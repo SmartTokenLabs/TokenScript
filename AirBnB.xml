@@ -6,9 +6,12 @@
 
     <!-- Actions are available when the asset card is open, or when
          the asset instance is open. The following shows both
-         scenarios:
-	 
-	  Singapore Telcom  13:45 31 Jan 2018          4G
+         scenarios. -->
+
+    <!-- First, the asset card. -->
+
+<!--
+       Singapore Telcom  13:45 31 Jan 2018          4G
 	 +-----------------------------------------------+
 
 	 +-----------------------------------------------+
@@ -47,8 +50,11 @@
 	   +--------+ +----+ +--------+ +----+ +-------+
 
                 ◀          ◉         ◼
+-->
+    <!-- Then, the asset instance, which happens after the user
+         clicked the first asset card "92 Elias Road..." -->
 
-
+<!--
 	  Singapore Telcom  13:45 31 Jan 2018          4G
 	 +-----------------------------------------------+
 
@@ -90,13 +96,12 @@
 
                 ◀          ◉         ◼
 
-
-    -->
+-->
 
     <!-- ON THE DESIGN CHOICE OF DECLARING ACTIONS
 	 
 At first, it seems that instead of defining actions in XML, we can
-gain more flexibilty by designing it in a way that they are returned
+gain more flexibility by designing it in a way that they are returned
 dynamically, e.g. by callbacks. There are cases where such flexibility
 is desirable, for example, when the availability of an action or even
 the name of it depends on token status or external input (availability
@@ -104,13 +109,13 @@ of a server, for example). But that doesn't contradict with the design
 of defining actions in XML, since an action defined in XML can be
 enabled or disabled by javascript code when the need
 rises. Furthermore, defining actions as separate entity, outside of
-the javascript code have the advantage that they can be influnced by
-mobilephone policy (e.g. a policy of "never attest identity" leads to
-certain actions being disabled instead of dapp hanging there in a
-deadloop), easily examined for breaches (an action that is not defined
+the javascript code have the advantage that they can be influenced by
+user-agent policy (e.g. a policy of "never attest identity" leads to
+certain actions being disabled instead of Dapp hanging there in a
+deadlock), easily examined for breaches (an action that is not defined
 and signed will not appear as a result of program execution), easily
 understood by the wallet (e.g. a wallet can examine an action that
-leads to outgoing transafer of value before the user start the action)
+leads to outgoing transfer of value before the user start the action)
 and finally, easily translated.
     -->
 
