@@ -5,19 +5,23 @@
     <!-- you will see a lot of actions being defined from here. -->
 
     <!-- Actions are available when the asset card is open, or when
-         the asset instance is open. The following shows both
-         scenarios. -->
+         the asset instance is click-and-hold by a user -->
 
     <!-- First, the asset card. -->
 
 <!--
-       Singapore Telcom  13:45 31 Jan 2018          4G
+      Singapore Telcom  13:45 31 Jan 2018          4G
 	 +-----------------------------------------------+
 
 	 +-----------------------------------------------+
 	 |  AirBNB Booking                               |
-	 |                                               |
 	 |               BELONG EVERYWHERE               |
+	 |                                               |
+	 | +-------------------------------------------+ |
+	 | |                                           | |
+	 | | + Create a new booking                    | |
+	 | |                                           | |
+	 | +-------------------------------------------+ |
 	 |                                               |
 	 | +-------------------------------------------+ |
 	 | | 31 Jan 2018 á 2 Feb 2018                  | |
@@ -39,20 +43,16 @@
 	 | | 7 Feb 2018 á 13 Feb 2018                  | |
 	 | |                                           | |
 	 | |    Unit 1519, 28 Harbour Street, NSW 2000 | |
-	 | |                                           | |
-	 | |    2 Bedroom unit, checkin after 1pm.     | |
-	 | +-------------------------------------------+ |
-	 |                                               |
-	 +-----------------------------------------------+
+     | |                                           | |
+     | |    2 Bedroom unit, checkin after 1pm.     | |
+     | +-------------------------------------------+ |
+     |                                               |
+     +-----------------------------------------------+
+               ◀          ◉         ◼
 
-	   +--------+ +----+ +--------+ +----+ +-------+
-	   |Transfer| |Lend| |Check in| |Sell| |Auction|
-	   +--------+ +----+ +--------+ +----+ +-------+
-
-                ◀          ◉         ◼
 -->
     <!-- Then, the asset instance, which happens after the user
-         clicked the first asset card "92 Elias Road..." -->
+         clicked the first asset instance "92 Elias Road..." -->
 
 <!--
 	  Singapore Telcom  13:45 31 Jan 2018          4G
@@ -64,10 +64,14 @@
 	 |                                               |
 	 |   92 ELIAS ROAD, SINGAPORE, 519951            |
 	 |                                               |
-	 | Checkin: 31 Jan 2018 1pm - 6pm                |
+	 | Checkin: 31 Jan 2018 1pm + 6pm                |
 	 | Checkout: 2 Feb 2018 10am                     |
 	 |                                               |
 	 |   Landlord: VeryHappyBunny                    |
+	 |                                               |
+	 | +--------+ +----+ +--------+ +----+ +-------+ |
+	 | |Transfer| |Lend| |Check in| |Sell| |Auction| |
+	 | +--------+ +----+ +--------+ +----+ +-------+ |
 	 |                                               |
 	 |                                               |
 	 |   Conversation history                        |
@@ -75,8 +79,8 @@
 	 | +-------------------------------------------+ |
 	 | |                                           | |
 	 | | You: We are travellers form Australia     | |
-	 | |      Judging from the pictures you have   | |
-	 | |      a veranda?                           | |
+	 | |      Judging from the pictures you ha^e   | |
+	 | |      a ^eranda?                           | |
 	 | |                                           | |
 	 | | VeryHappyBunny: A patio actually, you     | |
 	 | |                 can use any time.         | |
@@ -85,14 +89,10 @@
 	 | |                                           | |
 	 | | You: Good, we will get there after lunch. | |
 	 | |                                           | |
-	 | +-------------------------------------------+ |
+     | +-------------------------------------------+ |
 	 |                                               |
 	 |                                               |
 	 +-----------------------------------------------+
-
-	   +--------+ +----+ +--------+ +----+ +-------+
-	   |Transfer| |Lend| |Check in| |Sell| |Auction|
-	   +--------+ +----+ +--------+ +----+ +-------+
 
                 ◀          ◉         ◼
 
