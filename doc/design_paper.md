@@ -44,14 +44,106 @@ Magic links is simply a signed message for automic swap. It facilitates one majo
 
 In TBML terminology, an asset is something that can be owned and has value. This is a broad definition of asset. It doesn't require, like the finanical assets, that an asset produces a return, or is anticipated to. This makes it possible for things like friendship to be defined as an asset. A token of friendship would be a signed message from someone, recognising some other as a friend, and it would be an asset in TBML terminology. Apparently a token of friendship from Michael Jackson can be of high value, especially since he cannot produce any more of these tokens, but even a humble token like "Friend of Weiwu" has some value. It, for example, allows a friend of Weiwu to sign a delivery recipt for him, or allows such a friend to get a mate-rate for signing up in the same dojo Weiwu practises in. There is even a neat trick, which, by using secret sharing protocols, having Weiwu's friendship token allows one to learn common friends shared with Weiwu. Notice that this definition does not require the asset to be a blockchain token, nor that it even exist on the blockchain. More on that in the latter chapter "attestation".
 
-Assets can have financial value and utility value. 
+Assets can have financial value and utility value.
+
+Examples of Assets with financial value:
+
+Rental....
+
+Airbnb ...
 
 # Actions
 
-Actions are things that can be done to an asset. Typical actions are transfer, sell, buy, 
+Actions are things that can be done to an asset.
+
+Regarding the financial properties of an asset, typical actions are transfer, sell, buy, collateralise, combine (e.g. in the case of cross-collateralisation), insure, auction and testify (obtain a signature of someone in order to satisfy certain trading requirements).
+
+The other actions depends much on the utility properties of an asset, however, varies from one type of asset to another. AirBNB token, for example, would allow a user to open the smart-lock of their AirBNB room at the time it is reserved for. That's probably all the utility you can get from AirBNB token, but game assets, for example, can be equiped, unequiped, transmuted, transmogrified, enchanted, disenchanted, cursed, purged, socketed, unsocketed, broken-down, recycled, consecrated... Imagination is the limit.
 
 Let's continue with the AirBNB example. If Alice owns a token that represents the right to use a room during certain time window, or "a booking" in user's terms, then the actions she could perform are:
 
 Check-in - either produces a QR code to verify the booking to the landlord, or use an NFC-enabled phone to open a smart-lock.
 
-Transfer - 
+
+      Singapore Telcom  13:45 31 Jan 2018          4G
+     +-----------------------------------------------+
+
+     +-----------------------------------------------+
+     |  AirBNB Booking                               |
+     |               BELONG EVERYWHERE               |
+     |                                               |
+     | +-------------------------------------------+ |
+     | |                                           | |
+     | | + Create a new booking                    | |
+     | |                                           | |
+     | +-------------------------------------------+ |
+     |                                               |
+     | +-------------------------------------------+ |
+     | | 31 Jan 2018 á 2 Feb 2018                  | |
+     | |                                           | |
+     | |    92 Elias Road, Singpaore, 519951       | |
+     | |                                           | |
+     | |    2 Bedroom unit, check in after 1pm     | |
+     | +-------------------------------------------+ |
+     |                                               |
+     | +-------------------------------------------+ |
+     | | 2 Feb 2018 á 6 Feb 2018                   | |
+     | |                                           | |
+     | |    9 Lemke Street, Muirhead, NT 0810      | |
+     | |                                           | |
+     | |    3 Bedroom house, self-check in         | |
+     | +-------------------------------------------+ |
+     |                                               |
+     | +-------------------------------------------+ |
+     | | 7 Feb 2018 á 13 Feb 2018                  | |
+     | |                                           | |
+     | |    Unit 1519, 28 Harbour Street, NSW 2000 | |
+     | |                                           | |
+     | |    2 Bedroom unit, checkin after 1pm.     | |
+     | +-------------------------------------------+ |
+     |                                               |
+     +-----------------------------------------------+
+               ◀          ◉         ◼
+
+
+
+      Singapore Telcom  13:45 31 Jan 2018          4G
+     +-----------------------------------------------+
+
+     +-----------------------------------------------+
+     |  AirBNB Booking                               |
+     |               BELONG EVERYWHERE               |
+     |                                               |
+     | +-------------------------------------------+ |
+     | |                                           | |
+     | | + Create a new booking                    | |
+     | |                                           | |
+     | +-------------------------------------------+ |
+     |                                               |
+     | +-------------------------------------------+ |
+     | | 31 Jan 2018 á 2 Feb 2018                  | |
+     | |                                           | |
+     | |    92 Elias Road, Singpaore, 519951       | |
+     | |                                           | |
+     | |    2 Bedroom unit, check in after 1pm     | |
+     | +-------------------------------------------+ |
+     |                                               |
+     | +-------------------------------------------+ |
+     | | 2 Feb 2018 á 6 Feb 2018                   | |
+     | |                                           | |
+     | |    9 Lemke Street, Muirhead, NT 0810      | |
+     | |                                           | |
+     | |    3 Bedroom house, self-check in         | |
+     | +-------------------------------------------+ |
+     |                                               |
+     | +-------------------------------------------+ |
+     | | 7 Feb 2018 á 13 Feb 2018                  | |
+     | |                                           | |
+     | |    Unit 1519, 28 Harbour Street, NSW 2000 | |
+     | |
+     | |
+     | |    2 Bedroom unit, checkin after 1pm.     | |
+     | +-------------------------------------------+ |
+     |                                               |
+     +-----------------------------------------------+
+               ◀          ◉         ◼
