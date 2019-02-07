@@ -171,43 +171,45 @@ Check-in - either produces a QR code to verify the booking to the landlord, or u
 
 
 
-      Singapore Telcom  13:45 31 Jan 2018          4G
-     +-----------------------------------------------+
 
-     +-----------------------------------------------+
-     |  AirBNB Booking                               |
-     |               BELONG EVERYWHERE               |
-     |                                               |
-     | +-------------------------------------------+ |
-     | |                                           | |
-     | | + Create a new booking                    | |
-     | |                                           | |
-     | +-------------------------------------------+ |
-     |                                               |
-     | +-------------------------------------------+ |
-     | | 31 Jan 2018 á 2 Feb 2018                  | |
-     | |                                           | |
-     | |    92 Elias Road, Singpaore, 519951       | |
-     | |                                           | |
-     | |    2 Bedroom unit, check in after 1pm     | |
-     | +-------------------------------------------+ |
-     |                                               |
-     | +-------------------------------------------+ |
-     | | 2 Feb 2018 á 6 Feb 2018                   | |
-     | |                                           | |
-     | |    9 Lemke Street, Muirhead, NT 0810      | |
-     | |                                           | |
-     | |    3 Bedroom house, self-check in         | |
-     | +-------------------------------------------+ |
-     |                                               |
-     | +-------------------------------------------+ |
-     | | 7 Feb 2018 á 13 Feb 2018                  | |
-     | |                                           | |
-     | |    Unit 1519, 28 Harbour Street, NSW 2000 | |
-     | |
-     | |
-     | |    2 Bedroom unit, checkin after 1pm.     | |
-     | +-------------------------------------------+ |
-     |                                               |
-     +-----------------------------------------------+
-               ◀          ◉         ◼
+	  Singapore Telcom  13:45 31 Jan 2018          4G
+	 +-----------------------------------------------+
+
+	 +-----------------------------------------------+
+	 |                                               |
+	 | AirBnB Booking                                |
+	 |                                               |
+	 |   92 ELIAS ROAD, SINGAPORE, 519951            |
+	 |                                               |
+	 | Checkin: 31 Jan 2018 1pm + 6pm                |
+	 | Checkout: 2 Feb 2018 10am                     |
+	 |                                               |
+	 |   Landlord: VeryHappyBunny                    |
+	 |                                               |
+	 | +--------+ +----+ +--------+ +----+ +-------+ |
+	 | |Transfer| |Lend| |Check in| |Sell| |Auction| |
+	 | +--------+ +----+ +--------+ +----+ +-------+ |
+	 |                                               |
+	 |                                               |
+	 |   Conversation history                        |
+	 |                                               |
+	 | +-------------------------------------------+ |
+	 | |                                           | |
+	 | | You: We are travellers form Australia     | |
+	 | |      Judging from the pictures you have   | |
+	 | |      a Veranda?                           | |
+	 | |                                           | |
+	 | | VeryHappyBunny: A patio actually, you     | |
+	 | |                 can use any time.         | |
+	 | |                                           | |
+	 | | (You confirmed booking)                   | |
+	 | |                                           | |
+	 | | You: Good, we will get there after lunch. | |
+	 | |                                           | |
+         | +-------------------------------------------+ |
+	 |                                               |
+	 |                                               |
+	 +-----------------------------------------------+
+
+                ◀          ◉         ◼
+
