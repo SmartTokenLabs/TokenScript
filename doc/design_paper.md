@@ -42,9 +42,12 @@ Magic links is simply a signed message for automic swap. It facilitates one majo
 
 # Assets
 
-In TBML terminology, an asset is something that can be owned and has value. This is a broad definition of asset. It doesn't require, like the finanical assets, that an asset produces a return, or is anticipated to. This makes it possible for things like friendship to be defined as an asset. A token of friendship would be a signed message from someone, recognising some other as a friend, and it would be an asset in TBML terminology. Apparently a token of friendship from Michael Jackson can be of high value, especially since he cannot produce any more of these tokens, but even a humble token like "Friend of Weiwu" has some value. It, for example, allows a friend of Weiwu to sign a delivery recipt for him, or allows such a friend to get a mate-rate for signing up in the same dojo Weiwu practises in. There is even a neat trick, which, by using secret sharing protocols, having Weiwu's friendship token allows one to learn common friends shared with Weiwu. Notice that this definition does not require the asset to be a blockchain token, nor that it even exist on the blockchain. More on that in the latter chapter "attestation".
+In TBML terminology, an asset is something that can be owned and has value. This is a broad definition of asset. It doesn't require, like the finanical assets, that an asset produces a return, or is anticipated to.
 
-Assets can have financial value and utility value.
+
+Attestations are like Tokens except that they are not transferrable, or, if a smart contract rules that they accept an attestation being transferred, it is rendered invalid after the transfer. This makes it possible for things like friendship to be defined in a way similiar to token, and we may as well call such attestations token. A token of friendship would be a signed message from someone, recognising some other as a friend, and it would be an asset in TBML terminology. Apparently a token of friendship from Michael Jackson can be of high value, especially since he cannot produce any more of these tokens, but even a humble token like "Friend of Weiwu" has some value. It, for example, allows a friend of Weiwu to sign a delivery recipt for him, or allows such a friend to get a mate-rate for signing up in the same dojo Weiwu practises in. There is even a neat trick, which, by using secret sharing protocols, having Weiwu's friendship token allows one to learn common friends shared with Weiwu. Notice that this definition does not require the asset to be a blockchain token, nor that it even exist on the blockchain. More on that in the latter chapter "attestation".
+
+Assets and attestations (tokens in general) can have financial value and utility value.
 
 Examples of Assets with financial value:
 
@@ -60,7 +63,68 @@ Regarding the financial properties of an asset, typical actions are transfer, se
 
 The other actions depends much on the utility properties of an asset, however, varies from one type of asset to another. AirBNB token, for example, would allow a user to open the smart-lock of their AirBNB room at the time it is reserved for. That's probably all the utility you can get from AirBNB token, but game assets, for example, can be equiped, unequiped, transmuted, transmogrified, enchanted, disenchanted, cursed, purged, socketed, unsocketed, broken-down, recycled, consecrated... Imagination is the limit.
 
-Let's continue with the AirBNB example. If Alice owns a token that represents the right to use a room during certain time window, or "a booking" in user's terms, then the actions she could perform are:
+Let's start with fungible tokens, as they are somewhat simpler. In the following screen mock-up, the actions are: "Pay anyone", "Request Payment", "Convert to USD".
+
+     Vodafone          13:45 31 Jan 2018          4G
+    +-------------------------------------------------+
+
+    +-------------------------------------------------+
+    |                                                 |
+    | SOVEREIGN - cryptocurrency of Marshall Islands  |
+    |                                                 |
+    | +---------------------------------------------+ |
+    | |                                             | |
+    | | Current Balance: $314.15 ($276.15 available)| |
+    | |                                             | |
+    | +---------------------------------------------+ |
+    |                                                 |
+    | +----------+ +---------------+ +--------------+ |
+    | |Pay Anyone| |Request Payment| |Convert to USD| |
+    | +----------+ +---------------+ +--------------+ |
+    |                                                 |
+    | Recent Transactions                             |
+    | +---------------------------------------------+ |
+    | |                                             | |
+    | | 29 Jan BEKANT Desk - IKEA          -$499.99 | |
+    | |        +-- Delivery Token - FedEx  [open]   | |
+    | |        +-- Warranty 1 year - IKEA  [open]   | |
+    | |                                             | |
+    | | 28 Jan VISA Application             -$80.00 | |
+    | |        +--- Receipt Token          [open]   | |
+    | |                                             | |
+    | | 26 Purchase SOVEREIGN from Ether   +$800.00 | |
+    | |                                             | |
+    | |             Displaying 3 of 94 Transactions | |
+    | +---------------------------------------------+ |
+    |                                                 |
+    | Open Payment Channels                           |
+    | +---------------------------------------------+ |
+    | | GoCard:   Public Transit and parking fees   | |
+    | |                                             | |
+    | | Payment Channel                             | |
+    | | Opened: 2019-04-05       Balance held: $50  | |
+    | | Expiry: 2019-05-05    Current balance: $38  | |
+    | |                                             | |
+    | |                   [Inspect Payment Channel] | |
+    | +---------------------------------------------+ |
+    |                                                 |
+    | Preauthorisations                               |
+    | +--------------------------------------------+  |
+    | |                                            |  |
+    | | - The Guardian: biweekly,  $10, no expiry. |  |
+    | | - Pablo & Rusty's: monhtly, $28, till 2019 |  |
+    | |                                            |  |
+    | |           Displaying 2 of 5 authorisations |  |
+    | +--------------------------------------------+  |
+    |                                                 |
+    +-------------------------------------------------+
+
+		  ◀          ◉         ◼
+
+
+[explain the attestations associated with this token.]
+
+The case with non-fungible tokens are more complicated. Let's continue with the AirBNB example. If Alice owns a token that represents the right to use a room during certain time window, or "a booking" in user's terms, then the actions she could perform are:
 
 Check-in - either produces a QR code to verify the booking to the landlord, or use an NFC-enabled phone to open a smart-lock.
 
