@@ -172,44 +172,115 @@ Check-in - either produces a QR code to verify the booking to the landlord, or u
 
 
 
-	  Singapore Telcom  13:45 31 Jan 2018          4G
-	 +-----------------------------------------------+
+     Singapore Telcom  13:45 31 Jan 2018          4G
+    +-----------------------------------------------+
 
-	 +-----------------------------------------------+
-	 |                                               |
-	 | AirBnB Booking                                |
-	 |                                               |
-	 |   92 ELIAS ROAD, SINGAPORE, 519951            |
-	 |                                               |
-	 | Checkin: 31 Jan 2018 1pm + 6pm                |
-	 | Checkout: 2 Feb 2018 10am                     |
-	 |                                               |
-	 |   Landlord: VeryHappyBunny                    |
-	 |                                               |
-	 | +--------+ +----+ +--------+ +----+ +-------+ |
-	 | |Transfer| |Lend| |Check in| |Sell| |Auction| |
-	 | +--------+ +----+ +--------+ +----+ +-------+ |
-	 |                                               |
-	 |                                               |
-	 |   Conversation history                        |
-	 |                                               |
-	 | +-------------------------------------------+ |
-	 | |                                           | |
-	 | | You: We are travellers form Australia     | |
-	 | |      Judging from the pictures you have   | |
-	 | |      a Veranda?                           | |
-	 | |                                           | |
-	 | | VeryHappyBunny: A patio actually, you     | |
-	 | |                 can use any time.         | |
-	 | |                                           | |
-	 | | (You confirmed booking)                   | |
-	 | |                                           | |
-	 | | You: Good, we will get there after lunch. | |
-	 | |                                           | |
-         | +-------------------------------------------+ |
-	 |                                               |
-	 |                                               |
-	 +-----------------------------------------------+
+    +-----------------------------------------------+
+    |                                               |
+    | AirBnB Booking                                |
+    |                                               |
+    |   92 ELIAS ROAD, SINGAPORE, 519951            |
+    |                                               |
+    | Checkin: 31 Jan 2018 1pm + 6pm                |
+    | Checkout: 2 Feb 2018 10am                     |
+    |                                               |
+    |   Landlord: VeryHappyBunny                    |
+    |                                               |
+    | +--------+ +----+ +--------+ +----+ +-------+ |
+    | |Transfer| |Lend| |Check in| |Sell| |Auction| |
+    | +--------+ +----+ +--------+ +----+ +-------+ |
+    |                                               |
+    |                                               |
+    |   Conversation history                        |
+    |                                               |
+    | +-------------------------------------------+ |
+    | |                                           | |
+    | | You: We are travellers form Australia     | |
+    | |      Judging from the pictures you have   | |
+    | |      a Veranda?                           | |
+    | |                                           | |
+    | | VeryHappyBunny: A patio actually, you     | |
+    | |                 can use any time.         | |
+    | |                                           | |
+    | | (You confirmed booking)                   | |
+    | |                                           | |
+    | | You: Good, we will get there after lunch. | |
+    | |                                           | |
+    | +-------------------------------------------+ |
+    |                                               |
+    |                                               |
+    +-----------------------------------------------+
+
+	   ◀          ◉         ◼
+
+
+    +-----------------------------------------+
+    |                                         |
+    | Holden Barina 2012 Ownership Token      |
+    |                                         |
+    | Make: Holden Year: 2013  Colour: Black  |
+    | VIN: KL3TA48E9EB541191                  |
+    |                                         |
+    | +------+ +-------+ +------+ +--------+  |
+    | | Open | | Start | | Lock | | Locate |  |
+    | +------+ +-------+ +------+ +--------+  |
+    |                                         |
+    | +---------------+                       |
+    | | Authorise use |                       |
+    | +---------------+                       |
+    |                                         |
+    | +-------------+ +--------------------+  |
+    | | Maintenance | | Roadside Assitance |  |
+    | +-------------+ +--------------------+  |
+    |                                         |
+    | +---------------+                       |
+    | | Collateralise |                       |
+    | +---------------+                       |
+    |                                         |
+    | Registration:                           |
+    |                                         |
+    | +------------------------------------+  |
+    | |                                    |  |         +-----------------------------+
+    | | Issuer: Roads & Maritime Services  |  |         |                             |
+    | | Rego: CJ41HL   Expiry: 2017-12-03  |  | ------> | Access rego attestation     |
+    | |                                    |  |         |                             |
+    | +------------------------------------+  |         +-----------------------------+
+    |                                         |
+    | Purchase:                               |
+    |                                         |
+    | +------------------------------------+  |
+    | |                                    |  |
+    | | Issuer: Manheim Auctions           |  |         +-----------------------------+
+    | | Date: 2015+12+09   Price: $4724.83 |  |         |                             |
+    | |                                    |  | ------> | Access Invoice Token        |
+    | +------------------------------------+  |         |                             |
+    |                                         |         +-----------------------------+
+    | Insurance                               |
+    |                                         |
+    | +------------------------------------+  |         +-----------------------------+
+    | |                                    |  |         |                             |
+    | | Issuer: Virgin Car Insurance       |  |         | Access insurance token      |
+    | | Start Date: 2017 12 30             |  |         | functions:                  |
+    | |                                    |  | ------> |                             |
+    | +------------------------------------+  |         | · Claim                     |
+    |                                         |         | · Lump sum discount payment |
+    | Services:                               |         | · Upgrade / downgrade       |
+    |                                         |         | · Suspend policy            |
+    | +------------------------------------+  |         |                             |
+    | |                                    |  |         +-----------------------------+
+    | | 2016+06+01 Holden Capped Service   |  |
+    | |                                    |  |
+    | | 2016+12+15 Holden Capped Service   |  |
+    | |       +                            |  |
+    | |       +--+ Tire replacement        |  |
+    | |                                    |  |
+    | | 2017+06+15 Holden Capped Service   |  |
+    | |                                    |  |
+    | +------------------------------------+  |
+    |                                         |
+    +-----------------------------------------+
+
 
                 ◀          ◉         ◼
+
 
