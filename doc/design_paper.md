@@ -214,6 +214,103 @@ Check-in - either produces a QR code to verify the booking to the landlord, or u
 	   ◀          ◉         ◼
 
 
+Concept of delivery vs payment and how they are useful in both investment and consumption.
+
+(This seciton is in early draft stage, never mind the clutter)
+
+In the traditional financial world, transactions usually involve a currency in exchange of something deliverable.
+
+
+
+In the case that the deliverable is an asset, like a property or security, the transaction is considered done when the paper process or computer process is done. It's unlikely that the property owner will refuse to hand over the keys to the new owner or the company will refuse to share the dividend to an individual subscriber.
+
+
+
+In the case of purchasing common goods and services, the deliverable will usually be physical. If I buy a printer online, a printer gets delivered home; if I order a message service, someone shows up at the door. Delivery is an essential part of such transactions, and most payment processors like Paypal would not consider the transaction final unless delivery happened.
+
+
+
+[Picture illustration of payment vs goods and services, and payment vs asset]
+
+
+
+In today's economy, the difference between the two kinds is getting smaller. Goods and services can be investment candidates. Typically, old wine is usually purchased as goods but used as an investment asset. Even services, like hotel reservation, can be bought wholesales and speculated upon. On the other hand, properties like buildings can count towards as goods and services in some cases.
+
+
+
+We observe that when purchase happens, the deliverable is often made up of two components: rights and consumables.
+
+
+
+In the case of purchasing a share of a company, the right to enjoy dividend is the entire delivery. There is no consumable component of that purchase. In the case of purchasing BigMac, the consumable is the entire delivery. There is no rights component of that purchase. These are purchases purely for rights and consumables, respectively.
+
+
+
+But most transactions fall between those two kinds.
+
+
+
+Online purchase, for example, is usually an exchange between currency and a promise to deliver physical goods, or the right to pick it up from the local post office outlet, which is a right until it is redeemed. Ticket is a type of consumable that is always sold as right because the consumable services are not available yet at the time of purchase. In those examples, the purchaser obtains a right as the result of the transaction, which can be redeemed later for consumables.
+
+
+
+There are other rights than the right to redeem. Most purchases involve receipt which represents the right to return the goods under specific conditions, and many purchases involve a warranty, an insurance or reward points, which represent, respectively, the services to repair the goods, the right to sell broken products back or the entitlement of discount in the future purchases.
+
+
+
+Even the traditional purchase of investment asset might have a consumable component.  Sometimes, the shareholders might be okay with goods and services produced by the company as a dividend, which may surpass the dividend in value to them. But that structure, otherwise known as co-op, is usually not practical thanks to the lack of secondary market for those goods and services.
+
+
+
+Table: examples of purchases and input / output of those purchases
+
+
+
+Typical tokens in e-commerce setting:
+
+
+
+Delivery Token
+
+- Get a notification when the product is delivered.
+
+- Obtain goods from the collection point.
+
+- Authorise someone else to obtain the goods.
+
+
+
+Invoice Token
+
+- Proof to the tax authority (for tax deduction), if paid.
+
+- Request payment from the employer
+
+
+
+Receipt Token
+
+- Return or change a faulty product
+
+
+
+Insurance token
+
+- Sell the product back
+
+
+
+Product ownership token
+
+- Access warrant and other services.
+
+- Get notified of updates.
+
+
+(The whole concept can be illustrated in a few examples, e.g. this car token)
+
+
+       Telstra   13:45 31 Jan 2018          4G
     +-----------------------------------------+
     |                                         |
     | Holden Barina 2012 Ownership Token      |
