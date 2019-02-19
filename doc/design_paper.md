@@ -1,5 +1,56 @@
 
-# Introduction
+# Whitepaper
+
+There are two primary functions of blockchains that can change the way human interacts and business conducts. Both were neglected amidst the unfortunate speculative games in the early days of Blockchain.
+
+As we will soon elaborate, the first is the capacity to create frictionless markets. The second is the capacity to integrate the web.
+
+This paper is going to start with the vision, then, reason the architect needed on top of blockchains, then focus on a critical layer of technology that enables this architect to be possible, which we name TBML.
+
+The remarkable blockchain speculations took place in 2017 - 2018 brought our attention to tokens. As we buy and sell tokens, we forgot that it was intended to be used. It was like when canned sardines became a speculative asset, people brush off the idea that it was made to eat.
+
+Despite the unfortunate speculative bubble, it's not wrong to focus on tokens, as it is the enabler of the two primary functions we will elaborate:
+
+## The vision: frictionless market
+
+The 80s' "Back to the Future" featured a world of powerful machines: hovering boards, flying cars. It didn't happen. The technology advancement in our time is beyond the imagination of the 80s science fiction movies, albeit not through more powerful machinery, but more efficient use of information. Ride-sharing revolutionised the way we organise our daily lives, and Airbnb changed the way we travel. These are the new markets. They have less cost to operate, more accessible and have finer operational units.
+
+However, the majority of the markets still operates with high costs. The stock market, for example, has so much overhead that is only justifiable for multi-million businesses thanks to its reliance on rules and regulations to function.
+
+Can we create more efficient markets without the overhead?
+
+Can we tokenise, for example, 1% of a property, so that the property market can react faster than the typical month-long property purchase-sales cycle? Can we tokenise electricity, so that power users can benefit from finer scheduling of the use of resources, and households can benefit from collecting surplus sun energy?
+
+Can we tokenise AirBnB booking, so that the hosts can purchase a guaranteed cash flow from the market, while speculators profit from predicting the travel needs? Can we tokenise the risk of shipment, so that small importers and exports, not significant enough to obtain letters of credit, compete in international markets, and perhaps eventually outcompete traditional model like AirBNB outcompete hotels?
+
+Can we tokenise insurance that depends on cryptographic proofs, so that the insurer bare less cost of fraudulent documents? Can we decentralise the insurers altogether?
+
+Blockchain can provide the foundation layer to achieve those.  Much work still needs to be done on scalability, privacy, and last, the focus of this paper, quality methods to define how tokens should be used and traded.
+
+Does a token expire? AirBNB booking tokens certainly do, but 1% property token probably not. Should the token owner receive a notification on specific events? Power token certainly needs that, for the change in the power supply is dynamic. Is a token streamable?
+
+How does it look on the user's mobile, and how is it called in users language?
+
+If a buyer wants to purchase a tokenised country estate from a seller, how do they establish a trusted method of communication?
+
+If a token entitles the user to do specific actions online, how can the user login to the web services with that token?
+
+We have done very little on making the tokens compatible with different methods of trades, listing and rating. There was nearly zero effort to make tokens represents *goods and services* - a basic need for an efficient market.
+
+During the speculative bubble in 2017, a power token ICO, as an example, does not need to provide any explanation of how the tokens can be used. All speculators need to know is that they represent a "stake in the future tokenised electricity". As long as the token can fill investors with imagination, it's good enough for an ICO. There is, therefore, no more functionalities needed other than an ERC20 interface. For such a speculative power token, it depends on no attestations like the proof of actual power production, no properties as where the energy is provided, for how long it is available. There is just no need to do any work than making it ERC20 compatible.
+
+With the end of the speculative frenzy, now is a good time to present a framework for describing token behaviours.
+
+Such a framework must fit tokens into different environments for them to function in use-cases.
+
+ - letting them interact with different IT systems and APIs
+- making them renderable and associate tokens with the actions they can perform in user's wallet
+- Making them fit into listing or auction based general-purpose markets. Building one marketplace for one token type would be too inefficient.
+- allow new protocols to be developed on top of them (streaming, communication, staking, collateralization  etc.)
+
+The following chapters of this paper will elaborate on this technical framework.
+
+## Integrate the web.
 
 The world wide web (The web) was made for information sharing.
 
