@@ -52,6 +52,45 @@ The following chapters of this paper will elaborate on this technical framework.
 
 ## Integrate the web.
 
+
+Tim Berners-Lee and the innovators of the world wide web modelled it mainly after a public library model and computer-human interaction model.
+
+First, the library model. In this model, information is freely available and indexed and cross-referenced by a URI. Its incarnation, the URL, is where the data is, and there is no restriction on where you can go.
+
+Second, the computer-human interaction model. In this model, two players are having a conversation - human asks, machine answers. A computer has limited knowledge, but it can help the user to reach the right computer.
+
+Therefore the web was built as a giant library where each book is a computer with whom one can have a conversation. It's probably from where Facebook got its namesake inspiration - a website is a book.
+
+It's this design that caused a lot of modern inconveniences.
+
+A user would receive an email about the shoes she ordered. She takes the delivery tracking number, opens the Australia Post website (another book), type in the tracking number to find the current status.
+
+Another user pauses as he books two tickets for an opera, rummages through his wallet to find his frequent flyer number, types it into the order to collect the points.
+
+Why are we doing so much copy and pasting when machines are exceptionally good at doing those? Because the web is like a giant library by design, and we are like readers keeping notes of the index numbers under our sleeves. It's not, for example, designed like a personal assistant.
+
+It's easy to see the cause of the inconvenience: the web is poorly integrated. When a user checks out on a website, she isn't sure if she has enough balance on her card, because the bank is not integrated with the shopping system. When a patient orders a service, she can't see how much the insurance can cover it until the bill is settled, nor whether she has reached the annual cap, because the clinic is not integrated with the health insurance company.
+
+The answer to an integrated web requires a few building blocks that weren't in the blueprint: authentication, ownership, transfer of value and trading.
+
+The web doesn't have a built-in authentication mechanism†. The add-on like "Sign in with Facebook" merely tried to provide authentication through a trusted 3rd party, which, despite privacy and availability concerns, is only good for account authentication, not for business logic.
+
+†  Despite the excellent efforts on client/server certificates in TLS, these authentication methods are not for processes, but sites only. It's a delegation model. Imagine a buyer not checking if a title deed is real, but only checks if the seller's name matches the one on the deed. That would be the delegation model used in TLS. In fact, TLS can't guarantee anything on the website is real, only that the website is real.
+
+For an example simple business logic: "the owner of the property is able to check its easement information". The logic itself doesn't require account authentication on its own, and it would be a bad idea to add account authentication on top of it since if the property is sold, the new property owner would now need to create a new account at the easement service website, secure it, and proof the ownership to the property. Besides being onerous, this process is also inflexible: it doesn't allow the owner to authorise the access to a 3rd party like a landscape planner or a pest inspector. More such examples are easily found in healthcare, retail and almost every business on the web. Today, we repeatedly add more and more accounts to address such integration needs. When our tool is a hammer every problem looks like a nail.
+
+The web also doesn't have an ownership or transfer of valve mechanism. If Alice is interested in a "Magic: The Gathering" card, and it popped up in the market, Alice will need to create an account on a website like mtgox.com, shorthand for "Magic The Gathering: Gox", to trade it. She might also need to sort out a payment method with a Paypal account. Nothing is properly integrated, the user has to do it. For every integration, the user needs to own two accounts. When she wants to use the card in an online game, a third account she will need. She can't, for example, click a link in an email and, like magic, the money goes to the seller and the card is hers, in an atomic transaction, and ready to be used in her games.
+
+It's easy to see that these building blocks are needed for an integrated web, and blockchain can serve the need. But what's the path from the integration need to the base technology?
+
+We know computers are good at computation, and science needs computation. The path, as it turned out, is data processing programming language. Similarly, to integrate the web using a trust layer like blockchain, the path is Token and a token behaviour language.
+
+In such a design, Token is the integration point, and token behaviour language is the interface for integration. Knowing token can go across systems, like Property Ownership token being used in land registration, insurance, pest inspect, mortgage and lots of systems, it must have its own behaviour pattern that can interact with users, to show the status and allow action buttons for functions to be integrated. In other words, a token must have its own UI logic as well as integration logic.
+
+[a picture of an example of property token in two statues side by side. The left side has an action button (among others) that says Power Connection. The right side has the same token, but with a "Leased" label on it, and the "Power Connection" action button is invalidated because now it is with the lessor]
+
+------------ [ following are from the old 1st chatper ] -------------
+
 The world wide web (The web) was made for information sharing.
 
 The web lacks native support for the building blocks of today's Internet economy: authentication, transfer of value or trading, or express trusted relationship like Facebook friend introduction. Tim Berners-Lee envisioned the web a document platform. HTML, today mostly used to represent user interface, was originally a document format suitable for free information. The last decade saw the rise of modern programmable web browser technologies, aimed to allow various middlemen to provide what was missing in the blueprint of the web: Facebook to be entrusted with personal trust; Paypal to be entrusted to transfer value and Amazon to be entrusted for e-commerce trades.
