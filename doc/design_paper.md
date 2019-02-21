@@ -1,4 +1,3 @@
-
 # TBML Whitepaper
 
 ## Introduction
@@ -15,7 +14,7 @@ Despite this folly, it is not a bad thing to intially focus on tokens as they ar
 
 ## The vision: frictionless markets
 
-The 80s' "Back to the Future" featured a world of powerful machines filled with hovering boards and flying cars. It didn't happen and as Peter Thiel once famously lamented "we were promised flying cars, instead we got a 140 characters". The technological advancement of our time is beyond the imagination of the 80s science fiction movies, albeit not through more powerful machinery, but more efficient use of information.
+The 80s' "Back to the Future" featured a world of powerful machines filled with hovering boards and flying cars. It didn't happen. As Peter Thiel once famously lamented, "we were promised flying cars, instead we got a 140 characters". The technological advancement of our time is beyond the imagination of the 80s science fiction movies, albeit not through more powerful machinery, but more efficient use of information.
 
 Ride-sharing revolutionised the way we organise our daily lives and Airbnb changed the way we travel. These are the new markets and they incur less cost to operate, are more accessible and have finer operational units.
 
@@ -33,9 +32,11 @@ Can we tokenise the risk of a shipment, so that small importers and exports, not
 
 Can we tokenise insurance that depends on cryptographic proofs, so that the insurer bares less cost of fraudulent documents? Can we decentralise the insurers altogether?
 
-Blockchain technology can provide the foundational layer to achieve these. A lot of work needs to be done to ensure scalability, privacy and quality methods to define how tokens should be used and traded. 
+Blockchain technology can provide the foundational layer to achieve these. A lot of work needs to be done to ensure scalability, privacy and quality methods to define how tokens should be used and traded.
 
-Do tokens expire? AirBNB booking tokens certainly do, but 1% ownership of a property token probably doesn't. Should the token owner receive a notification on a specific event? Power tokens certainly need that, for the change in the power supply is dynamic. Is a token stream-able?
+This paper does not intend to provide a full solution, instead, it focuses on the last part, on quality methods to define how tokens should be used and traded.
+
+Tokens have different properties. Do tokens expire? AirBNB booking tokens certainly do, but 1% ownership of a property tokens probably don't. Should the token owner receive a notification on a specific event? Power tokens certainly need that, for the change in the power supply is dynamic. Is a token stream-able?
 
 How does it look on the user's mobile, and how is it called in a users language?
 
@@ -43,9 +44,9 @@ If a buyer wants to purchase a tokenised country estate from a seller, how do th
 
 If a token entitles the user to do specific actions online, how can the user login to the web services with that token?
 
-We have done very little on making the tokens compatible with different methods of trading, listing and rating; there is nearly zero effort devoted to making tokens represent *goods and services* - a basic need for an efficient market.
+We have done very little on making the tokens interoperable with different methods of trading, listing and rating; there is nearly zero effort devoted to making tokens represent *goods and services* - a basic need for an efficient market.
 
-During the speculative bubble of 2017, a power token ICO, does not need to provide any explanation of how the tokens can be used. All speculators need to know is that they represent a "stake in the future tokenised electricity". As long as the token can fill investors with imagination, it's good enough for an ICO. There is, no more functionality needed other than an ERC20 interface. Such a speculative token doesn't depend on attestations, like the proof of actual power production nor does it need properties which describe where the energy is provided or for how long it is available. There is no need to do actual work besides the marketing and creation of an ERC20 token. 
+During the speculative bubble of 2017, a power token ICO, does not need to provide any explanation of how the tokens can be used. All speculators need to know is that they represent a "stake in the future tokenised electricity". As long as the token can fill investors with imagination, it's good enough for an ICO. There is, no more functionality needed other than an ERC20 interface. Such a speculative token doesn't depend on attestations - the proof of actual power production - nor does it need properties like where the energy is provided or for how long it is available. There is no need to do actual work besides the marketing and creation of an ERC20 token. 
 
 With the madness over, it is time to present a framework for describing such token behaviours. 
 
@@ -65,7 +66,7 @@ In the computer-human interaction model, two players are having a conversation -
 
 Therefore the web was built as a giant library where each book is a computer with whom one can have a conversation. It's probably where Facebook got its namesake inspiration - a website that is a book.
 
-This design has caused a lot of modern inconveniences. A user would receive an email about the shoes she ordered, she then takes the delivery tracking number, opens the Australia Post website (another book) and types in the tracking number to find the current status. Another user pauses as he books two tickets for an opera, rummages through his wallet to find his frequent flyer number and types it into the order to collect the points.
+This design has caused a lot of modern inconveniences. A user would receive an email about the shoes she ordered, she then takes the delivery tracking number, opens the Australia Post website - another book in the giant library of the web - and types in the tracking number to find the current status. On a different day, the same user might pause as she books two tickets for an opera, switch to her frequent flyer app, copy that number over and paste it into the order to collect the points. She might struggle a bit installing that frequent flyer app to start with.
 
 Why are we doing so much copy and pasting when machines are exceptionally good at doing those? It's because the web is like a giant library by design, and we are like readers keeping notes of the index numbers under our sleeves. It's not designed like a personal assistant.
 
@@ -77,11 +78,11 @@ The web doesn't have a built-in authentication mechanism†. The add-on "Sign in
 
 †  Despite the excellent efforts on client/server certificates in TLS, these authentication methods are not for processes, but sites only. It's a delegation model. Imagine a buyer not checking if a title deed is real, but only checks if the seller's name matches the one on the deed. That would be the delegation model used in TLS. In fact, TLS can't guarantee anything on the website is real, only that the website is real.
 
-For example, the simple business logic: "the owner of the property is able to check its easement information", doesn't require account authentication on its own and it would be a bad idea to add account authentication on top of it. This is because if the property is sold, the new property owner would now need to create a new account at the easement service website and secure it with the proof of ownership to the property. This process is onerous and inflexible, as it doesn't allow the owner to authorise the access to a 3rd party like a landscape planner or a pest inspector. Such examples are easily found in healthcare, retail and almost every business on the web. Today, we repeatedly add more and more accounts to address such integration needs and when our tool is a hammer every problem looks like a nail.
+For example, the simple business logic: "the owner of the property is able to check its easement information", doesn't require account authentication on its own and it would be a bad idea to add account authentication on top of it. This is because if the property is sold, the new property owner would now need to create a new account at the easement service website and secure it with the proof of ownership to the property. This process is onerous and inflexible, as it doesn't allow the owner to authorise the access to a 3rd party like a landscape planner or a pest inspector. Such authentication needs are easily found in healthcare, retail and almost every web-based business. Today, we repeatedly add more and more accounts to address such integration needs and when our tool is a hammer every problem looks like a nail.
 
-The web also doesn't have an ownership or transfer of value mechanism. If Alice is interested in a "Magic: The Gathering" card, and it popped up in the market, Alice will need to create an account on a website like mtgox.com, shorthand for "Magic The Gathering: Gox", to trade it. She might also need to sort out a payment method with a Paypal account. Nothing is properly integrated and the user has to do it manually. For every integration, the user needs to own two accounts and when she wants to use the card in an online game, she will need a third account. She can't click on a link in an email and immediately use the card in a game. 
+The web also doesn't have an ownership or transfer of value mechanism. If Alice is interested in a "Magic: The Gathering" card, and it popped up in the market, Alice will need to create an account on a website like mtgox.com, shorthand for "Magic The Gathering: Gox", to trade it. She might also need to sort out a payment method with a Paypal account. Properly integration is often lacking for complexity or security reasons, and the user has to do it manually. For every integration, the user needs to own two accounts and when she wants to use the card in an online game, she will need a third account to login to the game. She can't click on a link in an email and immediately use the card in a game.
 
-It's easy to see that these building blocks are necessary for an integrated web and that blockchains can serve this need, but what's the path to get there? We assert that the way to get there is a data processing language that defines tokens and their behaviour. In such a design, the token is the integration point and the language is the interface for the integrations. Tokens seamlessly go accross systems and can be used for use cases like property ownership, insurance, pest inspection, mortgages and many other systems. It must define its own behaviour pattern which can be used to interact with users to show the status and allow functions to be natively integrated. In other words, a token must have it's own UI and integration logic. 
+It's easy to see that these building blocks are necessary for an integrated web and that blockchains can serve this need, but what's the path to get there? We assert that the way to get there is a data processing language that defines tokens and their behaviour. In such a design, the token is the integration point and the language is the interface for the integrations. Tokens seamlessly go accross systems, examplified by a property token being used for renting, insurance, pest inspection, mortgages and many other systems. It must define its own behaviour pattern which can be used to interact with users to show the status and allow functions to be natively integrated. In other words, a token must have it's own UI and integration logic. 
 
 [a picture of an example of property token that has two statues side by side. The left side has an action button (among others) that says Power Connection. The right side has the same token, but with a "Leased" label on it, and the "Power Connection" action button is invalidated because now it is with the lessor]
 
