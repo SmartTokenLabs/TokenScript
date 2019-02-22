@@ -93,7 +93,7 @@ TBML stands for Token Behaviour Markup Language and is our framework for definin
 
 It is similar to XML and allows HTML and JavaScript to be injected into the file so that it can define it's functionality, UI and relationships to tokens and other dapps on the blockchain.
 
-# address "Frictionless Market" needs
+## address "Frictionless Market" needs
 
 We assert that a language for dictating the behaviour of a token is needed. Its design requirement follows its intended goal: to facilitate frictionless market and to integrate the web.
 
@@ -122,19 +122,19 @@ Any party is able to render and apply functions to the token using TBML, includi
 
 In general, providing a layered structure, using and reusing it, is better than having a monolithic design where a Dapp tied to an asset class and have all knowledge of the asset locally. The reasons are interoperability, scalability and security. Specifically, with the 1% property token as an example, the interoperability, scalability and security concerns are demonstrated below.
 
-## Interoperability:
+### Interoperability:
 
 Suppose a property guru Peter wish to create a website called "Peter's Pride Asset", where he selects the best property available on the market. He can create a listing of those properties with rich information of the current price, location, years of the building and even photos, which the users can purchase with a click. There is no reason that he needs permission to do so because the data of those tokens are on the blockchain and the transaction of those tokens requires no middlemen. However, he would necessarily need to obtain the knowledge local to how to render the token on his website, like how to get the expiration of a token from its holding smart contract. If the underlying smart contract has gone through changes, like adding an attribute (e.g. council rate), his website would need to upgrade. Similarly, the transaction rule might be updated to require the buyer to submit an identity attestation as part of a purchase. Without a speedy upgrade, his users would submit transactions not conforming and gets rejected later in the blockchain. In the end, he would resort to passing the rendering and trading of the token to the Dapp tied to this token, returning to a centralised status and limit the innovation and competition in this space.
 
 In a similar fashion, suppose an investors' forum where the members are allowed to login using their 1% property token, the rendering of the token, under each post, would need to be sourced from the Dapp tied to the token, since it's too much work for a forum to render the token and keep the code updated. Such sourcing would require permission and might be tied to the availability of that Dapp.
 
-## Scalability
+### Scalability
 
 Horizontally, the same type of asset might have tokens across multiple networks like Plasma Chains. A buyer is likely to be interested only in assets in Australia, and therefore only connected to the Australian 1% Property network. It can be difficult to have an all-knowing node to provided rendered token information for all existing tokens, especially if a network is designed with privacy in mind. Therefore, to scale, the knowledge about token (TBML) must be detached from the access to the token.
 
 Vertically, if we desire a token whose makeup is 1% property token from a sample of 100 global cities, for mid-big size investors to distribute the risk, a computer system that can manipulate such token must be built with the knowledge about member tokens. It again cannot depend on the availability, security and openness of the original Dapp tied to that asset. TBML would work in the middle for the making of such tokens.
 
-## Security
+### Security
 
 It is impractical to improvise a schema where every transaction the user might sign is rendered in a user-readable format. It's easy to start with such an effort with a transaction data translation tool, translating enigmatic transaction payload to a user readable data, but ultimately system integration needs and UX needs would surpass what a translation engine can do.
 
@@ -150,7 +150,7 @@ TBML is designed to separate token rendering code and transaction generating cod
 
 A user who is purchasing a 1% property token from Peter's Pride Property recommendation website can be provided with rendering and transaction packaged and signed by the same group of people who created the holding contract of such tokens, therefore the user can purchase assets from any website with a similar level of trust, or purchase it from a WeChat or Facebook private message and know it is the real token being rendered and  transacted.
 
-## Design requirement for frictionless market
+### Design requirement for frictionless market
 
 TBML language has to provide:
 
@@ -169,9 +169,228 @@ And it should be usable by:
 
 We will proceed on addressing the need for "Integrating the Web" and come to a full picture of the design requirements of TBML in the following chapters.
 
-# address "Integrate the web" needs
+## address "Integrate the web" needs
 
-[todo]
+As we explained earlier, the web is poorly integrated, as the only link between the units of the web - websites, is, frankly, links. It carries no business process, authentication or trust relationship. There is no anchoring points for integration.
+
+We believe token is the anchor points for integration. Again, this is best illustrated by examples.
+
+Suppose a user purchases an iPhone from Harvey Norman, an online retailer, using blockchain. The input of the transaction will be some sort of currency. The output, in this case, will be three tokens:
+
+- a delivery token, which can be used to redeem the product from a local pick-up station.
+- a warranty token, issued by Apple, which allows the iPhone to be serviced in other shops than Harvey Norman (e.g. Apple Centre).
+- a receipt token, issued by Harvey Norman, which allows the product to be returned in 90 days. It's also useful for getting Tourism Tax Refund if you want to take the phone out of Australia.
+
+If without tokens as the integration anchor, the three different services might be carried out by different means.
+
+Delivery Token:
+
+Without it, a user might get a tracking number instead of a token, which itself carries no authentication information, so it can't be used to pick up the product unless a pickup code is provided, perhaps in SMS - even more poorly integrated with the process.
+
+With the use of a delivery token, the token status can be remotely updated by the delivery company, even messaging to users to inform a coming delivery (if the token is held in a mobile wallet). With a bit of cryptography, it's easy to authorise someone else to pick up a product.
+
+Warranty Token:
+
+Without it, a user might need the serial number and an online registration process to activate the warranty. She might even need to create an account for that, whose password she might soon forget.
+
+With the use of warranty token, the terms and expiration would be easy to find, as it is token properties. The user can log in to warranty service website with the token, forgoing an account. The token can be programmed to receive messages like product call back or emergency security update.
+
+Receipt Token
+
+Currently, lacking a reliable way to authenticate the purchase, the online-purchased products usually can't be returned in the store, but instead must be returned by online means, like posting it back. A token carries the means for authentication sufficient for the process to be done in store. Despite such a receipt token cannot be transfered or authorised,  it is still useful for 3rd party integration. The Tax office will be satisfied that the receipt can't be faked without collaboration from the seller, and allows an easier tax-refund process. If the phone is bought for work, the employee can easily reclaim the expense from an employer with trust implied.
+
+As we can observe, by the use of tokens, normally scattered business process and web experience can finally be integrated. This ties closely to the other benefit of the blockchain: frictionless market. In this example:
+
+- When the phone is traded second hand, it would be easy to pass the warranty to the next user through a token transfer, opening the market further.
+
+- Since delivery can be tokenised, it would be easy for the buyer to choose his favourite delivery company without having to supply it with business context (address, product, weight, dates) manually, further opening the market for competition.
+
+This example can be further extended to solve complicated and innovative business cases. Suppose the purchase is not made with ordinary currency, but American Express point, the iPhone purchased will be insured for screen damage. As a result, the transaction will have a 4th token as output: an insurance token.
+
+When the mobile phone is repaired for screen damage, an invoice is issued in relation to the purchase record of the mobile phone, to prove that it is the same mobile phone purchased with AmericanExpress points, therefore, enabling the insurance to be paid on the spot. Without those tokens, the user will have to submit a billing statement (that points are deducted), an invoice (that a phone is purchased), evidence of repair (that the same phone is repaired), in order to submit a claim. Many users will surely miss one of those documents, and the claim may take a few days, yet prone to fraud. In this insurance case, blockchain allowed business process innovation that otherwise would require the user to sacrifice convenience, for the mere fact that too many parties are involved and there lack an integration anchor.
+
+The power of integration is further strengthened by the use of the Internet of Things. Let's imagine a future version of AirBNB, where the bookings are tokenised. A traveller can enter a booked AirBNB house by unlocking the smart-lock with his or her token, and the smart-lock would recognise who is the current owner of the booking token.
+
+If Alice owns a token that represents the right to use a room during certain time window, or "a booking" in user's terms, then the actions she could perform are:
+
+Check-in - either produce a QR code to verify the booking to the landlord, or use an NFC-enabled phone to open a smart-lock.
+
+
+      Singapore Telecom  13:45 31 Jan 2018          4G
+     +-----------------------------------------------+
+
+     +-----------------------------------------------+
+     |  AirBNB Booking                               |
+     |               BELONGS EVERYWHERE               |
+     |                                               |
+     | +-------------------------------------------+ |
+     | |                                           | |
+     | | + Create a new booking                    | |
+     | |                                           | |
+     | +-------------------------------------------+ |
+     |                                               |
+     | +-------------------------------------------+ |
+     | | 31 Jan 2018 á 2 Feb 2018                  | |
+     | |                                           | |
+     | |    92 Elias Road, Singpaore, 519951       | |
+     | |                                           | |
+     | |    2 Bedroom unit, check in after 1pm     | |
+     | +-------------------------------------------+ |
+     |                                               |
+     | +-------------------------------------------+ |
+     | | 2 Feb 2018 á 6 Feb 2018                   | |
+     | |                                           | |
+     | |    9 Lemke Street, Muirhead, NT 0810      | |
+     | |                                           | |
+     | |    3 Bedroom house, self-check in         | |
+     | +-------------------------------------------+ |
+     |                                               |
+     | +-------------------------------------------+ |
+     | | 7 Feb 2018 á 13 Feb 2018                  | |
+     | |                                           | |
+     | |    Unit 1519, 28 Harbour Street, NSW 2000 | |
+     | |                                           | |
+     | |    2 Bedroom unit, checkin after 1pm.     | |
+     | +-------------------------------------------+ |
+     |                                               |
+     +-----------------------------------------------+
+               ◀          ◉         ◼
+
+
+
+
+     Singapore Telecom  13:45 31 Jan 2018          4G
+    +-----------------------------------------------+
+
+    +-----------------------------------------------+
+    |                                               |
+    | AirBnB Booking                                |
+    |                                               |
+    |   92 ELIAS ROAD, SINGAPORE, 519951            |
+    |                                               |
+    | Check-in: 31 Jan 2018 1pm + 6pm                |
+    | Checkout: 2 Feb 2018 10am                     |
+    |                                               |
+    |   Landlord: VeryHappyBunny                    |
+    |                                               |
+    | +--------+ +----+ +--------+ +----+ +-------+ |
+    | |Transfer| |Lend| |Check in| |Sell| |Auction| |
+    | +--------+ +----+ +--------+ +----+ +-------+ |
+    |                                               |
+    |                                               |
+    |   Conversation history                        |
+    |                                               |
+    | +-------------------------------------------+ |
+    | |                                           | |
+    | | You: We are travellers form Australia,    | |
+    | |      Judging from the pictures you have   | |
+    | |      a Veranda?                           | |
+    | |                                           | |
+    | | VeryHappyBunny: A patio actually, you     | |
+    | |              can use it anytime.          | |
+    | |                                           | |
+    | | (You confirmed a booking)                 | |
+    | |                                           | |
+    | | You: Good, we will get there after lunch. | |
+    | |                                           | |
+    | +-------------------------------------------+ |
+    |                                               |
+    |                                               |
+    +-----------------------------------------------+
+
+	   ◀          ◉         ◼
+
+
+
+Observing the desirable integration, we can see TBML has to satisfy the following needs:
+
+- allow token actions to be defined. In the case of delivery, "redeem" action, which may be done with QR code or NFC, "authorise action", for someone else to pick up a delivery.
+- allow blockchain functions to be accessed in the action.
+- allow web functions to be accessed in action
+- allow token status to be updated, through web api or signed message (more on that later).
+
+A combined example.
+
+We have demonstrated, by the example of 1% property token, that blockchain can enable a frictionless market through tokenisation of asset; we also have demonstrated by the example of AirBNB token that tokens can have function integration like opening a smart-lock during its booking validity. Let's see an example where both uses are combined - a car token.
+
+On one side, a car is an asset, so it can be bought, sold, transferred, auctioned, collaborated, insured, all enabled by blockchain.
+
+On the other side, a car has utility. A car's ownership token can convert a blockchain wallet into a car key, with additional functions like graphically represent the car's current location. Authorising someone to access your car, or renting it for profit, would be easily done by signing blockchain transactions or attestations, without passing car keys around.
+
+The following picture illustrated the look of such a car token in user's wallet:
+
+
+       Telstra   13:45 31 Jan 2018          4G
+    +-----------------------------------------+
+    |                                         |
+    | Holden Barina 2012 Ownership Token      |
+    |                                         |
+    | Make: Holden Year: 2013  Colour: Black  |
+    | VIN: KL3TA48E9EB541191                  |
+    |                                         |
+    | +------+ +-------+ +------+ +--------+  |
+    | | Open | | Start | | Lock | | Locate |  |
+    | +------+ +-------+ +------+ +--------+  |
+    |                                         |
+    | +---------------+                       |
+    | | Authorise use |                       |
+    | +---------------+                       |
+    |                                         |
+    | +-------------+ +--------------------+  |
+    | | Maintenance | | Roadside Assitance |  |
+    | +-------------+ +--------------------+  |
+    |                                         |
+    | +---------------+                       |
+    | | Collateralise |                       |
+    | +---------------+                       |
+    |                                         |
+    | Registration:                           |
+    |                                         |
+    | +------------------------------------+  |
+    | |                                    |  |         +-----------------------------+
+    | | Issuer: Roads & Maritime Services  |  |         |                             |
+    | | Rego: CJ41HL   Expiry: 2017-12-03  |  | ------> | Access rego attestation     |
+    | |                                    |  |         |                             |
+    | +------------------------------------+  |         +-----------------------------+
+    |                                         |
+    | Purchase:                               |
+    |                                         |
+    | +------------------------------------+  |
+    | |                                    |  |
+    | | Issuer: Manheim Auctions           |  |         +-----------------------------+
+    | | Date: 2015+12+09   Price: $4724.83 |  |         |                             |
+    | |                                    |  | ------> | Access Invoice Token        |
+    | +------------------------------------+  |         |                             |
+    |                                         |         +-----------------------------+
+    | Insurance                               |
+    |                                         |
+    | +------------------------------------+  |         +-----------------------------+
+    | |                                    |  |         |                             |
+    | | Issuer: Virgin Car Insurance       |  |         | Access insurance token      |
+    | | Start Date: 2017 12 30             |  |         | functions:                  |
+    | |                                    |  | ------> |                             |
+    | +------------------------------------+  |         | · Claim                     |
+    |                                         |         | · Lump sum discount payment |
+    | Services:                               |         | · Upgrade / downgrade       |
+    |                                         |         | · Suspend policy            |
+    | +------------------------------------+  |         |                             |
+    | |                                    |  |         +-----------------------------+
+    | | 2016+06+01 Holden Capped Service   |  |
+    | |                                    |  |
+    | | 2016+12+15 Holden Capped Service   |  |
+    | |       +                            |  |
+    | |       +--+ Tire replacement        |  |
+    | |                                    |  |
+    | | 2017+06+15 Holden Capped Service   |  |
+    | |                                    |  |
+    | +------------------------------------+  |
+    |                                         |
+    +-----------------------------------------+
+
+
+                ◀          ◉         ◼
+
+
 
  
 
@@ -298,94 +517,7 @@ Let's start with fungible tokens, as they are somewhat simpler. In the following
 
 [explains the attestations associated with this token.]
 
-The case with non-fungible tokens are more complicated. Let's continue with the AirBNB example. If Alice owns a token that represents the right to use a room during certain time window, or "a booking" in user's terms, then the actions she could perform are:
-
-Check-in - either produce a QR code to verify the booking to the landlord, or use an NFC-enabled phone to open a smart-lock.
-
-
-      Singapore Telecom  13:45 31 Jan 2018          4G
-     +-----------------------------------------------+
-
-     +-----------------------------------------------+
-     |  AirBNB Booking                               |
-     |               BELONGS EVERYWHERE               |
-     |                                               |
-     | +-------------------------------------------+ |
-     | |                                           | |
-     | | + Create a new booking                    | |
-     | |                                           | |
-     | +-------------------------------------------+ |
-     |                                               |
-     | +-------------------------------------------+ |
-     | | 31 Jan 2018 á 2 Feb 2018                  | |
-     | |                                           | |
-     | |    92 Elias Road, Singpaore, 519951       | |
-     | |                                           | |
-     | |    2 Bedroom unit, check in after 1pm     | |
-     | +-------------------------------------------+ |
-     |                                               |
-     | +-------------------------------------------+ |
-     | | 2 Feb 2018 á 6 Feb 2018                   | |
-     | |                                           | |
-     | |    9 Lemke Street, Muirhead, NT 0810      | |
-     | |                                           | |
-     | |    3 Bedroom house, self-check in         | |
-     | +-------------------------------------------+ |
-     |                                               |
-     | +-------------------------------------------+ |
-     | | 7 Feb 2018 á 13 Feb 2018                  | |
-     | |                                           | |
-     | |    Unit 1519, 28 Harbour Street, NSW 2000 | |
-     | |                                           | |
-     | |    2 Bedroom unit, checkin after 1pm.     | |
-     | +-------------------------------------------+ |
-     |                                               |
-     +-----------------------------------------------+
-               ◀          ◉         ◼
-
-
-
-
-     Singapore Telecom  13:45 31 Jan 2018          4G
-    +-----------------------------------------------+
-
-    +-----------------------------------------------+
-    |                                               |
-    | AirBnB Booking                                |
-    |                                               |
-    |   92 ELIAS ROAD, SINGAPORE, 519951            |
-    |                                               |
-    | Check-in: 31 Jan 2018 1pm + 6pm                |
-    | Checkout: 2 Feb 2018 10am                     |
-    |                                               |
-    |   Landlord: VeryHappyBunny                    |
-    |                                               |
-    | +--------+ +----+ +--------+ +----+ +-------+ |
-    | |Transfer| |Lend| |Check in| |Sell| |Auction| |
-    | +--------+ +----+ +--------+ +----+ +-------+ |
-    |                                               |
-    |                                               |
-    |   Conversation history                        |
-    |                                               |
-    | +-------------------------------------------+ |
-    | |                                           | |
-    | | You: We are travellers form Australia,    | |
-    | |      Judging from the pictures you have   | |
-    | |      a Veranda?                           | |
-    | |                                           | |
-    | | VeryHappyBunny: A patio actually, you     | |
-    | |              can use it anytime.          | |
-    | |                                           | |
-    | | (You confirmed a booking)                 | |
-    | |                                           | |
-    | | You: Good, we will get there after lunch. | |
-    | |                                           | |
-    | +-------------------------------------------+ |
-    |                                               |
-    |                                               |
-    +-----------------------------------------------+
-
-	   ◀          ◉         ◼
+The case with non-fungible tokens are more complicated. Let's continue with the AirBNB example.
 
 
 [The concept of delivery vs payment and how it is useful in both investments and consumption.]
@@ -482,76 +614,4 @@ Product ownership token
 
 
 (The whole concept can be illustrated in a few examples, e.g. this car token)
-
-
-       Telstra   13:45 31 Jan 2018          4G
-    +-----------------------------------------+
-    |                                         |
-    | Holden Barina 2012 Ownership Token      |
-    |                                         |
-    | Make: Holden Year: 2013  Colour: Black  |
-    | VIN: KL3TA48E9EB541191                  |
-    |                                         |
-    | +------+ +-------+ +------+ +--------+  |
-    | | Open | | Start | | Lock | | Locate |  |
-    | +------+ +-------+ +------+ +--------+  |
-    |                                         |
-    | +---------------+                       |
-    | | Authorise use |                       |
-    | +---------------+                       |
-    |                                         |
-    | +-------------+ +--------------------+  |
-    | | Maintenance | | Roadside Assitance |  |
-    | +-------------+ +--------------------+  |
-    |                                         |
-    | +---------------+                       |
-    | | Collateralise |                       |
-    | +---------------+                       |
-    |                                         |
-    | Registration:                           |
-    |                                         |
-    | +------------------------------------+  |
-    | |                                    |  |         +-----------------------------+
-    | | Issuer: Roads & Maritime Services  |  |         |                             |
-    | | Rego: CJ41HL   Expiry: 2017-12-03  |  | ------> | Access rego attestation     |
-    | |                                    |  |         |                             |
-    | +------------------------------------+  |         +-----------------------------+
-    |                                         |
-    | Purchase:                               |
-    |                                         |
-    | +------------------------------------+  |
-    | |                                    |  |
-    | | Issuer: Manheim Auctions           |  |         +-----------------------------+
-    | | Date: 2015+12+09   Price: $4724.83 |  |         |                             |
-    | |                                    |  | ------> | Access Invoice Token        |
-    | +------------------------------------+  |         |                             |
-    |                                         |         +-----------------------------+
-    | Insurance                               |
-    |                                         |
-    | +------------------------------------+  |         +-----------------------------+
-    | |                                    |  |         |                             |
-    | | Issuer: Virgin Car Insurance       |  |         | Access insurance token      |
-    | | Start Date: 2017 12 30             |  |         | functions:                  |
-    | |                                    |  | ------> |                             |
-    | +------------------------------------+  |         | · Claim                     |
-    |                                         |         | · Lump sum discount payment |
-    | Services:                               |         | · Upgrade / downgrade       |
-    |                                         |         | · Suspend policy            |
-    | +------------------------------------+  |         |                             |
-    | |                                    |  |         +-----------------------------+
-    | | 2016+06+01 Holden Capped Service   |  |
-    | |                                    |  |
-    | | 2016+12+15 Holden Capped Service   |  |
-    | |       +                            |  |
-    | |       +--+ Tire replacement        |  |
-    | |                                    |  |
-    | | 2017+06+15 Holden Capped Service   |  |
-    | |                                    |  |
-    | +------------------------------------+  |
-    |                                         |
-    +-----------------------------------------+
-
-
-                ◀          ◉         ◼
-
 
