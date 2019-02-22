@@ -93,7 +93,86 @@ TBML stands for Token Behaviour Markup Language and is our framework for definin
 
 It is similar to XML and allows HTML and JavaScript to be injected into the file so that it can define it's functionality, UI and relationships to tokens and other dapps on the blockchain.
 
-TODO finish up
+# address "Frictionless Market" needs
+
+We assert that a language for dictating the behaviour of a token is needed. Its design requirement follows its intended goal: to facilitate frictionless market and to integrate the web.
+
+A market is a place where delivery vs payment happens. On the deliverable side, there are all sorts of things money can buy: assets, goods and services. On the payment side, there are Ether, DAI, Sovereign etc. The fact that any blockchain asset can be transacted any time, as long as it follows the rules, without middlemen being intermediary, gives us maximum market efficiency - the frictionless market. However, both the deliverables and the payment side requires a framework to "plug-in" - the TBML token behaviour language we are proposing.
+
+It's easier to demonstrate the design requirements with an example. Let's imagine a market for 1% property. A property owner can issue many pieces of a token, each represents 1% ownership of the property. He can sell these tokens to obtain cash.
+
+A buyer needs to know quite a bit of information. It's easy to understand that such a token would fetch 1% of the sales revenue if the underlying property is sold, but a lot more details are needed:
+
+- Where is the property and how its current status is?
+- Can a 1% property token owner vote?  For example, on the purchase decision to insurance against bush fire?
+- Is the 1% automatically converted into currency at the time of property sales, or can the token holder elect to keep it?
+- Is the token properly underwritten to prevent double-collateralization?
+- If the property was collateralized for a mortgage, what is the condition for a liquidation event where the tokenised share of the property is of a smaller percentage of the entire asset than the owner can rightfully issue token with? [damn, let's fix this sentence]
+- Is providing identity attestation a condition of purchase?
+
+A lot of the details are in the smart contract that holds the asset, for example, the total number of tokens issued by the issuer. Much is not, for example, how to fetch previous sales prices of the land from an online title deed database.
+
+Typically, nowadays those token related information are locally coded in a Dapp in the form of a website. We envision it to be best abstracted out and placed in a token behaviour language TBML. You can imagine it works like a data processing language that for a given token:
+
+- It fetches token related information from its holding smart contract and 3rd party sources.
+- It has a rendering section where the token is rendered in visual or audio fashion.
+- It has a transaction section where the purpose and condition for trade and transactions are described (a superset of ABI).
+
+Any party is able to render and apply functions to the token using TBML, including entities like generic marketplaces, user-agents and 3rd party apps.
+
+In general, providing a layered structure, using and reusing it, is better than having a monolithic design where a Dapp tied to an asset class and have all knowledge of the asset locally. The reasons are interoperability, scalability and security. Specifically, with the 1% property token as an example, the interoperability, scalability and security concerns are demonstrated below.
+
+## Interoperability:
+
+Suppose a property guru Peter wish to create a website called "Peter's Pride Asset", where he selects the best property available on the market. He can create a listing of those properties with rich information of the current price, location, years of the building and even photos, which the users can purchase with a click. There is no reason that he needs permission to do so because the data of those tokens are on the blockchain and the transaction of those tokens requires no middlemen. However, he would necessarily need to obtain the knowledge local to how to render the token on his website, like how to get the expiration of a token from its holding smart contract. If the underlying smart contract has gone through changes, like adding an attribute (e.g. council rate), his website would need to upgrade. Similarly, the transaction rule might be updated to require the buyer to submit an identity attestation as part of a purchase. Without a speedy upgrade, his users would submit transactions not conforming and gets rejected later in the blockchain. In the end, he would resort to passing the rendering and trading of the token to the Dapp tied to this token, returning to a centralised status and limit the innovation and competition in this space.
+
+In a similar fashion, suppose an investors' forum where the members are allowed to login using their 1% property token, the rendering of the token, under each post, would need to be sourced from the Dapp tied to the token, since it's too much work for a forum to render the token and keep the code updated. Such sourcing would require permission and might be tied to the availability of that Dapp.
+
+## Scalability
+
+Horizontally, the same type of asset might have tokens across multiple networks like Plasma Chains. A buyer is likely to be interested only in assets in Australia, and therefore only connected to the Australian 1% Property network. It can be difficult to have an all-knowing node to provided rendered token information for all existing tokens, especially if a network is designed with privacy in mind. Therefore, to scale, the knowledge about token (TBML) must be detached from the access to the token.
+
+Vertically, if we desire a token whose makeup is 1% property token from a sample of 100 global cities, for mid-big size investors to distribute the risk, a computer system that can manipulate such token must be built with the knowledge about member tokens. It again cannot depend on the availability, security and openness of the original Dapp tied to that asset. TBML would work in the middle for the making of such tokens.
+
+## Security
+
+It is impractical to improvise a schema where every transaction the user might sign is rendered in a user-readable format. It's easy to start with such an effort with a transaction data translation tool, translating enigmatic transaction payload to a user readable data, but ultimately system integration needs and UX needs would surpass what a translation engine can do.
+
+Take the 1% property token as an example, a confirmation might look like this: You are going to purchase 1% of property #802820 with 45 Ethers, are you sure?
+
+The user would be unsure if the glass ceiling designer 2-bedroom house he is watching is #802820.
+
+A translation tool cannot go further because properly rendering the property token requires more than word processing. This limit is easily hit even without introducing complex integration scenarios where more than one tokens are involved in a transaction (e.g. purchasing a used car and get a car token plus a warranty token).
+
+Eventually, a transaction is generated with code, and the user would have to delegate the trust to the code. In a user's words, it's like this: I am accessing the website tied to this token, so I will trust that this transaction I am signing is generated for the intention I have while using the website.
+
+TBML is designed to separate token rendering code and transaction generating code and package them into its own container, signed by a party that the user is likely to trust. There are a few trust levels, which we will detail in the later chapters.
+
+A user who is purchasing a 1% property token from Peter's Pride Property recommendation website can be provided with rendering and transaction packaged and signed by the same group of people who created the holding contract of such tokens, therefore the user can purchase assets from any website with a similar level of trust, or purchase it from a WeChat or Facebook private message and know it is the real token being rendered and  transacted.
+
+## Design requirement for frictionless market
+
+TBML language has to provide:
+
+- Where to find the asset (which chain, what smart contract holds the asset)
+- Vocabulary for token assets
+- Methods to render and translate attributes in local languages
+- Methods to obtain 3rd party information and a list of what 3rd parties are trustworthy.
+- A superset of ABI information that informs users the purpose of the transaction.
+
+And it should be usable by:
+
+- The Dapp created by the token issuer;
+- Any 3rd party Dapp that might use the token;
+- A generic market not owned by the token issuer;
+- Various user-agents, in rendering and using the assets in the wallet section of mobile and desktop wallets.
+
+We will proceed on addressing the need for "Integrating the Web" and come to a full picture of the design requirements of TBML in the following chapters.
+
+# address "Integrate the web" needs
+
+[todo]
+
  
 
 ------------ [ the following is from the old 1st chapter ] -------------
