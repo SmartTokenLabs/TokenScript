@@ -2,36 +2,30 @@
 
 # Author's note
 
-The remarkable crypto speculations that took place in 2017 - 2018 brought our attention to tokens. As we bought and sold them, we forgot that they were intended to be used. This is similar to the housing bubble of 2008 in which people forgot that houses were not merely speculative assets but rather a place for people to live.
+The remarkable crypto speculations that took place in 2017 - 2018 brought our attention to tokens. As we bought and sold them, we forgot their intended purpose was to be used; this is analogous to the housing bubble in which people forgot that houses were not merely speculative assets but rather a place to live.
 
-To provide practical use of blockchain, we have to understand what is its function to the world economy and the Internet. The authors of this paper are technical experts who went through years of study and exploration in the use of blockchain in cryptocurrency and in finance, both in traditional financial instutitions and the newer crypto startups. Though such activities we came to realise that blockchain has two primary functions, which we will elaborate in this paper.
+To provide a practical use of the blockchain, we must understand its utility to the world economy and the internet. The authors of this paper are technical experts who went through years of study and exploration into its applications in cryptocurrency and finance both via financial institutions and startups. With this experience, we came to realise that the blockchain has two primary functions to which we will elaborate further in this paper.
 
-Despite the great folly in 2017-2018, it is not a bad thing to intially focus on tokens. Tokens, as the authors will elaborate, are the enabler of the two primary functions. We define the technique to make it happen "Tokenisation".
+Despite the great folly in 2017-2018, it is not a bad thing to initially focus on tokens. Tokens, as the authors will elaborate, are the enabler of the two primary functions. We define the technique to make it happen in "Tokenisation".
 
-Previous blockchain work mostly focused on enriching the capacity of blockchain technology. This paper will focus on tokenisation and provide an standardization effort known as TBML which address the tokenisation, therefore making the blockchain technical stack complete and useful for the economy and the Internet.
-
-Just like houses are useful for people to live.
+Previous efforts in this industry primarily focused on enriching the capacity of the technology. This paper will focus on tokenisation and provide a standardisation effort known as TBML (Token Behaviour Markup Language) which will make the blockchain technical stack complete and useful for the economy and the internet.
 
 \pagebreak
 
 
 ## Introduction
 
-Blockchain technology has two primary functions that serve essential purposes for the future economy and the future Internet.
+Blockchain technology has two primary functions that serve essential purposes for the future economy and the future Internet. These are providing a frictionless market and integrating the web.
 
-- For the future economy, blockchain provids a frictionless market.
-
-- For the future Intnert, blockchain can integrate the web.
-
-This paper will first address the vision of where we can be and follow up with the design and reasoning the architecture needed on top of blockchains. Then it comes down to TBML, a key missing layer, and explain its design priciple and the way we are building it.
+This paper will address the vision of where we can be and follow up with the design and reasoning behind the architecture needed on top of the blockchain. We will then explain TBML which is a critical missing layer and go over its design principles and how we are building it.
 
 ## Frictionless markets
 
-The 80s' "Back to the Future" featured a world of powerful machines filled with hovering boards and flying cars. It didn't happen. As Peter Thiel once famously lamented, "we were promised flying cars, instead we got a 140 characters". The technological advancement of our time is beyond the imagination of the 80s science fiction movies, albeit not through more powerful machinery, but more efficient use of information.
+The 80s' "Back to the Future" featured a world of powerful machines filled with hovering boards and flying cars. It didn't happen. As Peter Thiel once famously lamented, "we were promised flying cars; instead, we got 140 characters". The technological advancement of our time is beyond the imagination of the 80s science fiction movies, albeit not through more powerful machinery, but more efficient use of information.
 
-Ride-sharing revolutionised the way we organise our daily lives and Airbnb changed the way we travel. These are the new, less frictional markets. They incur less cost to operate, are more accessible and have finer operational units.
+Ride-sharing revolutionised the way we organise our daily lives, and AirBNB changed the way we travel. These are the new, less frictional markets. They incur less cost to operate, are more accessible and have finer operational units.
 
-But despite this web 2.0 revolution, the majority of markets still operate with high costs. The stock market for example, has so much overhead that it is only justifiable for multi-million dollar businesses which rely on the trust of rules and regulations to operate.
+But despite this web 2.0 revolution, the majority of markets still operate with high costs. The stock market, for example, has so much overhead that it is only justifiable for multi-million dollar businesses which rely on the trust of rules and regulations to operate.
 
 ### Can we create a frictionless market through tokenisation?
 
@@ -39,19 +33,19 @@ Can we tokenise, for example, 1% of a property, so that the property market can 
 
 Can we tokenise electricity, allowing power users to benefit from finer scheduling of the use of resources, and households to benefit from collecting surplus sun energy?
 
-Can we tokenise AirBnB bookings, so that hosts can purchase a guaranteed cash flow from the market, while speculators profit from predicting the travel needs?
+Can we tokenise AirBNB bookings, so that hosts can purchase a guaranteed cash flow from the market, while speculators profit from predicting the travel needs?
 
-Can we tokenise the risk and reward of international trades, so that small importers and exports, not significant enough to obtain letters of credit, can compete in international markets and perhaps eventually outcompete the traditional model like AirBNB outcompetes hotels?
+Can we tokenise the risk and reward of international trades, so that small importers and exports, not significant enough to obtain letters of credit, can compete in global markets and perhaps eventually outcompete the traditional model like AirBNB outcompetes hotels?
 
-Can we create insurance token that depends on cryptographic proofs, so that the insurer can remove, from their pricing, their costs incurred by fraudulent documents? Can we decentralise the insurers altogether?
+Can we create an insurance token that depends on cryptographic proofs, so that the insurer can remove from their pricing, the costs incurred by fraudulent documents? Can we decentralise the insurers altogether?
 
 Blockchain technology can provide the foundational layer to achieve these. A lot of work needs to be done to ensure scalability, privacy and quality methods to define how tokens should be used and traded.
 
-This paper does not intend to provide a full solution, instead, it focuses on the last part, on quality methods to define how tokens should be used and traded.
+This paper does not intend to provide a full solution; instead, it focuses on the last part, on quality methods to define how tokens should be used and traded.
 
 ### The challenge of tokenisation
 
-Tokens have different properties. Do tokens expire? AirBNB booking tokens certainly do, but 1% ownership of a property tokens probably don't. Should the token owner receive a notification on a specific event? Power tokens certainly need that, for the change in the power supply is dynamic. Is a token stream-able?
+Tokens have different properties. Do tokens expire? AirBNB booking tokens certainly do, but 1% ownership of property tokens probably don't. Should the token owner receive a notification on a specific event? Power tokens certainly need that, for the change in the power supply is dynamic. Is a token stream-able?
 
 How does it look on the user's mobile, and how is it called in a users language?
 
@@ -61,11 +55,11 @@ If a token entitles the user to do specific actions online, how can the user log
 
 We have done very little on making the tokens interoperable with different methods of trading, listing and rating; there is nearly zero effort devoted to making tokens represent *goods and services* - a basic need for an efficient market.
 
-During the speculative bubble of 2017, a power token ICO, does not need to provide any explanation of how the tokens can be used. All speculators need to know is that they represent a "stake in the future tokenised electricity". As long as the token can fill investors with imagination, it's good enough for an ICO. There is, no more functionality needed other than an ERC20 interface. Such a speculative token doesn't depend on attestations - the proof of actual power production - nor does it need properties like where the energy is provided or for how long it is available. There is no need to do actual work besides the marketing and creation of an ERC20 token. 
+During the speculative bubble of 2017, a power token ICO does not need to provide any explanation of how the tokens can be used. All speculators need to know is that they represent a "stake in the future tokenised electricity". As long as the token can fill investors with imagination, it's good enough for an ICO. There is, no more functionality needed other than an ERC20 interface. Such a speculative token doesn't depend on attestations - the proof of actual power production - nor does it need properties like where the energy is provided or for how long it is available. There is no need to do actual work besides the marketing and creation of an ERC20 token.
 
-With the madness over, it is time to present a framework for describing such token behaviours. 
+With the madness over, it is time to present a framework for describing such token behaviours.
 
-Such a framework must fit tokens into different environments for them to function as use-cases, they must:
+Such a framework must fit tokens into different environments for them to function as use-cases; they must:
 
 - Let the user interact with different IT systems and APIs
 
@@ -87,30 +81,32 @@ Therefore the web was built as a giant library where each book is a computer wit
 
 This design has caused a lot of modern inconveniences. A user would receive an email about the shoes she ordered, she then takes the shipping tracking number, opens the Australia Post website - another book in the giant library of the web - and types in the tracking number to find the current status. On a different day, the same user might pause as she books two tickets for an opera, switch to her frequent flyer app, copy that number over and paste it into the order to collect the points. She might struggle a bit installing that frequent flyer app to start with.
 
-Why are we doing so much copy and pasting when machines are exceptionally good at doing those? It's because the web is like a giant library by design, and we are like readers keeping notes of the index numbers under our sleeves. It's not designed like a personal assistant.
+Why are we doing so much copy and pasting when machines are exceptionally good at doing this? It's because the web is like a giant library by design, and we are like readers keeping notes of the index numbers under our sleeves, and it's not designed like a personal assistant.
 
-It's easy to see the cause of the inconvenience, the web is poorly integrated. When a user checks out on a website, she isn't sure if she has enough balance on her card, because the bank is not integrated with the shopping system. When a patient orders a service, she can't see how much the insurance can cover until the bill is settled, nor can she see whether she has reached the annual cap, because the clinic is not integrated with the health insurance company.
+It's easy to see the cause of the inconvenience; the web is poorly integrated. When a user checks out on a website, she isn't sure if she has enough balance on her card, because the bank is not integrated with the shopping system. When a patient orders a service, she can't see how much the insurance can cover until the bill is settled, nor can she see whether she has reached the annual cap because the clinic is not integrated with the health insurance company.
 
 The answer to an integrated web requires a few building blocks that weren't in the blueprint: authentication, ownership, transfer of value and trading.
 
 The web doesn't have a built-in authentication mechanism[^1]. The add-on "Sign in with Facebook" merely tried to provide authentication through a trusted 3rd party, which, despite privacy and availability concerns, is only good for account authentication and not for business logic.
 
-[^1]: Despite the excellent efforts on client/server certificates in TLS, these authentication methods are not for processes, but only for sites. It's a delegation model. Imagine a buyer not checking if a title deed is real, but only checks if the seller's name matches the one on the deed. That would be the delegation model used in TLS. In fact, TLS can't guarantee anything on the website is real, only that the website is real. The unit of trust here is certainly not fine enough for web to deliver integrated experience.
+[^1]: Despite the excellent efforts on client/server certificates in TLS, these authentication methods are not for processes, but only for sites. It's a delegation model. Imagine a buyer not checking if a title deed is real, but only checks if the seller's name matches the one on the deed. That would be the delegation model used in TLS. In fact, TLS can't guarantee anything on the website is real, only that the website is real. The unit of trust here is certainly not granular enough for the web to deliver an integrated experience.
 
-And "Account authentication" is not a subsitute of web integration. For example, the simple business logic: "the owner of the property is able to check its easement information", doesn't require account authentication, and it would be a bad idea to add account authentication on top of it. If you force "Account authentication" model, when the property is sold, the new property owner would now need to create a new account at the easement service website and secure it with the proof of ownership to the property. This process is onerous. It's also inflexible, as it doesn't allow the owner to authorise the access to a 3rd party like a landscape planner or a pest inspector. Such integration needs, badly addressed by account authentication, are easily found in healthcare, retail and almost every web-based business. Today, we are still adding more and more accounts to address the growing integration needs. It's a case of hammering every problem down as if it is a nail.
+"Account authentication" is not a substitute for web integration. For example, the simple business logic: "the owner of the property can check its easement information", doesn't require account authentication, and it would be a bad idea to add account authentication on top of it. If you force the "Account authentication" model, when the property is sold, the new property owner would now need to create a new account at the easement service website and secure it with the proof of ownership to the property.
 
-The web also doesn't have an ownership or transfer of value mechanism. If Alice is interested in a "Magic: The Gathering" card, and it popped up in the market, Alice will need to create an account on a website like mtgox.com, shorthand for "Magic The Gathering: Gox", to trade it. She might also need to sort out a payment method with a Paypal account. Properly integration is often lacking for complexity or security reasons, and the user has to do it manually. For every integration, the user needs to own two accounts and when she wants to use the card in an online game, she will need a third account to login to the game. She can't click on a link in an email and immediately use the card in a game.
+This process is onerous and inflexible; it doesn't allow the owner to authorise the access to a 3rd party like a landscape planner or a pest inspector. Such integration needs, poorly addressed by account authentication, are easily found in healthcare, retail and almost every web-based business. Today, we are still adding more and more accounts to address the growing integration needs. It's a case of hammering every problem down as if it is a nail.
+
+The web also doesn't have an ownership or transfer of value mechanism. If Alice is interested in a "Magic: The Gathering" card, and it popped up in the market, Alice will need to create an account on a website like mtgox.com, shorthand for "Magic The Gathering: Gox", to trade it. She might also need to sort out a payment method with a Paypal account. Proper integration is often lacking for complexity or security reasons, and the user has to do it manually. For each integration, the user needs to own two accounts, and when she wants to use the card in an online game, she will need a third account to log in to the game. She can't click on a link in an email and immediately use the card in a game.
 
 It's easy to see that these building blocks are necessary for an integrated web and that blockchains can serve this need, but what's the path to get there?
 
-The short answer is "tokenisation". We assert that the way to get there is a data processing language that defines tokens and their behaviour. In such a design, the token is the integration point and the language is the interface for the integrations. Tokens seamlessly go accross systems, examplified by a property token being used for renting, insurance, pest inspection, mortgages and many other systems. It must define its own behaviour pattern which can be used to interact with users to show the status and allow functions to be natively integrated. In other words, a token must have it's own UI and integration logic. 
+The short answer is "tokenisation". We assert that the way to get there is a data processing language that defines tokens and their behaviour. In such a design, the token is the integration point and the language is the interface for the integrations. Tokens seamlessly go across systems, exemplified by a property token being used for rent, insurance, pest inspection, mortgages and many other processes. It must define its own behaviour pattern which can be used to interact with users to show the status and allow functions to be natively integrated. In other words, a token must have its own UI and integration logic.
 
-[a picture of an example of property token that has two statues side by side. The left side has an action button (among others) that says Power Connection. The right side has the same token, but with a "Leased" label on it, and the "Power Connection" action button is invalidated because now it is with the lessor]
+[a picture of an example of a property token that has two statues side by side]. The left side has an action button (among others) that says Power Connection. The right side has the same token, but with a "Leased" label on it, and the "Power Connection" action button is invalidated because now it is with the lessor]
 
 
 ## Introducing TBML
 
-TBML stands for Token Behaviour Markup Language and is our framework for defining such a context for dapps to integrate on their own and with other dapps. 
+TBML stands for Token Behaviour Markup Language and is our framework for defining such a context for dapps to integrate on their own and with other dapps.
 
 It is similar to XML and allows HTML and JavaScript to be injected into the file so that it can define it's functionality, UI and relationships to tokens and other dapps on the blockchain.
 
@@ -118,67 +114,69 @@ It is similar to XML and allows HTML and JavaScript to be injected into the file
 
 We assert that a language for dictating the behaviour of a token is needed. Its design requirement follows its intended goal: to facilitate frictionless market and to integrate the web.
 
-A market is a place where delivery vs payment happens. On the deliverable side, there are all sorts of things money can buy: assets, goods and services. On the payment side, there are Ether, DAI, Sovereign etc. The fact that any blockchain asset can be transacted any time, as long as it follows the rules, without middlemen being intermediary, gives us maximum market efficiency - the frictionless market. However, both the deliverables and the payment side requires a framework to "plug-in" - the TBML token behaviour language we are proposing.
+A market is a place where delivery vs payment happens. On the deliverable side, there are all sorts of things money can buy: assets, goods and services. On the payment side, there are Ether, DAI, Sovereign etc. The fact that any blockchain asset can be transacted any time, as long as it follows the rules, without middlemen, gives us maximum market efficiency - the frictionless market. However, both the deliverables and the payment side requires a framework to "plug-in" - the TBML token behaviour language we are proposing.
 
-It's easier to demonstrate the design requirements with an example. Let's imagine a market for 1% property. A property owner can issue many pieces of a token, each represents 1% ownership of the property. He can sell these tokens to obtain cash.
+It's easier to demonstrate the design requirements with an example. Let's imagine a market for 1% property. A property owner can issue many pieces of a token, each representing 1% ownership of the property. He can sell these tokens to obtain cash.
 
 A buyer needs to know quite a bit of information. It's easy to understand that such a token would fetch 1% of the sales revenue if the underlying property is sold, but a lot more details are needed:
 
-- Where is the property and how its current status is?
-- Can a 1% property token owner vote?  For example, on the purchase decision to insurance against bush fire?
+- Where is the property and what is its current status?
+- Can a 1% property token owner vote?  For example, on the purchase decision to insurance against a bush fire?
 - Is the 1% automatically converted into currency at the time of property sales, or can the token holder elect to keep it?
 - Is the token properly underwritten to prevent double-collateralization?
-- If the property was collateralized for a mortgage, what is the condition for a liquidation event where the tokenised share of the property is of a smaller percentage of the entire asset than the owner can rightfully issue token with? [damn, let's fix this sentence]
-- Is providing identity attestation a condition of purchase?
+- If the property is collateralised for a mortgage, what is the condition for a liquidation event to occur when the share of the property is a smaller percentage of the asset than the owner can rightfully issue a token with? TODO - the meaning of this point is unclear
+- Is providing an identity attestation a condition of purchase?
 
-A lot of the details are in the smart contract that holds the asset, for example, the total number of tokens issued by the issuer. Much is not, for example, how to fetch previous sales prices of the land from an online title deed database.
+A lot of these details are in the smart contract that holds the asset in question, however, many details are not, such as how to fetch previous sales prices for the land from an online title deed database.
 
-Typically, nowadays those token related information are locally coded in a Dapp in the form of a website. We envision it to be best abstracted out and placed in a token behaviour language TBML. You can imagine it works like a data processing language that for a given token:
+Nowadays such token related information is typically encoded into the Dapp with a website. We envision it to be best abstracted out and placed in a token behaviour language (TBML). You can imagine it works like a data processing language for a given token that can:
 
-- It fetches token related information from its holding smart contract and 3rd party sources.
-- It has a rendering section where the token is rendered in visual or audio fashion.
+- Fetch token related information from its holding smart contract and 3rd party sources.
+- It has a rendering section where the token is represented in a visual or audio fashion.
 - It has a transaction section where the purpose and condition for trade and transactions are described (a superset of ABI).
 
 Any party is able to render and apply functions to the token using TBML, including entities like generic marketplaces, user-agents and 3rd party apps.
 
-In general, providing a layered structure, using and reusing it, is better than having a monolithic design where a Dapp tied to an asset class and have all knowledge of the asset locally. The reasons are interoperability, scalability and security. Specifically, with the 1% property token as an example, the interoperability, scalability and security concerns are demonstrated below.
+In general, providing a layered structure, using and reusing it, is better than having a static design where a Dapp is tied to an asset class and has all the knowledge of the asset locally. The reasons for this are interoperability, scalability and security. Specifically, with the 1% property token as an example, the interoperability, scalability and security concerns are demonstrated below.
 
 ### Interoperability:
 
-Suppose a property guru Peter wish to create a website called "Peter's Pride Asset", where he selects the best property available on the market. He can create a listing of those properties with rich information of the current price, location, years of the building and even photos, which the users can purchase with a click. There is no reason that he needs permission to do so because the data of those tokens are on the blockchain and the transaction of those tokens requires no middlemen. However, he would necessarily need to obtain the knowledge local to how to render the token on his website, like how to get the expiration of a token from its holding smart contract. If the underlying smart contract has gone through changes, like adding an attribute (e.g. council rate), his website would need to upgrade. Similarly, the transaction rule might be updated to require the buyer to submit an identity attestation as part of a purchase. Without a speedy upgrade, his users would submit transactions not conforming and gets rejected later in the blockchain. In the end, he would resort to passing the rendering and trading of the token to the Dapp tied to this token, returning to a centralised status and limit the innovation and competition in this space.
+Suppose a property guru named Peter wishes to create a website called "Peter's Pride Asset", where he selects the best properties available on the market. He can create a listing of those properties with rich information of the current price, location, age of the building and even photos, which the users can purchase with a click. There is no reason that he needs permission to do so because the data of those tokens are on the blockchain and the transaction of those tokens requires no middlemen. However, he would need to obtain the knowledge local to how to render the token on his website, like how to get the expiration of a token from its holding smart contract. If the underlying smart contract has gone through changes, like adding an attribute (e.g. council rate), his website would need to upgrade.
+
+Similarly, the transaction rule might be updated to require the buyer to submit an identity attestation as part of a purchase. Without a speedy upgrade, his users would submit transactions not conforming and get rejected later in the blockchain. In the end, he would resort to passing the rendering and trading of the token to the Dapp tied to this token, returning to a centralised status and limit the innovation and competition in this space.
 
 In a similar fashion, suppose an investors' forum where the members are allowed to login using their 1% property token, the rendering of the token, under each post, would need to be sourced from the Dapp tied to the token, since it's too much work for a forum to render the token and keep the code updated. Such sourcing would require permission and might be tied to the availability of that Dapp.
 
 ### Scalability
 
-Horizontally, the same type of asset might have tokens across multiple networks like Plasma Chains. A buyer is likely to be interested only in assets in Australia, and therefore only connected to the Australian 1% Property network. It can be difficult to have an all-knowing node to provided rendered token information for all existing tokens, especially if a network is designed with privacy in mind. Therefore, to scale, the knowledge about token (TBML) must be detached from the access to the token.
+Horizontally, the same type of asset might have tokens across multiple networks like Plasma Chains. A buyer is likely to be interested only in assets in Australia, and therefore only connected to the Australian 1% Property network. It can be difficult to have an all-knowing node to provided rendered token information for all existing tokens, especially if a network is designed with privacy in mind. Therefore, to scale, the knowledge about the token (TBML) must be detached from the access to the token.
 
-Vertically, if we desire a token whose makeup is 1% property token from a sample of 100 global cities, for mid-big size investors to distribute the risk, a computer system that can manipulate such token must be built with the knowledge about member tokens. It again cannot depend on the availability, security and openness of the original Dapp tied to that asset. TBML would work in the middle for the making of such tokens.
+Vertically, if we desire a token whose makeup is a 1% property token from a sample of 100 global cities, for mid-big size investors to distribute the risk, a computer system that can manipulate such a token must be built with the knowledge about member tokens. It again cannot depend on the availability, security and openness of the original Dapp tied to that asset. TBML would work in the middle for the making of such tokens.
 
 ### Security
 
-It is impractical to improvise a schema where every transaction the user might sign is rendered in a user-readable format. It's easy to start with such an effort with a transaction data translation tool, translating enigmatic transaction payload to a user readable data, but ultimately system integration needs and UX needs would surpass what a translation engine can do.
+It is impractical to improvise a schema where every transaction the user might sign is rendered in a user-readable format. It's easy to start with such an effort with a transaction data translation tool, translating an enigmatic transaction payload to "user-readable data", but ultimately the system integration and UX needs would surpass what a translation engine can do.
 
-Take the 1% property token as an example, a confirmation might look like this: You are going to purchase 1% of property #802820 with 45 Ethers, are you sure?
+Take the 1% property token as an example; a confirmation might look like this: You are going to purchase 1% of property #802820 with 45 Ethers, are you sure?
 
-The user would be unsure if the glass ceiling designer 2-bedroom house he is watching is #802820.
+The user will be unsure if the glass ceiling designer 2-bedroom house he is watching is #802820.
 
-A translation tool cannot go further because properly rendering the property token requires more than word processing. This limit is easily hit even without introducing complex integration scenarios where more than one tokens are involved in a transaction (e.g. purchasing a used car and get a car token plus a warranty token).
+A translation tool cannot go further because correctly rendering the property token requires more than word processing. This limit is easily hit even without introducing complex integration scenarios where more than one token is involved in a transaction (e.g. purchasing a used car and getting a car token with a warranty token).
 
-Eventually, a transaction is generated with code, and the user would have to delegate the trust to the code. In a user's words, it's like this: I am accessing the website tied to this token, so I will trust that this transaction I am signing is generated for the intention I have while using the website.
+Eventually, a transaction is generated with code, and the user would have to delegate the trust to the code. In a user's words, I am accessing the website tied to this token, so I will trust that this transaction I am signing is generated for the intention I have while using the site.
 
-TBML is designed to separate token rendering code and transaction generating code and package them into its own container, signed by a party that the user is likely to trust. There are a few trust levels, which we will detail in the later chapters.
+TBML is designed to separate token rendering code, and transaction generating code and package them into its container, signed by a party that the user is likely to trust. There are a few trust levels, which we will detail in later chapters.
 
-A user who is purchasing a 1% property token from Peter's Pride Property recommendation website can be provided with rendering and transaction packaged and signed by the same group of people who created the holding contract of such tokens, therefore the user can purchase assets from any website with a similar level of trust, or purchase it from a WeChat or Facebook private message and know it is the real token being rendered and  transacted.
+A user who is purchasing a 1% property token from Peter's Pride Property recommendation website can be supplied with a rendering and transaction package, signed by the same group of people who created the holding contract of such tokens. Therefore the user can purchase assets from any website with a similar level of trust, or purchase it from a WeChat or Facebook private message and know it is the real token being rendered and transacted.
 
-### Design requirement for frictionless market
+### Design requirements for a frictionless market
 
-TBML language has to provide:
+The TBML language has to provide:
 
-- Where to find the asset (which chain, what smart contract holds the asset)
+- Where to find the asset (which chain and what smart contract holds the asset)
 - Vocabulary for token assets
 - Methods to render and translate attributes in local languages
-- Methods to obtain 3rd party information and a list of what 3rd parties are trustworthy.
+- Ways to obtain 3rd party information and a list of what 3rd parties are trustworthy.
 - A superset of ABI information that informs users the purpose of the transaction.
 
 And it should be usable by:
@@ -190,23 +188,23 @@ And it should be usable by:
 
 We will proceed on addressing the need for "Integrating the Web" and come to a full picture of the design requirements of TBML in the following chapters.
 
-## address "Integrate the web" needs
+## address the "Integrate the web" need
 
-As we explained earlier, the web is poorly integrated, as the only link between the units of the web - websites, is, frankly, links. It carries no business process, authentication or trust relationship. There is no anchoring points for integration.
+As we explained earlier, the web is poorly integrated, as the only link between the units of the web, i.e. "websites" are links. It carries no business process, authentication or trust relationship. There are no anchoring points for integration.
 
-We believe token is the anchor points for integration. Again, this is best illustrated by examples.
+We believe the token is the anchor points for integration. Again, this is best illustrated by examples.
 
-Suppose a user purchases an iPhone from Harvey Norman, an online retailer, using blockchain. The input of the transaction will be some sort of currency. The output, in this case, will be three tokens:
+Suppose a user purchases an iPhone from Harvey Norman, an online retailer, using the blockchain. The input of the transaction will be a type of currency; the output, in this case, will be three tokens:
 
 - a shipping token, which can be used to redeem the product from a local pick-up station.
-- a warranty token, issued by Apple, which allows the iPhone to be serviced in other shops than Harvey Norman (e.g. Apple Centre).
-- a receipt token, issued by Harvey Norman, which allows the product to be returned in 90 days. It's also useful for getting Tourism Tax Refund if you want to take the phone out of Australia.
+- a warranty token, issued by Apple, which allows the iPhone to be serviced in shops other than Harvey Norman (e.g. Apple Centre).
+- A receipt token, issued by Harvey Norman, which allows the product to be returned in 90 days. It's also useful for getting a Tourism Tax Refund if you want to take the phone out of Australia.
 
-If without tokens as the integration anchor, the three different services might be carried out by different means.
+If without tokens as the integration anchor, the three different services might be carried out by various means.
 
 ---
 
-#### Shipping Token
+#### The Shipping Token
 
 Without it, a user might get a tracking number instead of a token, which itself carries no authentication information, so it can't be used to pick up the product unless a pickup code is provided, perhaps in SMS - even more poorly integrated with the process.
 
@@ -214,31 +212,37 @@ With the use of a shipping token, the token status can be remotely updated by th
 
 #### Warranty Token
 
-Without it, a user might need the serial number and an online registration process to activate the warranty. She might even need to create an account for that, whose password she might soon forget.
+Without this token, a user might need the serial number and an online registration process to activate the warranty. She might even need to create an account for that, whose password she will probably soon forget.
 
-With the use of warranty token, the terms and expiration would be easy to find, as it is token properties. The user can log in to warranty service website with the token, forgoing an account. The token can be programmed to receive messages like product call back or emergency security update.
+With the use of a warranty token, the terms and expiration would be easy to find, as it is token properties. The user can log in to the warranty service website with the token, forgoing an account. The token can be programmed to receive messages like product call back or emergency security updates.
 
 #### Receipt Token
 
-Currently, lacking a reliable way to authenticate the purchase, the online-purchased products usually can't be returned in the store, but instead must be returned by online means, like posting it back. A token carries the means for authentication sufficient for the process to be done in store. Despite such a receipt token cannot be transfered or authorised,  it is still useful for 3rd party integration. The Tax office will be satisfied that the receipt can't be faked without collaboration from the seller, and allows an easier tax-refund process. If the phone is bought for work, the employee can easily reclaim the expense from an employer with trust implied.
+Lacking a reliable way to authenticate the purchase, an online purchased product usually cannot be returned to the store but might be returned via online means such as a postback. A token carries the means for authentication sufficient for the process to be done in store.
+
+Despite such a token not being transferable or authorised, it is still useful for 3rd party integrations.  The Tax office will be satisfied that the receipt can't be faked without collaboration from the seller, and allows a swift and easy tax-refund process. If the phone is purchased for work, the employee can easily reclaim the expense from an employer with the trust implied.
 
 ---
 
-As we can observe, by the use of tokens, normally scattered business process and web experience can finally be integrated. This ties closely to the other benefit of the blockchain: frictionless market. In this example:
+As we can observe by the use of tokens, normally scattered business processes and web experiences can finally be integrated. This ties closely to the other benefit of the blockchain: a frictionless market. In this example:
 
-- When the phone is traded second hand, it would be easy to pass the warranty to the next user through a token transfer, opening the market further.
+- When the phone traded is second hand, it would be easy to pass the warranty to the next user through a token transfer, opening the market further.
 
 - Since shipping can be tokenised, it would be easy for the buyer to choose his favourite shipping company without having to supply it with business context (address, product, weight, dates) manually, further opening the market for competition.
 
-This example can be further extended to solve complicated and innovative business cases. Suppose the purchase is not made with ordinary currency, but American Express point, the iPhone purchased will be insured for screen damage. As a result, the transaction will have a 4th token as output: an insurance token.
+This example can be further extended to solve complicated and innovative business cases. Suppose the purchase is not made with fiat currency but with American Express points. The iPhone purchase will be insured for screen damage, and as a result, the transaction will have a 4th insurance token as the output.
 
-When the mobile phone is repaired for screen damage, an invoice is issued in relation to the purchase record of the mobile phone, to prove that it is the same mobile phone purchased with AmericanExpress points, therefore, enabling the insurance to be paid on the spot. Without those tokens, the user will have to submit a billing statement (that points are deducted), an invoice (that a phone is purchased), evidence of repair (that the same phone is repaired), in order to submit a claim. Many users will surely miss one of those documents, and the claim may take a few days, yet prone to fraud. In this insurance case, blockchain allowed business process innovation that otherwise would require the user to sacrifice convenience, for the mere fact that too many parties are involved and there lack an integration anchor.
+When the mobile phone is repaired for screen damage, an invoice is issued concerning the purchase record of the phone to prove it is the same phone purchased with the points, enabling the insurance to be paid on the spot.
 
-The power of integration is further strengthened by the use of the Internet of Things. Let's imagine a future version of AirBNB, where the bookings are tokenised. A traveller can enter a booked AirBNB house by unlocking the smart-lock with his or her token, and the smart-lock would recognise who is the current owner of the booking token.
+Without such tokens, the user will have to submit a billing statement, invoice and evidence of repair in order to submit a claim. Many users will surely miss one of those documents; the claim may take a few days, and still be prone to fraud.
 
-If Alice owns a token that represents the right to use a room during certain time window, or "a booking" in user's terms, then the actions she could perform are:
+In this insurance case, the blockchain allowed business process innovation that otherwise would require the user to sacrifice convenience, for the mere fact that too many parties are involved and there lacks an integration anchor.
 
-Check-in - either produce a QR code to verify the booking to the landlord, or use an NFC-enabled phone to open a smart-lock.
+The power of integration is further strengthened by the use of the Internet of Things. Let's imagine a future version of AirBNB, where the bookings are tokenised. A traveller can enter a booked AirBNB house by unlocking the smart-lock with his or her token, and the smart-lock would recognise who the current owner of the booking token is.
+
+If Alice owns a token that represents the right to use a room during a certain time window, or "a booking" in user's terms, then the actions she could perform are:
+
+Check-in - either produce a QR code to verify the booking to the landlord or use an NFC-enabled phone to open a smart-lock.
 
 
       Singapore Telecom  13:45 31 Jan 2018          4G
@@ -289,7 +293,7 @@ Check-in - either produce a QR code to verify the booking to the landlord, or us
 
     +-----------------------------------------------+
     |                                               |
-    | AirBnB Booking                                |
+    | AirBNB Booking                                |
     |                                               |
     |   92 ELIAS ROAD, SINGAPORE, 519951            |
     |                                               |
@@ -323,29 +327,31 @@ Check-in - either produce a QR code to verify the booking to the landlord, or us
     |                                               |
     +-----------------------------------------------+
 
-	   ◀          ◉         ◼
+       ◀          ◉         ◼
 
 
 
 Observing the desirable integration, we can see TBML has to satisfy the following needs:
 
-- allow token actions to be defined. In the case of shipping token, "redeem" action, which may be done with QR code or NFC, "authorise action", for someone else to pick up a delivery.
+- Allow token actions to be defined. In the case of a shipping token, there would be a "redeem" action (via a QR code or NFC) and an "authorise" action which would allow someone else to pick up a delivery.
 
-- allow blockchain functions to be accessed in the action.
+- Allow blockchain functions to be accessed in an action.
 
-- allow web functions to be accessed in action
+- Allow web functions to be accessed in an action
 
-- allow token status to be updated, through web api or signed message (more on that later).
+- Allow the token status to be updated, via a web api or signed message (more on that later).
 
 A combined example.
 
-We have demonstrated, by the example of 1% property token, that blockchain can enable a frictionless market through tokenisation of asset; we also have demonstrated by the example of AirBNB token that tokens can have function integration like opening a smart-lock during its booking validity. Let's see an example where both uses are combined - a car token.
+With the example of the 1% property token, we demonstrated that the blockchain can enable a frictionless market via tokenisation of an asset.
 
-On one side, a car is an asset, so it can be bought, sold, transferred, auctioned, collaborated, insured, all enabled by blockchain.
+With the case of the AirBNB token, we also showed that tokens can have function integration like opening a smart lock during its booking validity. Let's illustrate an example where both uses are combined - a car token.
 
-On the other side, a car has utility. A car's ownership token can convert a blockchain wallet into a car key, with additional functions like graphically represent the car's current location. Authorising someone to access your car, or renting it for profit, would be easily done by signing blockchain transactions or attestations, without passing car keys around.
+On the one hand, a car is an asset, that can be bought, sold, transferred, auctioned, collaborated and insured, all enabled by blockchain.
 
-The following picture illustrated the look of such a car token in user's wallet:
+On the other hand, a car also has utility. A car's ownership token can convert a blockchain wallet into a car key, with additional functions like graphically representing the car's current location. Authorising someone to access your car, or renting it for profit, would be seamlessly done by signing blockchain transactions or attestations, without passing car keys around.
+
+The following picture illustrates the look of such a car token in the user's wallet:
 
 
        Telstra   13:45 31 Jan 2018          4G
@@ -419,50 +425,15 @@ The following picture illustrated the look of such a car token in user's wallet:
                 ◀          ◉         ◼
 
 
+## How TBML works
 
- 
-
------------- [ the following is from the old 1st chapter ] -------------
-
-The world wide web was made for information sharing.
-
-The web lacks native support for the building blocks of today's internet economy. These are authentication, transfer of value or trusted relationship expression (facebook friends for example). Tim Berners-Lee envisioned the web as a document platform. HTML, today mostly used to represent the user interface, was originally a document format suitable for free information. The last decade saw the rise of modern programmable web browser technologies, such as JavaScript, that aimed to allow various middlemen to provide what was missing in the blueprint of the web: Facebook to be entrusted with personal trust; Paypal to be entrusted with transfer of value and Amazon to be entrusted with e-commerce trades.
-
-
-Bitcoin, for the first time, made it possible to transfer value without an intermediary. With these principles, Ethereum and various other blockchains have enabled an expressive, trusted world computer whose computational matrix is made of value, trust relationships and business rules. Reliably  providing these outputs in this current era can only be procured via a myriad of instituions, overly trusted corporations, leaky privacy potections and regulations. 
-
-(duplicate: These fundamental technologies allowed us to build a new web without trusted middlemen - in some scenarios, even completely without middlemen, as proven in the FIFA ticket trading experiment we conducted mid-2018.)
-
-To participate, we need a global interface, a new world-wide-web, to the computer, but the web is not ready for the change.
-
-Vitalik Buterin envisioned web3, the new web with blockchain and without a lot of middlemen. It provided, for the first time, the capacity for a web application to access Ethereum nodes.
-
-However, Ethereum nodes are not the objects we can use to access the web. It's a tool that doesn't fit the ship of hands.
-
-The old world-wide-web connects people through clicks, forms and search queries. The new world-wide-web, web3, carries trust around by the use of tokens and cryptographic attestations. There lacks the technology to allow tokens to interact with web applications. Today's most popular concept, the Dapp browser, is largely just a connector to blockchain nodes. It is oblivious of what tokens the user has, in what stages the tokens are being used (e.g. collateralized), or even how to display that token in the user's language. It cannot facilitate the way of interaction demanded by web3.
-
-In order to overcome the missing gap, Dapps work very hard to control what belongs to the users directly. A Dapp that sells pizza, for example, will not only display the pizza and manage the shopping cart but also does a lot for the payment, it:
-
-- loops through a list of known tokens that can be used to purchase the pizza;
-- requests the user's public key, checks the user's balance in each of those tokens and unnecessarily learns the users wealth;
-- renders a selection list for the user to choose a token;
-- assembles the transaction using the user's choice of token.
-
-This approach, if compared to the good old world-wide-web, is like having the web application access the user's CPU and keyboard, reading input directly from the user's keystrokes. If the user upgrades his keyboard to a USB model, the web application has to update their code to understand the new type of keystrokes.
-
-Similarly, in the current web3 model, if there is another token that becomes popular, or even if the existing one changed their contract a bit to work around a security issue, the Pizza selling website would need to update their code.
-
-This has the result of either making dapps expensive and hard to secure (current status) or gives rise to cloud-based web-logic code centres who can update their code frequently and securely for the much smaller pizza shops, re-introducing a third party that has to be trusted.
-
-Furthermore, the current status does not scale. It requires the web application to have the full view of the underlying blockchain, which can't always be provided for security, privacy or bandwidth reasons. This is a more prominent problem when scalability technologies like Plasma enable high-throughput blockchains and blockchains whose blocks are not public. It also doesn't allow the user to provide attestations(cryptographically signed directives) for use cases such as ticketing, token proofs (He is my friend for example), big proofs like Merkle-trees or serious proofs like identity (KYC). This is because such attestations behave like tokens but do not live on the blockchain for privacy, cost or bandwidth reasons. 
-
-# Magic Links
+### Magic Links
 
 Magic links are simply a signed message for an atomic swap. It facilitates one major function of traditional financial institutions, a function called  "Delivery versus Payment", whereby one party, the buyer, pays in a currency and the other delivers an asset to be purchased. In today's financial world, delivery of physical goods is not a concern of the financial institutions. Once the transaction is done on paper or on a computer, it is considered done. This assumption is built on the trust towards financial institutions.
 
 (Consider deletion: If, for example, the transaction consists of a loan in the form of currency and a car the loan is used to purchase, then the actual delivery of the car is out of concern, and both the buyer and seller are expected to follow what the computer tells them to do.)
 
-# Assets
+### Assets
 
 In TBML terminology, an asset is something that can be owned and has value. This is a broad definition and doesn't require, like the financial assets, that an asset produces a return, or is anticipated to.
 
@@ -476,7 +447,7 @@ Rental....
 
 Airbnb ...
 
-# Actions
+### Actions
 
 Actions are things that can be done to an asset.
 
