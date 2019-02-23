@@ -1,34 +1,44 @@
 # TBML Whitepaper
 
-## Introduction
-
-Blockchain technology has two primary functions that can change the way individuals and businesses behave; the first is the capacity to create a frictionless market and the second is the capacity to integrate the web. 
-
-This paper will first address the vision of where we can be and follow up with the design and reasoning behind the architecture needed on top of blockchains. We will also present our technology known as TBML which provides this critical layer and makes the architecture possible. 
-
 ## Author's note
 
-The remarkable crypto speculations that took place in 2017 - 2018 brought our attention to tokens. As we bought and sold them, we forgot that they were intended to be used. This is similar to the housing bubble of 2008 in which people forgot that houses were not merely speculative assets but rather a place for people to live. 
+The remarkable crypto speculations that took place in 2017 - 2018 brought our attention to tokens. As we bought and sold them, we forgot that they were intended to be used. This is similar to the housing bubble of 2008 in which people forgot that houses were not merely speculative assets but rather a place for people to live.
 
-Despite this folly, it is not a bad thing to intially focus on tokens as they are the enabler of the two primary functions which we will elaborate on below. 
+To provide practical use of blockchain, we have to understand what is its function to the world economy and the Internet. The authors of this paper are technical experts who went through years of study and exploration in the use of blockchain in cryptocurrency and in finance, both in traditional financial instutitions and the newer crypto startups. Though such activities we came to realise that blockchain has two primary functions, which we will elaborate in this paper.
 
-## The vision: frictionless markets
+Despite the great folly in 2017-2018, it is not a bad thing to intially focus on tokens. Tokens, as the authors will elaborate, are the enabler of the two primary functions. Both are provided by tokenisation.
+
+Previous blockchain work mostly focused on enriching the capacity of blockchain technology. This paper will focus on tokenisation and provide an standardization effort known as TBML which address the tokenisation, therefore making the blockchain technical stack complete and useful for the economy and the Internet.
+
+Just like houses are useful for people to live.
+
+## Introduction
+
+Blockchain technology has two primary functions that serve essential purposes for the future economy and the future Internet.
+
+- For the future economy, blockchain provids a frictionless market.
+
+- For the future Intnert, blockchain can integrate the web.
+
+This paper will first address the vision of where we can be and follow up with the design and reasoning the architecture needed on top of blockchains. Then it comes down to TBML, a key missing layer, and explain its design priciple and the way we are building it.
+
+## Frictionless markets
 
 The 80s' "Back to the Future" featured a world of powerful machines filled with hovering boards and flying cars. It didn't happen. As Peter Thiel once famously lamented, "we were promised flying cars, instead we got a 140 characters". The technological advancement of our time is beyond the imagination of the 80s science fiction movies, albeit not through more powerful machinery, but more efficient use of information.
 
 Ride-sharing revolutionised the way we organise our daily lives and Airbnb changed the way we travel. These are the new markets and they incur less cost to operate, are more accessible and have finer operational units.
 
-Despite this web 2.0 revolution, the majority of markets still operate with high costs. The stock market for example, has so much overhead that it is only justifiable for multi-million dollar businesses which rely on the trust of rules and regulations to operate. 
+Despite this web 2.0 revolution, the majority of markets still operate with high costs. The stock market for example, has so much overhead that it is only justifiable for multi-million dollar businesses which rely on the trust of rules and regulations to operate.
 
-## Can we create a more efficient market without the overhead?
+### Can we create a more efficient market without the overhead?
 
-Can we tokenise, for example, 1% of a property, so that the property market can react faster than the typical month-long property purchase-sales cycle? 
+Can we tokenise, for example, 1% of a property, so that the property market can react faster than the typical month-long property purchase-sales cycle?
 
-Can we tokenise electricity, so that power users can benefit from finer scheduling of the use of resources, and households can benefit from collecting surplus sun energy?
+Can we tokenise electricity, allowing power users to benefit from finer scheduling of the use of resources, and households to benefit from collecting surplus sun energy?
 
-Can we tokenise AirBnB bookings, so that hosts can purchase a guaranteed cash flow from the market, while speculators profit from predicting the travel needs? 
+Can we tokenise AirBnB bookings, so that hosts can purchase a guaranteed cash flow from the market, while speculators profit from predicting the travel needs?
 
-Can we tokenise the risk of a shipment, so that small importers and exports, not significant enough to obtain letters of credit, can compete in international markets and perhaps eventually outcompete the traditional model like AirBNB outcompetes hotels?
+Can we tokenise the risk and reward of international trades, so that small importers and exports, not significant enough to obtain letters of credit, can compete in international markets and perhaps eventually outcompete the traditional model like AirBNB outcompetes hotels?
 
 Can we tokenise insurance that depends on cryptographic proofs, so that the insurer bares less cost of fraudulent documents? Can we decentralise the insurers altogether?
 
@@ -51,12 +61,16 @@ During the speculative bubble of 2017, a power token ICO, does not need to provi
 With the madness over, it is time to present a framework for describing such token behaviours. 
 
 Such a framework must fit tokens into different environments for them to function as use-cases, they must:
+
 - Let the user interact with different IT systems and APIs
+
 - Make them render-able and associated with the actions they can perform in the user's wallet
+
 - Making them fit into listing or auction based general-purpose markets; building one marketplace for one token type would be too inefficient.
+
 - Allow new protocols to be developed on top of them (streaming, communication, staking, collateralization, etc.)
 
-## Integrating the web.
+## Integrate the web.
 
 Tim Berners-Lee and the innovators of the world wide web modelled the web primarily on a public library model and computer-human interaction model.
 
@@ -74,15 +88,17 @@ It's easy to see the cause of the inconvenience, the web is poorly integrated. W
 
 The answer to an integrated web requires a few building blocks that weren't in the blueprint: authentication, ownership, transfer of value and trading.
 
-The web doesn't have a built-in authentication mechanism†. The add-on "Sign in with Facebook" merely tried to provide authentication through a trusted 3rd party, which, despite privacy and availability concerns, is only good for account authentication and not for business logic.
+The web doesn't have a built-in authentication mechanism[^1]. The add-on "Sign in with Facebook" merely tried to provide authentication through a trusted 3rd party, which, despite privacy and availability concerns, is only good for account authentication and not for business logic.
 
-†  Despite the excellent efforts on client/server certificates in TLS, these authentication methods are not for processes, but sites only. It's a delegation model. Imagine a buyer not checking if a title deed is real, but only checks if the seller's name matches the one on the deed. That would be the delegation model used in TLS. In fact, TLS can't guarantee anything on the website is real, only that the website is real.
+[^1]: Despite the excellent efforts on client/server certificates in TLS, these authentication methods are not for processes, but only for sites. It's a delegation model. Imagine a buyer not checking if a title deed is real, but only checks if the seller's name matches the one on the deed. That would be the delegation model used in TLS. In fact, TLS can't guarantee anything on the website is real, only that the website is real. The unit of trust here is certainly not fine enough for web to deliver integrated experience.
 
-For example, the simple business logic: "the owner of the property is able to check its easement information", doesn't require account authentication on its own and it would be a bad idea to add account authentication on top of it. This is because if the property is sold, the new property owner would now need to create a new account at the easement service website and secure it with the proof of ownership to the property. This process is onerous and inflexible, as it doesn't allow the owner to authorise the access to a 3rd party like a landscape planner or a pest inspector. Such authentication needs are easily found in healthcare, retail and almost every web-based business. Today, we repeatedly add more and more accounts to address such integration needs and when our tool is a hammer every problem looks like a nail.
+And "Account authentication" is not a subsitute of web integration. For example, the simple business logic: "the owner of the property is able to check its easement information", doesn't require account authentication, and it would be a bad idea to add account authentication on top of it. If you force "Account authentication" model, when the property is sold, the new property owner would now need to create a new account at the easement service website and secure it with the proof of ownership to the property. This process is onerous. It's also inflexible, as it doesn't allow the owner to authorise the access to a 3rd party like a landscape planner or a pest inspector. Such integration needs, badly addressed by account authentication, are easily found in healthcare, retail and almost every web-based business. Today, we are still adding more and more accounts to address the growing integration needs. It's a case of hammering every problem down as if it is a nail.
 
 The web also doesn't have an ownership or transfer of value mechanism. If Alice is interested in a "Magic: The Gathering" card, and it popped up in the market, Alice will need to create an account on a website like mtgox.com, shorthand for "Magic The Gathering: Gox", to trade it. She might also need to sort out a payment method with a Paypal account. Properly integration is often lacking for complexity or security reasons, and the user has to do it manually. For every integration, the user needs to own two accounts and when she wants to use the card in an online game, she will need a third account to login to the game. She can't click on a link in an email and immediately use the card in a game.
 
-It's easy to see that these building blocks are necessary for an integrated web and that blockchains can serve this need, but what's the path to get there? We assert that the way to get there is a data processing language that defines tokens and their behaviour. In such a design, the token is the integration point and the language is the interface for the integrations. Tokens seamlessly go accross systems, examplified by a property token being used for renting, insurance, pest inspection, mortgages and many other systems. It must define its own behaviour pattern which can be used to interact with users to show the status and allow functions to be natively integrated. In other words, a token must have it's own UI and integration logic. 
+It's easy to see that these building blocks are necessary for an integrated web and that blockchains can serve this need, but what's the path to get there?
+
+The short answer is "tokenisation". We assert that the way to get there is a data processing language that defines tokens and their behaviour. In such a design, the token is the integration point and the language is the interface for the integrations. Tokens seamlessly go accross systems, examplified by a property token being used for renting, insurance, pest inspection, mortgages and many other systems. It must define its own behaviour pattern which can be used to interact with users to show the status and allow functions to be natively integrated. In other words, a token must have it's own UI and integration logic. 
 
 [a picture of an example of property token that has two statues side by side. The left side has an action button (among others) that says Power Connection. The right side has the same token, but with a "Leased" label on it, and the "Power Connection" action button is invalidated because now it is with the lessor]
 
