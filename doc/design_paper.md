@@ -1,4 +1,4 @@
-# TBML Whitepaper
+# TBML Design Paper
 
 # Author's note
 
