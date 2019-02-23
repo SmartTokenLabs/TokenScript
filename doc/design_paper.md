@@ -1,16 +1,19 @@
 # TBML Whitepaper
 
-## Author's note
+# Author's note
 
 The remarkable crypto speculations that took place in 2017 - 2018 brought our attention to tokens. As we bought and sold them, we forgot that they were intended to be used. This is similar to the housing bubble of 2008 in which people forgot that houses were not merely speculative assets but rather a place for people to live.
 
 To provide practical use of blockchain, we have to understand what is its function to the world economy and the Internet. The authors of this paper are technical experts who went through years of study and exploration in the use of blockchain in cryptocurrency and in finance, both in traditional financial instutitions and the newer crypto startups. Though such activities we came to realise that blockchain has two primary functions, which we will elaborate in this paper.
 
-Despite the great folly in 2017-2018, it is not a bad thing to intially focus on tokens. Tokens, as the authors will elaborate, are the enabler of the two primary functions. Both are provided by tokenisation.
+Despite the great folly in 2017-2018, it is not a bad thing to intially focus on tokens. Tokens, as the authors will elaborate, are the enabler of the two primary functions. We define the technique to make it happen "Tokenisation".
 
 Previous blockchain work mostly focused on enriching the capacity of blockchain technology. This paper will focus on tokenisation and provide an standardization effort known as TBML which address the tokenisation, therefore making the blockchain technical stack complete and useful for the economy and the Internet.
 
 Just like houses are useful for people to live.
+
+\pagebreak
+
 
 ## Introduction
 
@@ -80,7 +83,7 @@ In the computer-human interaction model, two players are having a conversation -
 
 Therefore the web was built as a giant library where each book is a computer with whom one can have a conversation. It's probably where Facebook got its namesake inspiration - a website that is a book.
 
-This design has caused a lot of modern inconveniences. A user would receive an email about the shoes she ordered, she then takes the delivery tracking number, opens the Australia Post website - another book in the giant library of the web - and types in the tracking number to find the current status. On a different day, the same user might pause as she books two tickets for an opera, switch to her frequent flyer app, copy that number over and paste it into the order to collect the points. She might struggle a bit installing that frequent flyer app to start with.
+This design has caused a lot of modern inconveniences. A user would receive an email about the shoes she ordered, she then takes the shipping tracking number, opens the Australia Post website - another book in the giant library of the web - and types in the tracking number to find the current status. On a different day, the same user might pause as she books two tickets for an opera, switch to her frequent flyer app, copy that number over and paste it into the order to collect the points. She might struggle a bit installing that frequent flyer app to start with.
 
 Why are we doing so much copy and pasting when machines are exceptionally good at doing those? It's because the web is like a giant library by design, and we are like readers keeping notes of the index numbers under our sleeves. It's not designed like a personal assistant.
 
@@ -193,33 +196,37 @@ We believe token is the anchor points for integration. Again, this is best illus
 
 Suppose a user purchases an iPhone from Harvey Norman, an online retailer, using blockchain. The input of the transaction will be some sort of currency. The output, in this case, will be three tokens:
 
-- a delivery token, which can be used to redeem the product from a local pick-up station.
+- a shipping token, which can be used to redeem the product from a local pick-up station.
 - a warranty token, issued by Apple, which allows the iPhone to be serviced in other shops than Harvey Norman (e.g. Apple Centre).
 - a receipt token, issued by Harvey Norman, which allows the product to be returned in 90 days. It's also useful for getting Tourism Tax Refund if you want to take the phone out of Australia.
 
 If without tokens as the integration anchor, the three different services might be carried out by different means.
 
-Delivery Token:
+---
+
+#### Shipping Token
 
 Without it, a user might get a tracking number instead of a token, which itself carries no authentication information, so it can't be used to pick up the product unless a pickup code is provided, perhaps in SMS - even more poorly integrated with the process.
 
-With the use of a delivery token, the token status can be remotely updated by the delivery company, even messaging to users to inform a coming delivery (if the token is held in a mobile wallet). With a bit of cryptography, it's easy to authorise someone else to pick up a product.
+With the use of a shipping token, the token status can be remotely updated by the shipping company, even messaging to users to inform an upcoming delivery (if the token is held in a mobile wallet). With a bit of cryptography, it's easy to authorise someone else to pick up a product.
 
-Warranty Token:
+#### Warranty Token
 
 Without it, a user might need the serial number and an online registration process to activate the warranty. She might even need to create an account for that, whose password she might soon forget.
 
 With the use of warranty token, the terms and expiration would be easy to find, as it is token properties. The user can log in to warranty service website with the token, forgoing an account. The token can be programmed to receive messages like product call back or emergency security update.
 
-Receipt Token
+#### Receipt Token
 
 Currently, lacking a reliable way to authenticate the purchase, the online-purchased products usually can't be returned in the store, but instead must be returned by online means, like posting it back. A token carries the means for authentication sufficient for the process to be done in store. Despite such a receipt token cannot be transfered or authorised,  it is still useful for 3rd party integration. The Tax office will be satisfied that the receipt can't be faked without collaboration from the seller, and allows an easier tax-refund process. If the phone is bought for work, the employee can easily reclaim the expense from an employer with trust implied.
+
+---
 
 As we can observe, by the use of tokens, normally scattered business process and web experience can finally be integrated. This ties closely to the other benefit of the blockchain: frictionless market. In this example:
 
 - When the phone is traded second hand, it would be easy to pass the warranty to the next user through a token transfer, opening the market further.
 
-- Since delivery can be tokenised, it would be easy for the buyer to choose his favourite delivery company without having to supply it with business context (address, product, weight, dates) manually, further opening the market for competition.
+- Since shipping can be tokenised, it would be easy for the buyer to choose his favourite shipping company without having to supply it with business context (address, product, weight, dates) manually, further opening the market for competition.
 
 This example can be further extended to solve complicated and innovative business cases. Suppose the purchase is not made with ordinary currency, but American Express point, the iPhone purchased will be insured for screen damage. As a result, the transaction will have a 4th token as output: an insurance token.
 
@@ -320,9 +327,12 @@ Check-in - either produce a QR code to verify the booking to the landlord, or us
 
 Observing the desirable integration, we can see TBML has to satisfy the following needs:
 
-- allow token actions to be defined. In the case of delivery, "redeem" action, which may be done with QR code or NFC, "authorise action", for someone else to pick up a delivery.
+- allow token actions to be defined. In the case of shipping token, "redeem" action, which may be done with QR code or NFC, "authorise action", for someone else to pick up a delivery.
+
 - allow blockchain functions to be accessed in the action.
+
 - allow web functions to be accessed in action
+
 - allow token status to be updated, through web api or signed message (more on that later).
 
 A combined example.
