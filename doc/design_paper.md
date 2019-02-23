@@ -29,11 +29,11 @@ This paper will first address the vision of where we can be and follow up with t
 
 The 80s' "Back to the Future" featured a world of powerful machines filled with hovering boards and flying cars. It didn't happen. As Peter Thiel once famously lamented, "we were promised flying cars, instead we got a 140 characters". The technological advancement of our time is beyond the imagination of the 80s science fiction movies, albeit not through more powerful machinery, but more efficient use of information.
 
-Ride-sharing revolutionised the way we organise our daily lives and Airbnb changed the way we travel. These are the new markets and they incur less cost to operate, are more accessible and have finer operational units.
+Ride-sharing revolutionised the way we organise our daily lives and Airbnb changed the way we travel. These are the new, less frictional markets. They incur less cost to operate, are more accessible and have finer operational units.
 
-Despite this web 2.0 revolution, the majority of markets still operate with high costs. The stock market for example, has so much overhead that it is only justifiable for multi-million dollar businesses which rely on the trust of rules and regulations to operate.
+But despite this web 2.0 revolution, the majority of markets still operate with high costs. The stock market for example, has so much overhead that it is only justifiable for multi-million dollar businesses which rely on the trust of rules and regulations to operate.
 
-### Can we create a more efficient market without the overhead?
+### Can we create a frictionless market through tokenisation?
 
 Can we tokenise, for example, 1% of a property, so that the property market can react faster than the typical month-long property purchase-sales cycle?
 
@@ -43,11 +43,13 @@ Can we tokenise AirBnB bookings, so that hosts can purchase a guaranteed cash fl
 
 Can we tokenise the risk and reward of international trades, so that small importers and exports, not significant enough to obtain letters of credit, can compete in international markets and perhaps eventually outcompete the traditional model like AirBNB outcompetes hotels?
 
-Can we tokenise insurance that depends on cryptographic proofs, so that the insurer bares less cost of fraudulent documents? Can we decentralise the insurers altogether?
+Can we create insurance token that depends on cryptographic proofs, so that the insurer can remove, from their pricing, their costs incurred by fraudulent documents? Can we decentralise the insurers altogether?
 
 Blockchain technology can provide the foundational layer to achieve these. A lot of work needs to be done to ensure scalability, privacy and quality methods to define how tokens should be used and traded.
 
 This paper does not intend to provide a full solution, instead, it focuses on the last part, on quality methods to define how tokens should be used and traded.
+
+### The challenge of tokenisation
 
 Tokens have different properties. Do tokens expire? AirBNB booking tokens certainly do, but 1% ownership of a property tokens probably don't. Should the token owner receive a notification on a specific event? Power tokens certainly need that, for the change in the power supply is dynamic. Is a token stream-able?
 
