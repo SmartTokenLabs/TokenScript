@@ -89,7 +89,7 @@ The answer to an integrated web requires a few building blocks that weren't in t
 
 The web doesn't have a built-in authentication mechanism[^1]. The add-on "Sign in with Facebook" merely tried to provide authentication through a trusted 3rd party, which, despite privacy and availability concerns, is only good for account authentication and not for business logic.
 
-[^1]: Despite the excellent efforts on client/server certificates in TLS, these authentication methods are not for processes, but only for sites. It's a delegation model. Imagine a buyer not checking if a title deed is real, but only checks if the seller's name matches the one on the deed. That would be the delegation model used in TLS. In fact, TLS can't guarantee anything on the website is real, only that the website is real. The unit of trust here is certainly not granular enough for the web to deliver an integrated experience.
+[^1]: Despite the excellent efforts on client/server certificates in TLS, these authentication methods are not for processes, but only for sites. It's a delegation model. Imagine a buyer not checking if a title deed is real, but only checks if the seller's name matches the one on the deed. That would be the delegation model used in TLS. In this model, TLS can't guarantee anything on the website is real, only that the website is real. Facebook uses TLS but people put a lot of fake news on it. The unit of trust here is certainly not granular enough for the web to deliver an integrated experience.
 
 "Account authentication" is not a substitute for web integration. For example, the simple business logic: "the owner of the property can check its easement information", doesn't require account authentication, and it would be a bad idea to add account authentication on top of it. If you force the "Account authentication" model, when the property is sold, the new property owner would now need to create a new account at the easement service website and secure it with the proof of ownership to the property.
 
@@ -104,32 +104,49 @@ The short answer is "tokenisation". We assert that the way to get there is a dat
 [a picture of an example of a property token that has two statues side by side]. The left side has an action button (among others) that says Power Connection. The right side has the same token, but with a "Leased" label on it, and the "Power Connection" action button is invalidated because now it is with the lessor]
 
 
-## Introducing TBML
+## Design requirements
+
+We assert that a descriptive language which we name TBML is needed to provide a pathway from blockchain technologies, most prominently Ethereum, to allowing blockchain to perform the two major functions: "Frictionless Market" and "Integrate the web".
 
 TBML stands for Token Behaviour Markup Language and is our framework for defining such a context for dapps to integrate on their own and with other dapps.
 
-It is similar to XML and allows HTML and JavaScript to be injected into the file so that it can define it's functionality, UI and relationships to tokens and other dapps on the blockchain.
+If Javascritp can be thought of as a solution technology to allow us to achieve interactive web, TBML can be similiarly thought of as a solution technology to allow blockchain to achieve "Frictionless Market" and "Integrate the Web".
 
-## address "Frictionless Market" needs
+Unlike most blockchain technology paper, the authors of this paper choose to demonstrate the design by the order of requirements to solution. This is because TBML is a solution layer technology, unlike Ethereum or Plasma which serves a base layer. It's not feasible to demonstrate the works of TBML or evaluate a design decision without using use-cases as examples.
 
-We assert that a language for dictating the behaviour of a token is needed. Its design requirement follows its intended goal: to facilitate frictionless market and to integrate the web.
+The solution will be demonstrated in the following chatpers.
+
+## address "Frictionless Market" capacity
+
+A market is not a noisy channel overloaded with information. More importantly, it is a place where delivery versus payment happens. On the deliverable side, there are all sorts of things money can buy: assets, goods and services. On the payment side, there are Ether, DAI, Sovereign etc.
+
+With blockchain, any tokenised asset can be transacted any time, as long as it follows the rules, without middlemen or intermediary, gives us maximum market efficiency - the frictionless market.
 
 A market is a place where delivery vs payment happens. On the deliverable side, there are all sorts of things money can buy: assets, goods and services. On the payment side, there are Ether, DAI, Sovereign etc. The fact that any blockchain asset can be transacted any time, as long as it follows the rules, without middlemen, gives us maximum market efficiency - the frictionless market. However, both the deliverables and the payment side requires a framework to "plug-in" - the TBML token behaviour language we are proposing.
 
-It's easier to demonstrate the design requirements with an example. Let's imagine a market for 1% property. A property owner can issue many pieces of a token, each representing 1% ownership of the property. He can sell these tokens to obtain cash.
+However, the tokens require a framework to be presented, indexed, traded, auctioned, combined... to suit the needs of such a market. It's easier to demonstrate the design requirements with an example
+
+### 1% property token
+
+Let's imagine a market for "1% property". A property owner can issue many pieces of a token, each represents 1% ownership of the property. He can sell these tokens to obtain cash.
 
 A buyer needs to know quite a bit of information. It's easy to understand that such a token would fetch 1% of the sales revenue if the underlying property is sold, but a lot more details are needed:
 
-- Where is the property and what is its current status?
+- Where is the property and what status is it in?
+
 - Can a 1% property token owner vote?  For example, on the purchase decision to insurance against a bush fire?
-- Is the 1% automatically converted into currency at the time of property sales, or can the token holder elect to keep it?
+
+- Is the 1% automatically converted into currency at the time of property sales, or can the token holder elect to continue holding it?
+
 - Is the token properly underwritten to prevent double-collateralization?
-- If the property is collateralised for a mortgage, what is the condition for a liquidation event to occur when the share of the property is a smaller percentage of the asset than the owner can rightfully issue a token with? TODO - the meaning of this point is unclear
-- Is providing an identity attestation a condition of purchase?
+
+- If the property was collateralized for a mortgage, what is the condition for a liquidation event?
+
+- Is providing a buyer's identity attestation a condition of purchase?
 
 A lot of these details are in the smart contract that holds the asset in question, however, many details are not, such as how to fetch previous sales prices for the land from an online title deed database.
 
-Nowadays such token related information is typically encoded into the Dapp with a website. We envision it to be best abstracted out and placed in a token behaviour language (TBML). You can imagine it works like a data processing language for a given token that can:
+Typically, nowadays those token related information are locally coded in a Dapp in the form of a website. We argue that for it to be effectively marketized, It needs to be abstracted out and placed in a token behaviour language TBML. You can imagine it works like a data processing language that for a given token
 
 - Fetch token related information from its holding smart contract and 3rd party sources.
 - It has a rendering section where the token is represented in a visual or audio fashion.
