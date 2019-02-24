@@ -575,7 +575,54 @@ This vision is made possible through TBML. Without which the clear separation of
 
 In the first case, TBML described shipping token to be able to receive messages. In the simple form, the message is entrusted and rendered to the user interface
 
-[work in prorgress]
+We will demonstrate the portion of TBML related to messaging.
+
+    <token>
+      <name xml:lang="en">Shipment</name>
+      <name xml:lang="zh">貨單</name>
+      <name xml:lang="es">Despacho</name>
+      [...]
+      <states>
+         <state name="initialised"/>
+         <state name="dispathced"/>
+	 <state name="collectable"/>
+	 <state name="used"/>
+	 <state name="expired"/>
+	 <state name="returned"/>
+      </states>
+      <messages-acl>
+         <trust signed="issuer">
+	     <permission>
+	         <display type="history"/>
+		 <display type="notification"/>
+             </permission>
+             <condition state="initialised"/>
+	 </trust>
+	 <trust certified="issuer">
+	     <permission>
+	         <display type="history"/>
+		 <display type="notification"/>
+             </permission>
+             <condition state="dispatched"/>
+	 </trust>
+	 [...]
+
+
+The section between `<states>...</states>` gives a list of states which is the basis of defining messages the token holder is allowed to receive.
+
+The first `<trust>...</trust>` structure causes the user agent to accept and display any signed messages from the token issuer, in this case the online retailer, as notification and an entry in message history, when the token's state is initialised.
+
+The second `<trust>...</trust>` structure causes the user agent to accept and display any signed messages, whose signing verification key is certified by the issuer of the token, as notification and as an entry in message history, when the token's state is "dispatched". This effectively allows any entity the token issuer explicitly trust to issue a message at "dispatched" state.
+
+When the online retailer changes his delivery company, the retailer could issue a certificate on the public key of the new delivery company, thereby authorising them to send messages to the token holders (buyers) to update them the delivery status, yet restricting the messages to only certain stages of business process.
+
+This code snipet shows that by giving such flexibility TBML connected to a new business process without requiring change in the smart contract or affecting user experience. It also allowed communication to the token holder without sending messages through smart contracts.
+
+The method of actual communication is left open to be implemented by other layers of blockchain technology like a message queue or even a distributed message queue.
+
+It's worth noting that messaging is not the only part connected to the business process. We will explain a broader scope of integration in the "Web integration" chapter.
+
+It's also possible to write TBML in such a way that only messages from the online retailer is trusted and displayed, therefore, any new delivery company must send their delivery status message to the online retailer's systems to be forwarded to the buyer. There are availability and privacy reasons why this may not be a good idea. For example, a delivery company should be able to operate when the online retailer is offline; the user might send the door entrance passcode to the delivery company which the online retailer should not learn.
 
 ---
 
