@@ -474,62 +474,8 @@ The other actions depend much on the utility properties of an asset, however, th
 
 Let's start with fungible tokens, as they are somewhat simpler. In the following screen mock-up, the actions are: "Pay anyone", "Request Payment", "Convert to USD".
 
-     Vodafone          13:45 31 Jan 2018          4G
-    +-------------------------------------------------+
 
-    +-------------------------------------------------+
-    |                                                 |
-    | SOVEREIGN - cryptocurrency of Marshall Islands  |
-    |                                                 |
-    | +---------------------------------------------+ |
-    | |                                             | |
-    | | Current Balance: $314.15 ($276.15 available)| |
-    | |                                             | |
-    | +---------------------------------------------+ |
-    |                                                 |
-    | +----------+ +---------------+ +--------------+ |
-    | |Pay Anyone| |Request Payment| |Convert to USD| |
-    | +----------+ +---------------+ +--------------+ |
-    |                                                 |
-    | Recent Transactions                             |
-    | +---------------------------------------------+ |
-    | |                                             | |
-    | | 29 Jan BEKANT Desk - IKEA          -$499.99 | |
-    | |        +-- Delivery Token - FedEx  [open]   | |
-    | |        +-- Warranty 1 year - IKEA  [open]   | |
-    | |                                             | |
-    | | 28 Jan VISA Application             -$80.00 | |
-    | |        +--- Receipt Token          [open]   | |
-    | |                                             | |
-    | | 26 Purchase SOVEREIGN from Ether   +$800.00 | |
-    | |                                             | |
-    | |             Displaying 3 of 94 Transactions | |
-    | +---------------------------------------------+ |
-    |                                                 |
-    | Open Payment Channels                           |
-    | +---------------------------------------------+ |
-    | | GoCard:   Public Transit and parking fees   | |
-    | |                                             | |
-    | | Payment Channel                             | |
-    | | Opened: 2019-04-05       Balance held: $50  | |
-    | | Expiry: 2019-05-05    Current balance: $38  | |
-    | |                                             | |
-    | |                   [Inspect Payment Channel] | |
-    | +---------------------------------------------+ |
-    |                                                 |
-    | Pre-authorisations                               |
-    | +--------------------------------------------+  |
-    | |                                            |  |
-    | | - The Guardian: biweekly,  $10, no expiry. |  |
-    | | - Pablo & Rusty's: monthly, $28, till 2019 |  |
-    | |                                            |  |
-    | |           Displaying 2 of 5 authorisations |  |
-    | +--------------------------------------------+  |
-    |                                                 |
-    +-------------------------------------------------+
-
-		  ◀          ◉         ◼
-
+![Rendering of the sovereign token on a mobile phone. Notice the action buttons.](doc/sovereign.png)
 
 [explains the attestations associated with this token.]
 
