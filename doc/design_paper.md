@@ -537,9 +537,9 @@ We talked about the design requirements of TBML and let's step in closer to find
 
 Early public blockchain Endeavourers attempted to implement both a contractual relationship and business process into smart contracts. As an example, a smart contract would not only process an order but also manages the inventory. Such an attempt is like that of a patron whp finds not only his real-life contract with ikea but also the return policy and which aisle he should go to fetch the furniture package.
 
-These attempts didn't work thanks to the lack of performance or privacy reasons, but extending them would be the wrong approach. Realising that blockchain was not fit to be a business engine, ICO hustlers in 2017 touted the idea of new generations of blockchain with tens of thousands of transactions per seconds. 2018 saw the renewal of such disinformation picturing blockchain as "the new cloud", a superset of AWS' functionalities. The underlying thinking is that blockchain as a new technology must be a faster and stronger version of the previous ones: the Cloud; much akin to the way we imagined the 2000s transportation solution being flying cars, not Uber.
+These attempts didn't work due to the lack of performance and privacy in current generation blockchains, but extending them would be the wrong approach. Realising that blockchain was not fit to be a business engine, ICO hustlers in 2017 touted the idea of new generations of blockchain with tens of thousands of transactions per seconds. 2018 saw the renewal of such disinformation picturing blockchain as "the new cloud", a superset of AWS' functionalities. The underlying thinking is that blockchain as a new technology must be a faster and stronger version of the previous ones: the Cloud; much akin to the way we imagined the 2000s transportation solution being flying cars, not Uber.
 
-Thanks to its additional security assumptions, Byzantine Fault tolerance blockchains would never outperform AWS's business engines. The openness of blockchain is another issue. Furthermore, it's not practical to build a firewall around a blockchain business process. If performance, privacy and security issues are not persuasive enough, the compelling argument this paper provides lies in the life cycle management. Since the contractual relationship, reflected by the tokens the user holds, will stay for a long time, while the business process is, ideally, perfected from day to day.
+Thanks to its additional security assumptions, Byzantine Fault tolerance blockchains would never outperform AWS's business engines. Furthermore, it's not practical to build a firewall around a blockchain business process. If performance, privacy and security issues are not persuasive enough, the compelling argument this paper provides lies in the life cycle management: the contractual relationship, reflected by the tokens the user holds, will stay for a long time, while the business process is, ideally, perfected from day to day.
 
 The authors of this paper advocate a method to draw the line between a smart contract and a business process.
 
@@ -547,23 +547,37 @@ The authors of this paper advocate a method to draw the line between a smart con
 
 2. A smart contract and business process are integrated through the tokens.
 
-Going further along the online iPhone purchase example, at the time of purchase, a shipment token is created, representing the user's right to receive the delivery. It does not imply that in the very few seconds the purchase is recorded on the blockchain, an inventory management database selected a warehouse, deducted the iPhone from its inventory count, labelled it with a shipment tracker and returned the tracker to the token. It would be absurd to use blockchain like a cloud platform and outright impossible thanks to the atomic nature of blockchain transactions.
+Going further along the online iPhone purchase example, with the purchase transaction a shipment token is created, representing the user's right to receive the delivery. It does not imply that in the very moment the purchase is recorded on the blockchain, an inventory management database selected a warehouse, deducted the iPhone from its inventory count, labelled it with a shipment tracker and returned the tracker to the token. That would be an absurd way to use blockchain and outright impossible thanks to the atomic nature of blockchain transactions.
 
 Preferably instead, the online retailer obtained a point of integration - the shipment token, which will allow the warehouse to find the product, label it at its own pace, inform the user that the product is ready to be shipped (the token carries the definition of what communication is allowed to the holder), and send it on its way.
 
-As the business matures and markets become less frictional, two changes happen. The first change is that the online retailer found a better shipment company. In this case, the new shipment company will integrate the token, sending shipping progress information in place of the old one. The customers can still prove ownership of the shipping with his token, e.g. by using an NFC mobile phone to touch the deliverer's hand-held device. There is no need to change the smart contract transaction rules. The online retailer can even change the shipping company when the product is first under-delivered without the user changing his token.
+As the business matures and markets become less frictional, two changes happen.
+
+#### Change in the business process
+
+The first change is that the online retailer found a better shipment company. In this case, the new shipment company will integrate the same shipment token, sending shipping progress information in place of the old one. The customers can still prove ownership of the shipping with his token, e.g. by using an NFC mobile phone to touch the deliverer's hand-held device.
+
+There is no need to change the smart contract transaction rules. The online retailer can even change the shipping company when the product is first under-delivered without the user changing his token.
 
 This change illustrated that the business process should decouple from the token, instead, integrated through the token.
 
-Business went on for a while; then, there is an innovation from the blockchain market. Some users bulk-purchased a year's shipping from a delivery company, to enjoy the AmazonPrime-like free shipping privileges without using Amazon. Seeing an opportunity, a credit card company even went so far as to provide such a privilege to their card holders (which could also be represented by a token).  The online retailer decided to join the game to stay competitive. This time, he would need to modify his smart contract, changing the transaction rule that a shipping token can be accepted at the time of purchase. In such a case, the output of the transaction will not have a shipping token, since one is already provided.
+#### Change in the market
+
+Business went on for a while; then, there is an innovation from the blockchain market. Some users bulk-purchased a year's shipping from a delivery company, to enjoy the AmazonPrime-like free shipping privileges without using Amazon[^2]. Seeing an opportunity, a credit card company even went so far as to provide such a privilege to the subscribers of their card, which is also represented by a toke.
+
+[^2]: The market condition for such an innovation might exist, because only the buyer is most familiar with the last-mile delivery experience. Usually, online retailer negotiate bulk delivery contracts since they have the quantity, but they are just a proxy of the buyers' experience. Their interest is not perfectly aligned with the buyers.
+
+The online retailer decided to join the game to stay competitive. This time, he would need to modify his smart contract, changing the transaction rule that a shipping token can be accepted at the time of purchase. In such a case, the output of the transaction will not have a shipping token, since one is already provided.[^3]
+
+[^3]: In practical implementations, bulk-purchased shipping labels, if tokenised, may or may not be the same as shipping tokens, which is mapped to a specific tracking number, since there might be a case of a semi-fungible token changing into a non-fungible token. The implementors might choose to destory the former and re-create the latter. The authors of this paper decided to leave out such detail for the clarity of the text.
 
 The online retailer will necessarily modify his business process to expect pick-ups from any delivery company the user purchased shipping tokens from.
 
 This change illustrated that a new transaction rule would result in a change of smart contract.
 
-To recap, business process changes should not lead to a smart contract change. An improvement in a free market, in the form of a transaction rule change, should naturally lead to a smart contract change. Blockchain serves to provide a frictionless market, not to optimise business processes[^2].
+#### Business processes may not change smart contract. Market condition may.
 
-[^2]: Is it even possible that the market can be even less fractional than a bulk-purchasing AmazonPrime-like delivery can enable? Maybe, but it would hardly be possible without blockchain technology. A sound counter-argument for blockchain naysayers.
+To recap, business process changes should not lead to a smart contract change. An improvement in a free market, in the form of a transaction rule change, should naturally lead to a smart contract change. Blockchain serves to provide a frictionless market, not to optimise business processes.
 
 This vision is made possible through TBML. Without which the clear separation of integration needs and business process needs would be difficult and the result would be not interoperable.
 
