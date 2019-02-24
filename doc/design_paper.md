@@ -587,6 +587,52 @@ Attestations: crypto-kitten vouchers, FIFA ticket redeem coupons, American Expre
 
 (This section is in the early draft stage, never mind the clutter)
 
+## The design of TBML
+
+We talked about the design requirements of TBML and let's step in closer to find out how would it work.
+
+### Relate tokens to smart contract and tokens to web services
+
+Early public blockchain Endeavourers attempted to implement both contractual relationship and business process into smart contracts. As an example, a smart contract would not only process an order but also manages the inventory.  Such an attempt is like that a patron finds that his real-life contract with Ikea containing not only the return policy but also from which aisle and which rack should he go to fetch their furniture package.
+
+These attempts didn't work thanks to the lack of performance, privacy reasons, but extending them would be the wrong approach. Realising that blockchain was not fit to be a business engine, ICO hustlers in 2017 touted the idea of new generations of blockchain with tens of thousands of transactions per seconds. 2018 saw the renewal of such disinformation picturing blockchain as "the new cloud", a superset of AWS' functionalities. The underlying thinking is that blockchain as a new technology must be a faster and stronger version of the previous ones: the Cloud; much akin to the way we imagined the 2000s transportation solution being flying cars, not Uber.
+
+Thanks to its additional security assumption, Byzantine Fault tolerance, blockchains would never out-perform today's business engines built without such an assumption, like AWS. The openness of blockchain is another issue. Furthermore, it's not practical to build a firewall around a blockchain business process. If performance, privacy and security issues are not persuasive enough, the compelling argument this paper provides lies in the life cycle management. Since the contractual relationship, reflected by the tokens the user hold, will stay for a long time, while the business process is, ideally, perfected from day to day. For an analogy, a token is as stable as a multi-million dollar property, and business processes are as flexible as the whores coming in and out daily. They should not be the same piece of software.
+
+The authors of this paper advocate a method to draw the line between a smart contract and a business process.
+
+1. Smart contract dictates the transaction rules of tokens, not the utility of the tokens.
+
+2. Smart contract and business processes are integrated through the tokens.
+
+Going further alone the online iPhone purchase example, at the time of purchase, a shipment token is created, representing the user's right to receive the delivery. It does not imply that in the very few seconds the purchase is recorded on the blockchain, an inventory management database selected a warehouse, deducted the iPhone from its inventory count, labelled it with a shipment tracker and returned the tracker to the token. That would be a preposterous way of using blockchain like a cloud platform, and outright impossible thanks to the atomic nature of blockchain transactions.
+
+Preferably instead, the online retailer obtained a point of integration - the shipment token, which will allow the warehouse to find the product, label it at its own pace, inform the user that the product is ready to be shipped (the token carries the definition what communication is allowed to the holder), and send it on its way.
+
+As the business matures and markets become less frictional, two changes happen. We made the imaginary changes as following to illustrate the relationship between business processes and smart contracts.
+
+The first change is that the online retailer found a better shipment company. In this case, the new shipment company will integrate to the token, sending shipping progress information in place of the old one. The customers can still prove ownership of the shipping with his token, e.g. by using an NFC mobile phone to touch the deliverer's hand-held device. There is no need to change the smart contract transaction rules. The online retailer can even change the shippment company when the product is first under-delivered without the user changing his token.
+
+This change illustrated that the business process should decouple from token, instead, integrated through the token.
+
+Business went on for a while; then, there is an innovation from the blockchain market. Some users bulk-purchased a year's shipping from a delivery company, to enjoy the AmazonPrime-like free shipping privilege without using Amazon. Seeing the opportunity, a credit card company even went that far to provide such privilege to their card holds (which is represented by a token as well). The online retailer decided to join the game to stay competitive. This time, he would need to modify his smart contract, changing the transaction rule that a shipping token can be accepted at the time of purchase. In such a case, the output of the transaction will not have a shipping token, since one is already provided.
+
+The online retailer will necessarily modify his business process to expect pick-ups from any delivery company the user purchased shipping token from. It's a bit messy in the beginning, but in the end, competition is good for everyone.
+
+This change illustrated that a new transaction rule would result in a change of smart contract.
+
+To recap, business process change should not lead to a smart contract change. An improvement in a freer market, in the form of a transaction rule change, should naturally lead to a smart contract change. Blockchain serves to provide a frictionless market, not to optimise business processes[^2].
+
+[^2]: Is it even possible that the market can be even less fractional than bulk-purchasing AmazonPrime-like delivery can enable? Maybe, but it would hardly be possible without blockchain technology. A sound counter-argument for blockchain naysayers.
+
+This vision is made possible through TBML. Without which the clear separation of integration needs and business process needs would be difficult and the result would be not interoperable.
+
+In the first case, TBML described shipping token to be able to receive messages. In the simple form, the message is entrusted and rendered to the user interface
+
+[work in prorgress]
+
+---
+
 In the traditional financial world, transactions usually involve a currency in exchange of something deliverable.
 
 
