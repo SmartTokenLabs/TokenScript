@@ -106,15 +106,11 @@ The short answer is "tokenisation". We assert that the way to get there is a dat
 
 ## Design requirements
 
-We assert that a descriptive language which we name TBML is needed to provide a pathway from blockchain technologies, most prominently Ethereum, to allowing blockchain to perform the two major functions: "Frictionless Market" and "Integrate the web".
+We assert that a descriptive language (TBML) is needed to allow blockchain technology to enable "frictionless markets" and an "integrated web".
 
 TBML stands for Token Behaviour Markup Language and is our framework for defining such a context for dapps to integrate on their own and with other dapps.
 
-If Javascritp can be thought of as a solution technology to allow us to achieve interactive web, TBML can be similiarly thought of as a solution technology to allow blockchain to achieve "Frictionless Market" and "Integrate the Web".
-
-Unlike most blockchain technology paper, the authors of this paper choose to demonstrate the design by the order of requirements to solution. This is because TBML is a solution layer technology, unlike Ethereum or Plasma which serves a base layer. It's not feasible to demonstrate the works of TBML or evaluate a design decision without using use-cases as examples.
-
-The solution will be demonstrated in the following chatpers.
+Unlike most whitepapers in the space, we choose to demonstrate the design by order of requirements to make a solution; this is because TBML is a solution layer rather than Ethereum or Plasma which serves as a base layer. It's not feasible to demonstrate the works of TBML or evaluate a design decision without showing use-cases as examples.
 
 ## address "Frictionless Market" capacity
 
@@ -522,11 +518,11 @@ To explain the use case when the *revocation* of an attestation has to happen on
 
 --
 
-Authori's note:
+## Authors note:
 
-Assets: crypto kitten, FIFA ticket, right to a bottle of wine, ownership of 1% of a house, a piece of armour in a video game, dice in a video game.
+Examples of assets: crypto kitties, FIFA tickets, right to a bottle of wine, 1% ownership of a house, a piece of armour in a video game or dice in a video game.
 
-Attestations: crypto-kitten vouchers, FIFA ticket redeem coupons, American Express Centurion status, Friendship Token (a signed message from Michael Jackson saying that Victor Zhang is a friend), identity proof.
+Examples of attestations: crypto-kitten vouchers, FIFA ticket redeem coupons, American Express Centurion status, Friendship Tokens (a signed message from Michael Jackson saying that Victor Zhang is a friend) or proof of identity.
 
 
 [The concept of delivery vs payment and how it is useful in both investments and consumption.]
@@ -539,52 +535,48 @@ We talked about the design requirements of TBML and let's step in closer to find
 
 ### Relate tokens to smart contract and tokens to web services
 
-Early public blockchain Endeavourers attempted to implement both contractual relationship and business process into smart contracts. As an example, a smart contract would not only process an order but also manages the inventory.  Such an attempt is like that a patron finds that his real-life contract with Ikea containing not only the return policy but also from which aisle and which rack should he go to fetch their furniture package.
+Early public blockchain Endeavourers attempted to implement both a contractual relationship and business process into smart contracts. As an example, a smart contract would not only process an order but also manages the inventory. Such an attempt is like that of a patron whp finds not only his real-life contract with ikea but also the return policy and which aisle he should go to fetch the furniture package.
 
-These attempts didn't work thanks to the lack of performance, privacy reasons, but extending them would be the wrong approach. Realising that blockchain was not fit to be a business engine, ICO hustlers in 2017 touted the idea of new generations of blockchain with tens of thousands of transactions per seconds. 2018 saw the renewal of such disinformation picturing blockchain as "the new cloud", a superset of AWS' functionalities. The underlying thinking is that blockchain as a new technology must be a faster and stronger version of the previous ones: the Cloud; much akin to the way we imagined the 2000s transportation solution being flying cars, not Uber.
+These attempts didn't work thanks to the lack of performance or privacy reasons, but extending them would be the wrong approach. Realising that blockchain was not fit to be a business engine, ICO hustlers in 2017 touted the idea of new generations of blockchain with tens of thousands of transactions per seconds. 2018 saw the renewal of such disinformation picturing blockchain as "the new cloud", a superset of AWS' functionalities. The underlying thinking is that blockchain as a new technology must be a faster and stronger version of the previous ones: the Cloud; much akin to the way we imagined the 2000s transportation solution being flying cars, not Uber.
 
-Thanks to its additional security assumption, Byzantine Fault tolerance, blockchains would never out-perform today's business engines built without such an assumption, like AWS. The openness of blockchain is another issue. Furthermore, it's not practical to build a firewall around a blockchain business process. If performance, privacy and security issues are not persuasive enough, the compelling argument this paper provides lies in the life cycle management. Since the contractual relationship, reflected by the tokens the user hold, will stay for a long time, while the business process is, ideally, perfected from day to day. For an analogy, a token is as stable as a multi-million dollar property, and business processes are as flexible as the whores coming in and out daily. They should not be the same piece of software.
+Thanks to its additional security assumptions, Byzantine Fault tolerance blockchains would never outperform AWS's business engines. The openness of blockchain is another issue. Furthermore, it's not practical to build a firewall around a blockchain business process. If performance, privacy and security issues are not persuasive enough, the compelling argument this paper provides lies in the life cycle management. Since the contractual relationship, reflected by the tokens the user holds, will stay for a long time, while the business process is, ideally, perfected from day to day.
 
 The authors of this paper advocate a method to draw the line between a smart contract and a business process.
 
-1. Smart contract dictates the transaction rules of tokens, not the utility of the tokens.
+1. A smart contract dictates the transaction rules of tokens, not the utility of the tokens.
 
-2. Smart contract and business processes are integrated through the tokens.
+2. A smart contract and business process are integrated through the tokens.
 
-Going further alone the online iPhone purchase example, at the time of purchase, a shipment token is created, representing the user's right to receive the delivery. It does not imply that in the very few seconds the purchase is recorded on the blockchain, an inventory management database selected a warehouse, deducted the iPhone from its inventory count, labelled it with a shipment tracker and returned the tracker to the token. That would be a preposterous way of using blockchain like a cloud platform, and outright impossible thanks to the atomic nature of blockchain transactions.
+Going further along the online iPhone purchase example, at the time of purchase, a shipment token is created, representing the user's right to receive the delivery. It does not imply that in the very few seconds the purchase is recorded on the blockchain, an inventory management database selected a warehouse, deducted the iPhone from its inventory count, labelled it with a shipment tracker and returned the tracker to the token. It would be absurd to use blockchain like a cloud platform and outright impossible thanks to the atomic nature of blockchain transactions.
 
-Preferably instead, the online retailer obtained a point of integration - the shipment token, which will allow the warehouse to find the product, label it at its own pace, inform the user that the product is ready to be shipped (the token carries the definition what communication is allowed to the holder), and send it on its way.
+Preferably instead, the online retailer obtained a point of integration - the shipment token, which will allow the warehouse to find the product, label it at its own pace, inform the user that the product is ready to be shipped (the token carries the definition of what communication is allowed to the holder), and send it on its way.
 
-As the business matures and markets become less frictional, two changes happen. We made the imaginary changes as following to illustrate the relationship between business processes and smart contracts.
+As the business matures and markets become less frictional, two changes happen. The first change is that the online retailer found a better shipment company. In this case, the new shipment company will integrate the token, sending shipping progress information in place of the old one. The customers can still prove ownership of the shipping with his token, e.g. by using an NFC mobile phone to touch the deliverer's hand-held device. There is no need to change the smart contract transaction rules. The online retailer can even change the shipping company when the product is first under-delivered without the user changing his token.
 
-The first change is that the online retailer found a better shipment company. In this case, the new shipment company will integrate to the token, sending shipping progress information in place of the old one. The customers can still prove ownership of the shipping with his token, e.g. by using an NFC mobile phone to touch the deliverer's hand-held device. There is no need to change the smart contract transaction rules. The online retailer can even change the shippment company when the product is first under-delivered without the user changing his token.
+This change illustrated that the business process should decouple from the token, instead, integrated through the token.
 
-This change illustrated that the business process should decouple from token, instead, integrated through the token.
+Business went on for a while; then, there is an innovation from the blockchain market. Some users bulk-purchased a year's shipping from a delivery company, to enjoy the AmazonPrime-like free shipping privileges without using Amazon. Seeing an opportunity, a credit card company even went so far as to provide such a privilege to their card holders (which could also be represented by a token).  The online retailer decided to join the game to stay competitive. This time, he would need to modify his smart contract, changing the transaction rule that a shipping token can be accepted at the time of purchase. In such a case, the output of the transaction will not have a shipping token, since one is already provided.
 
-Business went on for a while; then, there is an innovation from the blockchain market. Some users bulk-purchased a year's shipping from a delivery company, to enjoy the AmazonPrime-like free shipping privilege without using Amazon. Seeing the opportunity, a credit card company even went that far to provide such privilege to their card holds (which is represented by a token as well). The online retailer decided to join the game to stay competitive. This time, he would need to modify his smart contract, changing the transaction rule that a shipping token can be accepted at the time of purchase. In such a case, the output of the transaction will not have a shipping token, since one is already provided.
-
-The online retailer will necessarily modify his business process to expect pick-ups from any delivery company the user purchased shipping token from. It's a bit messy in the beginning, but in the end, competition is good for everyone.
+The online retailer will necessarily modify his business process to expect pick-ups from any delivery company the user purchased shipping tokens from.
 
 This change illustrated that a new transaction rule would result in a change of smart contract.
 
-To recap, business process change should not lead to a smart contract change. An improvement in a freer market, in the form of a transaction rule change, should naturally lead to a smart contract change. Blockchain serves to provide a frictionless market, not to optimise business processes[^2].
+To recap, business process changes should not lead to a smart contract change. An improvement in a free market, in the form of a transaction rule change, should naturally lead to a smart contract change. Blockchain serves to provide a frictionless market, not to optimise business processes[^2].
 
-[^2]: Is it even possible that the market can be even less fractional than bulk-purchasing AmazonPrime-like delivery can enable? Maybe, but it would hardly be possible without blockchain technology. A sound counter-argument for blockchain naysayers.
+[^2]: Is it even possible that the market can be even less fractional than a bulk-purchasing AmazonPrime-like delivery can enable? Maybe, but it would hardly be possible without blockchain technology. A sound counter-argument for blockchain naysayers.
 
 This vision is made possible through TBML. Without which the clear separation of integration needs and business process needs would be difficult and the result would be not interoperable.
 
-In the first case, TBML described shipping token to be able to receive messages. In the simple form, the message is entrusted and rendered to the user interface
+In the first case, TBML described a shipping token to be able to receive messages. In the simplist form, the message is entrusted and rendered to the user interface
 
-[work in prorgress]
+[work in progress]
 
 ---
 
 In the traditional financial world, transactions usually involve a currency in exchange of something deliverable.
 
 
-
-In the case that the deliverable is an asset, like a property or security, the transaction is considered done when the paper process or computer process is done. It's unlikely that the property owner will refuse to hand over the keys to the new owner or the company will refuse to share the dividend to an individual subscriber.
-
+In the case that the deliverable is an asset, like a property or security, the transaction is considered done when the paper or computer process is complete. It's unlikely that the property owner will refuse to hand over the keys to the new owner or the company will refuse to share the dividend to an individual subscriber.
 
 
 In the case of purchasing common goods and services, the deliverable will usually be physical. If I buy a printer online, a printer gets delivered home; if I order a massage service, someone shows up at the door. Delivery is an essential part of such transactions, and most payment processors like Paypal would not consider the transaction final unless delivery happened.
@@ -603,15 +595,15 @@ We observe that when a purchase happens, the deliverable is often made up of two
 
 
 
-In the case of purchasing a share of a company, the right to enjoy dividend is the entire delivery. There is no consumable component of that purchase. In the case of purchasing a BigMac, the consumable is the entire delivery. There is no rights component to that purchase. These are purchases purely for rights and consumables, respectively.
+In the case of purchasing a share of a company, the right to enjoy the dividend is the entire delivery. There is no consumable component of that purchase. In the case of purchasing a BigMac, the consumable is the entire delivery. There is no rights component to that purchase. These are purchases purely for rights and consumables, respectively.
 
 
 
-But most transactions fall between those two kinds.
+But most transactions fall between these two kinds.
 
 
 
-Online purchases, for example, are usually either an exchange between currency with a promise to deliver physical goods or the right to pick it up from the local post office, which is a right until redeemed. A ticket is a type of consumable that is always sold as a right because the consumable service is not available at the time of purchase. In these examples, the purchaser obtains a right as the result of the transaction which can later be redeemed for consumables. 
+Online purchases, for example, are usually either an exchange between currency with a promise to deliver physical goods or the right to pick it up from the local post office, which is a right until redeemed. A ticket is a type of consumable that is always sold as a right because the consumable service is not available at the time of purchase. In these examples, the purchaser obtains a right as the result of the transaction which can later be redeemed for consumables.
 
 
 
@@ -623,11 +615,11 @@ Even the traditional purchase of an investment asset might have a consumable com
 
 
 
-Table: examples of purchases and input / output of those purchases
+Table: examples of purchases and input/output of those purchases
 
 
 
-Typical tokens in e-commerce setting:
+Typical tokens in an e-commerce setting:
 
 
 
@@ -669,4 +661,3 @@ Product ownership token
 
 
 (The whole concept can be illustrated in a few examples, e.g. this car token)
-
