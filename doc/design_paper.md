@@ -572,7 +572,7 @@ Business went on for a while; then, there is an innovation from the blockchain m
 
 The online retailer decided to join the game to stay competitive. This time, he would need to modify his smart contract, changing the transaction rule that a shipping token can be accepted at the time of purchase. In such a case, the output of the transaction will not have a shipping token, since one is already provided.[^3]
 
-[^3]: In practical implementations, bulk-purchased shipping labels, if tokenised, may or may not be the same as shipping tokens, which is mapped to a specific tracking number, since there might be a case of a semi-fungible token changing into a non-fungible token. The implementors might choose to destory the former and re-create the latter. The authors of this paper decided to leave out such detail for the clarity of the text.
+[^3]: In practical implementations, bulk-purchased shipping labels, if tokenised, may or may not be the same as shipping tokens. The first might be designed as a semi-fungible token, while the latter must be non-fungible, each mapped to a specific tracking number. The authors of this paper decided to leave out such detail for the clarity of the text.
 
 The online retailer will necessarily modify his business process to expect pick-ups from any delivery company the user purchased shipping tokens from.
 
