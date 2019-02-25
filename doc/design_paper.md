@@ -91,7 +91,7 @@ It's easy to see the cause of the inconvenience; the web is poorly integrated. T
 
 The answer to integrate the web requires a few building blocks that weren't in the Web's blueprint: authentication, ownership, transfer of value and trading.
 
-The web doesn't have a built-in authentication mechanism[^tls]. The add-on "Sign in with Facebook" merely tried to provide authentication through a trusted 3rd party, which, despite privacy and availability concerns, is only good for account authentication and not for business logic.
+The web doesn't have a built-in authentication mechanism[^tls]. The add-on "Sign in with Facebook" merely tried to provide authentication through a trusted 3rd party, which, despite privacy and availability concerns, is only good for account authentication and not for integration.
 
 [^tls]: Despite the excellent efforts on client/server certificates in TLS, these authentication methods are not for processes, but only for sites. It's a delegation model. Imagine a buyer not checking if a title deed is real, but only checks if the seller's name matches the one on the deed. That would be the delegation model used in TLS. In this model, TLS can't guarantee anything on the website is real, only that the website is real. Facebook uses TLS but people put a lot of fake news on it. The unit of trust here is certainly not granular enough for the web to deliver an integrated experience.
 
@@ -99,17 +99,19 @@ The web doesn't have a built-in authentication mechanism[^tls]. The add-on "Sign
 
 For example, the simple business logic: "the owner of a car can check its service history", doesn't require an account. If you force the "Account authentication" model, bad things happens:
 
-- When the car is sold, the new car owner would now need to create a new account at the service website and secure it with the proof of ownership to the car. This is onerous, a hidden cost to the car market.
+- When the car is sold, the new car owner would now need to create a new account at the service website and secure it with the proof of ownership to the car. This is onerous and unreliable.
 
 - When a 3rd party like a Vehicle Modification workshop or an insurer needs to access the repair history, there is no easy way to authorise them without giving away the account. This is inflexible.
 
-Such integration needs, poorly addressed by adding accounts, are easily found in healthcare, retail and almost every web-based business. Today, we are still adding more and more accounts to address the growing integration needs. It's a case of hammering every problem down as if it is a nail.
+Such integration needs, poorly addressed by adding accounts, are easily found in healthcare, retail and almost every web-based business. Today, we are still adding more and more accounts to address the growing integration needs. It's a case of hammering every problem down as if it is a nail. The following chapters will demonstrate that integration through token, not account, is the solution.
 
 Similiarly, the web doesn't have a builtin mechanism for ownership, transfer of value and trading.
 
-Taking the car story further, a car seller would need to post the car information on a website, creating yet another account on the way. The buyer cannot buy it and acquire automatically the ownership proof, compulsory insurance, unused service quota and so like, with not much defence on fraud. These has to be done separately. Even payment has to be done separately. The process starts at web and ends somewhere else.
+Taking the car story further, a car seller would need to post the car information on a website, creating yet another account on the way. The buyer cannot buy it and acquire automatically (and atomically[^atomatic]) the ownership proof, compulsory insurance, unused service quota and so like, yet defenceless to frauds. These has to be done separately. Even payment has to be done separately. The process starts at web and ends somewhere else.
 
-These missing features of the web is provided by blockchains. The key to such a connection is "tokenisation".
+[^atomatic]: In blockchain terms, an atomatic transaction either happens or not. If well defined, it's not impossible for a buyer to have successfully paid for a car yet not getting the ownership token, or only have transferred the car's ownership but not the compulsory insurance on it.
+
+These missing features of the web are the well known functions of blockchain. The key to pair the Web with blockchain, is "tokenisation".
 
 Tokens seamlessly go across systems, carries their trading rules and user interfaces.
 
