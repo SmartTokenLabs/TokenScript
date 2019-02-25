@@ -77,25 +77,37 @@ In the computer-human interaction model, two players are having a conversation -
 
 Therefore the web was built as a giant library where each book is a computer with whom one can have a conversation. It's probably where Facebook got its namesake inspiration - a website that is a book.
 
-This design has caused a lot of modern inconveniences. A user would one day order a pair of shoes. In another day, receives an SMS about an upcoming delivery; she then takes the shipping tracking number, opens the Australia Post website - another book in the giant library of the web - and types in the tracking number to find the current status. She might still not evne know it is the shoes. In another occasion, the same user might pause as she books two tickets for an opera, switch to her frequent flyer app, copy that number over and paste it into the order to collect the points. She might struggle a bit installing that frequent flyer app to start with.
+This design has caused a lot of modern inconveniences. A user would one day order a pair of shoes. In another day, receives an SMS about an upcoming delivery; she then takes the shipping tracking number, opens the Australia Post website - another book in the giant library of the web - and types in the tracking number to find the current status. She might still not even know what's in the parcel. In another occasion, the same user might pause as she books two tickets for an opera, switch to her frequent flyer app, copy that number over and paste it into the order to collect the points. She might struggle a bit installing that frequent flyer app to start with.
 
 Why are we doing so much copy and pasting when machines are exceptionally good at doing this? It's because the web is like a giant library by design, and we are like readers keeping notes of the index numbers under our sleeves, and it's not designed like a personal assistant.
 
-It's easy to see the cause of the inconvenience; the web is poorly integrated. When a user checks out on a website, she isn't sure if she has enough balance on her card, because the bank is not integrated with the shopping system. When a patient orders a service, she can't see how much the insurance can cover until the bill is settled, nor can she see whether she has reached the annual cap because the clinic is not integrated with the health insurance company.
+It's easy to see the cause of the inconvenience; the web is poorly integrated.
 
-The answer to an integrated web requires a few building blocks that weren't in the blueprint: authentication, ownership, transfer of value and trading.
+- When a user checks out on the web, she isn't sure if she has enough balance on her card, because the bank is not integrated with the shopping system.
+
+- When a patient orders a service, she can't see how much the insurance can cover until the bill is settled, nor can she see whether she has reached the annual cap because the clinic is not integrated with the health insurance company.
+
+The answer to integrate the web requires a few building blocks that weren't in the blueprint: authentication, ownership, transfer of value and trading.
 
 The web doesn't have a built-in authentication mechanism[^tls]. The add-on "Sign in with Facebook" merely tried to provide authentication through a trusted 3rd party, which, despite privacy and availability concerns, is only good for account authentication and not for business logic.
 
 [^tls]: Despite the excellent efforts on client/server certificates in TLS, these authentication methods are not for processes, but only for sites. It's a delegation model. Imagine a buyer not checking if a title deed is real, but only checks if the seller's name matches the one on the deed. That would be the delegation model used in TLS. In this model, TLS can't guarantee anything on the website is real, only that the website is real. Facebook uses TLS but people put a lot of fake news on it. The unit of trust here is certainly not granular enough for the web to deliver an integrated experience.
 
-"Account authentication" is not a substitute for web integration. For example, the simple business logic: "the owner of the property can check its easement information", doesn't require account authentication, and it would be a bad idea to add account authentication on top of it. If you force the "Account authentication" model, when the property is sold, the new property owner would now need to create a new account at the easement service website and secure it with the proof of ownership to the property.
+### "Account authentication" is not a substitute for web integration.
 
-This process is onerous and inflexible; it doesn't allow the owner to authorise the access to a 3rd party like a landscape planner or a pest inspector. Such integration needs, poorly addressed by account authentication, are easily found in healthcare, retail and almost every web-based business. Today, we are still adding more and more accounts to address the growing integration needs. It's a case of hammering every problem down as if it is a nail.
+For example, the simple business logic: "the owner of the property can check its service history", doesn't require an account. If you force the "Account authentication" model, bad things happens:
 
-The web also doesn't have an ownership or transfer of value mechanism. If Alice is interested in a "Magic: The Gathering" card, and it popped up in the market, Alice will need to create an account on a website like mtgox.com, shorthand for "Magic The Gathering: Gox", to trade it. She might also need to sort out a payment method with a Paypal account. Proper integration is often lacking for complexity or security reasons, and the user has to do it manually. For each integration, the user needs to own two accounts, and when she wants to use the card in an online game, she will need a third account to log in to the game. She can't click on a link in an email and immediately use the card in a game.
+- When the car is sold, the new car owner would now need to create a new account at the service website and secure it with the proof of ownership to the car. This is onerous, a hidden cost to the car market.
 
-It's easy to see that these missing features are necessary for an integrated web and that blockchains can serve this need, but how to provide them? Again, the answer is "tokenisation".
+- When a 3rd party like a Vehicle Modification workshop or an insurer needs to access the repair history, there is no easy way to authorise them without giving away the account. This is inflexible.
+
+Such integration needs, poorly addressed by adding accounts, are easily found in healthcare, retail and almost every web-based business. Today, we are still adding more and more accounts to address the growing integration needs. It's a case of hammering every problem down as if it is a nail.
+
+Similiarly, the web doesn't have a builtin mechanism for ownership, transfer of value and trading.
+
+Taking the car story further, a car seller would need to post the car information on a website, creating yet another account on the way. The buyer cannot buy it and acquire automatically the ownership proof, compulsory insurance, unused service quota and so like, with not much defence on fraud. These has to be done separately. Even payment has to be done separately. The process starts at web and ends somewhere else.
+
+These missing features of the web is provided by blockchains. The key to such a connection is "tokenisation".
 
 Tokens seamlessly go across systems, carries their trading rules and user interfaces.
 
