@@ -77,17 +77,19 @@ In the computer-human interaction model, two players are having a conversation -
 
 Therefore the web was built as a giant library where each book is a computer with whom one can have a conversation. It's probably where Facebook got its namesake inspiration - a website that is a book.
 
-This design has caused a lot of modern inconveniences. A user would one day order a pair of shoes. In another day, receives an SMS about an upcoming delivery; she then takes the shipping tracking number, opens the Australia Post website - another book in the giant library of the web - and types in the tracking number to find the current status. She might still not even know what's in the parcel. In another occasion, the same user might pause as she books two tickets for an opera, switch to her frequent flyer app, copy that number over and paste it into the order to collect the points. She might struggle a bit installing that frequent flyer app to start with.
+This design has caused a lot of modern inconveniences. A user would one day receive an email on her monthly statement, yet she couldn't recognise a few entires on them. It says "Amazon". Was it about ordering a pair of shoes? She has to copy the order number and look it up in Amazon. In another occasion, the same user might pause as she books two tickets for an opera, switch to her frequent flyer app, copy that number over and paste it into the order to collect the points. She might struggle a bit installing that frequent flyer app to start with.
 
-Why are we doing so much copy and pasting when machines are exceptionally good at doing this? It's because the web is like a giant library by design, and we are like readers keeping notes of the index numbers under our sleeves, and it's not designed like a personal assistant.
+Why are we doing so much copy and pasting when machines are exceptionally good at doing this? It's because the web is like a giant library by design, and we are like readers keeping notes of the index numbers under our sleeves. It's not, as we would hope to have, designed like a personal assistant.[^smart-phone]
 
-It's easy to see the cause of the inconvenience; the web is poorly integrated.
+[^smart-phone]: Surprisingly, even the technology that was created to fill the role of a personal assitant, the Smart Phone, still failed, for the same reason: a Web not integratable can't be integrated by the efforts from client side alone. The infrastructure has to support integration. A smart phone is modeled like a dial-up Internet connection, with each app representing a website. The users stil need to figure out whom to talk to before talking, and still copies information around. It's not possible, for example, to ask your smart phone to sum up all the money one may access by his online banking apps.
+
+It's easy to see the cause of the inconvenience; the web is poorly integrated. The bad examples go on and on:
 
 - When a user checks out on the web, she isn't sure if she has enough balance on her card, because the bank is not integrated with the shopping system.
 
 - When a patient orders a service, she can't see how much the insurance can cover until the bill is settled, nor can she see whether she has reached the annual cap because the clinic is not integrated with the health insurance company.
 
-The answer to integrate the web requires a few building blocks that weren't in the blueprint: authentication, ownership, transfer of value and trading.
+The answer to integrate the web requires a few building blocks that weren't in the Web's blueprint: authentication, ownership, transfer of value and trading.
 
 The web doesn't have a built-in authentication mechanism[^tls]. The add-on "Sign in with Facebook" merely tried to provide authentication through a trusted 3rd party, which, despite privacy and availability concerns, is only good for account authentication and not for business logic.
 
@@ -95,7 +97,7 @@ The web doesn't have a built-in authentication mechanism[^tls]. The add-on "Sign
 
 ### "Account authentication" is not a substitute for web integration.
 
-For example, the simple business logic: "the owner of the property can check its service history", doesn't require an account. If you force the "Account authentication" model, bad things happens:
+For example, the simple business logic: "the owner of a car can check its service history", doesn't require an account. If you force the "Account authentication" model, bad things happens:
 
 - When the car is sold, the new car owner would now need to create a new account at the service website and secure it with the proof of ownership to the car. This is onerous, a hidden cost to the car market.
 
