@@ -107,13 +107,17 @@ Such integration needs, poorly addressed by adding accounts, are easily found in
 
 Similiarly, the web doesn't have a builtin mechanism for ownership, transfer of value and trading.
 
-Taking the car story further, a car seller would need to post the car information on a website, creating yet another account on the way. The buyer cannot buy it and acquire automatically (and atomically[^atomatic]) the ownership proof, compulsory insurance, unused service quota and so like, yet defenceless to frauds. These has to be done separately. Even payment has to be done separately. The process starts at web and ends somewhere else.
+Taking the car story further, a car seller would need to post the car information on a website, creating yet another account on the way. The buyer cannot click "buy" and acquire the ownership proof, compulsory insurance, unused service quota and so like in one go. These has to be done separately, using easily tampered paper proofs and forms. Even payment has to be done separately. The process starts at web and ends somewhere else.
 
-[^atomatic]: In blockchain terms, an atomatic transaction either happens or not. If well defined, it's not impossible for a buyer to have successfully paid for a car yet not getting the ownership token, or only have transferred the car's ownership but not the compulsory insurance on it.
+In contrast, the same process on blockchain would be automatic, fraud-proof[^attestations] and atomic[^atomic].
 
-These missing features of the web are the well known functions of blockchain. The key to pair the Web with blockchain, is "tokenisation".
+[^attestations]: the method to provide cryptographically signed attestations as a condition for transaction is discussed later in the "Attestation" chapter.
 
-Tokens seamlessly go across systems, carries their trading rules and user interfaces.
+[^atomic]: In blockchain terms, an atomatic transaction either happens or not. If well defined, it's not impossible for a buyer to have successfully paid for a car yet not getting the ownership token, or only have transferred the car's ownership but not the compulsory insurance on it.
+
+These missing features of the web are the well known functions of blockchain. This seemingly perfect-fit pair's wedding requires the exchange of tokens, or what this paper call "tokenisation".
+
+Tokens seamlessly go across systems, carries their trading rules and user interfaces and business context.
 
 --
 
