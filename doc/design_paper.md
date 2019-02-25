@@ -18,7 +18,7 @@ Please join our work at xxx. A yellowpaper will be produced to guide implementor
 
 \pagebreak
 
-# Introduction
+# Introduction: What does blockchain *do*?
 
 Blockchain technology has **two primary functions** that serve essential purposes for the future economy and the future Internet:
 
@@ -118,6 +118,74 @@ In contrast, the same process on blockchain would be automatic, fraud-proof[^att
 These missing features of the web are the well known functions of blockchain. The virtual wedding of this perfect fit couple requires a virtual exchange of tokens, or what this paper call "tokenisation".
 
 Tokens seamlessly go across systems, carries their trading rules and user interfaces and business context.
+
+## Example: Car Ownership Token
+
+The following example, a car ownership, is a successfully tokenised .... [Edit: explain the elements]
+
+    +----------------------------------------------------------+
+    |                                                          |
+    |          Holden Barina 2012 Ownership Token              |
+    |                                                          |
+    |          Make: Holden Year: 2013  Colour: Black          |
+    |          VIN: KL3TA48E9EB541191                          |
+    |                                                          |
+    | +--------+  +--------------------+  +------------------+ |
+    | | Open   |  | Authorise use      |  | List for sale    | |
+    | +--------+  +--------------------+  +------------------+ |
+    |                                                          |
+    | +--------+  +--------------------+  +------------------+ |
+    | | Start  |  | Lend               |  | Auction          | |
+    | +--------+  +--------------------+  +------------------+ |
+    |                                                          |
+    | +--------+  +--------------------+  +------------------+ |
+    | | Lock   |  | Transfer Ownership |  | Collateralise    | |
+    | +--------+  +--------------------+  +------------------+ |
+    |                                                          |
+    | +--------+                          +------------------+ |
+    | | Locate |                          | List for sharing | |
+    | +--------+                          +------------------+ |
+    |                                                          |
+    |               Registration:                              |
+    |                                                          |
+    |               +------------------------------------+     |
+    |               |                                    |     |      +-----------------------------+
+    |               | Issuer: Roads & Maritime Services  |     |      |                             |
+    |               | Rego: CJ41HL   Expiry: 2017+12+03  |     |  +-> | Access rego attestation     |
+    |               |                                    |     |      |                             |
+    |               +------------------------------------+     |      +-----------------------------+
+    |                                                          |
+    |               Holden Capped Service                      |
+    |                                                          |
+    |               +------------------------------------+     |
+    |               |                                    |     |
+    |               | Issuer: Holden Australia           |     |      +-----------------------------+
+    |               | Expiry: 2020-12-09                 |     |      |                             |
+    |               | Last served: 180 days ago          |     |  +-> | Access Invoice Token        |
+    |               |             (due for a service)    |     |      |                             |
+    |               |                                    |     |      +-----------------------------+
+    |               +------------------------------------+     |
+    |                                                          |
+    |               Insurance                                  |      +------------------------------+
+    |                                                          |      |                              |
+    |               +------------------------------------+     |      | Access insurance token       |
+    |               |                                    |     |      | functions:                   |
+    |               | Issuer: Virgin Car Insurance       |     |  +-> |                              |
+    |               | Start Date: 2017 12 30             |     |      | · Claim                      |
+    |               |                                    |     |      | · Lump sum discount payment  |
+    |               +------------------------------------+     |      | · Upgrade / downgrade        |
+    |                                                          |      | · Suspend policy             |
+    |               Purchase:                                  |      | · Access Roadside Assistance |
+    |                                                          |      |                              |
+    |               +------------------------------------+     |      +------------------------------+
+    |               |                                    |     |
+    |               | Issuer: Manheim Auctions           |     |
+    |               | Date: 2015+12+09   Price: $4724.83 |     |
+    |               |                                    |     |
+    |               +------------------------------------+     |
+    |                                                          |
+    +----------------------------------------------------------+
+
 
 --
 
@@ -413,82 +481,13 @@ With the example of the 1% property token, we demonstrated that the blockchain c
 
 With the case of the AirBNB token, we also showed that tokens can have function integration like opening a smart lock during its booking validity. Let's illustrate an example where both uses are combined - a car token.
 
+------------------
+
 On the one hand, a car is an asset, that can be bought, sold, transferred, auctioned, collaborated and insured, all enabled by blockchain.
 
 On the other hand, a car also has utility. A car's ownership token can convert a blockchain wallet into a car key, with additional functions like graphically representing the car's current location. Authorising someone to access your car, or renting it for profit, would be seamlessly done by signing blockchain transactions or attestations, without passing car keys around.
 
 The following picture illustrates the look of such a car token in the user's wallet:
-
-
-       Telstra   13:45 31 Jan 2018          4G
-    +-----------------------------------------+
-    |                                         |
-    | Holden Barina 2012 Ownership Token      |
-    |                                         |
-    | Make: Holden Year: 2013  Colour: Black  |
-    | VIN: KL3TA48E9EB541191                  |
-    |                                         |
-    | +------+ +-------+ +------+ +--------+  |
-    | | Open | | Start | | Lock | | Locate |  |
-    | +------+ +-------+ +------+ +--------+  |
-    |                                         |
-    | +---------------+                       |
-    | | Authorise use |                       |
-    | +---------------+                       |
-    |                                         |
-    | +-------------+ +--------------------+  |
-    | | Maintenance | | Roadside Assitance |  |
-    | +-------------+ +--------------------+  |
-    |                                         |
-    | +---------------+                       |
-    | | Collateralise |                       |
-    | +---------------+                       |
-    |                                         |
-    | Registration:                           |
-    |                                         |
-    | +------------------------------------+  |
-    | |                                    |  |         +-----------------------------+
-    | | Issuer: Roads & Maritime Services  |  |         |                             |
-    | | Rego: CJ41HL   Expiry: 2017-12-03  |  | ------> | Access rego attestation     |
-    | |                                    |  |         |                             |
-    | +------------------------------------+  |         +-----------------------------+
-    |                                         |
-    | Purchase:                               |
-    |                                         |
-    | +------------------------------------+  |
-    | |                                    |  |
-    | | Issuer: Manheim Auctions           |  |         +-----------------------------+
-    | | Date: 2015+12+09   Price: $4724.83 |  |         |                             |
-    | |                                    |  | ------> | Access Invoice Token        |
-    | +------------------------------------+  |         |                             |
-    |                                         |         +-----------------------------+
-    | Insurance                               |
-    |                                         |
-    | +------------------------------------+  |         +-----------------------------+
-    | |                                    |  |         |                             |
-    | | Issuer: Virgin Car Insurance       |  |         | Access insurance token      |
-    | | Start Date: 2017 12 30             |  |         | functions:                  |
-    | |                                    |  | ------> |                             |
-    | +------------------------------------+  |         | · Claim                     |
-    |                                         |         | · Lump sum discount payment |
-    | Services:                               |         | · Upgrade / downgrade       |
-    |                                         |         | · Suspend policy            |
-    | +------------------------------------+  |         |                             |
-    | |                                    |  |         +-----------------------------+
-    | | 2016+06+01 Holden Capped Service   |  |
-    | |                                    |  |
-    | | 2016+12+15 Holden Capped Service   |  |
-    | |       +                            |  |
-    | |       +--+ Tire replacement        |  |
-    | |                                    |  |
-    | | 2017+06+15 Holden Capped Service   |  |
-    | |                                    |  |
-    | +------------------------------------+  |
-    |                                         |
-    +-----------------------------------------+
-
-
-                ◀          ◉         ◼
 
 # The design of TBML
 
