@@ -24,7 +24,7 @@ Blockchain technology has **two primary functions** that serve essential purpose
 
 This paper will address the vision of where we can be and follow up with the design and reasoning behind the architecture needed on top of the blockchain. We will then explain TBML which is a critical missing layer and go over its design principles and how we are building it.
 
-### Frictionless markets
+### First primary function of the blockchain: Frictionless markets
 
 The 80s' "Back to the Future" featured a world of powerful machines filled with hovering boards and flying cars. It didn't happen. As Peter Thiel once famously lamented, "we were promised flying cars; instead, we got 140 characters". The technological advancement of our time is beyond the imagination of the 80s science fiction movies, albeit not through more powerful machinery, but efficient use of Internet.
 
@@ -48,17 +48,7 @@ Can we tokenise the risk and reward of international trades, so that small impor
 
 Can we create an insurance token that depends on cryptographic proofs, so that the insurer can remove from their pricing, the costs incurred by fraudulent documents? Can we decentralise the insurers altogether?
 
-Blockchain can provide the foundational layer to achieve these. A lot of work needs to be done to ensure scalability, privacy and quality methods to define how tokens should be used and traded, but we see the biggest hurdle lies in tokenisation.
-
-Tokenisation requires bundling a token with its transaction rules and behaviour patterns, taking them off the system where they initially grew in, free them to be traded or used in different context.
-
-Taking property as an example, its existance as a record in the title deeds office is not useful to an open market, since it's only valid in that database. Tokenising property would require a crypto-record on a blockchain not owned by the title deeds office[^in-house-blockchain].
-
-This paper focuses on the missing layer in the technical stak for tokenisation to happen.
-
-[^in-house-blockchain]: There is the biggest misconception in the traditional government and business sector, that in order to use blockchain, one has to own it in house. TV serie IT Crowds famousely joked such misconception by having a few IT guys presenting to management the Internet as a physical box, fittingly owned in a house.
-
-#### The challenge of tokenisation
+Blockchain can provide the foundational layer to achieve these. While blockchain scalability and privacy will improve, to make frictionless market work we also need quality methods to define how tokens should be used and transacted - the focus of our work on TBML.
 
 Tokens have different properties. Do tokens expire? AirBNB booking tokens certainly do, but 1% ownership of property tokens probably don't. Should the token owner receive a notification on a specific event? Power tokens certainly need that, for the change in the power supply is dynamic. Is a token stream-able?
 
@@ -68,23 +58,13 @@ If a buyer wants to purchase a tokenised country estate from a seller, how do th
 
 If a token entitles the user to do specific actions online, how can the user login to the web services with that token?
 
-We have done very little on making the tokens interoperable with different methods of trading, listing and rating; there is nearly zero effort devoted to making tokens represent *goods and services* - a basic need for an efficient market.
+It's easy to see the need of a framework defining tokens and making them interoperable with different methods of trading, listing and rating. We did end up having hundreds of tokens in 2017-2018, but they are uniformly on the payment side - currency like, ERC20 tokens. There is nearly zero effort devoted to making tokens represent *goods and services* - a basic need for an efficient market.
 
-During the speculative bubble of 2017, a power token ICO does not need to provide any explanation of how the tokens can be used. All speculators need to know is that they represent a "stake in the future tokenised electricity". As long as the token can fill investors with imagination, it's good enough for an ICO. There is, no more functionality needed other than an ERC20 interface. Such a speculative token doesn't depend on attestations - the proof of actual power production - nor does it need properties like where the energy is provided or for how long it is available. There is no need to do actual work besides the marketing and creation of an ERC20 token.
+During the speculative bubble of 2017, a power token ICO does not need to provide any explanation of how the tokens can be used. All speculators need to know is that they represent a "stake in the future world of tokenised electricity". As long as the token can inspire investors with imagination, it's good enough for an ICO. There is, no more functionality needed other than an ERC20 interface. Such a speculative token doesn't depend on attestations - the proof of actual power production - nor does it need properties like where the energy is provided or for how long it is available.
 
-With the madness over, it is time to present a framework for describing such token behaviours.
+Now the madness is over, it's time to present the technical framework to make market work.
 
-Such a framework must fit tokens into different environments for them to function as use-cases; they must:
-
-- Let the user interact with different IT systems and APIs
-
-- Make them render-able and associated with the actions they can perform in the user's wallet
-
-- Making them fit into listing or auction based general-purpose markets; building one marketplace for one token type would be too inefficient.
-
-- Allow new protocols to be developed on top of them (streaming, communication, staking, collateralization, etc.)
-
-### Integrate the web.
+### Second primary function of the blockchain: Integrate the web.
 
 Tim Berners-Lee and the innovators of the world wide web modelled the web primarily on a public library model and computer-human interaction model.
 
@@ -112,9 +92,13 @@ This process is onerous and inflexible; it doesn't allow the owner to authorise 
 
 The web also doesn't have an ownership or transfer of value mechanism. If Alice is interested in a "Magic: The Gathering" card, and it popped up in the market, Alice will need to create an account on a website like mtgox.com, shorthand for "Magic The Gathering: Gox", to trade it. She might also need to sort out a payment method with a Paypal account. Proper integration is often lacking for complexity or security reasons, and the user has to do it manually. For each integration, the user needs to own two accounts, and when she wants to use the card in an online game, she will need a third account to log in to the game. She can't click on a link in an email and immediately use the card in a game.
 
-It's easy to see that these building blocks are necessary for an integrated web and that blockchains can serve this need, but what's the path to get there?
+It's easy to see that these missing features are necessary for an integrated web and that blockchains can serve this need, but how to provide them? Again, the answer is "tokenisation".
 
-Tokens seamlessly go across systems, exemplified by a property token being used for rent, insurance, pest inspection, mortgages and many other markets. It must define its own behaviour pattern which can be used to interact with users to show the status and allow functions to be accessible from its integration environment. In other words, a token must have its own UI and integration logic.
+Tokens seamlessly go across systems, carries their trading rules and user interfaces.
+
+--
+
+exemplified by a property token being used for rent, insurance, pest inspection, mortgages and many other markets. It must define its own behaviour pattern which can be used to interact with users to show the status and allow functions to be accessible from its integration environment. In other words, a token must have its own UI and integration logic.
 
 We assert that the way to get there is a data processing language that defines tokens and their behaviour. In such a design, the token is the integration point and the language is the interface for the integrations. Tokens seamlessly go across systems, exemplified by a property token being used for rent, insurance, pest inspection, mortgages and many other processes.
 
@@ -122,6 +106,32 @@ We assert that the way to get there is a data processing language that defines t
 It must define its own behaviour pattern which can be used to interact with users to show the status and allow functions to be natively integrated. In other words, a token must have its own UI and integration logic.
 
 [a picture of an example of a property token that has two statues side by side]. The left side has an action button (among others) that says Power Connection. The right side has the same token, but with a "Leased" label on it, and the "Power Connection" action button is invalidated because now it is with the lessor]
+
+#### The challenge of tokenisation
+
+Tokenisation requires bundling a token with its transaction rules and behaviour patterns, taking them off the system where they initially grew in, free them to be traded or used in different context.
+
+Taking property as an example, its existance as a record in the title deeds office is not useful to an open market, since it's only valid in that
+database. Tokenising property would require a crypto-record on a blockchain not owned by the title deeds office[^in-house-blockchain].
+
+This paper focuses on the missing layer in the technical stak for tokenisation to happen.
+
+[^in-house-blockchain]: There is the biggest misconception in the traditional government and business sector, that in order to use blockchain, one has to own it in house. TV serie IT Crowds famousely joked such misconception by having a few IT guys presenting to management the Internet as a physical box, fittingly owned in a house.
+
+
+[ these paragraphs should move to the lower level]
+
+With the madness over, it is time to present a framework for describing such token behaviours.
+
+Such a framework must fit tokens into different environments for them to function as use-cases; they must:
+
+- Let the user interact with different IT systems and APIs
+
+- Make them render-able and associated with the actions they can perform in the user's wallet
+
+- Making them fit into listing or auction based general-purpose markets; building one marketplace for one token type would be too inefficient.
+
+- Allow new protocols to be developed on top of them (streaming, communication, staking, collateralization, etc.)
 
 
 ## Design requirements
