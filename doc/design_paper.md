@@ -115,7 +115,7 @@ In contrast, the same process on blockchain would be automatic, fraud-proof[^att
 
 [^atomic]: In blockchain terms, an atomatic transaction either happens or not. If well defined, it's not impossible for a buyer to have successfully paid for a car yet not getting the ownership token, or only have transferred the car's ownership but not the compulsory insurance on it.
 
-These missing features of the web are the well known functions of blockchain. This seemingly perfect-fit pair's wedding requires the exchange of tokens, or what this paper call "tokenisation".
+These missing features of the web are the well known functions of blockchain. The virtual wedding of this perfect fit couple requires a virtual exchange of tokens, or what this paper call "tokenisation".
 
 Tokens seamlessly go across systems, carries their trading rules and user interfaces and business context.
 
