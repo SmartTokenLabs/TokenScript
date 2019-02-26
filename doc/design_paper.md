@@ -211,7 +211,7 @@ Carry trust relationship and business context to 3rd parties
 
 We assert that a descriptive language (TBML) is needed to allow blockchain technology to enable "frictionless markets" and an "integrated web". TBML stands for Token Behaviour Markup Language.
 
-Unlike most whitepapers in the space, we choose to introduce the technology by example. This is because TBML is a solution layer rather than base-layer technologies like Ethereum and Plasma. It's not feasible to demonstrate the works of TBML or evaluate a design decision without showing use-cases as examples.
+By virtue of TBML being a solution layer rather than base-layer technologies like Ethereum and Plasma, we choose to introduce the technology by example, and provide rich business-context based discussion for a boarder specturm of audience.
 
 ## address "Frictionless Market" capacity
 
@@ -321,7 +321,7 @@ Furthermore, the fact that the transaction requires an identity attestation or i
 
 Reference information is what relevant to the token and provided by web services, typically through a RESTful API call.[^trusted-information]
 
-[^trusted-information] Originally we call it "Trusted information", meaning data such as previous property sales price or regional property performance data is just "provided", without blockchain proofs or attestations, hence, it has to be explicitly trusted by the user. As it turned out, this term misfired as some developers think it means "proven information" and provided as trusted already. So we used a less precise term "Reference information", which, unfortunately, feels like a catch-all phrase.
+[^trusted-information]: Originally we call it "Trusted information", meaning data such as previous property sales price or regional property performance data is just "provided", without blockchain proofs or attestations, hence, it has to be explicitly trusted by the user. As it turned out, this term misfired as some developers think it means "proven information" and provided as trusted already. So we used a less precise term "Reference information", which, unfortunately, feels like a catch-all phrase.
 
 Since TBML is signed by the token issuer (not token owner - the token issuer is often entity that deployed the smart contrat), the reference information sourced from the web apis specified in TBML is assumed trusted. The security chapter will detail different levels of trust.
 
@@ -336,7 +336,7 @@ Dictates the correct method to construct a blockchain transaction, like:
 - How to render the purchase form and translate to user's local language.
 - Is the condition all met (e.g. a purchase isn't possible after the underlying property is liquidated).
 
-In Ethereum context, this information is a superset of ABI (the smart contract function call signatures), with the additional part being business logic (property must be still valid and seller still have it) and presentation logic (like the message "The property is liquidated. Purchase no longer possible.").
+These information is a super-set of smart contract programmable interface (In Ethereum, called ABI), with the additional part being business logic (e.g. property must be still valid and seller still have it) and presentation logic (e.g. the message "The property is liquidated. Purchase no longer possible").
 
 In conclusion, TBML allows the context (user-agent or trading engine) to:
 
