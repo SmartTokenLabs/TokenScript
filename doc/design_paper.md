@@ -202,28 +202,19 @@ It must define its own behaviour pattern which can be used to interact with user
 
 Tokenisation requires bundling a token with its transaction rules and behaviour patterns, taking them off the system where they initially grew in, free them to be traded or used in different context.
 
-Taking property as an example, its existence as a record in the title deeds office is not useful to an open market, since it's only valid in that
-database. Tokenising property would require a crypto-record on a blockchain not owned by the title deeds office[^in-house-blockchain].
+Allow users to interact with different systems through the tokens
+:   In the car example, the car token is issued by Holden, the maker, and necessarily so because it contains code to interact with a smart lock (the *Open*, *Start*, *Lock* actions) and Holden's own web service (the *Locate* action), yet it needs to work in other environments. The *Auction* action, for example, is provided by a third party auction web service. The user access auction service through the token without the need of signing up and proving ownership. The *List for sharing* is provided by a third party service which tokenises the usage of the car by hours or days and sells them piecemeal. The owner can access such a market through this Token. The buyers will have information about the car's GPS location, the capacity to unlock the door and use it, through this token as well.
 
-This paper focuses on the missing layer in the technical stak for tokenisation to happen.
+Rendering a token and associate it with the actions they can perform in the user's wallet
+:   In the car example, if the registration expired, the web component at work would paint the Registration Token red or display a warning. Actions like *List for sharing* will not be available if the car's rego has expired, and the integrated token interface should clearly pass that message to the user.
 
-[^in-house-blockchain]: There is the biggest misconception in the traditional government and business sector, that in order to use blockchain, one has to own it in house. TV serie IT Crowds famousely joked such misconception by having a few IT guys presenting to management the Internet as a physical box, fittingly owned in a house.
+Allow new protocols to be developed on tokens
+:   In the car example, collateralization might be an additional protocol, an ERC in Ethereum context. The protocol might have its own implementation and the car token might pre-date it. Similarly, there are streaming, communication, staking or other protocols (See "Magic" chapter). The framework must allow them to exist and work with tokens.
 
+Carry trust relationship and business context to 3rd parties
+:   In the car example, the insurance token provides Roadside Assistance service through NRMA, another company not directly contracted by the driver. Yet the driver might access this function through the insurance token and immediately be identified as qualified for help. In this example, *Trust relationship* means that the user indirectly trusts NRMA to provide roadside assistance, to obtain the user's GPS location and identity information at the time of emergency. *Business context* means the customer's qualification for roadside assistance, like insurance not expired, service not reached annual cap etc. In this story both *trust relationship* and *business context* has to be in the token, not centralised through the insurance company's web service since the two have different a) availability, b) privacy and c) integration requirements[^abc].
 
-[ these paragraphs should move to the lower level]
-
-With the madness over, it is time to present a framework for describing such token behaviours.
-
-Such a framework must fit tokens into different environments for them to function as use-cases; they must:
-
-- Let the user interact with different IT systems and APIs
-
-- Make them render-able and associated with the actions they can perform in the user's wallet
-
-- Making them fit into listing or auction based general-purpose markets; building one marketplace for one token type would be too inefficient.
-
-- Allow new protocols to be developed on top of them (streaming, communication, staking, collateralization, etc.)
-
+[^abc]: Availability: NRMA is online 24/7 but Virgin Insurance can suspend their services in public holidays or at night. Privacy: NRMA can learn user's GPS location but Virgin Insurance isn't legally allowed to learn it. Integration: Most of NRMA's customers are not obtained through Virgin Insurance, so it would be an additional system to integrate and extra security concern for NRMA to integrate to Virgain Insurance's web service. Of all three, availability might be the most visible. Just imagine how angry a customer will be, having his car breaking down in the middle of the baren outback, and learn that road-side assistance can't be authorised because the insurer's website is upgrading.
 
 # Design requirements
 
