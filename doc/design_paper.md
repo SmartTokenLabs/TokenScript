@@ -170,7 +170,7 @@ The following example, a car ownership token, is a successfully tokenised .... [
     |                                                          |      |                              |
     |               +------------------------------------+     |      | Access insurance token       |
     |               |                                    |     |      | functions:                   |
-    |               | Issuer: Virgin Car Insurance       |     |  +-> |                              |
+    |               | Issuer: Qantas Car Insurance       |     |  +-> |                              |
     |               | Start Date: 2017 12 30             |     |      | · Claim                      |
     |               |                                    |     |      | · Lump sum discount payment  |
     |               +------------------------------------+     |      | · Upgrade / downgrade        |
@@ -214,7 +214,7 @@ Allow new protocols to be developed on tokens
 Carry trust relationship and business context to 3rd parties
 :   In the car example, the insurance token provides Roadside Assistance service through NRMA, another company not directly contracted by the driver. Yet the driver might access this function through the insurance token and immediately be identified as qualified for help. In this example, *Trust relationship* means that the user indirectly trusts NRMA to provide roadside assistance, to obtain the user's GPS location and identity information at the time of emergency. *Business context* means the customer's qualification for roadside assistance, like insurance paid, location in the range of service and annual cap not reached etc. In this story both *trust relationship* and *business context* has to be in the token, not centralised through the insurance company's web service since the two have different a) availability, b) privacy and c) integration requirements[^abc].
 
-[^abc]: Availability: NRMA is online 24/7 but Virgin Insurance can suspend their services in public holidays or at night. Privacy: NRMA can learn user's GPS location but Virgin Insurance isn't legally allowed to learn it. Integration: Most of NRMA's customers are not obtained through Virgin Insurance, so it would be an additional system to integrate and extra security concern for NRMA to integrate to Virgain Insurance's web service. Of all three, availability might be the most visible. Just imagine how angry a customer will be, having his car breaking down in the middle of the barren Australian outback, and learn that the road-side assistance can't be authorised because the insurer's web service is upgrading "For a better user experience".
+[^abc]: Availability: NRMA is online 24/7 but Qantas Insurance can suspend their services in public holidays or at night. Privacy: NRMA can learn user's GPS location but Qantas Insurance isn't legally allowed to learn it. Integration: Most of NRMA's customers are not obtained through Qantas Insurance, so it would be an additional system to integrate and extra security concern for NRMA to integrate to Virgain Insurance's web service. Of all three, availability might be the most visible. Just imagine how angry a customer will be, having his car breaking down in the middle of the barren Australian outback, and learn that the road-side assistance can't be authorised because the insurer's web service is upgrading "For a better user experience".
 
 # Design requirements
 
