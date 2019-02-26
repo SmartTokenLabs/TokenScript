@@ -12,9 +12,9 @@ Previous efforts in this industry primarily focused on enriching the capacity of
 
 Just like a house providing a place to live.
 
-## Advertisement
+## Join the game
 
-Please join our work at xxx. A yellow paper will be produced to guide implementors to use TBML for their tokens and dapps, but a work in progress is always available online.
+Please join our work at xxx. A Yellow Paper to guide implementors to use TBML for their tokens and dapps will take months to make, but a work in progress is always available online. Participate now to avoid the draft language specification being made without consideration your token model.
 
 \pagebreak
 
