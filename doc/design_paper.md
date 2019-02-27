@@ -509,36 +509,6 @@ With the case of the AirBNB token, we also showed that tokens can have function 
 
 # The design of TBML
 
-## Components
-
-
----
-
-[Editor: the following served as an outline of the entire chatper and should be checked then safely removed now that the chapter is nearly fully written.]
-
-Design requirements for a frictionless market
-
-The TBML language has to provide:
-
-- Where to find the asset (which chain and what smart contract holds the asset)
-- Vocabulary for token assets
-- Methods to render and translate attributes in local languages
-- Ways to obtain 3rd party information and a list of what 3rd parties are trustworthy.
-- A superset of ABI information that informs users the purpose of the transaction.
-
-And it should be usable by:
-
-- The Dapp created by the token issuer;
-- Any 3rd party Dapp that might use the token;
-- A generic market not owned by the token issuer;
-- Various user-agents, in rendering and using the assets in the wallet section of mobile and desktop wallets.
-
-We will proceed on addressing the need for "Integrating the Web" and come to a full picture of the design requirements of TBML in the following chapters.
-
----
-
-We talked about the design requirements of TBML and let's step in closer to find out how would it work.
-
 ## Relate tokens to smart contract and tokens to web services
 
 Early public blockchain projects attempted to implement both token logic and business process into smart contracts. Using an online retail project as an example, such a smart contract would not only process an order but also manages the inventory. The token transaction logic, like under what condition the transaction is valid, is tied with business process, like checking inventory. This method is, naturally, inherited from the way people build websites.
