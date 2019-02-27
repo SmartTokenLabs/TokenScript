@@ -10,7 +10,7 @@ Despite the great folly in 2017-2018, it is not a bad thing to initially focus o
 
 Previous efforts in this industry primarily focused on enriching the capacity of the technology. This paper will focus on tokenisation and introduce a standardisation effort known as TBML (Token Behaviour Markup Language) which will make the blockchain technical stack complete, providing utility for the economy and the internet.
 
-Just like a house providing a place to live.
+
 
 ## Join the game
 
