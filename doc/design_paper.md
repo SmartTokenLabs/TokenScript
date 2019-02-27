@@ -121,6 +121,12 @@ Tokens seamlessly go across systems, carries their trading rules and user interf
 
 ## Example: Car Ownership Token
 
+We will comine the two concepts: frictionless market, achieved by tokenising assets; integrate the web, by using token as integration point for web services. We will demonstrate an example that encompasses both concepts: car token.
+
+On the one hand, a car is a tokenised asset, that can be bought, sold, transferred, auctioned, collaborated and insured, all enabled by blockchain.
+
+On the other hand, a car also has utility. A car's ownership token can convert a blockchain wallet into a car key, with additional functions like graphically representing the car's current location. Authorising someone to access your car, or renting it for profit, would be seamlessly done by signing blockchain transactions or attestations, without passing car keys around.
+
 The following screenshot of a car token represents the final stage of tokenisation.
 
 
@@ -429,19 +435,19 @@ It's unlikely any scalability plan will not involve the participation of dapp br
 
 ## address the "Integrate the web" need
 
-As we explained earlier, the web is poorly integrated, as the only link between the units of the web, i.e. "websites" are links. It carries no business process, authentication or trust relationship. There are no anchoring points for integration.
+We trace the reason that the web is poorly integrated to the only link between the units of the web, i.e. URL links. A link carries no business process, authentication or trust relationship. There are no anchoring points for integration on links.
 
 We believe the token is the anchor points for integration. Again, this is best illustrated by examples.
 
 Suppose a user purchases an iPhone from Harvey Norman, an online retailer, using the blockchain. The input of the transaction will be a type of currency; the output, in this case, will be three tokens:
 
 - a shipping token, which can be used to redeem the product from a local pick-up station.
+
 - a warranty token, issued by Apple, which allows the iPhone to be serviced in shops other than Harvey Norman (e.g. Apple Centre).
+
 - A receipt token, issued by Harvey Norman, which allows the product to be returned in 90 days. It's also useful for getting a Tourism Tax Refund if you want to take the phone out of Australia.
 
 If without tokens as the integration anchor, the three different services might be carried out by various means.
-
----
 
 ### The Shipping Token
 
@@ -461,9 +467,7 @@ Lacking a reliable way to authenticate the purchase, an online purchased product
 
 Despite such a token not being transferable or authorised, it is still useful for 3rd party integrations.  The Tax office will be satisfied that the receipt can't be faked without collaboration from the seller, and allows a swift and easy tax-refund process. If the phone is purchased for work, the employee can easily reclaim the expense from an employer with the trust implied.
 
-[TODO: Farrah is working on an illustration, should be fit here by 26th Feb.]
-
----
+![Purchase with one token, getting three tokens. They can be used to access services, like delivery and repair.](purchase-without-shipment-token.jpeg)
 
 As we can observe by the use of tokens, normally scattered business processes and web experiences can finally be integrated. This ties closely to the other benefit of the blockchain: a frictionless market. In this example:
 
@@ -485,92 +489,7 @@ If Alice owns a token that represents the right to use a room during a certain t
 
 Check-in - either produce a QR code to verify the booking to the landlord or use an NFC-enabled phone to open a smart-lock.
 
-
-      Singapore Telecom  13:45 31 Jan 2018          4G
-     +-----------------------------------------------+
-
-     +-----------------------------------------------+
-     |  AirBNB Booking                               |
-     |               BELONGS EVERYWHERE               |
-     |                                               |
-     | +-------------------------------------------+ |
-     | |                                           | |
-     | | + Create a new booking                    | |
-     | |                                           | |
-     | +-------------------------------------------+ |
-     |                                               |
-     | +-------------------------------------------+ |
-     | | 31 Jan 2018 á 2 Feb 2018                  | |
-     | |                                           | |
-     | |    92 Elias Road, Singpaore, 519951       | |
-     | |                                           | |
-     | |    2 Bedroom unit, check in after 1pm     | |
-     | +-------------------------------------------+ |
-     |                                               |
-     | +-------------------------------------------+ |
-     | | 2 Feb 2018 á 6 Feb 2018                   | |
-     | |                                           | |
-     | |    9 Lemke Street, Muirhead, NT 0810      | |
-     | |                                           | |
-     | |    3 Bedroom house, self-check in         | |
-     | +-------------------------------------------+ |
-     |                                               |
-     | +-------------------------------------------+ |
-     | | 7 Feb 2018 á 13 Feb 2018                  | |
-     | |                                           | |
-     | |    Unit 1519, 28 Harbour Street, NSW 2000 | |
-     | |                                           | |
-     | |    2 Bedroom unit, checkin after 1pm.     | |
-     | +-------------------------------------------+ |
-     |                                               |
-     +-----------------------------------------------+
-               ◀          ◉         ◼
-
-
-
-
-     Singapore Telecom  13:45 31 Jan 2018          4G
-    +-----------------------------------------------+
-
-    +-----------------------------------------------+
-    |                                               |
-    | AirBNB Booking                                |
-    |                                               |
-    |   92 ELIAS ROAD, SINGAPORE, 519951            |
-    |                                               |
-    | Check-in: 31 Jan 2018 1pm + 6pm                |
-    | Checkout: 2 Feb 2018 10am                     |
-    |                                               |
-    |   Landlord: VeryHappyBunny                    |
-    |                                               |
-    | +--------+ +----+ +--------+ +----+ +-------+ |
-    | |Transfer| |Lend| |Check in| |Sell| |Auction| |
-    | +--------+ +----+ +--------+ +----+ +-------+ |
-    |                                               |
-    |                                               |
-    |   Conversation history                        |
-    |                                               |
-    | +-------------------------------------------+ |
-    | |                                           | |
-    | | You: We are travellers form Australia,    | |
-    | |      Judging from the pictures you have   | |
-    | |      a Veranda?                           | |
-    | |                                           | |
-    | | VeryHappyBunny: A patio actually, you     | |
-    | |              can use it anytime.          | |
-    | |                                           | |
-    | | (You confirmed a booking)                 | |
-    | |                                           | |
-    | | You: Good, we will get there after lunch. | |
-    | |                                           | |
-    | +-------------------------------------------+ |
-    |                                               |
-    |                                               |
-    +-----------------------------------------------+
-
-       ◀          ◉         ◼
-
-
+![AirBnB Token integrates IoT, allowing the token to open a smart-lock.](airbnb.jpeg)
 
 Observing the desirable integration, we can see TBML has to satisfy the following needs:
 
@@ -587,14 +506,6 @@ A combined example.
 With the example of the 1% property token, we demonstrated that the blockchain can enable a frictionless market via tokenisation of an asset.
 
 With the case of the AirBNB token, we also showed that tokens can have function integration like opening a smart lock during its booking validity. Let's illustrate an example where both uses are combined - a car token.
-
-------------------
-
-On the one hand, a car is an asset, that can be bought, sold, transferred, auctioned, collaborated and insured, all enabled by blockchain.
-
-On the other hand, a car also has utility. A car's ownership token can convert a blockchain wallet into a car key, with additional functions like graphically representing the car's current location. Authorising someone to access your car, or renting it for profit, would be seamlessly done by signing blockchain transactions or attestations, without passing car keys around.
-
-The following picture illustrates the look of such a car token in the user's wallet:
 
 # The design of TBML
 
