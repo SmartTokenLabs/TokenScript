@@ -405,9 +405,66 @@ A user who is purchasing a 1% property token from Peter's Pride Property recomme
 
 ## payment side example: DAI token
 
-We decide to use a real token in this example thanks to our recent collaboration with MakerDAO project, the issuer of DAI token.
+DAI is a token designed for payment - purchasing security token, purchasing goods and services and so like. It's intended to match USD in value. Not fixing the supply cap, it is not itself an investiment candidate.
 
-[TODO: fill this chapter before 27th Feb]
+In many ways DAI functions like Ether, the base currency in Ethereum. However, it can't be a drop-in replacement for Ether.
+
+First, the Dapps written for Ethereum may not be aware that the user has DAI token, unless it explicitly support DAI. A Pizza ordering service that accepts Ether as payment, for example, cannot trivially start to accept DAI token. This is true even if DAI provides a DAI-to-Ether gateway service which, in an atomic fashion, converts DAI to Ether in the same transaction which uses the resulting Ether to purchasing Pizza.
+
+If Pizza website doesn't upgrade, the user has to convert DAI to Ether first, then, purchase Pizza with a second transaction. Such a process is not only inconvenient, but lack atomicity, meaning that the user could have converted DAI to Ether trough the effort, only to fail the checkout since the Pizza is sold out, and ended up with additional Ethers that she has to deal with.
+
+It's worth noticing that the Pizza website cannot upgrade to support DAI without knowing how to discover the user's DAI balance (in order to not to to waste a transaction fee just to find the DAI balance is insufficient), how to construct a DAI withdraw transaction or DAI-Ether gateway transaction and make direct smart contract function calls to the DAI holding contract.
+
+Naturally, the Pizza website isn't in the best position to manage these payment-side details. TBML addreses this problem by
+
+1. Encapsulating the smart contract function calls needed for supporting DAI, along with the javascript to construct needed transactions in TBML, signed by DAI issuer.
+
+2. Providing a browser side implementation and a javascript based implementation for TBML compatibility, so that the Pizza shop could just call a generic action to return Ether (or any acceptable currency) and let the payment logic in TBML work at transaction.
+
+TBML's capacity to embed payment logic and presentation means that not only it can display messages in user's language (like balance or "insufficient balance" message), but it can perform functions like pre-checking the balance, pause the checkout flow so that the user can perform a top-up flow and return to the checkout flow to finalise the checkout.
+
+To the user, the process resembles a bit like the checkout processs leads the user to Paypal to finalise the transaction, except the process happens locally in an enhanced user-agent.
+
+We again argue that current prevailing method is not suitable for creati
+ng a frictionless market, while TBML could, by providing reasons in the areas of *interoperability*, *scalability* and *security*.
+
+As concluded, Pizza website would not have the necessary payment side logic to handle everything on its own. The traditional approach is to let the Pizaa website use the javascript sourced by MakerDAO project. The javascript may or may not use a RESTful API provided by MakerDAO
+
+This approach solves one problem by introducing quite a few others.
+
+#### Security
+
+When the user makes the purchase attempt, the transaction is created with the combined effort of local javascript (Pizza shop javascript) and the supposedly secure javascript supplied by DAI. The user is presented with a transaction payload that contains both the parameters to access DAI contract, e.g. amount to pay, and the parameters to access the Pizza website contract, e.g. amount of pizzas to buy and the toppings of choice. Apparently such a transaction has to be sent to DAI contract and channeled (proxed) to the Pizza shop contract.
+
+There are two immediate[^minor-security-concerns] security concerns. First is that the website didn't use the MakerDAO javascript library correctly, which has the final transaction builder in it. Second is that it is not MakerDAO's javascript at work, but a version replaced by a hacker.
+
+[^minor-security-concers]: When two systems plug on the web, usually there are a hoard of security concerns. To give one example, if a side didn't update the code to reflect the other side's change, the resulting malformed transaction might be rejected. Tracing these transactions allow an attacker to target websites not updated.
+
+These issues are addressed by the encapsulation method used in TBML.
+
+First, the transaction forming code is signed by MakeDAO separately and updated separately from user-agent side. The website's code doesn't have to be signed because it just supplies the business logic, not payment logic. Say, if a bug is found, DAI can suspend the payment by updating these signed instructions, and the Pizza website would behave as if it has been updated to address the issue. If the bug is found to be in the DAI holding contract, and a replacement contract is deployed, MakerDAO would update TBML and sign it again, without Pizza website having to do anything.
+
+Second, by explicitly asking the user to trust the TBML signed by MakerDAO, the user would not need to trust Pizza website's rendering of the transaction content, since it would be rendered by the trusted MakerDAO TBML.
+
+![A payment using TBML. Notice that the *Complete Order* button is not on the website, but in the TBML token area generated by Dapp browser, where the code to render the transaction is pre-signed.](payment-in-wallet.jpeg)
+
+Third, if secure protocols needs to be added, for example, an attestation from the website (can re-use the SSL certificate) to certify the transaction receiving smart contract, or the smart contract returning explicit trust of the website by domain name, the additional logic can be a combined effort of upgrading the dapp browser's support of new TBML feature and the token issuer's new TBML code, without touching the website.
+
+#### Interoperatibility
+
+
+
+DAI token balance isn't immediately available to the DApps.
+
+t has a few additional features that we will take care of 
+
+1. The creation of DAI tokens requires a set-up phase.
+2.  It's needed to enquire a smart contract or cross reference another blockchain to find the balance.
+3. The de-risking of DAI comes with a cost. The user 
+
+[Edit: describe how DAI works]
+
+[Important to note that
 
 ---
 
