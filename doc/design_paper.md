@@ -1,18 +1,21 @@
-# TBML Design Paper
+**|| added the full name of TBML to the headline || **
+# Token Behaviour Markup Language (TBML) Design Paper
 
 ## Author's note
 
 The remarkable blockchain speculations that took place in 2017 - 2018 brought everyone's attention to crypto tokens. As we bought and sold them, we forgot their intended purpose was to be used; this is analogous to the housing bubble in which people forgot that houses were not merely speculative assets but rather a place to live.
 
-To provide a practical use of the blockchain, we must understand its utility to the world economy and the internet. The authors of this paper are technical experts who went through years of study and exploration into its applications both via financial institutions and startups. With this experience, we came to realise that the blockchain has **two primary functions** which we will elaborate further in this paper.
+To provide a practical use of the blockchain, we must understand its utility to the world economy and the internet. The authors of this paper are technical experts who went through years of study**ing** and exploration into its applications both via financial institutions and startups. With this experience, we came to realise that the blockchain has **two primary functions** which we will elaborate further in this paper. **|| Here I want to give the two primary functions in short sentences ||
 
-Despite the great folly in 2017-2018, it is not a bad thing to initially focus on tokens. Tokens, as the authors will elaborate, are the enabler of the two primary functions. We define the technique to make it happen in "Tokenisation".
+Despite the great folly in 2017-2018, it is not a bad thing to initially focus on tokens. Tokens, as the authors will elaborate, are the enabler of the two primary functions. We define the technique to make it happen in "Tokenisation". **|| Which two primary functions? If you don't provide them here, you steal the attention of the readers. That's only good for fiction / entertainment ||**
 
-Previous efforts in this industry primarily focused on enriching the capacity of the technology. This paper will focus on tokenisation and introduce a standardisation effort known as TBML (Token Behaviour Markup Language) which will make the blockchain technical stack complete, providing utility for the economy and the internet.
+Previous efforts in this industry primarily focused on enriching the capacity of the technology. **|| Is the former sentence really needed? ||** This paper will focus on tokenisation and introduce a standardisation effort **|| we call ||** ~~known~~ as TBML (Token Behaviour Markup Language)**,** which will make the blockchain technical stack complete **and provide** ~~providing~~ utility for the economy and the internet.
+
+**|| I miss two things: 1. the two primary functions of tokens, 2. the reason why they need a markup language to provide utility
 
 ## Join the game
 
-Please join our work at xxx. A Yellow Paper to guide implementors to use TBML for their tokens and dapps will take months to make, but a work in progress is always available online. Participate now to avoid the draft language specification being made without consideration your token model.
+Please join our work at xxx. A Yellow Paper to guide implementors to use TBML for their tokens and dapps will take months to make, but a work in progress is always available online. Participate now to avoid the draft language specification being made without considerati**ng**~~on~~ your token model.
 
 \pagebreak
 
@@ -22,6 +25,8 @@ Blockchain technology has **two primary functions** that serve essential purpose
 
 - providing a frictionless market; and
 - integrating the web.
+
+**||Here I'd like to have a bit more, maybe a promise, maybe a method||**
 
 This paper will address the vision of where we can be and follow up with the design and reasoning behind the architecture needed on top of the blockchain. We will then explain TBML which is a critical missing layer and go over its design principles and how we are building it.
 
@@ -33,9 +38,11 @@ Ride-sharing revolutionised the way we organise our daily lives, and AirBNB chan
 
 However, despite this web 2.0 revolution, the majority of markets still operate with high costs. The stock market, for example, has so much overhead that it is only justifiable for multi-million dollar businesses which rely on the trust of rules and regulations to operate.
 
-With blockchain, any tokenised asset can be transacted any time, as long as it follows the rules, without middlemen or intermediary, gives us maximum market efficiency - the frictionless market. On top of the benefits of not relying on an intermediary, in a tokenised market model, the buyers and sellers do not need to "enter" the market; instead, tokens are *always on the market*[^market-model], making such a model better than intermediaries.
+With blockchain, any tokenised asset can be transacted any time, as long as it follows the rules, without middlemen or intermediary, **and** gives us maximum market efficiency - the frictionless market. On top of the benefits of not relying on an intermediary, in a tokenised market model, the buyers and sellers do not need to "enter" the market; instead, tokens are *always on the market*[^market-model], making such a model better than intermediaries.
 
 [^market-model]: With the traditional intermediary-operated market model, a trade is made in two stages: entering the market, making a deal. Blockchain can simplify that into a protocol; therefore the blockchain token assets can be considered always on the market.
+
+**|| Good term: Always on the Market. Would try to take this in a headline ||**
 
 ### Can we create a frictionless market through tokenisation?
 
@@ -51,6 +58,8 @@ Can we create an insurance token that depends on cryptographic proofs, so that t
 
 Blockchain can provide the foundational layer to achieve these. While blockchain scalability and privacy will improve, a working, frictionless market also depends on quality methods to define how tokens should be used and transacted - the focus of our work on TBML.
 
+**|| The next blocks has no tight connection to the previous' - also: Wouldn't talk about scalability and privacy here. Too short to talk about all challenges. Better stay at promises - or make a new chapter for open questions and so on||**
+
 Tokens have different properties. Do tokens expire? AirBNB booking tokens certainly do, but 1% ownership of property tokens probably don't. Should the token owner receive a notification on a specific event? Power tokens certainly need that, for the change in the power supply is dynamic. Is a token stream-able?
 
 How does it look on the user's mobile, and how is it called in a users language?
@@ -59,13 +68,17 @@ If a buyer wants to purchase a tokenised country estate from a seller, how do th
 
 If a token entitles the user to do specific actions online, how can the user login to the web services with that token?
 
-It's easy to see the need for a framework defining tokens and making them interoperable with different methods of trading, listing and rating. We did end up having hundreds of tokens in 2017-2018, but they are uniformly the currency-like, ERC20 tokens, filling up the payment side of the market[^payment]. There is nearly zero effort devoted to making tokens represent *goods and services* - the deliverable side of market and a fundamental need for a market to work.
+**|| Would make a chapter with challenges, than a next chapter with describing the need for a framework. Maybe something like subheadlines for the frictionless market ||**
 
-[^payment]: In the later chapters we will categorise tokens as payment tokens and deliverable tokens. ERC20 tokens bearing the hallmarks of *payment tokens* only filles one side of market with tokens, therefore can't lift a market.
+It's easy to see the need for a framework defining tokens and making them interoperable with different methods of trading, listing and rating. We did end up having hundreds of tokens in 2017-2018, but they are uniformly the currency-like, ERC20 tokens, filling up the payment side of the market[^payment]. **||Here the primary message, 'currency token', is in a sidesentence. Put it into the main sentence ||** There is nearly zero effort devoted to making tokens represent *goods and services* - the deliverable side of market and a fundamental need for a market to work. **||(isn't there the ERC721 standard for non-fungible token?)||**
 
-During the speculative bubble of 2017, a power token ICO does not need to provide any explanation of how the tokens can be used. All speculators need to know is that they represent a "stake in the future world of tokenised electricity". As long as the token can inspire investors with imagination, it's good enough for an ICO. There is, no more functionality needed other than an ERC20 interface. Such a speculative token doesn't depend on attestations - the proof of actual power production - nor does it need properties like where the energy is provided or for how long it is available.
+[^payment]: In the later chapters we will categorise tokens as **payment tokens** and **deliverable tokens**. ERC20 tokens bearing the hallmarks of *payment tokens* only filles one side of market with tokens, therefore can't lift a market. **||why? What's missing? What are deliverable token do?||**
+
+During the speculative bubble of 2017, a power token ICO ~~does~~ **did** not need to provide any explanation of how the tokens can be used. All speculators need**ed** to know is that they represent a "stake in the future world of tokenised electricity". As long as the token can inspire investors with imagination, it's good enough for an ICO. There is~~,~~ no more functionality needed other than an ERC20 interface. Such a speculative token d**idn't**~~oesn't~~ depend on attestations - the proof of actual power production - nor d**id**~~oes~~ it need properties like where the energy is provided or for how long it is available.
 
 Now that the madness is over, it's time to present the technical framework to make the market work.
+
+**|| The blocks above are good, but should have a better introduction. Again, the last block is only loosely connected to the former. Maybe take it as the problem of using payment tokens for other uses. As with this block the chapter "frictionless markets" ends, it is a bit disappointing, as it just stops without explaining what a framework can deliver ||**
 
 ## Blockchain integrates the web
 
