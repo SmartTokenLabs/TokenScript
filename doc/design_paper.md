@@ -121,70 +121,11 @@ Tokens seamlessly go across systems, carries their trading rules and user interf
 
 ## Example: Car Ownership Token
 
-The following example, a car ownership token, is a successfully tokenised .... [Edit: explain the elements]
+The following screenshot of a car token represents the final stage of tokenisation.
 
-    +----------------------------------------------------------+
-    |                                                          |
-    |          Holden Barina 2012 Ownership Token              |
-    |                                                          |
-    |          Make: Holden Year: 2013  Colour: Black          |
-    |          VIN: KL3TA48E9EB541191                          |
-    |                                                          |
-    | +--------+  +--------------------+  +------------------+ |
-    | | Open   |  | Authorise use      |  | List for sale    | |
-    | +--------+  +--------------------+  +------------------+ |
-    |                                                          |
-    | +--------+  +--------------------+  +------------------+ |
-    | | Start  |  | Lend               |  | Auction          | |
-    | +--------+  +--------------------+  +------------------+ |
-    |                                                          |
-    | +--------+  +--------------------+  +------------------+ |
-    | | Lock   |  | Transfer Ownership |  | Collateralise    | |
-    | +--------+  +--------------------+  +------------------+ |
-    |                                                          |
-    | +--------+                          +------------------+ |
-    | | Locate |                          | List for sharing | |
-    | +--------+                          +------------------+ |
-    |                                                          |
-    |               Registration:                              |
-    |                                                          |
-    |               +------------------------------------+     |
-    |               |                                    |     |      +-----------------------------+
-    |               | Issuer: Roads & Maritime Services  |     |      |                             |
-    |               | Rego: CJ41HL   Expiry: 2017+12+03  |     |  +-> | Access rego attestation     |
-    |               |                                    |     |      |                             |
-    |               +------------------------------------+     |      +-----------------------------+
-    |                                                          |
-    |               Holden Capped Service                      |
-    |                                                          |
-    |               +------------------------------------+     |
-    |               |                                    |     |
-    |               | Issuer: Holden Australia           |     |      +-----------------------------+
-    |               | Expiry: 2020-12-09                 |     |      |                             |
-    |               | Last served: 180 days ago          |     |  +-> | Access Invoice Token        |
-    |               |             (due for a service)    |     |      |                             |
-    |               |                                    |     |      +-----------------------------+
-    |               +------------------------------------+     |
-    |                                                          |
-    |               Insurance                                  |      +------------------------------+
-    |                                                          |      |                              |
-    |               +------------------------------------+     |      | Access insurance token       |
-    |               |                                    |     |      | functions:                   |
-    |               | Issuer: Qantas Car Insurance       |     |  +-> |                              |
-    |               | Start Date: 2017 12 30             |     |      | · Claim                      |
-    |               |                                    |     |      | · Lump sum discount payment  |
-    |               +------------------------------------+     |      | · Upgrade / downgrade        |
-    |                                                          |      | · Suspend policy             |
-    |               Purchase:                                  |      | · Access Roadside Assistance |
-    |                                                          |      |                              |
-    |               +------------------------------------+     |      +------------------------------+
-    |               |                                    |     |
-    |               | Issuer: Manheim Auctions           |     |
-    |               | Date: 2015+12+09   Price: $4724.83 |     |
-    |               |                                    |     |
-    |               +------------------------------------+     |
-    |                                                          |
-    +----------------------------------------------------------+
+
+![A car token. Four tokens: Rego, Capped Service, Insurance and Purchase, either depeneds or relates to the car ownership token.](car-token.jpeg)
+
 
 At first glance, it is just a handy portal to do everything about the car, including market functions and utility. However, it's not possible with the traditional web model.
 
