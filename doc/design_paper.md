@@ -433,7 +433,7 @@ Rendering user's balance in dapp website is briefly mentioned as a privacy issue
 
 It's unlikely any scalability plan will not involve the participation of dapp browsers and wallets. They results in situation that dapps could not take care of the payment side with whatever advanced javascript they can supply.
 
-## address the "Integrate the web" need
+## Address the "Integrate the web" need
 
 We trace the reason that the web is poorly integrated to the only link between the units of the web, i.e. URL links. A link carries no business process, authentication or trust relationship. There are no anchoring points for integration on links.
 
@@ -463,13 +463,13 @@ With the use of a warranty token, the terms and expiration would be easy to find
 
 ### Receipt Token
 
-Lacking a reliable way to authenticate the purchase, an online purchased product usually cannot be returned to the store but might be returned via online means such as a postback. A token carries the means for authentication sufficient for the process to be done in store.
+Lacking a reliable way to authenticate the purchase, an online purchased product usually cannot be returned to the store but might be returned via online means such as a postback. A token carries the methods for authentication sufficient for the process to be done in store.
 
 Despite such a token not being transferable or authorised, it is still useful for 3rd party integrations.  The Tax office will be satisfied that the receipt can't be faked without collaboration from the seller, and allows a swift and easy tax-refund process. If the phone is purchased for work, the employee can easily reclaim the expense from an employer with the trust implied.
 
 ![Purchase with one token, getting three tokens. They can be used to access services, like delivery and repair.](purchase-without-shipment-token.jpeg)
 
-As we can observe by the use of tokens, normally scattered business processes and web experiences can finally be integrated. This ties closely to the other benefit of the blockchain: a frictionless market. In this example:
+As we can observe by the use of tokens, usually scattered business processes and web experiences can finally be integrated. This ties closely to the other benefit of the blockchain: a frictionless market. In this example:
 
 - When the phone traded is second hand, it would be easy to pass the warranty to the next user through a token transfer, opening the market further.
 
@@ -485,7 +485,7 @@ In this insurance case, the blockchain allowed business process innovation that 
 
 The power of integration is further strengthened by the use of the Internet of Things. Let's imagine a future version of AirBNB, where the bookings are tokenised. A traveller can enter a booked AirBNB house by unlocking the smart-lock with his or her token, and the smart-lock would recognise who the current owner of the booking token is.
 
-If Alice owns a token that represents the right to use a room during a certain time window, or "a booking" in user's terms, then the actions she could perform are:
+If Alice owns a token that represents the right to use a room during a specific time window, or "a booking" in user's terms, then the actions she could perform are:
 
 Check-in - either produce a QR code to verify the booking to the landlord or use an NFC-enabled phone to open a smart-lock.
 
@@ -499,13 +499,7 @@ Observing the desirable integration, we can see TBML has to satisfy the followin
 
 - Allow web functions to be accessed in an action
 
-- Allow the token status to be updated, via a web api or signed message (more on that later).
-
-A combined example.
-
-With the example of the 1% property token, we demonstrated that the blockchain can enable a frictionless market via tokenisation of an asset.
-
-With the case of the AirBNB token, we also showed that tokens can have function integration like opening a smart lock during its booking validity. Let's illustrate an example where both uses are combined - a car token.
+- Allow the token status to be updated, via a web API or signed message (more on that later).
 
 # The design of TBML
 
