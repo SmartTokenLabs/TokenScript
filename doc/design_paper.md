@@ -678,54 +678,79 @@ To explain the use case when the *revocation* of an attestation has to happen on
 
 # The components of TBML
 
-## Magic Links
+## Actions
 
-Magic links are simply a signed message for an atomic swap. It facilitates one major function of traditional financial institutions, a function called  "Delivery versus Payment", whereby one party, the buyer, pays in a currency and the other delivers an asset to be purchased. In today's financial world, delivery of physical goods is not a concern of the financial institutions. Once the transaction is done on paper or on a computer, it is considered done. This assumption is built on the trust towards financial institutions.
+We seperate the rendering portion of TBML and the actionable portion. Action refer the things you can do with a token. There are generally either:
 
-(Consider deletion: If, for example, the transaction consists of a loan in the form of currency and a car the loan is used to purchase, then the actual delivery of the car is out of concern, and both the buyer and seller are expected to follow what the computer tells them to do.)
+- Use the token to access to a web service
+- Use the token to control IOT devices
+- Transacte with the token.
 
-## Assets
+All examples of these actions can be found in the car example in the first chapter. For example:
 
-In TBML terminology, an asset is something that can be owned and has value. This is a broad definition and doesn't require, like the financial assets, that an asset produces a return, or is anticipated to.
+Car token's actions:
+
+Unlock
+:   The token has enough credential information to answer a challenge-response from a car in order to unlock it while offline.
+
+Authorise
+:   The user can also authorise another person to use it, sending an authorisation (which is an attestation - see Attestation chapter) as easy as sending an instant message.
+
+Lend
+:   The difference between authorising and lending is the latter also authorises the borrower to use Holden Capped Service and to open the garage gate.
+
+Holden Capped Service token's actions
+
+Book a service
+:   This token allows the user to login to any holden service center and book an appointment.
+
+Check-in
+:   He further uses this token to enter the service station (swipe his mobile to enter the sliding gate).
+
+Pay
+:   By including the Holden Capped Service token in a transaction, the service cost is capped, either on the web through pre-pay or on the POS.
+
+Not all actions are provided by the token. Typically:
+
+Transfer
+:   Provided by a generic token's TBML. You can imagine for example the TBML file of ERC721 allows any conforming tokens to be transferred, and the car token might be one of them. In reality it can hardly be the case because car token's transaction rules usually require attestations, such as the buyer is of the legal age to conduct such a transaction, but even in such cases, the rule might be supplied by a TBML regulating the car trade.
+
+Auction
+:   Provided by an auction market. When the user accesses an auction market, using the same mechanism that allows a token to login to a website, the user's agent (wallet) would show a list of tokens that can enjoy the auction service. If the user trusts the auction market, she can then add its action to all of the supported tokens.
+
+List for sharing
+:   A startup company, let's call it CarNextDoor, offers to manage the process so the car owners can safely list the car for sharing and automatically gets income. Once listed, the car owner will obtain a listing token and has to book his use of his own car through it. In exchange, when he is not using it, the car goes out and earn money for him. Naturally, the action is provided by CarNextDoor, not by Holden.
+
+## Magic links
+
+Magic links are simply a shortcut to an action on a specific asset. It's usually sent to the owner of the asset. It comes with required attestations for a transaction (e.g. an atomic swap).
+
+
+## Attestations
 
 Attestations are like Tokens except that they are not transferable, in the case that a smart contract allows them to be transferred, the original attestation is render invalid after the transfer.  This makes it possible for things like friendship to be defined in a way similar to the token, and therefore, we may as well call such attestations "tokens". A token of friendship would be a signed message from someone, recognising someone else as a friend, and it would be an asset in TBML terminology. Apparently a token of friendship from Michael Jackson can be of high value, especially since he cannot produce any more of these tokens, but even a humble token like "Friend of Weiwu" has some value. It, for example, allows a friend of Weiwu to sign a delivery recipt for him, or allows such a friend to get a mate-rate for signing up in the same dojo Weiwu practises in. There is even a neat trick, which, by using secret sharing protocols, having Weiwu's friendship token allows one to learn common friends shared with Weiwu. Notice that this definition does not require the asset to be a blockchain token, nor that it even exists on the blockchain. More on that in the latter chapter "attestation".
 
 Assets and attestations (tokens in general) can have financial value and utility value.
 
-Examples of Assets with financial value:
+## Assets
 
-Rental....
-
-Airbnb ...
-
-## Actions
-
-Actions are things that can be done to an asset.
-
-Regarding the financial properties of an asset, typical actions are transfer, sell, buy, collateralise, combine (e.g. in the case of cross-collateralization), insure, auction and testify (obtain a signature of someone in order to satisfy certain trading requirements).
-
-The other actions depend much on the utility properties of an asset, however, this varies from one type of asset to another. AirBNB token, for example, would allow a user to open the smart-lock of their AirBNB room at the time it is reserved for. That's probably all the utility you can get from the AirBNB token, but game assets, for example, can be equipped, unequipped, transmuted, transmogrified, enchanted, disenchanted, cursed, purged, socketed, unsocketed, broken-down, recycled, consecrated... Imagination is the limit.
-
-Let's start with fungible tokens, as they are somewhat simpler. In the following screen mock-up, the actions are: "Pay anyone", "Request Payment", "Convert to USD".
-
-
-![Rendering of the sovereign token on a mobile phone. Notice the action buttons.](sovereign.png)
-
-[explains the attestations associated with this token.]
-
-The case with non-fungible tokens are more complicated. Let's continue with the AirBNB example.
-
-
-
-# Examples of TBML
-
----
-Authors note:
+In TBML terminology, an asset is something that can be owned and has value. This is a broad definition and doesn't require, like the financial assets, that an asset produces a return, or is anticipated to.
 
 Examples of assets: crypto kitties, FIFA tickets, right to a bottle of wine, 1% ownership of a house, a piece of armour in a video game or dice in a video game.
 
 Examples of attestations: crypto-kitten vouchers, FIFA ticket redeem coupons, American Express Centurion status, Friendship Tokens (a signed message from Michael Jackson saying that Victor Zhang is a friend) or proof of identity.
 
+
+# Join the game
+
+The work to define TBML as a specification is a work in progress. We aim to produce a yellow paper of the key methods and considerations and extend it from there. More methods of collaborations are being put to work as you read this draft. For now, the contact points are:
+
+weiwu.zhang@alphawallet.com
+james.sangalli@alphawallet.com
+victor.zhang@alphawallet.com
+
+
+Authors note: Delivery vs payment
 
 [The concept of delivery vs payment and how it is useful in both investments and consumption.]
 
