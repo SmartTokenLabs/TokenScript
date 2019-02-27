@@ -230,9 +230,9 @@ We assert that a descriptive language (TBML) is needed to allow blockchain techn
 
 By virtue of TBML being a solution layer rather than base-layer technologies like Ethereum and Plasma, we choose to introduce the technology by example, and provide rich business-context based discussion for a boarder specturm of audience.
 
-## address "Frictionless Market" capacity
+## Address "Frictionless Market" needs
 
-Taking a closer look at "market", a market is not a noisy channel overloaded with information; more importantly, it is a place where delivery versus payment happens. With less reliance on the middlemen, our focus is turned into the tokens being traded, that is, *deliverables* and *payments*.
+Taking a closer look at "market", a market is not a noisy channel overloaded with information; more importantly, it is a place where delivery versus payment happens. With blockchain relying less on the middlemen, the host of the trades, our focus is turned into the tokens being traded, that is, *deliverables* and *payments*, and their role in market.
 
 deliverables
 :    All sorts of things money can buy: assets, goods and services.
@@ -245,13 +245,13 @@ market
 
 TMML provides both *the deliverable* and *the payment* side tokens to "plug-in" to the *market*. 
 
-Such a framework is essential for tokens to be presented, indexed, transacted, traded, auctioned, combined... to form a frictionless market.
+Such a framework is essential for tokens to be presented, indexed, transacted, traded, auctioned, combined... to work towards a frictionless market.
 
 We will introduce TBML through an example on each of the *deliverable* side and on *payment* side.
 
-### deliverable side example: 1% property token
+### Deliverable side example: 1% property token
 
-Let's imagine a market for "1% property". A property owner can issue many pieces of a token, each represents 1% ownership of the property. He can sell these tokens to obtain cash.
+Let's imagine a market for "1% property". A property owner can issue many pieces of a token, each represents 1% ownership of the property. He can sell these tokens for cash.
 
 A buyer needs to know quite a bit of information. It's easy to understand that such a token would fetch 1% of the sales revenue if the underlying property is sold, but a lot more details are needed:
 
@@ -279,12 +279,14 @@ Specific to blockchain, we also have:
 
 We categorise these trade-sensitive information into three categories:
 
-- product description. Item 2, 3, 5, 6 are in PD
+- product description[^pd]. Item 2, 3, 5, 6 are in PD
 - attested information. Item 1, 4, 6, 7 are in Attestations.
 - reference information. Item 8, 9.
 - action information (how to perform an asset action). Item 10.
 
 Understandablly, the buyers need to access all these for an informed decision.
+
+[^pd] The word is loaned from the financial sector, usually used to describe packaged investment products. It basically means the formular which profit is calculated and the current values of the varibales in the formular.
 
 #### Product description
 
