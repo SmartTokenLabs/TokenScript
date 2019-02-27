@@ -78,9 +78,11 @@ During the speculative bubble of 2017, a power token ICO ~~does~~ **did** not ne
 
 Now that the madness is over, it's time to present the technical framework to make the market work.
 
-**|| The blocks above are good, but should have a better introduction. Again, the last block is only loosely connected to the former. Maybe take it as the problem of using payment tokens for other uses. As with this block the chapter "frictionless markets" ends, it is a bit disappointing, as it just stops without explaining what a framework can deliver ||**
+**|| The blocks above are good, but should have a better introduction. Again, the last block is only loosely connected to the former. Maybe take it as the problem of using payment tokens for other uses. As with this block the chapter "frictionless markets" ends, it is a bit disappointing, as it just stops without explaining what a framework can deliver. When it comes to what the framwork does, it stops. ||**
 
 ## Blockchain integrates the web
+
+**||Subheadline: The problem of the internet as we know it||**
 
 Tim Berners-Lee and the innovators of the world wide web modelled the web primarily on a public library model and computer-human interaction model.
 
@@ -90,7 +92,7 @@ In the computer-human interaction model, two players are having a conversation -
 
 Therefore the web was built as a giant library where each book is a computer with whom one can have a conversation. The analogy probably is where Facebook got its namesake inspiration - a website is a book after all.
 
-This design has caused a lot of modern inconveniences. A user would one day receive an email on her monthly statement, yet she couldn't recognise a few entries on them. It says "Amazon". Was it about ordering a pair of shoes? She has to copy the order number and look it up in Amazon. In another occasion, the same user might pause as she books two tickets for an opera, switch to her frequent flyer app, copy that number over and paste it into the order to collect the points. She might struggle a bit installing that frequent flyer app at the outset.
+This design has caused a lot of modern inconveniences. A user would one day receive an email on her monthly statement, yet she couldn't recognise a few entries on them. It says "Amazon". Was it about ordering a pair of shoes? She has to copy the order number and look it up in Amazon. In another occasion, the same user might pause as she books two tickets for an opera, switch to her frequent flyer app, copy that number over and paste it into the order to collect the points. She might struggle a bit installing that frequent flyer app at the outset. **||These inconveniences are not very clear. I don't understand them. Are they hidden under the gui?||**
 
 Why are we doing so much copy and pasting when machines are exceptionally good at doing this? Owning to the design, the web is like a giant library, and we are like readers keeping notes of the index numbers under our sleeves. We certainly hope the Web resembles, instead o a library, more like a personal assistant.[^pda]
 
@@ -108,7 +110,11 @@ The web doesn't have a built-in authentication mechanism[^tls]. The add-on "Sign
 
 [^tls]: Despite the excellent efforts on client/server certificates in TLS, these authentication methods are not for processes, but only for sites. It's a delegation model. Imagine a buyer not checking if a title deed is real, but only checks if the seller's name matches the one on the deed. That would be the delegation model used in TLS. In this model, TLS can't guarantee anything on the website is real; only that the website itself is. Facebook uses TLS, but people put much fake news on it. The unit of trust here is undoubtedly not granular enough for the web to deliver an integrated experience.
 
+**|| Here I wish more clearity. Maybe start with a abstract definition of the problem, do examples, abstract from there, provide more examples, make a conclusion. As this is just the antithesis of what you are on about, it should be shorter. ||**
+
 ### "Account authentication" is not a substitute for web integration.
+
+**|| add an abstract definition of the problem before starting with an example. If readers don't know what to look for in the example, they will be confused ||**
 
 For example, the simple business logic: "the owner of a car can check its service history", doesn't require an account. If you force the "Account authentication" model, bad things happen:
 
@@ -116,7 +122,9 @@ For example, the simple business logic: "the owner of a car can check its servic
 
 - When a 3rd party like a Vehicle Modification workshop or an insurer needs to access the repair history, there is no easy way to authorise them without giving away the account. This is inflexible.
 
-Such integration needs, poorly addressed by adding accounts, are easily found in healthcare, retail and almost every web-based business. Today, we are still adding more and more accounts to address the growing integration needs. It's a case of hammering every problem down as if it is a nail. The following chapters will demonstrate that integration through token, not account, is the solution.
+Such integration needs, poorly addressed by adding accounts, are easily found in healthcare, retail and almost every web-based business. Today, we are still adding more and more accounts to address the growing integration needs. It's a case of hammering every problem down as if it is a nail. ~~The following chapters will demonstrate that integration through token, not account, is the solution.~~ **(we will later demonstrate that ... )**
+
+**|| Subheadline: The lack of a ownership mechanism ||**
 
 Similarly, the web doesn't have a built-in mechanism for ownership, transfer of value and trading.
 
@@ -132,13 +140,17 @@ These missing features of the web are the well-known functions of the blockchain
 
 Tokens seamlessly go across systems, carries their trading rules and user interfaces and business context.
 
+**|| the switch to token / blockchains comes a bit abrupt. Maybe take the two problems in one subchapter and make another one about blockchain. This should be a bit longer and address both problems ||**
+
 ## Example: Car Ownership Token
 
 We will comine the two concepts: frictionless market, achieved by tokenising assets; integrate the web, by using token as integration point for web services. We will demonstrate an example that encompasses both concepts: car token.
 
+**|| Wouldn't it be better to do one example for each case and merge them later? ||**
+
 On the one hand, a car is a tokenised asset, that can be bought, sold, transferred, auctioned, collaborated and insured, all enabled by blockchain.
 
-On the other hand, a car also has utility. A car's ownership token can convert a blockchain wallet into a car key, with additional functions like graphically representing the car's current location. Authorising someone to access your car, or renting it for profit, would be seamlessly done by signing blockchain transactions or attestations, without passing car keys around.
+On the other hand, a car also has utility. **(delete the last sentence)** A car's ownership token can convert a blockchain wallet into a car key, with additional functions like graphically representing the car's current location. Authorising someone to access your car, or renting it for profit, would be seamlessly done by signing blockchain transactions or attestations, without passing car keys around.
 
 The following screenshot of a car token represents the final stage of tokenisation.
 
@@ -162,6 +174,8 @@ If the owner wishes to sell the car, she only has to list it on any website with
 
 This chapter serve to present the vision. We will have the opportunity to inspect the technical aspect of this well-integrated well-tokenised car token in later chapters again.
 
+**|| Use this example to outline the abstract principles and the role of blockchain / token more clearly. ||**
+
 --
 
 ### The challenge of tokenisation
@@ -170,6 +184,8 @@ Tokenisation requires bundling a token with its transaction rules and behaviour 
 
 Allow users to interact with different systems through the tokens
 :   In the car example, the car token is issued by Holden, the maker, and necessarily so because it contains code to interact with a smart lock (the *Open*, *Start*, *Lock* actions) and Holden's own web service (the *Locate* action), yet it needs to work in other environments. The *Auction* action, for example, is provided by a third party auction web service. The user access auction service through the token without the need of signing up and proving ownership. The *List for sharing* is provided by a third party service which tokenises the usage of the car by hours or days and sells them piecemeal. The owner can access such a market through this Token. The buyers will have information about the car's GPS location, the capacity to unlock the door and use it, through this token as well.
+
+**|| too much, too tight ||**
 
 Rendering a token and associate it with the actions they can perform in the user's wallet
 :   In the car example, if the registration expired, the web component at work would paint the Registration Token red or display a warning. Actions like *List for sharing* will not be available with an expired car rego, and the integrated token interface should clearly pass that message to the user.
@@ -185,6 +201,8 @@ Carry trust relationship and business context to 3rd parties
 # Design requirements
 
 We assert that a descriptive language (TBML) is needed to allow blockchain technology to enable "frictionless markets" and an "integrated web". TBML stands for Token Behaviour Markup Language.
+
+**|| why? ||**
 
 By virtue of TBML being a solution layer rather than base-layer technologies like Ethereum and Plasma, we choose to introduce the technology by example, and provide rich business-context based discussion for a boarder specturm of audience.
 
