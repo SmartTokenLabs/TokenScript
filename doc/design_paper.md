@@ -10,8 +10,6 @@ Despite the great folly in 2017-2018, it is not a bad thing to initially focus o
 
 Previous efforts in this industry primarily focused on enriching the capacity of the technology. This paper will focus on tokenisation and introduce a standardisation effort known as TBML (Token Behaviour Markup Language) which will make the blockchain technical stack complete, providing utility for the economy and the internet.
 
-
-
 ## Join the game
 
 Please join our work at xxx. A Yellow Paper to guide implementors to use TBML for their tokens and dapps will take months to make, but a work in progress is always available online. Participate now to avoid the draft language specification being made without consideration your token model.
@@ -403,7 +401,7 @@ TBML is designed to separate token rendering code, and transaction generating co
 
 A user who is purchasing a 1% property token from Peter's Pride Property recommendation website can be supplied with a rendering and transaction package, signed by the same group of people who created the holding contract of such tokens. Therefore the user can purchase assets from any website with a similar level of trust, or purchase it from a WeChat or Facebook private message and know it is the real token being rendered and transacted.
 
-## payment side example: DAI token
+## Payment side example: DAI token
 
 DAI is a token designed for payment - purchasing security token, purchasing goods and services and so like. It's intended to match USD in value. Not fixing the supply cap, it is not itself an investiment candidate.
 
@@ -454,44 +452,39 @@ Third, if secure protocols needs to be added, for example, an attestation from t
 
 #### Interoperatibility
 
+Adding support for DAI itself is trouble enough, not to mention adding other payment side tokens. In the 2017-2018 frenzy, a lot of payment side tokens are invented and heavily invested in. Pretty much anything advertised not as a security token outlines some way their token can be used to pay or co-pay some goods and services. Electricity tokens, for example, is invented as the currency of the future tokenised electricity. Most of them are jokes, but what if they are put to work? Even if only 10% of these tokens are done by sincerer ICO teams, all of them would forsee similiar trouble as the integration of DAI token into the market.
 
+And each payment side currency brings its own payment side logic. Take DAI for example, it has these payment side logic:
 
-DAI token balance isn't immediately available to the DApps.
+1. The creation of DAI tokens requires a set-up phase, called CDP.
+2. The risk level of a CDP changes. Users should receive a notification of their CDP is at liquidation risk. We will cover such case again in the next chapter.
+3. If the balance runs low, but the user has quite a bit of Ethers on his/her account, she may pause the checkout to top up before returning to the checkout.
 
-t has a few additional features that we will take care of 
+An architect might read it here and decide these can all be done out of band. Just kick the user back to the MakerDAO website if any of these happens. This would not address payment side innovation like Point+Pay, where the points are selected at the same screen as payment. In fact, you can observe a proliferationDictionary of payment side innovations in China for examples:
 
-1. The creation of DAI tokens requires a set-up phase.
-2.  It's needed to enquire a smart contract or cross reference another blockchain to find the balance.
-3. The de-risking of DAI comes with a cost. The user 
+- Micro-credit (e.g. 花唄) and collatoralised credit
 
-[Edit: describe how DAI works]
+- Points to use when the shopping behaviour matches the encouraged behaviour of micro-credit, e.g. shopping overseas.
 
-[Important to note that
+- Cashback when you spent more than ¥1000 in a day.
 
----
+- Red packet that can only be used in paying consumption.
 
-[Editor: the following served as an outline of the entire chatper and should be checked then safely removed now that the chapter is nearly fully written.]
+- Lottery on being the 100th, 200th.. 600th payment.
 
-Design requirements for a frictionless market
+- Free shipping insurance on selected shopping behaviour (e.g. to encourage shoppers to favour drop-shipping as it loses advantage thanks to its slow delivery).
 
-The TBML language has to provide:
+- Prepaid online shopping payment cards, like the Alipay cards sold in Australia Post.
 
-- Where to find the asset (which chain and what smart contract holds the asset)
-- Vocabulary for token assets
-- Methods to render and translate attributes in local languages
-- Ways to obtain 3rd party information and a list of what 3rd parties are trustworthy.
-- A superset of ABI information that informs users the purpose of the transaction.
+TBML intends to give room for payment side innovation as well as deliverable side. Traditionally, partner support used to curb payment side innovation. American Express implemented points to pay API but after years only less than 5% of partner e-commerce websites provided this as a checkout option.
 
-And it should be usable by:
+#### Scalability
 
-- The Dapp created by the token issuer;
-- Any 3rd party Dapp that might use the token;
-- A generic market not owned by the token issuer;
-- Various user-agents, in rendering and using the assets in the wallet section of mobile and desktop wallets.
+The payment and delivery may not be on the same blockchain.
 
-We will proceed on addressing the need for "Integrating the Web" and come to a full picture of the design requirements of TBML in the following chapters.
+Rendering user's balance in dapp website is briefly mentioned as a privacy issue a few pages back, but as blockchain scales, the dapp's server side may not have equal access to the client on some data like balance. It's possible that the website only observes the result of the transaction and happy to deliver physical or tokenised goods by rules.
 
----
+It's unlikely any scalability plan will not involve the participation of dapp browsers and wallets. They results in situation that dapps could not take care of the payment side with whatever advanced javascript they can supply.
 
 ## address the "Integrate the web" need
 
@@ -663,6 +656,34 @@ On the other hand, a car also has utility. A car's ownership token can convert a
 The following picture illustrates the look of such a car token in the user's wallet:
 
 # The design of TBML
+
+## Components
+
+
+---
+
+[Editor: the following served as an outline of the entire chatper and should be checked then safely removed now that the chapter is nearly fully written.]
+
+Design requirements for a frictionless market
+
+The TBML language has to provide:
+
+- Where to find the asset (which chain and what smart contract holds the asset)
+- Vocabulary for token assets
+- Methods to render and translate attributes in local languages
+- Ways to obtain 3rd party information and a list of what 3rd parties are trustworthy.
+- A superset of ABI information that informs users the purpose of the transaction.
+
+And it should be usable by:
+
+- The Dapp created by the token issuer;
+- Any 3rd party Dapp that might use the token;
+- A generic market not owned by the token issuer;
+- Various user-agents, in rendering and using the assets in the wallet section of mobile and desktop wallets.
+
+We will proceed on addressing the need for "Integrating the Web" and come to a full picture of the design requirements of TBML in the following chapters.
+
+---
 
 We talked about the design requirements of TBML and let's step in closer to find out how would it work.
 
