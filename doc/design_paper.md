@@ -92,45 +92,55 @@ This design has caused a lot of modern inconveniences. A user would one day rece
 
 Why are we doing so much copy and pasting when machines are exceptionally good at doing this? Owning to the design, the web is like a giant library, and we are like readers keeping notes of the index numbers under our sleeves. We ~~certainly~~ hope **that in the future** the Web resembles no longer of a library, but more like a personal assistant. **However, it is not clear how we can get there.**
 
-## The client side can't integrate a web that is not designed to integrate
+### The client side can't integrate a web that is not designed to integrate
 
 [^pda]
 
-[^pda]: Surprisingly, even the technology that was created to fill the role of a personal assistant, the Smart Phone, still failed, for the same reason: the efforts from client side alone can't integrate a Web that is not designed to integrate. The infrastructure has to support integration. A smartphone is modelled like a dial-up Internet connection, with each app representing a website. The users still need to figure out which computer (app) to talk to before entering the conversation, and still copies information around as he swaps apps around. It's not possible, for example, to ask your smartphone to sum up all the money one may access by his online banking apps.
+[^pda]: Surprisingly, even the technology that was created to fill the role of a personal assistant, the Smart Phone, still failed, for the same reason: the efforts from client side alone can't integrate a Web that is not designed to integrate. **It made the problem even worse, as copy-pasting becomes an even bigger trouble when you use a Smart Phone.**
 
-It's easy to see the cause of the inconvenience; the web is poorly integrated. The bad examples go on and on:
+**The truth is: Not the client, but t**he infrastructure has to support integration. A smartphone is modelled like a dial-up Internet connection, with each app representing a website. The users still need to figure out which computer (app) to talk to before entering the conversation, and still copies information around as he swaps apps around. It's not possible, for example, to ask your smartphone to sum up all the money one may access by his online banking apps.
+
+It's easy to see the cause of the inconvenience **:** the web is poorly integrated. The bad examples go on and on:
 
 - When a user checks out on the web, she isn't sure if she has enough balance on her card, since the bank is not integrated with the shopping system.
 
 - When a patient orders a service, she can't see how much the insurance can cover until the bill settles, nor can she know whether she has reached the annual cap since the clinic is not integrated with the health insurance company.
 
-The answer to integrating the web requires a few building blocks that weren't in the Web's blueprint: authentication, ownership, transfer of value and trading.
+The ~~answer~~ challenge to integrating the web requires a few building blocks that weren't in the Web's blueprint: authentication, ownership, transfer of value and trading.
 
-The web doesn't have a built-in authentication mechanism[^tls]. The add-on "Sign in with Facebook" merely tried to provide authentication through a trusted 3rd party, which, despite privacy and availability concerns, is only good for account authentication and not for integration.
+### Authentification with trusted 3rd parties
 
-[^tls]: Despite the excellent efforts on client/server certificates in TLS, these authentication methods are not for processes, but only for sites. It's a delegation model. Imagine a buyer not checking if a title deed is real, but only checks if the seller's name matches the one on the deed. That would be the delegation model used in TLS. In this model, TLS can't guarantee anything on the website is real; only that the website itself is. Facebook uses TLS, but people put much fake news on it. The unit of trust here is undoubtedly not granular enough for the web to deliver an integrated experience.
+The web doesn't have a built-in authentication mechanism[^tls]. **To route around this gab, many users use add-ons like "Sign in with Facebook".** Those merely try to provide authentication through a trusted 3rd party, **which does not only cause privacy and availability concerns,** but also only serves for account authentication **and can't be used** for integration.
 
-**|| Here I wish more clearity. Maybe start with a abstract definition of the problem, do examples, abstract from there, provide more examples, make a conclusion. As this is just the antithesis of what you are on about, it should be shorter. ||**
+[^tls]: **There has been excellent** efforts on client/server certificates in **Transport Layer Security (TLS)**. However, these authentication methods are not for processes, but only for sites. **They represent** a delegation model: Imagine a buyer not checking if a title deed is real, but only checks if the seller's name matches the one on the deed. That would be the delegation model used in TLS. In this model, TLS can't guarantee **that** anything on the website is real -- only that the website itself is. Facebook uses TLS, but people put much fake news on it. The unit of trust here is undoubtedly not granular enough for the web to deliver an integrated experience.
+
+**|3| Nice thesis. Still, want it to be more clear ||**
 
 ### "Account authentication" is not a substitute for web integration.
 
-**|| add an abstract definition of the problem before starting with an example. If readers don't know what to look for in the example, they will be confused ||**
+**|3| add an abstract definition of the problem before starting with an example. If readers don't know what to look for in the example, they will be confused ||**
 
-For example, the simple business logic: "the owner of a car can check its service history", doesn't require an account. If you force the "Account authentication" model, bad things happen:
+**On top of it, the model of account based authentification is the cause of further problems.** Most simple business cases - for example "the owner of a car checks its service history" - don't require an account. If you enforce parties involved having an account to authenticate, bad things happen:
 
 - When the car is sold, the new car owner would now need to create a new account at the service website and secure it with the proof of ownership to the car. This is onerous and unreliable.
 
 - When a 3rd party like a Vehicle Modification workshop or an insurer needs to access the repair history, there is no easy way to authorise them without giving away the account. This is inflexible.
 
-Such integration needs, poorly addressed by adding accounts, are easily found in healthcare, retail and almost every web-based business. Today, we are still adding more and more accounts to address the growing integration needs. It's a case of hammering every problem down as if it is a nail. ~~The following chapters will demonstrate that integration through token, not account, is the solution.~~ **(we will later demonstrate that ... )**
+Such integration needs, poorly addressed by adding accounts, are easily found in healthcare, retail and almost every web-based business. Today, we are still adding more and more accounts to address the growing integration needs. It's a case of hammering every problem down as if it is a nail. **Most people do not feel well with this model, but don't see an alternative to integrate the web. An internet without accounts is beyond most people's imagination.**
 
-**|| Subheadline: The lack of a ownership mechanism ||**
+**We will demonstrate that integration through token will be a superior solution to integrate the internet. But first we address the second lacking building block of an integrated web.**
+
+### The lack of a ownership mechanism 
 
 Similarly, the web doesn't have a built-in mechanism for ownership, transfer of value and trading.
 
-Taking the car story further, a car seller would need to post the car information on a website, creating yet another account on the way. The buyer cannot click "buy" and acquire the ownership proof, compulsory insurance, unused service quota and so like in one go, and have payment processed. All these actions have to be done separately, using easily-tampered paper proofs and forms. The process starts at the web and ends somewhere else.
+**To demonstrate, we take the car story a bit further:** When you want to sell your car, you need to post the car information on a website. **To do so, you must create another account on the way. When someone wants to buy your car, you and the buyer have to go through a chain of processes:** Insurance, unused service quota, vehicle registrations, documentation handover, payment and so on. All these actions have to be done separately, using easily-tampered paper proofs and forms. The process starts at the web and ends somewhere else instead of being automatically done after the buyer clicked "buy".
 
-In contrast, the same process on blockchain would be automatic, fraud-proof[^attestations] and atomic[^atomic].
+**Is it possible to make it happen, that the entire chain of bureaucratic procedures happens securely in the backend, while you just push the "buy" button? With the web of accounts, you'd need to knot together a lot of accounts and trusted third parties, which hide the process from the user, while they fulfill the same paper trail as before.** 
+
+In contrast, when you base the same process on a blockchain and on tokens, it would be automatic, fraud-proof[^attestations] and atomic[^atomic].
+
+**|4| Make an example, what would happen.
 
 [^attestations]: the method to provide cryptographically signed attestations as a condition for a transaction is discussed later in the "Attestation" chapter.
 
