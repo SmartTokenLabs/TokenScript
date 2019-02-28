@@ -7,9 +7,7 @@ The remarkable blockchain speculations that took place in 2017 - 2018 brought ev
 
 To provide a practical use of the blockchain, we must understand its utility to the world economy and the internet. The authors of this paper are technical experts who went through years of study**ing** and exploration into its applications both via financial institutions and startups. With this experience, we came to realise that the blockchain has **two primary functions: First, it provides a frictionless market. Second, it integrates the web. We define the technique to make it happen in "Tokenisation".**
 
-Previous efforts in this industry primarily focused on enriching the capacity of the technology. **|| Is the former sentence really needed? ||** This paper will focus on tokenisation and introduce a standardisation effort **|| we call ||** ~~known~~ as TBML (Token Behaviour Markup Language)**,** which will make the blockchain technical stack complete **and provide** ~~providing~~ utility for the economy and the internet.
-
-**|| I miss two things: 1. the two primary functions of tokens, 2. the reason why they need a markup language to provide utility
+Previous efforts in this industry primarily focused on enriching the capacity of the technology. This paper will focus on tokenisation and introduce a standardisation effort we call TBML (Token Behaviour Markup Language), which will make the blockchain technical stack complete and provide utility for the economy and the internet. TBML will unleash the full potential of Tokenisation. 
 
 ## Join the game
 
@@ -24,11 +22,11 @@ Blockchain technology has **two primary functions** that serve essential purpose
 - providing a frictionless market; and
 - integrating the web.
 
-**||Here I'd like to have a bit more, maybe a promise, maybe a method||**
+**|1|Here I'd like to have a bit more, maybe a promise, maybe a method||**
 
 This paper will address the vision of where we can be and follow up with the design and reasoning behind the architecture needed on top of the blockchain. We will then explain TBML which is a critical missing layer and go over its design principles and how we are building it.
 
-## Blockchain provides a frictionless market
+## Blockchain provides a frictionless market: Atomic Assets always on the Market
 
 The 80s' "Back to the Future" featured a world of powerful machines filled with hovering boards and flying cars. It didn't happen. As Peter Thiel once famously lamented, "we were promised flying cars; instead, we got 140 characters". The technological advancement of our time is beyond the imagination of the 80s science fiction movies, albeit not through more powerful machinery, but efficient use of the Internet.
 
@@ -40,9 +38,7 @@ With blockchain, any tokenised asset can be transacted any time, as long as it f
 
 [^market-model]: With the traditional intermediary-operated market model, a trade is made in two stages: entering the market, making a deal. Blockchain can simplify that into a protocol; therefore the blockchain token assets can be considered always on the market.
 
-**|| Good term: Always on the Market. Would try to take this in a headline ||**
-
-### Can we create a frictionless market through tokenisation?
+### Tokenisation can create a frictionless market
 
 Can we tokenise, for example, 1% of a property, so that the property market can react faster than the typical month-long property purchase-sales cycle?
 
@@ -54,9 +50,9 @@ Can we tokenise the risk and reward of international trades, so that small impor
 
 Can we create an insurance token that depends on cryptographic proofs, so that the insurer can remove from their pricing, the costs incurred by fraudulent documents? Can we decentralise the insurers altogether?
 
-Blockchain can provide the foundational layer to achieve these. While blockchain scalability and privacy will improve, a working, frictionless market also depends on quality methods to define how tokens should be used and transacted - the focus of our work on TBML.
+Blockchain can provide the foundational layer to achieve these. **It will enable a working, frictionless market with atomic parts of assets always on the market. However, this can only become true when there is a realibale and precise method to define how tokens should be used and transacted. This the focus of our work on TBML.**
 
-**|| The next blocks has no tight connection to the previous' - also: Wouldn't talk about scalability and privacy here. Too short to talk about all challenges. Better stay at promises - or make a new chapter for open questions and so on||**
+### Token properties
 
 Tokens have different properties. Do tokens expire? AirBNB booking tokens certainly do, but 1% ownership of property tokens probably don't. Should the token owner receive a notification on a specific event? Power tokens certainly need that, for the change in the power supply is dynamic. Is a token stream-able?
 
@@ -66,33 +62,39 @@ If a buyer wants to purchase a tokenised country estate from a seller, how do th
 
 If a token entitles the user to do specific actions online, how can the user login to the web services with that token?
 
-**|| Would make a chapter with challenges, than a next chapter with describing the need for a framework. Maybe something like subheadlines for the frictionless market ||**
+It's easy to see the need for a framework defining tokens and making them interoperable with different methods of trading, listing and rating. 
 
-It's easy to see the need for a framework defining tokens and making them interoperable with different methods of trading, listing and rating. We did end up having hundreds of tokens in 2017-2018, but they are uniformly the currency-like, ERC20 tokens, filling up the payment side of the market[^payment]. **||Here the primary message, 'currency token', is in a sidesentence. Put it into the main sentence ||** There is nearly zero effort devoted to making tokens represent *goods and services* - the deliverable side of market and a fundamental need for a market to work. **||(isn't there the ERC721 standard for non-fungible token?)||**
+### Payment Token and deliverable Token
 
-[^payment]: In the later chapters we will categorise tokens as **payment tokens** and **deliverable tokens**. ERC20 tokens bearing the hallmarks of *payment tokens* only filles one side of market with tokens, therefore can't lift a market. **||why? What's missing? What are deliverable token do?||**
+In 2017-2018 we did end up having hundreds of tokens. However, they uniformly fall into one category of token: Created with the ERC20 standard they are currency like, filling up the *payment side* of the market[^payment]. There is nearly zero effort devoted to making tokens represent *goods and services* - which is the *deliverable side* of market and a fundamental need for a market to work. **||(isn't there the ERC721 standard for non-fungible token?)||**
 
-During the speculative bubble of 2017, a power token ICO ~~does~~ **did** not need to provide any explanation of how the tokens can be used. All speculators need**ed** to know is that they represent a "stake in the future world of tokenised electricity". As long as the token can inspire investors with imagination, it's good enough for an ICO. There is~~,~~ no more functionality needed other than an ERC20 interface. Such a speculative token d**idn't**~~oesn't~~ depend on attestations - the proof of actual power production - nor d**id**~~oes~~ it need properties like where the energy is provided or for how long it is available.
+[^payment]: We categorise tokens as **payment tokens** and **deliverable tokens**. ERC20 tokens bearing the hallmarks of *payment tokens* only filles one side of market with tokens, therefore can't lift a market. **||why? What's missing? What are deliverable token do?||**
 
-Now that the madness is over, it's time to present the technical framework to make the market work.
+During the speculative bubble of 2017, a power token ICO **did** not need to provide any explanation of how the tokens can be used. All speculators need**ed** to know is that they represent for example a "stake in the future world of tokenised electricity". As long as the token can inspire investors with imagination, it's good enough for an ICO. There is no more functionality needed other than an ERC20 interface. Such a speculative token d**idn't** depend on attestations - the proof of actual power production - nor d**id** it need properties like where the energy is provided or for how long it is available. **Instead of enabling a frictionless market, those tokens have just been a promise on enabling it. By far most will never deliver.**
 
-**|| The blocks above are good, but should have a better introduction. Again, the last block is only loosely connected to the former. Maybe take it as the problem of using payment tokens for other uses. As with this block the chapter "frictionless markets" ends, it is a bit disappointing, as it just stops without explaining what a framework can deliver. When it comes to what the framwork does, it stops. ||**
+Now that the madness is over, it's time to present the technical framework to make the market **actually** work.
+
+**|1| Here is want to have: A glimpse on HOW? ||**
 
 ## Blockchain integrates the web
 
-**||Subheadline: The problem of the internet as we know it||**
+### The problem of the internet as we know it
 
 Tim Berners-Lee and the innovators of the world wide web modelled the web primarily on a public library model and computer-human interaction model.
 
-In the library model, information is freely available, indexed and cross-referenced by a URI. Its incarnation, the URL, is where the data is, and there is no restriction on where you can go.
+In the library model, information is freely available, indexed and cross-referenced by a URI. Its incarnation, the URL, is where the data is, and there is no restriction on where you can go. In the computer-human interaction model, two players are having a conversation - the human asks and the machine answers. A computer has limited knowledge, but it can help the user to reach the right computer.
 
-In the computer-human interaction model, two players are having a conversation - the human asks and the machine answers. A computer has limited knowledge, but it can help the user to reach the right computer.
+Therefore the web was built as a giant library where each book is a computer with whom one can have a conversation. ~~The analogy probably is where Facebook got its namesake inspiration - a website is a book after all.~~
 
-Therefore the web was built as a giant library where each book is a computer with whom one can have a conversation. The analogy probably is where Facebook got its namesake inspiration - a website is a book after all.
+This design has caused a lot of modern inconveniences. A user would one day receive an email on her monthly statement, yet she couldn't recognise a few entries on them. It says "Amazon". Was it about ordering a pair of shoes? She has to copy the order number and look it up in Amazon. In another occasion, the same user might pause as she books two tickets for an opera, switch to her frequent flyer app, copy that number over and paste it into the order to collect the points. She might struggle a bit installing that frequent flyer app at the outset. 
 
-This design has caused a lot of modern inconveniences. A user would one day receive an email on her monthly statement, yet she couldn't recognise a few entries on them. It says "Amazon". Was it about ordering a pair of shoes? She has to copy the order number and look it up in Amazon. In another occasion, the same user might pause as she books two tickets for an opera, switch to her frequent flyer app, copy that number over and paste it into the order to collect the points. She might struggle a bit installing that frequent flyer app at the outset. **||These inconveniences are not very clear. I don't understand them. Are they hidden under the gui?||**
+**|2|These inconveniences are not very clear. I don't understand them. Push it up to a more abstract level ("the delivered information is just a representation of another book with information") - make two examples - put it more precisely. Maybe you have stronger examples?||**
 
-Why are we doing so much copy and pasting when machines are exceptionally good at doing this? Owning to the design, the web is like a giant library, and we are like readers keeping notes of the index numbers under our sleeves. We certainly hope the Web resembles, instead o a library, more like a personal assistant.[^pda]
+Why are we doing so much copy and pasting when machines are exceptionally good at doing this? Owning to the design, the web is like a giant library, and we are like readers keeping notes of the index numbers under our sleeves. We ~~certainly~~ hope **that in the future** the Web resembles no longer of a library, but more like a personal assistant. **However, it is not clear how we can get there.**
+
+## The client side can't integrate a web that is not designed to integrate
+
+[^pda]
 
 [^pda]: Surprisingly, even the technology that was created to fill the role of a personal assistant, the Smart Phone, still failed, for the same reason: the efforts from client side alone can't integrate a Web that is not designed to integrate. The infrastructure has to support integration. A smartphone is modelled like a dial-up Internet connection, with each app representing a website. The users still need to figure out which computer (app) to talk to before entering the conversation, and still copies information around as he swaps apps around. It's not possible, for example, to ask your smartphone to sum up all the money one may access by his online banking apps.
 
