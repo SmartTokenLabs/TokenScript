@@ -188,7 +188,7 @@ payment
 market
 :    Market is where delivery versus payment happens. *Market* is an concept, not a marketplace. A user who checks out on a website is accessing a market. She doesn't have to be in a marketplace (e.g. Amazon) to do so.
 
-TMML provides both *the deliverable* and *the payment* side tokens to "plug-in" to the *market*. 
+TBML provides both *the deliverable* and *the payment* side tokens to "plug-in" to the *market*. 
 
 Such a framework is essential for tokens to be presented, indexed, transacted, traded, auctioned, combined... to work towards a frictionless market.
 
