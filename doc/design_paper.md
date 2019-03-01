@@ -38,6 +38,8 @@ With blockchain, any tokenised asset can be transacted any time, as long as it f
 
 [^market-model]: With the traditional intermediary-operated market model, a trade is made in two stages: entering the market, making a deal. Blockchain can simplify that into a protocol; therefore the blockchain token assets can be considered always on the market.
 
+**|| The footnote seems to be too important to be a footnote**
+
 ### Tokenisation can create a frictionless market
 
 Can we tokenise, for example, 1% of a property, so that the property market can react faster than the typical month-long property purchase-sales cycle?
@@ -68,13 +70,17 @@ It's easy to see the need for a framework defining tokens and making them intero
 
 In 2017-2018 we did end up having hundreds of tokens. However, they uniformly fall into one category of token: Created with the ERC20 standard they are currency like, filling up the *payment side* of the market[^payment]. There is nearly zero effort devoted to making tokens represent *goods and services* - which is the *deliverable side* of market and a fundamental need for a market to work. **||(isn't there the ERC721 standard for non-fungible token?)||**
 
+Therefore, we categorise ... 
+
 [^payment]: We categorise tokens as **payment tokens** and **deliverable tokens**. ERC20 tokens bearing the hallmarks of *payment tokens* only filles one side of market with tokens, therefore can't lift a market. **||why? What's missing? What are deliverable token do?||**
+
+**|| again: Too important to be in a footnote. A short explanation for what "delivery tokens do / are would be good
 
 During the speculative bubble of 2017, a power token ICO **did** not need to provide any explanation of how the tokens can be used. All speculators need**ed** to know is that they represent for example a "stake in the future world of tokenised electricity". As long as the token can inspire investors with imagination, it's good enough for an ICO. There is no more functionality needed other than an ERC20 interface. Such a speculative token d**idn't** depend on attestations - the proof of actual power production - nor d**id** it need properties like where the energy is provided or for how long it is available. **Instead of enabling a frictionless market, those tokens have just been a promise on enabling it. By far most will never deliver.**
 
 Now that the madness is over, it's time to present the technical framework to make the market **actually** work.
 
-**|1| Here is want to have: A glimpse on HOW? ||**
+**|1| Here I want to have: A glimpse on HOW? ||**
 
 ## Blockchain integrates the web
 
@@ -120,7 +126,9 @@ The web doesn't have a built-in authentication mechanism[^tls]. **To route aroun
 
 **|3| add an abstract definition of the problem before starting with an example. If readers don't know what to look for in the example, they will be confused ||**
 
-**On top of it, the model of account based authentification is the cause of further problems.** Most simple business cases - for example "the owner of a car checks its service history" - don't require an account. If you enforce parties involved having an account to authenticate, bad things happen:
+**On top of it, the model of account based authentification is the cause of further problems.** Most simple business cases - for example "the owner of a car checks its service history" - don't require an account. **Basically, accounts are stopgaps to problems created by the specific structure of the Internet as we know it.**
+
+If you enforce parties involved having an account to authenticate, bad things happen:
 
 - When the car is sold, the new car owner would now need to create a new account at the service website and secure it with the proof of ownership to the car. This is onerous and unreliable.
 
@@ -140,13 +148,13 @@ Similarly, the web doesn't have a built-in mechanism for ownership, transfer of 
 
 In contrast, when you base the same process on a blockchain and on tokens, it would be automatic, fraud-proof[^attestations] and atomic[^atomic].
 
-**|4| Make an example, what would happen.
+**|4| Make an example, what would happen, or what "automatic, fraud-proof and atomic enables
 
 [^attestations]: the method to provide cryptographically signed attestations as a condition for a transaction is discussed later in the "Attestation" chapter.
 
 [^atomic]: In blockchain terms, an atomic transaction either happens or not. If well defined, it's not impossible for a buyer to have successfully paid for a car yet not getting the ownership token, or only have transferred the car's ownership but not the compulsory insurance on it.
 
-These missing features of the web are the well-known functions of the blockchain. The virtual wedding of this perfect fit couple requires a virtual exchange of tokens, or what this paper called "tokenisation".
+These missing features of the web are the well-known functions of the blockchain. **||add a short, specific definition of blockchain, like "an open, permissionless and immutable ledger"||** The virtual wedding of this perfect fit couple requires a virtual exchange of tokens, or what this paper called "tokenisation".
 
 Tokens seamlessly go across systems, carries their trading rules and user interfaces and business context.
 
@@ -154,13 +162,11 @@ Tokens seamlessly go across systems, carries their trading rules and user interf
 
 ## Example: Car Ownership Token
 
-We will comine the two concepts: frictionless market, achieved by tokenising assets; integrate the web, by using token as integration point for web services. We will demonstrate an example that encompasses both concepts: car token.
+We will com**b**ine the two concepts: **a** frictionless market, achieved by tokenising assets; **and the integration of** ~~integrate~~ the web, by using token as **an** integration point for web services. We will demonstrate **with** an example that encompasses both concepts: car token.
 
-**|| Wouldn't it be better to do one example for each case and merge them later? ||**
+On the one hand, a car is a tokenised asset, that can be bought, sold, transferred, auctioned, collaborated and insured, all enabled by blockchain. **The token represents the payment side.**
 
-On the one hand, a car is a tokenised asset, that can be bought, sold, transferred, auctioned, collaborated and insured, all enabled by blockchain.
-
-On the other hand, a car also has utility. **(delete the last sentence)** A car's ownership token can convert a blockchain wallet into a car key, with additional functions like graphically representing the car's current location. Authorising someone to access your car, or renting it for profit, would be seamlessly done by signing blockchain transactions or attestations, without passing car keys around.
+On the other hand, a car also has utility. A car's ownership token can **represent the delivery side too. It can** convert a blockchain wallet into a car key, with additional functions like graphically representing the car's current location. Authorising someone to access your car, or renting it for profit, would be seamlessly done by signing blockchain transactions or attestations, without passing car keys around.
 
 The following screenshot of a car token represents the final stage of tokenisation.
 
@@ -168,21 +174,29 @@ The following screenshot of a car token represents the final stage of tokenisati
 ![A car token. Four tokens: Rego, Capped Service, Insurance and Purchase, either depeneds or relates to the car ownership token.](car-token.jpeg)
 
 
-At first glance, it is just a handy portal to do everything about the car, including market functions and utility. However, it's not possible with the traditional web model.
+At first glance, it is just a handy portal to do everything about the car, including market functions and utility. However, it's not possible with the traditional web model. In the web 2.0 model, you are restricted to handling every element on its own:
 
-In the web 2.0 model, you are restricted to handling every element on its own. To register the car, there is a separate process which involves creating an account with the Road and Maritime Services and proving ownership manually without the aid of cryptography. When you want to provide insurance to the car, you have to create another account and manually offer proof of its registration to that new service. (If you find not needing to do so, the cost of unpayable insurance merely is hidden and borne by the market.) Likewise, if you want to make the car available to share economy through Uber or hour-based car rental, the work of proving and settling payments and insurance cost adds friction to the market.
+* To register the car, there is a separate process which involves creating an account with the Road and Maritime Services and proving ownership manually without the aid of cryptography. 
+* When you want to provide insurance to the car, you have to create another account and manually offer proof of its registration to that new service. ~~(If you find not needing to do so, the cost of unpayable insurance merely is hidden and borne by the market.)~~ L
+* ikewise, if you want to make the car available to share economy through Uber or hour-based car rental, the work of proving and settling payments and insurance cost adds friction to the market.
 
-Now let's reimagine this in the web3 world whereby such elements can be tokenised. Vendor (in this case Holden) provides an ownership token to the new owner which can be used to operate the car. The token, transferred to the owner at the time of purchase, is in turn used to acquire the registration token. An inbuilt IoT device allows the car to be operated with proof of ownership via a token.
+**The intented portal does not enable those functions by itself, but merely serves as a gateway to merge a lot of different accounts as we know if from the internet of today. It's just another stopgap, which hides papertrail processes from the user, without solving the underlying problem.**
+
+Now let's reimagine this in the web3 world whereby such elements can be tokenised. **The** Vendor (in this case Holden) provides an ownership token to the new owner which can be used to operate the car. The token, transferred to the owner at the time of purchase, is in turn used to acquire the registration token. An inbuilt IoT device allows the car to be operated with proof of ownership via a token.
 
 The owner, wishing to purchase insurance, only needs to provide the proof of ownership and registration token to be qualified to fulfil the requirements with the insurance company. The insurance companies standards are met automatically by matching the tokens to their requirements and once validated, the insurance company can send the owner an insurance token in exchange for payment. The insurance token carries its own functions and services.
 
 If the owner would like to become an Uber driver, she can easily prove her vehicle is good enough by providing proof of ownership, insurance and registration with her tokens. Uber then automatically provides her with an Uber token which, depends on the owner's need, can be used to get himself started as an Uber driver or allow a 3rd party driver to do so. None of these processes requires manual verification or account creation.
 
+**|| Maybe the blocks about the example should be shorter, just pointing out the principle with short blocks and letting the imagination of the reader do the rest
+
 Taking this even further, the owner can skip Uber all together and rent her car directly to strangers. Not wanting her car to be trashed by some random stranger, she can restrict her renters to those who have an attestation token issued by the 'better drivers bureau'. The renter proves they have this token, pays a sum to the owner and is atomically issued with a temporary token that allows them to unlock and use the car for a certain period of time. This is done without the creation of an account or need to submit tons of documents to be validated manually by the owner.
 
 If the owner wishes to sell the car, she only has to list it on any website with a price. The ownership token and payment can be swapped atomically (ensuring neither the buyer or seller is cheated) and the new owner can drive away with the car without even meeting the original owner face to face. The new buyer knows in advance whether the car has been registered and is legally owned by merely validating the original owner's ownership token in their wallet. The original owner's token is invalidated once the swap occurs and she can no longer operate the car. It is also possible to automatically void the insurance policy once the exchange has occurred and provide the original owner with a rebate for premature cancellation.
 
-This chapter serve to present the vision. We will have the opportunity to inspect the technical aspect of this well-integrated well-tokenised car token in later chapters again.
+This chapter serve to present the vision. **Token enable the whole ownership and utility processes around car trading and sharing to happen automatically, fraud-proof and atomic. This eliminates a lot of friction and allows much more flexibility to individualize the economic transactions.**
+
+We will have the opportunity to inspect the technical aspect of this well-integrated well-tokenised car token in later chapters again.
 
 **|| Use this example to outline the abstract principles and the role of blockchain / token more clearly. ||**
 
@@ -190,21 +204,26 @@ This chapter serve to present the vision. We will have the opportunity to inspec
 
 ### The challenge of tokenisation
 
-Tokenisation requires bundling a token with its transaction rules and behaviour patterns, taking them off the system where they initially grew in, free them to be traded or used in different context.
+**|| Lack of clearity: The car example demonstrated the potential of tokens. Now we come to the challenges. This should reflect stronger in the text. I try to make it more structured.
 
-Allow users to interact with different systems through the tokens
-:   In the car example, the car token is issued by Holden, the maker, and necessarily so because it contains code to interact with a smart lock (the *Open*, *Start*, *Lock* actions) and Holden's own web service (the *Locate* action), yet it needs to work in other environments. The *Auction* action, for example, is provided by a third party auction web service. The user access auction service through the token without the need of signing up and proving ownership. The *List for sharing* is provided by a third party service which tokenises the usage of the car by hours or days and sells them piecemeal. The owner can access such a market through this Token. The buyers will have information about the car's GPS location, the capacity to unlock the door and use it, through this token as well.
+**The car ownership was just one example how token can transform all kind of digitalized economic interactions. The 2017 ICO Hype was just a slight glimpse of this potential, creating a lot of (bad) investments, but not many products. To unleash the potential of tokens, several requirements must be fulfilled:
 
-**|| too much, too tight ||**
+**1. Tokenisation means representing all kind of assets as a token on a blockchain. This requires bundling a token with its transactions rules and behaviour patterns. It takes them off the system where they initially grew in and frees them to be traded or used in different context.
 
-Rendering a token and associate it with the actions they can perform in the user's wallet
+**2. Tokenisatoins further requires to allow** users to interact with different systems through the tokens: In the car example, the car token is issued by Holden, the maker, and necessarily so because it contains code to interact with a smart lock (the *Open*, *Start*, *Lock* actions) and Holden's own web service (the *Locate* action), yet it needs to work in other environments. The *Auction* action, for example, is provided by a third party auction web service. The user access**es** auction service**s** through the token without the need of signing up and proving ownership. The *List for sharing* is provided by a**nother** third party service which tokenises the usage of the car by hours or days and sells them piecemeal. 
+
+The owner must be able to access **all those** ~~such a~~ markets **solely** through this Token. The token becomes the fundamental and atomic base for economic interactions. ~~The buyers will have information about the car's GPS location, the capacity to unlock the door and use it, through this token as well.~~ 
+
+**3. Also, a token must be renderable and** associate ~~it~~ with the actions **it** ~~they~~ can perform in the user's wallet
 :   In the car example, if the registration expired, the web component at work would paint the Registration Token red or display a warning. Actions like *List for sharing* will not be available with an expired car rego, and the integrated token interface should clearly pass that message to the user.
 
-Allow new protocols to be developed on tokens
+**4. It must allow** new protocols to be developed on tokens
 :   In the car example, collateralization might be an additional protocol, an ERC in Ethereum context. The protocol might have its own implementation and the car token might pre-date it. Similarly, there are streaming, communication, staking or other protocols (See "Magic" chapter). The framework must allow them to exist and work with tokens.
 
-Carry trust relationship and business context to 3rd parties
+**5.** Carry trust relationship and business context to 3rd parties
 :   In the car example, the insurance token provides Roadside Assistance service through NRMA, another company not directly contracted by the driver. Yet the driver might access this function through the insurance token and immediately be identified as qualified for help. In this example, *Trust relationship* means that the user indirectly trusts NRMA to provide roadside assistance, to obtain the user's GPS location and identity information at the time of emergency. *Business context* means the customer's qualification for roadside assistance, like insurance paid, location in the range of service and annual cap not reached etc. In this story both *trust relationship* and *business context* has to be in the token, not centralised through the insurance company's web service since the two have different a) availability, b) privacy and c) integration requirements[^abc].
+
+**This are just a few examples of requirements of token. Instead of the simple ERC20 (or ERC721) token established on Ethereum, we need a much more flexible token setup, which reflects a lot of possible coordinates and allows the integration of requirements we do not know today.
 
 [^abc]: Availability: NRMA is online 24/7 but Qantas Insurance can suspend their services in public holidays or at night. Privacy: NRMA can learn user's GPS location but Qantas Insurance isn't legally allowed to learn it. Integration: Most of NRMA's customers are not obtained through Qantas Insurance, so it would be an additional system to integrate and extra security concern for NRMA to integrate to Virgain Insurance's web service. Of all three, availability might be the most visible. Just imagine how angry a customer will be, having his car breaking down in the middle of the barren Australian outback, and learn that the road-side assistance can't be authorised because the insurer's web service is upgrading "For a better user experience".
 
