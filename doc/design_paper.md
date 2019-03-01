@@ -206,7 +206,9 @@ We will have the opportunity to inspect the technical aspect of this well-integr
 
 **|| Lack of clearity: The car example demonstrated the potential of tokens. Now we come to the challenges. This should reflect stronger in the text. I try to make it more structured.
 
-**The car ownership was just one example how token can transform all kind of digitalized economic interactions. The 2017 ICO Hype was just a slight glimpse of this potential, creating a lot of (bad) investments, but not many products. To unleash the potential of tokens, several requirements must be fulfilled:
+**The car ownership was just one example how token can transform all kind of digitalized economic interactions. The 2017 ICO Hype was just a slight glimpse of this potential, creating a lot of (bad) investments, but not many products. Most token have been just used for payments, effectively being gift cards for certain services, which have been sold in the expectation that those services will provide valuable products at some time.
+
+**To unleash their potential, token needs to become a lot more sophisticated and switch from the payment side to the delivery side. Several requirements must be fulfilled:
 
 **1. Tokenisation means representing all kind of assets as a token on a blockchain. This requires bundling a token with its transactions rules and behaviour patterns. It takes them off the system where they initially grew in and frees them to be traded or used in different context.
 
