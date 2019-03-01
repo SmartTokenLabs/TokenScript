@@ -162,11 +162,13 @@ Tokens seamlessly go across systems, carries their trading rules and user interf
 
 ## Example: Car Ownership Token
 
-We will com**b**ine the two concepts: **a** frictionless market, achieved by tokenising assets; **and the integration of** ~~integrate~~ the web, by using token as **an** integration point for web services. We will demonstrate **with** an example that encompasses both concepts: car token.
+We will com**b**ine the two concepts: **a** frictionless market, achieved by tokenising assets; **and the integration of** ~~integrate~~ the web, by using token as **an** integration point for web services. We will demonstrate **with** an example that encompasses both concepts: car token. **This is just one of many examples. You can transfer the concepts on nearly everything, including real estate markets, every kind of b2b and resource transfer - every transaction which involves digital goods or a digital representation of physical good.
 
-On the one hand, a car is a tokenised asset, that can be bought, sold, transferred, auctioned, collaborated and insured, all enabled by blockchain. **The token represents the payment side.**
+**The car example is meant to help understand the concepts.** On the one hand, a car is a tokenised asset, that can be bought, sold, transferred, auctioned, collaborated and insured, all enabled by blockchain. 
 
-On the other hand, a car also has utility. A car's ownership token can **represent the delivery side too. It can** convert a blockchain wallet into a car key, with additional functions like graphically representing the car's current location. Authorising someone to access your car, or renting it for profit, would be seamlessly done by signing blockchain transactions or attestations, without passing car keys around.
+On the other hand, a car also has utility. A car's ownership token can convert a blockchain wallet into a car key, with additional functions like graphically representing the car's current location. Authorising someone to access your car, or renting it for profit, would be seamlessly done by signing blockchain transactions or attestations, without passing car keys around.
+
+**In both cases the token represent the delivery side of things: They *are* the product. Those token can interact with a non-token kind of payment, but tokenizing the payments would make the whole process much more fluent.**
 
 The following screenshot of a car token represents the final stage of tokenisation.
 
