@@ -222,7 +222,7 @@ Specific to blockchain, we also have:
 
 10. How to correctly and securely construct a transaction for the assiet (purchase, voting etc)
 
-We categorise these trade-sensitive information into three categories:
+We categorise these trade-sensitive information into four categories:
 
 - product description[^pd]. Item 2, 3, 5, 6 are in PD
 - attested information. Item 1, 4, 6, 7 are in Attestations.
