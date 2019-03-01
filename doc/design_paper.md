@@ -220,7 +220,7 @@ A buyer needs to know quite a bit of information. It's easy to understand that s
 
 Specific to blockchain, we also have:
 
-10. How to correctly and securely construct a transaction for the assiet (purchase, voting etc)
+10. How to correctly and securely construct a transaction for the assist (purchase, voting etc)
 
 We categorise these trade-sensitive information into three categories:
 
