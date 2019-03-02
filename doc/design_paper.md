@@ -272,7 +272,7 @@ Attestation is just a signed message stating a fact. Attestations are often used
 In the 1% property token example, the involved attestations are:
 
 - by identity authority and title deeds office, to attest the issuer's ownership of the property.
-- by collatorisation authority[^set-operation] to prevent double collatorisation
+- by collateralization authority[^set-operation] to prevent double collateralization
 - by buyers, for providing identity or capacity to invest in this type of asset
 
 [^set-operation]: Eventually, this could be a cryptographic set operation, but even if that happens, the metadata directing the context (user-agent) to proform the computation still needs to be described in TBML.
