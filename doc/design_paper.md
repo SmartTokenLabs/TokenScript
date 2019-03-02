@@ -409,7 +409,7 @@ And each payment side currency brings its own payment side logic. Take DAI for e
 
 An architect might read it here and decide these can all be done out of band. Just kick the user back to the MakerDAO website if any of these happens. This would not address payment side innovation like Point+Pay, where the points are selected at the same screen as payment. In fact, you can observe a proliferationDictionary of payment side innovations in China for examples:
 
-- Micro-credit (e.g. 花唄) and collatoralised credit
+- Micro-credit (e.g. 花唄) and collateralized credit
 
 - Points to use when the shopping behaviour matches the encouraged behaviour of micro-credit, e.g. shopping overseas.
 
