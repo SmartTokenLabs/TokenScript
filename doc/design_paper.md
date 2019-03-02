@@ -267,7 +267,7 @@ This simplified `attribute-type` code snippet allows the value for Voting Right 
 
 #### Attested information
 
-Attestation is just a signed message stating a fact. Attestations are often used to satify the conditions of the transactions. More on that in the chapter Attestations.
+Attestation is just a signed message stating a fact. Attestations are often used to satisfy the conditions of the transactions. More on that in the chapter Attestations.
 
 In the 1% property token example, the involved attestations are:
 
