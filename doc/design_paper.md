@@ -375,7 +375,7 @@ To the user, the process resembles a bit like the checkout processs leads the us
 We again argue that current prevailing method is not suitable for creati
 ng a frictionless market, while TBML could, by providing reasons in the areas of *interoperability*, *scalability* and *security*.
 
-As concluded, Pizza website would not have the necessary payment side logic to handle everything on its own. The traditional approach is to let the Pizaa website use the javascript sourced by MakerDAO project. The javascript may or may not use a RESTful API provided by MakerDAO
+As concluded, Pizza website would not have the necessary payment side logic to handle everything on its own. The traditional approach is to let the Pizza website use the javascript sourced by MakerDAO project. The javascript may or may not use a RESTful API provided by MakerDAO
 
 This approach solves one problem by introducing quite a few others.
 
