@@ -596,7 +596,7 @@ The second `<trust>...</trust>` structure causes the user agent to accept and di
 
 When the online retailer changes his delivery company, the retailer could issue a certificate on the public key of the new delivery company, thereby authorising them to send messages to the token holders (buyers) to update them the delivery status, yet restricting the messages to only certain stages of business process.
 
-This code snipet shows that by giving such flexibility TBML connected to a new business process without requiring change in the smart contract or affecting user experience. It also allowed communication to the token holder without sending messages through smart contracts.
+This code snippet shows that by giving such flexibility TBML connected to a new business process without requiring change in the smart contract or affecting user experience. It also allowed communication to the token holder without sending messages through smart contracts.
 
 The method of actual communication is left open to be implemented by other layers of blockchain technology like a message queue or even a distributed message queue.
 
