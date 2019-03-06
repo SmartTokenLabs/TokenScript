@@ -5,7 +5,13 @@
 
 The remarkable blockchain speculations that took place in 2017 - 2018 brought everyone's attention to crypto tokens. As we bought and sold them, we forgot their intended purpose was to be used; this is analogous to the housing bubble in which people forgot that houses were not merely speculative assets but rather a place to live.
 
-To provide a practical use of the blockchain, we must understand its utility to the world economy and the internet. The authors of this paper are technical experts who went through years of study**ing** and exploration into its applications both via financial institutions and startups. With this experience, we came to realise that the blockchain has **two primary functions: First, it provides a frictionless market. Second, it integrates the web. We define the technique to make it happen in "Tokenisation". We will demonstrate the advantages of a tokenized internet with the example of a car management suite.**
+To provide a practical use of the blockchain, we must understand its utility to the world economy and the internet. The authors of this paper are technical experts who went through years of study**ing** and exploration into its applications both via financial institutions and startups. With this experience, we came to realise that the blockchain has **two primary functions:
+
+1. It provides a frictionless market. 
+
+2. It integrates the web. We define the technique to make it happen in "Tokenisation". 
+
+We will demonstrate these advantagess of a tokenized internet with the example of a car management suite.**
 
 Previous efforts in this industry primarily focused on enriching the capacity of the technology. This paper will focus on tokenisation and introduce a standardisation effort we call TBML (Token Behaviour Markup Language), which will make the blockchain technical stack complete and provide utility for the economy and the internet. TBML will unleash the full potential of Tokenisation. 
 
