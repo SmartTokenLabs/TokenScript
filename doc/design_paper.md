@@ -5,7 +5,7 @@
 
 The remarkable blockchain speculations that took place in 2017 - 2018 brought everyone's attention to crypto tokens. As we bought and sold them, we forgot their intended purpose was to be used; this is analogous to the housing bubble in which people forgot that houses were not merely speculative assets but rather a place to live.
 
-To provide a practical use of the blockchain, we must understand its utility to the world economy and the internet. The authors of this paper are technical experts who went through years of study**ing** and exploration into its applications both via financial institutions and startups. With this experience, we came to realise that the blockchain has **two primary functions: First, it provides a frictionless market. Second, it integrates the web. We define the technique to make it happen in "Tokenisation".**
+To provide a practical use of the blockchain, we must understand its utility to the world economy and the internet. The authors of this paper are technical experts who went through years of study**ing** and exploration into its applications both via financial institutions and startups. With this experience, we came to realise that the blockchain has **two primary functions: First, it provides a frictionless market. Second, it integrates the web. We define the technique to make it happen in "Tokenisation". We will demonstrate the advantages of a tokenized internet with the example of a car management suite.**
 
 Previous efforts in this industry primarily focused on enriching the capacity of the technology. This paper will focus on tokenisation and introduce a standardisation effort we call TBML (Token Behaviour Markup Language), which will make the blockchain technical stack complete and provide utility for the economy and the internet. TBML will unleash the full potential of Tokenisation. 
 
@@ -85,17 +85,15 @@ In the library model, information is freely available, indexed and cross-referen
 
 Therefore the web was built as a giant library where each book is a computer with whom one can have a conversation. ~~The analogy probably is where Facebook got its namesake inspiration - a website is a book after all.~~
 
-This design has caused a lot of modern inconveniences. A user would one day receive an email on her monthly statement, yet she couldn't recognise a few entries on them. It says "Amazon". Was it about ordering a pair of shoes? She has to copy the order number and look it up in Amazon. In another occasion, the same user might pause as she books two tickets for an opera, switch to her frequent flyer app, copy that number over and paste it into the order to collect the points. She might struggle a bit installing that frequent flyer app at the outset. 
+This design has caused a lot of modern inconveniences. A user would one day receive an email on her monthly statement, yet she couldn't recognise a few entries on them. It says "Amazon". Was it about ordering a pair of shoes? She has to copy the order number and look it up in Amazon. ~~In another occasion, t~~The same user might pause as she books two tickets for an opera, switch to her frequent flyer app, copy that number over and paste it into the order to collect the points. She might struggle a bit installing that frequent flyer app at the outset. **When she buys on another webshop, she needs to download another app or create another account.**
 
-**|2|These inconveniences are not very clear. I don't understand them. Push it up to a more abstract level ("the delivered information is just a representation of another book with information") - make two examples - put it more precisely. Maybe you have stronger examples?||**
-
-Why are we doing so much copy and pasting when machines are exceptionally good at doing this? Owning to the design, the web is like a giant library, and we are like readers keeping notes of the index numbers under our sleeves. We ~~certainly~~ hope **that in the future** the Web resembles no longer of a library, but more like a personal assistant. **However, it is not clear how we can get there.**
+Why are we doing so much copy and pasting when machines are exceptionally good at doing this? Owning to the design, the web is like a giant library, and we are like readers keeping notes of the index numbers under our sleeves. We ~~certainly~~ hope **that in the future** the Web resembles no longer of a library, but more like a personal assistant. 
 
 ### The client side can't integrate a web that is not designed to integrate
 
 [^pda]
 
-[^pda]: Surprisingly, even the technology that was created to fill the role of a personal assistant, the Smart Phone, still failed, for the same reason: the efforts from client side alone can't integrate a Web that is not designed to integrate. **It made the problem even worse, as copy-pasting becomes an even bigger trouble when you use a Smart Phone.**
+[^pda]: Surprisingly, even the technology that was created to fill the role of a personal assistant, the Smart Phone, still failed for the same reasons: the efforts from client side alone can't integrate a Web that is not designed to integrate. **It made the problem even worse, as copy-pasting becomes an even bigger trouble when you use a Smart Phone.**
 
 **The truth is: Not the client, but t**he infrastructure has to support integration. A smartphone is modelled like a dial-up Internet connection, with each app representing a website. The users still need to figure out which computer (app) to talk to before entering the conversation, and still copies information around as he swaps apps around. It's not possible, for example, to ask your smartphone to sum up all the money one may access by his online banking apps.
 
@@ -109,15 +107,13 @@ The ~~answer~~ challenge to integrating the web requires a few building blocks t
 
 ### Authentification with trusted 3rd parties
 
-The web doesn't have a built-in authentication mechanism[^tls]. **To route around this gab, many users use add-ons like "Sign in with Facebook".** Those merely try to provide authentication through a trusted 3rd party, **which does not only cause privacy and availability concerns,** but also only serves for account authentication **and can't be used** for integration.
+The web doesn't have a built-in authentication mechanism. **To route around this gab, many users use add-ons like "Sign in with Facebook".** Those merely try to provide authentication through a trusted 3rd party, **which does not only cause privacy and availability concerns,** but also only serves for account authentication **and can't be used** for integration.
 
-[^tls]: **There has been excellent** efforts on client/server certificates in **Transport Layer Security (TLS)**. However, these authentication methods are not for processes, but only for sites. **They represent** a delegation model: Imagine a buyer not checking if a title deed is real, but only checks if the seller's name matches the one on the deed. That would be the delegation model used in TLS. In this model, TLS can't guarantee **that** anything on the website is real -- only that the website itself is. Facebook uses TLS, but people put much fake news on it. The unit of trust here is undoubtedly not granular enough for the web to deliver an integrated experience.
+**There have been excellent efforts** on client/server certificates in **Transport Layer Security (TLS)**. However, these authentication methods are not for processes, but only for sites. **They represent** a delegation model: Imagine a buyer not checking if a title deed is real, but only checks if the seller's name matches the one on the deed. That would be the delegation model used in TLS. In this model, TLS can't guarantee **that** anything on the website is real -- only that the website itself is. Facebook uses TLS, but people put much fake news on it. The unit of trust here is undoubtedly not granular enough for the web to deliver an integrated experience.
 
 **|3| Nice thesis. Still, want it to be more clear ||**
 
 ### "Account authentication" is not a substitute for web integration.
-
-**|3| add an abstract definition of the problem before starting with an example. If readers don't know what to look for in the example, they will be confused ||**
 
 **On top of it, the model of account based authentification is the cause of further problems.** Most simple business cases - for example "the owner of a car checks its service history" - don't require an account. **Basically, accounts are stopgaps to problems created by the specific structure of the Internet as we know it.**
 
@@ -135,27 +131,24 @@ Such integration needs, poorly addressed by adding accounts, are easily found in
 
 Similarly, the web doesn't have a built-in mechanism for ownership, transfer of value and trading.
 
-**To demonstrate, we take the car story a bit further:** When you want to sell your car, you need to post the car information on a website. **To do so, you must create another account on the way. When someone wants to buy your car, you and the buyer have to go through a chain of processes:** Insurance, unused service quota, vehicle registrations, documentation handover, payment and so on. All these actions have to be done separately, using easily-tampered paper proofs and forms. The process starts at the web and ends somewhere else instead of being automatically done after the buyer clicked "buy".
+**To demonstrate, we take the car story a bit further:** When you want to sell your car, you need to post the car information on a website. **To do so, you must create another account on the way. When someone wants to buy your car, you and the buyer have to go through a chain of processes:** Insurance, unused service quota, vehicle registrations, documentation handover, payment and so on. All these actions have to be done separately, using easily-tampered paper proofs and forms **and accounts**. The process starts at the web and ends somewhere else instead of being automatically done after the buyer clicked "buy".
 
 **Is it possible to make it happen, that the entire chain of bureaucratic procedures happens securely in the backend, while you just push the "buy" button? With the web of accounts, you'd need to knot together a lot of accounts and trusted third parties, which hide the process from the user, while they fulfill the same paper trail as before.** 
 
-In contrast, when you base the same process on a blockchain and on tokens, it would be automatic, fraud-proof[^attestations] and atomic[^atomic].
-
-**|4| Make an example, what would happen, or what "automatic, fraud-proof and atomic enables
+In contrast, when you base the same process on a blockchain and on tokens, it would be automatic, fraud-proof[^attestations] and atomic[^atomic]. **You could finish a car sell with one click in a secure way without the need of accounts and paper trails.**
 
 [^attestations]: the method to provide cryptographically signed attestations as a condition for a transaction is discussed later in the "Attestation" chapter.
 
 [^atomic]: In blockchain terms, an atomic transaction either happens or not. If well defined, it's not impossible for a buyer to have successfully paid for a car yet not getting the ownership token, or only have transferred the car's ownership but not the compulsory insurance on it.
 
-These missing features of the web are the well-known functions of the blockchain. **||add a short, specific definition of blockchain, like "an open, permissionless and immutable ledger"||** The virtual wedding of this perfect fit couple requires a virtual exchange of tokens, or what this paper called "tokenisation".
+These missing features of the web are the well-known functions of the blockchain. **A blockchain is an immutable, decentralized record of ownership, sometimes called a "tripple-entry bookkeeping" system.** The virtual wedding of this perfect fit couple requires a virtual exchange of tokens, or what this paper called "tokenisation".
 
-Tokens seamlessly go across systems, carries their trading rules and user interfaces and business context.
+To do so, Token must seamlessly go across systems, carry their trading rules and user interfaces and business context.
 
-**|| the switch to token / blockchains comes a bit abrupt. Maybe take the two problems in one subchapter and make another one about blockchain. This should be a bit longer and address both problems ||**
 
 ## Example: Car Ownership Token
 
-We will com**b**ine the two concepts: **a** frictionless market, achieved by tokenising assets; **and the integration of** ~~integrate~~ the web, by using token as **an** integration point for web services. We will demonstrate **with** an example that encompasses both concepts: car token. **This is just one of many examples. You can transfer the concepts on nearly everything, including real estate markets, every kind of b2b and resource transfer - every transaction which involves digital goods or a digital representation of physical good.
+We will com**b**ine the two concepts: **a** frictionless market, achieved by tokenising assets; **and the integration of** ~~integrate~~ the web, by using token as **an** integration point for web services. We will demonstrate **with** an example that encompasses both concepts: car token. **This is just one of many examples. You can transfer the concepts on nearly everything, including real estate markets, every kind of b2b and resource transfer - every transaction which involves digital goods or a digital representation of physical good.**
 
 **The car example is meant to help understand the concepts.** On the one hand, a car is a tokenised asset, that can be bought, sold, transferred, auctioned, collaborated and insured, all enabled by blockchain. 
 
@@ -173,27 +166,30 @@ At first glance, it is just a handy portal to do everything about the car, inclu
 
 * To register the car, there is a separate process which involves creating an account with the Road and Maritime Services and proving ownership manually without the aid of cryptography. 
 * When you want to provide insurance to the car, you have to create another account and manually offer proof of its registration to that new service. ~~(If you find not needing to do so, the cost of unpayable insurance merely is hidden and borne by the market.)~~ L
-* ikewise, if you want to make the car available to share economy through Uber or hour-based car rental, the work of proving and settling payments and insurance cost adds friction to the market.
+* Likewise, if you want to make the car available to share economy through Uber or hour-based car rental, the work of proving and settling payments and insurance cost adds friction to the market.
 
 **The intented portal does not enable those functions by itself, but merely serves as a gateway to merge a lot of different accounts as we know if from the internet of today. It's just another stopgap, which hides papertrail processes from the user, without solving the underlying problem.**
 
-Now let's reimagine this in the web3 world whereby such elements can be tokenised. **The** Vendor (in this case Holden) provides an ownership token to the new owner which can be used to operate the car. The token, transferred to the owner at the time of purchase, is in turn used to acquire the registration token. An inbuilt IoT device allows the car to be operated with proof of ownership via a token.
+Now let's reimagine this in the web3 world whereby such elements can be tokenised, step by step: 
 
-The owner, wishing to purchase insurance, only needs to provide the proof of ownership and registration token to be qualified to fulfil the requirements with the insurance company. The insurance companies standards are met automatically by matching the tokens to their requirements and once validated, the insurance company can send the owner an insurance token in exchange for payment. The insurance token carries its own functions and services.
+__Buying and registration__: **The** Vendor (in this case Holden) provides an ownership token to the new owner which can be used to operate the car. The token, transferred to the owner at the time of purchase, is in turn used to acquire the registration token. An inbuilt IoT device allows the car to be operated with proof of ownership via a token.
 
-If the owner would like to become an Uber driver, she can easily prove her vehicle is good enough by providing proof of ownership, insurance and registration with her tokens. Uber then automatically provides her with an Uber token which, depends on the owner's need, can be used to get himself started as an Uber driver or allow a 3rd party driver to do so. None of these processes requires manual verification or account creation.
+__Insurance:__ The owner, wishing to purchase insurance, only needs to provide the proof of ownership and registration token to be qualified to fulfil the requirements with the insurance company. The insurance companies standards are met automatically by matching the tokens to their requirements and once validated, the insurance company can send the owner an insurance token in exchange for payment. The insurance token carries its own functions and services.
 
-**|| Maybe the blocks about the example should be shorter, just pointing out the principle with short blocks and letting the imagination of the reader do the rest
+**Token build the join between different providers and services, which are used to be built by accounts, trust and paperwork.**
 
-Taking this even further, the owner can skip Uber all together and rent her car directly to strangers. Not wanting her car to be trashed by some random stranger, she can restrict her renters to those who have an attestation token issued by the 'better drivers bureau'. The renter proves they have this token, pays a sum to the owner and is atomically issued with a temporary token that allows them to unlock and use the car for a certain period of time. This is done without the creation of an account or need to submit tons of documents to be validated manually by the owner.
+__Uber:__ If the owner would like to become an Uber driver, she can easily prove her vehicle is good enough by providing proof of ownership, insurance and registration with her tokens. Uber then automatically provides her with an Uber token which, depend**ing**~~s~~ on the owner's need, can be used to get himself started as an Uber driver or allow a 3rd party driver to do so. None of these processes requires manual verification or account creation.
 
-If the owner wishes to sell the car, she only has to list it on any website with a price. The ownership token and payment can be swapped atomically (ensuring neither the buyer or seller is cheated) and the new owner can drive away with the car without even meeting the original owner face to face. The new buyer knows in advance whether the car has been registered and is legally owned by merely validating the original owner's ownership token in their wallet. The original owner's token is invalidated once the swap occurs and she can no longer operate the car. It is also possible to automatically void the insurance policy once the exchange has occurred and provide the original owner with a rebate for premature cancellation.
+**Token enable a more flexible, even programmable, use of ownership rights and their interaction, as zentralised, account-bases services can provide.**
+
+__Self-Uber:__ Taking this even further, the owner can skip Uber all together and rent her car directly to strangers. Not wanting her car to be trashed by some random stranger, she can restrict her renters to those who have an attestation token issued by the 'better drivers bureau'. The renter proves they have this token, pays a sum to the owner and is atomically issued with a temporary token that allows them to unlock and use the car for a certain period of time. This is done without the creation of an account or need to submit tons of documents to be validated manually by the owner.
+
+__Selling:__ If the owner wishes to sell the car, she only has to list it on any website with a price. The ownership token and payment can be swapped atomically (ensuring neither the buyer or seller is cheated) and the new owner can drive away with the car without even meeting the original owner face to face. The new buyer knows in advance whether the car has been registered and is legally owned by merely validating the original owner's ownership token in their wallet. The original owner's token is invalidated once the swap occurs and she can no longer operate the car. It is also possible to automatically void the insurance policy once the exchange has occurred and provide the original owner with a rebate for premature cancellation.
 
 This chapter serve to present the vision. **Token enable the whole ownership and utility processes around car trading and sharing to happen automatically, fraud-proof and atomic. This eliminates a lot of friction and allows much more flexibility to individualize the economic transactions.**
 
 We will have the opportunity to inspect the technical aspect of this well-integrated well-tokenised car token in later chapters again.
 
-**|| Use this example to outline the abstract principles and the role of blockchain / token more clearly. ||**
 
 --
 
