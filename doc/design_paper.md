@@ -168,7 +168,7 @@ At first glance, it is just a handy portal to do everything about the car, inclu
 * When you want to provide insurance to the car, you have to create another account and manually offer proof of its registration to that new service. ~~(If you find not needing to do so, the cost of unpayable insurance merely is hidden and borne by the market.)~~ L
 * Likewise, if you want to make the car available to share economy through Uber or hour-based car rental, the work of proving and settling payments and insurance cost adds friction to the market.
 
-**The intented portal does not enable those functions by itself, but merely serves as a gateway to merge a lot of different accounts as we know if from the internet of today. It's just another stopgap, which hides papertrail processes from the user, without solving the underlying problem.**
+**The intented portal does not enable those functions by itself, but merely serves as a gateway to merge a lot of different accounts as we know it from the internet of today. It's just another stopgap, which hides papertrail processes from the user, without solving the underlying problem.**
 
 Now let's reimagine this in the web3 world whereby such elements can be tokenised, step by step: 
 
