@@ -13,11 +13,19 @@ To provide a practical use of the blockchain, we must understand its utility to 
 
 We will demonstrate these advantagess of a tokenized internet with the example of a car management suite.**
 
-Previous efforts in this industry primarily focused on enriching the capacity of the technology. This paper will focus on tokenisation and introduce a standardisation effort we call TBML (Token Behaviour Markup Language), which will make the blockchain technical stack complete and provide utility for the economy and the internet. TBML will unleash the full potential of Tokenisation. 
+Previous efforts in this industry primarily focused on enriching the capacity of the technology. This paper will focus on tokenisation and introduce a standardisation effort we call Tokenscript (Token Behaviour Markup Language), which will make the blockchain technical stack complete and provide utility for the economy and the internet. Tokenscript will unleash the full potential of Tokenisation. 
 
-## Join the game
+Please join our work at tokenscript.org. A Yellow Paper to guide implementors to use Tokenscript for their tokens and dapps will take months to make, but a work in progress is always available online. Participate now to avoid the draft language specification being made without considerati**ng**~~on~~ your token model.
 
-Please join our work at xxx. A Yellow Paper to guide implementors to use TBML for their tokens and dapps will take months to make, but a work in progress is always available online. Participate now to avoid the draft language specification being made without considerati**ng**~~on~~ your token model.
+\pagebreak
+
+# Abstract
+
+We recognise the blockchain technology's utility in providing a frictionless market and integrating the web. This is done through tokenization. Tokenized rights can be traded on the market and integrated across systems, forming a frictionless market and allowing free integration.
+
+Today, the way tokens are accessed, rendered and transacted are scattered across Dapps and Smart Contracts. If all knowledge about a token is in a dapp, the dapp has to participate in the marketization and all integrations of that token, recreating data interoperability, security and availability barrier - exactly the same set of issues that prevented tokenisation before blockchain was invented.
+
+Tokenscript is a method to abstract out the token information, access methods and UI rendering so that they can be efficiently marketized and used for integration.
 
 \pagebreak
 
