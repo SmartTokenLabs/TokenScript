@@ -21,11 +21,9 @@ Please join our work at tokenscript.org. A Yellow Paper to guide implementors to
 
 # Abstract
 
-We recognise the blockchain technology's utility in providing a frictionless market and integrating the web. This is done through tokenization. Tokenized rights can be traded on the market and integrated across systems, forming a frictionless market and allowing free integration.
+We recognise the blockchain technology's utility in providing a frictionless market and integrating the web. This is done through tokenization. Tokenized rights can be traded on the market and integrated across systems, forming a frictionless market and allowing free and accountless integration.
 
-Today, the way tokens are accessed, rendered and transacted are scattered across Dapps and Smart Contracts. If all knowledge about a token is in a dapp, the dapp has to participate in the marketization and all integrations of that token, recreating data interoperability, security and availability barrier - exactly the same set of issues that prevented tokenisation before blockchain was invented.
-
-Tokenscript is a method to abstract out the token information, access methods and UI rendering so that they can be efficiently marketized and used for integration.
+Today, the ways tokens are accessed, rendered and transacted are scattered across immutable Smart Contracts on the blockchain. Most token either have a very primitive business logic (as payment token), while some try to put complex business logic into the contract, creating an dapp (decentralized application). This enables DAOs (Decentralized Autonomous Organizations), but hardly helps to create a frictionless token economy and integrate the web. When marketization and integration of a token is tied to a dapp, it recreates data interoperability, security and availability barrier - exactly the same issues that prevented tokenisation before blockchain was invented
 
 \pagebreak
 
@@ -36,11 +34,9 @@ Blockchain technology has **two primary functions** that serve essential purpose
 - providing a frictionless market; and
 - integrating the web.
 
-**|1|Here I'd like to have a bit more, maybe a promise, maybe a method||**
-
 This paper will address the vision of where we can be and follow up with the design and reasoning behind the architecture needed on top of the blockchain. We will then explain TBML which is a critical missing layer and go over its design principles and how we are building it.
 
-## A frictionless market of Atomic Assets
+## Creating a frictionless market
 
 The 80s' "Back to the Future" featured a world of powerful machines filled with hovering boards and flying cars. It didn't happen. As Peter Thiel once famously lamented, "we were promised flying cars; instead, we got 140 characters". The technological advancement of our time is beyond the imagination of the 80s science fiction movies, albeit not through more powerful machinery, but efficient use of the Internet.
 
@@ -48,46 +44,43 @@ Ride-sharing revolutionised the way we organise our daily lives, and AirBNB chan
 
 However, despite this web 2.0 revolution, the majority of markets still operate with high costs. The stock market, for example, has so much overhead that it is only justifiable for multi-million dollar businesses which rely on the trust of rules and regulations to operate.
 
-With blockchain, any tokenised asset can be **fastly** transacted any time, as long as it follows the rules, without middlemen or intermediary. **This eliminates frictions and enables maximum market efficiency**. ~~- the frictionless market. On top of the benefits of not relying on an intermediary, in a tokenised market model, t~~ The buyers and sellers do not need to "enter" the market; instead, tokens are *always on the market*[^market-model]~~, making such a model better than intermediaries~~.
+With blockchain, any tokenised asset can be **fastly** transacted any time, as long as it follows the rules, without middlemen or intermediary. **This eliminates frictions and enables maximum market efficiency**. ~~- the frictionless market. On top of the benefits of not relying on an intermediary, in a tokenised market model, t~~ The buyers and sellers do not need to "enter" the market; instead, tokens are *always on the market*~~, making such a model better than intermediaries~~.
 
-[^market-model]: With the traditional intermediary-operated market model, a trade is made in two stages: entering the market, making a deal. Blockchain can simplify that into a protocol; therefore the blockchain token assets can be considered always on the market.
-
-**|| The footnote seems to be too important to be a footnote**
+**With** the traditional intermediary-operated market model, a trade is made in two stages: entering the market, making a deal. Blockchain can simplify that into a protocol; therefore the blockchain token assets can be considered *always on the market*.
 
 ### Atomic Assets
 
-Can we tokenise, for example, 1% of a property, **so that we have atomic property makets with lower entry thresholds, which** ~~the property market can~~ react faster than the typical month-long property purchase-sales cycle? **Can token create a market of atomized investments in resources?
+Can we tokenise~~, for example,~~ 1% of a property, **so that we have atomic property makets with lower entry thresholds, which** ~~the property market can~~ react faster than the typical month-long property purchase-sales cycle? **Can token create a market of atomized investments in all kind of resources?**
 
 Can we tokenise electricity, allowing power users to benefit from finer scheduling of the use of resources, and households to benefit from collecting surplus sun energy? Can we tokenise AirBNB bookings, so that hosts can purchase a guaranteed cash flow from the market, while speculators profit from predicting the travel needs? 
 
 Can we tokenise the risk and reward of international trades, so that small importers and exports, not significant enough to obtain letters of credit, can compete in global markets ~~and perhaps eventually outcompete the traditional model like AirBNB outcompetes hotels~~? Can we tokenize books, content and intellectual property, creating liquid markets for them?
 
-Can we create an insurance token that depends on cryptographic proofs, so that the insurer can remove from their pricing, the costs incurred by fraudulent documents? 
-**|| Don't understand, Maybe too complicated for the place?? ||**
+Can we create an insurance token that depends on cryptographic proofs, so that the insurer can remove from their pricing, the costs incurred by fraudulent documents? **|| Don't understand, Maybe too complicated for the place?? ||** Can we decentralise the insurers altogether?
 
-Can we decentralise the insurers altogether?
-
-Blockchain can provide the foundational layer to achieve these. **It will enable a working, frictionless market with atomic parts of assets always on the market. However, this can only become true when there is a realibale and precise method to define how tokens should be used and transacted. This the focus of our work on TBML. But first, we look at what tokens are able to do currently**
+Blockchain can provide the foundational layer to achieve these. **It will enable a working, frictionless market with atomic parts of assets always on the market. However, this can only become true when there is a realibale and precise method to define how tokens should be used and transacted. This the focus of our work on TBML. But first, we look at what tokens are how token operate currently.**
 
 ### Payment Token and deliverable Token
 
-In 2017-2018 we did end up having hundreds of tokens. However, they uniformly fall into one category of token: Created with the ERC20 standard they are currency-like, filling up the *payment side* of the market[^payment]. There is nearly zero effort devoted to making tokens *goods and services* - which is the *deliverable side* of market and a fundamental need for a market to work. **||(isn't there the ERC721 standard for non-fungible token?)||**
+In 2017-2018 we did end up having hundreds of tokens. However, they uniformly fall into one category of token: Created with the ERC20 standard they are currency-like, filling up the *payment side* of the market. There is nearly zero effort devoted to making tokens *goods and services* - which is the *deliverable side* of market and a fundamental need for a market to work. **||(isn't there the ERC721 standard for non-fungible token?)||**
 
-Therefore, we categorise ~~[^payment]: We categorise~~ tokens as **payment tokens** and **deliverable tokens**. ERC20 tokens bearing the hallmarks of *payment tokens* only filles one side of market with tokens. They can't lift the market, as they just compete with other payment-token - like Bitcoin or Ether - on the payment side. They represent a good, but they do not actually deliver. They are rather gift cards.
+We categorise ~~[^payment]: We categorise~~ tokens as **payment tokens** and **deliverable tokens**. ERC20 tokens bearing the hallmarks of *payment tokens* only filles one side of market with tokens. They can't lift the market, as they just compete with other payment-token - like Bitcoin or Ether - on the payment side. They represent a good, but they do not actually deliver. They are rather gift cards.
 
 During the speculative bubble of 2017, a power token ICO **did** not need to provide any explanation of how the tokens can be used. All speculators need**ed** to know is that they represent for example a "stake in the future world of tokenised electricity". As long as the token can inspire investors with imagination, it's good enough for an ICO. There is no more functionality needed other than an ERC20 interface. 
 
-Such a speculative token d**idn't** depend on attestations - the proof of actual power production - nor d**id** it need properties like where the energy is provided or for how long it is available. **Instead of enabling a frictionless market, those tokens have just been a promise on enabling it that was sold as a gift card.** By far most will never deliver.
+Such a speculative token d**idn't** depend on attestations - the proof of actual power production - nor d**id** it need properties like where the energy is provided or for how long it is available. **Instead of enabling a frictionless market, those tokens have just been a promise on enabling it, which has been sold as a gift card.** By far most will never deliver.
 
 Now that the madness is over, it's time to present the technical framework to make the market **actually** work.
 
+**|| The following block has been here before, but you deleted it? It might be indeed better to put it closer to the design area. However, it provides a glance into Tokenscript and is a transition||**
+
 ### Token properties
 
-**Tokens can be products.** Therefore they need different propterties: Do tokens expire? AirBNB booking tokens certainly do, but 1% ownership of property tokens probably don't. Should the token owner receive a notification on a specific event? Power tokens certainly need that, for the change in the power supply is dynamic. Is a token stream-able?
+**Tokens can be products.** Therefore they need to have different properties: Do tokens expire? AirBNB booking tokens certainly do, but 1% ownership of property tokens probably don't. Should the token owner receive a notification on a specific event? Power tokens certainly need that, for the change in the power supply is dynamic. Is a token stream-able?
 
 How does it look on the user's mobile, and how is it called in a users language? If a buyer wants to purchase a tokenised country estate from a seller, how do they establish a trusted method of communication? If a token entitles the user to do specific actions online, how can the user login to the web services with that token?
 
-It's easy to see the need for a**n open** framework defining tokens and making them interoperable with different methods of trading, listing and rating. **Token markup script will provide such a framework. To understand it's full scope, however, we need to look at the second part of what Blockchains can do: Integrate the web.**
+It's easy to see the need for a**n open** framework defining tokens and making them interoperable with different methods of trading, listing and rating. **Tokenscript will provide such a framework. However, to diligently design it we need to consider the second part of what Blockchains can do: Integrate the web.**
 
 ## Blockchain integrates the web
 
@@ -105,9 +98,7 @@ Why are we doing so much copy and pasting when machines are exceptionally good a
 
 ### The client side can't integrate a web that is not designed to integrate
 
-[^pda]
-
-[^pda]: Surprisingly, even the technology that was created to fill the role of a personal assistant, the Smart Phone, still failed for the same reasons: the efforts from client side alone can't integrate a Web that is not designed to integrate. **It made the problem even worse, as copy-pasting becomes an even bigger trouble when you use a Smart Phone.**
+Surprisingly, even the technology that was created to fill the role of a personal assistant, the Smart Phone, still failed for the same reasons: the efforts from client side alone can't integrate a Web that is not designed to integrate. **It made the problem even worse, as copy-pasting becomes an even bigger trouble when you use a Smart Phone.**
 
 **The truth is: Not the client, but t**he infrastructure has to support integration. A smartphone is modelled like a dial-up Internet connection, with each app representing a website. The users still need to figure out which computer (app) to talk to before entering the conversation, and still copies information around as he swaps apps around. It's not possible, for example, to ask your smartphone to sum up all the money one may access by his online banking apps.
 
@@ -119,15 +110,11 @@ It's easy to see the cause of the inconvenience **:** the web is poorly integrat
 
 The ~~answer~~ challenge to integrating the web requires a few building blocks that weren't in the Web's blueprint: authentication, ownership, transfer of value and trading.
 
-### Authentification with trusted 3rd parties
-
-The web doesn't have a built-in authentication mechanism. **To route around this gab, many users use add-ons like "Sign in with Facebook".** Those merely try to provide authentication through a trusted 3rd party, **which does not only cause privacy and availability concerns,** but also only serves for account authentication **and can't be used** for integration.
-
-**There have been excellent efforts** on client/server certificates in **Transport Layer Security (TLS)**. However, these authentication methods are not for processes, but only for sites. **They represent** a delegation model: Imagine a buyer not checking if a title deed is real, but only checks if the seller's name matches the one on the deed. That would be the delegation model used in TLS. In this model, TLS can't guarantee **that** anything on the website is real -- only that the website itself is. Facebook uses TLS, but people put much fake news on it. The unit of trust here is undoubtedly not granular enough for the web to deliver an integrated experience.
-
-**|3| Nice thesis. Still, want it to be more clear ||**
-
 ### "Account authentication" is not a substitute for web integration.
+
+The web doesn't have a built-in authentication mechanism[^tls]. **To route around this gab, many users use add-ons like "Sign in with Facebook".** Those merely try to provide authentication through a trusted 3rd party, **which does not only cause privacy and availability concerns,** but also only serves for account authentication **and can't be used** for integration.
+
+[^tls]**There have been excellent efforts** on client/server certificates in **Transport Layer Security (TLS)**. However, these authentication methods are not for processes, but only for sites. **They represent** a delegation model: Imagine a buyer not checking if a title deed is real, but only checks if the seller's name matches the one on the deed. That would be the delegation model used in TLS. In this model, TLS can't guarantee **that** anything on the website is real -- only that the website itself is. Facebook uses TLS, but people put much fake news on it. The unit of trust here is undoubtedly not granular enough for the web to deliver an integrated experience.
 
 **On top of it, the model of account based authentification is the cause of further problems.** Most simple business cases - for example "the owner of a car checks its service history" - don't require an account. **Basically, accounts are stopgaps to problems created by the specific structure of the Internet as we know it.**
 
@@ -139,13 +126,13 @@ If you enforce parties involved having an account to authenticate, bad things ha
 
 Such integration needs, poorly addressed by adding accounts, are easily found in healthcare, retail and almost every web-based business. Today, we are still adding more and more accounts to address the growing integration needs. It's a case of hammering every problem down as if it is a nail. **Most people do not feel well with this model, but don't see an alternative to integrate the web. An internet without accounts is beyond most people's imagination.**
 
-**We will demonstrate that integration through token will be a superior solution to integrate the internet. But first we address the second lacking building block of an integrated web.**
+**We will demonstrate that integration through token will be a superior solution to integrate the internet. A key element of this process is ownership.**
 
 ### The lack of a ownership mechanism 
 
-Similarly, the web doesn't have a built-in mechanism for ownership, transfer of value and trading.
+The web doesn't have a built-in mechanism for ownership, transfer of value and trading.
 
-**To demonstrate, we take the car story a bit further:** When you want to sell your car, you need to post the car information on a website. **To do so, you must create another account on the way. When someone wants to buy your car, you and the buyer have to go through a chain of processes:** Insurance, unused service quota, vehicle registrations, documentation handover, payment and so on. All these actions have to be done separately, using easily-tampered paper proofs and forms **and accounts**. The process starts at the web and ends somewhere else instead of being automatically done after the buyer clicked "buy".
+**To demonstrate, we take the car story a bit further:** When you want to sell your car, you need to post the car information on a website. **To do so, you must create an account on the way. When someone wants to buy your car, you and the buyer have to go through a chain of processes:** Insurance, unused service quota, vehicle registrations, documentation handover, payment and so on. All these actions have to be done separately, using easily-tampered paper proofs and forms **and accounts**. The process starts at the web and ends somewhere else instead of being automatically done after the buyer clicked "buy".
 
 **Is it possible to make it happen, that the entire chain of bureaucratic procedures happens securely in the backend, while you just push the "buy" button? With the web of accounts, you'd need to knot together a lot of accounts and trusted third parties, which hide the process from the user, while they fulfill the same paper trail as before.** 
 
@@ -162,7 +149,7 @@ To do so, Token must seamlessly go across systems, carry their trading rules and
 
 ## Example: Car Ownership Token
 
-We will com**b**ine the two concepts: **a** frictionless market, achieved by tokenising assets; **and the integration of** ~~integrate~~ the web, by using token as **an** integration point for web services. We will demonstrate **with** an example that encompasses both concepts: car token. **This is just one of many examples. You can transfer the concepts on nearly everything, including real estate markets, every kind of b2b and resource transfer - every transaction which involves digital goods or a digital representation of physical good.**
+We will com**b**ine the two concepts: **a** frictionless market, achieved by tokenising assets; **and the integration of** ~~integrate~~ the web, by using token as **an** integration point for web services. We will demonstrate **with** an example that encompasses both concepts: car token. **This is just one of many examples. You can transfer the concepts on nearly everything, including real estate markets, any kind of b2b and resource transfer - every transaction which involves digital goods or a digital representation of physical good.**
 
 **The car example is meant to help understand the concepts.** On the one hand, a car is a tokenised asset, that can be bought, sold, transferred, auctioned, collaborated and insured, all enabled by blockchain. 
 
@@ -194,7 +181,7 @@ __Insurance:__ The owner, wishing to purchase insurance, only needs to provide t
 
 __Uber:__ If the owner would like to become an Uber driver, she can easily prove her vehicle is good enough by providing proof of ownership, insurance and registration with her tokens. Uber then automatically provides her with an Uber token which, depend**ing**~~s~~ on the owner's need, can be used to get himself started as an Uber driver or allow a 3rd party driver to do so. None of these processes requires manual verification or account creation.
 
-**Token enable a more flexible, even programmable, use of ownership rights and their interaction, as zentralised, account-bases services can provide.**
+**Token enable a more flexible, even programmable, use of ownership rights and their interaction, as zentralised, account-based services can provide.**
 
 __Self-Uber:__ Taking this even further, the owner can skip Uber all together and rent her car directly to strangers. Not wanting her car to be trashed by some random stranger, she can restrict her renters to those who have an attestation token issued by the 'better drivers bureau'. The renter proves they have this token, pays a sum to the owner and is atomically issued with a temporary token that allows them to unlock and use the car for a certain period of time. This is done without the creation of an account or need to submit tons of documents to be validated manually by the owner.
 
@@ -217,7 +204,7 @@ We will have the opportunity to inspect the technical aspect of this well-integr
 
 **1. Tokenisation means representing all kind of assets as a token on a blockchain.** This requires bundling a token with its transactions rules and behaviour patterns. It takes them off the system where they initially grew in and frees them to be traded or used in different context.
 
-**2. Tokenisatoins must allow** users to interact with different systems through the tokens: In the car example, the car token is issued by Holden, the maker, and necessarily so because it contains code to interact with a smart lock (the *Open*, *Start*, *Lock* actions) and Holden's own web service (the *Locate* action), yet it needs to work in other environments. The *Auction* action, for example, is provided by a third party auction web service. The user access**es** auction service**s** through the token without the need of signing up and proving ownership. The *List for sharing* is provided by a**nother** third party service which tokenises the usage of the car by hours or days and sells them piecemeal. 
+**2. Tokenisatoins must allow** users to interact with different systems through the tokens: In the car example, the car token is issued by ~~Holden, ~~the maker, and necessarily so because it contains code to interact with a smart lock (the *Open*, *Start*, *Lock* actions) and the maker's own web service (the *Locate* action), yet it needs to work in other environments. The *Auction* action, for example, is provided by a third party auction web service. The user access**es** auction service**s** through the token without the need of signing up and proving ownership. The *List for sharing* is provided by a**nother** third party service which tokenises the usage of the car by hours or days and sells them piecemeal. And so on.
 
 The owner must be able to access **all those** ~~such a~~ markets **solely** through this Token. The token becomes the fundamental and atomic base for economic interactions. ~~The buyers will have information about the car's GPS location, the capacity to unlock the door and use it, through this token as well.~~ 
 
@@ -228,8 +215,6 @@ The owner must be able to access **all those** ~~such a~~ markets **solely** thr
 **5. A token must** carry trust relationship and business context to 3rd parties: In the car example, the insurance token provides Roadside Assistance service through NRMA, another company not directly contracted by the driver. Yet the driver might access this function through the insurance token and immediately be identified as qualified for help. In this example, *Trust relationship* means that the user indirectly trusts NRMA to provide roadside assistance, to obtain the user's GPS location and identity information at the time of emergency. *Business context* means the customer's qualification for roadside assistance, like insurance paid, location in the range of service and annual cap not reached etc. In this story both *trust relationship* and *business context* has to be in the token, not centralised through the insurance company's web service since the two have different a) availability, b) privacy and c) integration requirements[^abc].
 
 **This are just a few examples of requirements of token. Instead of the simple ERC20 (or ERC721) token established on Ethereum, we need a much more flexible token setup, which reflects a lot of possible coordinates and allows the integration of requirements we do not know today.**
-
-**|| Go through the points, shorter, more precise, maybe more attractive to read ||**
 
 [^abc]: Availability: NRMA is online 24/7 but Qantas Insurance can suspend their services in public holidays or at night. Privacy: NRMA can learn user's GPS location but Qantas Insurance isn't legally allowed to learn it. Integration: Most of NRMA's customers are not obtained through Qantas Insurance, so it would be an additional system to integrate and extra security concern for NRMA to integrate to Virgain Insurance's web service. Of all three, availability might be the most visible. Just imagine how angry a customer will be, having his car breaking down in the middle of the barren Australian outback, and learn that the road-side assistance can't be authorised because the insurer's web service is upgrading "For a better user experience".
 
