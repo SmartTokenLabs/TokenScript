@@ -26,7 +26,7 @@ Blockchain technology has **two primary functions** that serve essential purpose
 
 This paper will address the vision of where we can be and follow up with the design and reasoning behind the architecture needed on top of the blockchain. We will then explain TBML which is a critical missing layer and go over its design principles and how we are building it.
 
-## Blockchain provides a frictionless market: Atomic Assets always on the Market
+## A frictionless market of Atomic Assets
 
 The 80s' "Back to the Future" featured a world of powerful machines filled with hovering boards and flying cars. It didn't happen. As Peter Thiel once famously lamented, "we were promised flying cars; instead, we got 140 characters". The technological advancement of our time is beyond the imagination of the 80s science fiction movies, albeit not through more powerful machinery, but efficient use of the Internet.
 
@@ -34,53 +34,46 @@ Ride-sharing revolutionised the way we organise our daily lives, and AirBNB chan
 
 However, despite this web 2.0 revolution, the majority of markets still operate with high costs. The stock market, for example, has so much overhead that it is only justifiable for multi-million dollar businesses which rely on the trust of rules and regulations to operate.
 
-With blockchain, any tokenised asset can be transacted any time, as long as it follows the rules, without middlemen or intermediary, **and** gives us maximum market efficiency - the frictionless market. On top of the benefits of not relying on an intermediary, in a tokenised market model, the buyers and sellers do not need to "enter" the market; instead, tokens are *always on the market*[^market-model], making such a model better than intermediaries.
+With blockchain, any tokenised asset can be **fastly** transacted any time, as long as it follows the rules, without middlemen or intermediary. **This eliminates frictions and enables maximum market efficiency**. ~~- the frictionless market. On top of the benefits of not relying on an intermediary, in a tokenised market model, t~~ The buyers and sellers do not need to "enter" the market; instead, tokens are *always on the market*[^market-model]~~, making such a model better than intermediaries~~.
 
 [^market-model]: With the traditional intermediary-operated market model, a trade is made in two stages: entering the market, making a deal. Blockchain can simplify that into a protocol; therefore the blockchain token assets can be considered always on the market.
 
 **|| The footnote seems to be too important to be a footnote**
 
-### Tokenisation can create a frictionless market
+### Atomic Assets
 
-Can we tokenise, for example, 1% of a property, so that the property market can react faster than the typical month-long property purchase-sales cycle?
+Can we tokenise, for example, 1% of a property, **so that we have atomic property makets with lower entry thresholds, which** ~~the property market can~~ react faster than the typical month-long property purchase-sales cycle? **Can token create a market of atomized investments in resources?
 
-Can we tokenise electricity, allowing power users to benefit from finer scheduling of the use of resources, and households to benefit from collecting surplus sun energy?
+Can we tokenise electricity, allowing power users to benefit from finer scheduling of the use of resources, and households to benefit from collecting surplus sun energy? Can we tokenise AirBNB bookings, so that hosts can purchase a guaranteed cash flow from the market, while speculators profit from predicting the travel needs? 
 
-Can we tokenise AirBNB bookings, so that hosts can purchase a guaranteed cash flow from the market, while speculators profit from predicting the travel needs?
+Can we tokenise the risk and reward of international trades, so that small importers and exports, not significant enough to obtain letters of credit, can compete in global markets ~~and perhaps eventually outcompete the traditional model like AirBNB outcompetes hotels~~? Can we tokenize books, content and intellectual property, creating liquid markets for them?
 
-Can we tokenise the risk and reward of international trades, so that small importers and exports, not significant enough to obtain letters of credit, can compete in global markets and perhaps eventually outcompete the traditional model like AirBNB outcompetes hotels?
+Can we create an insurance token that depends on cryptographic proofs, so that the insurer can remove from their pricing, the costs incurred by fraudulent documents? 
+**|| Don't understand, Maybe too complicated for the place?? ||**
 
-Can we create an insurance token that depends on cryptographic proofs, so that the insurer can remove from their pricing, the costs incurred by fraudulent documents? Can we decentralise the insurers altogether?
+Can we decentralise the insurers altogether?
 
-Blockchain can provide the foundational layer to achieve these. **It will enable a working, frictionless market with atomic parts of assets always on the market. However, this can only become true when there is a realibale and precise method to define how tokens should be used and transacted. This the focus of our work on TBML.**
-
-### Token properties
-
-Tokens have different properties. Do tokens expire? AirBNB booking tokens certainly do, but 1% ownership of property tokens probably don't. Should the token owner receive a notification on a specific event? Power tokens certainly need that, for the change in the power supply is dynamic. Is a token stream-able?
-
-How does it look on the user's mobile, and how is it called in a users language?
-
-If a buyer wants to purchase a tokenised country estate from a seller, how do they establish a trusted method of communication?
-
-If a token entitles the user to do specific actions online, how can the user login to the web services with that token?
-
-It's easy to see the need for a framework defining tokens and making them interoperable with different methods of trading, listing and rating. 
+Blockchain can provide the foundational layer to achieve these. **It will enable a working, frictionless market with atomic parts of assets always on the market. However, this can only become true when there is a realibale and precise method to define how tokens should be used and transacted. This the focus of our work on TBML. But first, we look at what tokens are able to do currently**
 
 ### Payment Token and deliverable Token
 
-In 2017-2018 we did end up having hundreds of tokens. However, they uniformly fall into one category of token: Created with the ERC20 standard they are currency like, filling up the *payment side* of the market[^payment]. There is nearly zero effort devoted to making tokens represent *goods and services* - which is the *deliverable side* of market and a fundamental need for a market to work. **||(isn't there the ERC721 standard for non-fungible token?)||**
+In 2017-2018 we did end up having hundreds of tokens. However, they uniformly fall into one category of token: Created with the ERC20 standard they are currency-like, filling up the *payment side* of the market[^payment]. There is nearly zero effort devoted to making tokens *goods and services* - which is the *deliverable side* of market and a fundamental need for a market to work. **||(isn't there the ERC721 standard for non-fungible token?)||**
 
-Therefore, we categorise ... 
+Therefore, we categorise ~~[^payment]: We categorise~~ tokens as **payment tokens** and **deliverable tokens**. ERC20 tokens bearing the hallmarks of *payment tokens* only filles one side of market with tokens. They can't lift the market, as they just compete with other payment-token - like Bitcoin or Ether - on the payment side. They represent a good, but they do not actually deliver. They are rather gift cards.
 
-[^payment]: We categorise tokens as **payment tokens** and **deliverable tokens**. ERC20 tokens bearing the hallmarks of *payment tokens* only filles one side of market with tokens, therefore can't lift a market. **||why? What's missing? What are deliverable token do?||**
+During the speculative bubble of 2017, a power token ICO **did** not need to provide any explanation of how the tokens can be used. All speculators need**ed** to know is that they represent for example a "stake in the future world of tokenised electricity". As long as the token can inspire investors with imagination, it's good enough for an ICO. There is no more functionality needed other than an ERC20 interface. 
 
-**|| again: Too important to be in a footnote. A short explanation for what "delivery tokens do / are would be good
-
-During the speculative bubble of 2017, a power token ICO **did** not need to provide any explanation of how the tokens can be used. All speculators need**ed** to know is that they represent for example a "stake in the future world of tokenised electricity". As long as the token can inspire investors with imagination, it's good enough for an ICO. There is no more functionality needed other than an ERC20 interface. Such a speculative token d**idn't** depend on attestations - the proof of actual power production - nor d**id** it need properties like where the energy is provided or for how long it is available. **Instead of enabling a frictionless market, those tokens have just been a promise on enabling it. By far most will never deliver.**
+Such a speculative token d**idn't** depend on attestations - the proof of actual power production - nor d**id** it need properties like where the energy is provided or for how long it is available. **Instead of enabling a frictionless market, those tokens have just been a promise on enabling it that was sold as a gift card.** By far most will never deliver.
 
 Now that the madness is over, it's time to present the technical framework to make the market **actually** work.
 
-**|1| Here I want to have: A glimpse on HOW? ||**
+### Token properties
+
+**Tokens can be products.** Therefore they need different propterties: Do tokens expire? AirBNB booking tokens certainly do, but 1% ownership of property tokens probably don't. Should the token owner receive a notification on a specific event? Power tokens certainly need that, for the change in the power supply is dynamic. Is a token stream-able?
+
+How does it look on the user's mobile, and how is it called in a users language? If a buyer wants to purchase a tokenised country estate from a seller, how do they establish a trusted method of communication? If a token entitles the user to do specific actions online, how can the user login to the web services with that token?
+
+It's easy to see the need for a**n open** framework defining tokens and making them interoperable with different methods of trading, listing and rating. **Token markup script will provide such a framework. To understand it's full scope, however, we need to look at the second part of what Blockchains can do: Integrate the web.**
 
 ## Blockchain integrates the web
 
