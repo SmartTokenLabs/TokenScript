@@ -220,7 +220,7 @@ The owner must be able to access **all those** ~~such a~~ markets **solely** thr
 
 # Design requirements
 
-**|| Give a break. Make a longer, good to understand, calm description of the system before jumping into the next example ||**
+**|| Give a break. Make a longer, good to understand, calm description of the system before jumping into the next example -- make the list of data involved (product description, attestation, ...) much shorter. Just to show how much and different it is. Catch them later on. ||**
 
 
 We assert that a descriptive language (TBML) is needed to allow blockchain technology to enable "frictionless markets" and an "integrated web". TBML stands for Token Behaviour Markup Language.
@@ -372,7 +372,15 @@ With the first example demonstrated, we use the opportunity to articulate **why 
 
 #### Interoperability:
 
-Suppose a property guru named Peter wishes to create a website called "Peter's Pride Asset", where he selects the best properties available on the market. He can create a listing of those properties with rich information of the current price, location, age of the building and even photos, which the users can purchase with a click. There is no reason that he needs permission to do so because the data of those tokens are on the blockchain and the transaction of those tokens requires no middlemen. However, he would need to obtain the knowledge local to how to render the token on his website, like how to get the expiration of a token from its holding smart contract. If the underlying smart contract has gone through changes, like adding an attribute (e.g. council rate), his website would need to upgrade.
+Suppose a property guru named Peter wishes to create a website called "Peter's Pride Asset", where he selects the best properties available on the market. He can create a listing of those properties with rich information of the current price, location, age of the building and even photos, which the users can purchase with a click. 
+
+**|| The next sentences expresses perfectly what this is all about. |**
+
+*There is no reason that he needs permission to do so because the data of those tokens are on the blockchain and the transaction of those tokens requires no middlemen.*
+
+**|| The token logic makes the business. He can't cheat, everybody can provide this service, as it is done by itself ||**
+
+However, he would need to obtain the knowledge local to how to render the token on his website, like how to get the expiration of a token from its holding smart contract. If the underlying smart contract has gone through changes, like adding an attribute (e.g. council rate), his website would need to upgrade.
 
 Similarly, the transaction rule might be updated to require the buyer to submit an identity attestation as part of a purchase. Without a speedy upgrade, his users would submit transactions not conforming and get rejected later in the blockchain. In the end, he would resort to passing the rendering and trading of the token to the Dapp tied to this token, returning to a centralised status and limit the innovation and competition in this space.
 
