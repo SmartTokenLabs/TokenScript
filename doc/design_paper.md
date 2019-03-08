@@ -220,6 +220,9 @@ The owner must be able to access **all those** ~~such a~~ markets **solely** thr
 
 # Design requirements
 
+**|| Give a break. Make a longer, good to understand, calm description of the system before jumping into the next example ||**
+
+
 We assert that a descriptive language (TBML) is needed to allow blockchain technology to enable "frictionless markets" and an "integrated web". TBML stands for Token Behaviour Markup Language.
 
 **|| why? ||**
