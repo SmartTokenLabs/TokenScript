@@ -83,7 +83,7 @@ Now that the madness is over, it's time to present the technical framework to ma
 
 Tim Berners-Lee and the innovators of the world wide web modelled the web primarily on a public library model and computer-human interaction model.
 
-In the library model, information is freely available, indexed and cross-referenced by a URI. Its incarnation, the URL, is where the data is, and there is no restriction on where you can go.
+In the library model, information is freely available, indexed and cross-referenced by a URL. Its incarnation, the URL, is where the data is, and there is no restriction on where you can go.
 
 In the computer-human interaction model, two players are having a conversation - the human asks and the machine answers. A computer has limited knowledge, but it can help the user to reach the right computer.
 
