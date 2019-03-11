@@ -1,4 +1,4 @@
-# Token Behaviour Markup Language (TBML) Design Paper
+# Tokenscript Design Paper
 
 ## Author's note
 
@@ -33,7 +33,7 @@ Blockchain technology has two primary functions that serve essential purposes fo
 - providing a frictionless market; and
 - integrating the web.
 
-This paper will address the vision of where we can be and follow up with the design and reasoning behind the architecture needed on top of the blockchain. We will then explain TBML which is a critical missing layer and go over its design principles and how we are building it.
+This paper will address the vision of where we can be and follow up with the design and reasoning behind the architecture needed on top of the blockchain. We will then explain Tokenscript which is a critical missing layer and go over its design principles and how we are building it.
 
 ## Creating a frictionless market
 
@@ -57,7 +57,7 @@ Can we tokenise the risk and reward of international trades, so that small impor
 
 Can we create an insurance token that depends on cryptographic proofs, so that the insurer can remove from their pricing, the costs incurred by fraudulent documents? Can we decentralise the insurers altogether?
 
-Blockchain can provide the foundational layer to achieve these. It will enable a working, frictionless market with atomic parts of assets always on the market. However, this can only become true when there is a realibale and precise method to define how tokens should be used and transacted. This the focus of our work on TBML. But first, we look at what tokens are how token operate currently.
+Blockchain can provide the foundational layer to achieve these. It will enable a working, frictionless market with atomic parts of assets always on the market. However, this can only become true when there is a realibale and precise method to define how tokens should be used and transacted. This the focus of our work on Tokenscript. But first, we look at what tokens are how token operate currently.
 
 ### Payment Token and deliverable Token
 
