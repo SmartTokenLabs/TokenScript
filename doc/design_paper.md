@@ -135,7 +135,7 @@ Tokens seamlessly go across systems, carries their trading rules and user interf
 
 We will comine the two concepts: frictionless market, achieved by tokenising assets; integrate the web, by using token as integration point for web services. We will demonstrate an example that encompasses both concepts: car token.
 
-On the one hand, a car is a tokenised asset, that can be bought, sold, transferred, auctioned, collaborated and insured, all enabled by blockchain.
+On the one hand, a car is a tokenised asset, that can be bought, sold, transferred, auctioned, collateralized and insured, all enabled by blockchain.
 
 On the other hand, a car also has utility. A car's ownership token can convert a blockchain wallet into a car key, with additional functions like graphically representing the car's current location. Authorising someone to access your car, or renting it for profit, would be seamlessly done by signing blockchain transactions or attestations, without passing car keys around.
 
