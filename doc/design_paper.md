@@ -10,19 +10,19 @@ To provide a practical use of the blockchain, we must understand its utility to 
 
 2. It integrates the web. We define the technique to make it happen in "Tokenisation". 
 
-We will demonstrate these advantagess of a tokenized internet with the example of a car management suite.**
+We  demonstrate these advantages of a tokenised internet with the example of a car management suite.**
 
-Previous efforts in this industry primarily focused on enriching the capacity of the technology. This paper will focus on tokenisation and introduce a standardisation effort we call Tokenscript (Token Behaviour Markup Language), which will make the blockchain technical stack complete and provide utility for the economy and the internet. Tokenscript will unleash the full potential of Tokenisation. 
+Previous efforts in this industry primarily focused on enriching the capacity of the technology. This paper focuses on tokenisation and introduces a standardisation effort we call Tokenscript (Token Behaviour Markup Language), which will make the blockchain technical stack complete and provide utility for the economy and the internet. Tokenscript will unleash the full potential of Tokenisation. 
 
-Please join our work at tokenscript.org. A Yellow Paper to guide implementors to use Tokenscript for their tokens and dapps will take months to make, but a work in progress is always available online. Participate now to avoid the draft language specification being made without considerating your token model.
+Please join our work at tokenscript.org. A Yellow Paper to guide implementors to use Tokenscript for their tokens and dapps will take months to make, but a work in progress is always available online. Participate now to prevent the draft specification derail from a valueable use case in your knowledge.
 
 \pagebreak
 
 # Abstract
 
-We recognise the blockchain technology's utility in providing a frictionless market and integrating the web. This is done through tokenization. Tokenized rights can be traded on the market and integrated across systems, forming a frictionless market and allowing free and accountless integration.
+We recognise the blockchain technology's utility in providing a frictionless market and integrating the web. This is done through tokenisation. Tokenised rights can be traded on the market and integrated across systems, forming a frictionless market and allowing free and accountless integration.
 
-Today, the ways tokens are accessed, rendered and transacted are scattered across immutable Smart Contracts on the blockchain. Most token either have a very primitive business logic (as payment token), while some try to put complex business logic into the contract, creating an dapp (decentralized application). This enables DAOs (Decentralized Autonomous Organizations), but hardly helps to create a frictionless token economy and integrate the web. When marketization and integration of a token is tied to a dapp, it recreates data interoperability, security and availability barrier - exactly the same issues that prevented tokenisation before blockchain was invented
+Today, the ways tokens are accessed, rendered and transacted are scattered across dynamic Dapps and immutable Smart Contracts on the blockchain. Most tokens either have a very primitive business logic (as payment token), while some try to put complex business logic into the contract, creating a specific dapp (decentralised application) to cate the interactions with the token. This enables DAOs (Decentralized Autonomous Organizations) but hardly helps to create a frictionless token economy and integrate the web. When marketisation and integration of a token is tied to a dapp, it recreates data interoperability, security and availability barrier - the same issues that prevented tokenisation before blockchain's invention.
 
 \pagebreak
 
@@ -33,7 +33,7 @@ Blockchain technology has two primary functions that serve essential purposes fo
 - providing a frictionless market; and
 - integrating the web.
 
-This paper will address the vision of where we can be and follow up with the design and reasoning behind the architecture needed on top of the blockchain. We will then explain Tokenscript which is a critical missing layer and go over its design principles and how we are building it.
+This paper addresses the vision of where we can be and follow up with the design and reasoning behind the architecture needed on top of the blockchain. We explain Tokenscript which is a critical missing layer and go over its design principles and how we are building it.
 
 ## Creating a frictionless market
 
@@ -43,27 +43,27 @@ Ride-sharing revolutionised the way we organise our daily lives, and AirBNB chan
 
 However, despite this web 2.0 revolution, the majority of markets still operate with high costs. The stock market, for example, has so much overhead that it is only justifiable for multi-million dollar businesses which rely on the trust of rules and regulations to operate.
 
-With blockchain, any tokenised asset can be fastly transacted any time, as long as it follows the rules, without middlemen or intermediary. This eliminates frictions and enables maximum market efficiency. The buyers and sellers do not need to "enter" the market; instead, tokens are *always on the market*.
+With blockchain, any tokenised asset can be fastly transacted any time, as long as it follows the rules, without an intermediary, eliminating frictions and enabling maximum market efficiency. The buyers and sellers do not need to "enter" the market; instead, tokens are *always on the market*.
 
 With the traditional intermediary-operated market model, a trade is made in two stages: entering the market, making a deal. Blockchain can simplify that into a protocol; therefore the blockchain token assets can be considered *always on the market*.
 
-### Granular Assets
+### Tokenised Assets
 
-Can we tokenise 1% of a property, so that we have atomic property makets with lower entry thresholds, which react faster than the typical month-long property purchase-sales cycle? Can token create a market of granular investments in all kind of resources?
+Can we tokenise 1% of a property, so that we have a finer property market with lower entry thresholds, which react faster than the typical month-long property purchase-sales cycle? Can token create a market of granular investments in all kind of resources?
 
 Can we tokenise electricity, allowing power users to benefit from finer scheduling of the use of resources, and households to benefit from collecting surplus sun energy? Can we tokenise AirBNB bookings, so that hosts can purchase a guaranteed cash flow from the market, while speculators profit from predicting the travel needs? 
 
-Can we tokenise the risk and reward of international trades, so that small importers and exports, not significant enough to obtain letters of credit, can compete in global markets? Can we tokenize books, content and intellectual property, creating liquid markets for them?
+Can we tokenise the risk and reward of international trades, so that small importers and exports, not significant enough to obtain letters of credit, can compete in global markets? Can we tokenise books, content and intellectual property, creating liquid markets for them?
 
 Can we create an insurance token that depends on cryptographic proofs, so that the insurer can remove from their pricing, the costs incurred by fraudulent documents? Can we decentralise the insurers altogether?
 
-Blockchain can provide the foundational layer to achieve these. It will enable a working, frictionless market with atomic parts of assets always on the market. However, this can only become true when there is a realibale and precise method to define how tokens should be used and transacted. This the focus of our work on Tokenscript. But first, we look at what tokens are how token operate currently.
+Blockchain can provide the foundational layer to achieve these. It enables a working, frictionless market with tokenised assets *always on the market*. However, this can only become true when there is a reliable and precise method to define how tokens should be used and transacted. This the focus of our work on Tokenscript. But first, we look at what tokens are how token operate currently.
 
 ### Payment Token and deliverable Token
 
-In 2017-2018 we did end up having hundreds of tokens. However, they uniformly fall into one category of token: Created with the ERC20 standard they are currency-like, filling up the *payment side* of the market. There is nearly zero effort devoted to making tokens *goods and services* - which is the *deliverable side* of market and a fundamental need for a market to work.
+In 2017-2018 we did end up having hundreds of tokens. However, they uniformly fall into one category of token: created with the ERC20 standard they are currency-like, filling up the *payment side* of the market. There is nearly zero effort devoted to making tokens *goods and services* - which is the *deliverable side* of the market and a fundamental need for a market to work.
 
-We categorise tokens as payment tokens and deliverable tokens. ERC20 tokens bearing the hallmarks of *payment tokens* only filles one side of market with tokens. They can't lift the market, as they just compete with other payment-token - like Bitcoin or Ether - on the payment side. They represent a good, but they do not actually deliver. They are rather gift cards.
+We categorise tokens as payment tokens and deliverable tokens. ERC20 tokens bearing the hallmarks of *payment tokens* only fills one side of the market with tokens. They can't lift the market, as they merely compete with other payment-token - like Bitcoin or Ether - on the payment side. They represent a good, but they do not actually deliver. They are rather gift cards.
 
 During the speculative bubble of 2017, a power token ICO did not need to provide any explanation of how the tokens can be used. All speculators needed to know is that they represent for example a "stake in the future world of tokenised electricity". As long as the token can inspire investors with imagination, it's good enough for an ICO. There is no more functionality needed other than an ERC20 interface. 
 
@@ -77,7 +77,7 @@ Tokens can be products. Therefore they need to have different properties: Do tok
 
 How does it look on the user's mobile, and how is it called in a users language? If a buyer wants to purchase a tokenised country estate from a seller, how do they establish a trusted method of communication? If a token entitles the user to do specific actions online, how can the user login to the web services with that token?
 
-It's easy to see the need for an open framework defining tokens and making them interoperable with different methods of trading, listing and rating. Tokenscript will provide such a framework. However, to diligently design it we need to consider the second part of what Blockchains can do: Integrate the web.
+It's easy to see the need for an open framework defining tokens and making them interoperable with different methods of trading, listing and rating. Tokenscript provides such a framework. However, to diligently design it we need to consider the second part of what Blockchains can do: Integrate the web.
 
 ## Blockchain integrates the web
 
@@ -95,9 +95,9 @@ Why are we doing so much copy and pasting when machines are exceptionally good a
 
 ### The client side can't integrate a web that is not designed to integrate
 
-Surprisingly, even the technology that was created to fill the role of a personal assistant, the Smart Phone, still failed for the same reasons: the efforts from client side alone can't integrate a Web that is not designed to integrate. It made the problem even worse, as copy-pasting becomes an even bigger trouble when you use a Smart Phone.
+Surprisingly, even the technology that was created to fill the role of a personal assistant, the Smart Phone, still failed for the same reasons: the efforts from client side alone can't integrate a Web that is not designed to integrate. It made the problem even worse, as copy-pasting becomes bigger trouble when using a Smart Phone.
 
-The truth is: Not the client, but the infrastructure has to support integration. A smartphone is modelled like a dial-up Internet connection, with each app representing a website. The users still need to figure out which computer (app) to talk to before entering the conversation, and still copies information around as he swaps apps around. It's not possible, for example, to ask your smartphone to sum up all the money one may access by his online banking apps.
+The truth is: Not only the client but the infrastructure has to support integration. A smartphone is modelled after a dial-up Internet connection, with each app representing a website. The users still need to figure out which computer (app) to talk to before entering the conversation, and still copies information around as he swaps apps around. It's not possible, for example, to ask your smartphone to sum up all the money one may access by his online banking apps.
 
 It's easy to see the cause of the inconvenience: the web is poorly integrated. The bad examples go on and on:
 
@@ -109,11 +109,11 @@ The challenge to integrating the web requires a few building blocks that weren't
 
 ### "Account authentication" is not a substitute for web integration.
 
-The web doesn't have a built-in authentication mechanism[^tls]. To route around this gab, many users use add-ons like "Sign in with Facebook". Those merely try to provide authentication through a trusted 3rd party, which does not only cause privacy and availability concerns, but also only serves for account authentication and can't be used for integration.
+The web doesn't have a built-in authentication mechanism[^tls]. To route around this gab, many users use add-ons like "Sign in with Facebook". Those merely try to provide authentication through a trusted 3rd party, which does not only cause privacy and availability concerns but also only serves for account authentication and can't be used for integration.
 
-[^tls]There have been excellent efforts on client/server certificates in Transport Layer Security (TLS). However, these authentication methods are not for processes, but only for sites. They represent a delegation model: Imagine a buyer not checking if a title deed is real, but only checks if the seller's name matches the one on the deed. That would be the delegation model used in TLS. In this model, TLS can't guarantee that anything on the website is real -- only that the website itself is. Facebook uses TLS, but people put much fake news on it. The unit of trust here is undoubtedly not granular enough for the web to deliver an integrated experience.
+[^tls]: There have been excellent efforts on client/server certificates in Transport Layer Security (TLS). However, these authentication methods are not for processes, but only for sites. They represent a delegation model: Imagine a buyer not checking if a title deed is real, but only checks if the seller's name matches the one on the deed. That would be the delegation model used in TLS. In this model, TLS can't guarantee that anything on the website is genuine -- only that the website itself is. Facebook uses TLS, but people put much fake news on it. The unit of trust here is undoubtedly not granular enough for the web to deliver an integrated experience.
 
-On top of it, the model of account based authentification is the cause of further problems. Most simple business cases - for example "the owner of a car checks its service history" - don't require an account. Basically, accounts are stopgaps to problems created by the specific structure of the Internet as we know it.
+On top of it, the model of account based authentification is the cause of further problems. Most simple business cases - for example, "the owner of a car checks its service history" - don't require an account. Truthfully, accounts are stopgaps to problems created by the specific structure of the Internet as we know it.
 
 If you enforce parties involved having an account to authenticate, bad things happen:
 
@@ -121,43 +121,43 @@ If you enforce parties involved having an account to authenticate, bad things ha
 
 - When a 3rd party like a Vehicle Modification workshop or an insurer needs to access the repair history, there is no easy way to authorise them without giving away the account. This is inflexible.
 
-Such integration needs, poorly addressed by adding accounts, are easily found in healthcare, retail and almost every web-based business. Today, we are still adding more and more accounts to address the growing integration needs. It's a case of hammering every problem down as if it is a nail. Most people do not feel well with this model, but don't see an alternative to integrate the web. An internet without accounts is beyond most people's imagination.
+Such integration needs, poorly addressed by adding accounts, are easily found in healthcare, retail and almost every web-based business. Today, we are still adding more and more accounts to address the growing integration needs. It's a case of hammering every problem down as if it is a nail. Most people do not feel well with this model but don't see an alternative to integrating the web. An internet without accounts is beyond most people's imagination.
 
-We will demonstrate that integration through token will be a superior solution to integrate the internet. A key element of this process is ownership.
+We  demonstrate that integration through token is a superior solution to integrate the internet. A vital element of this process is ownership.
 
-### The lack of a ownership mechanism 
+### The lack of an ownership mechanism 
 
 The web doesn't have a built-in mechanism for ownership, transfer of value and trading.
 
 To demonstrate, we take the car story a bit further: When you want to sell your car, you need to post the car information on a website. To do so, you must create an account on the way. When someone wants to buy your car, you and the buyer have to go through a chain of processes: Insurance, unused service quota, vehicle registrations, documentation handover, payment and so on. All these actions have to be done separately, using easily-tampered paper proofs and forms and accounts. The process starts at the web and ends somewhere else instead of being automatically done after the buyer clicked "buy".
 
-Is it possible to make it happen, that the entire chain of bureaucratic procedures happens securely in the backend, while you just push the "buy" button? With the web of accounts, you'd need to knot together a lot of accounts and trusted third parties, which hide the process from the user, while they fulfill the same paper trail as before.*
+Is it possible to make it happen, that the entire chain of bureaucratic procedures happens securely in the backend, while you just push the "buy" button? With the web of accounts, you'd need to knot together a lot of accounts and trusted third parties, which hide the process from the user, while they fulfil the same paper trail as before.*
 
-In contrast, when you base the same process on a blockchain and on tokens, it would be automatic, fraud-proof[^attestations] and atomic[^atomic]. You could finish a car sell with one click in a secure way without the need of accounts and paper trails.
+In contrast, when you base the same process on a blockchain and on tokens, it would be automatic, fraud-proof[^attestations] and atomic[^atomic]. You could finish a car sell with one click in a secure way without the need for accounts and paper trails.
 
 [^attestations]: the method to provide cryptographically signed attestations as a condition for a transaction is discussed later in the "Attestation" chapter.
 
 [^atomic]: In blockchain terms, an atomic transaction either happens or not. If well defined, it's not impossible for a buyer to have successfully paid for a car yet not getting the ownership token, or only have transferred the car's ownership but not the compulsory insurance on it.
 
-These missing features of the web are the well-known functions of the blockchain. A blockchain is an immutable, decentralized record of ownership, sometimes called a "tripple-entry bookkeeping" system. The virtual wedding of this perfect fit couple requires a virtual exchange of tokens, or what this paper called "tokenisation".
+These missing features of the web are the well-known functions of the blockchain. A blockchain is an immutable, decentralized record of ownership, sometimes called a "triple-entry bookkeeping" system. The virtual wedding of this perfect fit couple requires a virtual exchange of tokens, or what this paper called "tokenisation".
 
 To do so, Token must seamlessly go across systems, carry their trading rules and user interfaces and business context.
 
 
 ## Example: Car Ownership Token
 
-We will combine the two concepts: a frictionless market, achieved by tokenising assets; and the integration of the web, by using token as an integration point for web services. We will demonstrate with an example that encompasses both concepts: car token. This is just one of many examples. You can transfer the concepts on nearly everything, including real estate markets, any kind of b2b and resource transfer - every transaction which involves digital goods or a digital representation of physical good.
+We combine the two concepts: a frictionless market, achieved by tokenising assets; and the integration of the web, by using the token as an integration point for web services. We demonstrate with an example that encompasses both concepts: car token. This is just one of many examples. You can transfer the concepts on nearly everything, including real estate markets, any kind of b2b and resource transfer - every transaction which involves digital goods or a digital representation of physical good.
 
 The car example is meant to help understand the concepts. On the one hand, a car is a tokenised asset, that can be bought, sold, transferred, auctioned, collaborated and insured, all enabled by blockchain. 
 
 On the other hand, a car also has utility. A car's ownership token can convert a blockchain wallet into a car key, with additional functions like graphically representing the car's current location. Authorising someone to access your car, or renting it for profit, would be seamlessly done by signing blockchain transactions or attestations, without passing car keys around.
 
-In both cases the token represent the delivery side of things: They *are* the product. Those token can interact with a non-token kind of payment, but tokenizing the payments would make the whole process much more fluent.
+In both cases, the token represents the delivery side of things: They *are* the product. Those token can interact with a non-token kind of payment, but tokenising the payments would make the whole process much more fluent.
 
 The following screenshot of a car token represents the final stage of tokenisation.
 
 
-![A car token. Four tokens: Rego, Capped Service, Insurance and Purchase, either depeneds or relates to the car ownership token.](car-token.jpeg)
+![A car token. Four tokens: Rego, Capped Service, Insurance and Purchase, either depends or relates to the car ownership token.](car-token.jpeg)
 
 
 At first glance, it is just a handy portal to do everything about the car, including market functions and utility. However, it's not possible with the traditional web model. In the web 2.0 model, you are restricted to handling every element on its own:
@@ -166,25 +166,25 @@ At first glance, it is just a handy portal to do everything about the car, inclu
 * When you want to provide insurance to the car, you have to create another account and manually offer proof of its registration to that new service. 
 * Likewise, if you want to make the car available to share economy through Uber or hour-based car rental, the work of proving and settling payments and insurance cost adds friction to the market.
 
-The intented portal does not enable those functions by itself, but merely serves as a gateway to merge a lot of different accounts as we know it from the internet of today. It's just another stopgap, which hides papertrail processes from the user, without solving the underlying problem.
+The intended portal does not enable those functions by itself but merely serves as a gateway to merge a lot of different accounts as we know it from the internet of today. It's just another stopgap, which hides paper trail processes from the user, without solving the underlying problem.
 
 Now let's reimagine this in the web3 world whereby such elements can be tokenised, step by step: 
 
 __Buying and registration__: The Vendor (in this case Holden) provides an ownership token to the new owner which can be used to operate the car. The token, transferred to the owner at the time of purchase, is in turn used to acquire the registration token. An inbuilt IoT device allows the car to be operated with proof of ownership via a token.
 
-__Insurance:__ The owner, wishing to purchase insurance, only needs to provide the proof of ownership and registration token to be qualified to fulfil the requirements with the insurance company. The insurance companies standards are met automatically by matching the tokens to their requirements and once validated, the insurance company can send the owner an insurance token in exchange for payment. The insurance token carries its own functions and services.
+__Insurance:__ The owner, wishing to purchase insurance, only needs to provide the proof of ownership and registration token to be qualified to fulfil the requirements with the insurance company. The insurance companies standards are met automatically by matching the tokens to their requirements and once validated; the insurance company can send the owner an insurance token in exchange for payment. The insurance token carries its own functions and services.
 
 Token build the join between different providers and services, which are used to be built by accounts, trust and paperwork.
 
 __Uber:__ If the owner would like to become an Uber driver, she can easily prove her vehicle is good enough by providing proof of ownership, insurance and registration with her tokens. Uber then automatically provides her with an Uber token which, depend ing on the owner's need, can be used to get himself started as an Uber driver or allow a 3rd party driver to do so. None of these processes requires manual verification or account creation.
 
-Token enable a more flexible, even programmable, use of ownership rights and their interaction, as zentralised, account-based services can provide.
+Token enable a more flexible, even programmable, use of ownership rights and their interaction, as centralised, account-based services can provide.
 
-__Self-Uber:__ Taking this even further, the owner can skip Uber all together and rent her car directly to strangers. Not wanting her car to be trashed by some random stranger, she can restrict her renters to those who have an attestation token issued by the 'better drivers bureau'. The renter proves they have this token, pays a sum to the owner and is atomically issued with a temporary token that allows them to unlock and use the car for a certain period of time. This is done without the creation of an account or need to submit tons of documents to be validated manually by the owner.
+__Self-Uber:__ Taking this even further, the owner can skip Uber all together and rent her car directly to strangers. Not wanting her car to be trashed by some random stranger, she can restrict her renters to those who have an attestation token issued by the 'better drivers bureau'. The renter proves they have this token, pays a sum to the owner and is atomically issued with a temporary token that allows them to unlock and use the car for a certain period of time. This is done without the creation of an account or needs to submit tons of documents to be validated manually by the owner.
 
 __Selling:__ If the owner wishes to sell the car, she only has to list it on any website with a price. The ownership token and payment can be swapped atomically (ensuring neither the buyer or seller is cheated) and the new owner can drive away with the car without even meeting the original owner face to face. The new buyer knows in advance whether the car has been registered and is legally owned by merely validating the original owner's ownership token in their wallet. The original owner's token is invalidated once the swap occurs and she can no longer operate the car. It is also possible to automatically void the insurance policy once the exchange has occurred and provide the original owner with a rebate for premature cancellation.
 
-This chapter serve to present the vision. Token enable the whole ownership and utility processes around car trading and sharing to happen automatically, fraud-proof and atomic. This eliminates a lot of friction and allows much more flexibility to individualize the economic transactions.
+This chapter serves to present the vision. Token enable the whole ownership and utility processes around car trading and sharing to happen automatically, fraud-proof and atomic. This eliminates a lot of friction and allows much more flexibility to individualize the economic transactions.
 
 We will have the opportunity to inspect the technical aspect of this well-integrated well-tokenised car token in later chapters again.
 
@@ -193,7 +193,7 @@ We will have the opportunity to inspect the technical aspect of this well-integr
 
 ### The challenge of tokenisation
 
-The car ownership was just one example how token can transform all kind of digitalized economic interactions. The 2017 ICO Hype was a slight glimpse of this potential, creating a lot of (bad) investments, but not many products. Most token have been just used for payments, effectively being gift cards for certain services, which have been sold in the expectation that those services will provide valuable products at some time.
+The car ownership was just one example of how token can transform all kind of digitalized economic interactions. The 2017 ICO Hype was a slight glimpse of this potential, creating a lot of (bad) investments, but not many products. Most tokens have been just used for payments, effectively being gift cards for certain services, which have been sold in the expectation that those services will provide valuable products at some time.
 
 To unleash their potential, token needs to become a lot more sophisticated and switch from the payment side to the delivery side. Several requirements must be fulfilled:
 
@@ -209,7 +209,7 @@ __4. It must allow new protocols to be developed on tokens:__ In the car example
 
 __5. A token must carry trust relationship and business context to 3rd parties:__ In the car example, the insurance token provides Roadside Assistance service through NRMA, another company not directly contracted by the driver. Yet the driver might access this function through the insurance token and immediately be identified as qualified for help. In this example, *Trust relationship* means that the user indirectly trusts NRMA to provide roadside assistance, to obtain the user's GPS location and identity information at the time of emergency. *Business context* means the customer's qualification for roadside assistance, like insurance paid, location in the range of service and annual cap not reached etc. In this story both *trust relationship* and *business context* has to be in the token, not centralised through the insurance company's web service since the two have different a) availability, b) privacy and c) integration requirements[^abc].
 
-This are just a few examples of requirements of token. Instead of the simple ERC20 (or ERC721) token established on Ethereum, we need a much more flexible token setup, which reflects a lot of possible coordinates and allows the integration of requirements we do not know today.
+These are just a few examples of requirements of a token. Instead of the simple ERC20 (or ERC721) token established on Ethereum, we need a much more flexible token setup, which reflects a lot of possible coordinates and allows the integration of requirements we do not know today.
 
 [^abc]: Availability: NRMA is online 24/7 but Qantas Insurance can suspend their services in public holidays or at night. Privacy: NRMA can learn user's GPS location but Qantas Insurance isn't legally allowed to learn it. Integration: Most of NRMA's customers are not obtained through Qantas Insurance, so it would be an additional system to integrate and extra security concern for NRMA to integrate to Qantas Insurance's web service. Of all three, availability might be the most visible. Just imagine how angry a customer will be, having his car breaking down in the middle of the barren Australian outback, and learn that the road-side assistance can't be authorised because the insurer's web service is upgrading "For a better user experience".
 
@@ -221,7 +221,7 @@ By virtue of Tokenscript being a solution layer rather than base-layer technolog
 
 ## Address "Frictionless Market" needs
 
-Taking a closer look at "market", a market is not a noisy channel overloaded with information; more importantly, it is a place where delivery versus payment happens. With blockchain relying less on the middlemen, the host of the trades, our focus is turned into the tokens being traded, that is, *deliverables* and *payments*, and their role in market.
+Taking a closer look at "market", a market is not a noisy channel overloaded with information; more importantly, it is a place where delivery versus payment happens. With blockchain relying less on the middlemen, the host of the trades, our focus is turned into the tokens being traded, that is, *deliverables* and *payments*, and their role in the market.
 
 deliverables
 :    All sorts of things money can buy: assets, goods and services.
@@ -230,7 +230,7 @@ payment
 :    Ether, DAI, Sovereign. Anything currency-like. Only programmable currencies are relevant to this paper.
 
 market
-:    Market is where delivery versus payment happens. *Market* is an concept, not a marketplace. A user who checks out on a website is accessing a market. She doesn't have to be in a marketplace (e.g. Amazon) to do so.
+:    Market is where delivery versus payment happens. *Market* is a concept, not a marketplace. A user who checks out on a website is accessing a market. She doesn't have to be in a marketplace (e.g. Amazon) to do so.
 
 Tokenscript provides both *the deliverable* and *the payment* side tokens to "plug-in" to the *market*. 
 
@@ -273,13 +273,13 @@ We categorise these trade-sensitive information into four categories:
 - reference information. Item 8, 9.
 - action information (how to perform an asset action). Item 10.
 
-Understandablly, the buyers need to access all these for an informed decision.
+Understandably, the buyers need to access all these for an informed decision.
 
-[^pd] The word is loaned from the financial sector, usually used to describe packaged investment products. It basically means the formular which profit is calculated and the current values of the varibales in the formular.
+[^pd] The word is loaned from the financial sector, usually used to describe packaged investment products. It means the formula which profit is calculated and the current values of the variables in the formula.
 
 #### Product description
 
-Product description information is typically in the smart contract. In Ethereum cases, these can be obtained by making a few Smart Contract function calls, therefore, the only needed work is to convert them into presentation - usually it means translating to the language user speaks and converting "True" value into a nicely ticked checkbox. This serve to introduce the first functionality of Tokenscript: acting as a presentation layer for smart-contracts.
+Product description information is typically in the smart contract. In Ethereum cases, these can be obtained by making a few Smart Contract function calls, therefore, the only needed work is to convert them into a presentation - usually, it means translating to the language user speaks and converting "True" value into a nicely ticked checkbox. This serves to introduce the first functionality of Tokenscript: acting as a presentation layer for smart-contracts.
 
     <attribute-type id="voting-right">
        <name xml:lang="en">Voting right</name>
@@ -307,11 +307,12 @@ Product description information is typically in the smart contract. In Ethereum 
 	</origin>
     </attribute-type>
 
+
 This simplified `attribute-type` code snippet allows the value for Voting Right to be fetched from `holding-contract`, which is a smart contract defined somewhere else in the Tokenscript, and present it in one of a few languages.
 
 #### Attested information
 
-Attestation is just a signed message stating a fact. Attestations are often used to satisfy the conditions of the transactions. More on that in the chapter Attestations.
+Attestation is just a signed message stating a fact. Attestations are often used to satisfy the conditions of the transactions — more on that in chapter Attestations.
 
 In the 1% property token example, the involved attestations are:
 
@@ -319,11 +320,11 @@ In the 1% property token example, the involved attestations are:
 - by collateralization authority[^set-operation] to prevent double collateralization
 - by buyers, for providing identity or capacity to invest in this type of asset
 
-[^set-operation]: Eventually, this could be a cryptographic set operation, but even if that happens, the metadata directing the context (user-agent) to proform the computation still needs to be described in Tokenscript.
+[^set-operation]: Eventually, this could be a cryptographic set operation, but even if that happens, the metadata directing the context (user-agent) to perform the computation still needs to be described in Tokenscript.
 
-The first two attestations are not stored in smart contract for cost (size and number of transactions) and privacy reasons. It's possible to utilise zero knowledge proof to provide a generic proof that the attestation is for the said property and said owner, and it has not expired. What proofs are expected and can be validated is also described in Tokenscript.
+The first two attestations are not stored in a smart contract for privacy and cost (size and number of transactions) reasons. It's possible to utilise zero-knowledge proof to provide anonymous proof that the attestation is for the said property and said owner, and it has not expired. What proofs are expected and can be validated is also described in Tokenscript.
 
-Furthermore, the fact that the transaction requires an identity attestation or investment capacity attestation from the buyers. These are described in Tokenscript as well so the context (e.g. user-agent) can prevent the user to submit a transaction without qualifying proof or help the user to select suitable attestations for a purchase transaction.
+Furthermore, the fact that the transaction requires an identity attestation or investment capacity attestation from the buyers. These are described in Tokenscript as well so the context (e.g. user-agent) can prevent the user from submitting a transaction without qualifying proof or help the user to select suitable attestations for a purchase transaction.
 
 #### Reference information
 
@@ -331,7 +332,7 @@ Reference information is what relevant to the token and provided by web services
 
 [^trusted-information]: Originally we call it "Trusted information", meaning data such as previous property sales price or regional property performance data is just "provided", without blockchain proofs or attestations, hence, it has to be explicitly trusted by the user. As it turned out, this term misfired as some developers think it means "proven information" and provided as trusted already. So we used a less precise term "Reference information", which, unfortunately, feels like a catch-all phrase.
 
-Since Tokenscript is signed by the token issuer (not token owner - the token issuer is often entity that deployed the smart contrat), the reference information sourced from the web apis specified in Tokenscript is assumed trusted. The security chapter will detail different levels of trust.
+Since Tokenscript is signed by the token issuer (not token owner - the token issuer is often entity that deployed the smart contract), the reference information sourced from the web APIs specified in Tokenscript is assumed trusted. The security chapter will detail different levels of trust.
 
 Today, all such information related to a token is usually held together on a DAPP website made by the same entity that deployed the token. We argue that for tokens to be effectively marketized, It needs to be abstracted out and placed in the token behaviour language Tokenscript.
 
@@ -339,24 +340,24 @@ Today, all such information related to a token is usually held together on a DAP
 
 Dictates the correct method to construct a blockchain transaction, like:
 
-- What attestations are needed to prove the buyer's capacity to purchase.
-- What parameters are needed for a purchase (e.g. number of 1% shares).
-- How to render the purchase form and translate to user's local language.
-- Is the condition all met (e.g. a purchase isn't possible after the underlying property is liquidated).
+- What attestations are needed to prove the buyer's capacity to purchase?
+- What parameters are needed for a purchase (e.g. number of 1% shares)?
+- How to render the purchase form and translate to the user's local language.
+- Is the condition all met (e.g. a purchase isn't possible after the underlying property is liquidated)?
 
-These information is a super-set of smart contract programmable interface (In Ethereum, called ABI), with the additional part being business logic (e.g. property must be still valid and seller still have it) and presentation logic (e.g. the message "The property is liquidated. Purchase no longer possible").
+This information is a super-set of smart contract programmable interface (In Ethereum, called ABI), with the additional part being business logic (e.g. property must be still valid and owned by the seller) and presentation logic (e.g. the message "The property is liquidated. Purchase no longer possible").
 
 In conclusion, Tokenscript allows the context (user-agent or trading engine) to:
 
 - Fetch token related information from its holding smart contract, attestations and references.
 - Produce a visual or audio rendering of the token
-- Produce a list of actions that can be performed and how to constrct the transactions.
+- Produce a list of actions that can be performed and how to construct the transactions.
 
 Any party is able to render and apply functions to the token using Tokenscript, including entities like generic marketplaces, user-agents and 3rd party apps. We call these parties "context" in general.
 
 ### Why Tokenscript
 
-With the first example demonstrated, we use the opportunity to articulate why Tokenscript is needed, over the current prevailing way of providing asset access with a host DApp. We argue that the current prevailing method is not suitable for creating a frictionless market, while Tokenscript could, by providing reasons in the areas of *interoperability*, *scalability* and *security*.
+With the first example demonstrated, we use the opportunity to articulate why Tokenscript is needed, over the current prevailing way of providing asset access with a host DApp. We argue that the currently prevailing method is not suitable for creating a frictionless market, while Tokenscript could, by providing reasons in the areas of *interoperability*, *scalability* and *security*.
 
 #### Interoperability:
 
@@ -370,7 +371,7 @@ In a similar fashion, suppose an investors' forum where the members are allowed 
 
 Horizontally, the same type of asset might have its token instances across multiple networks like Plasma Chains. A buyer is likely to be interested only in assets in Australia, and therefore only connected to the Australian 1% Property network. It can be difficult to have an all-knowing node to provided rendered token information for all existing tokens, especially if a network is designed with privacy in mind. Therefore, to scale, the knowledge about the token (Tokenscript) must be detached from the access to the token.
 
-Vertically - by speaking *vertical*, we mean to build upward, to building structured transactions using a token transaction or creating structured tokens on top of a token. Such transaction and token access the component tokens. For example, if we desire a token whose make up is a 1% property token from a sample of 100 global cities, for mid-size investors to distribute the risk, a system that can manipulate such a token must be built with the knowledge about member tokens. It again cannot depend on the availability, security and openness of the original Dapp tied to that asset. Tokenscript would work in the middle for the making of such tokens.
+Vertically - by speaking *vertical*, we mean to build upward, to building structured transactions using a token transaction or creating structured tokens on top of a token. Such transaction and token access the component tokens. For example, if we desire a token which is made up from 1% property tokens risk-distributed over a sample of 100 global cities, a system that can manipulate such a token must be built with the knowledge about member tokens. It again cannot depend on the availability, security and openness of the original Dapp tied to that asset. Tokenscript would work in the middle for the making of such tokens.
 
 If we follow the example of Peter's Pride Property website as a Hello World example, it might need the user to submit a transaction not only purchase a token, but also tips Peter in the meanwhile. If only the token's issuer's DAPP knows how to assemble a token purchase transaction, this will be impractical for Peter.
 
@@ -394,19 +395,19 @@ A user who is purchasing a 1% property token from Peter's Pride Property recomme
 
 ## Payment side example: DAI token
 
-DAI is a token designed for payment - purchasing security token, purchasing goods and services and so like. It's intended to match USD in value. Not fixing the supply cap, it is not itself an investiment candidate.
+DAI is a token designed for payment - purchasing security token, purchasing goods and services and so like. It's intended to match USD in value. Not fixing the supply cap, it is not itself an investment candidate.
 
-In many ways DAI functions like Ether, the base currency in Ethereum. However, it can't be a drop-in replacement for Ether.
+In many ways, DAI functions like Ether, the base currency in Ethereum. However, it can't be a drop-in replacement for Ether.
 
-First, the Dapps written for Ethereum may not be aware that the user has DAI token, unless it explicitly support DAI. A Pizza ordering service that accepts Ether as payment, for example, cannot trivially start to accept DAI token. This is true even if DAI provides a DAI-to-Ether gateway service which, in an atomic fashion, converts DAI to Ether in the same transaction which uses the resulting Ether to purchasing Pizza.
+First, the Dapps written for Ethereum may not be aware that the user has DAI token unless it explicitly supports DAI. A Pizza ordering service that accepts Ether as payment, for example, cannot trivially start to accept DAI token. This is true even if DAI provides a DAI-to-Ether gateway service which, in an atomic fashion, converts DAI to Ether in the same transaction which uses the resulting Ether to purchasing Pizza.
 
-If Pizza website doesn't upgrade, the user has to convert DAI to Ether first, then, purchase Pizza with a second transaction. Such a process is not only inconvenient, but lack atomicity, meaning that the user could have converted DAI to Ether trough the effort, only to fail the checkout since the Pizza is sold out, and ended up with additional Ethers that she has to deal with.
+If Pizza website doesn't upgrade, the user has to convert DAI to Ether first, then, purchase Pizza with a second transaction. Such a process is not only inconvenient, but lack atomicity, meaning that the user could have converted DAI to Ether through the effort, only to fail the checkout since the Pizza is sold out, and ended up with additional Ethers with which she has to deal.
 
 It's worth noticing that the Pizza website cannot upgrade to support DAI without knowing how to discover the user's DAI balance[^balance-is-privacy] (to not to to waste a transaction fee just to find the DAI balance is insufficient), how to construct a DAI withdraw transaction or DAI-Ether gateway transaction and make direct smart contract function calls to the DAI holding contract.
 
 [^balance-is-privacy]: Eventually, the Pizza website would not only be oblivious about how to check balance, since Tokenscript handles it, but also not possible to know the balance. This would require underlying blockchain's support, but ultimately cannot be done if we continue the current trend where website, who should care about business logic, also care about payment logic.
 
-Naturally, the Pizza website isn't in the best position to manage these payment-side details. Tokenscript addreses this problem by
+Naturally, the Pizza website isn't in the best position to manage these payment-side details. Tokenscript addresses this problem by
 
 1. Encapsulating the smart contract function calls needed for supporting DAI, along with the javascript to construct needed transactions in Tokenscript, signed by DAI issuer.
 
@@ -414,26 +415,25 @@ Naturally, the Pizza website isn't in the best position to manage these payment-
 
 Tokenscript's capacity to embed payment logic and presentation means that not only it can display messages in user's language (like balance or "insufficient balance" message), but it can perform functions like pre-checking the balance, pause the checkout flow so that the user can perform a top-up flow and return to the checkout flow to finalise the checkout.
 
-To the user, the process resembles a bit like the checkout processs leads the user to Paypal to finalise the transaction, except the process happens locally in an enhanced user-agent.
+To the user, the process resembles a bit like the checkout process leads the user to Paypal to finalise the transaction, except the process, happens locally in an enhanced user-agent.
 
-We again argue that current prevailing method is not suitable for creati
-ng a frictionless market, while Tokenscript could, by providing reasons in the areas of *interoperability*, *scalability* and *security*.
+We again argue that current prevailing method is not suitable for creating a frictionless market, while Tokenscript could, by providing reasons in the areas of *interoperability*, *scalability* and *security*.
 
-As concluded, Pizza website would not have the necessary payment side logic to handle everything on its own. The traditional approach is to let the Pizza website use the javascript sourced by MakerDAO project. The javascript may or may not use a RESTful API provided by MakerDAO
+As concluded, Pizza website would not have the necessary payment side logic to handle everything on its own. The traditional approach is to let the Pizza website use the javascript sourced by MakerDAO project. The javascript may or may not use a RESTful API provided by MakerDAO.
 
 This approach solves one problem by introducing quite a few others.
 
 #### Security
 
-When the user makes the purchase attempt, the transaction is created with the combined effort of local javascript (Pizza shop javascript) and the supposedly secure javascript supplied by DAI. The user is presented with a transaction payload that contains both the parameters to access DAI contract, e.g. amount to pay, and the parameters to access the Pizza website contract, e.g. amount of pizzas to buy and the toppings of choice. Apparently such a transaction has to be sent to DAI contract and channeled (proxed) to the Pizza shop contract.
+When the user makes the purchase attempt, the transaction is created with the combined effort of local javascript (Pizza shop javascript) and the supposedly secure javascript supplied by DAI. The user is presented with a transaction payload that contains both the parameters to access DAI contract, e.g. amount to pay, and the parameters to access the Pizza website contract, e.g. amount of pizzas to buy and the toppings of choice. Apparently, such a transaction has to be sent to DAI contract and channelled (proxied) to the Pizza shop contract.
 
 There are two immediate[^minor-security-concerns] security concerns. First is that the website didn't use the MakerDAO javascript library correctly, which has the final transaction builder in it. Second is that it is not MakerDAO's javascript at work, but a version replaced by a hacker.
 
-[^minor-security-concerns]: When two systems plug on the web, usually there are a hoard of security concerns. To give one example, if a side didn't update the code to reflect the other side's change, the resulting malformed transaction might be rejected. Tracing these transactions allow an attacker to target websites not updated.
+[^minor-security-concerns]: When two systems plug on the web, usually there is a hoard of security concerns. To give one example, if a side didn't update the code to reflect the other side's change, the resulting malformed transaction might be rejected. Tracing these transactions allow an attacker to target websites not updated.
 
 These issues are addressed by the encapsulation method used in Tokenscript.
 
-First, the transaction forming code is signed by MakeDAO separately and updated separately from user-agent side. The website's code doesn't have to be signed because it just supplies the business logic, not payment logic. Say, if a bug is found, DAI can suspend the payment by updating these signed instructions, and the Pizza website would behave as if it has been updated to address the issue. If the bug is found to be in the DAI holding contract, and a replacement contract is deployed, MakerDAO would update Tokenscript and sign it again, without Pizza website having to do anything.
+First, the transaction forming code is signed by MakeDAO separately and updated separately from the user-agent side. The website's code doesn't have to be signed because it just supplies the business logic, not payment logic. Say, if a bug is found, DAI can suspend the payment by updating these signed instructions, and the Pizza website would behave as if it has been updated to address the issue. If the bug is found to be in the DAI holding contract, and a replacement contract is deployed, MakerDAO would update Tokenscript and sign it again, without Pizza website having to do anything.
 
 Second, by explicitly asking the user to trust the Tokenscript signed by MakerDAO, the user would not need to trust Pizza website's rendering of the transaction content, since it would be rendered by the trusted MakerDAO Tokenscript.
 
@@ -443,15 +443,15 @@ Third, if secure protocols needs to be added, for example, an attestation from t
 
 #### Interoperability
 
-Adding support for DAI itself is trouble enough, not to mention adding other payment side tokens. In the 2017-2018 frenzy, a lot of payment side tokens are invented and heavily invested in. Pretty much anything advertised not as a security token outlines some way their token can be used to pay or co-pay some goods and services. Electricity tokens, for example, is invented as the currency of the future tokenised electricity. Most of them are jokes, but what if they are put to work? Even if only 10% of these tokens are done by sincerer ICO teams, all of them would forsee similiar trouble as the integration of DAI token into the market.
+Adding support for DAI itself is trouble enough, not to mention adding other payment side tokens. In the 2017-2018 frenzy, a lot of payment side tokens are invented and heavily invested in. Pretty much anything advertised not as a security token outlines some way their token can be used to pay or co-pay some goods and services. Electricity tokens, for example, is invented as the currency of the future tokenised electricity. Most of them are jokes, but what if they are put to work? Even if only 10% of these tokens are done by sincerer ICO teams, all of them would forsee similar trouble as the integration of DAI token into the market.
 
-And each payment side currency brings its own payment side logic. Take DAI for example, it has these payment side logic:
+And each payment side currency brings its own payment side logic. Take DAI, for example. It has these payment side logic:
 
 1. The creation of DAI tokens requires a set-up phase, called CDP.
-2. The risk level of a CDP changes. Users should receive a notification of their CDP is at liquidation risk. We will cover such case again in the next chapter.
+2. The risk level of a CDP changes. Users should receive a notification of their CDP is at liquidation risk. We will cover such a case again in the next chapter.
 3. If the balance runs low, but the user has quite a bit of Ethers on his/her account, she may pause the checkout to top up before returning to the checkout.
 
-An architect might read it here and decide these can all be done out of band. Just kick the user back to the MakerDAO website if any of these happens. This would not address payment side innovation like Point+Pay, where the points are selected at the same screen as payment. In fact, you can observe a proliferationDictionary of payment side innovations in China for examples:
+An architect might read it here and decide these can all be done out-of-band. Just kick the user back to the MakerDAO website if any of these happens. This would not address payment side innovation like Point+Pay, where the points are selected at the same screen as payment. In fact, you can observe a proliferationDictionary of payment side innovations in China for examples:
 
 - Micro-credit (e.g. 花唄) and collateralized credit
 
@@ -459,7 +459,7 @@ An architect might read it here and decide these can all be done out of band. Ju
 
 - Cashback when you spent more than ¥1000 in a day.
 
-- Red packet that can only be used in paying consumption.
+- Red-packets that can only be used in paying consumption.
 
 - Lottery on being the 100th, 200th.. 600th payment.
 
@@ -467,15 +467,15 @@ An architect might read it here and decide these can all be done out of band. Ju
 
 - Prepaid online shopping payment cards, like the Alipay cards sold in Australia Post.
 
-Tokenscript intends to give room for payment side innovation as well as deliverable side. Traditionally, partner support used to curb payment side innovation. American Express implemented points to pay API but after years only less than 5% of partner e-commerce websites provided this as a checkout option.
+Tokenscript intends to give room for payment side innovation as well as the deliverable side. Traditionally, partner support used to curb payment side innovation. American Express implemented points to pay API, but after years only less than 5% of partner e-commerce websites provided this as a checkout option.
 
 #### Scalability
 
 The payment and delivery may not be on the same blockchain.
 
-Rendering user's balance in dapp website is briefly mentioned as a privacy issue a few pages back, but as blockchain scales, the dapp's server side may not have equal access to the client on some data like balance. It's possible that the website only observes the result of the transaction and happy to deliver physical or tokenised goods by rules.
+Rendering user's balance in dapp website is briefly mentioned as a privacy issue a few pages back, but as blockchain scales, the Dapp's server side may not have equal access to the client on some data like balance. It's possible that the website only observes the result of the transaction and happy to deliver physical or tokenised goods by rules.
 
-It's unlikely any scalability plan will not involve the participation of dapp browsers and wallets. They results in situation that dapps could not take care of the payment side with whatever advanced javascript they can supply.
+It's unlikely any scalability plan will not involve the participation of dapp browsers and wallets. They result in a situation that dapps could not take care of the payment side with whatever advanced javascript they can supply.
 
 ## Address the "Integrate the web" need
 
@@ -581,7 +581,7 @@ This change illustrated that the business process should decouple from the token
 
 Business went on for a while; then, there is an innovation from the blockchain market. Some users bulk-purchased a year's shipping from a delivery company, to enjoy the AmazonPrime-like free shipping privileges without using Amazon[^last-mile-market]. Seeing an opportunity, a credit card company even went so far as to provide such a privilege to the subscribers of their card, which is also represented by a toke.
 
-[^last-mile-market]: The market condition for such an innovation might exist, because only the buyer is most familiar with the last-mile delivery experience. Usually, an online retailer negotiates a higher bulk delivery discount than their buyers could, but they are just a proxy of the buyers' experience. Their interest is not perfectly aligned with the buyers. A buyer driving 30 minutes to pick up a parcel knows that the discount is no match for her time. The delivery company can also optimise the process better than the online retailer, for example, by requesting access to the buyer's calendar, which the online retailer couldn't do safely. Ultimately, more value can be created with the collaboration between buyer and the delivery company.
+[^last-mile-market]: The market condition for such an innovation might exist because only the buyer is most familiar with the last-mile delivery experience. Usually, an online retailer negotiates a higher bulk delivery discount than their buyers could, but they are just a proxy of the buyers' experience. Their interest is not perfectly aligned with the buyers. A buyer driving 30 minutes to pick up a parcel knows that the discount is no match for her time. The delivery company can also optimise the process better than the online retailer, for example, by requesting access to the buyer's calendar, which the online retailer couldn't do safely. Ultimately, more value can be created with the collaboration between the buyer and the delivery company.
 
 The online retailer decided to join the game to stay competitive. This time, he would need to modify his smart contract, changing the transaction rule that a shipping token can be accepted at the time of purchase. In such a case, the output of the transaction will not have a shipping token, since one is already provided.[^fungible-shipping-token]
 
@@ -591,15 +591,15 @@ The online retailer will necessarily modify his business process to expect pick-
 
 This change illustrated that a new transaction rule would result in a change of smart contract.
 
-### Business processes may not change smart contract. Market condition may.
+### Business processes may not change smart contracts. The market condition may.
 
 To recap, business process changes should not lead to a smart contract change. An improvement in a free market, in the form of a transaction rule change, should naturally lead to a smart contract change. Blockchain serves to provide a frictionless market, not to optimise business processes.
 
 This vision is made possible through Tokenscript. Without which the clear separation of integration needs and business process needs would be difficult and the result would be not interoperable.
 
-In the first case, Tokenscript described a shipping token to be able to receive messages. In the simplist form, the message is entrusted and rendered to the user interface
+In the first case, Tokenscript described a shipping token to be able to receive messages. In the simplest form, the message is entrusted and rendered to the user interface
 
-We will demonstrate the portion of Tokenscript related to messaging.
+We demonstrate the portion of Tokenscript related to messaging.
 
     <token>
       <name xml:lang="en">Shipment</name>
@@ -631,16 +631,15 @@ We will demonstrate the portion of Tokenscript related to messaging.
 	 </trust>
 	 [...]
 
-
 The section between `<states>...</states>` gives a list of states which is the basis of defining messages the token holder is allowed to receive.
 
-The first `<trust>...</trust>` structure causes the user agent to accept and display any signed messages from the token issuer, in this case the online retailer, as notification and an entry in message history, when the token's state is initialised.
+The first `<trust>...</trust>` structure causes the user agent to accept and display any signed messages from the token issuer, in this case, the online retailer, as notification and an entry in message history, when the token's state is initialised.
 
 The second `<trust>...</trust>` structure causes the user agent to accept and display any signed messages, whose signing verification key is certified by the issuer of the token, as notification and as an entry in message history, when the token's state is "dispatched". This effectively allows any entity the token issuer explicitly trust to issue a message at "dispatched" state.
 
-When the online retailer changes his delivery company, the retailer could issue a certificate on the public key of the new delivery company, thereby authorising them to send messages to the token holders (buyers) to update them the delivery status, yet restricting the messages to only certain stages of business process.
+When the online retailer changes his delivery company, the retailer could issue a certificate on the public key of the new delivery company, thereby authorising them to send messages to the token holders (buyers) to update them the delivery status, yet restricting the messages to only certain stages of the business process.
 
-This code snippet shows that by giving such flexibility Tokenscript connected to a new business process without requiring change in the smart contract or affecting user experience. It also allowed communication to the token holder without sending messages through smart contracts.
+This code snippet shows that by giving such flexibility Tokenscript connected to a new business process without requiring a change in the smart contract or affecting user experience. It also allowed communication to the token holder without sending messages through smart contracts.
 
 The method of actual communication is left open to be implemented by other layers of blockchain technology like a message queue or even a distributed message queue.
 
@@ -688,11 +687,11 @@ To explain the use case when the *revocation* of an attestation has to happen on
 
 ## Actions
 
-We seperate the rendering portion of Tokenscript and the actionable portion. Action refer the things you can do with a token. There are generally either:
+We separate the rendering portion of Tokenscript and the actionable portion. Action refer to the things you can do with a token. There are generally either:
 
-- Use the token to access to a web service
+- Use the token to access a web service
 - Use the token to control IOT devices
-- Transacte with the token.
+- Transact with the token.
 
 All examples of these actions can be found in the car example in the first chapter. For example:
 
@@ -710,7 +709,7 @@ Lend
 Holden Capped Service token's actions
 
 Book a service
-:   This token allows the user to login to any holden service center and book an appointment.
+:   This token allows the user to login to any holden service centre and book an appointment.
 
 Check-in
 :   He further uses this token to enter the service station (swipe his mobile to enter the sliding gate).
@@ -721,10 +720,10 @@ Pay
 Not all actions are provided by the token. Typically:
 
 Transfer
-:   Provided by a generic token's Tokenscript. You can imagine for example the Tokenscript file of ERC721 allows any conforming tokens to be transferred, and the car token might be one of them. In reality it can hardly be the case because car token's transaction rules usually require attestations, such as the buyer is of the legal age to conduct such a transaction, but even in such cases, the rule might be supplied by a Tokenscript regulating the car trade.
+:   Provided by a generic token's Tokenscript. You can imagine for example the Tokenscript file of ERC721 allows any conforming tokens to be transferred, and the car token might be one of them. In reality, it can hardly be the case because car token's transaction rules usually require attestations, such as the buyer is of the legal age to conduct such a transaction, but even in such cases, the rule might be supplied by a Tokenscript regulating the car trade.
 
 Auction
-:   Provided by an auction market. When the user accesses an auction market, using the same mechanism that allows a token to login to a website, the user's agent (wallet) would show a list of tokens that can enjoy the auction service. If the user trusts the auction market, she can then add its action to all of the supported tokens.
+:   Provided by an auction market. When the user accesses an auction market, using the same mechanism that allows a token to log in to a website, the user's agent (wallet) would show a list of tokens that can enjoy the auction service. If the user trusts the auction market, she can then add its action to all of the supported tokens.
 
 List for sharing
 :   A startup company, let's call it CarNextDoor, offers to manage the process so the car owners can safely list the car for sharing and automatically gets income. Once listed, the car owner will obtain a listing token and has to book his use of his own car through it. In exchange, when he is not using it, the car goes out and earn money for him. Naturally, the action is provided by CarNextDoor, not by Holden.
@@ -736,7 +735,7 @@ Magic links are simply a shortcut to an action on a specific asset. It's usually
 
 ## Attestations
 
-Attestations are like Tokens except that they are not transferable, in the case that a smart contract allows them to be transferred, the original attestation is render invalid after the transfer.  This makes it possible for things like friendship to be defined in a way similar to the token, and therefore, we may as well call such attestations "tokens". A token of friendship would be a signed message from someone, recognising someone else as a friend, and it would be an asset in Tokenscript terminology. Apparently a token of friendship from Michael Jackson can be of high value, especially since he cannot produce any more of these tokens, but even a humble token like "Friend of Weiwu" has some value. It, for example, allows a friend of Weiwu to sign a delivery receipt for him, or allows such a friend to get a mate-rate for signing up in the same dojo Weiwu practises in. There is even a neat trick, which, by using secret sharing protocols, having Weiwu's friendship token allows one to learn common friends shared with Weiwu. Notice that this definition does not require the asset to be a blockchain token, nor that it even exists on the blockchain. More on that in the latter chapter "attestation".
+Attestations are like Tokens except that they are not transferable, in the case that a smart contract allows them to be transferred, the original attestation is rendered invalid after the transfer.  This makes it possible for things like friendship to be defined in a way similar to the token, and therefore, we may as well call such attestations "tokens". A token of friendship would be a signed message from someone, recognising someone else as a friend, and it would be an asset in Tokenscript terminology. Apparently, a token of friendship from Michael Jackson can be of high value, especially since he cannot produce any more of these tokens, but even a humble token like "Friend of Weiwu" has some value. It, for example, allows a friend of Weiwu to sign a delivery receipt for him or allows such a friend to get a mate-rate for signing up in the same dojo Weiwu practices in. There is even a neat trick, which, by using secret sharing protocols, having Weiwu's friendship token allows one to learn common friends shared with Weiwu. Notice that this definition does not require the asset to be a blockchain token, nor that it even exists on the blockchain. More on that in the latter chapter "attestation".
 
 Assets and attestations (tokens in general) can have financial value and utility value.
 
@@ -751,9 +750,4 @@ Examples of attestations: crypto-kitten vouchers, FIFA ticket redeem coupons, Am
 
 # Join the game
 
-The work to define Tokenscript as a specification is a work in progress. We aim to produce a yellow paper of the key methods and considerations and extend it from there. More methods of collaborations are being put to work as you read this draft. For now, the contact points are:
-
-weiwu.zhang@alphawallet.com
-james.sangalli@alphawallet.com
-victor.zhang@alphawallet.com
-
+The work to define Tokenscript as a specification is a work in progress. We aim to produce a yellow paper of the key methods and considerations and extend it from there. The work in progress is coordinated with Discourse on http://www.tokenscript.org
