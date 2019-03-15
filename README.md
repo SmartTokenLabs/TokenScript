@@ -2,7 +2,7 @@
 
 TokenScript builds the front end logic of a token dapp with the smart contract on the backend. 
 
-A TokenScript file contains a token's business logic, token UI rendering and program interface, signed by the token's modeller to prevent tampering and phising.
+A TokenScript file contains a token's business logic, token UI rendering and program interface, signed by the token's modeller.
 
 ## Don't we already have a front-end for tokens?
 
