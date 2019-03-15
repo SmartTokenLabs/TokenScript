@@ -24,6 +24,10 @@ We recognise the blockchain technology's utility in providing a frictionless mar
 
 Today, the ways tokens are accessed, rendered and transacted are scattered across dynamic Dapps and immutable Smart Contracts on the blockchain. Most tokens either have a very primitive business logic (as payment token), while some try to put complex business logic into the contract, creating a specific dapp (decentralised application) to cater the interactions with the token. This enables DAOs (Decentralized Autonomous Organizations) but hardly helps to create a frictionless token economy and integrate the web. When marketisation and integration of a token is tied to a dapp, it recreates data interoperability, security and availability barrier - the same issues that prevented tokenisation before blockchain's invention.
 
+TokenScript allows token logic and rendering to be separated out of the "host", allows token to be easily portable and market to be created for it.
+
+It allows different token providers to, not only describe the features of their tokens but also how they are allowed to “act”, e.g. transferability. The crux of the idea is that such a markup description can be updated at any time by the token issuer and retroactively reflect the behaviour of already issued tokens. Besides allowing easy interoperability between different token providers, this also eliminates the need to update the DApp or smart contract whenever the business logic of a particular type of token changes.
+
 \pagebreak
 
 # Introduction: What does blockchain *do*?
