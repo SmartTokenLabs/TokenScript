@@ -1,26 +1,26 @@
 # TokenScript
 
-A TokenScript builds the front end of a token while smart contracts are the backend of a token.
+TokenScript builds the front end logic of a token dapp with the smart contract on the backend. 
 
-A TokenScript file contains a token's business logic, token UI rendering and program interface, signed by the token's modeller.
+A TokenScript file contains a token's business logic, token UI rendering and program interface, signed by the token's modeller to prevent tampering and phising.
 
-## Isn't dapp the front end of a token?
+## Isn't a website serving a smart contract the front end of a token?
 
-Today, each token has a "home" dapp, let's call it "hosting" dapp.
+Nowadays, most token dapps have a website which serves all the content relevant to the underlying smart contract.
 
-If everything user has to do with that token is done on that hosting dapp, then the hosting dapp is all needed for a token front. However, one might wonder why such 2-party game (use r<-> hosting dapp) needs to use smart contract tokens at all.
+If everything the user wanted to do with that dapp is done via the hosting website, then this is sufficient to serve the users of the dapp. However, one might want to use a dapp which can talk to another such as a 2 party game which holds other items such as a sword on the other. 
 
-Tokenscript is similiar to taking the "hosting" app and make it portable. In the Tokenscript framework, Dapps provide services using or related to the token. Such distinction and separation between Tokenscript and Dapp is important for the two primary functions of blockchain: *building a frictionless market* and *integrate the web*. More about that in the design paper.
+TokenScript enables the host dapp to become portable and usable across multiple dapps. In this frameworkd, a dapp can provide services and context related to the token (e.g. you have one sword in the WoW dapp and an assault rifle in call of duty). This distinction enables the dapp to integrate with another and create a frictionless experience for the user. More about that in the design paper.
 
 ## How is it created and used?
 
 A TokenScript is created by the token's modeler, typically the team which builds the underlying smart contracts dictating the token's transaction rules.
 
-When userd by a user (through user-agent, e.g. a Dapp browser) Tokenscript visually render the token and provide trustworthy assembling of transactions related to the token.
+When used by a user (through user-agent, e.g. a Dapp browser) Tokenscript visually renders the token and provides trustworthy assembling of transactions related to the token.
 
-When used by a dapp developer, Tokenscript allows a Dapp to interact with its interface instead of directly accessing smart contracts, so that the Dapp can be upgraded independently of all the tokens it supports.
+When used by a dapp developer, TokenScript allows a Dapp to interact with its interface instead of directly accessing smart contracts, so that the Dapp can be upgraded independently of all the tokens it supports.
 
-When used by a market or any other token related services (e.g. auction, collateralisation), it allows token to be correctly rendered and signed for use with these services.
+When used by a market or any other token related service (e.g. an auction or collateralisation), it allows the token to be correctly rendered and signed for use with these services.
 
 ## What's in a TokenScript file?
 
@@ -28,7 +28,7 @@ TokenScript is an XML dialect. It describes the functions provided by the token 
 
 ## TokenScript Project introduction: 
 
-TokenScript Project is to develop and help with adoption of TokenScript, the standard markup language for creating and using cryptographic tokens(e.g. blockchain tokens) and DApps.
+The TokenScript project is an initiative to help spread adoption of TokenScript. 
 
 The remarkable blockchain speculations that took place in 2017 - 2018 brought everyone's attention to crypto tokens. As we bought and sold them, we forgot their intended purpose was to be used; this is analogous to the housing bubble in which people forgot that houses were not merely speculative assets but rather a place to live. To provide a practical use of the blockchain, we must understand its utility to the world economy and the internet. The people behind this project are technical experts who went through years of study and experimentation into its applications both via financial institutions and startups. With this experience, we recognise the blockchain technology's utility in providing a frictionless market and integrating the web.
 
