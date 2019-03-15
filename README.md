@@ -4,13 +4,15 @@ TokenScript builds the front end logic of a token dapp with the smart contract o
 
 A TokenScript file contains a token's business logic, token UI rendering and program interface, signed by the token's modeller to prevent tampering and phising.
 
-## Isn't a website serving a smart contract the front end of a token?
+## Don't we already have a front-end for tokens?
 
-Nowadays, most token dapps have a website which serves all the content relevant to the underlying smart contract.
+In Ethereum, most tokens have a web application which serves all the content relevant to the token. Let's call it _the "Dapp" of the token_.
 
-If everything the user wanted to do with that dapp is done via the hosting website, then this is sufficient to serve the users of the dapp. However, one might want to use a dapp which can talk to another such as a 2 party game which holds other items such as a sword on the other. 
+If everything the user wanted to do with that token is done on that website, then yes there is already a front-end for that token. But that token isn't very useful as a blockchain token, since it can't be used on other Dapps.
 
-TokenScript enables the host dapp to become portable and usable across multiple dapps. In this frameworkd, a dapp can provide services and context related to the token (e.g. you have one sword in the WoW dapp and an assault rifle in call of duty). This distinction enables the dapp to integrate with another and create a frictionless experience for the user. More about that in the design paper.
+TokenScript of a token is like making _the dapp of the token_ portable and usable across multiple dapps. In this frameworkd, a dapp can provide services and context related to the token (e.g. you have one sword in the WoW dapp and an assault rifle in call of duty).
+
+This distinction and separation is important for tokenisation - a concept addressed in [the design paper](https://github.com/AlphaWallet/TokenScript/releases). The authors of the design paper holds that there is no tangbile benifit of using blockchain without tokenisation.
 
 ## How is it created and used?
 
