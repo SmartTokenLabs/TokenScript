@@ -10,7 +10,7 @@ In Ethereum, most tokens have a web application which serves all the content rel
 
 If everything the user wanted to do with that token is done on that website, then yes there is already a front-end for that token. But that token isn't very useful as a blockchain token, since it can't be used on other Dapps.
 
-TokenScript of a token is like making _the dapp of the token_ portable and usable across multiple dapps. In this frameworkd, a dapp can provide services and context related to the token (e.g. you have one sword in the WoW dapp and an assault rifle in call of duty).
+TokenScript of a token is like making _the dapp of the token_ portable and usable across multiple dapps. In this framework, a dapp can provide services and context related to the token (e.g. you have one sword in the WoW dapp and an assault rifle in call of duty).
 
 This distinction and separation is important for tokenisation - a concept addressed in [the design paper](https://github.com/AlphaWallet/TokenScript/releases). The authors of the design paper holds that there is no tangbile benifit of using blockchain without tokenisation.
 
