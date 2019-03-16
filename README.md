@@ -14,9 +14,17 @@ TokenScript of a token is like making _the dapp of the token_ portable and usabl
 
 This distinction and separation is important for tokenisation - a concept addressed in [the design paper](https://github.com/AlphaWallet/TokenScript/releases). The authors of the design paper holds that there is no tangbile benifit of using blockchain without tokenisation.
 
-## How is it created and used?
+## Why Tokenscript?
 
-A TokenScript is created by the token's modeler, typically the team which builds the underlying smart contracts dictating the token's transaction rules.
+Today, the way tokens are accessed, rendered and transacted are scattered across Dapps and Smart Contracts. This limited the use of Tokens.
+
+Typically, all knowledge about rendering a token and constructing a transaction about the token is in a "host" web app. The "host" web app becomes a centre in the token's marketisation and integration, recreating data interoperability, security and availability barrier - precisely the same set of issues that prevented tokenisation before blockchain's invention.
+
+By taking the knowledge of tokens including smart contract interfaces out and put them into a portable Tokenscript we allow tokens to be accessible and useful.
+
+## How is a Tokenscript created and used?
+
+A TokenScript is typically created by the token's modeler, the team which builds the underlying smart contracts dictating the token's transaction rules.
 
 When used by a user (through user-agent, e.g. a Dapp browser) Tokenscript visually renders the token and provides trustworthy assembling of transactions related to the token.
 
