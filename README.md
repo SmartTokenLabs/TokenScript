@@ -14,14 +14,6 @@ TokenScript of a token is like making _the dapp of the token_ portable and usabl
 
 This distinction and separation is important for tokenisation - a concept addressed in [the design paper](https://github.com/AlphaWallet/TokenScript/releases). The authors of the design paper holds that there is no tangbile benifit of using blockchain without tokenisation.
 
-## Why Tokenscript?
-
-Today, the way tokens are accessed, rendered and transacted are scattered across Dapps and Smart Contracts. This limited the use of Tokens.
-
-Typically, all knowledge about rendering a token and constructing a transaction about the token is in a "host" web app. The "host" web app becomes a centre in the token's marketisation and integration, recreating data interoperability, security and availability barrier - precisely the same set of issues that prevented tokenisation before blockchain's invention.
-
-By taking the knowledge of tokens including smart contract interfaces out and put them into a portable Tokenscript we allow tokens to be accessible and useful.
-
 ## How is a Tokenscript created and used?
 
 A TokenScript is typically created by the token's modeler, the team which builds the underlying smart contracts dictating the token's transaction rules.
@@ -35,6 +27,14 @@ When used by a market or any other token related service (e.g. an auction or col
 ## What's in a TokenScript file?
 
 TokenScript is an XML dialect. It describes the functions provided by the token (through smart contract or not), the method to render it on the user's interface, the ERCs token behaviour templates it uses and the javascript needed to construct transactions and render the token. It also defines how attestations are used to decorate, or convert to, or validate a transaction.
+
+## Why Tokenscript?
+
+Today, the way tokens are accessed, rendered and transacted are scattered across Dapps and Smart Contracts. This limited the use of Tokens.
+
+Typically, all knowledge about rendering a token and constructing a transaction about the token is in a "host" web app. The "host" web app becomes a centre in the token's marketisation and integration, recreating data interoperability, security and availability barrier - precisely the same set of issues that prevented tokenisation before blockchain's invention.
+
+By taking the knowledge of tokens including smart contract interfaces out and put them into a portable Tokenscript we allow tokens to be accessible and useful.
 
 ## TokenScript Project introduction
 
