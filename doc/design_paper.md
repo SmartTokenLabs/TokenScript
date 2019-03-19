@@ -22,7 +22,7 @@ Please join our work at tokenscript.org. A Yellow Paper to guide implementors to
 
 We recognise the blockchain technology's utility in providing a frictionless market and integrating the web. This is done through tokenisation. Tokenised rights can be traded on the market and integrated across systems, forming a frictionless market and allowing free and accountless integration.
 
-Today, the ways tokens are accessed, rendered and transacted are scattered across dynamic Dapps and immutable Smart Contracts on the blockchain. Most tokens either have a very primitive business logic or try to put complex business logic into the contract to cater the interactions with the token. This adds complexity and security issues, while hardly addressing all potential business patterns in advance. When marketisation and integration of a token is tied to a dapp, it recreates data interoperability, security and availability barrier - the same issues that prevented tokenisation before blockchain's invention.
+Today, the ways tokens are accessed, rendered and transacted are scattered across dynamic Dapps and immutable Smart Contracts on the blockchain. Most tokens either have a very primitive business logic or try to put complex logics into the contract to cater the interactions with the token. This adds complexity and security issues, while hardly addressing all potential business patterns in advance. When marketisation and integration of a token is tied to a dapp, it recreates data interoperability, security and availability barrier - the same issues that prevented tokenisation before blockchain's invention.
 
 Therefore we introduce Tokenskript, a program interface for tokenisation. It abstracts out the token information, access methods and UI rendering so that they can be efficiently marketised and used for integration. It allows different token providers to not only describe the features of their tokens but also how they are allowed to “act”, e.g. transferability. The crux of the idea is that such a markup description can be updated at any time by the token issuer and retroactively reflect the behaviour of already issued tokens. Besides allowing easy interoperability between different token providers, this also eliminates the need to update the DApp or smart contract whenever the business logic of a particular type of token changes.
 
@@ -61,7 +61,9 @@ Can we tokenise the risk and reward of international trades, so that small impor
 
 Can we create an insurance token that depends on cryptographic proofs, so that the insurer can remove the costs incurred by fraudulent documents from the pricing? Can we decentralise the insurers altogether?
 
-Blockchain can provide the foundational layer to achieve these. It enables a working, frictionless market with tokenised assets *always on the market*. However, this can only become true when there is a reliable and precise method to define how tokens should be used and transacted. This the focus of our work on Tokenscript. But first, we look at what tokens are how token operate currently.
+Blockchain can provide the foundational layer to achieve these. It enables a working, frictionless market with tokenised assets *always on the market*. However, this can only become true when there is a reliable and precise method to define how tokens should be used and transacted. This the focus of our work on Tokenscript. 
+
+To carve out the difference, we look at how Tokens are used today.
 
 ### Payment Token and deliverable Token
 
@@ -81,7 +83,9 @@ Tokens can be products. Therefore they need to have different properties: Do tok
 
 How does it look on the user's mobile, and how is it called in a users language? If a buyer wants to purchase a tokenised country estate from a seller, how do they establish a trusted method of communication? If a token entitles the user to do specific actions online, how can the user login to the web services with that token?
 
-It's easy to see the need for an open framework defining tokens and making them interoperable with different methods of trading, listing and rating. Tokenscript provides such a framework. However, to diligently design it we need to consider the second part of what Blockchains can do: Integrate the web.
+It's easy to see the need for an open framework defining tokens and making them interoperable with different methods of trading, listing and rating. Tokenscript provides such a framework. It overcomes the limitation of the approach to put everything in a smart contract or a set of smart contracts.
+
+However, to diligently design it we need to consider the second part of what Blockchains can do: Integrate the web.
 
 ## Blockchain integrates the web
 
@@ -205,7 +209,7 @@ To unleash their potential, token needs to become a lot more sophisticated and s
 
 __1. Tokenisation means representing all kind of assets as a token on a blockchain.__ This requires bundling a token with its transactions rules and behaviour patterns. It takes them off the system where they initially grew in and frees them to be traded or used in different context.
 
-__2. Tokenisatoins must allow users to interact with different systems through the tokens:__ In the car example, the car token is issued by the maker, and necessarily so because it contains code to interact with a smart lock (the *Open*, *Start*, *Lock* actions) and the maker's own web service (the *Locate* action), yet it needs to work in other environments. The *Auction* action, for example, is provided by a third party auction web service. The user accesses auction services through the token without the need of signing up and proving ownership. The *List for sharing* is provided by another third party service which tokenises the usage of the car by hours or days and sells them piecemeal. And so on.
+__2. Tokenisation must allow users to interact with different systems through the tokens:__ In the car example, the car token is issued by the maker, and necessarily so because it contains code to interact with a smart lock (the *Open*, *Start*, *Lock* actions) and the maker's own web service (the *Locate* action), yet it needs to work in other environments. The *Auction* action, for example, is provided by a third party auction web service. The user accesses auction services through the token without the need of signing up and proving ownership. The *List for sharing* is provided by another third party service which tokenises the usage of the car by hours or days and sells them piecemeal. And so on.
 
 The owner must be able to access all those markets solely through this Token. The token becomes the fundamental and atomic base for economic interactions.  
 
