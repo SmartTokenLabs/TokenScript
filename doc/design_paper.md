@@ -1,4 +1,75 @@
 # Tokenscript Design Paper
+## [Author's note](https://github.com/AlphaWallet/TokenScript/blob/master/doc/design_paper.md#authors-note)
+
+## [Abstract](https://github.com/AlphaWallet/TokenScript/blob/master/doc/design_paper.md#abstract)
+
+## [Introduction: What does blockchain do?](https://github.com/AlphaWallet/TokenScript/blob/master/doc/design_paper.md#introduction-what-does-blockchain-do)
+
+### [Creating a frictionless market](https://github.com/AlphaWallet/TokenScript/blob/master/doc/design_paper.md#creating-a-frictionless-market)
+
+#### [Tokenised Assets](https://github.com/AlphaWallet/TokenScript/blob/master/doc/design_paper.md#tokenised-assets)
+
+#### [Payment Token and deliverable Token](https://github.com/AlphaWallet/TokenScript/blob/master/doc/design_paper.md#payment-token-and-deliverable-token)
+
+#### [Token properties](https://github.com/AlphaWallet/TokenScript/blob/master/doc/design_paper.md#token-properties)
+
+### [Blockchain integrates the web](https://github.com/AlphaWallet/TokenScript/blob/master/doc/design_paper.md#blockchain-integrates-the-web)
+
+#### [The problem of the internet as we know it](https://github.com/AlphaWallet/TokenScript/blob/master/doc/design_paper.md#the-problem-of-the-internet-as-we-know-it)
+
+#### [The client side can't integrate a web that is not designed to integrate](https://github.com/AlphaWallet/TokenScript/blob/master/doc/design_paper.md#the-client-side-cant-integrate-a-web-that-is-not-designed-to-integrate)
+
+#### ["Account authentication" is not a substitute for web integration](https://github.com/AlphaWallet/TokenScript/blob/master/doc/design_paper.md#account-authentication-is-not-a-substitute-for-web-integration)
+
+#### [The lack of an ownership mechanism](https://github.com/AlphaWallet/TokenScript/blob/master/doc/design_paper.md#the-lack-of-an-ownership-mechanism)
+
+### [Example: Car Ownership Token](https://github.com/AlphaWallet/TokenScript/blob/master/doc/design_paper.md#example-car-ownership-token)
+
+### [The challenge of tokenisation](https://github.com/AlphaWallet/TokenScript/blob/master/doc/design_paper.md#the-challenge-of-tokenisation)
+
+## [Design requirements](https://github.com/AlphaWallet/TokenScript/blob/master/doc/design_paper.md#design-requirements)
+
+### [Address "Frictionless Market" needs](https://github.com/AlphaWallet/TokenScript/blob/master/doc/design_paper.md#address-frictionless-market-needs)
+
+#### [Deliverable side example: 1% property token](https://github.com/AlphaWallet/TokenScript/blob/master/doc/design_paper.md#deliverable-side-example-1-property-token)
+
+#### [Why Tokenscript](https://github.com/AlphaWallet/TokenScript/blob/master/doc/design_paper.md#why-tokenscript)
+
+### [Payment side example: DAI token](https://github.com/AlphaWallet/TokenScript/blob/master/doc/design_paper.md#payment-side-example-dai-token)
+
+### [Address the "Integrate the web" need](https://github.com/AlphaWallet/TokenScript/blob/master/doc/design_paper.md#address-the-integrate-the-web-need)
+
+#### [The Shipping Token](https://github.com/AlphaWallet/TokenScript/blob/master/doc/design_paper.md#the-shipping-token)
+
+#### [Warranty Token](https://github.com/AlphaWallet/TokenScript/blob/master/doc/design_paper.md#warranty-token)
+
+#### [Receipt Token](https://github.com/AlphaWallet/TokenScript/blob/master/doc/design_paper.md#receipt-token)
+
+## [The design of Tokenscript](https://github.com/AlphaWallet/TokenScript/blob/master/doc/design_paper.md#the-design-of-tokenscript)
+
+### [Relate tokens to smart contract and tokens to web services](https://github.com/AlphaWallet/TokenScript/blob/master/doc/design_paper.md#relate-tokens-to-smart-contract-and-tokens-to-web-services)
+
+#### [Change in the business process](https://github.com/AlphaWallet/TokenScript/blob/master/doc/design_paper.md#change-in-the-business-process)
+
+#### [Change in the market](https://github.com/AlphaWallet/TokenScript/blob/master/doc/design_paper.md#change-in-the-market)
+
+#### [Business processes may not change smart contracts. The market condition may](https://github.com/AlphaWallet/TokenScript/blob/master/doc/design_paper.md#business-processes-may-not-change-smart-contracts-the-market-condition-may)
+
+### [Types of tokens](https://github.com/AlphaWallet/TokenScript/blob/master/doc/design_paper.md#types-of-tokens)
+
+### [Attestations](https://github.com/AlphaWallet/TokenScript/blob/master/doc/design_paper.md#attestations)
+
+## [The components of Tokenscript](https://github.com/AlphaWallet/TokenScript/blob/master/doc/design_paper.md#the-components-of-tokenscript)
+
+### [Actions](https://github.com/AlphaWallet/TokenScript/blob/master/doc/design_paper.md#actions)
+
+### [Magic links](https://github.com/AlphaWallet/TokenScript/blob/master/doc/design_paper.md#magic-links)
+
+### [Attestations](https://github.com/AlphaWallet/TokenScript/blob/master/doc/design_paper.md#attestations-1)
+
+### [Assets](https://github.com/AlphaWallet/TokenScript/blob/master/doc/design_paper.md#assets)
+
+## [Join the game](https://github.com/AlphaWallet/TokenScript/blob/master/doc/design_paper.md#join-the-game)
 
 ## Author's note
 
