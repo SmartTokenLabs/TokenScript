@@ -18,6 +18,55 @@ Please join our work at tokenscript.org. A Yellow Paper to guide implementors to
 
 \pagebreak
 
+## Table of Contents
+
+- [Author's note](#authors-note)
+- [Abstract](#abstract)
+- [Introduction: What does blockchain <em>do</em>?](#introduction-what-does-blockchain-do)
+  - [Creating a frictionless market](#creating-a-frictionless-market)
+    - [Tokenised Assets](#tokenised-assets)
+    - [Payment Token and deliverable Token](#payment-token-and-deliverable-token)
+    - [Token properties](#token-properties)
+  - [Blockchain integrates the web](#blockchain-integrates-the-web)
+    - [The problem of the internet as we know it](#the-problem-of-the-internet-as-we-know-it)
+    - [The client side can't integrate a web that is not designed to integrate](#the-client-side-cant-integrate-a-web-that-is-not-designed-to-integrate)
+    - ["Account authentication" is not a substitute for web integration\.](#account-authentication-is-not-a-substitute-for-web-integration)
+    - [The lack of an ownership mechanism](#the-lack-of-an-ownership-mechanism)
+  - [Example: Car Ownership Token](#example-car-ownership-token)
+    - [The challenge of tokenisation](#the-challenge-of-tokenisation)
+- [Design requirements](#design-requirements)
+  - [Address "Frictionless Market" needs](#address-frictionless-market-needs)
+    - [Deliverable side example: 1% property token](#deliverable-side-example-1-property-token)
+      - [Product description](#product-description)
+      - [Attested information](#attested-information)
+      - [Reference information](#reference-information)
+      - [Action information](#action-information)
+    - [Why Tokenscript](#why-tokenscript)
+      - [Interoperability:](#interoperability)
+      - [Scalability](#scalability)
+      - [Security](#security)
+  - [Payment side example: DAI token](#payment-side-example-dai-token)
+    - [Security](#security-1)
+    - [Interoperability](#interoperability-1)
+    - [Scalability](#scalability-1)
+  - [Address the "Integrate the web" need](#address-the-integrate-the-web-need)
+    - [The Shipping Token](#the-shipping-token)
+    - [Warranty Token](#warranty-token)
+    - [Receipt Token](#receipt-token)
+- [The design of Tokenscript](#the-design-of-tokenscript)
+  - [Relate tokens to smart contract and tokens to web services](#relate-tokens-to-smart-contract-and-tokens-to-web-services)
+    - [Change in the business process](#change-in-the-business-process)
+    - [Change in the market](#change-in-the-market)
+    - [Business processes may not change smart contracts\. The market condition may\.](#business-processes-may-not-change-smart-contracts-the-market-condition-may)
+  - [Types of tokens](#types-of-tokens)
+  - [Attestations](#attestations)
+- [The components of Tokenscript](#the-components-of-tokenscript)
+  - [Actions](#actions)
+  - [Magic links](#magic-links)
+  - [Attestations](#attestations-1)
+  - [Assets](#assets)
+- [Join the game](#join-the-game)
+
 # Abstract
 
 We recognise the blockchain technology's utility in providing a frictionless market and integrating the web. This is done through tokenisation. Tokenised rights can be traded on the market and integrated across systems, forming a frictionless market and allowing free and accountless integration.
@@ -531,13 +580,15 @@ Lacking a reliable way to authenticate the purchase, an online purchased product
 
 Despite such a token not being transferable or authorised, it is still useful for 3rd party integrations.  The Tax office will be satisfied that the receipt can't be faked without collaboration from the seller, and allows a swift and easy tax-refund process. If the phone is purchased for work, the employee can easily reclaim the expense from an employer with the trust implied.
 
-![Purchase with one token, getting three tokens. They can be used to access services, like delivery and repair.](purchase-without-shipment-token.jpg)
+![Purchase with one token, getting three tokens. They can be used to access services, like delivery and repair.](img/purchase-without-shipment-token.jpeg)
 
 As we can observe by the use of tokens, usually scattered business processes and web experiences can finally be integrated. This ties closely to the other benefit of the blockchain: a frictionless market. In this example:
 
 - When the phone traded is second hand, it would be easy to pass the warranty to the next user through a token transfer, opening the market further.
 
-- Since shipping can be tokenised, it would be easy for the buyer to choose his favourite shipping company without having to supply it with business context (address, product, weight, dates) manually, further opening the market for competition.
+- Since shipping can be tokenised, it would be easy for the buyer to choose his favourite shipping company without having to supply it with business context (address, product, weight, dates) manually, further opening the market for competition. This is illustrated below.
+
+![Purchase with a payment token and a shipping token. Notice that shipping token is supplied by the user, which we assume the user purchased in bulk before, in order to let market work to her advantage.](img/purchase-with-shipment-token.jpeg)
 
 This example can be further extended to solve complicated and innovative business cases. Suppose the purchase is not made with fiat currency but with American Express points. The iPhone purchase will be insured for screen damage, and as a result, the transaction will have a 4th insurance token as the output.
 
