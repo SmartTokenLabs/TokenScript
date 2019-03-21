@@ -4,7 +4,7 @@
 
 The remarkable blockchain speculations that took place in 2017 - 2018 brought everyone's attention to crypto tokens. As we bought and sold them, we forgot their intended purpose was to be used; this is analogous to the housing bubble in which people forgot that houses were not merely speculative assets but rather a place to live.
 
-To provide a practical use of the blockchain, we must understand its utility to the world economy and the internet. The authors of this paper are technical experts who went through years of research and experimentation into its applications both via financial institutions and startups. With this experience, we came to realise that the blockchain has two primary functions:
+To provide a practical use of the blockchain, we must understand its utility to the world economy and the Internet. The authors of this paper are technical experts who went through years of research and experimentation into its applications both via financial institutions and startups. With this experience, we came to realise that the blockchain has two primary functions:
 
 1. It provides a frictionless market. 
 
@@ -22,7 +22,11 @@ Please join our work at tokenscript.org. A Yellow Paper to guide implementors to
 
 We recognise the blockchain technology's utility in providing a frictionless market and integrating the web. This is done through tokenisation. Tokenised rights can be traded on the market and integrated across systems, forming a frictionless market and allowing free and accountless integration.
 
-Today, the ways tokens are accessed, rendered and transacted are scattered across dynamic Dapps and immutable Smart Contracts on the blockchain. Most tokens either have a very primitive business logic (as payment token), while some try to put complex business logic into the contract, creating a specific dapp (decentralised application) to cater the interactions with the token. This enables DAOs (Decentralized Autonomous Organizations) but hardly helps to create a frictionless token economy and integrate the web. When marketisation and integration of a token is tied to a dapp, it recreates data interoperability, security and availability barrier - the same issues that prevented tokenisation before blockchain's invention.
+Today, the ways tokens are accessed, rendered and transacted are scattered across dynamic Dapps and immutable Smart Contracts on the blockchain. Most tokens either have a very primitive business logic or try to put complex logics into the contract to cater the interactions with the token. This adds complexity and security issues, while hardly addressing all potential business patterns in advance. When marketisation and integration of a token is tied to a dapp, it recreates data interoperability, security and availability barrier - the same issues that prevented tokenisation before blockchain's invention.
+
+Therefore we introduce Tokenskript, a program interface for tokenisation. It abstracts out the token information, access methods and UI rendering so that they can be efficiently marketised and used for integration. It allows different token providers to not only describe the features of their tokens but also how they are allowed to “act”, e.g. transferability. The crux of the idea is that such a markup description can be updated at any time by the token issuer and retroactively reflect the behaviour of already issued tokens. Besides allowing easy interoperability between different token providers, this also eliminates the need to update the DApp or smart contract whenever the business logic of a particular type of token changes.
+
+Specifically, Tokenscript is an XML dialect. It describes the functions provided by the token (through smart contract or not), the method to render it on the user's interface, the ERCs token behaviour templates it uses and the javascript needed to construct transactions and render the token.
 
 TokenScript allows token logic and rendering to be separated out of the "host", allows token to be easily portable and market to be created for it.
 
@@ -65,7 +69,9 @@ Can we tokenise books, content and intellectual property, creating liquid market
 
 Can we create an insurance token that depends on cryptographic proofs, so that the insurer can remove the costs incurred by fraudulent documents from the pricing? Can we decentralise the insurers altogether?
 
-Blockchain can provide the foundational layer to achieve these. It enables a working, frictionless market with tokenised assets *always on the market*. However, this can only become true when there is a reliable and precise method to define how tokens should be used and transacted. This the focus of our work on Tokenscript. But first, we look at what tokens are how token operate currently.
+Blockchain can provide the foundational layer to achieve these. It enables a working, frictionless market with tokenised assets *always on the market*. However, this can only become true when there is a reliable and precise method to define how tokens should be used and transacted. This the focus of our work on Tokenscript. 
+
+To carve out the difference, we look at how Tokens are used today.
 
 ### Payment Token and deliverable Token
 
@@ -85,7 +91,9 @@ Tokens can be products. Therefore they need to have different properties: Do tok
 
 How does it look on the user's mobile, and how is it called in a users language? If a buyer wants to purchase a tokenised country estate from a seller, how do they establish a trusted method of communication? If a token entitles the user to do specific actions online, how can the user login to the web services with that token?
 
-It's easy to see the need for an open framework defining tokens and making them interoperable with different methods of trading, listing and rating. Tokenscript provides such a framework. However, to diligently design it we need to consider the second part of what Blockchains can do: Integrate the web.
+It's easy to see the need for an open framework defining tokens and making them interoperable with different methods of trading, listing and rating. Tokenscript provides such a framework. It overcomes the limitation of the approach to put everything in a smart contract or a set of smart contracts.
+
+However, to diligently design it we need to consider the second part of what Blockchains can do: Integrate the web.
 
 ## Blockchain integrates the web
 
@@ -101,7 +109,7 @@ Therefore the web was built as a giant library where each book is a computer wit
 
 This design has caused a lot of modern inconveniences. A user would one day receive an email on her monthly statement, yet she couldn't recognise a few entries on them. It says "Amazon". Was it about ordering a pair of shoes? She has to copy the order number and look it up in Amazon. The same user might pause as she books two tickets for an opera, switch to her frequent flyer app, copy that number over and paste it into the order to collect the points. She might struggle a bit installing that frequent flyer app at the outset. When she buys on another webshop, she needs to download another app or create another account.
 
-Why are we doing so much copy and pasting when machines are exceptionally good at doing this? Owning to the design, the web is like a giant library, and we are like readers keeping notes of the index numbers under our sleeves. We hope that in the future** the Web resembles no longer of a library, but more like a personal assistant. 
+Why are we doing so much copy and pasting when machines are exceptionally good at doing this? Owning to the design, the web is like a giant library, and we are like readers keeping notes of the index numbers under our sleeves. We hope that in the future the Web resembles no longer of a library, but more like a personal assistant. 
 
 ### The client side can't integrate a web that is not designed to integrate
 
@@ -209,7 +217,7 @@ To unleash their potential, token needs to become a lot more sophisticated and s
 
 __1. Tokenisation means representing all kind of assets as a token on a blockchain.__ This requires bundling a token with its transactions rules and behaviour patterns. It takes them off the system where they initially grew in and frees them to be traded or used in different context.
 
-__2. Tokenisatoins must allow users to interact with different systems through the tokens:__ In the car example, the car token is issued by the maker, and necessarily so because it contains code to interact with a smart lock (the *Open*, *Start*, *Lock* actions) and the maker's own web service (the *Locate* action), yet it needs to work in other environments. The *Auction* action, for example, is provided by a third party auction web service. The user accesses auction services through the token without the need of signing up and proving ownership. The *List for sharing* is provided by another third party service which tokenises the usage of the car by hours or days and sells them piecemeal. And so on.
+__2. Tokenisation must allow users to interact with different systems through the tokens:__ In the car example, the car token is issued by the maker, and necessarily so because it contains code to interact with a smart lock (the *Open*, *Start*, *Lock* actions) and the maker's own web service (the *Locate* action), yet it needs to work in other environments. The *Auction* action, for example, is provided by a third party auction web service. The user accesses auction services through the token without the need of signing up and proving ownership. The *List for sharing* is provided by another third party service which tokenises the usage of the car by hours or days and sells them piecemeal. And so on.
 
 The owner must be able to access all those markets solely through this Token. The token becomes the fundamental and atomic base for economic interactions.  
 
@@ -219,7 +227,9 @@ __4. It must allow new protocols to be developed on tokens:__ In the car example
 
 __5. A token must carry trust relationship and business context to 3rd parties:__ In the car example, the insurance token provides Roadside Assistance service through NRMA, another company not directly contracted by the driver. Yet the driver might access this function through the insurance token and immediately be identified as qualified for help. In this example, *Trust relationship* means that the user indirectly trusts NRMA to provide roadside assistance, to obtain the user's GPS location and identity information at the time of emergency. *Business context* means the customer's qualification for roadside assistance, like insurance paid, location in the range of service and annual cap not reached etc. In this story both *trust relationship* and *business context* has to be in the token, not centralised through the insurance company's web service since the two have different a) availability, b) privacy and c) integration requirements[^abc].
 
-These are just a few examples of requirements of a token. Instead of the simple ERC20 (or ERC721) token established on Ethereum, we need a much more flexible token setup, which reflects a lot of possible coordinates and allows the integration of requirements we do not know today.
+These are just a few examples of requirements of a token. The most commonly used tokens, ERC20 or ERC721 on Ethereum, hardly match these requirements. Trying to put all possible business rules in the smart contract the token is part of needlessly adds a lot of complexity, which often has ended in major security problems. As it is impossible to predict any business case and pattern a token can be part of, the smart contract does also need an upgrade mechanism. This again increases complexity and safety problems. Further, a smart contract onchain is a bad tool to structure the behaviour of wallets.
+
+Shortly said: The way we use token today is insufficient to create token for the delivery side of a trade, which is why most tokens are just used as a replacement for payments. What is needed is a solution that enables tokens to interact with and react on a changing and complex world of business and markets, without setting their core functions at risk. Therefore we propose **Tokenscript**, a method to separate the business logic from the smart contract by creating a markup file for the token, signed and updated by the token's issuer.
 
 [^abc]: Availability: NRMA is online 24/7 but Qantas Insurance can suspend their services in public holidays or at night. Privacy: NRMA can learn user's GPS location but Qantas Insurance isn't legally allowed to learn it. Integration: Most of NRMA's customers are not obtained through Qantas Insurance, so it would be an additional system to integrate and extra security concern for NRMA to integrate to Qantas Insurance's web service. Of all three, availability might be the most visible. Just imagine how angry a customer will be, having his car breaking down in the middle of the barren Australian outback, and learn that the road-side assistance can't be authorised because the insurer's web service is upgrading "For a better user experience".
 
