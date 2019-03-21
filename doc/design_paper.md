@@ -298,19 +298,21 @@ Market: Is a concept, not a marketplace. A user who checks out on a website is a
 
 Tokenscript provides both *the deliverable* and *the payment* side tokens to "plug-in" to the *market*. The difference is important: In the current market architecture both deliverables and payments have to be transfered to the market. This does not only add friction and time-lags, but mostly also introduce trusted middle men. With Tokenscript payments and deliverables can be directly plugged-in to the market.
 
-To do, TokenScript enables tokens to be presented, indexed, transacted, traded, auctioned, combined and so on. 
+To do, TokenScript must enable tokens to be presented, indexed, transacted, traded, auctioned, combined and so on. 
 
-### Why Tokenscript
+## Why Tokenscript
 
-With the first example demonstrated, we use the opportunity to articulate why Tokenscript is needed, over the current prevailing way of providing asset access with a host DApp. We argue that the currently prevailing method is not suitable for creating a frictionless market, while Tokenscript could, by providing reasons in the areas of *interoperability*, *scalability* and *security*.
+Token as a general concept can do a lot. But without a framework like Tokenscript they need to provide assess access with a host DApp. We argue that the currently prevailing method is not suitable for creating a frictionless market, while Tokenscript could, by providing reasons in the areas of *interoperability*, *scalability* and *security*.
 
 #### Interoperability:
 
-Suppose a property guru named Peter wishes to create a website called "Peter's Pride Asset", where he selects the best properties available on the market. He can create a listing of those properties with rich information of the current price, location, age of the building and even photos, which the users can purchase with a click. There is no reason that he needs permission to do so because the data of those tokens are on the blockchain and the transaction of those tokens requires no middlemen. However, he would need to obtain the knowledge local to how to render the token on his website, like how to get the expiration of a token from its holding smart contract. If the underlying smart contract has gone through changes, like adding an attribute (e.g. council rate), his website would need to upgrade.
+Suppose a property guru named Peter wishes to create a website called "Peter's Pride Asset", where he selects the best properties available on the market, which are represented by a token which serve as the deliverable. Peter can create a listing of those properties with rich information of the current price, location, age of the building and even photos, which the users can purchase with a click. Peter doesn't need persmission to do so, because the data of those tokens are on the blockchain. In fact, once the tokens are on the chain, everybody can build his own asset portal.
 
-Similarly, the transaction rule might be updated to require the buyer to submit an identity attestation as part of a purchase. Without a speedy upgrade, his users would submit transactions not conforming and get rejected later in the blockchain. In the end, he would resort to passing the rendering and trading of the token to the Dapp tied to this token, returning to a centralised status and limit the innovation and competition in this space.
+However, Peter would need to obtain the knowledge local to how to render the token on his website, like how to get the expiration of a token from its holding smart contract. If the underlying smart contract has gone through changes, like adding an attribute (e.g. council rate), his website would need to upgrade. Similarly, the transaction rule might be updated to require the buyer to submit an identity attestation as part of a purchase. Without a speedy upgrade, his users would submit transactions not conforming and get rejected later in the blockchain. In the end, he would resort to passing the rendering and trading of the token to the Dapp tied to this token, returning to a centralised status and limiting the innovation and competition in this space.
 
-In a similar fashion, suppose an investors' forum where the members are allowed to login using their 1% property token, the rendering of the token, under each post, would need to be sourced from the Dapp tied to the token, since it's too much work for a forum to render the token and keep the code updated. Such sourcing would require permission and might be tied to the availability of that Dapp.
+In a similar fashion, suppose an investors' forum where the members are allowed to login using their 1% property token. The rendering of the token, under each post, would need to be sourced from the Dapp tied to the token, since it's too much work for a forum to render the token and keep the code updated. Such sourcing would require permission and might be tied to the availability of that Dapp.
+
+This are just a few examples of the interoperability problems of the DApp approach.
 
 #### Scalability
 
