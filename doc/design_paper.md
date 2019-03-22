@@ -580,7 +580,7 @@ Lacking a reliable way to authenticate the purchase, an online purchased product
 
 Despite such a token not being transferable or authorised, it is still useful for 3rd party integrations.  The Tax office will be satisfied that the receipt can't be faked without collaboration from the seller, and allows a swift and easy tax-refund process. If the phone is purchased for work, the employee can easily reclaim the expense from an employer with the trust implied.
 
-![Purchase with one token, getting three tokens. They can be used to access services, like delivery and repair.](img/purchase-without-shipment-token.jpeg)
+![Purchase with one token, getting three tokens. They can be used to access services, like delivery and repair.](img/purchase-without-shipment-token.JPEG)
 
 As we can observe by the use of tokens, usually scattered business processes and web experiences can finally be integrated. This ties closely to the other benefit of the blockchain: a frictionless market. In this example:
 
@@ -588,7 +588,7 @@ As we can observe by the use of tokens, usually scattered business processes and
 
 - Since shipping can be tokenised, it would be easy for the buyer to choose his favourite shipping company without having to supply it with business context (address, product, weight, dates) manually, further opening the market for competition. This is illustrated below.
 
-![Purchase with a payment token and a shipping token. Notice that shipping token is supplied by the user, which we assume the user purchased in bulk before, in order to let market work to her advantage.](img/purchase-with-shipment-token.jpeg)
+![Purchase with a payment token and a shipping token. Notice that shipping token is supplied by the user, which we assume the user purchased in bulk before, in order to let market work to her advantage.](img/purchase-with-shipment-token.JPEG)
 
 This example can be further extended to solve complicated and innovative business cases. Suppose the purchase is not made with fiat currency but with American Express points. The iPhone purchase will be insured for screen damage, and as a result, the transaction will have a 4th insurance token as the output.
 
