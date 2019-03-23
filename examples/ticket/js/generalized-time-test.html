@@ -1,0 +1,19 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+ "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+  <head>
+    <title>Generalized Time testing page</title>
+    <script type="text/javascript" src="generalized-time.js">
+    </script>
+  </head>
+  <body>
+    <h1>You will see a few alerts</h1>
+    <script type="text/javascript">
+	// value taken from the example on wikipedia
+        // https://en.wikipedia.org/wiki/GeneralizedTime
+	gt = new GeneralizedTime("19851106210627.3-0500")
+	alert("Hour: " + gt.getHours());
+	alert("Timezone: " + gt.getTimeZone());
+    </script>
+  </body>
+</html>
