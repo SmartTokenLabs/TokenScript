@@ -99,9 +99,9 @@ tokenDefinition = {
 	    syntax: IA5String,
 	    single: "true",
         },
-        countryA: {
-            name: "County A",
-	    syntax: IA5String
+        startTime: {
+            name: "Event Start Time",
+	    syntax: BinaryTime
         },
         ...
     },
@@ -134,7 +134,7 @@ The other elements in a `tokenDefinition`, like `name` and `symbol`, refer to th
 
 If you compare [spawnable-contract/schema1/token-plain-javascript.xsl](../spawnable-contract/schema1/token-plain-javascript.xsl) and [blockchain-tickets/schema1/token-plain-javascript.xsl](../blockchain-tickets/schema1/token-plain-javascript.xsl), you can see what needs to be done for changing the layout (aside from some boilerplate).
 
-### attribute-value? not always
+### attribute-value pair? not always
 
 In the previous example, observe that not every attribute of a token is of a primitive type.
 
@@ -151,32 +151,36 @@ token = {
 }
 ```
 
-There are two attributes that are not of a primivite type: `locked`, which represents the balance committed somehow (typically, to a state channel), and `expiry` which is how much the balance will disappear at certain date, typically used as an incentive for users to spend, the opposite incentive of Bitcoin. The two might give you the impression that only "dynamic" attributes are complex. That's not the case.
+There are two attributes that are not of a primivite type: `locked`, which represents the balance committed somehow (typically, to a state channel), and `expiry` which is how much the balance will disappear at certain date, typically used as an incentive for users to spend, the opposite incentive of Bitcoin.
 
-Take time as an example. Typically, blockchain uses `BinaryTime` syntax for gas efficiency, which is just binary encoded UnixTime. When used as the time of an event, there is no ambiguity which point of time it refers to, no matter in which timezone the event happens. In such case, the value is in a dictionary consisting of exactly one key: 'local', which in turn contains a JavaScript Date object. (The key `local` has no meaning here because the API does not actually supply a string; it supplies a JavaScript Date object. It's only to prevent developers to wonder if it would localise correctly.)
+What form of value do we have for each attribute is a result of the attrubte-type found in `tokenDefinition`.
+
+Take time as an example. Typically, blockchain uses `BinaryTime` syntax for gas efficiency, which is just binary encoded UnixTime. When used as the time of an event, there is no ambiguity which point of time it refers to, no matter in which timezone the event happens. In such case, the attribute is a dictionary of a single key:
 
 ```
 instance = {
     section: "22",
     meetingStarts: {
-        local: Wed Jan 30 2019 17:16:54 GMT+1100 (AEDT)
+        time: Wed Jan 30 2019 17:16:54 GMT+1100 (AEDT)
     }
     ...
 }
 ```
 
-However, sometimes the data has to contain timezone information. In the case of FIFA ticket (tokenised), the time displayed should be relevent to the timezone of the match's venue and not fluctuate based on user's local timezone. therefore UnixTime isn't sufficient on its own. In such case, a `GeneralizedTime` is used specifically to cointain the time zone information. When that is used,
+However, sometimes - tokenised FIFA ticket or airline ticket - the time should be relevant to the timezone. The token designer would have supplied a [GeneralizedTime](https://en.wikipedia.org/wiki/GeneralizedTime) as the value of such an attribute. The attribute is a dictionary of two keys. The time as a Date object and the raw value for GeneralizedTime, which can be used to extract timezone information if needed.
 
 ```
 instance = {
     section: "22",
     matchStarts: {
-        remote: Wed Jan 30 2019 14:16:54 GMT+1100 (AEDT),
-        local: Wed Jan 30 2019 17:16:54 GMT+1100 (AEDT)
+        value: "19851106210627-0500",
+        time: Wed Jan 30 2019 17:16:54 GMT+1100 (AEDT)
     }
     ...
 }
 ```
+
+If a developer intends to find out if an attribute is of BinaryTime or GeneralizedTime, he can look up the definition.
 
 The value of `someDate.locale` would be what you expect normally. `someDate.venue` is the date you would use for displaying a venue-specific time, eg. a soccer game match time, that should always be displayed in the venue's timezone. to display such a time, use `someDate.venue` and print it in your locale. The value has already been corrected for it:
 
