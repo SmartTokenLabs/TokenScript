@@ -167,7 +167,7 @@ instance = {
 }
 ```
 
-However, sometimes - tokenised FIFA ticket or airline ticket - the time should be relevant to the timezone. The token designer would have supplied a [GeneralizedTime](https://en.wikipedia.org/wiki/GeneralizedTime) as the value of such an attribute. The attribute is a dictionary of two keys. The time as a Date object and the raw value for GeneralizedTime, which can be used to extract timezone information if needed.
+However, sometimes - tokenised FIFA ticket or airline ticket - the time should be relevant to the timezone. The token designer would have supplied a [GeneralizedTime](https://en.wikipedia.org/wiki/GeneralizedTime) as the value of such an attribute. The attribute is a dictionary of two keys. The time as a Date object and the raw value for GeneralizedTime, which can be used to extract timezone information like [examplified](../examples/ticket/js/generalized-time-test.html).
 
 ```
 instance = {
