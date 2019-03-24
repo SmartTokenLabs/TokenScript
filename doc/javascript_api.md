@@ -96,12 +96,12 @@ tokenDefinition = {
         attributeId: attribute,
         category: {
             name: "Cat",
-	    syntax: IA5String,
+	    syntax: "IA5String",
 	    single: "true",
         },
         startTime: {
             name: "Event Start Time",
-	    syntax: BinaryTime
+	    syntax: "BinaryTime",
         },
         ...
     },
@@ -167,7 +167,7 @@ instance = {
 }
 ```
 
-However, sometimes - tokenised FIFA ticket or airline ticket - the time should be relevant to the timezone. The token designer would have supplied a [GeneralizedTime](https://en.wikipedia.org/wiki/GeneralizedTime) as the value of such an attribute. The attribute is a dictionary of two keys. The time as a Date object and the raw value for GeneralizedTime, which can be used to extract timezone information like [examplified](../examples/ticket/js/generalized-time-test.html).
+However, sometimes - tokenised FIFA ticket or airline ticket - the time should be relevant to the timezone. The token designer would have supplied a [GeneralizedTime](https://en.wikipedia.org/wiki/GeneralizedTime) as the value of such an attribute. The attribute is a dictionary of two keys. The time as a Date object and the raw value for GeneralizedTime, which can be used to extract timezone information like [exemplified](../examples/ticket/js/generalized-time-test.html).
 
 ```
 instance = {
@@ -180,7 +180,7 @@ instance = {
 }
 ```
 
-If a developer intends to find out if an attribute is of BinaryTime or GeneralizedTime, he can look up the definition.
+If a developer intends to find out if an attribute is of `BinaryTime` or `GeneralizedTime`, he can look up the definition (search for `BinaryTime` in the begining of this document for an example).
 
 The value of `someDate.locale` would be what you expect normally. `someDate.venue` is the date you would use for displaying a venue-specific time, eg. a soccer game match time, that should always be displayed in the venue's timezone. to display such a time, use `someDate.venue` and print it in your locale. The value has already been corrected for it:
 
