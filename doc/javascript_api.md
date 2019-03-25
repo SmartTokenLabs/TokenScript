@@ -161,20 +161,22 @@ Take time as an example. Typically, blockchain uses `BinaryTime` syntax for gas 
 instance = {
     section: "22",
     meetingStarts: {
-        time: Wed Jan 30 2019 17:16:54 GMT+1100 (AEDT)
+        date: Wed Jan 30 2019 17:16:54 GMT+1100 (AEDT)
     }
     ...
 }
 ```
 
-However, sometimes - tokenised FIFA ticket or airline ticket - the time should be relevant to the timezone. The token designer would have supplied a [GeneralizedTime](https://en.wikipedia.org/wiki/GeneralizedTime) as the value of such an attribute. The attribute is a dictionary of two keys. The time as a Date object and the raw value for GeneralizedTime, which can be used to extract timezone information like [exemplified](../examples/ticket/js/generalized-time-test.html).
+(Key name `date` is chosen because that's how JavaScript calls time).
+
+However, sometimes - tokenised FIFA ticket or airline ticket - the time should be relevant to the timezone. The token designer would have supplied a [GeneralizedTime](https://en.wikipedia.org/wiki/GeneralizedTime) as the value of such an attribute. The attribute is a dictionary of two keys: `date` as a Date object and the raw value for GeneralizedTime, which can be used to extract timezone information like [exemplified](../examples/ticket/js/generalized-time-test.html).
 
 ```
 instance = {
     section: "22",
     matchStarts: {
-        value: "19851106210627-0500",
-        time: Wed Jan 30 2019 17:16:54 GMT+1100 (AEDT)
+        generalizedTime: "19851106210627-0500",
+        date: Wed Jan 30 2019 17:16:54 GMT+1100 (AEDT)
     }
     ...
 }
