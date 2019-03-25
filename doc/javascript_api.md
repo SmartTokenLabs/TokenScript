@@ -161,13 +161,13 @@ Take time as an example. Typically, blockchain uses `BinaryTime` syntax for gas 
 instance = {
     section: "22",
     startTime: {
-        date: Wed Jan 30 2019 17:16:54 GMT+1100 (AEDT)
+        date: 𝑛𝑒𝑤 𝑫𝒂𝒕𝒆(1985, 10, 6, 21, 22, 27, 0)
     }
     ...
 }
 ```
 
-(Key name `date` is chosen because that's how JavaScript calls time).
+Date object is represented with the code how it would have been created in Sydney (AEDT) time.
 
 However, in the case the time relevent to the timezone is important, the token designer would have supplied a [GeneralizedTime](https://en.wikipedia.org/wiki/GeneralizedTime). Take a FIFA football match ticket as an example, `matchTime` attribute is a dictionary of two keys: `date` as a Date object, not containing timezone, and the raw value for GeneralizedTime which has the timezone in it.
 
@@ -176,7 +176,7 @@ instance = {
     section: "22",
     matchTime: {
         generalizedTime: "19851106210627-0500",
-        date: Wed Jan 30 2019 17:16:54 GMT+1100 (AEDT)
+        date: 𝑛𝑒𝑤 𝑫𝒂𝒕𝒆(1985, 10, 6, 21, 22, 27, 0)
     }
     ...
 }
