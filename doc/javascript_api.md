@@ -161,7 +161,7 @@ Take time as an example. Typically, blockchain uses `BinaryTime` syntax for gas 
 instance = {
     section: "22",
     startTime: {
-        date: 𝑛𝑒𝑤 𝑫𝒂𝒕𝒆("1985-11-07T02:06:27")
+        date: new Date("1985-11-07T02:06:27")
     }
     ...
 }
@@ -176,7 +176,7 @@ instance = {
     section: "22",
     matchTime: {
         generalizedTime: "19851106210627-0500",
-        date: 𝑛𝑒𝑤 𝑫𝒂𝒕𝒆("1985-11-07T02:06:27")
+        date: new Date("1985-11-07T02:06:27")
     }
     ...
 }
