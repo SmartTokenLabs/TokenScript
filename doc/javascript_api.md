@@ -68,7 +68,7 @@ token = {
 
 Where attributes like `votingRights` are defined in Tokenscript.
 
-For a non-fungible token, like a ticket to a venue:
+For a non-fungible token, like a ticket to an event:
 
 ```
 token = {
@@ -160,7 +160,7 @@ Take time as an example. Typically, blockchain uses `BinaryTime` syntax for gas 
 ```
 instance = {
     section: "22",
-    meetingStarts: {
+    startTime: {
         date: Wed Jan 30 2019 17:16:54 GMT+1100 (AEDT)
     }
     ...
@@ -169,12 +169,12 @@ instance = {
 
 (Key name `date` is chosen because that's how JavaScript calls time).
 
-However, sometimes - tokenised FIFA ticket or airline ticket - the time should be relevant to the timezone. The token designer would have supplied a [GeneralizedTime](https://en.wikipedia.org/wiki/GeneralizedTime) as the value of such an attribute. The attribute is a dictionary of two keys: `date` as a Date object and the raw value for GeneralizedTime, which can be used to extract timezone information like [exemplified](../examples/ticket/js/generalized-time-test.html).
+However, in the case the time relevent to the timezone is important, the token designer would have supplied a [GeneralizedTime](https://en.wikipedia.org/wiki/GeneralizedTime). Take a FIFA football match ticket as an example, `matchTime` attribute is a dictionary of two keys: `date` as a Date object, not containing timezone, and the raw value for GeneralizedTime which has the timezone in it.
 
 ```
 instance = {
     section: "22",
-    matchStarts: {
+    matchTime: {
         generalizedTime: "19851106210627-0500",
         date: Wed Jan 30 2019 17:16:54 GMT+1100 (AEDT)
     }
@@ -184,11 +184,7 @@ instance = {
 
 If a developer intends to find out if an attribute is of `BinaryTime` or `GeneralizedTime`, he can look up the definition (search for `BinaryTime` in the begining of this document for an example).
 
-The value of `someDate.locale` would be what you expect normally. `someDate.venue` is the date you would use for displaying a venue-specific time, eg. a soccer game match time, that should always be displayed in the venue's timezone. to display such a time, use `someDate.venue` and print it in your locale. The value has already been corrected for it:
-
-```
-return instance.someDate.venue.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
-```
+The value of `matchTime.date` would be a normal `Date` object, the time the match starts. As every `Date` object, it doesn't contain the timezone information. But if you want to display a venue-specific time, eg. a soccer game match time at the venue, you need to extract that information from the `generalizedTime` string, like shown in the [example](../examples/ticket/js/generalized-time-test.html).
 
 ## B. Callback
 
