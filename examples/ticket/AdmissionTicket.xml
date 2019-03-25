@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE tokenscript  [
+<!ENTITY token.en SYSTEM "cards/token.en.html">
+<!ENTITY enter.en SYSTEM "cards/enter.en.html">
+]>
+<ts:token xmlns:ts="http://tokenscript.org/ns/tokenscript"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:xml="http://www.w3.org/XML/1998/namespace">
+
+  <ts:name xml:lang="en">Admission Ticket Token</ts:name>
+  <ts:name xml:lang="zh">入場券</ts:name>
+  <ts:name xml:lang="es">Boleto de admisión</ts:name>
+  <ts:name xml:lang="en" type="collective">Admission Ticket Tokens</ts:name>
+  <ts:name xml:lang="zh" type="collective">入場券</ts:name>
+  <ts:name xml:lang="es" type="collective">Boletos de admisión</ts:name>
+  <!-- TODO: will make separate Tokenscript for ERC875 -->
+  <ts:contract id="ecr875" type="holding">
+    <ts:address network="3">0x16e58F9a98bc46a572CFb9ce28DDEeaf76AF645a</ts:address>
+  </ts:contract>
+  <ts:selections>
+    <ts:selection id="expired">
+      <ts:name xml:lang="en">Expired Tickets</ts:name>
+      <ts:name xml:lang="zh">已经过期的票</ts:name>
+      <ts:filter>expired</ts:filter>
+    </ts:selection>
+  </ts:selections>
+  <ts:cards>
+    <ts:token-card>
+      <view-iconified xml:lang="en">
+        <p>An Admission Ticket Token</p>
+      </view-iconified>
+      <view xml:lang="en">
+        &token.en;
+      </view>
+    </ts:token-card>
+    <ts:action type="confirm-back">
+      <!-- in type confirm-back:
+      window.onConfirm is called if user hit "confirm";
+      window.close() causes the back button to be pressed.
+      -->
+      <ts:name xml:lang="en">Enter</ts:name>
+      <ts:name xml:lang="zh">入場</ts:name>
+      <ts:name xml:lang="es">Entrar</ts:name>
+      <ts:exclude selection="expired"/>
+      <view xml:lang="en">
+        &enter.en;
+      </view>
+    </ts:action>
+  </ts:cards>
+  <ts:attribute-types>
+    <ts:attribute-type id="country" oid="2.5.4.7" syntax="1.3.6.1.4.1.1466.115.121.1.15">
+      <ts:name xml:lang="en">Country</ts:name>
+      <ts:name xml:lang="zh">国家</ts:name>
+      <ts:name xml:lang="es">País</ts:name>
+      <ts:origin bitmask="FFFF000000000000000000000000000000000000000000000000000000000000" as="utf8"/>
+    </ts:attribute-type>
+    <ts:attribute-type id="locality" oid="2.5.4.7" syntax="1.3.6.1.4.1.1466.115.121.1.15">
+      <ts:name xml:lang="en">City</ts:name>
+      <ts:name xml:lang="zh">城市</ts:name>
+      <ts:name xml:lang="es">Ciudad</ts:name>
+      <ts:origin contract="erc875">
+        <ts:function name="getLocality">
+          <ts:inputs>
+            <ts:uint256 ref="tokenID"/>
+          </ts:inputs>
+        </ts:function>
+      </ts:origin>
+    </ts:attribute-type>
+    <ts:attribute-type id="start" syntax="1.3.6.1.4.1.1466.115.121.1.24">
+      <ts:name>🕑</ts:name>
+      <ts:origin bitmask="0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000000000000000000000" as="utf8"/>
+    </ts:attribute-type>
+    <ts:attribute-type id="numero" syntax="1.3.6.1.4.1.1466.115.121.1.27">
+      <ts:name>№</ts:name>
+      <ts:origin bitmask="000000000000000000000000000000000000000000FFFF000000000000000000" as="unsigned"/>
+    </ts:attribute-type>
+    <ts:attribute-type id="category" syntax="1.3.6.1.4.1.1466.115.121.1.15">
+      <ts:name xml:lang="en">Category</ts:name>
+      <ts:name xml:lang="zh">等级</ts:name>
+      <ts:name xml:lang="es">Clase</ts:name>
+      <ts:origin bitmask="0000000000000000000000000000000000000000000000FFFFFFFFFF00000000" as="utf8"/>
+    </ts:attribute-type>
+    <ts:attribute-type id="section" syntax="1.3.6.1.4.1.1466.115.121.1.15">
+      <ts:name xml:lang="en">Section</ts:name>
+      <ts:name xml:lang="zh">区号</ts:name>
+      <ts:name xml:lang="es">Sección</ts:name>
+      <ts:origin bitmask="00000000000000000000000000000000000000000000000000000000FFFFFFFF" as="utf8"/>
+    </ts:attribute-type>
+    <ts:attribute-type id="expired" syntax="1.3.6.1.4.1.1466.115.121.1.7"> <!-- boolean -->
+      <ts:origin contract="erc875" as="mapping">
+        <ts:function name="isExpired">
+          <ts:inputs>
+            <ts:uint256 ref="tokenID"/>
+          </ts:inputs>
+        </ts:function>
+        <ts:mapping>
+          <ts:option key="0">
+            <ts:value>FALSE</ts:value>
+          </ts:option>
+          <ts:option key="1">
+            <ts:value>TRUE</ts:value>
+          </ts:option>
+        </ts:mapping>
+      </ts:origin>
+    </ts:attribute-type>
+    <ts:attribute-type id="street" syntax="1.3.6.1.4.1.1466.115.121.1.15" as="utf8"> <!-- string -->
+      <ts:origin contract="erc875">
+        <ts:function name="getStreet">
+          <ts:inputs>
+            <ts:uint256 ref="tokenID"/>
+          </ts:inputs>
+        </ts:function>
+      </ts:origin>
+    </ts:attribute-type>
+    <ts:attribute-type id="building" syntax="1.3.6.1.4.1.1466.115.121.1.15" as="utf8"> <!-- string -->
+      <ts:origin contract="erc875">
+        <ts:function name="getBuildingName">
+          <ts:inputs>
+            <ts:uint256 ref="tokenID"/>
+          </ts:inputs>
+        </ts:function>
+      </ts:origin>
+    </ts:attribute-type>
+    <ts:attribute-type id="state" syntax="1.3.6.1.4.1.1466.115.121.1.15" as="utf8"> <!-- string -->
+      <ts:origin contract="erc875">
+        <ts:function name="getState">
+          <ts:inputs>
+            <ts:uint256 ref="tokenID"/>
+          </ts:inputs>
+        </ts:function>
+      </ts:origin>
+    </ts:attribute-type>
+  </ts:attribute-types>
+</ts:token>
