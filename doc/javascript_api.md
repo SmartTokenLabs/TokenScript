@@ -151,9 +151,9 @@ token = {
 }
 ```
 
-There are two attributes that are not of a primivite type: `locked`, which represents the balance committed somehow (typically, to a state channel), and `expiry` which is how much the balance will disappear at certain date, typically used as an incentive for users to spend, the opposite incentive of Bitcoin.
+There are two attributes that are not of a primitive type: `locked`, which represents the balance committed somehow (typically, to a state channel), and `expiry` which is how much the balance will disappear at certain date, typically used as an incentive for users to spend, the opposite incentive of Bitcoin.
 
-What form of value do we have for each attribute is a result of the attrubte-type found in `tokenDefinition`.
+What form of value do we have for each attribute is a result of the attribute-type found in `tokenDefinition`.
 
 Take time as an example. Typically, blockchain uses `BinaryTime` syntax for gas efficiency, which is just binary encoded UnixTime. When used as the time of an event, there is no ambiguity which point of time it refers to, no matter in which timezone the event happens. In such case, the attribute is a dictionary of a single key:
 
