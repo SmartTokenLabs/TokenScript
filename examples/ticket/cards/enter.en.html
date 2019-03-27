@@ -1,12 +1,21 @@
 <html>
 <head>
-<script type="text/javascript">
-window.onConfirm = function() {
-	alert("Shit, I'm hit!");
-}
-</script>
+    <script type="text/javascript">
+    //<![CDATA[
+    function render () {
+        // TODO: fetch challenge
+        // if fetch successful:
+        var success = false;
+        document.getElementById("msg").textContent = success ? "Open the door now?" : "The host controlling the door isn't responsive."
+    }
+    window.addEventListener('load', render, false);
+    function responseChallenge() {
+        // TODO: response to the challenge, called when user hit "confirm" below of the action card.
+    }
+    // window.addEventListener('confirm', responseChallenge, false);
+    //]]></script>
 </head>
 <body>
-<p>There is nothing to display here. Just hit the OK button</p>
+<p id="msg">Preparing to unlock the entrance door.</p>
 </body>
 </html>
