@@ -312,17 +312,10 @@ Basically, Tokenscript puts a lot of information offchain, while the core of the
 
 You can imagine it by thinking on a computer program for your music files: Like the token on a blockchain, the music files remain the same, but the software, to play and use them, can change. It can be automatically updated to eliminate a bug, or it can change to allow new features, like recording, cutting or fine-tuning the audio frequences. Tokenscript is the hinge which connects the software with the token and makes sure that the interaction of both is not arbitrary, but structured by the issuer of the token.
 
+### Advantages of Tokenscript
 
+We already established that Tokenscript helps to overcome many challenges of Tokenization, mostly in the areas of integrating and updating business logic, transactional behavior and the interaction with different systems. Here we will focus on three main advantages of using Tokenscript: Interoperability, Scalability and Security:
 
-
-
-
-
-
-
-
-
-, while Tokenscript could, by providing reasons in the areas of *interoperability*, *scalability* and *security*.
 
 #### Interoperability:
 
@@ -359,6 +352,7 @@ Eventually, a transaction is generated with code, and the user would have to del
 Tokenscript is designed to separate token rendering code, and transaction generating code and package them into its container, signed by a party that the user is likely to trust (often, signed by the same key used for deploying a smart contract). There are a few trust levels, which we will detail in later chapters.
 
 A user who is purchasing a 1% property token from Peter's Pride Property recommendation website can be supplied with a rendering and transaction package, signed by the same group of people who created the holding contract of such tokens. Therefore the user can purchase assets from any website with a similar level of trust, or purchase it from a WeChat or Facebook private message and know it is the real token being rendered and transacted.
+
 
 # Design requirements
 
