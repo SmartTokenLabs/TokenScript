@@ -258,6 +258,8 @@ We will have the opportunity to inspect the technical aspect of this well-integr
 
 --
 
+## Why Tokenscript
+
 ### The challenge of tokenisation
 
 The car ownership was just one example of how token can transform all kind of digitalized economic interactions. The 2017 ICO Hype was a slight glimpse of this potential, creating a lot of (bad) investments, but not many products. Most tokens have been just used for payments, effectively being gift cards for certain services, which have been sold in the expectation that those services will provide valuable products at some time.
@@ -282,27 +284,45 @@ Shortly said: The way we use token today is insufficient to create token for the
 
 [^abc]: Availability: NRMA is online 24/7 but Qantas Insurance can suspend their services in public holidays or at night. Privacy: NRMA can learn user's GPS location but Qantas Insurance isn't legally allowed to learn it. Integration: Most of NRMA's customers are not obtained through Qantas Insurance, so it would be an additional system to integrate and extra security concern for NRMA to integrate to Qantas Insurance's web service. Of all three, availability might be the most visible. Just imagine how angry a customer will be, having his car breaking down in the middle of the barren Australian outback, and learn that the road-side assistance can't be authorised because the insurer's web service is upgrading "For a better user experience".
 
-# Design requirements
+### The problems of legacy tokens (for example ERC)
 
-We assert that a descriptive language (Tokenscript) is needed to allow blockchain technology to enable "frictionless markets" and an "integrated web". Tokenscript stands for Token Behaviour Markup Language.
+Token as a general concept can do a lot. But without a framework like Tokenscript they need to provide assess access with a host DApp. We argue that the currently prevailing method is not suitable for creating a frictionless market. Fulfilling the challenges with the conventional token model is difficult, often nearly impossible, while adding complexity and causing scalability, interoperability and security issues.
 
-## Address "Frictionless Market" needs
+**1. Representing all kind of assets and bundling a token with business logic and transactions rules:** In the world of Ethereum - the de facto standard for token - this is usually done with dAPPS: The business logic of a token - all kind of applications - are coded in a smart contract. This requires the designers to fetch all possible business scenarios, while it adds a lot of complexity to the code. And complexity causes security issues. There are a lot of examples on Ethereum how this concept can go wrong, which is why the Ethereum community set back to trying only very carefully to implement only very limited business logics in smart contracts.
 
-A *market* is a place where *delivery* versus *payment* happens. Blockchain enables this place to rely less on middlemen. As this concept are crucial to understand how to design TokenScript, we will define its parts.
+**2. Interacting with different systems:** Ethereum token have a very limited way of interacting with other systems like wallets. If the logic of interaction is part of the smart contract, we have the problems of 1. *and* to deal with the fact that you can't represent all systems language in one contract. 
 
-Deliverables: All sorts of things money can buy: assets, goods and services. In this context deliverables mean that not a physical good, but an entitlement is transfered. This proto-tokenization happened long ago. Deliverables can profit immensively from a sophisticated token design as TokenScript provides.
+**3. Render tokens**: As build on an immutable smart contract, token on Ethereum are unrenderable by default. There are methods which allow to render a smart contract, but they mostly rely on another (immutable) smart contract and add a lot of complexity to the contract.
 
-Payments: All value transfers done with anything currency-like. In this context, only programmable currencies like Ether or Dai are relevant.
+**4. Allowing new protocols on the token:** Again, the inflexibility and immutability of a smart contract tokens makes it hard to allow to develop new protocols for it, especially when those protocols are not known when the contract is written. This could end with a locked-in-state of the token on one certain protocol and a migration to another protocol which lies completely in the hand of a single trusted party.
 
-Market: Is a concept, not a marketplace. A user who checks out on a website is accessing a market. She doesn't have to be in a marketplace (e.g. Amazon) to do so.
+[[Edit: I think 5. and 1. are very similar points. Maybe cut them.]]
 
-Tokenscript provides both *the deliverable* and *the payment* side tokens to "plug-in" to the *market*. The difference is important: In the current market architecture both deliverables and payments have to be transfered to the market. This does not only add friction and time-lags, but mostly also introduce trusted middle men. With Tokenscript payments and deliverables can be directly plugged-in to the market.
+### Tokenscript as a solution
 
-To do, TokenScript must enable tokens to be presented, indexed, transacted, traded, auctioned, combined and so on. 
+We propose Tokenscript as a solution to overcome the unsolved challenges which prevent to unleash the potential of Tokenization.
 
-## Why Tokenscript
+Tokenscript is a program interface for tokenisation. It is an XML dialect, descriping the functions provided by the token (through smart contract or not), the method to render it on the user's interface, the ERCs token behaviour templates it uses and the javascript needed to construct transactions and render the token.
 
-Token as a general concept can do a lot. But without a framework like Tokenscript they need to provide assess access with a host DApp. We argue that the currently prevailing method is not suitable for creating a frictionless market, while Tokenscript could, by providing reasons in the areas of *interoperability*, *scalability* and *security*.
+Tokenscript abstracts out the parts of the token behaviour, which are needed to use it in many business contexts: Token information, access methods, UI rendering and much more. This allows token to be efficiently marketised and used for integration. With Tokenscript you can design complex business logics without affecting the token's basic security foundation. You can also easily upgrade those logics, if the real usage shows flaws in the business logics or imporivements. 
+
+With Tokenscript different token providers to not only describe the features of their tokens but also how they are allowed to “act”, e.g. transferability. This allows the token to match different contextes and needs. Further, the XML dialect can be easily read by any device and software without the need to pull it into the core of the wallet which structures its interaction with the blockchain. It's also possible to use Tokenscript to perfom token actions on another protocol, without the need to migrate the token smart contract.
+
+Basically, Tokenscript puts a lot of information offchain, while the core of the token design remains on the chain and the Tokenscript information is signed by the Token issuer. This makes it as verifiable as the smart contract itself, while being a set of shared data between the token issuer and it's users.
+
+You can imagine it by thinking on a computer program for your music files: Like the token on a blockchain, the music files remain the same, but the software, to play and use them, can change. It can be automatically updated to eliminate a bug, or it can change to allow new features, like recording, cutting or fine-tuning the audio frequences. Tokenscript is the hinge which connects the software with the token and makes sure that the interaction of both is not arbitrary, but structured by the issuer of the token.
+
+
+
+
+
+
+
+
+
+
+
+, while Tokenscript could, by providing reasons in the areas of *interoperability*, *scalability* and *security*.
 
 #### Interoperability:
 
@@ -340,7 +360,23 @@ Tokenscript is designed to separate token rendering code, and transaction genera
 
 A user who is purchasing a 1% property token from Peter's Pride Property recommendation website can be supplied with a rendering and transaction package, signed by the same group of people who created the holding contract of such tokens. Therefore the user can purchase assets from any website with a similar level of trust, or purchase it from a WeChat or Facebook private message and know it is the real token being rendered and transacted.
 
+# Design requirements
 
+We assert that a descriptive language (Tokenscript) is needed to allow blockchain technology to enable "frictionless markets" and an "integrated web". Tokenscript stands for Token Behaviour Markup Language.
+
+## Address "Frictionless Market" needs
+
+A *market* is a place where *delivery* versus *payment* happens. Blockchain enables this place to rely less on middlemen. As this concept are crucial to understand how to design TokenScript, we will define its parts.
+
+Deliverables: All sorts of things money can buy: assets, goods and services. In this context deliverables mean that not a physical good, but an entitlement is transfered. This proto-tokenization happened long ago. Deliverables can profit immensively from a sophisticated token design as TokenScript provides.
+
+Payments: All value transfers done with anything currency-like. In this context, only programmable currencies like Ether or Dai are relevant.
+
+Market: Is a concept, not a marketplace. A user who checks out on a website is accessing a market. She doesn't have to be in a marketplace (e.g. Amazon) to do so.
+
+Tokenscript provides both *the deliverable* and *the payment* side tokens to "plug-in" to the *market*. The difference is important: In the current market architecture both deliverables and payments have to be transfered to the market. This does not only add friction and time-lags, but mostly also introduce trusted middle men. With Tokenscript payments and deliverables can be directly plugged-in to the market.
+
+To do, TokenScript must enable tokens to be presented, indexed, transacted, traded, auctioned, combined and so on. 
 
 ### Deliverable side example: 1% property token
 
