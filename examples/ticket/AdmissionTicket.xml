@@ -26,12 +26,12 @@
   </ts:selections>
   <ts:cards>
     <ts:token-card>
-      <view-iconified xml:lang="en">
+      <ts:view-iconified xml:lang="en">
         <p>An Admission Ticket Token</p>
-      </view-iconified>
-      <view xml:lang="en">
+      </ts:view-iconified>
+      <ts:view xml:lang="en">
         &token.en;
-      </view>
+      </ts:view>
     </ts:token-card>
     <ts:action type="confirm-back">
       <!-- in type confirm-back:
@@ -42,9 +42,9 @@
       <ts:name xml:lang="zh">入場</ts:name>
       <ts:name xml:lang="es">Entrar</ts:name>
       <ts:exclude selection="expired"/>
-      <view xml:lang="en">
+      <ts:view xml:lang="en">
         &enter.en;
-      </view>
+      </ts:view>
     </ts:action>
   </ts:cards>
   <ts:attribute-types>
