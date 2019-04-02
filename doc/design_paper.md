@@ -266,15 +266,20 @@ The car ownership example demonstrated the power of tokenization to errect a fri
 
 To unleash their potential, tokens need to become a lot more sophisticated and switch from the payment side to the delivery side. Several requirements must be fulfilled to enable this:
 
-__1. Tokenisation means representing all kind of assets as a token on a blockchain.__ This requires bundling a token with its *transactions rules* and *behaviour patterns*. It takes them off the system where they initially grew in and frees them to be traded or used in *different contexts*.
+__1. Tokenisation means representing all kind of assets as a token on a blockchain__ 
+This requires bundling a token with its *transactions rules* and *behaviour patterns*. It takes them off the system where they initially grew in and frees them to be traded or used in *different contexts*.
 
-__2. Tokenisation must allow users to interact with different systems through the tokens:__ In the car example, the car token contains code to interact with a *smart lock* (the *Open*, *Start*, *Lock* actions) and the maker's own *web service* (the *Locate* action). The *List for sharing* is provided by *another third party service* which tokenises the usage of the car by hours or days and sells them piecemeal. The token needs to work in other environments - while the owner must be able to access all those markets solely through this Token.   
+__2. Tokenisation must allow users to interact with different systems through the tokens__ 
+In the car example, the car token contains code to interact with a *smart lock* (the *Open*, *Start*, *Lock* actions) and the maker's own *web service* (the *Locate* action). The *List for sharing* is provided by *another third party service* which tokenises the usage of the car by hours or days and sells them piecemeal. The token needs to work in other environments - while the owner must be able to access all those markets solely through this Token.   
 
-__3. Also, a token must be renderable and associate with the actions it can perform in the user's wallet:__ In the car example, if the registration expired, the web component at work would paint the Registration Token red or display a warning. Actions like *List for sharing* will not be available with an expired car rego, and the integrated token interface should clearly pass that message to the user.
+__3. Also, a token must be renderable and associate with the actions it can perform in the user's wallet__ 
+In the car example, if the registration expired, the web component at work would paint the Registration Token red or display a warning. Actions like *List for sharing* will not be available with an expired car rego, and the integrated token interface should clearly pass that message to the user.
 
-__4. It must allow new protocols to be developed on tokens:__ In the car example, collateralization might be an additional protocol, an ERC in Ethereum context. The protocol might have its own implementation and the car token might pre-date it. Similarly, there are streaming, communication, staking or other protocols (See "Magic" chapter). The framework must allow them to exist and work with tokens.
+__4. It must allow new protocols to be developed on tokens__ 
+In the car example, collateralization might be an additional protocol, an ERC in Ethereum context. The protocol might have its own implementation and the car token might pre-date it. Similarly, there are streaming, communication, staking or other protocols (See "Magic" chapter). The framework must allow them to exist and work with tokens.
 
-__5. A token must carry trust relationship and business context to 3rd parties:__ In the car example, the insurance token provides Roadside Assistance service through NRMA, another company not directly contracted by the driver. Yet the driver might access this function through the insurance token and immediately be identified as qualified for help. In this example, *Trust relationship* means that the user indirectly trusts NRMA to provide roadside assistance, to obtain the user's GPS location and identity information at the time of emergency. *Business context* means the customer's qualification for roadside assistance, like insurance paid, location in the range of service and annual cap not reached etc. In this story both *trust relationship* and *business context* has to be in the token, not centralised through the insurance company's web service since the two have different a) availability, b) privacy and c) integration requirements[^abc].
+__5. A token must carry trust relationship and business context to 3rd parties__ 
+In the car example, the insurance token provides Roadside Assistance service through NRMA, another company not directly contracted by the driver. Yet the driver might access this function through the insurance token and immediately be identified as qualified for help. In this example, *Trust relationship* means that the user indirectly trusts NRMA to provide roadside assistance, to obtain the user's GPS location and identity information at the time of emergency. *Business context* means the customer's qualification for roadside assistance, like insurance paid, location in the range of service and annual cap not reached etc. In this story both *trust relationship* and *business context* has to be in the token, not centralised through the insurance company's web service since the two have different a) availability, b) privacy and c) integration requirements[^abc].
 
 These are just a few examples of requirements of a token. In the following chapter we will investigate how the commonly used tokens, ERC20 or ERC721 on Ethereum, fulfil these requirements. 
 
@@ -284,13 +289,23 @@ These are just a few examples of requirements of a token. In the following chapt
 
 The commonly used token on Ethereum need to provide access with a host DApp, which means it puts everything in a smart contract on a chain. We argue that these method is not suitable for creating a frictionless market. Fulfilling the challenges with the conventional token model is difficult, often nearly impossible, while adding complexity and causing scalability, interoperability and security issues.
 
-**1. Representing all kind of assets and bundling a token with business logic and transactions rules:** In the world of Ethereum - the de facto standard for token - this is usually done with dAPPS: The business logic of a token - all kind of applications - are coded in a smart contract. This requires the designers to fetch all possible business scenarios, while it adds a lot of complexity to the code. The amount of complexity often causes security issues. There are a lot of examples on Ethereum how this concept can go wrong, which is why the Ethereum community set back to trying only very carefully to implement only very limited behavior patterns in smart contracts.
+**Bundling a token with business logic, trust relationship and transactions rules** 
+In the world of Ethereum - the de facto standard for token - this is usually done with dAPPS: The business logic of a token - all kind of applications - are coded in a smart contract. This requires the designers to fetch all possible business scenarios while it adds a lot of complexity to the code. The amount of complexity often causes security issues. There are a lot of examples on Ethereum how this concept can go wrong, which is why the Ethereum community set back to trying only very carefully to implement only very limited behavior patterns in smart contracts.
 
-**2. Interacting with different systems:** Ethereum token have a very limited way of interacting with other systems like wallets. If the logic of interaction is part of the smart contract, we have the problems of 1. *and* to deal with the fact that you can't represent all systems language in one contract. It is impossible to do this without the help of external frameworks.
+Another problem which often emerges is the upgrade of a token's business logic. Nobody can know in advance every kind of application and context of token transfers. To reflect this, it is possible to upgrade Ethereum smart contracts. However, this adds complexity to the code and just moves the un-upgradability to the upgrade-contract. As the incident on Parity's multisig contract demonstrated, this adds another security issue.
 
-**3. Render tokens**: As build on an immutable smart contract, token on Ethereum are unrenderable by default. There are methods which allow to render a smart contract, but they mostly rely on another (immutable) smart contract and add a lot of complexity to the contract. It's also hard to render the interaction of a system with an event in the token history, when the smart contract doesn't define the behaviour of all those systems in a way they understand.
+**Interacting with different systems** 
+Ethereum token have a very limited way of interacting with other systems like wallets. If the logic of interaction is part of the smart contract, we have the problems of 1. *and* to deal with the fact that you can't represent all systems language in one contract. It is impossible to do this without the help of external frameworks.
 
-**4. Allowing new protocols on the token:** Again, the inflexibility and immutability of a smart contract tokens makes it hard to allow to develop new protocols for it, especially when those protocols are not known when the contract is written. This could end with a locked-in-state of the token on one certain protocol and a migration to another protocol which lies completely in the hand of a single trusted party.
+**Render tokens in a wallet** 
+It's hard to render the interaction of a system with an event in the token history, when the smart contract doesn't define the behaviour of all those systems in a way they understand. It's also hard to make a smart contract powered token to interact with all kind of different user interface systems - especially when upgrading the contract requires a lot of work.
+
+**Allowing new protocols on the token** 
+Again, the inflexibility and immutability of a smart contract tokens makes it hard to allow to develop new protocols for it, especially when those protocols are not known when the contract is written. This could end with a locked-in-state of the token on one certain protocol and a migration to another protocol which lies completely in the hand of a single trusted party.
+
+To summon it: Token on Ethereum suffer from being bound too tightly to a smart contract (dAPP), which introduces inflexibility, complexity and often security issues. It makes it nearly impossible to implement advanced business logics, interoperability and relationship structures. If done, it is often made in a over simplistic way. The requirement to upgrade the business logic is more of a bandgab, which helps on one area, but makes the problems on another area worse.
+
+When you try to integrate markets with Ethereum tokens you often end with not focusing on the business case itself - but on the development of the token smart contract. 
 
 [[Edit: I think 5. and 1. are very similar points. Maybe cut them.]]
 
@@ -298,56 +313,15 @@ The commonly used token on Ethereum need to provide access with a host DApp, whi
 
 We propose Tokenscript as a solution to overcome the unsolved challenges which prevent to unleash the potential of Tokenization.
 
-Tokenscript is a program interface for tokenisation. It is an XML dialect, descriping the functions provided by the token (through smart contract or not), the method to render it on the user's interface, the ERCs token behaviour templates it uses and the javascript needed to construct transactions and render the token.
+Tokenscript is a program interface for tokenisation. It is an XML dialect, descriping the functions provided by the token, the method to render it on the user's interface, it's ERCs token behaviour templates and the javascript needed to construct transactions and render the token. It's a tool to simplify the interaction of a token and the user interface.
 
-Tokenscript abstracts out the parts of the token behaviour, which are needed to use it in many business contexts: Token information, access methods, UI rendering and much more. This allows token to be efficiently marketised and used for integration. With Tokenscript you can design complex business logics without affecting the token's basic security foundation. You can also easily upgrade those logics, if the real usage shows flaws or hints on improvements.
+Tokenscript abstracts out the parts of the token behaviour, which are needed to use it in many business contexts: Token information, access methods, UI rendering and much more. With Tokenscript different token providers to not only describe the features of their tokens but also how they are allowed to “act”, e.g. transferability. 
 
-With Tokenscript different token providers to not only describe the features of their tokens but also how they are allowed to “act”, e.g. transferability. This allows the token to match different contextes and needs. Further, the XML dialect can be easily read by any device and software without the need to pull it into the core of the wallet which structures its interaction with the blockchain. It's also possible to use Tokenscript to perfom token actions on another protocol, without the need to migrate the token smart contract.
+The XML dialect can be easily read by any device and software without the need to pull it into the core of the wallet which structures its interaction with the blockchain. It's also possible to use Tokenscript to perfom token actions on another protocol, without the need to migrate the token smart contract.
 
 Basically, Tokenscript puts a lot of information offchain, while the core of the token design remains on the chain and the Tokenscript information is signed by the Token issuer. This makes it as verifiable as the smart contract itself, while being a set of shared data between the token issuer and it's users. In the context of current blockchain terminology it could be described as a *Layer 2* technology for the interaction with token. 
 
-You can imagine it by thinking on a computer program for your music files: Like the token on a blockchain, the music files remain the same, but the software, to play and use them, can change. It can be automatically updated to eliminate a bug, or it can change to allow new features, like recording, cutting or fine-tuning the audio frequences. Tokenscript is the hinge which connects the software with the token and makes sure that the interaction of both is not arbitrary, but structured by the issuer of the token.
-
-### Advantages of Tokenscript
-
-We established that Tokenscript helps to overcome many challenges of Tokenization, mostly in the areas of integrating and updating business logic, transactional behavior and the interaction with different systems. Here we will focus on three main advantages of using Tokenscript: Interoperability, Scalability and Security:
-
-
-#### Interoperability:
-
-Suppose a property guru named Peter wishes to create a website called "Peter's Pride Asset", where he selects the best properties available on the market, which are represented by a token which serve as the deliverable. Peter can create a listing of those properties with rich information of the current price, location, age of the building and even photos, which the users can purchase with a click. Peter doesn't need persmission to do so, because the data of those tokens are on the blockchain. In fact, once the tokens are on the chain, everybody can build his own asset portal.
-
-However, Peter would need to obtain the knowledge local to how to render the token on his website, like how to get the expiration of a token from its holding smart contract. If the underlying smart contract has gone through changes, like adding an attribute (e.g. council rate), his website would need to upgrade. Similarly, the transaction rule might be updated to require the buyer to submit an identity attestation as part of a purchase. Without a speedy upgrade, his users would submit transactions not conforming and get rejected later in the blockchain. In the end, he would resort to passing the rendering and trading of the token to the Dapp tied to this token, returning to a centralised status and limiting the innovation and competition in this space.
-
-The same problems emerges with a lot of application. Tokenscript helps Peter to keep his platform upgraded and to better react on events.
-
-
-#### Scalability
-
-Horizontally, the same type of asset might have its token instances across multiple networks like Plasma Chains. A buyer is likely to be interested only in assets in Australia, and therefore only connected to the Australian Property network. It can be difficult to have an all-knowing node to provided rendered token information for all existing tokens, especially if a network is designed with privacy in mind. Therefore, to scale, the knowledge about the token (Tokenscript) must be detached from the access to the token.
-
-Vertically - by speaking *vertical*, we mean to build upward, to building structured transactions using a token transaction or creating structured tokens on top of a token. Such transaction and token access the component tokens. For example, if we desire a token which is made up from 1% property tokens risk-distributed over a sample of 100 global cities, a system that can manipulate such a token must be built with the knowledge about member tokens. It again cannot depend on the availability, security and openness of the original Dapp tied to that asset. Tokenscript would work in the middle for the making of such tokens.
-
-If we follow the example of Peter's Pride Property website as a Hello World example, it might need the user to submit a transaction not only purchase a token, but also tips Peter in the meanwhile. If only the token's issuer's DAPP knows how to assemble a token purchase transaction, this will be impractical for Peter.
-
-The vertical stack naturally can be a lot more complicated than this, even in simple scenarios. You will see one revealed in an e-commerce story in the "Integrate the web" section of this chapter.
-
-#### Security
-
-It is impractical to improvise a schema where every transaction the user might sign is rendered in a user-readable format. It's easy to start with such an effort with a transaction visualiser tool, interpreting an enigmatic transaction payload to the user, similar to Linux's `identify(1)` command, but ultimately the system integration and UX needs would surpass what a dictionary style transaction visualiser can do.
-
-Take the 1% property token as an example; a confirmation might look like this: You are going to purchase 1% of property #802820 with 45 Ethers, are you sure?
-
-The user will be unsure if the glass ceiling designer 2-bedroom house he is watching is #802820.
-
-A dictionary based translation visualiser cannot go further because correctly rendering the property token requires more than word processing. This limit is easily hit even without introducing integration scenarios in the "Integrate the web" section of this chapter.
-
-Eventually, a transaction is generated with code, and the user would have to delegate the trust to the code. In a user's words, I am accessing the website tied to this token, so I will trust that this transaction I am signing is generated for the intention I have while using the site. This is a broken trust model, a regression to the TLS model of trusting the site instead of the content.
-
-Tokenscript is designed to separate token rendering code, and transaction generating code and package them into its container, signed by a party that the user is likely to trust (often, signed by the same key used for deploying a smart contract). There are a few trust levels, which we will detail in later chapters.
-
-A user who is purchasing a 1% property token from Peter's Pride Property recommendation website can be supplied with a rendering and transaction package, signed by the same group of people who created the holding contract of such tokens. Therefore the user can purchase assets from any website with a similar level of trust, or purchase it from a WeChat or Facebook private message and know it is the real token being rendered and transacted.
-
+You can imagine it by thinking on a computer program for your music files: Like the token on a blockchain, the music files remain the same, but the software for playing them can change. It can be automatically updated to eliminate a bug, or it can change to allow new features, like recording, cutting or fine-tuning the audio frequences. Tokenscript is the hinge which connects the software with the token and makes sure that the interaction of both is not arbitrary, but structured by the issuer of the token.
 
 # Design requirements
 
@@ -484,6 +458,51 @@ In conclusion, Tokenscript allows the context (user-agent or trading engine) to:
 
 Any party is able to render and apply functions to the token using Tokenscript, including entities like generic marketplaces, user-agents and 3rd party apps. We call these parties "context" in general.
 
+## Advantages of Tokenscript
+
+### Advantages of Tokenscript
+
+We established that Tokenscript helps to overcome many challenges of Tokenization, mostly in the areas of integrating and updating business logic, transactional behavior and the interaction with different systems. Here we will focus on three main advantages of using Tokenscript: Interoperability, Scalability and Security:
+
+
+#### Interoperability:
+
+Suppose a property guru named Peter wishes to create a website called "Peter's Pride Asset", where he selects the best properties available on the market, which are represented by a token which serve as the deliverable. Peter can create a listing of those properties with rich information of the current price, location, age of the building and even photos, which the users can purchase with a click. Peter doesn't need persmission to do so, because the data of those tokens are on the blockchain. In fact, once the tokens are on the chain, everybody can build his own asset portal.
+
+However, Peter would need to obtain the knowledge local to how to render the token on his website, like how to get the expiration of a token from its holding smart contract. If the underlying smart contract has gone through changes, like adding an attribute (e.g. council rate), his website would need to upgrade. Similarly, the transaction rule might be updated to require the buyer to submit an identity attestation as part of a purchase. Without a speedy upgrade, his users would submit transactions not conforming and get rejected later in the blockchain. In the end, he would resort to passing the rendering and trading of the token to the Dapp tied to this token, returning to a centralised status and limiting the innovation and competition in this space.
+
+The same problems emerges with a lot of application. Tokenscript helps Peter to keep his platform upgraded and to better react on events.
+
+
+#### Scalability
+
+Horizontally, the same type of asset might have its token instances across multiple networks like Plasma Chains. A buyer is likely to be interested only in assets in Australia, and therefore only connected to the Australian Property network. It can be difficult to have an all-knowing node to provided rendered token information for all existing tokens, especially if a network is designed with privacy in mind. Therefore, to scale, the knowledge about the token (Tokenscript) must be detached from the access to the token.
+
+Vertically - by speaking *vertical*, we mean to build upward, to building structured transactions using a token transaction or creating structured tokens on top of a token. Such transaction and token access the component tokens. For example, if we desire a token which is made up from 1% property tokens risk-distributed over a sample of 100 global cities, a system that can manipulate such a token must be built with the knowledge about member tokens. It again cannot depend on the availability, security and openness of the original Dapp tied to that asset. Tokenscript would work in the middle for the making of such tokens.
+
+If we follow the example of Peter's Pride Property website as a Hello World example, it might need the user to submit a transaction not only purchase a token, but also tips Peter in the meanwhile. If only the token's issuer's DAPP knows how to assemble a token purchase transaction, this will be impractical for Peter.
+
+The vertical stack naturally can be a lot more complicated than this, even in simple scenarios. You will see one revealed in an e-commerce story in the "Integrate the web" section of this chapter.
+
+#### Security
+
+It is impractical to improvise a schema where every transaction the user might sign is rendered in a user-readable format. It's easy to start with such an effort with a transaction visualiser tool, interpreting an enigmatic transaction payload to the user, similar to Linux's `identify(1)` command, but ultimately the system integration and UX needs would surpass what a dictionary style transaction visualiser can do.
+
+Take the 1% property token as an example; a confirmation might look like this: You are going to purchase 1% of property #802820 with 45 Ethers, are you sure?
+
+The user will be unsure if the glass ceiling designer 2-bedroom house he is watching is #802820.
+
+A dictionary based translation visualiser cannot go further because correctly rendering the property token requires more than word processing. This limit is easily hit even without introducing integration scenarios in the "Integrate the web" section of this chapter.
+
+Eventually, a transaction is generated with code, and the user would have to delegate the trust to the code. In a user's words, I am accessing the website tied to this token, so I will trust that this transaction I am signing is generated for the intention I have while using the site. This is a broken trust model, a regression to the TLS model of trusting the site instead of the content.
+
+Tokenscript is designed to separate token rendering code, and transaction generating code and package them into its container, signed by a party that the user is likely to trust (often, signed by the same key used for deploying a smart contract). There are a few trust levels, which we will detail in later chapters.
+
+A user who is purchasing a 1% property token from Peter's Pride Property recommendation website can be supplied with a rendering and transaction package, signed by the same group of people who created the holding contract of such tokens. Therefore the user can purchase assets from any website with a similar level of trust, or purchase it from a WeChat or Facebook private message and know it is the real token being rendered and transacted.
+
+
+
+
 
 ## Payment side example: DAI token
 
@@ -514,6 +533,7 @@ We again argue that current prevailing method is not suitable for creating a fri
 As concluded, Pizza website would not have the necessary payment side logic to handle everything on its own. The traditional approach is to let the Pizza website use the javascript sourced by MakerDAO project. The javascript may or may not use a RESTful API provided by MakerDAO.
 
 This approach solves one problem by introducing quite a few others.
+
 
 #### Security
 
