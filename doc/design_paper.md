@@ -441,6 +441,8 @@ Reference information is relevant to the token, but not part of the smart contra
 
 Since Tokenscript is signed by the token issuer (not by the token owner - the token issuer is often an entity that deployed the smart contract), the reference information sourced from web APIs specified in Tokenscript is assumed trusted. The security chapter will detail different levels of trust.
 
+**[[add an xml example for consistency]]**
+
 Today, all such information related to a token is usually held together on a DAPP website made by the same entity that deployed the token. This has the shortcoming that the DAPP is only useful when the API is still available and reliable. Having it not in the smart contract but in Tokenscript enables the token issuer to change the API source. 
 
 Thus we argue that for tokens to be effectively marketized, reference information needs to be abstracted out and placed in the token behaviour language Tokenscript.
@@ -456,6 +458,8 @@ Action information dictates the correct method to construct a blockchain transac
 - How to cast a vote if one is aligned with token ownership?
 
 This information is a super-set of smart contract programmable interface (In Ethereum, called ABI), with the additional part being business logic (e.g. property must be still valid and owned by the seller) and presentation logic (e.g. the message "The property is liquidated. Purchase no longer possible"). Tokenscript makes both the content as the visualization of the action information more flexible. 
+
+**[[add an xml example for consistency]]**
 
 **[Why not just use ABI? - I speculated]]**
 
