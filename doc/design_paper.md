@@ -311,7 +311,7 @@ When you try to integrate markets with Ethereum tokens you often end with not fo
 
 ### Tokenscript as a solution
 
-We propose Tokenscript as a solution to overcome the unsolved challenges which prevent to unleash the potential of Tokenization.
+We propose Tokenscript as a solution to overcome the unsolved challenges which prevent to unleash the potential of Tokenization. Tokenscript stands for Token Behaviour Markup Language.
 
 Tokenscript is a program interface for tokenisation. It is an XML dialect, descriping the functions provided by the token, the method to render it on the user's interface, it's ERCs token behaviour templates and the javascript needed to construct transactions and render the token. It's a tool to simplify the interaction of a token and the user interface.
 
@@ -325,25 +325,25 @@ You can imagine it by thinking on a computer program for your music files: Like 
 
 # Design requirements
 
-We assert that a descriptive language (Tokenscript) is needed to allow blockchain technology to enable "frictionless markets" and an "integrated web". Tokenscript stands for Token Behaviour Markup Language.
+To understand the requirements for Tokenscript, we will first introduce basic concepts about markets, marketplaces, payments and deliverables. Then we will use a real estate example to learn what a token markup language needs to be capable of. 
 
 ## Address "Frictionless Market" needs
 
-A *market* is a place where *delivery* versus *payment* happens. Blockchain enables this place to rely less on middlemen. As this concept are crucial to understand how to design TokenScript, we will define its parts.
+A *market* is a place where *delivery* versus *payment* happens. Blockchain enables this place to rely less on middlemen. As this concept are crucial, we will define them formally.
 
-Deliverables: All sorts of things money can buy: assets, goods and services. In this context deliverables mean that not a physical good, but an entitlement is transfered. This proto-tokenization happened long ago. Deliverables can profit immensively from a sophisticated token design as TokenScript provides.
+*Deliverables*: All sorts of things money can buy: assets, goods and services. In this context deliverables mean that not a physical good, but an entitlement is transfered. Proto-tokenization happened long ago. Think of land or security titles. However, only with blockchain they can be transfered without needing a third party to prevent double spends. Deliverables can profit immensively from tokenization - if the token design properly reflects they needs.
 
-Payments: All value transfers done with anything currency-like. In this context, only programmable currencies like Ether or Dai are relevant.
+*Payments*: All value transfers done with anything currency-like. In this context, only programmable currencies like Ether or Dai are relevant. On the market they are exchanged for deliverables.
 
-Market: Is a concept, not a marketplace. A user who checks out on a website is accessing a market. She doesn't have to be in a marketplace (e.g. Amazon) to do so.
+*Market*: Is a concept, not a marketplace. A user who checks out on a website is accessing a market as well as two people meeting to execute a trade. The user doesn't have to be in a marketplace (e.g. Amazon) to do so.
 
-Tokenscript provides both *the deliverable* and *the payment* side tokens to "plug-in" to the *market*. The difference is important: In the current market architecture both deliverables and payments have to be transfered to the market. This does not only add friction and time-lags, but mostly also introduce trusted middle men. With Tokenscript payments and deliverables can be directly plugged-in to the market.
+Tokenscript provides both *the deliverable* and *the payment* side tokens to "plug-in" to the *market*. The difference is important: In the current market architecture both deliverables and payments have to be transfered to the market. This does not only add friction and time-lags, but also introduce trusted middle men.
 
-To do, TokenScript must enable tokens to be presented, indexed, transacted, traded, auctioned, combined and so on. 
+To enable users to plugin-in to the market, TokenScript must enable tokens to be presented, indexed, transacted, traded, auctioned, combined and so on. 
 
 ### Deliverable side example: 1% property token
 
-Let's imagine a market for "1% property". A property owner can issue many pieces of a token, each represents 1% ownership of the property. He can sell these tokens for cash.
+Let's imagine a market for "1% property". A property owner can issue many pieces of a token, each represents 1% ownership of the property. He can sell these tokens for cash. 
 
 A buyer needs to know quite a bit of information. It's easy to understand that such a token would fetch 1% of the sales revenue if the underlying property is sold, but a lot more details are needed:
 
@@ -367,22 +367,24 @@ A buyer needs to know quite a bit of information. It's easy to understand that s
 
 Specific to blockchain, we also have:
 
-10. How to correctly and securely construct a transaction for the asset (purchase, voting etc)
+10. How to correctly and securely construct a transaction for the asset (purchase, voting etc)? You can't expect any investor to be a blockchain geek who knows to do load the smart contract files in his wallet.
 
 We categorise these trade-sensitive information into four categories:
 
-- product description[^pd]. Item 2, 3, 5, 6 are in PD
-- attested information. Item 1, 4, 6, 7 are in Attestations.
-- reference information. Item 8, 9.
-- action information (how to perform an asset action). Item 10.
+1. product description[^pd]. Item 2, 3, 5, 6 are in PD
+2. attested information. Item 1, 4, 6, 7 are in Attestations.
+3. reference information. Item 8, 9.
+4. action information (how to perform an asset action). Item 10.
 
-Understandably, the buyers need to access all these for an informed decision.
+Understandably, the buyers need to access all these for an informed decision. Ideally they show up on his wallet when he starts interacting with the token. In the following chapters, we will describe how these information categorizes manifest in Tokenscript.
 
 [^pd] The word is loaned from the financial sector, usually used to describe packaged investment products. It means the formula which profit is calculated and the current values of the variables in the formula.
 
 #### Product description
 
-Product description information is typically in the smart contract. In Ethereum cases, these can be obtained by making a few Smart Contract function calls, therefore, the only needed work is to convert them into a presentation - usually, it means translating to the language user speaks and converting "True" value into a nicely ticked checkbox. This serves to introduce the first functionality of Tokenscript: acting as a presentation layer for smart-contracts.
+Product description information is typically part of the smart contract. They can be obtained by making a few Smart Contract function calls, therefore, the only needed work is to convert them into a presentation. Usually, this means translating them to the language user speaks and converting "True" value into a nicely ticked checkbox. 
+
+This serves to introduce the first functionality of Tokenscript: acting as a presentation layer for smart-contracts. In XML it looks like this:
 
     <attribute-type id="voting-right">
        <name xml:lang="en">Voting right</name>
@@ -419,9 +421,9 @@ Attestation is just a signed message stating a fact. Attestations are often used
 
 In the 1% property token example, the involved attestations are:
 
-- by identity authority and title deeds office, to attest the issuer's ownership of the property.
-- by collateralization authority[^set-operation] to prevent double collateralization
-- by buyers, for providing identity or capacity to invest in this type of asset
+- The Identity authority and title deeds office attest the issuer's ownership of the property.
+- A collateralization authority[^set-operation] prevents double collateralization
+- The buyers provide their identity or capacity to invest in this type of asset
 
 [^set-operation]: Eventually, this could be a cryptographic set operation, but even if that happens, the metadata directing the context (user-agent) to perform the computation still needs to be described in Tokenscript.
 
@@ -429,32 +431,39 @@ The first two attestations are not stored in a smart contract for privacy and co
 
 Furthermore, the fact that the transaction requires an identity attestation or investment capacity attestation from the buyers. These are described in Tokenscript as well so the context (e.g. user-agent) can prevent the user from submitting a transaction without qualifying proof or help the user to select suitable attestations for a purchase transaction.
 
+**[[add an xml example for consistency]]**
+
 #### Reference information
 
-Reference information is what relevant to the token and provided by web services, typically through a RESTful API call.[^trusted-information]
+Reference information is relevant to the token, but not part of the smart contract. It is provided by web services, typically through a RESTful API call.[^trusted-information]
 
 [^trusted-information]: Originally we call it "Trusted information", meaning data such as previous property sales price or regional property performance data is just "provided", without blockchain proofs or attestations, hence, it has to be explicitly trusted by the user. As it turned out, this term misfired as some developers think it means "proven information" and provided as trusted already. So we used a less precise term "Reference information", which, unfortunately, feels like a catch-all phrase.
 
-Since Tokenscript is signed by the token issuer (not token owner - the token issuer is often entity that deployed the smart contract), the reference information sourced from the web APIs specified in Tokenscript is assumed trusted. The security chapter will detail different levels of trust.
+Since Tokenscript is signed by the token issuer (not by the token owner - the token issuer is often an entity that deployed the smart contract), the reference information sourced from web APIs specified in Tokenscript is assumed trusted. The security chapter will detail different levels of trust.
 
-Today, all such information related to a token is usually held together on a DAPP website made by the same entity that deployed the token. We argue that for tokens to be effectively marketized, It needs to be abstracted out and placed in the token behaviour language Tokenscript.
+Today, all such information related to a token is usually held together on a DAPP website made by the same entity that deployed the token. This has the shortcoming that the DAPP is only useful when the API is still available and reliable. Having it not in the smart contract but in Tokenscript enables the token issuer to change the API source. 
+
+Thus we argue that for tokens to be effectively marketized, reference information needs to be abstracted out and placed in the token behaviour language Tokenscript.
 
 #### Action information
 
-Dictates the correct method to construct a blockchain transaction, like:
+Action information dictates the correct method to construct a blockchain transaction, like:
 
 - What attestations are needed to prove the buyer's capacity to purchase?
 - What parameters are needed for a purchase (e.g. number of 1% shares)?
-- How to render the purchase form and translate to the user's local language.
-- Is the condition all met (e.g. a purchase isn't possible after the underlying property is liquidated)?
+- How to render the purchase form and translate to the user's local language?
+- Are the conditions all met (e.g. a purchase isn't possible after the underlying property is liquidated)?
+- How to cast a vote if one is aligned with token ownership?
 
-This information is a super-set of smart contract programmable interface (In Ethereum, called ABI), with the additional part being business logic (e.g. property must be still valid and owned by the seller) and presentation logic (e.g. the message "The property is liquidated. Purchase no longer possible").
+This information is a super-set of smart contract programmable interface (In Ethereum, called ABI), with the additional part being business logic (e.g. property must be still valid and owned by the seller) and presentation logic (e.g. the message "The property is liquidated. Purchase no longer possible"). Tokenscript makes both the content as the visualization of the action information more flexible. 
+
+**[Why not just use ABI? - I speculated]]**
 
 In conclusion, Tokenscript allows the context (user-agent or trading engine) to:
 
 - Fetch token related information from its holding smart contract, attestations and references.
 - Produce a visual or audio rendering of the token
-- Produce a list of actions that can be performed and how to construct the transactions.
+- Produce a list of actions that can be performed and explain how to construct the transactions.
 
 Any party is able to render and apply functions to the token using Tokenscript, including entities like generic marketplaces, user-agents and 3rd party apps. We call these parties "context" in general.
 
@@ -463,7 +472,6 @@ Any party is able to render and apply functions to the token using Tokenscript, 
 ### Advantages of Tokenscript
 
 We established that Tokenscript helps to overcome many challenges of Tokenization, mostly in the areas of integrating and updating business logic, transactional behavior and the interaction with different systems. Here we will focus on three main advantages of using Tokenscript: Interoperability, Scalability and Security:
-
 
 #### Interoperability:
 
