@@ -15,7 +15,7 @@
   <ts:name xml:lang="es" type="collective">Boletos de admisión</ts:name>
   <!-- TODO: will make separate Tokenscript for ERC875 -->
   <ts:contract id="ecr875" type="holding">
-    <ts:address network="3">0x16e58F9a98bc46a572CFb9ce28DDEeaf76AF645a</ts:address>
+    <ts:address network="3" interface="erc875">0x16e58F9a98bc46a572CFb9ce28DDEeaf76AF645a</ts:address>
   </ts:contract>
   <ts:selections>
     <ts:selection id="expired">
