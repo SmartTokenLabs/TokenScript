@@ -1,6 +1,3 @@
-<html>
-<head>
-    <title>Enter action</title>
     <script type="text/javascript">
     //<![CDATA[
     function render () {
@@ -15,8 +12,5 @@
     }
     // window.addEventListener('confirm', responseChallenge, false);
     //]]></script>
-</head>
-<body>
+
 <p id="msg">Preparing to unlock the entrance door.</p>
-</body>
-</html>
