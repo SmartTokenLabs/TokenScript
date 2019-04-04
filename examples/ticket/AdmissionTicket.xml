@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE tokenscript  [
+<!ENTITY token.en SYSTEM "cards/token.en.html">
+<!ENTITY enter.en SYSTEM "cards/enter.en.html">
+]>
+<ts:token xmlns:ts="http://tokenscript.org/ns/tokenscript"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:xml="http://www.w3.org/XML/1998/namespace">
+
+  <ts:name xml:lang="en">Admission Ticket Token</ts:name>
+  <ts:name xml:lang="zh">入場券</ts:name>
+  <ts:name xml:lang="es">Boleto de admisión</ts:name>
+  <ts:name xml:lang="en" type="collective">Admission Ticket Tokens</ts:name>
+  <ts:name xml:lang="zh" type="collective">入場券</ts:name>
+  <ts:name xml:lang="es" type="collective">Boletos de admisión</ts:name>
+  <!-- TODO: will make separate Tokenscript for ERC875 -->
+  <ts:contract id="erc875" type="holding">
+    <ts:address network="3">0x0C8D487DD27D7c4A027D9f92915659139e0b2FF2</ts:address>
+  </ts:contract>
+  <ts:selections>
+    <ts:selection id="expired">
+      <ts:name xml:lang="en">Expired Tickets</ts:name>
+      <ts:name xml:lang="zh">已经过期的票</ts:name>
+      <ts:filter>expired</ts:filter>
+    </ts:selection>
+  </ts:selections>
+  <ts:cards>
+    <ts:token-card>
+      <ts:view-iconified xml:lang="en">
+         &token.en;
+      </ts:view-iconified>
+         &token.en;
+      </ts:view>
+    </ts:token-card>
+    <ts:action type="confirm-back">
+      <!-- in type confirm-back:
+      window.onConfirm is called if user hit "confirm";
+      window.close() causes the back button to be pressed.
+      -->
+      <ts:name xml:lang="en">Enter</ts:name>
+      <ts:name xml:lang="zh">入場</ts:name>
+      <ts:name xml:lang="es">Entrar</ts:name>
+      <ts:exclude selection="expired"/>
+      <ts:view xml:lang="en">
+         &enter.en;
+</ts:view>
+</ts:action>
+</ts:cards>
+  <ts:attribute-types>
+    <ts:attribute-type id="locality" oid="2.5.4.7" syntax="1.3.6.1.4.1.1466.115.121.1.15">
+      <ts:name xml:lang="en">City</ts:name>
+      <ts:name xml:lang="zh">城市</ts:name>
+      <ts:name xml:lang="es">Ciudad</ts:name>
+      <ts:name xml:lang="ru">город</ts:name>
+      <ts:origin as="mapping" bitmask="00000000000000000000000000000000FF000000000000000000000000000000">
+        <ts:mapping>
+          <ts:option key="1">
+            <ts:value xml:lang="ru">Москва́</ts:value>
+            <ts:value xml:lang="en">Sydney</ts:value>
+            <ts:value xml:lang="zh">莫斯科</ts:value>
+            <ts:value xml:lang="es">Moscú</ts:value>
+          </ts:option>
+        </ts:mapping>
+      </ts:origin>
+    </ts:attribute-type>
+    <ts:attribute-type id="venue" syntax="1.3.6.1.4.1.1466.115.121.1.15">
+      <ts:name xml:lang="en">Venue</ts:name>
+      <ts:name xml:lang="zh">场馆</ts:name>
+      <ts:name xml:lang="es">Lugar</ts:name>
+      <ts:name xml:lang="ru">место встречи</ts:name>
+      <ts:origin as="mapping" bitmask="0000000000000000000000000000000000FF0000000000000000000000000000">
+        <ts:mapping>
+          <ts:option key="1">
+            <ts:value xml:lang="ru">Стадион Калининград</ts:value>
+            <ts:value xml:lang="en">Craig Wright's House</ts:value>
+            <ts:value xml:lang="zh">加里宁格勒体育场</ts:value>
+            <ts:value xml:lang="es">Estadio de Kaliningrado</ts:value>
+          </ts:option>
+        </ts:mapping>
+      </ts:origin>
+    </ts:attribute-type>
+    <ts:attribute-type id="time" syntax="1.3.6.1.4.1.1466.115.121.1.24">
+      <ts:name xml:lang="en">Time</ts:name>
+      <ts:name xml:lang="zh">时间</ts:name>
+      <ts:name xml:lang="es">Tiempo</ts:name>
+      <ts:name xml:lang="ru">время</ts:name>
+      <!-- keys used here are BinaryTime (RFC6019) for backward compatibility,
+           don't copy this behaviour when creating new assets -->
+      <ts:origin as="mapping" bitmask="000000000000000000000000000000000000FFFFFFFF00000000000000000000">
+        <ts:mapping>
+          <ts:option key="1531586800">
+            <ts:value>20200714170000+0300</ts:value>
+          </ts:option>
+        </ts:mapping>
+      </ts:origin>
+    </ts:attribute-type>
+  </ts:attribute-types>
+</ts:token>

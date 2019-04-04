@@ -1,0 +1,26 @@
+<script type="text/javascript">
+<![CDATA[
+        function startup() {
+            // 1. call API to fetch challenge
+            document.getElementById('msg').innerHTML = "Loading challenge ..."
+            const Http = new XMLHttpRequest();
+            const url = 'http://stormbird.duckdns.org:8080/api/getChallenge';
+            Http.open("GET", url);
+            Http.send();
+            Http.onreadystatechange = (e) => {
+                document.getElementById('msg').innerHTML = 'Challenge: ' + Http.responseText
+            }
+        }
+
+    function onConfirm(signature) {
+        document.getElementById('msg').innerHTML = 'Pressed confirm' //TODO: Handle signature check
+    }
+
+    window.onload = startup
+
+        // window.addEventListener('confirm', onConfirm, false);
+    ]]>
+</script>
+
+<h3>Welcome to Craig Wright's house!</h3>
+<div id="msg">Preparing to unlock the entrance door.</div>

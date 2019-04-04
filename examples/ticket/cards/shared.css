@@ -1,0 +1,68 @@
+
+@font-face {
+    font-family: 'SourceSansPro-Light';
+    src: local('SourceSansPro-Light'),url('SourceSansPro-Light.otf') format('opentype');
+    font-weight: lighter;
+    }
+    @font-face {
+    font-family: 'SourceSansPro-Regular';
+    src: local('SourceSansPro-Regular'),url('SourceSansPro-Regular.otf') format('opentype');
+    font-weight: normal;
+    }
+    @font-face {
+    font-family: 'SourceSansPro-Semibold';
+    src: local('SourceSansPro-Semibold'),url('SourceSansPro-Semibold.otf') format('opentype');
+    font-weight: bold;
+    }
+    @font-face {
+    font-family: 'SourceSansPro-Bold';
+    src: local('SourceSansPro-Bold'),url('SourceSansPro-Bold.otf') format('opentype');
+    font-weight: boldedr;
+    }
+    .tbml-count {
+    font-family: "SourceSansPro-Bold";
+    font-weight: bolder;
+    font-size: 21px;
+    color: rgb(47, 187, 79);
+    }
+    .tbml-category {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 21px;
+    color: rgb(37, 37, 37);
+    }
+    .tbml-venue {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 12px;
+    color: rgb(0, 0, 0);
+    }
+    .tbml-date {
+    font-family: "SourceSansPro-Semibold";
+    font-weight: bold;
+    font-size: 16px;
+    color: rgb(112, 112, 112);
+    }
+    .tbml-time {
+    font-family: "SourceSansPro-Light";
+    font-weight: lighter;
+    font-size: 16px;
+    color: rgb(112, 112, 112);
+    }
+    html {
+    }
+    
+    body {
+    padding: 0px;
+    margin: 0px;
+    }
+    
+    div {
+    margin: 0px;
+    padding: 0px;
+    }
+
+    .data-icon {
+    height:16px;
+    vertical-align: middle
+    }
