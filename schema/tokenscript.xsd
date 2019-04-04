@@ -54,8 +54,9 @@
   <xs:element name="token-card">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" ref="view-iconified"/>
-        <xs:element minOccurs="0" ref="view"/>
+        <xs:element minOccurs="0" ref="xhtml:style"/>
+        <xs:element ref="view-iconified"/>
+        <xs:element ref="view"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -64,20 +65,14 @@
       <xs:sequence>
         <xs:element maxOccurs="unbounded" ref="name"/>
         <xs:element minOccurs="0" ref="exclude"/>
+        <xs:element minOccurs="0" ref="xhtml:style"/>
         <xs:element ref="view"/>
       </xs:sequence>
 
     </xs:complexType>
   </xs:element>
   <xs:element name="include" type="xs:NCName"/>
-  <xs:element name="view">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" ref="xhtml:html"/>
-      </xs:sequence>
-      <xs:attribute ref="xml:lang"/>
-    </xs:complexType>
-  </xs:element>
+  <xs:element name="view" type="shtml"/>
   <xs:element name="view-iconified" type="shtml">
   </xs:element>
   <xs:complexType name="shtml">

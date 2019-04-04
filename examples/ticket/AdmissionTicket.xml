@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE tokenscript  [
-<!ENTITY token.en SYSTEM "cards/token.en.html">
-<!ENTITY enter.en SYSTEM "cards/enter.en.html">
+    <!ENTITY token.en SYSTEM "cards/token.en.shtml">
+    <!ENTITY enter.en SYSTEM "cards/enter.en.shtml">
+    <!ENTITY style SYSTEM "cards/shared.css">
 ]>
 <ts:token xmlns:ts="http://tokenscript.org/2019/04/tokenscript"
           xmlns="http://www.w3.org/1999/xhtml"
@@ -26,6 +27,7 @@
   </ts:selections>
   <ts:cards>
     <ts:token-card>
+      <style type="text/css">&style;</style>
       <ts:view-iconified xml:lang="en">
         <p>An Admission Ticket Token</p>
       </ts:view-iconified>
@@ -45,6 +47,7 @@
       <ts:name xml:lang="zh">入場</ts:name>
       <ts:name xml:lang="es">Entrar</ts:name>
       <ts:exclude selection="expired"/>
+      <style type="text/css">&style;</style>
       <ts:view xml:lang="en">
         &enter.en;
       </ts:view>
