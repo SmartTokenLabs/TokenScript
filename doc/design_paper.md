@@ -264,16 +264,16 @@ We will have the opportunity to inspect the technical aspect of this well-integr
 
 The car ownership example demonstrated the power of tokenization to errect a frictionless market and to integrate digital services. However, the way, tokens are used today, as it manifestated in the ICO hype of 2017/18, is far off from providing what we call tokenization. Most token don't even try to be more than a surplacement for the payment side.
 
-To unleash their potential, tokens need to become a lot more sophisticated and fill delivery side. Several requirements must be fulfilled to enable this:
+To unleash their potential, tokens need to become a lot more sophisticated and fill the delivery side. Several requirements must be fulfilled to enable this:
 
-__1. Tokenisation means representing all kind of assets as a token on a blockchain__ 
-This requires bundling a token with its *transactions rules* and *behaviour patterns*. New tokens should be able to enter the ecosystem on an abstracted layer, so that they can be traded or used in *different contexts*. With the anticipated proliferation of new plasma subnets, token shold also be able to seemlessly operate on them. 
+__1. Tokenisation means representing all kind of assets as a token on a blockchain__  
+This requires bundling a token with its *transactions rules* and *behaviour patterns*. New tokens should be able to enter the ecosystem on an abstracted layer, so that they can be traded and used in *different contexts*. With the anticipated proliferation of new plasma subnets, token shold also be able to seemlessly operate on them. 
 
-__2. Tokenisation must allow users to interact with different systems through the tokens__ 
+__2. Tokenisation must allow users to interact with different systems through the tokens__  
 In the car example, the car token contains code to interact with a *smart lock* (the *Open*, *Start*, *Lock* actions) and the maker's own *web service* (the *Locate* action). The *List for sharing* is provided by *another third party service* which tokenises the usage of the car by hours or days and sells them piecemeal. The token needs to work in other environments and be used by different services - while the owner must be able to access all those markets solely through this Token.   
 
-__3. Also, a token must be renderable and associate with the actions it can perform in the user's wallet__  
-In the car example, if the registration expired, the web component at work would paint the Registration Token red or display a warning. Actions like *List for sharing* will not be available with an expired car rego, and the integrated token interface should clearly pass that message to the user. Token must be rendered differently according to what happened to them. 
+__3. A token must be renderable and associate with the actions it can perform in the user's wallet__  
+In the car example, if the registration expired, the web component at work would paint the Registration Token red or display a warning. Actions like *List for sharing* will not be available with an expired car rego, and the integrated token interface should clearly pass that message to the user. Token must be rendered differently according to what happened to them in the user's wallet. 
 
 __4. It must allow new protocols to be developed on tokens__  
 A token never has a finished state. There are always options to attach new protocolls on it. In the property example, collateralization might be something wishful to add later, or identity information or the ability to transfer the token through plasma state channels. This has to reflect in the user interface, thus there must be a way to deploy trusted code to the
@@ -288,46 +288,27 @@ In both examples the token must carry trust relationships, which shouldn't depen
 
 ### The problems of legacy tokens (for example ERC)
 
-The commonly used token on Ethereum puts everything in a smart contract on a chain and relies on a hosted Dapp to be used to access its functions. We argue that this method is not suitable for creating a frictionless market. Fulfilling the challenges with the conventional token model is difficult, often nearly impossible, while adding complexity and causing scalability, interoperability and security issues.
+The commonly used tokens on Ethereum put everything in a smart contract on a chain and relies on a hosted DApp to access its functions. We argue that this method is not suitable for creating a frictionless market. Fulfilling the challenges with the conventional token model is difficult, often nearly impossible, while adding complexity and causing scalability, interoperability and security issues.
 
 **Bundling a token with business logic, trust relationship and transactions rules**   
-In the world of Ethereum - the de facto standard for token - this is usually done with dAPPS: The business logic of a token - all kind of applications - are coded in a smart contract, and centralized websites enable users to access the contract. 
+In the world of Ethereum - the de facto standard for token - this is usually done with DApps: The business logic of a token - all kind of applications - are coded in a smart contract, and centralized websites enable users to access the contract. 
 
-This method requires the designers to fetch all possible business scenarios while it adds a lot of complexity to the code. The amount of complexity often causes security issues. There are a lot of examples on Ethereum how this concept can go wrong, which is why the Ethereum community set back to trying only very carefully to implement only very limited behavior patterns in smart contracts. Creating a new token requires a developer to create an entire smart contract.
+This method requires the designers to fetch all possible business scenarios while it adds a lot of complexity to the code. The amount of complexity often causes security issues. There are a lot of examples on Ethereum how this concept can go wrong, which is why the Ethereum community restricted to only implement very limited behavior patterns in smart contracts. Creating a new token requires a developer to create an entire smart contract.
 
 Another problem which often emerges is the upgrade of a token's business logic. Nobody can know in advance every kind of application and context of token transfers. To reflect this, it is possible to upgrade Ethereum smart contracts. However, this adds complexity to the code and just moves the un-upgradability to the upgrade-contract. As the incident on Parity's multisig contract demonstrated, this adds another security issue.
 
---
-
-We shouldn't be seeing hundreds of dapp websites updating their code with the comment "now accepting cryptodog token after cryptokitten". This represents a growth (scalability) issue. ERC made the job easier (for example ERC721 provided a uniformed way to transfer token ownership), but new tokens come with new characteristics and new rules ("kittens can't be transferred when labouring").
-
-we can't expect all-seeing-nodes like opensea to
-provide token data. It would either be outdated (for a plasma subchain
-that operates a lot faster than Ethereum) or inaccessible (for a
-plasma subchain with limited public participation except for periodic
-commits with UTXOs). This represents a scalability issue.
-
---
-
+Further, upgrading a smart contracts needs the provider of hosted dapps to also upgrade their code. On scale this casues issues.
 
 **Interacting with different systems**  
-Ethereum token have a very limited way of interacting with other systems like wallets. If the logic of interaction is part of the smart contract, we have the problems of 1. *and* to deal with the fact that you can't represent all systems language in one contract. It is impossible to do this without the help of external frameworks.
+Ethereum token have a very limited way of interacting with other systems like wallets or dapps. If the logic of interaction is part of the smart contract, we have the problems of 1. *and* to deal with the fact that you can't represent all systems language in one contract. It is impossible to do this without the help of external frameworks. 
 
-Currently this is solved by using hosted dAPPS on websites, which structure the interaction between users and smart contracts. However, this reintroduces the centralization problems Blockchain was made to solve.
+Currently this is solved by using hosted DApps on websites, which structure the interaction between users and smart contracts. However, this reintroduces the centralization problems Blockchain was made to solve.
 
 **Render tokens in a wallet**  
-It's hard to render the interaction of a system with an event in the token history, when the smart contract doesn't define the behaviour of all those systems in a way they understand. It's also hard to make a smart contract powered token to interact with all kind of different user interface systems - especially when upgrading the contract requires a lot of work.
-
---
- A token is rendered
-differently according to what happened to the token. It's also a
-security issue. Imagine a website be hacked to warn the user that
-their car rego insurance token has expired, and ask the user to renew
-it but presenting the attacker's address to receive the fee.
---
+Tokenization requires that events in the token history trigger actions in the user interface. But it's hard to do this, when the smart contract doesn't define the behaviour of all those systems in a way they understand. It's also hard to do so when a contract is upgraded. The usual solution is, again, to use a hosted DApp.
 
 **Allowing new protocols on the token**  
-Again, the inflexibility and immutability of a smart contract tokens makes it hard to allow to develop new protocols for it, especially when those protocols are not known when the contract is written. This could end with a locked-in-state of the token on one certain protocol and a migration to another protocol which lies completely in the hand of a single trusted party.
+The inflexibility and immutability of a smart contract tokens makes it hard to allow to develop new protocols for it, especially when those protocols are not known when the contract is written. This could end with a locked-in-state of the token on one certain protocol and a migration to another protocol which lies completely in the hand of a single trusted party.
 
 **Trust relationships**
 Carrying trust relationships with the legacy models of token casts two problems: First, you will have to input private data on a blockchain, which has, even when encrypted, several risks. Second, you need to carry the relationship over a hosted dAPP, which means you are dependend on a website being online. If one part of a chain of trust relationships is offline, your token will not work.
@@ -336,7 +317,15 @@ To summon it: Token on Ethereum suffer from being bound too tightly to a smart c
 
 When you try to integrate markets with Ethereum tokens you often end with not focusing on the business case itself - but on the development of the token smart contract. Which is not how it should be done.
 
-[[Edit: I think 5. and 1. are very similar points. Maybe cut them.]]
+All cases have one common denominator: There is a missing link between the smart contract and the user. This either depreciates the functionality of the smart contracts or reintroduces centralized hosted DApps filling the gap.
+
+### The problem of hosted DApps
+
+If you use advanced smart contracts today, you usually access them over a website, which is called a hosted DApp. For example, smart contracts like CryptoKitties or the 0x exchange protocol don't need a trusted third party to serve its functionality - in theory. In practice Ethereum wallets fail to represent the logic and the action options of these smart contracts in a user friendly way.
+
+Hosted DApps have several shortcomings: They introduce a trusted third party. The website owner can render and manipulate data and block users from accessing the dapp. The user also has to rely on the third party website to stay available, to not leak private data and to not be hacked.
+
+The mission to integrate the web via tokens instead of accounts is mostly lost, when we rely on hosted DApps to use advanced business' logics of smart contracts. This is why we introduce an alternative approach to handle the user interaction with smart contracts and tokens. 
 
 ### Tokenscript as a solution
 
