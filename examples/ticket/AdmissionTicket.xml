@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE tokenscript  [
-<!ENTITY token.en SYSTEM "cards/token.en.html">
-<!ENTITY enter.en SYSTEM "cards/enter.en.html">
+<!ENTITY token.en SYSTEM "cards/token.en.shtml">
+<!ENTITY enter.en SYSTEM "cards/enter.en.shtml">
 ]>
 <ts:token xmlns:ts="http://tokenscript.org/ns/tokenscript"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -29,6 +29,7 @@
       <ts:view-iconified xml:lang="en">
          &token.en;
       </ts:view-iconified>
+      <ts:view xml:lang="en">
          &token.en;
       </ts:view>
     </ts:token-card>
@@ -43,7 +44,7 @@
       <ts:exclude selection="expired"/>
       <ts:view xml:lang="en">
          &enter.en;
-</ts:view>
+      </ts:view>
 </ts:action>
 </ts:cards>
   <ts:attribute-types>
