@@ -16,10 +16,12 @@
         document.getElementById('msg').innerHTML = 'Pressed confirm' //TODO: Handle signature check
     }
 
-    window.onload = startup
+    window.onload = startup;
+    window.onconfirm = onConfirm;
 
-        // window.addEventListener('confirm', onConfirm, false);
-    ]]>
+    // this is better but we don't know how to make it work:
+    // window.addEventListener('confirm', onConfirm, false);
+]]>
 </script>
 
 <h3>Welcome to Craig Wright's house!</h3>
