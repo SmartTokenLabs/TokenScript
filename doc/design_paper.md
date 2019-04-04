@@ -272,15 +272,15 @@ This requires bundling a token with its *transactions rules* and *behaviour patt
 __2. Tokenisation must allow users to interact with different systems through the tokens__ 
 In the car example, the car token contains code to interact with a *smart lock* (the *Open*, *Start*, *Lock* actions) and the maker's own *web service* (the *Locate* action). The *List for sharing* is provided by *another third party service* which tokenises the usage of the car by hours or days and sells them piecemeal. The token needs to work in other environments and be used by different services - while the owner must be able to access all those markets solely through this Token.   
 
-__3. Also, a token must be renderable and associate with the actions it can perform in the user's wallet__ 
+__3. Also, a token must be renderable and associate with the actions it can perform in the user's wallet__  
 In the car example, if the registration expired, the web component at work would paint the Registration Token red or display a warning. Actions like *List for sharing* will not be available with an expired car rego, and the integrated token interface should clearly pass that message to the user. Token must be rendered differently according to what happened to them. 
 
-__4. It must allow new protocols to be developed on tokens__ 
+__4. It must allow new protocols to be developed on tokens__  
 A token never has a finished state. There are always options to attach new protocolls on it. In the property example, collateralization might be something wishful to add later, or identity information or the ability to transfer the token through plasma state channels. This has to reflect in the user interface, thus there must be a way to deploy trusted code to the
 user-agent's wallet or prefered dapp.
 
-__5. A token must carry trust relationship and business context to 3rd parties__ 
-In the car example, the insurance token provides Roadside Assistance service through NRMA. The driver might be able to access this through the insurance token and immediately be identified as qualified for help. It could be also possible that you have a token from Quantas Insurance, which gives you access to NRMA service. 
+__5. A token must carry trust relationship and business context to 3rd parties__  
+In the car example, the insurance token provides Roadside Assistance service through NRMA. The driver might be able to access this through the token of his insurance provider and immediately be identified as qualified for help.
 In both examples the token must carry trust relationships, which shouldn't depend on the availability of a certain service, but passed directly by the token. Both business context as well as the relationsship must be part of the token, while being highly available, private and integrative. [^abc].
 
 
@@ -290,7 +290,7 @@ In both examples the token must carry trust relationships, which shouldn't depen
 
 The commonly used token on Ethereum puts everything in a smart contract on a chain and relies on a hosted Dapp to be used to access its functions. We argue that this method is not suitable for creating a frictionless market. Fulfilling the challenges with the conventional token model is difficult, often nearly impossible, while adding complexity and causing scalability, interoperability and security issues.
 
-**Bundling a token with business logic, trust relationship and transactions rules**  
+**Bundling a token with business logic, trust relationship and transactions rules**   
 In the world of Ethereum - the de facto standard for token - this is usually done with dAPPS: The business logic of a token - all kind of applications - are coded in a smart contract, and centralized websites enable users to access the contract. 
 
 This method requires the designers to fetch all possible business scenarios while it adds a lot of complexity to the code. The amount of complexity often causes security issues. There are a lot of examples on Ethereum how this concept can go wrong, which is why the Ethereum community set back to trying only very carefully to implement only very limited behavior patterns in smart contracts. Creating a new token requires a developer to create an entire smart contract.
