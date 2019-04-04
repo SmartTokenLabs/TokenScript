@@ -16,7 +16,7 @@
   <ts:name xml:lang="es" form="collective">Boletos de admisión</ts:name>
   <!-- TODO: will make separate Tokenscript for ERC875 -->
   <ts:contract id="ecr875" interface="erc875">
-    <ts:address network="3">0x16e58F9a98bc46a572CFb9ce28DDEeaf76AF645a</ts:address>
+    <ts:address network="3">0x0C8D487DD27D7c4A027D9f92915659139e0b2FF2</ts:address>
   </ts:contract>
   <ts:selections>
     <ts:selection id="expired">
@@ -54,16 +54,21 @@
     </ts:action>
   </ts:cards>
   <ts:attribute-types>
-    <ts:attribute-type id="country" oid="2.5.4.7" syntax="1.3.6.1.4.1.1466.115.121.1.15">
-      <ts:name xml:lang="en">Country</ts:name>
-      <ts:name xml:lang="zh">国家</ts:name>
-      <ts:name xml:lang="es">País</ts:name>
-      <ts:origin bitmask="FFFF000000000000000000000000000000000000000000000000000000000000" as="utf8"/>
-    </ts:attribute-type>
     <ts:attribute-type id="locality" oid="2.5.4.7" syntax="1.3.6.1.4.1.1466.115.121.1.15">
       <ts:name xml:lang="en">City</ts:name>
       <ts:name xml:lang="zh">城市</ts:name>
       <ts:name xml:lang="es">Ciudad</ts:name>
+      <ts:name xml:lang="ru">город</ts:name>
+      <ts:origin as="mapping" bitmask="00000000000000000000000000000000FF000000000000000000000000000000">
+        <ts:mapping>
+          <ts:option key="1">
+            <ts:value xml:lang="ru">Москва́</ts:value>
+            <ts:value xml:lang="en">Sydney</ts:value>
+            <ts:value xml:lang="zh">莫斯科</ts:value>
+            <ts:value xml:lang="es">Moscú</ts:value>
+          </ts:option>
+        </ts:mapping>
+      </ts:origin>
       <ts:origin contract="erc875">
         <ts:function name="getLocality">
           <ts:inputs>
@@ -71,6 +76,44 @@
           </ts:inputs>
         </ts:function>
       </ts:origin>
+    </ts:attribute-type>
+    <ts:attribute-type id="venue" syntax="1.3.6.1.4.1.1466.115.121.1.15">
+      <ts:name xml:lang="en">Venue</ts:name>
+      <ts:name xml:lang="zh">场馆</ts:name>
+      <ts:name xml:lang="es">Lugar</ts:name>
+      <ts:name xml:lang="ru">место встречи</ts:name>
+      <ts:origin as="mapping" bitmask="0000000000000000000000000000000000FF0000000000000000000000000000">
+        <ts:mapping>
+          <ts:option key="1">
+            <ts:value xml:lang="ru">Стадион Калининград</ts:value>
+            <ts:value xml:lang="en">Craig Wright's House</ts:value>
+            <ts:value xml:lang="zh">加里宁格勒体育场</ts:value>
+            <ts:value xml:lang="es">Estadio de Kaliningrado</ts:value>
+          </ts:option>
+        </ts:mapping>
+      </ts:origin>
+    </ts:attribute-type>
+    <ts:attribute-type id="time" syntax="1.3.6.1.4.1.1466.115.121.1.24">
+      <ts:name xml:lang="en">Time</ts:name>
+      <ts:name xml:lang="zh">时间</ts:name>
+      <ts:name xml:lang="es">Tiempo</ts:name>
+      <ts:name xml:lang="ru">время</ts:name>
+      <!-- keys used here are BinaryTime (RFC6019) for backward compatibility,
+           don't copy this behaviour when creating new assets -->
+      <ts:origin as="mapping" bitmask="000000000000000000000000000000000000FFFFFFFF00000000000000000000">
+        <ts:mapping>
+          <ts:option key="1531586800">
+            <ts:value>20200714170000+0300</ts:value>
+          </ts:option>
+        </ts:mapping>
+      </ts:origin>
+    </ts:attribute-type>
+    <!-- James Sangalli removed these attributes "to make life easier"
+    <ts:attribute-type id="country" oid="2.5.4.7" syntax="1.3.6.1.4.1.1466.115.121.1.15">
+      <ts:name xml:lang="en">Country</ts:name>
+      <ts:name xml:lang="zh">国家</ts:name>
+      <ts:name xml:lang="es">País</ts:name>
+      <ts:origin bitmask="FFFF000000000000000000000000000000000000000000000000000000000000" as="utf8"/>
     </ts:attribute-type>
     <ts:attribute-type id="start" syntax="1.3.6.1.4.1.1466.115.121.1.24">
       <ts:name>🕑</ts:name>
@@ -92,6 +135,7 @@
       <ts:name xml:lang="es">Sección</ts:name>
       <ts:origin bitmask="00000000000000000000000000000000000000000000000000000000FFFFFFFF" as="utf8"/>
     </ts:attribute-type>
+    -->
     <ts:attribute-type id="expired" syntax="1.3.6.1.4.1.1466.115.121.1.7"> <!-- boolean -->
       <ts:origin contract="erc875" as="mapping">
         <ts:function name="isExpired">
