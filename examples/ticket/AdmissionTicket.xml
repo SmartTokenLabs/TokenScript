@@ -3,19 +3,19 @@
 <!ENTITY token.en SYSTEM "cards/token.en.html">
 <!ENTITY enter.en SYSTEM "cards/enter.en.html">
 ]>
-<ts:token xmlns:ts="http://tokenscript.org/ns/tokenscript"
-          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<ts:token xmlns:ts="http://tokenscript.org/2019/04/tokenscript"
+          xmlns="http://www.w3.org/1999/xhtml"
           xmlns:xml="http://www.w3.org/XML/1998/namespace">
 
   <ts:name xml:lang="en">Admission Ticket Token</ts:name>
   <ts:name xml:lang="zh">入場券</ts:name>
   <ts:name xml:lang="es">Boleto de admisión</ts:name>
-  <ts:name xml:lang="en" type="collective">Admission Ticket Tokens</ts:name>
-  <ts:name xml:lang="zh" type="collective">入場券</ts:name>
-  <ts:name xml:lang="es" type="collective">Boletos de admisión</ts:name>
+  <ts:name xml:lang="en" form="collective">Admission Ticket Tokens</ts:name>
+  <ts:name xml:lang="zh" form="collective">入場券</ts:name>
+  <ts:name xml:lang="es" form="collective">Boletos de admisión</ts:name>
   <!-- TODO: will make separate Tokenscript for ERC875 -->
-  <ts:contract id="ecr875" type="holding">
-    <ts:address network="3" interface="erc875">0x16e58F9a98bc46a572CFb9ce28DDEeaf76AF645a</ts:address>
+  <ts:contract id="ecr875" interface="erc875">
+    <ts:address network="3">0x16e58F9a98bc46a572CFb9ce28DDEeaf76AF645a</ts:address>
   </ts:contract>
   <ts:selections>
     <ts:selection id="expired">
@@ -33,8 +33,11 @@
         &token.en;
       </ts:view>
     </ts:token-card>
-    <ts:action type="confirm-back">
-      <!-- in type confirm-back:
+    <ts:action>
+      <!-- this action is of the model confirm-back.
+      It should be <ts:action model="confirm-back"> but Weiwu
+      shied away from specifying that due to the likely change of design causing an upgrade path issue.
+
       window.onConfirm is called if user hit "confirm";
       window.close() causes the back button to be pressed.
       -->
