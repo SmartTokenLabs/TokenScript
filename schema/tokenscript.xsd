@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+           targetNamespace="http://tokenscript.org/2019/04/tokenscript"
+           xmlns:xhtml="http://www.w3.org/1999/xhtml"
+           xmlns="http://tokenscript.org/2019/04/tokenscript">
+
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace"
+        schemaLocation="http://www.w3.org/2001/xml.xsd" />
+
+  <xs:import namespace="http://www.w3.org/2000/09/xmldsig#"
+        schemaLocation="http://www.w3.org/TR/2008/REC-xmldsig-core-20080610/xmldsig-core-schema.xsd"
+  />
+  <!-- Importing XHTML namespace -->
+  <xs:import namespace="http://www.w3.org/1999/xhtml"
+             schemaLocation="http://www.w3.org/2002/08/xhtml/xhtml1-strict.xsd"/>
+  <xs:element name="token">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="name"/>
+        <xs:element maxOccurs="unbounded" ref="contract"/>
+        <xs:element ref="selections"/>
+        <xs:element ref="cards"/>
+        <xs:element minOccurs="0" ref="grouping"/>
+        <xs:element minOccurs="0" ref="ordering"/>
+        <xs:element ref="attribute-types"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="name">
+    <xs:complexType mixed="true">
+      <xs:attribute ref="xml:lang"/>
+      <xs:attribute name="form" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="contract">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="address"/>
+        <xs:element minOccurs="0" ref="interface"/>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:NCName"/>
+      <xs:attribute name="interface" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="interface" type="xs:NCName"/>
+  <xs:element name="cards">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="1" ref="token-card"/>
+        <xs:element maxOccurs="unbounded" ref="action"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="token-card">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="view-iconified"/>
+        <xs:element minOccurs="0" ref="view"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="action">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="name"/>
+        <xs:element minOccurs="0" ref="exclude"/>
+        <xs:element ref="view"/>
+      </xs:sequence>
+
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="include" type="xs:NCName"/>
+  <xs:element name="view">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="xhtml:html"/>
+      </xs:sequence>
+      <xs:attribute ref="xml:lang"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="view-iconified" type="shtml">
+  </xs:element>
+  <xs:complexType name="shtml">
+    <xs:complexContent>
+      <xs:extension base="xhtml:Block">
+        <xs:attributeGroup ref="xhtml:attrs"/>
+        <xs:attribute name="onload" type="xhtml:Script"/>
+        <xs:attribute name="onunload" type="xhtml:Script"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="redeem">
+    <xs:complexType>
+      <xs:attribute name="format" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="exclude">
+    <xs:complexType>
+      <xs:attribute name="selection"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="feemaster" type="xs:anyURI"/>
+  <xs:element name="gateway" type="xs:anyURI"/>
+  <xs:element name="prefix" type="xs:anyURI"/>
+  <xs:element name="selections">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="selection"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="selection">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="name"/>
+        <xs:element ref="filter"/>
+      </xs:sequence>
+      <xs:attribute name="id" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="filter" type="xs:string"/>
+  <xs:element name="grouping">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="group"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="group">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="consecutive_groups"/>
+      </xs:sequence>
+      <xs:attribute name="bitmask" use="required"/>
+      <xs:attribute name="name" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="consecutive_groups">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="ordering">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="order"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="order">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="byName"/>
+        <xs:element maxOccurs="unbounded" ref="byValue"/>
+      </xs:sequence>
+      <xs:attribute name="bitmask" use="required"/>
+      <xs:attribute name="name" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="byName">
+    <xs:complexType>
+      <xs:attribute name="field" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="byValue">
+    <xs:complexType>
+      <xs:attribute name="field" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="attribute-types">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="attribute-type"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="attribute-type">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="name"/>
+        <xs:element ref="origin"/>
+      </xs:sequence>
+      <xs:attribute name="as" type="xs:NCName"/>
+      <xs:attribute name="id" use="required" type="xs:NCName"/>
+      <xs:attribute name="oid" type="xs:NMTOKEN"/>
+      <xs:attribute name="syntax" use="required" type="xs:NMTOKEN"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="origin">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="function"/>
+        <xs:element minOccurs="0" ref="mapping"/>
+      </xs:sequence>
+      <xs:attribute name="as" type="xs:NCName"/>
+      <xs:attribute name="bitmask"/>
+      <xs:attribute name="contract" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="function">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="inputs"/>
+      </xs:sequence>
+      <xs:attribute name="name" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="inputs">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="uint256"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="uint256">
+    <xs:complexType>
+      <xs:attribute name="ref" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="mapping">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="option"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="option">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="value"/>
+      </xs:sequence>
+      <xs:attribute name="key" use="required" type="xs:integer"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="value">
+    <xs:complexType mixed="true">
+      <xs:attribute ref="xml:lang" use="optional" />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="address">
+    <xs:complexType mixed="true">
+      <xs:attribute name="network" use="required" type="xs:integer"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="message">
+    <xs:complexType mixed="true">
+      <xs:attribute ref="xml:lang" use="optional" />
+      <xs:attribute name="type" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
