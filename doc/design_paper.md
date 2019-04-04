@@ -290,12 +290,16 @@ These are just a few examples of requirements of a token. In the following chapt
 The commonly used token on Ethereum need to provide access with a host DApp, which means it puts everything in a smart contract on a chain. We argue that these method is not suitable for creating a frictionless market. Fulfilling the challenges with the conventional token model is difficult, often nearly impossible, while adding complexity and causing scalability, interoperability and security issues.
 
 **Bundling a token with business logic, trust relationship and transactions rules**  
-In the world of Ethereum - the de facto standard for token - this is usually done with dAPPS: The business logic of a token - all kind of applications - are coded in a smart contract. This requires the designers to fetch all possible business scenarios while it adds a lot of complexity to the code. The amount of complexity often causes security issues. There are a lot of examples on Ethereum how this concept can go wrong, which is why the Ethereum community set back to trying only very carefully to implement only very limited behavior patterns in smart contracts.
+In the world of Ethereum - the de facto standard for token - this is usually done with dAPPS: The business logic of a token - all kind of applications - are coded in a smart contract, and centralized websites enable users to access the contract. 
+
+This method requires the designers to fetch all possible business scenarios while it adds a lot of complexity to the code. The amount of complexity often causes security issues. There are a lot of examples on Ethereum how this concept can go wrong, which is why the Ethereum community set back to trying only very carefully to implement only very limited behavior patterns in smart contracts. Creating a new token requires a developer to create an entire smart contract.
 
 Another problem which often emerges is the upgrade of a token's business logic. Nobody can know in advance every kind of application and context of token transfers. To reflect this, it is possible to upgrade Ethereum smart contracts. However, this adds complexity to the code and just moves the un-upgradability to the upgrade-contract. As the incident on Parity's multisig contract demonstrated, this adds another security issue.
 
 **Interacting with different systems**  
 Ethereum token have a very limited way of interacting with other systems like wallets. If the logic of interaction is part of the smart contract, we have the problems of 1. *and* to deal with the fact that you can't represent all systems language in one contract. It is impossible to do this without the help of external frameworks.
+
+Currently this is solved by using hosted dAPPS on websites, which structure the interaction between users and smart contracts. However, this reintroduces the centralization problems Blockchain was made to solve.
 
 **Render tokens in a wallet**  
 It's hard to render the interaction of a system with an event in the token history, when the smart contract doesn't define the behaviour of all those systems in a way they understand. It's also hard to make a smart contract powered token to interact with all kind of different user interface systems - especially when upgrading the contract requires a lot of work.
@@ -303,9 +307,12 @@ It's hard to render the interaction of a system with an event in the token histo
 **Allowing new protocols on the token**  
 Again, the inflexibility and immutability of a smart contract tokens makes it hard to allow to develop new protocols for it, especially when those protocols are not known when the contract is written. This could end with a locked-in-state of the token on one certain protocol and a migration to another protocol which lies completely in the hand of a single trusted party.
 
-To summon it: Token on Ethereum suffer from being bound too tightly to a smart contract (dAPP), which introduces inflexibility, complexity and often security issues. It makes it nearly impossible to implement advanced business logics, interoperability and relationship structures. If done, it is often made in a over simplistic way. The requirement to upgrade the business logic is more of a bandgab, which helps on one area, but makes the problems on another area worse.
+**Trust relationships**
+Carrying trust relationships with the legacy models of token casts two problems: First, you will have to input private data on a blockchain, which has, even when encrypted, several risks. Second, you need to carry the relationship over a hosted dAPP, which means you are dependend on a website being online. If one part of a chain of trust relationships is offline, your token will not work.
 
-When you try to integrate markets with Ethereum tokens you often end with not focusing on the business case itself - but on the development of the token smart contract. 
+To summon it: Token on Ethereum suffer from being bound too tightly to a smart contract and hosted dAPPs, which introduces **inflexibility**, **complexity**, **centralization** and often **security and privacy issues**. It makes it nearly impossible to implement advanced business logics, **interoperability** and relationship structures in a **userfriendly** way. If done, it is often made in a over simplistic way. The requirement to **upgrade** the business logic is more of a bandgab, which helps on one area, but makes the problems on another area worse.
+
+When you try to integrate markets with Ethereum tokens you often end with not focusing on the business case itself - but on the development of the token smart contract. Which is not how it should be done.
 
 [[Edit: I think 5. and 1. are very similar points. Maybe cut them.]]
 
