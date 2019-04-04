@@ -170,8 +170,9 @@
   <xs:element name="attribute-type">
     <xs:complexType>
       <xs:sequence>
+        <!-- name is not needed if the attribute is only used for selection -->
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="name"/>
-        <xs:element ref="origin"/>
+        <xs:element minOccurs="1" maxOccurs="unbounded" ref="origin"/>
       </xs:sequence>
       <xs:attribute name="as" type="xs:NCName"/>
       <xs:attribute name="id" use="required" type="xs:NCName"/>
