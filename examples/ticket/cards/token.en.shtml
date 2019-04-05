@@ -1,5 +1,4 @@
 <script type="text/javascript">
-<![CDATA[
     class Token {
     constructor(tokenInstance) {
     this.props = tokenInstance
@@ -51,7 +50,6 @@
         const domHtml = new Token(currentTokenInstance).render()
         document.getElementById('root').innerHTML = domHtml
       }
-]]>
 </script>
     
 <div id="root"></div>
