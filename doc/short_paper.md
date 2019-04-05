@@ -75,22 +75,23 @@ The car ownership example demonstrated the power of tokenization to errect a fri
 
 To unleash their potential, tokens need to become a lot more sophisticated and fill the delivery side. Several requirements must be fulfilled to enable this:
 
-1. Tokenisation means representing all kind of assets as a token on a blockchain
-This requires bundling a token with its transactions rules and behaviour patterns. New tokens should be able to enter the ecosystem on an abstracted layer, so that they can be traded and used in different contexts. With the anticipated proliferation of new plasma subnets, token shold also be able to seemlessly operate on them.
+1. Richness
 
-2. Tokenisation must allow users to interact with different systems through the tokens
-In the car example, the car token contains code to interact with a smart lock (the Open, Start, Lock actions) and the maker's own web service (the Locate action). The List for sharing is provided by another third party service which tokenises the usage of the car by hours or days and sells them piecemeal. The token needs to work in other environments and be used by different services - while the owner must be able to access all those markets solely through this Token.
+Tokenization means having a large variety of tokens, each tailored for its usecase, and each based on a rich foundation, structuring transaction rules, behaviour patterns and business logic. 
 
-3. A token must be renderable and associate with the actions it can perform in the user's wallet
-In the car example, if the registration expired, the web component at work would paint the Registration Token red or display a warning. Actions like List for sharing will not be available with an expired car rego, and the integrated token interface should clearly pass that message to the user. Token must be rendered differently according to what happened to them in the user's wallet.
+2. Embeddedness
 
-4. It must allow new protocols to be developed on tokens
-A token never has a finished state. There are always options to attach new protocolls on it. In the property example, collateralization might be something wishful to add later, or identity information or the ability to transfer the token through plasma state channels. This has to reflect in the user interface, thus there must be a way to deploy trusted code to the user-agent's wallet or prefered dapp.
+Token must be able to interact with a large set of different systems, be it IoT devices, third party websites, wallets or other token and smart contracts. Tokenization only happens when token are embedded in this environment, while they are able to independently integrate this environment. All services, wallets and so on must be able to understand, address and react on every single event and action option of the token.
 
-5. A token must carry trust relationship and business context to 3rd parties
-In the car example, the insurance token provides Roadside Assistance service through NRMA. The driver might be able to access this through the token of his insurance provider and immediately be identified as qualified for help. In both examples the token must carry trust relationships, which shouldn't depend on the availability of a certain service, but passed directly by the token. Both business context as well as the relationsship must be part of the token, while being highly available, private and integrative. [^abc].
+3. Flexibility
 
-[^abc]: Availability: NRMA is online 24/7 but Qantas Insurance can suspend their services in public holidays or at night. Privacy: NRMA can learn user's GPS location but Qantas Insurance isn't legally allowed to learn it. Integration: Most of NRMA's customers are not obtained through Qantas Insurance, so it would be an additional system to integrate and extra security concern for NRMA to integrate to Qantas Insurance's web service. Of all three, availability might be the most visible. Just imagine how angry a customer will be, having his car breaking down in the middle of the barren Australian outback, and learn that the road-side assistance can't be authorised because the insurer's web service is upgrading "For a better user experience".
+A token never has a finished state. It must be able to be upgraded to reflect the business environment and to adopt new protocols, like other smart contracts or plasma state channels. To be successfull, token must not be locked-in in one protocol or one state, but be able to react flexible on the environment and technological achievements. Wallets and services must be able to adopt such changes of the token in an easy and fast manner. 
+
+4. Trust
+
+A token must carry trust relationship and business context to 3rd parties. There are many usecases in which a token is used to transport a permission, given from one party, to another. Only this enables token to integrate trust based services. This must not but can involve private data.
+
+It must be noted that the achievement of this requirements must not disturb the basic security and trust properties a token based on a blockchain provides.
 
 ## The shortcomings of the established token system
 
