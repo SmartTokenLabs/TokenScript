@@ -135,5 +135,3 @@ To explain Tokenscript in mor details, we will fetch out design requirements by 
 
 
 ## Design requirements
-1. ssss   
-   dddd
