@@ -1,5 +1,4 @@
 <script type="text/javascript">
-<![CDATA[
         function startup() {
             // 1. call API to fetch challenge
             document.getElementById('msg').innerHTML = "Loading challenge ..."
@@ -21,7 +20,6 @@
 
     // this is better but we don't know how to make it work:
     // window.addEventListener('confirm', onConfirm, false);
-]]>
 </script>
 
 <h3>Welcome to Craig Wright's house!</h3>
