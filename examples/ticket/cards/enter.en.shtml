@@ -1,25 +1,38 @@
 <script type="text/javascript">
-        function startup() {
-            // 1. call API to fetch challenge
-            document.getElementById('msg').innerHTML = "Loading challenge ..."
-            const Http = new XMLHttpRequest();
-            const url = 'http://stormbird.duckdns.org:8080/api/getChallenge';
-            Http.open("GET", url);
-            Http.send();
-            Http.onreadystatechange = (e) => {
-                document.getElementById('msg').innerHTML = 'Challenge: ' + Http.responseText
-            }
-        }
+window.onload = function startup() {
+	// 1. call API to fetch challenge
+	fetch('http://stormbird.duckdns.org:8080/api/getChallenge')
+	  .then(function(response) {
+		return response.text()
+	  })
+	  .then(function(response) {
+		document.getElementById('msg').innerHTML = 'Challenge: &amp;' + response
+		window.challenge = response
+	  })
+	}
 
-    function onConfirm(signature) {
-        document.getElementById('msg').innerHTML = 'Pressed confirm' //TODO: Handle signature check
-    }
-
-    window.onload = startup;
-    window.onconfirm = onConfirm;
-
-    // this is better but we don't know how to make it work:
-    // window.addEventListener('confirm', onConfirm, false);
+window.onConfirm = function onConfirm(signature) {
+	if (window.challenge === undefined || window.challenge.length == 0) return
+	const challenge = window.challenge
+	document.getElementById('msg').innerHTML = 'Opening...'
+	// 2. sign challenge to generate response
+	web3.personal.sign({data: challenge}, function(error, value) {
+		document.getElementById('msg').innerHTML = 'Response: ' + value + '::' + error
+		// 3. open door
+		fetch(`http://stormbird.duckdns.org:8080/api/checkSignature?contract=0x0C8D487DD27D7c4A027D9f92915659139e0b2FF2&amp;challenge=${challenge}&amp;sig=${value}`)
+		  .then(function(response) {
+			return response.text()
+		  })
+		  .then(function(response) {
+			if (response == "pass") {
+			  window.close()
+			} else {
+			  document.getElementById('msg').innerHTML = 'Failed with: ' + response
+			}
+		  })
+	})
+	window.challenge = '';
+}
 </script>
 
 <h3>Welcome to Craig Wright's house!</h3>
