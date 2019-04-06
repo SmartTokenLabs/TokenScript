@@ -15,7 +15,7 @@
   <ts:name xml:lang="zh" form="collective">入場券</ts:name>
   <ts:name xml:lang="es" form="collective">Boletos de admisión</ts:name>
   <!-- TODO: will make separate Tokenscript for ERC875 -->
-  <ts:contract id="ecr875" interface="erc875">
+  <ts:contract id="erc875" interface="erc875">
     <ts:address network="3">0x0C8D487DD27D7c4A027D9f92915659139e0b2FF2</ts:address>
   </ts:contract>
   <ts:selections>
