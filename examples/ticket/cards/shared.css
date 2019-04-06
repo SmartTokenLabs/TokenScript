@@ -1,24 +1,3 @@
-
-@font-face {
-    font-family: 'SourceSansPro-Light';
-    src: local('SourceSansPro-Light'),url('SourceSansPro-Light.otf') format('opentype');
-    font-weight: lighter;
-    }
-    @font-face {
-    font-family: 'SourceSansPro-Regular';
-    src: local('SourceSansPro-Regular'),url('SourceSansPro-Regular.otf') format('opentype');
-    font-weight: normal;
-    }
-    @font-face {
-    font-family: 'SourceSansPro-Semibold';
-    src: local('SourceSansPro-Semibold'),url('SourceSansPro-Semibold.otf') format('opentype');
-    font-weight: bold;
-    }
-    @font-face {
-    font-family: 'SourceSansPro-Bold';
-    src: local('SourceSansPro-Bold'),url('SourceSansPro-Bold.otf') format('opentype');
-    font-weight: boldedr;
-    }
     .tbml-count {
     font-family: "SourceSansPro-Bold";
     font-weight: bolder;
