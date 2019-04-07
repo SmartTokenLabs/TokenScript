@@ -1,6 +1,6 @@
 <script type="text/javascript">
-      ;(function() {
-'use strict'
+  ;(function() {
+  'use strict'
 
     function pad2(num) {
       if (num &lt; 10) return '0' + num
@@ -92,9 +92,10 @@
     } else {
       window.GeneralizedTime = GeneralizedTime
     }
-}())
-
-    class Token {
+  }())
+</script>
+<script type="text/javascript"><![CDATA[
+  class Token {
     constructor(tokenInstance) {
     this.props = tokenInstance
     }
@@ -144,15 +145,12 @@
       </div>`;
     return result
     }
-    }
-    </script>
+  }
     
-    <script>
-      web3.tokens.dataChanged = (oldTokens, updatedTokens) => {
+  web3.tokens.dataChanged = (oldTokens, updatedTokens) => {
         const currentTokenInstance = web3.tokens.data.currentInstance
         const domHtml = new Token(currentTokenInstance).render()
         document.getElementById('root').innerHTML = domHtml
-      }
-</script>
-    
+  }
+]]></script>
 <div id="root"></div>
