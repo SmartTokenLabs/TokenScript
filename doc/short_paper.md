@@ -45,7 +45,7 @@ We strongly believe that it is inevitable that Tokenization will happen and will
 
 To fulfill the promise, tokens need to become a lot more sophisticated. An important part is that they serve not only on the payment, but also on the delivery side. There are several requirements tokens must match to enable Tokenization:
 
-*1. Richness
+*1. Richness*
 
 Tokenization means having a large variety of tokens, each tailored for its usecase, and each based on a rich foundation, structuring transaction rules, behaviour patterns and business logic. 
 
