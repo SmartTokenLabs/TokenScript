@@ -140,7 +140,7 @@
           <span class="tbml-date">${date}</span>
         </div>
         <div>
-          <span class="tbml-time">${time}</span>  (<span>${this.props.locality}</span>)
+          <span class="tbml-time">${time}, ${this.props.locality}</span>
         </div>
       </div>`;
     return result
