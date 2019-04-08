@@ -4,15 +4,20 @@
            xmlns:xhtml="http://www.w3.org/1999/xhtml"
            xmlns="http://tokenscript.org/2019/04/tokenscript">
 
-  <xs:import namespace="http://www.w3.org/XML/1998/namespace"
-        schemaLocation="http://www.w3.org/2001/xml.xsd" />
 
+  <!-- Importing XML namespace for xml:lang and xml:id -->
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace"
+        schemaLocation="xml.xsd" />
+
+  <!-- Importing XML Signature namespace. Schema is from
+      http://www.w3.org/TR/2008/REC-xmldsig-core-20080610/xmldsig-core-schema.xsd
+  -->
   <xs:import namespace="http://www.w3.org/2000/09/xmldsig#"
-        schemaLocation="http://www.w3.org/TR/2008/REC-xmldsig-core-20080610/xmldsig-core-schema.xsd"
-  />
-  <!-- Importing XHTML namespace -->
+        schemaLocation="xmldsig-core-schema.xsd" />
+
+  <!-- Importing XHTML namespace. use xhtml1-strict.xsd to get xhtml:Block -->
   <xs:import namespace="http://www.w3.org/1999/xhtml"
-             schemaLocation="http://www.w3.org/2002/08/xhtml/xhtml1-strict.xsd"/>
+             schemaLocation="xhtml1-strict.xsd"/>
   <xs:element name="token">
     <xs:complexType>
       <xs:sequence>
