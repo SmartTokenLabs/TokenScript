@@ -1,9 +1,8 @@
 %.tsml: %.xml
 	# XML Canonicalization
-	xmlstarlet c14n $^  > $@.xml
+	xmlstarlet c14n $^  > $@ 
 	# XML Validation
-	xmlstarlet val --xsd ../../schema/tokenscript.xsd $^
-    # alternatively, use xmllint
-    # xmllint --noout --schema ../../schema/tokenscript.xsd $@.xml
-	mv $@.xml $@
+    # if failed, run validation again with xmllint to get meaningful error
+    # then delete the canonicalized file
+	-xmlstarlet val --xsd ../../schema/tokenscript.xsd $^ || (xmllint --noout --schema ../../schema/tokenscript.xsd $@; rm $@)
 ticket: AdmissionTicket.tsml 
