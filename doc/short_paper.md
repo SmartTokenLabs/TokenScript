@@ -1,73 +1,43 @@
 // This is a short version of a design paper, which takes the most important points and describes Tokenscript from an abstract, low-level point of view.
 
 ## Abstract
-We recognise the blockchain technology's utility in providing a frictionless market and integrating the web. This is done through tokenisation. Tokenised rights can be traded on the market and integrated across systems, forming a frictionless market and allowing free and accountless integration.
+We recognise the blockchain technology's utility in providing a frictionless market and integrating the web. This is done through  a process we call *tokenisation*. 
 
-Today, the ways tokens are accessed, rendered and transacted are scattered across dynamic Dapps and immutable Smart Contracts on the blockchain. Most tokens either have a very primitive business logic or try to put complex logics into the contract to cater the interactions with the token. This adds complexity and security issues, while hardly addressing all potential business patterns in advance. When marketisation and integration of a token is tied to a dapp, it recreates data interoperability, security and availability barrier - the same issues that prevented tokenisation before blockchain's invention.
+However, the way tokens are used today does not fulfill the requirements for tokenization. Tokens are accessed, rendered and transacted are scattered across dynamic Dapps and immutable Smart Contracts on the blockchain. This creates a lot of problems when you try to implement business logic in a token. It either ends with being very primitive, or it causes complexity and security issues and reintroduces central point of failures. 
 
 Therefore we introduce Tokenskript, a program interface for tokenisation. It abstracts out the token information, access methods and UI rendering so that they can be efficiently marketised and used for integration. It allows different token providers to not only describe the features of their tokens but also how they are allowed to “act”, e.g. transferability. The crux of the idea is that such a markup description can be updated at any time by the token issuer and retroactively reflect the behaviour of already issued tokens. Besides allowing easy interoperability between different token providers, this also eliminates the need to update the DApp or smart contract whenever the business logic of a particular type of token changes.
 
-Specifically, Tokenscript is an XML dialect. It describes the functions provided by the token (through smart contract or not), the method to render it on the user's interface, the ERCs token behaviour templates it uses and the javascript needed to construct transactions and render the token.
-
-TokenScript allows token logic and rendering to be separated out of the "host", allows token to be easily portable and market to be created for it.
-
-It allows different token providers to, not only describe the features of their tokens but also how they are allowed to “act”, e.g. transferability. The crux of the idea is that such a markup description can be updated at any time by the token issuer and retroactively reflect the behaviour of already issued tokens. Besides allowing easy interoperability between different token providers, this also eliminates the need to update the DApp or smart contract whenever the business logic of a particular type of token changes.
-
+Specifically, Tokenscript is an XML dialect. It describes the functions provided by the token (through smart contract or not), the method to render it on the user's interface, the ERCs token behaviour templates it uses and the javascript needed to construct transactions and render the token. TokenScript allows token logic and rendering to be separated out of the "host", making token easily portable and markets to be created for it.
 
 ## Tokenization
 Blockchain technology has two primary functions that serve essential purposes for the future economy and the future Internet:
 
-    providing a frictionless market; and
-    integrating the web.
+* providing a frictionless market; and
+* integrating the web.
 
-We call this process *Tokenization*. This paper addresses the vision of where we can be and follow up with the design and reasoning behind the architecture needed on top of the blockchain. We explain Tokenscript which is a critical missing layer and go over its design principles and how we are building it.
+We call this process *Tokenization*. This paper addresses the vision of where we can be and follow up with the design and reasoning behind the architecture needed on top of the blockchain. 
 
 ### Creating a frictionless Market
-However, despite this web 2.0 revolution, the majority of markets still operate with high costs. The stock market, for example, has so much overhead that it is only justifiable for multi-million dollar businesses which rely on the trust of rules and regulations to operate.
+The majority of markets is not integrated and operates with high costs. The stock market, for example, has so much overhead that it is only justifiable for multi-million dollar businesses which rely on the trust of rules and regulations to operate.
 
-With blockchain, any tokenised asset can be fastly transacted any time, as long as it follows the rules, without an intermediary, eliminating frictions and enabling maximum market efficiency. The buyers and sellers do not need to "enter" the market; instead, tokens are always on the market.
+Nearly all markets operate still in the traditional intermediary-operated market model. A trade is made in two stages: entering the market, making a deal. With blockchain, any tokenised asset can be fastly transacted any time, without an intermediary. The buyers and sellers do not need to "enter" the market; instead, tokens are *always on the market*. A trade can start with the second step. 
 
-With the traditional intermediary-operated market model, a trade is made in two stages: entering the market, making a deal. Blockchain can simplify that into a protocol; therefore the blockchain token assets can be considered always on the market.
+This enables trades the frictions of the traditional market permitted. We can tokenize 1% of a property and create granular investments of all kind of ressources. We can tokenize electricity, allowing power users to benefit from finer scheduling of the use of resources. And so much more. 
 
-Can we tokenise 1% of a property, so that we have a finer property market with lower entry thresholds, which react faster than the typical month-long property purchase-sales cycle? Can token create a market of granular investments in all kind of resources?
+Blockchain can provide the foundational layer to achieve these. But it requires a reliable and precise method to define how tokens should be used and transacted. Tokens must be categorised into *payment* and *deliverable* tokens. The commonly used ERC represents only the payment side of a trade. Often they just serve as a gift card, replacing other payment token. 
 
-Can we tokenise electricity, allowing power users to benefit from finer scheduling of the use of resources, and households to benefit from collecting surplus sun energy?
+To trigger tokenization, tokens must be products. To be so they need to have different properties: Do tokens expire? Some do, some do not. Should the token owner receive a notification on a specific event? Is it stream-able? Is it related to identity information? How does it look on the user's mobile, and how is it called in a users language? Does it define a method to establish trusted communication between buyers and sellers?
 
-Blockchain can provide the foundational layer to achieve these. It enables a working, frictionless market with tokenised assets always on the market. However, this can only become true when there is a reliable and precise method to define how tokens should be used and transacted. This the focus of our work on Tokenscript.
+### Integrating the web
+Like markets, the internet as we know it is not integrated. A symptom of this is the need to manually do so often copy and pasting. This is not a flaw of the user experience design, but of the architecture of the web. It is organized like a giant library, and users are like readers keeping notes of the index numbers.
 
-In 2017-2018 we did end up having hundreds of tokens. However, they uniformly fall into one category of token: created with the ERC20 standard they are currency-like, filling up the payment side of the market. There is nearly zero effort devoted to making tokens goods and services - which is the deliverable side of the market and a fundamental need for a market to work.
+The smartphone, which was designed to be the most integrative and personal tool for browsing the web, did not solve the problem. It even made it worse, as copy-pasting becomes bigger trouble when using a Smart Phone. The effort from the client side alone can't integrate a Web that is not designed to integrate. 
 
-We categorise tokens as payment tokens and deliverable tokens. ERC20 tokens bearing the hallmarks of payment tokens only fills one side of the market with tokens. They can't lift the market, as they merely compete with other payment-token - like Bitcoin or Ether - on the payment side. They represent a good, but they do not actually deliver. They are rather gift cards.
+The web lacks a built-in authentication mechanism. To route around this gab, many users use add-ons like "Sign in with Facebook". Those provide authentication through a trusted 3rd party, which does not only cause privacy and availability concerns, but is more of a stopgap instead of a solution. Most simple business cases don't require an account.
 
-During the speculative bubble of 2017, an energy token ICO did not need to provide any explanation of how the tokens can be used. All speculators needed to know is that they represent for example a "stake in the future world of tokenised electricity". As long as the token can inspire investors with imagination, it's good enough for an ICO. There is no more functionality needed other than an ERC20 interface.
+Another problem of disintegration of the web is the lack of a built-in mechanism for ownership, transfer of value and trading. Whenever ownership is involved, there needs to be a chain of bureaucratic procedures, which is pulled from account to account in the background - and each introduces another trusted third pary. Accounts can hide the problems of an disintegrated web - but they don't solve them. 
 
-Tokens can be products. Therefore they need to have different properties: Do tokens expire? AirBNB booking tokens certainly do, but 1% ownership of property tokens probably don't. Should the token owner receive a notification on a specific event? An energy token needs that, for the change in the power supply is dynamic. Is a token stream-able?
-
-How does it look on the user's mobile, and how is it called in a users language? If a buyer wants to purchase a tokenised country estate from a seller, how do they establish a trusted method of communication? If a token entitles the user to do specific actions online, how can the user login to the web services with that token?
-
-It's easy to see the need for an open framework defining tokens and making them interoperable with different methods of trading, listing and rating. Tokenscript provides such a framework. It overcomes the limitation of the approach to put everything in a smart contract or a set of smart contracts.
-
-### Integrate the web
-
-Why are we doing so much copy and pasting when machines are exceptionally good at doing this? Owning to the design, the web is like a giant library, and we are like readers keeping notes of the index numbers under our sleeves. We hope that in the future the Web resembles no longer of a library, but more like a personal assistant.
-
-Surprisingly, even the technology that was created to fill the role of a personal assistant, the Smart Phone, still failed for the same reasons: the efforts from client side alone can't integrate a Web that is not designed to integrate. It made the problem even worse, as copy-pasting becomes bigger trouble when using a Smart Phone.
-
-The truth is: Not only the client but the infrastructure has to support integration. A smartphone is modelled after a dial-up Internet connection, with each app representing a website. The users still need to figure out which computer (app) to talk to before entering the conversation, and still copies information around as he swaps apps around. It's therefore not possible, for example, to ask your smartphone to sum up all the money one may access by his online banking apps.
-
-The web doesn't have a built-in authentication mechanism[^tls]. To route around this gab, many users use add-ons like "Sign in with Facebook". Those merely try to provide authentication through a trusted 3rd party, which does not only cause privacy and availability concerns but also only serves for account authentication and can't be used for integration.
-
-On top of it, the model of account based authentification is the cause of further problems. Most simple business cases - for example, "the owner of a car checks its service history" - don't require an account. Truthfully, accounts are stopgaps to problems created by the specific structure of the Internet as we know it.
-
-The web doesn't have a built-in mechanism for ownership, transfer of value and trading.
-
-Is it possible to make it happen, that the entire chain of bureaucratic procedures happens securely in the backend, while you just push the "buy" button? With the web of accounts, you'd need to knot together a lot of accounts and trusted third parties, which hide the process from the user, while they fulfil the same paper trail as before.*
-
-In contrast, when you base the same process on a blockchain and on tokens, it would be automatic, fraud-proof[^attestations] and atomic[^atomic]. You could finish a car sell with one click in a secure way without the need for accounts and paper trails.
-
-These missing features of the web are the well-known functions of the blockchain. A blockchain is an immutable, decentralized record of ownership, sometimes called a "triple-entry bookkeeping" system. The virtual wedding of this perfect fit couple requires a virtual exchange of tokens, or what this paper called "tokenisation".
-
-To do so, Token must seamlessly go across systems, carry their trading rules and user interfaces and business context.
+Both missing features - authentication and ownership - are well-known functions of the blockchain. In the internet of tokenization, tokens are the angle which integrate the web.
 
 ## Requirements for Tokenization
 
