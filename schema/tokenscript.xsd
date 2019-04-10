@@ -51,8 +51,8 @@
   <xs:element name="cards">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="1" ref="token-card"/>
-        <xs:element maxOccurs="unbounded" ref="action"/>
+        <xs:element ref="token-card"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="action"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
