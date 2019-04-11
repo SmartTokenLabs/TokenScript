@@ -1,6 +1,6 @@
 # TokenScript
 
-TokenScript makes SmartTokens（Credit to Virgil Griffith for coming up with the name ‘SmartToken’）. These are like traditional ERC20 or ERC721 tokens but with extendable structure and signed Javacript to go with it to realise rich functions that previously dapps struggle to implement; and be traded with flexible, customized trading rules.
+TokenScript makes SmartTokens(Credit to Virgil Griffith for coming up with the name ‘SmartToken’). These are like traditional ERC20 or ERC721 tokens but with extendable structure and signed Javacript to go with it to realise rich functions that previously dapps struggle to implement; and be traded with flexible, customized trading rules.
 
 A TokenScript file is made of a) Javascripts to make Token work in the user's wallet or across multiple apps and b) a set of XML data to extract status and value of the token.
 
