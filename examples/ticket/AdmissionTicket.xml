@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE tokenscript  [
-    <!ENTITY token.en SYSTEM "cards/token.en.shtml">
-    <!ENTITY enter.en SYSTEM "cards/enter.en.shtml">
-    <!ENTITY style SYSTEM "cards/shared.css">
+    <!ENTITY token.en SYSTEM "token.en.shtml">
+    <!ENTITY enter.en SYSTEM "enter.en.shtml">
+    <!ENTITY style SYSTEM "shared.css">
 ]>
 <ts:token xmlns:ts="http://tokenscript.org/2019/04/tokenscript"
           xmlns="http://www.w3.org/1999/xhtml"
