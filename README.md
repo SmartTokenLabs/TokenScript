@@ -1,10 +1,10 @@
 # TokenScript
 
-TokenScript makes SmartTokens (Credit to Virgil Griffith for coming up with the name ‘SmartToken’). These are like traditional ERC20 or ERC721 tokens but with extendable structure and signed JavaScript to go with it to realise rich functions that previously dapps struggle to implement; and be traded with flexible, customized trading rules.
+TokenScript makes SmartTokens (Credit to [Virgil Griffith](https://twitter.com/virgilgr) for coming up with the name ‘SmartToken’). These are like traditional ERC20 or ERC721 tokens but with extendable structure and signed JavaScript to go with it to realise rich functions that previously dapps struggle to implement, and be traded with flexible, customized trading rules.
 
-A TokenScript file is made of a) JavaScripts to make Token work in the user's wallet or across multiple apps and b) a set of XML data to extract status and value of the token.
+A TokenScript file is made of a) JavaScript to make Token work in the user's wallet or across multiple apps and b) XML data to extract status and value of the token.
 
-In short, it's like a front-end of tokens.
+In short, it's like a front-end for tokens.
 
 ## Don't we already have a front-end for tokens?
 
@@ -12,12 +12,12 @@ Yes, it's called Dapp websites. But it's not portable and secure.
 
 If everything the user wanted to do with that token is done on a dapp website, that token isn't very useful on other Dapps. People used to cut out token functions, shoe-horn it to ERC20 or ERC721 to make it portable.
 
-TokenScript of a token is like making _the dapp of the token_ portable and usable across multiple dapps. It further secures it with a code signing model and a sandbox model.
+TokenScript of a token is like making _the dapp of the token_ portable and usable across multiple dapps. It further secures it with a sandboxed and code signed model.
 
 
-The design paper [the design paper](https://github.com/AlphaWallet/TokenScript/releases) outlined why TokenScript has to be portable for Tokenisation. The authors of the design paper holds that there is no tangible benefit of using blockchain without tokenisation.
+The [TokenScript design paper](https://github.com/AlphaWallet/TokenScript/releases) outlines why TokenScript has to be portable for Tokenisation. The authors of the design paper holds that there is no tangible benefit of using blockchain without tokenisation.
 
-## How is a TokenScript created and used?
+## How is TokenScript created and used?
 
 A TokenScript is typically created by the token's modeler, the team which builds the underlying smart contracts dictating the token's transaction rules.
 
