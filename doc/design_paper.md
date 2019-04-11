@@ -8,11 +8,13 @@ To provide a practical use of the blockchain, we must understand its utility to 
 
 1. It provides a frictionless market. 
 
-2. It integrates the web. We define the technique to make it happen in "Tokenisation". 
+2. It integrates the web.
 
-Despite the great folly in 2017-2018, it is not a bad thing to initially focus on tokens. Tokens are the enabler of the two primary functions. We define the technique to make it happen in "Tokenisation". Tokenised rights can be traded on the market and integrated across systems, forming a frictionless market and allowing free integration. Previous efforts in this industry primarily focused on enriching the capacity of the technology. This project will focus on tokenisation and introduce a standardisation effort known as Tokenscript (Token Behaviour Markup Language) which will make the blockchain technical stack complete, providing utility for the economy and the internet.
+Despite the great folly in 2017-2018, it is not a bad thing to initially focus on tokens. Tokens are the enabler of the two primary functions. We define the technique to make it happen in "Tokenisation".
 
-Previous efforts in this industry primarily focused on enriching the capacity of the technology. This paper focuses on tokenisation and introduces a standardisation effort we call Tokenscript (Token Behaviour Markup Language), which will make the blockchain technical stack complete and provide utility for the economy and the internet. Tokenscript will unleash the full potential of Tokenisation. 
+Tokenised rights can be traded on the market and integrated across systems, forming a frictionless market and allowing limitless integration.
+
+Previous efforts in this industry primarily focused on enhancing the technical dimensions like transaction throughput. This project will focus on tokenisation which serves in the functional dimension. We introduce a standardisation effort known as Tokenscript which will make the blockchain technical stack complete, providing utility for the economy and the internet.
 
 Please join our work at tokenscript.org. A Yellow Paper to guide implementors to use Tokenscript for their tokens and dapps will take months to make, but a work in progress is always available online. Participate now to prevent the draft specification derail from a valueable use case in your knowledge.
 
@@ -44,17 +46,17 @@ Please join our work at tokenscript.org. A Yellow Paper to guide implementors to
 
 # Abstract
 
-We recognise the blockchain technology's utility in providing a frictionless market and integrating the web. This is done through tokenisation. Tokenised rights can be traded on the market and integrated across systems, forming a frictionless market and allowing free and accountless integration.
+We recognise the blockchain technology's utility in providing a frictionless market and integrating the web. This is done through tokenisation. Tokenised rights can be traded on the market and integrated across systems, forming a frictionless market and allowing limitless and accountless integration.
 
 Today, the ways tokens are accessed, rendered and transacted are scattered across dynamic Dapps and immutable Smart Contracts on the blockchain. Most tokens either have a very primitive business logic or try to put complex logics into the contract to cater the interactions with the token. This adds complexity and security issues, while hardly addressing all potential business patterns in advance. When marketisation and integration of a token is tied to a dapp, it recreates data interoperability, security and availability barrier - the same issues that prevented tokenisation before blockchain's invention.
 
-Therefore we introduce Tokenskript, a program interface for tokenisation. It abstracts out the token information, access methods and UI rendering so that they can be efficiently marketised and used for integration. It allows different token providers to not only describe the features of their tokens but also how they are allowed to “act”, e.g. transferability. The crux of the idea is that such a markup description can be updated at any time by the token issuer and retroactively reflect the behaviour of already issued tokens. Besides allowing easy interoperability between different token providers, this also eliminates the need to update the DApp or smart contract whenever the business logic of a particular type of token changes.
+Therefore we introduce Tokenscript, a program interface for tokenisation. It abstracts out the token information, access methods and UI rendering so that they can be efficiently marketised and used for integration. It allows different token providers to not only describe the features of their tokens but also how they are allowed to “act”, e.g. transferability. The crux of the idea is that such a markup description can be updated at any time by the token issuer and retroactively reflect the behaviour of already issued tokens. Besides allowing easy interoperability between different token providers, this also eliminates the need to update the DApp or smart contract whenever the business logic of a particular type of token changes.
 
-Specifically, Tokenscript is an XML dialect. It describes the functions provided by the token (through smart contract or not), the method to render it on the user's interface, the ERCs token behaviour templates it uses and the javascript needed to construct transactions and render the token.
+Specifically, Tokenscript is an XML dialect. It describes the functions provided by the token (through smart contract or not), the method to render it on the user's interface, and the javascript needed to construct transactions and render the token.
 
 TokenScript allows token logic and rendering to be separated out of the "host", allows token to be easily portable and market to be created for it.
 
-It allows different token providers to, not only describe the features of their tokens but also how they are allowed to “act”, e.g. transferability. The crux of the idea is that such a markup description can be updated at any time by the token issuer and retroactively reflect the behaviour of already issued tokens. Besides allowing easy interoperability between different token providers, this also eliminates the need to update the DApp or smart contract whenever the business logic of a particular type of token changes.
+It allows different token providers to, not only describe the features of their tokens but also how they are allowed to “act”. The crux of the idea is that such a markup description can be updated at any time by the token issuer and retroactively reflect the behaviour of already issued tokens. Besides allowing easy interoperability between different token providers, this also eliminates the need to update the DApp or smart contract whenever the business logic of a particular type of token changes.
 
 \pagebreak
 
@@ -73,9 +75,9 @@ The 80s' "Back to the Future" featured a world of powerful machines filled with 
 
 Ride-sharing revolutionised the way we organise our daily lives, and AirBNB changed the way we travel. These are the new, less frictional markets. They incur less cost to operate, are more accessible and have finer operational units.
 
-However, despite this web 2.0 revolution, the majority of markets still operate with high costs. The stock market, for example, has so much overhead that it is only justifiable for multi-million dollar businesses which rely on the trust of rules and regulations to operate.
+However, despite this web 2.0 revolution, the majority of markets still operate with high costs. The stock market, for example, has so much overhead that it is only justifiable for multi-million dollar businesses to afford operating under the rules and regulations.
 
-With blockchain, any tokenised asset can be fastly transacted any time, as long as it follows the rules, without an intermediary, eliminating frictions and enabling maximum market efficiency. The buyers and sellers do not need to "enter" the market; instead, tokens are *always on the market*.
+With blockchain, any tokenised asset can be fastly transacted any time, as long as it follows the rules, without an intermediary or the process to "enter the market", eliminating frictions and enabling maximum market efficiency.
 
 With the traditional intermediary-operated market model, a trade is made in two stages: entering the market, making a deal. Blockchain can simplify that into a protocol; therefore the blockchain token assets can be considered *always on the market*.
 
@@ -289,7 +291,7 @@ This is why we introduce an alternative approach to handle the user interaction 
 
 ### Tokenscript as a solution
 
-We propose Tokenscript as a solution to overcome the shortcomings of the legacy token model. Tokenscript stands for Token Behaviour Markup Language.
+We propose Tokenscript as a solution to overcome the shortcomings of the legacy token model.
 
 Tokenscript is a program interface for tokenisation. It is an XML dialect, which describes the functions of the token and the method to interact and render it on the user interface. It serves two purposes: It helps the user to access the token's full functionality - and it allows to create more advanced and complex user-token-interactions. 
 
