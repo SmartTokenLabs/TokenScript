@@ -399,9 +399,7 @@ As another functionality, Tokenscript can extend the product description and int
 
 #### Attested information
 
-Attestation is just a signed message stating a fact. Attestations are often used to satisfy the conditions of the transactions — more on that in chapter Attestations.
-
-In the 1% property token example, the involved attestations are:
+Attestation is just a signed message stating a fact. Attestations are often used to satisfy the conditions of the transactions — more on that in chapter Attestations. In the 1% property token example, the involved attestations are:
 
 - The Identity authority and title deeds office attest the issuer's ownership of the property.
 - A collateralization authority[^set-operation] prevents double collateralization
@@ -411,7 +409,9 @@ In the 1% property token example, the involved attestations are:
 
 The first two attestations are not stored in a smart contract for privacy and cost (size and number of transactions) reasons. It's possible to utilise zero-knowledge proof to provide anonymous proof that the attestation is for the said property and said owner, and it has not expired. What proofs are expected and can be validated is also described in Tokenscript.
 
-Furthermore, the fact that the transaction requires an identity attestation or investment capacity attestation from the buyers. These are described in Tokenscript as well so the context (e.g. user-agent) can prevent the user from submitting a transaction without qualifying proof or help the user to select suitable attestations for a purchase transaction.
+Furthermore, the transaction requires an identity attestation or investment capacity attestation from the buyers. These are described in Tokenscript as well so the context (e.g. user-agent) can prevent the user from submitting a transaction without qualifying proof or help the user to select suitable attestations for a purchase transaction.
+
+Tokenscript does not just help relay the attestation data, but it also enables wallets to conveniently allow buyers and sellers to submit and read the attestation data without the need for a hosted DApp service.
 
 **[[add an xml example for consistency]]**
 
