@@ -321,7 +321,7 @@ For clearity, we define the three concepts involved.
 
 In traditional markets both the *the deliverable* and *the payment* side tokens must "plug-in" to the *market*. The market participant must transfer both parts of a deal to the market, which adds friction and introduces middle men. The promise of Tokenization is that both deliverable and payments are *always on the market*. 
 
-Enabling this is a main requirement for Tokenscript. To do so, Tokenscript enable tokens to be presented, indexed, transacted, traded, auctioned, combined and so on. We will demonstrate this requirement by both an example for delivery and payment.
+Enabling this is a main requirement for Tokenscript. To do so, Tokenscript enable tokens to be presented, indexed, transacted, traded, auctioned, combined and so on. We will demonstrate this requirement by both an example for delivery and payment and explain how Tokenscript can address this needs.
 
 ### Deliverable side example: 1% property token
 
@@ -356,7 +356,7 @@ We categorise these trade-sensitive information into four categories:
 3. Reference information: Item 8, 9.
 4. Action information (how to perform an asset action): Item 10.
 
-Understandably, the buyers need to access all these for an informed decision. Ideally they show up on his wallet when he starts interacting with the token. In the following chapters, we will describe how these information categorizes manifest in Tokenscript.
+Understandably, the buyers need to access all these for an informed decision. To allow tokenization of deliverables to happen, these information must show up on his wallet when he starts interacting with the token. In the following chapters, we will describe how these information categorizes manifest in Tokenscript.
 
 [^pd] The word is loaned from the financial sector, usually used to describe packaged investment products. It means the formula which profit is calculated and the current values of the variables in the formula.
 
@@ -455,15 +455,52 @@ In conclusion, Tokenscript allows the context (user-agent or trading engine) to:
 
 Any party is able to render and apply functions to the token using Tokenscript, including entities like generic marketplaces, user-agents and 3rd party apps. We call these parties "context" in general.
 
-### Advantages of Tokenscript
+**[[loudly thinking: Wouldn't it be better to continue with the payment side example? It somehow breaks the flow. Advantages doesn't seem to be a good fit in the chapter about requirements. Maybe I'll test it; maybe it's good to explain the advantages when we have also the payment side. The more I think about it, the more I tend to it. We already have a lot of talk about why Tokenscript. So we better stick to the examples and present the advantages later on - I tried it out.]]
 
-We established that Tokenscript helps to overcome many challenges of Tokenization, mostly in the areas of integrating and updating business logic, transactional behavior and the interaction with different systems. Here we will focus on a few main advantages of using Tokenscript: Interoperability, Scalability, Security, Privacy, User-Interface and Availability.
+
+## Payment side example: DAI token
+
+After the delivery side example we will inspect the payment side of a market exchange.
+
+DAI is a token designed for payment - purchasing security token, purchasing goods and services and so like. It's intended to match USD in value. Not fixing the supply cap, it is not itself an investment candidate.
+
+In many ways, DAI functions like Ether, the base currency in Ethereum. However, it can't be a drop-in replacement for Ether.
+
+First, the Dapps written for Ethereum may not be aware that the user has DAI token unless it explicitly supports DAI. A Pizza ordering service that accepts Ether as payment, for example, cannot trivially start to accept DAI token. This is true even if DAI provides a DAI-to-Ether gateway service which, in an atomic fashion, converts DAI to Ether in the same transaction which uses the resulting Ether to purchasing Pizza.
+
+If Pizza website doesn't upgrade, the user has to convert DAI to Ether first, then, purchase Pizza with a second transaction. Such a process is not only inconvenient, but lack atomicity, meaning that the user could have converted DAI to Ether through the effort, only to fail the checkout since the Pizza is sold out, and ended up with additional Ethers with which she has to deal.
+
+It's worth noticing that the Pizza website cannot upgrade to support DAI without knowing how to discover the user's DAI balance[^balance-is-privacy] (to not to to waste a transaction fee just to find the DAI balance is insufficient), how to construct a DAI withdraw transaction or DAI-Ether gateway transaction and make direct smart contract function calls to the DAI holding contract.
+
+[^balance-is-privacy]: Eventually, the Pizza website would not only be oblivious about how to check balance, since Tokenscript handles it, but also not possible to know the balance. This would require underlying blockchain's support, but ultimately cannot be done if we continue the current trend where website, who should care about business logic, also care about payment logic.
+
+Naturally, the Pizza website isn't in the best position to manage these payment-side details. Tokenscript addresses this problem by
+
+1. Encapsulating the smart contract function calls needed for supporting DAI, along with the javascript to construct needed transactions in Tokenscript, signed by DAI issuer.
+
+2. Providing a browser side implementation and a javascript based implementation for Tokenscript compatibility, so that the Pizza shop could just call a generic action to return Ether (or any acceptable currency) and let the payment logic in Tokenscript work at transaction.
+
+Tokenscript's capacity to embed payment logic and presentation means that not only it can display messages in user's language (like balance or "insufficient balance" message), but it can perform functions like pre-checking the balance, pause the checkout flow so that the user can perform a top-up flow and return to the checkout flow to finalise the checkout.
+
+To the user, the process resembles a bit like the checkout process leads the user to Paypal to finalise the transaction, except the process, happens locally in an enhanced user-agent.
+
+We again argue that current prevailing method is not suitable for creating a frictionless market, while Tokenscript could, by providing reasons in the areas of *interoperability*, *scalability* and *security*.
+
+As concluded, Pizza website would not have the necessary payment side logic to handle everything on its own. The traditional approach is to let the Pizza website use the javascript sourced by MakerDAO project. The javascript may or may not use a RESTful API provided by MakerDAO.
+
+This approach solves one problem by introducing quite a few others.
+
+
+### Advantages of Tokenscript: Delivery Side
+
+After having inspected the requirements to use token as deliveries, we will show what advantages Tokenscript provides compared with using vanilla token. The advantages will be shown with the property example.
+
 
 #### Interoperability:
 
-Suppose a property guru named Peter wishes to create a website called "Peter's Pride Asset", where he selects the best properties available on the market, which are represented by a token which serve as the deliverable. Peter can create a listing of those properties with rich information of the current price, location, age of the building and even photos, which the users can purchase with a click. Peter doesn't need permission to do so, because the data of those tokens are on the blockchain. In fact, once the tokens are on the chain, everybody can build his own asset portal.
+Let's suppose a property guru named Peter creates a website called "Peter's Pride Asset", where he selects the best properties available on the market and represents each by a token that serves as the deliverable. Peter can create a listing of those properties with rich information about price, location and so on, and allow users to purchase it with one click. 
 
-However, Peter would need to obtain the knowledge local to how to render the token on his website, like how to get the expiration of a token from its holding smart contract. If the underlying smart contract has gone through changes, like adding an attribute (e.g. council rate), his website would need to upgrade. Similarly, the transaction rule might be updated to require the buyer to submit an identity attestation as part of a purchase. Without a speedy upgrade, his users would submit transactions not conforming and get rejected later in the blockchain. In the end, he would resort to passing the rendering and trading of the token to the Dapp tied to this token, returning to a centralised status and limiting the innovation and competition in this space.
+Peter doesn't need permission, because the data of those tokens are on the blockchain. However, he needs knowledge how to render the token on his website. He also needs to upgrade his website, when the underlying smart contract or the transaction rules was changed. If he misses to do it in time, his users would submit transactions not conforming but getting rejected. 
 
 The same problems emerges with a lot of application. Tokenscript helps Peter to keep his platform upgraded and to better react on events. The real estate token can easily be operated on all kind of platforms. 
 
@@ -497,40 +534,7 @@ A user who is purchasing a 1% property token from Peter's Pride Property recomme
 
 #### Availability
 
-
-
-
-
-## Payment side example: DAI token
-
-DAI is a token designed for payment - purchasing security token, purchasing goods and services and so like. It's intended to match USD in value. Not fixing the supply cap, it is not itself an investment candidate.
-
-In many ways, DAI functions like Ether, the base currency in Ethereum. However, it can't be a drop-in replacement for Ether.
-
-First, the Dapps written for Ethereum may not be aware that the user has DAI token unless it explicitly supports DAI. A Pizza ordering service that accepts Ether as payment, for example, cannot trivially start to accept DAI token. This is true even if DAI provides a DAI-to-Ether gateway service which, in an atomic fashion, converts DAI to Ether in the same transaction which uses the resulting Ether to purchasing Pizza.
-
-If Pizza website doesn't upgrade, the user has to convert DAI to Ether first, then, purchase Pizza with a second transaction. Such a process is not only inconvenient, but lack atomicity, meaning that the user could have converted DAI to Ether through the effort, only to fail the checkout since the Pizza is sold out, and ended up with additional Ethers with which she has to deal.
-
-It's worth noticing that the Pizza website cannot upgrade to support DAI without knowing how to discover the user's DAI balance[^balance-is-privacy] (to not to to waste a transaction fee just to find the DAI balance is insufficient), how to construct a DAI withdraw transaction or DAI-Ether gateway transaction and make direct smart contract function calls to the DAI holding contract.
-
-[^balance-is-privacy]: Eventually, the Pizza website would not only be oblivious about how to check balance, since Tokenscript handles it, but also not possible to know the balance. This would require underlying blockchain's support, but ultimately cannot be done if we continue the current trend where website, who should care about business logic, also care about payment logic.
-
-Naturally, the Pizza website isn't in the best position to manage these payment-side details. Tokenscript addresses this problem by
-
-1. Encapsulating the smart contract function calls needed for supporting DAI, along with the javascript to construct needed transactions in Tokenscript, signed by DAI issuer.
-
-2. Providing a browser side implementation and a javascript based implementation for Tokenscript compatibility, so that the Pizza shop could just call a generic action to return Ether (or any acceptable currency) and let the payment logic in Tokenscript work at transaction.
-
-Tokenscript's capacity to embed payment logic and presentation means that not only it can display messages in user's language (like balance or "insufficient balance" message), but it can perform functions like pre-checking the balance, pause the checkout flow so that the user can perform a top-up flow and return to the checkout flow to finalise the checkout.
-
-To the user, the process resembles a bit like the checkout process leads the user to Paypal to finalise the transaction, except the process, happens locally in an enhanced user-agent.
-
-We again argue that current prevailing method is not suitable for creating a frictionless market, while Tokenscript could, by providing reasons in the areas of *interoperability*, *scalability* and *security*.
-
-As concluded, Pizza website would not have the necessary payment side logic to handle everything on its own. The traditional approach is to let the Pizza website use the javascript sourced by MakerDAO project. The javascript may or may not use a RESTful API provided by MakerDAO.
-
-This approach solves one problem by introducing quite a few others.
-
+### Advantages of Tokenscript: Payment Side
 
 #### Security
 
