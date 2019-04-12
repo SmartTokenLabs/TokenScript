@@ -55,3 +55,16 @@ lib/browser
 
 lib/web
 :    library for Dapps to render tokens in the case the dapp-browser does not support TokenScript. Some features are not available (e.g. switching nodes or accessing multiple Plasma Chain) as they require underlying dapp browser support.
+
+# Trying out TokenScript
+
+Join our Telegram group <https://t.me/AlphaWalletGroup> and ask for "an example Admission Ticket Token to play with TokenScript". Tell us your Ethereum address so we can send you a token.
+
+For iOS:
+
+1. Install the TestFlight build by visiting <https://testflight.apple.com/join/aHUxcsro>
+2. In the AlphaWallet app, go to Settings (last tab) > `Enabled Networks` and tap `Ropsten (test)` to enable it. Tap `Done`
+3. In the AlphaWallet app, go to Wallet (first tab) and tap the `+` button and paste the contract address `0x0C8D487DD27D7c4A027D9f92915659139e0b2FF2` to make the wallet display the token which should have been transferred to you
+4. Go to our repository at <https://github.com/AlphaWallet/TokenScript/tree/master/examples/ticket> and AirDrop the files `AdmissionTicket.xml`, `token.en.shtml`, `shared.css` and `enter.en.shtml` from your Mac to your iPhone. If you have access to the files in mobile Safari, you can also choose to "Open in AlphaWallet" from the iOS share menu
+In the AlphaWallet app, go to Wallet tab and tap on the token "Admission Ticket Token (DAT2)"
+6. In the AlphaWallet app, check the Settings tab > `TokenScript Overrides` for the list of TokenScript files. Swipe to delete or tap to share. You can AirDrop the files to another iPhone which has AlphaWallet TestFlight installed
