@@ -325,12 +325,10 @@ Enabling this is a main requirement for Tokenscript. To do so, Tokenscript enabl
 
 ### Deliverable side example: 1% property token
 
-Let's imagine a market for "1% property". A property owner can issue many pieces of a token, each represents 1% ownership of the property. He can sell these tokens for cash. 
-
-A buyer needs to know quite a bit of information. It's easy to understand that such a token would fetch 1% of the sales revenue if the underlying property is sold, but a lot more details are needed:
+Let's imagine a market for "1% property". A property owner can issue many pieces of a token, each represents 1% ownership of the property. He can sell these tokens for cash. A buyer needs to know quite a bit of information. It's easy to understand that such a token would fetch 1% of the sales revenue if the underlying property is sold, but a lot more details are needed:
 
 1. Where is the property and what status is it in?
-Re: Milestones
+
 2. Can a 1% property token owner vote?  For example, on the purchase decision to insurance against a bush fire?
 
 3. Is the 1% automatically converted into currency at the time of property sales, or can the token holder elect to continue holding it?
@@ -349,14 +347,14 @@ Re: Milestones
 
 Specific to blockchain, we also have:
 
-10. How to correctly and securely construct a transaction for the asset (purchase, voting etc)? You can't expect any investor to be a blockchain geek who knows to do load the smart contract files in his wallet.
+10. How to correctly and securely construct a transaction for the asset (purchase, voting etc)? You can't expect any investor to be a blockchain geek who knows how to load the smart contract files in his wallet.
 
 We categorise these trade-sensitive information into four categories:
 
-1. product description[^pd]. Item 2, 3, 5, 6 are in PD
-2. attested information. Item 1, 4, 6, 7 are in Attestations.
-3. reference information. Item 8, 9.
-4. action information (how to perform an asset action). Item 10.
+1. Product description[^pd]: Item 2, 3, 5, 6
+2. Attested information (attestations): Item 1, 4, 6, 7.
+3. Reference information: Item 8, 9.
+4. Action information (how to perform an asset action): Item 10.
 
 Understandably, the buyers need to access all these for an informed decision. Ideally they show up on his wallet when he starts interacting with the token. In the following chapters, we will describe how these information categorizes manifest in Tokenscript.
 
