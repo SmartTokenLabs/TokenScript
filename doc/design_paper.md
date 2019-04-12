@@ -439,7 +439,9 @@ Action information dictates the correct method to construct a blockchain transac
 - Are the conditions all met (e.g. a purchase isn't possible after the underlying property is liquidated)?
 - How to cast a vote if one is aligned with token ownership?
 
-This information is a super-set of smart contract programmable interface (In Ethereum, called ABI), with the additional part being business logic (e.g. property must be still valid and owned by the seller) and presentation logic (e.g. the message "The property is liquidated. Purchase no longer possible"). Tokenscript makes both the content as the visualization of the action information more flexible. 
+In Ethereum this information is a super-set of the smart contract programmable interface called ABI. It also contains business logic (e.g. property must be still valid and owned by the seller) and presentation logic (e.g. the message "The property is liquidated. Purchase no longer possible"). With more sophisticated token, this parts becomes more complex and will make it hard  to load it in a smart contract *and* visualize it approbriately in the wallet. 
+
+Tokenscript makes both the content as the visualization of the action information more flexible and accessible. 
 
 **[[add an xml example for consistency]]**
 
