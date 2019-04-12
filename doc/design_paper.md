@@ -395,6 +395,8 @@ This serves to introduce the first functionality of Tokenscript: acting as a pre
 
 This simplified `attribute-type` code snippet allows the value for Voting Right to be fetched from `holding-contract`, which is a smart contract defined somewhere else in the Tokenscript, and present it in one of a few languages.
 
+As another functionality, Tokenscript can extend the product description and integrate variable parts, which can be upgraded without messing with upgradability of smart contracts.
+
 #### Attested information
 
 Attestation is just a signed message stating a fact. Attestations are often used to satisfy the conditions of the transactions — more on that in chapter Attestations.
