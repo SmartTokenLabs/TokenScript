@@ -114,3 +114,21 @@ To explain Tokenscript in mor details, we will fetch out design requirements by 
 
 
 ## Design requirements
+
+Markets, Deliverables, Payments
+
+### Information on Deliverables
+
+1. Product description
+2. Attested information
+3. Reference information
+4. Action information (how to perform an asset action)
+
+
+
+
+
+
+
+
+
