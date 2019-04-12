@@ -606,6 +606,8 @@ Suppose a user purchases an iPhone from Harvey Norman, an online retailer, using
 
 If without tokens as the integration anchor, the three different services might be carried out by various means.
 
+**[[Big advantage: Without you have a lot of papers and so on which you need to store. With it, you have it all in your wallet and can recover it always with your seed. --> and, woah, you could use your xpub key to proof your tax refund]]
+
 ### The Shipping Token
 
 Without it, a user might get a tracking number instead of a token, which itself carries no authentication information, so it can't be used to pick up the product unless a pickup code is provided, perhaps in SMS - even more poorly integrated with the process.
