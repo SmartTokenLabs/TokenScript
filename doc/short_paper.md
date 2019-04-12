@@ -124,7 +124,11 @@ Markets, Deliverables, Payments
 3. Reference information
 4. Action information (how to perform an asset action)
 
+### Information for Payments
 
+### Advantages to achieve (?)
+
+### Requirements to integrate the web
 
 
 
