@@ -417,11 +417,11 @@ Tokenscript does not just help relay the attestation data, but it also enables w
 
 #### Reference information
 
-Reference information is relevant to the token, but not part of the smart contract. It is provided by web services, typically through a RESTful API call.[^trusted-information]
+Reference information is relevant to the token, but not part of the smart contract. In our example reference information includes data like previous property sales price or regional property performance. This is data which is useful for the owner or buyer of a token. It is provided by web services, typically through a RESTful API call.[^trusted-information]
 
-[^trusted-information]: Originally we call it "Trusted information", meaning data such as previous property sales price or regional property performance data is just "provided", without blockchain proofs or attestations, hence, it has to be explicitly trusted by the user. As it turned out, this term misfired as some developers think it means "proven information" and provided as trusted already. So we used a less precise term "Reference information", which, unfortunately, feels like a catch-all phrase.
+[^trusted-information]: Originally we call it "Trusted information", meaning the data is just "provided", without blockchain proofs or attestations, hence, it has to be explicitly trusted by the user. As it turned out, this term misfired as some developers think it means "proven information" and provided as trusted already. So we used a less precise term "Reference information", which, unfortunately, feels like a catch-all phrase.
 
-Since Tokenscript is signed by the token issuer (not by the token owner - the token issuer is often an entity that deployed the smart contract), the reference information sourced from web APIs specified in Tokenscript is assumed trusted. The security chapter will detail different levels of trust.
+It could be possible that eventually such information will end up being onchained. But even than they will be created and uploaded by an entity which has to be trusted. Reference data always leads to the problem of trust and web integration. With Tokenscript this data is signed by the token issuer (not by the token owner - the token issuer is often an entity that deployed the smart contract). In the case of the property this could be a real estate specialist. The reference information sourced from web APIs specified in Tokenscript is assumed to be trusted, but can be changed later. The security chapter will detail different levels of trust.
 
 **[[add an xml example for consistency]]**
 
