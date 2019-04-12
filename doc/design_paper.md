@@ -309,17 +309,19 @@ To understand the requirements for Tokenscript, we will first introduce basic co
 
 ## Address "Frictionless Market" needs
 
-A *market* is a place where *delivery* versus *payment* happens. Blockchain enables this place to rely less on middlemen. As this concept are crucial, we will define them formally.
+To find out the requirements for Tokenscript to create a frictionless market, we need to have a formal definition of markets and the concepts involved. In our case *a market is a place where delivery versus payment* happens. The role of Blockchain is to make markets rely less on middlemen and eliminate frictions. 
 
-*Deliverables*: All sorts of things money can buy: assets, goods and services. In this context deliverables mean that not a physical good, but an entitlement is transfered. Proto-tokenization happened long ago. Think of land or security titles. However, only with blockchain they can be transfered without needing a third party to prevent double spends. Deliverables can profit immensively from tokenization - if the token design properly reflects they needs.
+For clearity, we define the three concepts involved. 
 
-*Payments*: All value transfers done with anything currency-like. In this context, only programmable currencies like Ether or Dai are relevant. On the market they are exchanged for deliverables.
+*Deliverables*: All sorts of things money can buy: assets, goods and services. In this context deliverables are not a physical good, but an entitlement. A proto-tokenization of deliverables happened long ago, like land or security titles. However, only with blockchain they can be transfered in real-time without needing a third party to prevent double spends. Deliverables can profit immensively from tokenization - if the token design properly reflects their needs.
 
-*Market*: Is a concept, not a marketplace. A user who checks out on a website is accessing a market as well as two people meeting to execute a trade. The user doesn't have to be in a marketplace (e.g. Amazon) to do so.
+*Payments*: All value transfers done with anything currency-like. In traditional markets payments are done with Fiat currencies, either as physical banknotes or as electronic transfers through trusted third parties. Blockchain eliminates the middle men from payments and enables the use of programmable currencies like Ether or Dai.
 
-Tokenscript provides both *the deliverable* and *the payment* side tokens to "plug-in" to the *market*. The difference is important: In the current market architecture both deliverables and payments have to be transfered to the market. This does not only add friction and time-lags, but also introduce trusted middle men.
+*Market*: Is a concept of individuals exchanges payments versus deliverables. It is neither meant as a single marketplace nor the entirety of all marketplaces. To access a market users can, but most not be on a marketplace like Amazon. 
 
-To enable users to plugin-in to the market, TokenScript must enable tokens to be presented, indexed, transacted, traded, auctioned, combined and so on. We will demonstrate the requirements by both an example for delivery and payment.
+In traditional markets both the *the deliverable* and *the payment* side tokens must "plug-in" to the *market*. The market participant must transfer both parts of a deal to the market, which adds friction and introduces middle men. The promise of Tokenization is that both deliverable and payments are *always on the market*. 
+
+Enabling this is a main requirement for Tokenscript. To do so, Tokenscript enable tokens to be presented, indexed, transacted, traded, auctioned, combined and so on. We will demonstrate this requirement by both an example for delivery and payment.
 
 ### Deliverable side example: 1% property token
 
