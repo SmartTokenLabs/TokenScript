@@ -1,8 +1,23 @@
-%.tsml: %.xml
+XMLSECTOOL=xmlsectool
+SSL_KEY=ssl/shong.wang.key
+SSL_CERTS=ssl/shong.wang.certs
+SIGNATURE_ALGORITHM=rsa-sha256
+
+test: AdmissionTicket.canonicalized.xml
+
+%.canonicalized.xml : %.xml
+    # xmlsectool canonicalises automatically when needed, but leaving an xml:base attribute which creates trouble later.
+    # xmlstarlet does it neatly
 	# XML Canonicalization
-	xmlstarlet c14n $^  > $@ 
+	xmlstarlet c14n $^  > $@
+    # xmlsectool validates too, albeit adding xml:base with breaks schema. Example:
+    # JVMOPTS=-Djavax.xml.accessExternalDTD=all /opt/xmlsectool-2.0.0/xmlsectool.sh --validateSchema --xsd --schemaDirectory ../../schema --inFile AdmissionTicket.xml
 	# XML Validation
     # if failed, run validation again with xmllint to get meaningful error
     # then delete the canonicalized file
-	-xmlstarlet val --xsd ../../schema/tokenscript.xsd $^ || (xmllint --noout --schema ../../schema/tokenscript.xsd $@; rm $@)
-ticket: AdmissionTicket.tsml 
+	-xmlstarlet val --xsd ../../schema/tokenscript.xsd $@ || (xmllint --noout --schema ../../schema/tokenscript.xsd $@; rm $@)
+
+%.tsml: %.canonicalized.xml
+	$(XMLSECTOOL) --sign --keyInfoKeyName 'Shong Wang' --digest SHA-256 --signatureAlgorithm http://www.w3.org/2001/04/xmldsig-more#$(SIGNATURE_ALGORITHM) --inFile $^ --outFile $@ --key $(SSL_KEY) --certificate $(SSL_CERTS)
+	# removing the canonicalized created for validation
+	rm $^
