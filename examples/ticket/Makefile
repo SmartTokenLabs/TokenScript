@@ -3,7 +3,15 @@ SSL_KEY=ssl/shong.wang.key
 SSL_CERTS=ssl/shong.wang.certs
 SIGNATURE_ALGORITHM=rsa-sha256
 
-test: AdmissionTicket.canonicalized.xml
+help:
+	@echo Need a target.
+	@echo 
+	# Let's say you have a TokenScript "AdmissionTicket.xml"
+	#- to validate and canonicalize, add 'canonicalized' in the filename
+	@echo $$ make AdmissionTicket.canonicalized.xml
+	@echo
+	# - to sign, use tsml as file extension:
+	@echo $$ make AdmissionTicket.tsml
 
 %.canonicalized.xml : %.xml
     # xmlsectool canonicalises automatically when needed, but leaving an xml:base attribute which creates trouble later.
@@ -11,7 +19,7 @@ test: AdmissionTicket.canonicalized.xml
 	# XML Canonicalization
 	xmlstarlet c14n $^  > $@
     # xmlsectool validates too, albeit adding xml:base with breaks schema. Example:
-    # JVMOPTS=-Djavax.xml.accessExternalDTD=all /opt/xmlsectool-2.0.0/xmlsectool.sh --validateSchema --xsd --schemaDirectory ../../schema --inFile AdmissionTicket.xml
+    # JVMOPTS=-Djavax.xml.accessExternalDTD=all /opt/xmlsectool-2.0.0/xmlsectool.sh --validateSchema --xsd --schemaDirectory ../../schema --inFile $^
 	# XML Validation
     # if failed, run validation again with xmllint to get meaningful error
     # then delete the canonicalized file
