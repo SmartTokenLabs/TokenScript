@@ -12,15 +12,15 @@ First, check that you have the right tool installed. Say, in OS X with brew inst
 
 If your package manager doesn't provide xmlsectool, you can download from its [home page](https://wiki.shibboleth.net/confluence/display/XSTJ2/xmlsectool+V2+Home) and install it manually.
 
-From here I'll assume your system supports make. If not, go to "I don't use Make" section.
+From here I'll assume your system supports make. If not, go to [I don't use Make](#i-dont-use-make) section.
 
-If you installed xmlsectool mannually, for example to `/opt/xmlsectool-2.0.0/`, you will need to change the first line of the MakeFile to this:
+If you installed xmlsectool manually, for example to `/opt/xmlsectool-2.0.0/`, you will need to change the first line of the MakeFile to this:
 
 XMLSECTOOL=/opt/xmlsectool-2.0.0/xmlsectool.sh
 
 Having that sorted out, please also install xmlstarlet and xmllint
 
-$ brew install xmlstarlet xmllint
+    $ brew install xmlstarlet xmllint
 
 Now we have all the tools ready.
 
@@ -50,8 +50,23 @@ Run `make` with `AdmissionTicket.tsml`
     # removing the canonicalized created for validation
     rm AdmissionTicket.canonicalized.xml
 
-And now you get a signed TokenScrip AdmissionTicket.tsml which is ready to be published.
+And now you get a signed TokenScript AdmissionTicket.tsml which is ready to be published.
+
+## I don't use make
+
+If your system doesn't support make, but you did follow the instruction to install xmlsectool, then you can use a command to sign the TokenScript:
+
+   $ cd examples/ticket
+   $ /opt/xmlsectool-2.0.0/xmlsectool.sh --sign --keyInfoKeyName 'Shong Wang' --digest SHA-256 --signatureAlgorithm http://www.w3.org/2001/04/xmldsig-more#rsa-sha256 --inFile AdmissionTicket.xml --outFile AdmissionTicket.tsml --key ssl/shong.wang.key --certificate ssl/shong.wang.certs
+
+Unfortunately this command doesn't validate the XML file for you. The examples attached are pre-validated.
+
+The command should produce a file `AdmissionTicket.tsml` which is ready to go.
+
 
 # Publishing your TokenScript
 
 A signed TokenScript is published by including its reference in the DAPP website that uses the token, similiar to how CSS files are refered. The detail steps for doing so will be provided in the coming weeks in April 2019.
+
+
+
