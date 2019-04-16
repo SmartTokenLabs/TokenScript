@@ -7,13 +7,11 @@ like selling the token and redeeming the token) and plugging in the layout.
 
 Since NFTs like cryptokitties and our example can encode information inside their 32 bytes such 
 as genes or what time the game is supposed to be held, we can use TokenScript to interpret 
-the meaning of such tokens so that the user is given context.
+the meaning of such tokens so that the user is given context.  
 
-Since the token itself holds 32 bytes of data, you can define a bitmask inside the tokenscript file to 
-parse the meaning of each set of bytes inside the token actually means. Feel free to copy and paste 
-our FIFA example below to use for your own token. 
+### Creating your own XML file
 
-Note that you can easily localize this file to match whatever language you please and that you layout files can be referenced at the top.  
+You can create your own XML file by simply copying the one below and filling it out to match your own requirements. If you would like to simply try this one as an example then simply copy and paste it into a .xml file. This file will later be referenced in step 4 for signing and formation of the .tsml file. 
 
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE tokenscript  [
@@ -405,5 +403,3 @@ Note that you can easily localize this file to match whatever language you pleas
     </ts:attribute-type>
   </ts:attribute-types>
 </ts:token>
-
-The bitmasks can be customised to fit your own token. 
