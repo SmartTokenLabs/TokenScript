@@ -4,12 +4,8 @@
 We will be using this file [here](https://github.com/AlphaWallet/contracts/blob/master/blockchain-tickets/schema1/fifa-wc.tsml)
 as an example and you can find others in our other repository [here](https://github.com/AlphaWallet/contracts). 
 
-### Requirements
-To make the TokenScript (.tsml) file you will need to install [xmlstarlet](http://xmlstar.sourceforge.net/download.php)
-
 ### Adding your layout
-Since TokenScript is essentially an XML dialect, it is possible to plug in your existing layout files
-in HTML, CSS and JS. 
+Since TokenScript is essentially an XML dialect, it is possible to plug in your existing layout files in HTML, CSS and JS. 
 
 ### Getting your hands dirty with our FIFA WC NFT token in TokenScript
 To get started, simply create (or copy and paste) the layout formed below with the file name token.en.shtml
