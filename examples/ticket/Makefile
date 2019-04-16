@@ -4,12 +4,11 @@ SSL_CERTS=ssl/shong.wang.certs
 SIGNATURE_ALGORITHM=rsa-sha256
 
 help:
-	@echo Need a target.
-	@echo 
+	# Needs a target, example: $$ make AdmissionTicket.canonicalized.xml
+	#  
 	# Let's say you have a TokenScript "AdmissionTicket.xml"
 	#- to validate and canonicalize, add 'canonicalized' in the filename
 	@echo $$ make AdmissionTicket.canonicalized.xml
-	@echo
 	# - to sign, use tsml as file extension:
 	@echo $$ make AdmissionTicket.tsml
 
