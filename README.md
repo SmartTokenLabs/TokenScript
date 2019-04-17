@@ -1,6 +1,6 @@
 # TokenScript
 
-TokenScript makes SmartTokens (Credit to [Virgil Griffith](https://twitter.com/virgilgr) for coming up with the name ‘SmartToken’). These are like traditional ERC20 or ERC721 tokens but with extendable structure and signed JavaScript to go with it to realise rich functions that previously dapps struggle to implement, and be traded with flexible, customized trading rules.
+TokenScript makes SmartTokens (Credit to [Virgil Griffith](https://twitter.com/virgilgr) for coming up with the name ‘SmartToken’). These are like traditional ERC20 or ERC721 tokens but with extendable structure and signed JavaScript to go with it to realise rich functions that previously DApps struggle to implement, and be traded with flexible, customized trading rules.
 
 A TokenScript file is made of a) JavaScript to make Token work in the user's wallet or across multiple apps and b) XML data to extract status and value of the token.
 
@@ -8,11 +8,11 @@ In short, it's like a front-end for tokens.
 
 ## Don't we already have a front-end for tokens?
 
-Yes, it's called Dapp websites. But it's not portable and secure.
+Yes, it's called DApp websites. But it's not portable and secure.
 
-If everything the user wanted to do with that token is done on a dapp website, that token isn't very useful on other Dapps. People used to cut out token functions, shoe-horn it to ERC20 or ERC721 to make it portable.
+If everything the user wanted to do with that token is done on a DApp website, that token isn't very useful on other DApps. People used to cut out token functions, shoe-horn it to ERC20 or ERC721 to make it portable.
 
-TokenScript of a token is like making _the dapp of the token_ portable and usable across multiple dapps. It further secures it with a sandboxed and code signed model.
+TokenScript of a token is like making _the dapp of the token_ portable and usable across multiple DApps. It further secures it with a sandboxed and code signed model.
 
 
 The [TokenScript design paper](https://github.com/AlphaWallet/TokenScript/releases) outlines why TokenScript has to be portable for Tokenisation. The authors of the design paper holds that there is no tangible benefit of using blockchain without tokenisation.
@@ -21,9 +21,9 @@ The [TokenScript design paper](https://github.com/AlphaWallet/TokenScript/releas
 
 A TokenScript is typically created by the token's modeler, the team which builds the underlying smart contracts dictating the token's transaction rules.
 
-When used by a user (through user-agent, e.g. a Dapp browser) TokenScript visually renders the token and provides trustworthy assembling of transactions related to the token.
+When used by a user (through user-agent, e.g. a DApp browser) TokenScript visually renders the token and provides trustworthy assembling of transactions related to the token.
 
-When used by a dapp developer, TokenScript allows a Dapp to interact with its interface instead of directly accessing smart contracts, so that the Dapp can be upgraded independently of all the tokens it supports.
+When used by a DApp developer, TokenScript allows a DApp to interact with its interface instead of directly accessing smart contracts, so that the DApp can be upgraded independently of all the tokens it supports.
 
 When used by a market or any other token related service (e.g. an auction or collateralisation), it allows the token to be correctly rendered and signed for use with these services.
 
@@ -33,7 +33,7 @@ TokenScript is an XML dialect. It describes the functions provided by the token 
 
 ## Why TokenScript?
 
-Today, the way tokens are accessed, rendered and transacted are scattered across Dapps and Smart Contracts. This limited the use of Tokens.
+Today, the way tokens are accessed, rendered and transacted are scattered across DApps and Smart Contracts. This limited the use of Tokens.
 
 Typically, all knowledge about rendering a token and constructing a transaction about the token is in a "host" web app. The "host" web app becomes a centre in the token's marketisation and integration, recreating data interoperability, security and availability barrier - precisely the same set of issues that prevented tokenisation before blockchain's invention.
 
@@ -54,7 +54,7 @@ lib/browser
 :   browser plugin-support of TokenScript
 
 lib/web
-:    library for Dapps to render tokens in the case the dapp-browser does not support TokenScript. Some features are not available (e.g. switching nodes or accessing multiple Plasma Chain) as they require underlying dapp browser support.
+:    library for DApps to render tokens in the case the DApp-browser does not support TokenScript. Some features are not available (e.g. switching nodes or accessing multiple Plasma Chain) as they require underlying DApp browser support.
 
 # Trying out TokenScript
 
