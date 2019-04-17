@@ -14,5 +14,5 @@ After cloning the source code you can run it with either the emulator or your ow
 If you are using your real device, simply airdrop the .tsml or .shtml, .css and .xml files. 
 
 ### Debugging on Android
-Like with iOS, you can either use your own device or the emulator. To use the emulator, simply run the GitHub project via Android Studio and run it. You can drag and drop the file in the app_data/AlphaWallet directory. 
+As with iOS you can either use your own device or the emulator. Run on Android Studio/Intellij and use your device or the emulator. In the AlphaWallet settings choose 'enable dev override', allow the app access to file structure then drag and drop the file into the AlphaWallet directory at root or upload to sdcard/AlphaWallet using the Device File Explorer. If the 'enable dev override' is not chosen the app will not be able to pick up files in this directory.
 
