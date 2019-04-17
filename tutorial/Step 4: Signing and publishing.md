@@ -14,7 +14,7 @@ First, check that you have the right tool installed. Say, in OS X with brew inst
 
 If your package manager doesn't provide xmlsectool, you can download from its [home page](https://wiki.shibboleth.net/confluence/display/XSTJ2/xmlsectool+V2+Home) and install it manually.
 
-From here I'll assume your system supports make. If not, go to [I don't use Make](#i-dont-use-make) section.
+From here I'll assume your system supports make. If not, it's easier to wait for the tutorial on how to sign with GUI, which we will produce based on [Oxygen's document](https://www.oxygenxml.com/doc/versions/21.0/ug-editor/topics/signing-files.html#signing-files) by the end of April 2019.
 
 If you installed xmlsectool manually, for example to `/opt/xmlsectool-2.0.0/`, you will need to change the first line of the MakeFile to this:
 
@@ -53,18 +53,6 @@ Run `make` with `AdmissionTicket.tsml`
     rm AdmissionTicket.canonicalized.xml
 
 And now you get a signed TokenScript AdmissionTicket.tsml which is ready to be published.
-
-### I don't use make
-
-If your system doesn't support make, but you did follow the instruction to install xmlsectool, then you can use a command to sign the TokenScript:
-
-   $ cd examples/ticket
-   $ /opt/xmlsectool-2.0.0/xmlsectool.sh --sign --keyInfoKeyName 'Shong Wang' --digest SHA-256 --signatureAlgorithm http://www.w3.org/2001/04/xmldsig-more#rsa-sha256 --inFile AdmissionTicket.xml --outFile AdmissionTicket.tsml --key ssl/shong.wang.key --certificate ssl/shong.wang.certs
-
-Unfortunately this command doesn't validate the XML file for you. The examples attached are pre-validated.
-
-The command should produce a file `AdmissionTicket.tsml` which is ready to go.
-
 
 ### Publishing your TokenScript
 
