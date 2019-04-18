@@ -458,7 +458,29 @@ Any party is able to render and apply functions to the token using Tokenscript, 
 **[[loudly thinking: Wouldn't it be better to continue with the payment side example? It somehow breaks the flow. Advantages doesn't seem to be a good fit in the chapter about requirements. Maybe I'll test it; maybe it's good to explain the advantages when we have also the payment side. The more I think about it, the more I tend to it. We already have a lot of talk about why Tokenscript. So we better stick to the examples and present the advantages later on - I tried it out.]]
 
 
-## Payment side example: DAI token
+## Payment side example: Smart money
+
+Similar to the delivery side, a token economy needs to bring an advanced business logic to the payment side. With payment we mean a token representing a monetary unit used to pay for deliverables. In our case, this are programmable token like DAI or ETH.
+
+If we look at our property example, we see the need for some payment functions not available in current wallets: Maybe a payer needs to attach an identity file to a payment when he buys a property share. On the other side, the property token issuer might want to create recurring payouts of the income of the 1% token. If someone builds a platform to tokenize property shares, the owners will needs an easy way to integrate those kinds of payments. Further, paying for a property share might include multisig-payments, which introduce trusted third parties like notaries. A property trading platform might want to link payments to a list of certified notaries.
+
+If we think about advanced payment token like DAI Dollar - or collateralized loans with Dharma - the wallets needs to be aware of specific mechanisms of the underlying smart contracts. For example, if you spend the last remaining DAI in your CDP, you are at very high liquidataion risk, and the wallet should warn the user of the consequences. Giving the momentum these lending and stablecoin contracts currently enjoy, it is more than likely that we will see a many more of it in the future. Wallets must be able to understand the mechanism of those payment token. 
+
+One of the key feature of blockchains in payment is that they allow to have programmable, smart money. However, the development of it is very small at the moment. With Ethereum smart contracts you can build a large universe of interesting payment schemes. This can involve multisig contracts with sophisticated logic - like having a floating amount threshold which requires more and more cosigners when the amount rises, or having contracts which only allow single-signed payments to certain accounts. Payments can also automatically include cashback or affiliate schemes, which trigger when a payment is made to a given address. 
+
+In the future, the payment side of smart contract blockchains like Ethereum will render fundamentally. There are ideas to introduce new IBAN like address schemeres, there are smart contracted payment request providers, there will be offchain payment railways, like Raiden or Plasma, and it will be possible to exchange a delivery token via smart contracts in a payment token with the same process as you pay for something.
+
+This list is far from being complete, but just contains a few examples for innovations on the payment side which are up to come and will go hand-in-hand with the tokenization of deliverables. To deal with them, wallets must be prepared.
+
+
+
+
+
+
+
+
+
+
 
 After the delivery side example we will inspect the payment side of a market exchange.
 
