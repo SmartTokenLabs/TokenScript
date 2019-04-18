@@ -309,26 +309,26 @@ To understand the requirements for Tokenscript, we will first introduce basic co
 
 ## Address "Frictionless Market" needs
 
-A *market* is a place where *delivery* versus *payment* happens. Blockchain enables this place to rely less on middlemen. As this concept are crucial, we will define them formally.
+To find out the requirements for Tokenscript to create a frictionless market, we need to have a formal definition of markets and the concepts involved. In our case *a market is a place where delivery versus payment* happens. The role of Blockchain is to make markets rely less on middlemen and eliminate frictions. 
 
-*Deliverables*: All sorts of things money can buy: assets, goods and services. In this context deliverables mean that not a physical good, but an entitlement is transfered. Proto-tokenization happened long ago. Think of land or security titles. However, only with blockchain they can be transfered without needing a third party to prevent double spends. Deliverables can profit immensively from tokenization - if the token design properly reflects they needs.
+For clearity, we define the three concepts involved. 
 
-*Payments*: All value transfers done with anything currency-like. In this context, only programmable currencies like Ether or Dai are relevant. On the market they are exchanged for deliverables.
+*Deliverables*: All sorts of things money can buy: assets, goods and services. In this context deliverables are not a physical good, but an entitlement. A proto-tokenization of deliverables happened long ago, like land or security titles. However, only with blockchain they can be transfered in real-time without needing a third party to prevent double spends. Deliverables can profit immensively from tokenization - if the token design properly reflects their needs.
 
-*Market*: Is a concept, not a marketplace. A user who checks out on a website is accessing a market as well as two people meeting to execute a trade. The user doesn't have to be in a marketplace (e.g. Amazon) to do so.
+*Payments*: All value transfers done with anything currency-like. In traditional markets payments are done with Fiat currencies, either as physical banknotes or as electronic transfers through trusted third parties. Blockchain eliminates the middle men from payments and enables the use of programmable currencies like Ether or Dai.
 
-Tokenscript provides both *the deliverable* and *the payment* side tokens to "plug-in" to the *market*. The difference is important: In the current market architecture both deliverables and payments have to be transfered to the market. This does not only add friction and time-lags, but also introduce trusted middle men.
+*Market*: Is a concept of individuals exchanges payments versus deliverables. It is neither meant as a single marketplace nor the entirety of all marketplaces. To access a market users can, but most not be on a marketplace like Amazon. 
 
-To enable users to plugin-in to the market, TokenScript must enable tokens to be presented, indexed, transacted, traded, auctioned, combined and so on. We will demonstrate the requirements by both an example for delivery and payment.
+In traditional markets both the *the deliverable* and *the payment* side tokens must "plug-in" to the *market*. The market participant must transfer both parts of a deal to the market, which adds friction and introduces middle men. The promise of Tokenization is that both deliverable and payments are *always on the market*. 
+
+Enabling this is a main requirement for Tokenscript. To do so, Tokenscript enable tokens to be presented, indexed, transacted, traded, auctioned, combined and so on. We will demonstrate this requirement by both an example for delivery and payment and explain how Tokenscript can address this needs.
 
 ### Deliverable side example: 1% property token
 
-Let's imagine a market for "1% property". A property owner can issue many pieces of a token, each represents 1% ownership of the property. He can sell these tokens for cash. 
-
-A buyer needs to know quite a bit of information. It's easy to understand that such a token would fetch 1% of the sales revenue if the underlying property is sold, but a lot more details are needed:
+Let's imagine a market for "1% property". A property owner can issue many pieces of a token, each represents 1% ownership of the property. He can sell these tokens for cash. A buyer needs to know quite a bit of information. It's easy to understand that such a token would fetch 1% of the sales revenue if the underlying property is sold, but a lot more details are needed:
 
 1. Where is the property and what status is it in?
-Re: Milestones
+
 2. Can a 1% property token owner vote?  For example, on the purchase decision to insurance against a bush fire?
 
 3. Is the 1% automatically converted into currency at the time of property sales, or can the token holder elect to continue holding it?
@@ -347,16 +347,16 @@ Re: Milestones
 
 Specific to blockchain, we also have:
 
-10. How to correctly and securely construct a transaction for the asset (purchase, voting etc)? You can't expect any investor to be a blockchain geek who knows to do load the smart contract files in his wallet.
+10. How to correctly and securely construct a transaction for the asset (purchase, voting etc)? You can't expect any investor to be a blockchain geek who knows how to load the smart contract files in his wallet.
 
 We categorise these trade-sensitive information into four categories:
 
-1. product description[^pd]. Item 2, 3, 5, 6 are in PD
-2. attested information. Item 1, 4, 6, 7 are in Attestations.
-3. reference information. Item 8, 9.
-4. action information (how to perform an asset action). Item 10.
+1. Product description[^pd]: Item 2, 3, 5, 6
+2. Attested information (attestations): Item 1, 4, 6, 7.
+3. Reference information: Item 8, 9.
+4. Action information (how to perform an asset action): Item 10.
 
-Understandably, the buyers need to access all these for an informed decision. Ideally they show up on his wallet when he starts interacting with the token. In the following chapters, we will describe how these information categorizes manifest in Tokenscript.
+Understandably, the buyers need to access all these for an informed decision. To allow tokenization of deliverables to happen, these information must show up on his wallet when he starts interacting with the token. In the following chapters, we will describe how these information categorizes manifest in Tokenscript.
 
 [^pd] The word is loaned from the financial sector, usually used to describe packaged investment products. It means the formula which profit is calculated and the current values of the variables in the formula.
 
@@ -395,11 +395,11 @@ This serves to introduce the first functionality of Tokenscript: acting as a pre
 
 This simplified `attribute-type` code snippet allows the value for Voting Right to be fetched from `holding-contract`, which is a smart contract defined somewhere else in the Tokenscript, and present it in one of a few languages.
 
+As another functionality, Tokenscript can extend the product description and integrate variable parts, which can be upgraded without messing with upgradability of smart contracts.
+
 #### Attested information
 
-Attestation is just a signed message stating a fact. Attestations are often used to satisfy the conditions of the transactions — more on that in chapter Attestations.
-
-In the 1% property token example, the involved attestations are:
+Attestation is just a signed message stating a fact. Attestations are often used to satisfy the conditions of the transactions — more on that in chapter Attestations. In the 1% property token example, the involved attestations are:
 
 - The Identity authority and title deeds office attest the issuer's ownership of the property.
 - A collateralization authority[^set-operation] prevents double collateralization
@@ -409,17 +409,19 @@ In the 1% property token example, the involved attestations are:
 
 The first two attestations are not stored in a smart contract for privacy and cost (size and number of transactions) reasons. It's possible to utilise zero-knowledge proof to provide anonymous proof that the attestation is for the said property and said owner, and it has not expired. What proofs are expected and can be validated is also described in Tokenscript.
 
-Furthermore, the fact that the transaction requires an identity attestation or investment capacity attestation from the buyers. These are described in Tokenscript as well so the context (e.g. user-agent) can prevent the user from submitting a transaction without qualifying proof or help the user to select suitable attestations for a purchase transaction.
+Furthermore, the transaction requires an identity attestation or investment capacity attestation from the buyers. These are described in Tokenscript as well so the context (e.g. user-agent) can prevent the user from submitting a transaction without qualifying proof or help the user to select suitable attestations for a purchase transaction.
+
+Tokenscript does not just help relay the attestation data, but it also enables wallets to conveniently allow buyers and sellers to submit and read the attestation data without the need for a hosted DApp service.
 
 **[[add an xml example for consistency]]**
 
 #### Reference information
 
-Reference information is relevant to the token, but not part of the smart contract. It is provided by web services, typically through a RESTful API call.[^trusted-information]
+Reference information is relevant to the token, but not part of the smart contract. In our example reference information includes data like previous property sales price or regional property performance. This is data which is useful for the owner or buyer of a token. It is provided by web services, typically through a RESTful API call.[^trusted-information]
 
-[^trusted-information]: Originally we call it "Trusted information", meaning data such as previous property sales price or regional property performance data is just "provided", without blockchain proofs or attestations, hence, it has to be explicitly trusted by the user. As it turned out, this term misfired as some developers think it means "proven information" and provided as trusted already. So we used a less precise term "Reference information", which, unfortunately, feels like a catch-all phrase.
+[^trusted-information]: Originally we call it "Trusted information", meaning the data is just "provided", without blockchain proofs or attestations, hence, it has to be explicitly trusted by the user. As it turned out, this term misfired as some developers think it means "proven information" and provided as trusted already. So we used a less precise term "Reference information", which, unfortunately, feels like a catch-all phrase.
 
-Since Tokenscript is signed by the token issuer (not by the token owner - the token issuer is often an entity that deployed the smart contract), the reference information sourced from web APIs specified in Tokenscript is assumed trusted. The security chapter will detail different levels of trust.
+It could be possible that eventually such information will end up being onchained. But even than they will be created and uploaded by an entity which has to be trusted. Reference data always leads to the problem of trust and web integration. With Tokenscript this data is signed by the token issuer (not by the token owner - the token issuer is often an entity that deployed the smart contract). In the case of the property this could be a real estate specialist. The reference information sourced from web APIs specified in Tokenscript is assumed to be trusted, but can be changed later. The security chapter will detail different levels of trust.
 
 **[[add an xml example for consistency]]**
 
@@ -437,7 +439,9 @@ Action information dictates the correct method to construct a blockchain transac
 - Are the conditions all met (e.g. a purchase isn't possible after the underlying property is liquidated)?
 - How to cast a vote if one is aligned with token ownership?
 
-This information is a super-set of smart contract programmable interface (In Ethereum, called ABI), with the additional part being business logic (e.g. property must be still valid and owned by the seller) and presentation logic (e.g. the message "The property is liquidated. Purchase no longer possible"). Tokenscript makes both the content as the visualization of the action information more flexible. 
+In Ethereum this information is a super-set of the smart contract programmable interface called ABI. It also contains business logic (e.g. property must be still valid and owned by the seller) and presentation logic (e.g. the message "The property is liquidated. Purchase no longer possible"). With more sophisticated token, this parts becomes more complex and will make it hard  to load it in a smart contract *and* visualize it approbriately in the wallet. 
+
+Tokenscript makes both the content as the visualization of the action information more flexible and accessible. 
 
 **[[add an xml example for consistency]]**
 
@@ -451,15 +455,52 @@ In conclusion, Tokenscript allows the context (user-agent or trading engine) to:
 
 Any party is able to render and apply functions to the token using Tokenscript, including entities like generic marketplaces, user-agents and 3rd party apps. We call these parties "context" in general.
 
-### Advantages of Tokenscript
+**[[loudly thinking: Wouldn't it be better to continue with the payment side example? It somehow breaks the flow. Advantages doesn't seem to be a good fit in the chapter about requirements. Maybe I'll test it; maybe it's good to explain the advantages when we have also the payment side. The more I think about it, the more I tend to it. We already have a lot of talk about why Tokenscript. So we better stick to the examples and present the advantages later on - I tried it out.]]
 
-We established that Tokenscript helps to overcome many challenges of Tokenization, mostly in the areas of integrating and updating business logic, transactional behavior and the interaction with different systems. Here we will focus on a few main advantages of using Tokenscript: Interoperability, Scalability, Security, Privacy, User-Interface and Availability.
+
+## Payment side example: DAI token
+
+After the delivery side example we will inspect the payment side of a market exchange.
+
+DAI is a token designed for payment - purchasing security token, purchasing goods and services and so like. It's intended to match USD in value. Not fixing the supply cap, it is not itself an investment candidate.
+
+In many ways, DAI functions like Ether, the base currency in Ethereum. However, it can't be a drop-in replacement for Ether.
+
+First, the Dapps written for Ethereum may not be aware that the user has DAI token unless it explicitly supports DAI. A Pizza ordering service that accepts Ether as payment, for example, cannot trivially start to accept DAI token. This is true even if DAI provides a DAI-to-Ether gateway service which, in an atomic fashion, converts DAI to Ether in the same transaction which uses the resulting Ether to purchasing Pizza.
+
+If Pizza website doesn't upgrade, the user has to convert DAI to Ether first, then, purchase Pizza with a second transaction. Such a process is not only inconvenient, but lack atomicity, meaning that the user could have converted DAI to Ether through the effort, only to fail the checkout since the Pizza is sold out, and ended up with additional Ethers with which she has to deal.
+
+It's worth noticing that the Pizza website cannot upgrade to support DAI without knowing how to discover the user's DAI balance[^balance-is-privacy] (to not to to waste a transaction fee just to find the DAI balance is insufficient), how to construct a DAI withdraw transaction or DAI-Ether gateway transaction and make direct smart contract function calls to the DAI holding contract.
+
+[^balance-is-privacy]: Eventually, the Pizza website would not only be oblivious about how to check balance, since Tokenscript handles it, but also not possible to know the balance. This would require underlying blockchain's support, but ultimately cannot be done if we continue the current trend where website, who should care about business logic, also care about payment logic.
+
+Naturally, the Pizza website isn't in the best position to manage these payment-side details. Tokenscript addresses this problem by
+
+1. Encapsulating the smart contract function calls needed for supporting DAI, along with the javascript to construct needed transactions in Tokenscript, signed by DAI issuer.
+
+2. Providing a browser side implementation and a javascript based implementation for Tokenscript compatibility, so that the Pizza shop could just call a generic action to return Ether (or any acceptable currency) and let the payment logic in Tokenscript work at transaction.
+
+Tokenscript's capacity to embed payment logic and presentation means that not only it can display messages in user's language (like balance or "insufficient balance" message), but it can perform functions like pre-checking the balance, pause the checkout flow so that the user can perform a top-up flow and return to the checkout flow to finalise the checkout.
+
+To the user, the process resembles a bit like the checkout process leads the user to Paypal to finalise the transaction, except the process, happens locally in an enhanced user-agent.
+
+We again argue that current prevailing method is not suitable for creating a frictionless market, while Tokenscript could, by providing reasons in the areas of *interoperability*, *scalability* and *security*.
+
+As concluded, Pizza website would not have the necessary payment side logic to handle everything on its own. The traditional approach is to let the Pizza website use the javascript sourced by MakerDAO project. The javascript may or may not use a RESTful API provided by MakerDAO.
+
+This approach solves one problem by introducing quite a few others.
+
+
+### Advantages of Tokenscript: Delivery Side
+
+After having inspected the requirements to use token as deliveries, we will show what advantages Tokenscript provides compared with using vanilla token. The advantages will be shown with the property example.
+
 
 #### Interoperability:
 
-Suppose a property guru named Peter wishes to create a website called "Peter's Pride Asset", where he selects the best properties available on the market, which are represented by a token which serve as the deliverable. Peter can create a listing of those properties with rich information of the current price, location, age of the building and even photos, which the users can purchase with a click. Peter doesn't need permission to do so, because the data of those tokens are on the blockchain. In fact, once the tokens are on the chain, everybody can build his own asset portal.
+Let's suppose a property guru named Peter creates a website called "Peter's Pride Asset", where he selects the best properties available on the market and represents each by a token that serves as the deliverable. Peter can create a listing of those properties with rich information about price, location and so on, and allow users to purchase it with one click. 
 
-However, Peter would need to obtain the knowledge local to how to render the token on his website, like how to get the expiration of a token from its holding smart contract. If the underlying smart contract has gone through changes, like adding an attribute (e.g. council rate), his website would need to upgrade. Similarly, the transaction rule might be updated to require the buyer to submit an identity attestation as part of a purchase. Without a speedy upgrade, his users would submit transactions not conforming and get rejected later in the blockchain. In the end, he would resort to passing the rendering and trading of the token to the Dapp tied to this token, returning to a centralised status and limiting the innovation and competition in this space.
+Peter doesn't need permission, because the data of those tokens are on the blockchain. However, he needs knowledge how to render the token on his website. He also needs to upgrade his website, when the underlying smart contract or the transaction rules was changed. If he misses to do it in time, his users would submit transactions not conforming but getting rejected. 
 
 The same problems emerges with a lot of application. Tokenscript helps Peter to keep his platform upgraded and to better react on events. The real estate token can easily be operated on all kind of platforms. 
 
@@ -493,40 +534,7 @@ A user who is purchasing a 1% property token from Peter's Pride Property recomme
 
 #### Availability
 
-
-
-
-
-## Payment side example: DAI token
-
-DAI is a token designed for payment - purchasing security token, purchasing goods and services and so like. It's intended to match USD in value. Not fixing the supply cap, it is not itself an investment candidate.
-
-In many ways, DAI functions like Ether, the base currency in Ethereum. However, it can't be a drop-in replacement for Ether.
-
-First, the Dapps written for Ethereum may not be aware that the user has DAI token unless it explicitly supports DAI. A Pizza ordering service that accepts Ether as payment, for example, cannot trivially start to accept DAI token. This is true even if DAI provides a DAI-to-Ether gateway service which, in an atomic fashion, converts DAI to Ether in the same transaction which uses the resulting Ether to purchasing Pizza.
-
-If Pizza website doesn't upgrade, the user has to convert DAI to Ether first, then, purchase Pizza with a second transaction. Such a process is not only inconvenient, but lack atomicity, meaning that the user could have converted DAI to Ether through the effort, only to fail the checkout since the Pizza is sold out, and ended up with additional Ethers with which she has to deal.
-
-It's worth noticing that the Pizza website cannot upgrade to support DAI without knowing how to discover the user's DAI balance[^balance-is-privacy] (to not to to waste a transaction fee just to find the DAI balance is insufficient), how to construct a DAI withdraw transaction or DAI-Ether gateway transaction and make direct smart contract function calls to the DAI holding contract.
-
-[^balance-is-privacy]: Eventually, the Pizza website would not only be oblivious about how to check balance, since Tokenscript handles it, but also not possible to know the balance. This would require underlying blockchain's support, but ultimately cannot be done if we continue the current trend where website, who should care about business logic, also care about payment logic.
-
-Naturally, the Pizza website isn't in the best position to manage these payment-side details. Tokenscript addresses this problem by
-
-1. Encapsulating the smart contract function calls needed for supporting DAI, along with the javascript to construct needed transactions in Tokenscript, signed by DAI issuer.
-
-2. Providing a browser side implementation and a javascript based implementation for Tokenscript compatibility, so that the Pizza shop could just call a generic action to return Ether (or any acceptable currency) and let the payment logic in Tokenscript work at transaction.
-
-Tokenscript's capacity to embed payment logic and presentation means that not only it can display messages in user's language (like balance or "insufficient balance" message), but it can perform functions like pre-checking the balance, pause the checkout flow so that the user can perform a top-up flow and return to the checkout flow to finalise the checkout.
-
-To the user, the process resembles a bit like the checkout process leads the user to Paypal to finalise the transaction, except the process, happens locally in an enhanced user-agent.
-
-We again argue that current prevailing method is not suitable for creating a frictionless market, while Tokenscript could, by providing reasons in the areas of *interoperability*, *scalability* and *security*.
-
-As concluded, Pizza website would not have the necessary payment side logic to handle everything on its own. The traditional approach is to let the Pizza website use the javascript sourced by MakerDAO project. The javascript may or may not use a RESTful API provided by MakerDAO.
-
-This approach solves one problem by introducing quite a few others.
-
+### Advantages of Tokenscript: Payment Side
 
 #### Security
 
@@ -597,6 +605,8 @@ Suppose a user purchases an iPhone from Harvey Norman, an online retailer, using
 - A receipt token, issued by Harvey Norman, which allows the product to be returned in 90 days. It's also useful for getting a Tourism Tax Refund if you want to take the phone out of Australia.
 
 If without tokens as the integration anchor, the three different services might be carried out by various means.
+
+**[[Big advantage: Without you have a lot of papers and so on which you need to store. With it, you have it all in your wallet and can recover it always with your seed. --> and, woah, you could use your xpub key to proof your tax refund]]
 
 ### The Shipping Token
 
