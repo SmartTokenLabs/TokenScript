@@ -468,52 +468,38 @@ If we think about advanced payment token like DAI Dollar - or collateralized loa
 
 One of the key feature of blockchains in payment is that they allow to have programmable, smart money. However, the development of it is very small at the moment. With Ethereum smart contracts you can build a large universe of interesting payment schemes. This can involve multisig contracts with sophisticated logic - like having a floating amount threshold which requires more and more cosigners when the amount rises, or having contracts which only allow single-signed payments to certain accounts. Payments can also automatically include cashback or affiliate schemes, which trigger when a payment is made to a given address. 
 
-In the future, the payment side of smart contract blockchains like Ethereum will render fundamentally. There are ideas to introduce new IBAN like address schemeres, there are smart contracted payment request providers, there will be offchain payment railways, like Raiden or Plasma, and it will be possible to exchange a delivery token via smart contracts in a payment token with the same process as you pay for something.
+In the future, the payment side of smart contract blockchains like Ethereum will render fundamentally. There are ideas to introduce new IBAN like address schemeres, there are smart contracted payment request providers, there will be offchain payment railways, like Raiden or Plasma, it will be possible to exchange a delivery token via smart contracts in a payment token with the same process as you pay for something, and you might link payments to domain names of Ethereum Name Service (ENS).
 
-This list is far from being complete, but just contains a few examples for innovations on the payment side which are up to come and will go hand-in-hand with the tokenization of deliverables. To deal with them, wallets must be prepared.
+This list is far from being complete. You can observe a lot of payment side innovations in China, like points which are deserved for encouraged payment behaviours, advanced cashback logics, like when you spent more than ¥1000 in a day, lotteries on being the 100th, 200th or 600th payment, free shipping insurance under certain conditions, red-packets that can only be used in paying consumption. And so son. 
 
+It can be expected that in the future we see a large scope of innovations on the payment side which will go hand-in-hand with the tokenization of deliverables. To deal with them, wallets must be prepared.
 
+### Challenges on the payment side
 
+It is obvious that the innovations on the payment side will be a challenge for wallets and payment providers. The challenges are very similar to those for the delivery side:
 
+**How will the wallet know the payment logic and visualize it?** 
+For example, if you buy a Pizza and you are registered for several cashback services. Some Pizza might give you cashback points under certain conditions, or you have cashback points which only count for certain Pizzas. Your wallets needs to know this and tell you. With some cashback schemes you might be required to interact with a smart contract during payment through a special crafted transaction. How does your wallet know this?
 
+**What if the payment logic is updated?**
+Sometimes the payment logic might be rendered. For example, a chargeback provider offers special discounts. Or there is a new law for property shares. In those cases the wallets doing the payouts need to update the logic to craft transactions.
 
+**How to put complicated payment logic in a smart contract?**
+With the current model of smart contracts and hosted DApps, you need to have all the payment logic in a smart contract or a set of smart contracts. This will increase the contracts complexity while limiting the scope of what you can do. The smart contract might need to interact with other smart contracts or trusted third parties which provide changing lists of dicount offers.
 
+When done with the traditional models, more sophisticated payment logics will introduce complexity, security and privacy issues, while creating a large burden on wallets to integrate the logic and to establish a tight updating infrastructure. At the same time it will limit the scope of what is doable and restrict interoperability.
 
+Tokenscript again serves as a elegant and simple solution to circumvent these problems. Similar to the delivery side, the Tokenscript XML allows the creator of a smart contract - or the owner of a receiving address - to introduce and update a set of information to the wallet:
 
-
-
-After the delivery side example we will inspect the payment side of a market exchange.
-
-DAI is a token designed for payment - purchasing security token, purchasing goods and services and so like. It's intended to match USD in value. Not fixing the supply cap, it is not itself an investment candidate.
-
-In many ways, DAI functions like Ether, the base currency in Ethereum. However, it can't be a drop-in replacement for Ether.
-
-First, the Dapps written for Ethereum may not be aware that the user has DAI token unless it explicitly supports DAI. A Pizza ordering service that accepts Ether as payment, for example, cannot trivially start to accept DAI token. This is true even if DAI provides a DAI-to-Ether gateway service which, in an atomic fashion, converts DAI to Ether in the same transaction which uses the resulting Ether to purchasing Pizza.
-
-If Pizza website doesn't upgrade, the user has to convert DAI to Ether first, then, purchase Pizza with a second transaction. Such a process is not only inconvenient, but lack atomicity, meaning that the user could have converted DAI to Ether through the effort, only to fail the checkout since the Pizza is sold out, and ended up with additional Ethers with which she has to deal.
-
-It's worth noticing that the Pizza website cannot upgrade to support DAI without knowing how to discover the user's DAI balance[^balance-is-privacy] (to not to to waste a transaction fee just to find the DAI balance is insufficient), how to construct a DAI withdraw transaction or DAI-Ether gateway transaction and make direct smart contract function calls to the DAI holding contract.
-
-[^balance-is-privacy]: Eventually, the Pizza website would not only be oblivious about how to check balance, since Tokenscript handles it, but also not possible to know the balance. This would require underlying blockchain's support, but ultimately cannot be done if we continue the current trend where website, who should care about business logic, also care about payment logic.
-
-Naturally, the Pizza website isn't in the best position to manage these payment-side details. Tokenscript addresses this problem by
-
-1. Encapsulating the smart contract function calls needed for supporting DAI, along with the javascript to construct needed transactions in Tokenscript, signed by DAI issuer.
-
-2. Providing a browser side implementation and a javascript based implementation for Tokenscript compatibility, so that the Pizza shop could just call a generic action to return Ether (or any acceptable currency) and let the payment logic in Tokenscript work at transaction.
-
-Tokenscript's capacity to embed payment logic and presentation means that not only it can display messages in user's language (like balance or "insufficient balance" message), but it can perform functions like pre-checking the balance, pause the checkout flow so that the user can perform a top-up flow and return to the checkout flow to finalise the checkout.
-
-To the user, the process resembles a bit like the checkout process leads the user to Paypal to finalise the transaction, except the process, happens locally in an enhanced user-agent.
-
-We again argue that current prevailing method is not suitable for creating a frictionless market, while Tokenscript could, by providing reasons in the areas of *interoperability*, *scalability* and *security*.
-
-As concluded, Pizza website would not have the necessary payment side logic to handle everything on its own. The traditional approach is to let the Pizza website use the javascript sourced by MakerDAO project. The javascript may or may not use a RESTful API provided by MakerDAO.
-
-This approach solves one problem by introducing quite a few others.
+1. Product description: Information about products, merchants, cashbacks, discount offers, handling fees, CDP and other collateral information
+2. Attested information: Identity information, tax information and so on
+3. Reference information: third party databases alligned to the payment or the product, like a list of special offers or notaries to select.
+3. Action information (how to perform an asset action): Multisig-schemes, interaction with other smart contracts, recurring payments, receiver handle or ENS name, translation into other address schemes, crafting of transactions triggering smart contracts ...
 
 
-### Advantages of Tokenscript: Delivery Side
+## Advantages of Tokenscript 
+
+### Delivery Side
 
 After having inspected the requirements to use token as deliveries, we will show what advantages Tokenscript provides compared with using vanilla token. The advantages will be shown with the property example.
 
@@ -536,7 +522,9 @@ Vertically, a structured transaction is built using a token transaction or creat
 
 #### Security
 
-It is impractical to improvise a schema where every transaction the user might sign is rendered in a user-readable format. It's easy to start with such an effort with a transaction visualiser tool, interpreting an enigmatic transaction payload to the user, similar to Linux's `identify(1)` command, but ultimately the system integration and UX needs would surpass what a dictionary style transaction visualiser can do.
+It is impractical to improvise a schema where every transaction the user might sign is rendered in a user-readable format. It's easy to start with such an effort with a transaction visualiser tool, interpreting an enigmatic transaction payload to the user, similar to Linux's `identify(1)` command, but ultimately the system integratiwie sieht es mit dem Shop aus? Ich würde gern das PDF promoten und Email-Adressen sammeln.
+
+Beste Grüße von Aaronon and UX needs would surpass what a dictionary style transaction visualiser can do.
 
 Take the 1% property token as an example; a confirmation might look like this: You are going to purchase 1% of property #802820 with 45 Ethers, are you sure?
 
