@@ -227,8 +227,8 @@ We concatenate the output of all 3 in the app and load it for rendering each tok
 
 Implementing the TokenScript API and Rendering in the Mobile Apps
 ===
-There are a few additional files that are used in the app which is in the `tbml-mobile-app` directory:
+There are a few additional files that are used in the app which is in the `ts-mobile-app` directory:
 
 * [standard-styles.css](standard-styles.css) — CSS style classes that are injected into each token instance webview. TokenScript developers can use them or override if they want. Most notably this should include the custom fonts we include in the app. (the custom fonts don't work yet although the styles specify them)
 * [default-token.xsl](default-token.xsl) — The default token.xsl file which is included with empty templates and TokenScript-developer friendly messages
-* [generate-token-instance.xsl](generate-token-instance.xsl) - The XSL file used to include [default-token.xsl](default-token.xsl) ("TbmlStore.defaultTokenFilename"), the contract's `token.xsl` ("contract.lowercased().xsl") standard-styles.css ("standardTokenTbmlCss") as well as call the templates. The output of applying this XSL file on the asset definition is the HTML (and JavaScript + CSS) that is then rendered in each token instance's web view with each web view having access to the TokenScript API.
+* [generate-token-instance.xsl](generate-token-instance.xsl) - The XSL file used to include [default-token.xsl](default-token.xsl) ("tsStore.defaultTokenFilename"), the contract's `token.xsl` ("contract.lowercased().xsl") standard-styles.css ("standardTokentsCss") as well as call the templates. The output of applying this XSL file on the asset definition is the HTML (and JavaScript + CSS) that is then rendered in each token instance's web view with each web view having access to the TokenScript API.
