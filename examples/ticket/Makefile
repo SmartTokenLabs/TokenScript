@@ -5,13 +5,13 @@ KEYPASSWORD=shong.wang
 SIGNATURE_ALGORITHM=rsa-sha256
 
 help:
-	# Needs a target, example: $$ make AdmissionTicket.canonicalized.xml
+	# Needs a target, example: $$ make EntryToken.canonicalized.xml
 	#  
-	# Let's say you have a TokenScript "AdmissionTicket.xml"
+	# Let's say you have a TokenScript "EntryToken.xml"
 	#- to validate and canonicalize, add 'canonicalized' in the filename
-	@echo $$ make AdmissionTicket.canonicalized.xml
+	@echo $$ make EntryToken.canonicalized.xml
 	# - to sign, use tsml as file extension:
-	@echo $$ make AdmissionTicket.tsml
+	@echo $$ make EntryToken.tsml
 
 %.canonicalized.xml : %.xml
     # xmlsectool canonicalises automatically when needed, but leaving an xml:base attribute which creates trouble later.
