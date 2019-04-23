@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
-           targetNamespace="http://tokenscript.org/2019/04/tokenscript"
+           targetNamespace="http://tokenscript.org/2019/05/tokenscript"
            xmlns:xhtml="http://www.w3.org/1999/xhtml"
-           xmlns="http://tokenscript.org/2019/04/tokenscript">
+           xmlns="http://tokenscript.org/2019/05/tokenscript">
 
 
   <!-- Importing XML namespace for xml:lang and xml:id -->
@@ -23,12 +23,13 @@
       <xs:sequence>
         <xs:element maxOccurs="unbounded" ref="name"/>
         <xs:element maxOccurs="unbounded" ref="contract"/>
-        <xs:element ref="selections"/>
+        <xs:element minOccurs="0" ref="selections"/>
         <xs:element ref="cards"/>
         <xs:element minOccurs="0" ref="grouping"/>
         <xs:element minOccurs="0" ref="ordering"/>
         <xs:element ref="attribute-types"/>
       </xs:sequence>
+      <xs:attribute name="custodian" type="xs:boolean"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="name">
@@ -43,7 +44,7 @@
         <xs:element maxOccurs="unbounded" ref="address"/>
         <xs:element minOccurs="0" ref="interface"/>
       </xs:sequence>
-      <xs:attribute name="id" type="xs:NCName"/>
+      <xs:attribute name="label" type="xs:ID"/>
       <xs:attribute name="interface" use="required" type="xs:NCName"/>
     </xs:complexType>
   </xs:element>
@@ -69,11 +70,11 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element maxOccurs="unbounded" ref="name"/>
+        <xs:element minOccurs="0" ref="attribute-type"/>
         <xs:element minOccurs="0" ref="exclude"/>
         <xs:element minOccurs="0" ref="xhtml:style"/>
         <xs:element ref="view"/>
       </xs:sequence>
-
     </xs:complexType>
   </xs:element>
   <xs:element name="include" type="xs:NCName"/>
@@ -177,7 +178,8 @@
       <xs:sequence>
         <!-- name is not needed if the attribute is only used for selection -->
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="name"/>
-        <xs:element minOccurs="1" maxOccurs="unbounded" ref="origin"/>
+        <xs:element minOccurs="1" maxOccurs="unbounded" ref="origins"/>
+        <xs:element minOccurs="0" ref="mapping"/>
       </xs:sequence>
       <xs:attribute name="as" type="xs:NCName"/>
       <xs:attribute name="id" use="required" type="xs:NCName"/>
@@ -185,23 +187,28 @@
       <xs:attribute name="syntax" use="required" type="xs:NMTOKEN"/>
     </xs:complexType>
   </xs:element>
-  <xs:element name="origin">
+  <xs:element name="origins">
     <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" ref="function"/>
-        <xs:element minOccurs="0" ref="mapping"/>
-      </xs:sequence>
-      <xs:attribute name="as" type="xs:NCName"/>
-      <xs:attribute name="bitmask"/>
-      <xs:attribute name="contract" type="xs:NCName"/>
+      <xs:all>
+        <xs:element minOccurs="0" ref="ethereum-function"/>
+        <xs:element minOccurs="0" ref="token-id"/>
+      </xs:all>
     </xs:complexType>
   </xs:element>
-  <xs:element name="function">
+  <xs:element name="token-id">
+    <xs:complexType>
+      <xs:attribute name="as" type="xs:NCName"/>
+      <xs:attribute name="bitmask"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ethereum-function">
     <xs:complexType>
       <xs:sequence>
         <xs:element ref="inputs"/>
       </xs:sequence>
+      <xs:attribute name="contract" type="xs:IDREF"/>
       <xs:attribute name="name" use="required" type="xs:NCName"/>
+      <xs:attribute name="as" type="xs:NCName"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="inputs">
