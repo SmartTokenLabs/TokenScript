@@ -133,8 +133,6 @@ All attribute types are in the `attributeType` dictionary, even for attributes t
 
 The other elements in a `tokenDefinition`, like `name` and `symbol`, refer to the name and symbol of the token.
 
-If you compare [spawnable-contract/schema1/token-plain-javascript.xsl](../spawnable-contract/schema1/token-plain-javascript.xsl) and [blockchain-tickets/schema1/token-plain-javascript.xsl](../blockchain-tickets/schema1/token-plain-javascript.xsl), you can see what needs to be done for changing the layout (aside from some boilerplate).
-
 ### Attribute-Value Pair? Not always
 
 In the previous example, observe that not every attribute of a token is of a primitive type.
@@ -209,26 +207,8 @@ Future
 ---
 In (A), we can also stuff the entire list of tokens in the user's Ethereum wallet in there (in a future iteration) under the `all` key. We might have to key them by wallet/networks too. Performance is a concern, but this simple approach has quite a number of advantages. Perhaps it can be partially mitigated by adding a permission call that TokenScript developers have to make to make `tokens` accessible, maybe as part of the permission granted via https://eips.ethereum.org/EIPS/eip-1102 (which we should implement anyway) or a new function call.
 
-The development and debugging experience is a little tedious. With access to the simulator, we can drop updated files and run a web inspector on the simulator's TokenScript webview to look at the console.log output. But this is something we need to look into a bit more. It's still possible to hardcode `web3.tokens.currentInstance` and run the same HTML/JavaScript standalone after XSLT as a workaround.
+The development and debugging experience is a little tedious. With access to the simulator, we can drop updated files and run a web inspector on the simulator's TokenScript webview to look at the console.log output. Without the app's source, we can AirDrop TokenScript files to the app. It's also possible to hardcode `web3.tokens.currentInstance` and run the same HTML/JavaScript standalone. The developer experience is something we need to look into a bit more.
 
-token.xsl
+Implementing the TokenScript API and Rendering in the TokenScript Clients
 ===
-
-3 XSL templates are expected in token.xsl:
-
-* ```<xsl:template name="library">``` - for ```<script>``` tags.
-* ```<xsl:template name="token">``` - (class) definition for rendering a token instance
-* ```<xsl:template name="tokenRendering">``` - HTML and code to render a token instance
-
-We concatenate the output of all 3 in the app and load it for rendering each token instance, but
-
-1. In future iterations, we might attempt to parse and cache these files to improve performance. We should probably recommend that this not be used (so maybe it's worth thinking if it should be supported, but maybe developers will do it anyway). This template is optional because [default-token.xsl](default-token.xsl) defines an empty template with the same name.
-2. When rendering the entire list of token instances using `master.xsl`, we could call and load the `library` and `token` templates once for the entire list and the `tokenRendering` template once for each token instance.
-
-Implementing the TokenScript API and Rendering in the Mobile Apps
-===
-There are a few additional files that are used in the app which is in the `tbml-mobile-app` directory:
-
-* [standard-styles.css](standard-styles.css) — CSS style classes that are injected into each token instance webview. TokenScript developers can use them or override if they want. Most notably this should include the custom fonts we include in the app. (the custom fonts don't work yet although the styles specify them)
-* [default-token.xsl](default-token.xsl) — The default token.xsl file which is included with empty templates and TokenScript-developer friendly messages
-* [generate-token-instance.xsl](generate-token-instance.xsl) - The XSL file used to include [default-token.xsl](default-token.xsl) ("TbmlStore.defaultTokenFilename"), the contract's `token.xsl` ("contract.lowercased().xsl") standard-styles.css ("standardTokenTbmlCss") as well as call the templates. The output of applying this XSL file on the asset definition is the HTML (and JavaScript + CSS) that is then rendered in each token instance's web view with each web view having access to the TokenScript API.
+TODO: This section is for implementing clients like the AlphaWallet Android app, AlphaWallet iOS app, and desktop clients, not for writing TokenScript.
