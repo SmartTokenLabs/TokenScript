@@ -8,21 +8,22 @@ TokenScript supporting user-agent (Dapp browser), wallet or self-supporting Dapp
 
 ### For whom to use
 
-- The JavaScript running in Tokenscript
+- The JavaScript running in TokenScript
 - Javascript running in Dapp websites.
 
 Both uses the same JavaScript API but with nuances. For example:
 
 ---
 
-Difference in the tokens avaialble to be accessed through this API.
+Difference in the tokens available to be accessed through this API.
 
-- The tokens availble to a Dapp website depends on what token the user has chosen to use on that Dapp, as well as the tokens not owned by the current user, like the token the Dapp offers to transfer to the user (e.g. auction Dapp website) or to be created for the user (e.g. purchasing a new tokenised FIFA Ticket).
+- The tokens available to a Dapp website depends on what token the user has chosen to use on that Dapp, as well as the tokens not owned by the current user, like the token the Dapp offers to transfer to the user (e.g. auction Dapp website) or to be created for the user (e.g. purchasing a new tokenised FIFA Ticket).
 
-- The tokens available to the Javascript in a Tokenscript is typically the current token itself and depdencencies. In the TokenView, may also include other tokens that can interact with the current token.
+- The tokens available to the Javascript in a TokenScript is typically the current token itself and dependencies. In the TokenView, may also include other tokens that can interact with the current token.
+
 ---
 
-The api has 2 parts
+The API has 2 parts
 
 A. The token data.
 
@@ -66,7 +67,7 @@ token = {
 }
 ```
 
-Where attributes like `votingRights` are defined in Tokenscript.
+Where attributes like `votingRights` are defined in TokenScript.
 
 For a non-fungible token, like a ticket to an event:
 
@@ -122,7 +123,7 @@ attribute = {
 
 The metadata of a token is available in `web3.tokens.definition` with the contract address in [EIP55](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-55.md) as the key. The metadata is basically a 1:1 map from the relevant parts of the asset definition. Only the localized attribute names (and not grouping, ordering) is available for now.
 
-`attributeType` contains type information of each attribute, e.g. its name, syntax or whether or not the attribute type is single-valued. For example, to access the localized attribute name `"countryA"` for the token with contract `"0xD8e5F58DE3933E1E35f9c65eb72cb188674624F3"` use:
+`attributeType` contains type information of each attribute, e.g. its name, syntax or whether the attribute type is single-valued. For example, to access the localized attribute name `"countryA"` for the token with contract `"0xD8e5F58DE3933E1E35f9c65eb72cb188674624F3"` use:
 
 ```
 web3.tokens.definition["0xD8e5F58DE3933E1E35f9c65eb72cb188674624F3"].attributeType["countryA"]["name"]
@@ -134,7 +135,7 @@ The other elements in a `tokenDefinition`, like `name` and `symbol`, refer to th
 
 If you compare [spawnable-contract/schema1/token-plain-javascript.xsl](../spawnable-contract/schema1/token-plain-javascript.xsl) and [blockchain-tickets/schema1/token-plain-javascript.xsl](../blockchain-tickets/schema1/token-plain-javascript.xsl), you can see what needs to be done for changing the layout (aside from some boilerplate).
 
-### attribute-value pair? not always
+### Attribute-Value Pair? Not always
 
 In the previous example, observe that not every attribute of a token is of a primitive type.
 
@@ -169,7 +170,7 @@ instance = {
 
 Date object is represented by the code with which it would have been created. The key is `date` to inherit the misnaming by JavaScript.
 
-However, in the case the time relevent to the timezone is important, the token designer would have supplied a [GeneralizedTime](https://en.wikipedia.org/wiki/GeneralizedTime). Take a FIFA football match ticket as an example, `matchTime` attribute is a dictionary of two keys: `date` as a Date object, not containing timezone, and the raw value for GeneralizedTime which has the timezone in it.
+However, in the case the time relevant to the timezone is important, the token designer would have supplied a [GeneralizedTime](https://en.wikipedia.org/wiki/GeneralizedTime). Take a FIFA football match ticket as an example, `matchTime` attribute is a dictionary of two keys: `date` as a Date object, not containing timezone, and the raw value for GeneralizedTime which has the timezone in it.
 
 ```
 instance = {
@@ -182,7 +183,7 @@ instance = {
 }
 ```
 
-If a developer intends to find out if an attribute is of `BinaryTime` or `GeneralizedTime`, he can look up the definition (search for `BinaryTime` in the begining of this document for an example).
+If a developer intends to find out if an attribute is of `BinaryTime` or `GeneralizedTime`, he can look up the definition (search for `BinaryTime` in the beginning of this document for an example).
 
 The value of `matchTime.date` would be a normal `Date` object, the time the match starts. As every `Date` object, it doesn't contain the timezone information. But if you want to display a venue-specific time, eg. a soccer game match time at the venue, you need to extract that information from the `generalizedTime` string, like shown in the [example](../examples/ticket/js/generalized-time-test.html).
 
@@ -208,7 +209,7 @@ Future
 ---
 In (A), we can also stuff the entire list of tokens in the user's Ethereum wallet in there (in a future iteration) under the `all` key. We might have to key them by wallet/networks too. Performance is a concern, but this simple approach has quite a number of advantages. Perhaps it can be partially mitigated by adding a permission call that TokenScript developers have to make to make `tokens` accessible, maybe as part of the permission granted via https://eips.ethereum.org/EIPS/eip-1102 (which we should implement anyway) or a new function call.
 
-The development and debugging experience is a little tedious. With access to the simulator, we can drop updated files and run a web inspector on the simulator's TokenScript webview to look at the console.log output. But this is something we need to look into a bit more. It's still possible to hardcode `web3.tokens.currentInstance` and run the same HTML/JavaScript standalone after XSLT. So that's a workaround.
+The development and debugging experience is a little tedious. With access to the simulator, we can drop updated files and run a web inspector on the simulator's TokenScript webview to look at the console.log output. But this is something we need to look into a bit more. It's still possible to hardcode `web3.tokens.currentInstance` and run the same HTML/JavaScript standalone after XSLT as a workaround.
 
 token.xsl
 ===
