@@ -45,7 +45,7 @@
         <xs:element minOccurs="0" ref="interface"/>
       </xs:sequence>
       <xs:attribute name="label" type="xs:ID"/>
-      <xs:attribute name="interface" use="required" type="xs:NCName"/>
+      <xs:attribute name="interface" type="xs:NCName"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="interface" type="xs:NCName"/>
@@ -71,6 +71,7 @@
       <xs:sequence>
         <xs:element maxOccurs="unbounded" ref="name"/>
         <xs:element minOccurs="0" ref="attribute-type"/>
+        <xs:element minOccurs="0" ref="transaction"/>
         <xs:element minOccurs="0" ref="exclude"/>
         <xs:element minOccurs="0" ref="xhtml:style"/>
         <xs:element ref="view"/>
@@ -187,12 +188,25 @@
       <xs:attribute name="syntax" use="required" type="xs:NMTOKEN"/>
     </xs:complexType>
   </xs:element>
+  <xs:element name="transaction">
+    <xs:complexType>
+      <xs:choice minOccurs="1" maxOccurs="1">
+        <xs:element ref="ethereum-function"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="origins">
     <xs:complexType>
       <xs:all>
         <xs:element minOccurs="0" ref="ethereum-function"/>
+        <xs:element minOccurs="0" ref="user-entry"/>
         <xs:element minOccurs="0" ref="token-id"/>
       </xs:all>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="user-entry">
+    <xs:complexType>
+      <xs:attribute name="as" type="xs:NCName"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="token-id">

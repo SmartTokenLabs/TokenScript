@@ -11,14 +11,17 @@
 >
     <ts:name xml:lang="en">DAI</ts:name>
     <ts:name xml:lang="zh">代幣</ts:name>
-    <ts:contract interface="erc20" label="dai">
-        <ts:address network="1"></ts:address>
+    <ts:contract label="dai" interface="erc20">
+        <ts:address network="1">0xdecafbad1</ts:address>
+    </ts:contract>
+    <ts:contract label="dai-bridge">
+        <ts:address network="1">0xdecafbad2</ts:address>
     </ts:contract>
     <ts:cards>
         <ts:token-card>
             <ts:view-iconified/>
             <ts:view>
-                <div id="dai"/>
+                <div id="dai-balance"/>
             </ts:view>
         </ts:token-card>
         <ts:action>
@@ -26,8 +29,19 @@
             <ts:attribute-type id="amount" syntax="1.3.6.1.4.1.1466.115.121.1.36">
                 <ts:name xml:lang="en">Amount in DAI</ts:name>
                 <ts:name xml:lang="zh">代幣金額</ts:name>
-                <ts:origins></ts:origins>
+                <ts:origins>
+                    <!-- e18 is a hard coded multiplier.
+                    avoiding over-design when there is no identified needs -->
+                    <ts:user-entry as="e18"/>
+                </ts:origins>
             </ts:attribute-type>
+            <ts:transaction>
+                <ts:ethereum-function name="dai-bridge" contract="dai-bridge">
+                    <ts:inputs>
+                        <ts:uint256 ref="amount"/>
+                    </ts:inputs>
+                </ts:ethereum-function>
+            </ts:transaction>
             <ts:view/>
         </ts:action>
     </ts:cards>
