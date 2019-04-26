@@ -132,6 +132,13 @@ Tokenscript must be able to allow issuers of deliverables to integrate and rende
 
 ### Information for Payments
 
+Similarly, with the advent of programmable money like Ether or DAI-Dollar, there are opportunities on the payment side. There can be automated payments, automated cashbacks and affiliates, advanced multisig payment and escrow schemes, payments with attached attestation information, automated exchange of token, management of collaterals when using stablecoins like token and much more.
+
+Like the deliveries, the payment requires wallets to understand context and business logic of a payment to craft the correct transaction. This requires wallets to become much more sophisticated than what they are now. They must learn, visualize and use the underlying logic of complex payment operations. 
+
+To enable wallets to exploit the potential of programmable payment token, tokenscript must process similar information categories as on the delivery side.
+
+
 ### Advantages to achieve (?)
 
 ### Requirements to integrate the web
