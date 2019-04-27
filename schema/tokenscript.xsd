@@ -33,23 +33,41 @@
       <xs:attribute name="custodian" type="xs:boolean"/>
     </xs:complexType>
   </xs:element>
-  <xs:element name="name">
-    <xs:complexType mixed="true">
-      <xs:sequence>
+  <xs:element name="name" type="text"/>
+  <xs:complexType name="text" mixed="true">
+    <xs:choice>
       <xs:element maxOccurs="unbounded" ref="string"/>
+      <xs:element maxOccurs="unbounded" ref="plurals"/>
+    </xs:choice>
+  </xs:complexType>
+  <xs:element name="plurals">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="string"/>
       </xs:sequence>
+      <xs:attribute use="required" ref="xml:lang"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="string">
     <xs:complexType>
       <xs:simpleContent>
         <xs:extension base="xs:string">
-          <xs:attribute use="required" ref="xml:lang"/>
-          <xs:attribute name="form" type="xs:NCName"/>
+          <xs:attribute ref="xml:lang"/>
+          <xs:attribute name="quantity" type="quantity"/>
         </xs:extension>
       </xs:simpleContent>
     </xs:complexType>
   </xs:element>
+  <xs:simpleType name="quantity">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="zero" />
+      <xs:enumeration value="one" />
+      <xs:enumeration value="two" />
+      <xs:enumeration value="few" />
+      <xs:enumeration value="many" />
+      <xs:enumeration value="other" />
+    </xs:restriction>
+  </xs:simpleType>
   <xs:element name="contract">
     <xs:complexType>
       <xs:sequence>
