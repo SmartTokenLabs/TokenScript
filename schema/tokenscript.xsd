@@ -23,7 +23,7 @@
       <xs:sequence>
         <xs:element maxOccurs="unbounded" ref="name"/>
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="contract"/>
-        <xs:element maxOccurs="1" ref="origins"/>
+        <xs:element ref="origins"/>
         <xs:element minOccurs="0" ref="selections"/>
         <xs:element ref="cards"/>
         <xs:element minOccurs="0" ref="grouping"/>
@@ -35,7 +35,14 @@
   </xs:element>
   <xs:element name="name">
     <xs:complexType mixed="true">
-      <xs:attribute ref="xml:lang"/>
+      <xs:sequence>
+      <xs:element maxOccurs="unbounded" ref="string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="string">
+    <xs:complexType>
+      <xs:attribute use="required" ref="xml:lang"/>
       <xs:attribute name="form" type="xs:NCName"/>
     </xs:complexType>
   </xs:element>
