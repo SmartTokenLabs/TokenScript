@@ -22,7 +22,8 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element maxOccurs="unbounded" ref="name"/>
-        <xs:element maxOccurs="unbounded" ref="contract"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="contract"/>
+        <xs:element maxOccurs="1" ref="origins"/>
         <xs:element minOccurs="0" ref="selections"/>
         <xs:element ref="cards"/>
         <xs:element minOccurs="0" ref="grouping"/>
@@ -41,7 +42,11 @@
   <xs:element name="contract">
     <xs:complexType>
       <xs:sequence>
-        <xs:element maxOccurs="unbounded" ref="address"/>
+        <xs:element maxOccurs="unbounded" name="address">
+          <xs:complexType mixed="true">
+            <xs:attribute name="network" use="required" type="xs:integer"/>
+          </xs:complexType>
+        </xs:element>
         <xs:element minOccurs="0" ref="interface"/>
       </xs:sequence>
       <xs:attribute name="label" type="xs:ID"/>
@@ -218,54 +223,39 @@
   <xs:element name="ethereum-function">
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="inputs"/>
+        <xs:element name="inputs">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="uint256">
+                <xs:complexType >
+                  <xs:attribute name="ref" use="required" type="xs:NCName"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:sequence>
       <xs:attribute name="contract" type="xs:IDREF"/>
       <xs:attribute name="name" use="required" type="xs:NCName"/>
       <xs:attribute name="as" type="xs:NCName"/>
     </xs:complexType>
   </xs:element>
-  <xs:element name="inputs">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="uint256"/>
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="uint256">
-    <xs:complexType>
-      <xs:attribute name="ref" use="required" type="xs:NCName"/>
-    </xs:complexType>
-  </xs:element>
   <xs:element name="mapping">
     <xs:complexType>
       <xs:sequence>
-        <xs:element maxOccurs="unbounded" ref="option"/>
+        <xs:element maxOccurs="unbounded" name="option">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" name="value">
+                <xs:complexType mixed="true">
+                  <xs:attribute ref="xml:lang"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="key" use="required" type="xs:integer"/>
+          </xs:complexType>
+        </xs:element>
       </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="option">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element maxOccurs="unbounded" ref="value"/>
-      </xs:sequence>
-      <xs:attribute name="key" use="required" type="xs:integer"/>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="value">
-    <xs:complexType mixed="true">
-      <xs:attribute ref="xml:lang" use="optional" />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="address">
-    <xs:complexType mixed="true">
-      <xs:attribute name="network" use="required" type="xs:integer"/>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="message">
-    <xs:complexType mixed="true">
-      <xs:attribute ref="xml:lang" use="optional" />
-      <xs:attribute name="type" use="required" type="xs:NCName"/>
     </xs:complexType>
   </xs:element>
 </xs:schema>
