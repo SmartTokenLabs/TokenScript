@@ -31,7 +31,7 @@
                 <ts:name xml:lang="zh">代幣金額</ts:name>
                 <ts:origins>
                     <!-- e18 is a hard coded multiplier.
-                    avoiding over-design when there is no identified needs -->
+                    rationale for hardcoding: avoiding over-design  -->
                     <ts:user-entry as="e18"/>
                 </ts:origins>
             </ts:attribute-type>
@@ -50,7 +50,7 @@
             <ts:origins>
                 <ts:ethereum-function name="balanceOf" contract="dai">
                     <ts:inputs>
-                        <ts:uint256 ref="walletAddress"/>
+                        <ts:uint256 ref="ownerAddress"/>
                     </ts:inputs>
                 </ts:ethereum-function>
             </ts:origins>
