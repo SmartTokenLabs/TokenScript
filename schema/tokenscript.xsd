@@ -21,7 +21,7 @@
   <xs:element name="token">
     <xs:complexType>
       <xs:sequence>
-        <xs:element maxOccurs="unbounded" ref="name"/>
+        <xs:element ref="name"/>
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="contract"/>
         <xs:element ref="origins"/>
         <xs:element minOccurs="0" ref="selections"/>
@@ -42,8 +42,12 @@
   </xs:element>
   <xs:element name="string">
     <xs:complexType>
-      <xs:attribute use="required" ref="xml:lang"/>
-      <xs:attribute name="form" type="xs:NCName"/>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute use="required" ref="xml:lang"/>
+          <xs:attribute name="form" type="xs:NCName"/>
+        </xs:extension>
+      </xs:simpleContent>
     </xs:complexType>
   </xs:element>
   <xs:element name="contract">
@@ -56,7 +60,7 @@
         </xs:element>
         <xs:element minOccurs="0" ref="interface"/>
       </xs:sequence>
-      <xs:attribute name="label" type="xs:ID"/>
+      <xs:attribute name="name" type="xs:ID"/>
       <xs:attribute name="interface" type="xs:NCName"/>
     </xs:complexType>
   </xs:element>
@@ -81,7 +85,7 @@
   <xs:element name="action">
     <xs:complexType>
       <xs:sequence>
-        <xs:element maxOccurs="unbounded" ref="name"/>
+        <xs:element ref="name"/>
         <xs:element minOccurs="0" ref="attribute-type"/>
         <xs:element minOccurs="0" ref="transaction"/>
         <xs:element minOccurs="0" ref="exclude"/>
@@ -126,7 +130,7 @@
   <xs:element name="selection">
     <xs:complexType>
       <xs:sequence>
-        <xs:element maxOccurs="unbounded" ref="name"/>
+        <xs:element ref="name"/>
         <xs:element ref="filter"/>
       </xs:sequence>
       <xs:attribute name="id" use="required" type="xs:NCName"/>
@@ -190,8 +194,8 @@
     <xs:complexType>
       <xs:sequence>
         <!-- name is not needed if the attribute is only used for selection -->
-        <xs:element minOccurs="0" maxOccurs="unbounded" ref="name"/>
-        <xs:element minOccurs="1" maxOccurs="unbounded" ref="origins"/>
+        <xs:element minOccurs="0" ref="name"/>
+        <xs:element ref="origins"/>
         <xs:element minOccurs="0" ref="mapping"/>
       </xs:sequence>
       <xs:attribute name="as" type="xs:NCName"/>
@@ -230,7 +234,7 @@
   <xs:element name="ethereum">
     <xs:complexType>
       <xs:sequence>
-        <xs:element name="inputs">
+        <xs:element minOccurs="0" name="inputs">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="uint256">
