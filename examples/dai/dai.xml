@@ -17,6 +17,10 @@
     <ts:contract label="dai-bridge">
         <ts:address network="1">0xdecafbad2</ts:address>
     </ts:contract>
+    <ts:origins>
+        <ts:ethereum contract="dai">
+        </ts:ethereum>
+    </ts:origins>
     <ts:cards>
         <ts:token-card>
             <ts:view-iconified/>
@@ -36,11 +40,11 @@
                 </ts:origins>
             </ts:attribute-type>
             <ts:transaction>
-                <ts:ethereum-function name="dai-bridge" contract="dai-bridge">
+                <ts:ethereum function="dai-bridge" contract="dai-bridge">
                     <ts:inputs>
                         <ts:uint256 ref="amount"/>
                     </ts:inputs>
-                </ts:ethereum-function>
+                </ts:ethereum>
             </ts:transaction>
             <ts:view/>
         </ts:action>
@@ -48,11 +52,11 @@
     <ts:attribute-types>
         <ts:attribute-type id="balance" syntax="1.3.6.1.4.1.1466.115.121.1.36">
             <ts:origins>
-                <ts:ethereum-function name="balanceOf" contract="dai">
+                <ts:ethereum function="balanceOf" contract="dai">
                     <ts:inputs>
                         <ts:uint256 ref="ownerAddress"/>
                     </ts:inputs>
-                </ts:ethereum-function>
+                </ts:ethereum>
             </ts:origins>
         </ts:attribute-type>
     </ts:attribute-types>

@@ -196,14 +196,14 @@
   <xs:element name="transaction">
     <xs:complexType>
       <xs:choice minOccurs="1" maxOccurs="1">
-        <xs:element ref="ethereum-function"/>
+        <xs:element ref="ethereum"/>
       </xs:choice>
     </xs:complexType>
   </xs:element>
   <xs:element name="origins">
     <xs:complexType>
       <xs:all>
-        <xs:element minOccurs="0" ref="ethereum-function"/>
+        <xs:element minOccurs="0" ref="ethereum"/>
         <xs:element minOccurs="0" ref="user-entry"/>
         <xs:element minOccurs="0" ref="token-id"/>
       </xs:all>
@@ -220,7 +220,7 @@
       <xs:attribute name="bitmask"/>
     </xs:complexType>
   </xs:element>
-  <xs:element name="ethereum-function">
+  <xs:element name="ethereum">
     <xs:complexType>
       <xs:sequence>
         <xs:element name="inputs">
@@ -236,7 +236,7 @@
         </xs:element>
       </xs:sequence>
       <xs:attribute name="contract" type="xs:IDREF"/>
-      <xs:attribute name="name" use="required" type="xs:NCName"/>
+      <xs:attribute name="function" type="xs:NCName"/>
       <xs:attribute name="as" type="xs:NCName"/>
     </xs:complexType>
   </xs:element>
