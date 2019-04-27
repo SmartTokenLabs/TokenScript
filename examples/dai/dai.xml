@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE token  [
-        <!ENTITY style SYSTEM "shared.css">
-        ]>
+    <!ENTITY style SYSTEM "shared.css">
+    ]>
 <ts:token xmlns:ts="http://tokenscript.org/2019/05/tokenscript"
           xmlns="http://www.w3.org/1999/xhtml"
           xmlns:xml="http://www.w3.org/XML/1998/namespace"
@@ -9,8 +9,10 @@
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           custodian="false"
 >
-    <ts:name xml:lang="en">DAI</ts:name>
-    <ts:name xml:lang="zh">代幣</ts:name>
+    <ts:name>
+        <ts:string xml:lang="en">DAI</ts:string>
+        <ts:string xml:lang="zh">代幣</ts:string>
+    </ts:name>
     <ts:contract label="dai" interface="erc20">
         <ts:address network="1">0xdecafbad1</ts:address>
     </ts:contract>
@@ -29,10 +31,14 @@
             </ts:view>
         </ts:token-card>
         <ts:action>
-            <ts:name xml:lang="en">Transfer to xDAI</ts:name>
+            <ts:name>
+                <ts:string xml:lang="en">Transfer to xDAI</ts:string>
+            </ts:name>
             <ts:attribute-type id="amount" syntax="1.3.6.1.4.1.1466.115.121.1.36">
-                <ts:name xml:lang="en">Amount in DAI</ts:name>
-                <ts:name xml:lang="zh">代幣金額</ts:name>
+                <ts:name>
+                    <ts:string xml:lang="en">Amount in DAI</ts:string>
+                    <ts:string xml:lang="zh">代幣金額</ts:string>
+                </ts:name>
                 <ts:origins>
                     <!-- e18 is a hard coded multiplier.
                     rationale for hardcoding: avoiding over-design  -->
