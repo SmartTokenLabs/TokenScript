@@ -462,13 +462,13 @@ Any party is able to render and apply functions to the token using Tokenscript, 
 
 Similar to the delivery side, a token economy needs to bring an advanced business logic to the payment side. With payment we mean a token representing a monetary unit used to pay for deliverables. In our case, this are programmable token like DAI or ETH.
 
-If we look at our property example, we see the need for some payment functions not available in current wallets: Maybe a payer needs to attach an identity file to a payment when he buys a property share. On the other side, the property token issuer might want to create recurring payouts of the income of the 1% token. If someone builds a platform to tokenize property shares, the owners will needs an easy way to integrate those kinds of payments. Further, paying for a property share might include multisig-payments, which introduce trusted third parties like notaries. A property trading platform might want to link payments to a list of certified notaries.
+If we look at our property example, we see the need for some payment functions not available in current wallets: Maybe a payer needs to provide an identity proof with a payment when he buys a property share. On the other side, the property token issuer might want to create recurring payouts of the income of the 1% token. If someone builds a platform to tokenize property shares, the owners will needs an easy way to integrate those kinds of payments. Further, paying for a property share might include multisig-payments, which introduce trusted third parties like notaries. A property trading platform might want to link payments to a list of certified notaries.
 
 If we think about advanced payment token like DAI Dollar - or collateralized loans with [Dharma](https://www.dharma.io) - the wallets needs to be aware of specific mechanisms of the underlying smart contracts. For example, if you spend the last remaining DAI in your CDP, you are at very high liquidataion risk, and the wallet should warn the user of the consequences. Giving the momentum these lending and stablecoin contracts enjoy, it is more than likely that we will see many more of it in the future. Wallets must be able to understand the mechanism of those payment token and be able to inform the user about it. 
 
 One of the key feature of blockchains in payment is that they allow to have programmable, smart money. With Ethereum smart contracts you can build a large universe of interesting payment schemes. This can involve multisig contracts with sophisticated logic - like having a floating amount threshold which requires more and more cosigners when the amount rises, or having contracts which only allow single-signed payments to certain accounts. Payments can also automatically include cashback or affiliate schemes, which trigger when a payment is made to a given address. 
 
-In the future, the payment side of smart contract blockchains like Ethereum is expected to fundamentally: There are ideas to introduce new IBAN like address schemeres or to put payments to domain names of Ethereum Name Service (ENS).We already see smart contracted payment request providers and offchain payment railways, like Raiden or Plasma.
+In the future, the payment side of smart contract blockchains like Ethereum is expected to fundamentally change and advance: There are ideas to introduce new IBAN like address schemeres or to put payments to domain names of Ethereum Name Service (ENS).We already see smart contracted payment request providers and offchain payment railways, like Raiden or Plasma.
 
 This list is far from being complete. You can observe a lot of payment side innovations in China, like points which are deserved for encouraged payment behaviours, advanced cashback logics, like when you spent more than ¥1000 in a day, lotteries on being the 100th, 200th or 600th payment, free shipping insurance under certain conditions, red-packets that can only be used in paying consumption. And so son. 
 
@@ -522,9 +522,7 @@ Vertically, a structured transaction is built using a token transaction or creat
 
 #### Security
 
-It is impractical to improvise a schema where every transaction the user might sign is rendered in a user-readable format. It's easy to start with such an effort with a transaction visualiser tool, interpreting an enigmatic transaction payload to the user, similar to Linux's `identify(1)` command, but ultimately the system integratiwie sieht es mit dem Shop aus? Ich würde gern das PDF promoten und Email-Adressen sammeln.
-
-Beste Grüße von Aaronon and UX needs would surpass what a dictionary style transaction visualiser can do.
+It is impractical to improvise a schema where every transaction the user might sign is rendered in a user-readable format. It's easy to start with such an effort with a transaction visualiser tool, interpreting an enigmatic transaction payload to the user, similar to Linux's `identify(1)` command, but ultimately the system integrates and UX needs would surpass what a dictionary style transaction visualiser can do.
 
 Take the 1% property token as an example; a confirmation might look like this: You are going to purchase 1% of property #802820 with 45 Ethers, are you sure?
 
