@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
-           targetNamespace="http://tokenscript.org/2019/04/tokenscript"
+           targetNamespace="http://tokenscript.org/2019/05/tokenscript"
            xmlns:xhtml="http://www.w3.org/1999/xhtml"
-           xmlns="http://tokenscript.org/2019/04/tokenscript">
+           xmlns="http://tokenscript.org/2019/05/tokenscript">
 
 
   <!-- Importing XML namespace for xml:lang and xml:id -->
@@ -21,30 +21,65 @@
   <xs:element name="token">
     <xs:complexType>
       <xs:sequence>
-        <xs:element maxOccurs="unbounded" ref="name"/>
-        <xs:element maxOccurs="unbounded" ref="contract"/>
-        <xs:element ref="selections"/>
+        <xs:element ref="name"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="contract"/>
+        <xs:element ref="origins"/>
+        <xs:element minOccurs="0" ref="selections"/>
         <xs:element ref="cards"/>
         <xs:element minOccurs="0" ref="grouping"/>
         <xs:element minOccurs="0" ref="ordering"/>
         <xs:element ref="attribute-types"/>
       </xs:sequence>
+      <xs:attribute name="custodian" type="xs:boolean"/>
     </xs:complexType>
   </xs:element>
-  <xs:element name="name">
-    <xs:complexType mixed="true">
-      <xs:attribute ref="xml:lang"/>
-      <xs:attribute name="form" type="xs:NCName"/>
+  <xs:element name="name" type="text"/>
+  <xs:complexType name="text" mixed="true">
+    <xs:choice>
+      <xs:element maxOccurs="unbounded" ref="string"/>
+      <xs:element maxOccurs="unbounded" ref="plurals"/>
+    </xs:choice>
+  </xs:complexType>
+  <xs:element name="plurals">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="string"/>
+      </xs:sequence>
+      <xs:attribute use="required" ref="xml:lang"/>
     </xs:complexType>
   </xs:element>
+  <xs:element name="string">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute ref="xml:lang"/>
+          <xs:attribute name="quantity" type="quantity"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:simpleType name="quantity">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="zero" />
+      <xs:enumeration value="one" />
+      <xs:enumeration value="two" />
+      <xs:enumeration value="few" />
+      <xs:enumeration value="many" />
+      <xs:enumeration value="other" />
+    </xs:restriction>
+  </xs:simpleType>
   <xs:element name="contract">
     <xs:complexType>
       <xs:sequence>
-        <xs:element maxOccurs="unbounded" ref="address"/>
+        <xs:element maxOccurs="unbounded" name="address">
+          <xs:complexType mixed="true">
+            <xs:attribute name="network" use="required" type="xs:integer"/>
+          </xs:complexType>
+        </xs:element>
         <xs:element minOccurs="0" ref="interface"/>
       </xs:sequence>
-      <xs:attribute name="id" type="xs:NCName"/>
-      <xs:attribute name="interface" use="required" type="xs:NCName"/>
+      <xs:attribute name="name" type="xs:ID"/>
+      <xs:attribute name="interface" type="xs:NCName"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="interface" type="xs:NCName"/>
@@ -68,12 +103,13 @@
   <xs:element name="action">
     <xs:complexType>
       <xs:sequence>
-        <xs:element maxOccurs="unbounded" ref="name"/>
+        <xs:element ref="name"/>
+        <xs:element minOccurs="0" ref="attribute-type"/>
+        <xs:element minOccurs="0" ref="transaction"/>
         <xs:element minOccurs="0" ref="exclude"/>
         <xs:element minOccurs="0" ref="xhtml:style"/>
         <xs:element ref="view"/>
       </xs:sequence>
-
     </xs:complexType>
   </xs:element>
   <xs:element name="include" type="xs:NCName"/>
@@ -112,7 +148,7 @@
   <xs:element name="selection">
     <xs:complexType>
       <xs:sequence>
-        <xs:element maxOccurs="unbounded" ref="name"/>
+        <xs:element ref="name"/>
         <xs:element ref="filter"/>
       </xs:sequence>
       <xs:attribute name="id" use="required" type="xs:NCName"/>
@@ -176,8 +212,9 @@
     <xs:complexType>
       <xs:sequence>
         <!-- name is not needed if the attribute is only used for selection -->
-        <xs:element minOccurs="0" maxOccurs="unbounded" ref="name"/>
-        <xs:element minOccurs="1" maxOccurs="unbounded" ref="origin"/>
+        <xs:element minOccurs="0" ref="name"/>
+        <xs:element ref="origins"/>
+        <xs:element minOccurs="0" ref="mapping"/>
       </xs:sequence>
       <xs:attribute name="as" type="xs:NCName"/>
       <xs:attribute name="id" use="required" type="xs:NCName"/>
@@ -185,66 +222,69 @@
       <xs:attribute name="syntax" use="required" type="xs:NMTOKEN"/>
     </xs:complexType>
   </xs:element>
-  <xs:element name="origin">
+  <xs:element name="transaction">
     <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" ref="function"/>
-        <xs:element minOccurs="0" ref="mapping"/>
-      </xs:sequence>
+      <xs:choice minOccurs="1" maxOccurs="1">
+        <xs:element ref="ethereum"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="origins">
+    <xs:complexType>
+      <xs:all>
+        <xs:element minOccurs="0" ref="ethereum"/>
+        <xs:element minOccurs="0" ref="user-entry"/>
+        <xs:element minOccurs="0" ref="token-id"/>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="user-entry">
+    <xs:complexType>
+      <xs:attribute name="as" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="token-id">
+    <xs:complexType>
       <xs:attribute name="as" type="xs:NCName"/>
       <xs:attribute name="bitmask"/>
-      <xs:attribute name="contract" type="xs:NCName"/>
     </xs:complexType>
   </xs:element>
-  <xs:element name="function">
+  <xs:element name="ethereum">
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="inputs"/>
+        <xs:element minOccurs="0" name="inputs">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="uint256">
+                <xs:complexType >
+                  <xs:attribute name="ref" use="required" type="xs:NCName"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:sequence>
-      <xs:attribute name="name" use="required" type="xs:NCName"/>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="inputs">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="uint256"/>
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="uint256">
-    <xs:complexType>
-      <xs:attribute name="ref" use="required" type="xs:NCName"/>
+      <xs:attribute name="contract" type="xs:IDREF"/>
+      <xs:attribute name="function" type="xs:NCName"/>
+      <xs:attribute name="as" type="xs:NCName"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="mapping">
     <xs:complexType>
       <xs:sequence>
-        <xs:element maxOccurs="unbounded" ref="option"/>
+        <xs:element maxOccurs="unbounded" name="option">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" name="value">
+                <xs:complexType mixed="true">
+                  <xs:attribute ref="xml:lang"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="key" use="required" type="xs:integer"/>
+          </xs:complexType>
+        </xs:element>
       </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="option">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element maxOccurs="unbounded" ref="value"/>
-      </xs:sequence>
-      <xs:attribute name="key" use="required" type="xs:integer"/>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="value">
-    <xs:complexType mixed="true">
-      <xs:attribute ref="xml:lang" use="optional" />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="address">
-    <xs:complexType mixed="true">
-      <xs:attribute name="network" use="required" type="xs:integer"/>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="message">
-    <xs:complexType mixed="true">
-      <xs:attribute ref="xml:lang" use="optional" />
-      <xs:attribute name="type" use="required" type="xs:NCName"/>
     </xs:complexType>
   </xs:element>
 </xs:schema>
