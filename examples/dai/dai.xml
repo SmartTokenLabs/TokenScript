@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE token  [
     <!ENTITY style SYSTEM "shared.css">
+        <!ENTITY dai.en SYSTEM "dai.en.shtml">
     ]>
 <ts:token xmlns:ts="http://tokenscript.org/2019/05/tokenscript"
           xmlns="http://www.w3.org/1999/xhtml"
@@ -32,7 +33,7 @@
         <ts:token-card>
             <ts:view-iconified/>
             <ts:view>
-                <div id="dai-balance"/>
+                &dai.en;
             </ts:view>
         </ts:token-card>
         <ts:action>
@@ -62,13 +63,6 @@
             </ts:transaction>
             <ts:view/>
         </ts:action>
-
-        <ts:token-card>
-            <ts:view-iconified/>
-            <ts:view>
-                <div id="xdai-balance"/>
-            </ts:view>
-        </ts:token-card>
     </ts:cards>
     <ts:attribute-types>
         <ts:attribute-type id="balance" syntax="1.3.6.1.4.1.1466.115.121.1.36">
