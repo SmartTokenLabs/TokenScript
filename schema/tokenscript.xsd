@@ -254,7 +254,7 @@
       <xs:sequence>
         <xs:element minOccurs="0" name="inputs">
           <xs:complexType>
-            <xs:sequence>
+            <xs:choice maxOccurs="unbounded">
               <xs:element name="uint8">
                 <xs:complexType >
                   <xs:attribute name="ref" use="required" type="xs:NCName"/>
@@ -750,7 +750,7 @@
                   <xs:attribute name="ref" use="required" type="xs:NCName"/>
                 </xs:complexType>
               </xs:element>
-            </xs:sequence>
+            </xs:choice>
           </xs:complexType>
         </xs:element>
       </xs:sequence>
