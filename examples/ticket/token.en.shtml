@@ -55,7 +55,7 @@
         var symbolIdx
         if (time.charAt(length - 1 ) === 'Z'){
             return 0
-        } 
+        }
         if (time.indexOf('+') !== -1) {
             symbolIdx = time.indexOf('+')
         } else if (time.indexOf('-') !== -1) {
@@ -115,7 +115,7 @@ class Token {
         }
         return `<div>
             <div>
-                <span class="ts-count">x${this.props.getLocality}</span>  <span class="ts-category">${this.props.name}</span>
+                <span class="ts-count">x${this.props._count}</span>  <span class="ts-category">${this.props.name}</span>
             </div>
             <div>
                 <span class="ts-venue">${this.props.building}</span>
@@ -128,17 +128,17 @@ class Token {
                 <span class="ts-date">${date}</span>
             </div>
             <div>
-                <span class="ts-time">${time}, ${this.props.getLocality}</span>
+                <span class="ts-time">${time}, ${this.props.locality}</span>
             </div>
             </div>`;
     }
-
-    web3.tokens.dataChanged = (oldTokens, updatedTokens) => {
-        const currentTokenInstance = web3.tokens.data.currentInstance
-        const domHtml = new Token(currentTokenInstance).render()
-        document.getElementById('root').innerHTML = domHtml
-    }
-
 }
+
+web3.tokens.dataChanged = (oldTokens, updatedTokens) => {
+    const currentTokenInstance = web3.tokens.data.currentInstance
+    const domHtml = new Token(currentTokenInstance).render()
+    document.getElementById('root').innerHTML = domHtml
+}
+
 ]]></script>
 <div id="root"></div>
