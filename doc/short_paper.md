@@ -115,16 +115,29 @@ To explain Tokenscript in mor details, we will fetch out design requirements by 
 
 ## Design requirements
 
-Markets, Deliverables, Payments
+The design requirements for Tokenscript need to cover both the challenges to integrate markets and the internet. 
+
+For creating an integrated frictionless market we define *market* as the place where payment versus delivery happens: Someone pays with a money token and receives a deliverable in form of a token. Tokenscript must allow this process to happen frictionsless by allowing the issuers of delivery token to create and render a sophisticated business logic around the token, covering the needs of the market it integrates. At the same time, Tokenscript must enable wallets to easily understand and visualize the logic of the token and interact with it.
 
 ### Information on Deliverables
 
-1. Product description
-2. Attested information
-3. Reference information
-4. Action information (how to perform an asset action)
+The scope of classes of deliverables is infinite. As an example we could think of a market for tokenized 1% shares of properties, which can be bought and sold on different marketplaces. For such a token the buyers accquiring such token need a wallet which can display and react on a large array of information. We categorize these information in four classes:
+
+1. Product description: Voting rights of the property, payout specification of proceeds, condition for liquiditation in case of collaterialization of the property and so on.
+2. Attested information: Place and status of the property, legal state of ownership, identity information
+3. Reference information: Performance of property in this area, historical sales.
+4. Action information (how to perform an asset action): How to build a transaction to acquire the property? How to vote with your share, how to sell it or offer it on a market?
+
+Tokenscript must be able to allow issuers of deliverables to integrate and render those classes of information while enabling wallets to understand and visualize this information and transform it into adequate transactions. 
 
 ### Information for Payments
+
+Similarly, with the advent of programmable money like Ether or DAI-Dollar, there are opportunities on the payment side. There can be automated payments, automated cashbacks and affiliates, advanced multisig payment and escrow schemes, payments with attached attestation information, automated exchange of token, management of collaterals when using stablecoins like token and much more.
+
+Like the deliveries, the payment requires wallets to understand context and business logic of a payment to craft the correct transaction. This requires wallets to become much more sophisticated than what they are now. They must learn, visualize and use the underlying logic of complex payment operations. 
+
+To enable wallets to exploit the potential of programmable payment token, tokenscript must process similar information categories as on the delivery side.
+
 
 ### Advantages to achieve (?)
 

@@ -210,5 +210,4 @@ In (A), we can also stuff the entire list of tokens in the user's Ethereum walle
 The development and debugging experience is a little tedious. With access to the simulator, we can drop updated files and run a web inspector on the simulator's TokenScript webview to look at the console.log output. Without the app's source, we can AirDrop TokenScript files to the app. It's also possible to hardcode `web3.tokens.currentInstance` and run the same HTML/JavaScript standalone. The developer experience is something we need to look into a bit more.
 
 Implementing the TokenScript API and Rendering in the TokenScript Clients
-===
-TODO: This section is for implementing clients like the AlphaWallet Android app, AlphaWallet iOS app, and desktop clients, not for writing TokenScript.
+
