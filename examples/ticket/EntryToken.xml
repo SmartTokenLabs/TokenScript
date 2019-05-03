@@ -87,7 +87,7 @@
       <ts:origins>
         <ts:ethereum function="getLocality" contract="EntryToken">
             <ts:inputs>
-              <ts:uint256 ref="tokenID"/>
+              <ts:uint256 ref="tokenId"/>
             </ts:inputs>
         </ts:ethereum>
       </ts:origins>
@@ -106,7 +106,7 @@
       <ts:origins>
         <ts:ethereum function="isExpired" contract="EntryToken">
           <ts:inputs>
-            <ts:uint256 ref="tokenID"/>
+            <ts:uint256 ref="tokenId"/>
           </ts:inputs>
         </ts:ethereum>
       </ts:origins>
@@ -123,7 +123,7 @@
       <ts:origins>
         <ts:ethereum function="getStreet" contract="EntryToken">
           <ts:inputs>
-            <ts:uint256 ref="tokenID"/>
+            <ts:uint256 ref="tokenId"/>
           </ts:inputs>
         </ts:ethereum>
       </ts:origins>
@@ -132,7 +132,7 @@
       <ts:origins>
         <ts:ethereum function="getBuildingName" contract="EntryToken">
           <ts:inputs>
-            <ts:uint256 ref="tokenID"/>
+            <ts:uint256 ref="tokenId"/>
           </ts:inputs>
         </ts:ethereum>
       </ts:origins>
@@ -141,7 +141,7 @@
       <ts:origins>
         <ts:ethereum function="getState" contract="EntryToken">
           <ts:inputs>
-            <ts:uint256 ref="tokenID"/>
+            <ts:uint256 ref="tokenId"/>
           </ts:inputs>
         </ts:ethereum>
       </ts:origins>
