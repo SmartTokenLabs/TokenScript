@@ -104,7 +104,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element ref="name"/>
-        <xs:element minOccurs="0" ref="attribute-type"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="attribute-type"/>
         <xs:element minOccurs="0" ref="transaction"/>
         <xs:element minOccurs="0" ref="exclude"/>
         <xs:element minOccurs="0" ref="xhtml:style"/>
