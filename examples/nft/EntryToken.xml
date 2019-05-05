@@ -2,7 +2,7 @@
 <!DOCTYPE token  [
     <!ENTITY token.en SYSTEM "token.en.shtml">
     <!ENTITY enter.en SYSTEM "enter.en.shtml">
-    <!ENTITY style SYSTEM "shared.css">
+    <!ENTITY style SYSTEM "../shared.css">
 ]>
 <ts:token xmlns:ts="http://tokenscript.org/2019/05/tokenscript"
           xmlns="http://www.w3.org/1999/xhtml"

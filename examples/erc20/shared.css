@@ -1,35 +1,52 @@
+.ts-count {
+  font-family: "SourceSansPro";
+  font-weight: bolder;
+  font-size: 21px;
+  color: rgb(117, 185, 67);
+}
+.ts-category {
+  font-family: "SourceSansPro";
+  font-weight: lighter;
+  font-size: 21px;
+  color: rgb(67, 67, 67);
+}
+.ts-venue {
+  font-family: "SourceSansPro";
+  font-weight: lighter;
+  font-size: 16px;
+  color: rgb(67, 67, 67);
+}
+.ts-date {
+  font-family: "SourceSansPro";
+  font-weight: bold;
+  font-size: 14px;
+  color: rgb(112, 112, 112);
+  margin-left: 7px;
+  margin-right: 7px;
+}
+.ts-time {
+  font-family: "SourceSansPro";
+  font-weight: lighter;
+  font-size: 16px;
+  color: rgb(112, 112, 112);
+}
+html {
+}
+
 body {
-  font-family: Arial;
-    }
-table {
-  margin: 25px;
-  width: 90%;
-  table-layout: auto;
-    }
-.fixed {
-  table-layout: fixed;
-    }
-table,
-td,
-th {
-  border-collapse: collapse;
-    }
-th,
-td {
-  border: solid 0px;
-  text-align: left;
-    }
-form {
-  display: flex;
-  align-items: center;
-    }
-input {
-  background-color: #FFFFFF;
-  border: #D8D8D8 solid 1px;
-  border-radius: 6px;
-  padding: 0.5em;
-  width: 70%;
-  height: 50px;
-  margin-top: 5px;
-  font-size: 1em;
-    }
+padding: 0px;
+margin: 0px;
+}
+
+div {
+margin: 0px;
+padding: 0px;
+}
+
+.data-icon {
+height:16px;
+vertical-align: middle
+}
+
+.tbml-count {   font-family: "SourceSansPro";   font-weight: bolder;   font-size: 21px;   color: rgb(117, 185, 67); } .tbml-category {   font-family: "SourceSansPro";   font-weight: lighter;   font-size: 21px;   color: rgb(67, 67, 67); } .tbml-venue {   font-family: "SourceSansPro";   font-weight: lighter;   font-size: 16px;   color: rgb(67, 67, 67); } .tbml-date {   font-family: "SourceSansPro";   font-weight: bold;   font-size: 14px;   color: rgb(112, 112, 112);   margin-left: 7px;   margin-right: 7px; } .tbml-time {   font-family: "SourceSansPro";   font-weight: lighter;   font-size: 16px;   color: rgb(112, 112, 112); }    html {    }        body {    padding: 0px;    margin: 0px;    }        div {    margin: 0px;    padding: 0px;    }     .data-icon {    height:16px;    vertical-align: middle    } 
+

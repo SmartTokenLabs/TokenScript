@@ -1,0 +1,58 @@
+<script type="text/javascript"><![CDATA[
+class Token {
+    constructor(tokenInstance) {
+        this.props = tokenInstance
+    }
+
+    render() {
+        return `
+        <div>
+            <div class="mainHeader">
+                <h2>CDP Portal</h2>
+                <p>#${this.props.CDP_number}</p>
+            </div>
+
+            <div class="financial-info-left">
+               <h3>Liquidation Price ${this.props.ethPriceUSD * 0.63} </h3>
+               <h3>Current Price Info ${this.props.ethPriceUSD} </h3>
+               <h3>Liquidation Penalty ${this.props.liquidationPenalty} </h3>
+            </div>
+
+            <div class="financial-info-right">
+               <h3>Colateralization Ratio ${(this.props.deposited / this.props.generated) * 100} </h3>
+               <h3>Minimum Ratio 150%</h3>
+               <h3>Stability Fee ${this.props.stabilityFee + "%"} </h3>
+            </div>
+
+            <div class="eth-panel-left">
+               <h3>${this.props.deposited} Deposited </h3>
+               <h3>${this.props.amountDepositedEth} ETH </h3>
+               <h3>${this.props.amountDepositedUSDWorth} USD </h3>
+            </div>
+
+            <div class="eth-panel-right">
+               <h3>Max to withdraw ${this.props.amountToWithdraw} ETH </h3>
+               <h3>${this.props.amountWithdrawableEth} ETH </h3>
+               <h3>${this.props.amountWithdrawableUSDWorth} USD </h3>
+            </div>
+
+            <div class="dai-panel-left">
+               <h3>${this.props.generated} Generated </h3>
+               <h3>${this.props.generatedValueUSD} USD </h3>
+            </div>
+
+            <div class="dai-panel-right">
+               <h3>${this.props.maxToGenerate} Max to Generate</h3>
+               <h3>${this.props.maxToGenerateValue} USD</h3>
+            </div>
+        </div>`;
+    }
+}
+
+web3.tokens.dataChanged = (oldTokens, updatedTokens) => {
+    const currentTokenInstance = web3.tokens.data.currentInstance;
+    const domHtml = new Token(currentTokenInstance).render();
+    document.getElementById('root').innerHTML = domHtml;
+};
+
+]]></script>
