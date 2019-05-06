@@ -507,10 +507,11 @@ Deploying Tokenscript will help the delivery as well the payment side in the sam
 
 ## Advantages of Tokenscript 
 
+After the previous chapters it should have become clear, that Tokenization can profit from having the Tokenscript markup to support both the delivery and the payment side. In this chapter we will detail out how Tokenscript helps business operations. We will explain it for both the delivery and the payment side, using the examples of property markets and payments with DAI.
+
+Much of the advantages might be already known after reading the chapters above, which covered the challenges of Tokenization and a description of what Tokenscript can provide on a high-level perspective. But it is helpful to provide a section focused on the advantages of Tokenscript, as it works out the problems with the legacy token model and the advantages of Tokenscript on a more precise level. 
+
 ### Delivery Side
-
-After having inspected the requirements to use token as deliveries, we will show what advantages Tokenscript provides compared with using vanilla token. The advantages will be shown with the property example.
-
 
 #### Interoperability:
 
@@ -520,35 +521,56 @@ Peter doesn't need permission, because the data of those tokens are on the block
 
 The same problems emerges with a lot of application. Tokenscript helps Peter to keep his platform upgraded and to better react on events. The real estate token can easily be operated on all kind of platforms. 
 
-
 #### Scalability
 
-Horizontally, the same type of asset might have its token instances across multiple networks like Plasma Chains. It can be difficult to have an all-knowing node to provide rendered token information for all existing tokens. Therefore, to scale, the knowledge about the token (Tokenscript) must be detached from the access to the token.
+Horizontally, the same type of asset might have its token instances across multiple networks like Plasma Chains. Without such architectures a token economy will hardly be able to scale. But having an all-knowing node to provide rendered token information for all existing tokens will be hard - and detrimental to the goal of scaling the blockchain economy while keeping the burden on nodes small. Therefore, the knowledge about the token (Tokenscript) must be detached from the access to the token.
 
-Vertically, a structured transaction is built using a token transaction or creating tokens on top of a token. For example, a token which is made up from 1% property tokens risk-distributed over a sample of 100 global cities. Such transaction and token access the component tokens. It again cannot depend on the availability, security and openness of the original Dapp tied to that asset. Tokenscript would work in the middle for the making of such tokens.
+<!--- tbh, I have problems understanding this. What does it mean - knowledge about the token must be detached? Wouldn't it make more sense to use Tokenscript to attach the information on which chain it is transfered? -->
+
+Vertically, you might structurte transactions like creating tokens on top of a token. For example, you have a token which is made up from 1% property tokens, but distributes the risk over a sample of 100 global cities. The transaction and token access the component tokens. It cannot depend on the availability, security and openness of the original DApp tied to that asset. Tokenscript would work in the middle for the making of such tokens. It would allow the flexibility needed to vertically scale Token assets.
+
+<!--- Why can't it depend on the availability, security and ... of the original Dapp? -->
 
 
 #### Security
 
-It is impractical to improvise a schema where every transaction the user might sign is rendered in a user-readable format. It's easy to start with such an effort with a transaction visualiser tool, interpreting an enigmatic transaction payload to the user, similar to Linux's `identify(1)` command, but ultimately the system integrates and UX needs would surpass what a dictionary style transaction visualiser can do.
+How do you know that the transaction you sign is what you want to sign? With standard payment transaction this is a minor problem, but as some instances of keylogger-malware show, still a problem. But when it comes to the complex logic of token transfers, the legacy model of blockchain token will face large prroblems.
 
-Take the 1% property token as an example; a confirmation might look like this: You are going to purchase 1% of property #802820 with 45 Ethers, are you sure?
+Sure, you can render transactions in a user-readable format. It's easy to start with such an effort with a transaction visualiser tool, but ultimately the system integrates and the UX needs would surpass what a dictionary style transaction visualiser can do.
 
-The user will be unsure if the glass ceiling designer 2-bedroom house he is watching is #802820.
+Take the 1% property token as an example. A confirmation might look like this: You are going to purchase 1% of property #802820 with 45 Ethers, are you sure? The user will be unsure if the glass ceiling designer 2-bedroom house he is watching is #802820. A dictionary based translation visualiser cannot go further because correctly rendering the property token requires more than word processing. 
 
-A dictionary based translation visualiser cannot go further because correctly rendering the property token requires more than word processing. This limit is easily hit even without introducing integration scenarios in the "Integrate the web" section of this chapter.
+Eventually, a transaction is generated with code, and the user would have to delegate the trust to the code. In a user's words, I am accessing the website tied to this token, so I will trust that this transaction I am signing is generated for the intention I have while using the site. This is a broken trust model, a regression to the TLS model of trusting the site instead of the content. In fact, it is more secure to rely on the traditional model to trust estate agents and notaries.
 
-Eventually, a transaction is generated with code, and the user would have to delegate the trust to the code. In a user's words, I am accessing the website tied to this token, so I will trust that this transaction I am signing is generated for the intention I have while using the site. This is a broken trust model, a regression to the TLS model of trusting the site instead of the content.
+Tokenscript is designed to separate token rendering code and transaction generating code, and package them into its container, signed by a party that the user is likely to trust (often, signed by the same key used for deploying a smart contract). There are a few trust levels left, which we will detail in later chapters.
 
-Tokenscript is designed to separate token rendering code, and transaction generating code and package them into its container, signed by a party that the user is likely to trust (often, signed by the same key used for deploying a smart contract). There are a few trust levels, which we will detail in later chapters.
-
-A user who is purchasing a 1% property token from Peter's Pride Property recommendation website can be supplied with a rendering and transaction package, signed by the same group of people who created the holding contract of such tokens. Therefore the user can purchase assets from any website with a similar level of trust, or purchase it from a WeChat or Facebook private message and know it is the real token being rendered and transacted.
+A user who is purchasing a 1% property token from Peter's Pride Property recommendation website can be supplied with a rendering and transaction package, signed by the same group of people who created the holding contract of such tokens. Therefore the user can purchase assets from any website with a similar level of trust, or purchase it from a WeChat or Facebook private message and know it is the real token being rendered and transacted. 
 
 #### Privacy
 
+Almost all business operations involve some kind of identity. When you purchase 1% property token, in most jurisdiction you will be required to provide some kind of identity proof. In the traditional model, when you use a third party website like Peters Pride Assets, this site will require the identity proof and forward it to the seller, the notary or the authority. We already see this in masses when ICOs try to comply with regulations. Investors are uploading passport pictures on mass.
+
+The problems with this approach are well known. You simply don't want your identity documents being stored on many website databases, if you don't want to fall victim to identity theft. The website taking your credentials can absuse it - for example, sell or analyze it - or the website can be hacked. The problem of uploading passport images or other identity files on webservers is one of the worst consequence of a web integrated by webservers and lacking a ownership and identity mechansm. 
+
+With Tokenscript the issuer of the token can formulate a destination where to send the identity file, add a public key of the receiver, a reference to the cryptographic library used to encrypt the file, and let the buyer forward it automatically. For example, you pick your property on Peter's site, and while the amount to pay will go to the property seller - minus the provision for Peter - the encrypted identity proof could go directly to the land registry authority, with a note about the purchased property attached. 
+
 ####  User-Interface
 
+Imagine you have purchased a few 1% property shares on Peter's site. In a traditional wallet you only see it as little symbols - at best - with no further information. This is not what property investors want to see. They want to have pictures of the estate, prices, charts about the regional estate properties, expected date of payout and so on.
+
+You *could* show this in a wallet. It would 'just' require the wallet to adjust to the individual smart contract overloaded with these information or to trust a random website providing this information and adjust the UX to match it. In reality, no wallet made this possible, ending with users either using hosted DApps or smart contract providers trying to create their own wallet matching their needs.
+
+Tokenscript allows wallets to easily display all the needed data, as shown above.
+
 #### Availability
+
+As an owner of a 1% property share you have some interesting options: You can vote on decisions about renovation or restructuring of the property, you can request a payout of income, you can sell the property, or you can take a mortgage on it. If those options are part of the smart contract, you need to access the blockchain to process them.
+
+When Peter's Pride Assets serves as a DApp site, you will perform your actions using his site. When his site is unavailable or down - or maybe when he forgot to pay his SSL certificate - your token will be effectively unable to be used to pursue the rights you bought with the token. This could essentially be abused to manipulate property prices or ballots about renovation.
+
+The problems becomes worse when the 1% property token is embedded in further contracts or tokens. For example, there could be a site called Brad's Properties, which bundles 1% property token from other sides to create a property index. In the classical DApp model you would be dependent on Peter's site being available to use a property token you bought there to become part of a index token. Or imagine you take a mortgage on your token. Which would be effectively a transaction between you and a bank would become a transaction involving Peter's site.
+
+With Tokenscript the wallet will be able to support any required visualization and action by the user. This will make it unnecessary to rely on trusted third parties like DApps to use the functions associated with a token. 
 
 ### Advantages of Tokenscript: Payment Side
 
