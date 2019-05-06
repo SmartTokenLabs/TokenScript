@@ -139,7 +139,33 @@ Like the deliveries, the payment requires wallets to understand context and busi
 To enable wallets to exploit the potential of programmable payment token, tokenscript must process similar information categories as on the delivery side.
 
 
-### Advantages to achieve (?)
+### Advantages to achieve 
+
+There are several areas in which Tokenscript can achieve significant advantages: Interoperability, Scalability, Security, Privacy, User-Interface, Availability.
+
+#### Interoperability
+
+Tokenscript allows a token to maintain or change its underlying business logic compatible with many applications and wallet. It is a tool to enrich tokens with a complex business logic and make platforms, wallets or websites easily compatible with it, even when it is updated. Same counts for logics on the payment side.
+
+#### Scalability
+
+Scaling Ethereum requires to use second layer technologies like Plasma Sidechains. Tokenscript helps to allow fetching information about the token - and the chain on which it operates - without having a node that runs on all possible chains. It also allows to coordinate payment processes in which the payment token is not on the same chain as the delivery token. 
+
+#### Security
+
+Often it is hard for users to know the content of a transaction they sign. When transactions become more complicated - as they represent more complex transaction logics - it becomes hard for wallets and users to really know what they sign. In the end, users need to trust the website. With Tokenscript the level of required trust is reduced on the issuer of the Token.
+
+#### Privacy
+
+Some token business cases like the purchase of a property share could require the user to provide an identity proof. Without a tool like Tokenscript, it is very hard to do this without giving private data to a trusted third party, which is not directly part of the transaction, but coordinates it. Tokenscript can instruct the wallet how to send this data directly to the one needing it.
+
+#### User-Interface
+
+The more complex transaction and token logic gets, the harder it is for wallets to represent it and to update it. Imagine, you have 1000 token with 1000 individual business logics. Should the wallet developer integrate each one? Should the smart contract ABI cover every wallet or website implementation? Tokenscript markups allow wallets and other services to represent a rich set of information about a token, extend it with external information, implement action buttons and update the token logic.
+
+#### Availability
+
+In most cases, complex token logics - for example, Crypto Kitties - are accessed by a hosted DApp. This reintroduces the dependencies blockchain was meant to eliminate. It also introduces the integration through servers in the middle, when the token logic allows to integrate several parties, like using a car ownership token as an insurance token and a membership token for the road service.
 
 ### Requirements to integrate the web
 
