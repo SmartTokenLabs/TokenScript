@@ -632,19 +632,23 @@ We trace the reason that the web is poorly integrated to the only link between t
 
 We believe the token is the anchor points for integration. Again, this is best illustrated by examples.
 
-Suppose a user purchases an iPhone from Harvey Norman, an online retailer, using the blockchain. The input of the transaction will be a type of currency; the output, in this case, will be four tokens:
+Suppose a user purchases an iPhone from Harvey Norman, an online retailer, using the blockchain. The input of the transaction will be a type of currency; the output, in this case, might be five tokens:
 
 - a shipping token, which can be used to redeem the product from a local pick-up station.
 
 - a warranty token, issued by Apple, which allows the iPhone to be serviced in shops other than Harvey Norman (e.g. Apple Centre).
 
-- A receipt token, issued by Harvey Norman, which allows the product to be returned in 90 days. It's also useful for getting a Tourism Tax Refund if you want to take the phone out of Australia.
+- a receipt token, issued by Harvey Norman, which allows the product to be returned in 90 days. It's also useful for getting a Tourism Tax Refund if you want to take the phone out of Australia.
 
-- A login token which gives access to Apple's App Store, iTunes and so on. 
+- a login token which gives access to Apple's App Store, iTunes and so on. 
+
+- an ownership token representing the ownership of the iPhone
 
 <!---- I thought this fourth token represents the integration factor maybe better --> 
 
-If without tokens as the integration anchor, the three different services might be carried out by various means.
+If without tokens as the integration anchor, the three different services might be carried out by various means. With tokens, the buyer doesn't need to store papers, order id numbers, links and so on. All he needs is the seed of his wallet and the tokenscript file for the iPhone purchase. Even in case he loses his wallet, he can easily restore all he needs.
+
+Such a model can also make it much easier to interact with tax authorities, for example if the buyers wants to claim an input tax deduction. To proof it, he only has to give the tax authority his address. If the input tax deduction covers several purchases, he could give the financial authority his xpub key, and the tax authority can check the key against all claimed purchases in seconds without further proof.
 
 **[[Big advantage: Without you have a lot of papers and so on which you need to store. With it, you have it all in your wallet and can recover it always with your seed. --> and, woah, you could use your xpub key to proof your tax refund]]
 
