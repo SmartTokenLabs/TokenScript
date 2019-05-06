@@ -670,6 +670,14 @@ Lacking a reliable way to authenticate the purchase, an online purchased product
 
 Despite such a token not being transferable or authorised, it is still useful for 3rd party integrations.  The Tax office will be satisfied that the receipt can't be faked without collaboration from the seller, and allows a swift and easy tax-refund process. If the phone is purchased for work, the employee can easily reclaim the expense from an employer with the trust implied.
 
+### The Login Token
+
+This token can be used to login to an account for Apple's App Store or iTunes shop. It could also be used to synchronize several apple devices.
+
+### The ownership Token
+
+This token could be needed to use any other token. If the iPhone is sold, the ownership token is transfered too, and the old owner will not be able to login to the account of the new owner. There can also be a mechanism to delete the account history when the ownership token is transfered.
+
 ![Purchase with one token, getting three tokens. They can be used to access services, like delivery and repair.](img/purchase-without-shipment-token.jpeg)
 
 As we can observe by the use of tokens, usually scattered business processes and web experiences can finally be integrated. This ties closely to the other benefit of the blockchain: a frictionless market. In this example:
