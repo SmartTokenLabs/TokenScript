@@ -572,7 +572,7 @@ The problems becomes worse when the 1% property token is embedded in further con
 
 With Tokenscript the wallet will be able to support any required visualization and action by the user. This will make it unnecessary to rely on trusted third parties like DApps to use the functions associated with a token. 
 
-### Advantages of Tokenscript: Payment Side
+### Payment Side
 
 In this chapter we will specify the advantages of Tokenscript on the payment site. In doing so we will focus on using DAI Dollar as a means of payment, but also use other examples if it helps to improve understanding. 
 
@@ -623,6 +623,8 @@ It's unlikely any scalability plan will not involve the participation of dapp br
 #### User Interface
 
 Any sophisticated payment logic, as presented above, needs to be represented in the wallet and allow the user to execute certain payment actions. Tokenscript allows wallets to easily integrate a vast scope of payment options and innovations. Also, it allows the issuer of the payment Tokenscript to update the payment logic, without needing the wallet to update it too.
+
+In general, the advantages of Tokenscript for the payment side reflect the advantages on the delivery side. In both areas, Tokenscript serves as a tool for innovators to create sophisticated logics, implement it into wallets and update it.
 
 ## Address the "Integrate the web" need
 
