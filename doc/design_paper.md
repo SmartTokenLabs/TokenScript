@@ -620,6 +620,10 @@ It's unlikely any scalability plan will not involve the participation of dapp br
 
 <!--- not sure here, again, if this is what the point was about -->
 
+#### User Interface
+
+Any sophisticated payment logic, as presented above, needs to be represented in the wallet and allow the user to execute certain payment actions. Tokenscript allows wallets to easily integrate a vast scope of payment options and innovations. Also, it allows the issuer of the payment Tokenscript to update the payment logic, without needing the wallet to update it too.
+
 ## Address the "Integrate the web" need
 
 We trace the reason that the web is poorly integrated to the only link between the units of the web, i.e. URL links. A link carries no business process, authentication or trust relationship. There are no anchoring points for integration on links.
