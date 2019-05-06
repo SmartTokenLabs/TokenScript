@@ -432,7 +432,7 @@ Furthermore, the transaction requires an identity attestation or investment capa
 
 Tokenscript does not just help relay the attestation data, but it also enables wallets to conveniently allow buyers and sellers to submit and read the attestation data without the need for a hosted DApp service.
 
-**[[add an xml example for consistency]]**
+<!--- add an xml example for consistency]] -->
 
 #### Reference information
 
@@ -442,7 +442,7 @@ Reference information is relevant to the token, but not part of the smart contra
 
 It could be possible that eventually such information will end up being onchained. But even than they will be created and uploaded by an entity which has to be trusted. Reference data always leads to the problem of trust and web integration. With Tokenscript this data is signed by the token issuer (not by the token owner - the token issuer is often an entity that deployed the smart contract). In the case of the property this could be a real estate specialist. The reference information sourced from web APIs specified in Tokenscript is assumed to be trusted, but can be changed later. The security chapter will detail different levels of trust.
 
-**[[add an xml example for consistency]]**
+<!--- add an xml example for consistency -->
 
 Today, all such information related to a token is usually held together on a DAPP website made by the same entity that deployed the token. This has the shortcoming that the DAPP is only useful when the API is still available and reliable. Having it not in the smart contract but in Tokenscript enables the token issuer to change the API source. 
 
@@ -462,9 +462,9 @@ In Ethereum this information is a super-set of the smart contract programmable i
 
 Tokenscript makes both the content as the visualization of the action information more flexible and accessible. 
 
-**[[add an xml example for consistency]]**
+<!--- add an xml example for consistency -->
 
-**[Why not just use ABI? - I speculated]]**
+<!--- Why not just use ABI? - I speculated -->
 
 In conclusion, Tokenscript allows the context (user-agent or trading engine) to:
 
@@ -473,9 +473,6 @@ In conclusion, Tokenscript allows the context (user-agent or trading engine) to:
 - Produce a list of actions that can be performed and explain how to construct the transactions.
 
 Any party is able to render and apply functions to the token using Tokenscript, including entities like generic marketplaces, user-agents and 3rd party apps. We call these parties "context" in general.
-
-<!---loudly thinking: Wouldn't it be better to continue with the payment side example? It somehow breaks the flow. Advantages doesn't seem to be a good fit in the chapter about requirements. Maybe I'll test it; maybe it's good to explain the advantages when we have also the payment side. The more I think about it, the more I tend to it. We already have a lot of talk about why Tokenscript. So we better stick to the examples and present the advantages later on - I tried it out.--->
-
 
 ## Payment side example: Smart money
 
