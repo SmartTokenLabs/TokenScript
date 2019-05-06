@@ -632,13 +632,17 @@ We trace the reason that the web is poorly integrated to the only link between t
 
 We believe the token is the anchor points for integration. Again, this is best illustrated by examples.
 
-Suppose a user purchases an iPhone from Harvey Norman, an online retailer, using the blockchain. The input of the transaction will be a type of currency; the output, in this case, will be three tokens:
+Suppose a user purchases an iPhone from Harvey Norman, an online retailer, using the blockchain. The input of the transaction will be a type of currency; the output, in this case, will be four tokens:
 
 - a shipping token, which can be used to redeem the product from a local pick-up station.
 
 - a warranty token, issued by Apple, which allows the iPhone to be serviced in shops other than Harvey Norman (e.g. Apple Centre).
 
 - A receipt token, issued by Harvey Norman, which allows the product to be returned in 90 days. It's also useful for getting a Tourism Tax Refund if you want to take the phone out of Australia.
+
+- A login token which gives access to Apple's App Store, iTunes and so on. 
+
+<!---- I thought this fourth token represents the integration factor maybe better --> 
 
 If without tokens as the integration anchor, the three different services might be carried out by various means.
 
