@@ -632,6 +632,8 @@ We trace the reason that the web is poorly integrated to the only link between t
 
 We believe the token is the anchor points for integration. Again, this is best illustrated by examples.
 
+### Purchasing an iPhone
+
 Suppose a user purchases an iPhone from Harvey Norman, an online retailer, using the blockchain. The input of the transaction will be a type of currency; the output, in this case, might be five tokens:
 
 - a shipping token, which can be used to redeem the product from a local pick-up station.
@@ -652,29 +654,29 @@ Such a model can also make it much easier to interact with tax authorities, for 
 
 **[[Big advantage: Without you have a lot of papers and so on which you need to store. With it, you have it all in your wallet and can recover it always with your seed. --> and, woah, you could use your xpub key to proof your tax refund]]
 
-### The Shipping Token
+#### The Shipping Token
 
 Without it, a user might get a tracking number instead of a token, which itself carries no authentication information, so it can't be used to pick up the product unless a pickup code is provided, perhaps in SMS - even more poorly integrated with the process.
 
 With the use of a shipping token, the token status can be remotely updated by the shipping company, even messaging to users to inform an upcoming delivery (if the token is held in a mobile wallet). With a bit of cryptography, it's easy to authorise someone else to pick up a product.
 
-### Warranty Token
+#### Warranty Token
 
 Without this token, a user might need the serial number and an online registration process to activate the warranty. She might even need to create an account for that, whose password she will probably soon forget.
 
 With the use of a warranty token, the terms and expiration would be easy to find, as it is token properties. The user can log in to the warranty service website with the token, forgoing an account. The token can be programmed to receive messages like product call back or emergency security updates.
 
-### Receipt Token
+#### Receipt Token
 
 Lacking a reliable way to authenticate the purchase, an online purchased product usually cannot be returned to the store but might be returned via online means such as a postback. A token carries the methods for authentication sufficient for the process to be done in store.
 
 Despite such a token not being transferable or authorised, it is still useful for 3rd party integrations.  The Tax office will be satisfied that the receipt can't be faked without collaboration from the seller, and allows a swift and easy tax-refund process. If the phone is purchased for work, the employee can easily reclaim the expense from an employer with the trust implied.
 
-### The Login Token
+#### The Login Token
 
 This token can be used to login to an account for Apple's App Store or iTunes shop. It could also be used to synchronize several apple devices.
 
-### The ownership Token
+#### The ownership Token
 
 This token could be needed to use any other token. If the iPhone is sold, the ownership token is transfered too, and the old owner will not be able to login to the account of the new owner. There can also be a mechanism to delete the account history when the ownership token is transfered.
 
@@ -708,15 +710,19 @@ This process doesn't enables something fundamentally new, but it makes an existi
 
 ![AirBnB Token integrates IoT, allowing the token to open a smart-lock.](img/airbnb.jpeg)
 
+### Requirements
+
 Observing the desirable integration, we can see Tokenscript has to satisfy the following needs:
 
-- Allow token actions to be defined. In the case of a shipping token, there would be a "redeem" action (via a QR code or NFC) and an "authorise" action which would allow someone else to pick up a delivery.
+- Allow token actions to be defined. In the case of a shipping token, there would be a "redeem" action (via a QR code or NFC) and an "authorise" action which would allow someone else to pick up a delivery. In the case of AirBNB there would be an unlock or a verify action.
 
 - Allow blockchain functions to be accessed in an action.
 
-- Allow web functions to be accessed in an action
+- Allow web functions to be accessed in an action. Essentially this means that both blockchain and web functions must join in Tokenscript, which enables it to integrate it. Tokenscript must not only define how a token behaves - but also how other environments react on a token action.
 
-- Allow the token status to be updated, via a web API or signed message (more on that later).
+- Allow the token status to be updated, via a web API or signed message. The token status could be the validity during a specific time-frame, the extension of this time-frame and much more. (more on that later). 
+
+
 
 # The design of Tokenscript
 
