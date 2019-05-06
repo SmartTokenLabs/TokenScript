@@ -688,7 +688,7 @@ As we can observe by the use of tokens, usually scattered business processes and
 
 ![Purchase with a payment token and a shipping token. Notice that shipping token is supplied by the user, which we assume the user purchased in bulk before, in order to let market work to her advantage.](img/purchase-with-shipment-token.jpeg)
 
-This example can be further extended to solve complicated and innovative business cases. Suppose the purchase is not made with fiat currency but with American Express points. The iPhone purchase will be insured for screen damage, and as a result, the transaction will have a 4th insurance token as the output.
+This example can be further extended to solve complicated and innovative business cases. Suppose the purchase is not made with fiat currency but with American Express points. The iPhone purchase will be insured for screen damage, and as a result, the transaction will also have an insurance token as the output.
 
 When the mobile phone is repaired for screen damage, an invoice is issued concerning the purchase record of the phone to prove it is the same phone purchased with the points, enabling the insurance to be paid on the spot.
 
@@ -696,11 +696,15 @@ Without such tokens, the user will have to submit a billing statement, invoice a
 
 In this insurance case, the blockchain allowed business process innovation that otherwise would require the user to sacrifice convenience, for the mere fact that too many parties are involved and there lacks an integration anchor.
 
-The power of integration is further strengthened by the use of the Internet of Things. Let's imagine a future version of AirBNB, where the bookings are tokenised. A traveller can enter a booked AirBNB house by unlocking the smart-lock with his or her token, and the smart-lock would recognise who the current owner of the booking token is.
+### A future version of AirBNB
 
-If Alice owns a token that represents the right to use a room during a specific time window, or "a booking" in user's terms, then the actions she could perform are:
+The power of integration is further strengthened by the use of the Internet of Things. Let's imagine a future version of AirBNB, where the bookings are tokenised. When a travellers rents an AirBNB house, he receives a token which gives access to the house for a specific time window. If the time-window is closed, the token becomes essentially worthless.
 
-Check-in - either produce a QR code to verify the booking to the landlord or use an NFC-enabled phone to open a smart-lock.
+The house is secured by a smart-lock, which the traveller can unlock with his or her token, and the smart-lock would recognise who the current owner of the booking token is. If the house owner feels more comfortable, he can also demand the traveller to provide an identity token, which substitutes the account on platforms like AirBNB.
+
+If Alice owns a token that represents the right to use a room during a specific time window, or "a booking" in user's terms, then she can check-in by two possible actions: produce a QR code to verify the booking to the landlord - or use an NFC-enabled phone to open a smart-lock.
+
+This process doesn't enables something fundamentally new, but it makes an existing process much easier. Currently, booking a house with AirBNB or other platforms requires the traveller to have an account on the platform, to deposit his credit card (or some other proof of identity respectively deposit), to receive a order confirmation and an unlock key via email and more. All these steps can be integrated by a single token. 
 
 ![AirBnB Token integrates IoT, allowing the token to open a smart-lock.](img/airbnb.jpeg)
 
