@@ -296,11 +296,11 @@ Most of these shortcomings have one common denominator: There is a missing link 
 
 ### The problem of hosted DApps
 
-If you use advanced smart contracts today, you usually access them through a website, which is called a hosted DApp. For example, smart contracts like CryptoKitties or the 0x exchange protocol don't need a trusted third party to serve its functionality - in theory. In practice Ethereum wallets fail to represent the logic and the action options of these smart contracts in a user friendly way.
+If you use advanced smart contracts today, you usually access them through a website, which is called a hosted DApp. For example, smart contracts like CryptoKitties or the 0x exchange protocol don't need a trusted third party to serve its functionality - in theory. In practice Ethereum wallets fail to represent the logic and the action options of these smart contracts in a user friendly way. The result is that much of the advantages, blockchain enables, are lost.
 
-Hosted DApps have several shortcomings: They introduce a trusted third party. The website owner can render and manipulate data and block users from accessing the dapp. The user also has to rely on the third party website to stay available and updated, to not leak private data and to not be hacked.  
+Hosted DApps have several shortcomings: They introduce a trusted third party. The website owner can render and manipulate data and block users from accessing the dapp. The user also has to rely on the third party website to stay available and updated, to not leak private data and to not be hacked. The backend of the DApps is decentralized and trustless - but the frontend is as centralized and trusted as traditional websites.  
 
-Further, you can't integrate the web via tokens instead of accounts or websites, when you rely on hosted DApps to use advanced business' logics of smart contracts. When your token interaction carries a chain of trust relationships - like your car token is linked to your driver's licence and an insurance token, which itself gives you access to a road service - the DApp model requires this chain of relationship to pass each link through a centralized web server.
+Even more problematic: You can't integrate the web via tokens instead of accounts or websites, when you rely on hosted DApps. When you need to use advanced business' logics of smart contract, like passing your car token to the road service which uses it to check your insurance policy, you must use the DApps, as well as as road service and the insurance company. It is exactly the same model as we know from the web as we know it: The information might be attached to the token - but the way, information is passed, still relies on centralized websites.
 
 This is why we introduce an alternative approach to handle the user interaction with smart contracts and tokens. 
 
