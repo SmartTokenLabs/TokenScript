@@ -266,7 +266,11 @@ A token must carry trust relationship and business context to 3rd parties. In th
 
 ### The problems of legacy tokens
 
-The commonly used tokens on Ethereum put everything in a smart contract on a chain and often rely on a hosted DApp to access its functions. We argue that this method is not suitable for creating a frictionless market and integrating the web. Fulfilling the challenges with the conventional token model is difficult, often nearly impossible, while it adds complexity and causing scalability, interoperability and security issues.
+Early public blockchain projects attempted to implement both token logic and business process into smart contracts. Using an online retail project as an example, such a smart contract would not only process an order but also manages the inventory. The token transaction logic, like under what condition the transaction is valid, is tied with business process, like checking inventory. This method is, naturally, inherited from the way people build websites.
+
+Using an analogy to demonstrate the inappropriate method, suppose an IKEA manager decides to format the furniture sales contract to include information like which aisle a patron should go to fetch the furniture package, would it work in real life? Of course not, the contract would have to be modified too many times to reflect Ikea warehouse management; which aisle has the product has no impact on the validity of the trade.
+
+We argue that this method is not suitable for creating a frictionless market and integrating the web. Fulfilling the challenges with the conventional token model is difficult, often nearly impossible, while it adds complexity and causing scalability, interoperability and security issues:
 
 **Richness: Bundling a token with business logic, trust relationship and transactions rules** 
 
@@ -720,7 +724,7 @@ Observing the desirable integration, we can see Tokenscript has to satisfy the f
 
 - Allow web functions to be accessed in an action. Essentially this means that both blockchain and web functions must join in Tokenscript, which enables it to integrate it. Tokenscript must not only define how a token behaves - but also how other environments react on a token action.
 
-- Allow the token status to be updated, via a web API or signed message. The token status could be the validity during a specific time-frame, the extension of this time-frame and much more. (more on that later). 
+- Allow the token status to be updated, via a web API or signed message. The token status could be the validity during a specific time-frame, the extension of this time-frame and much more (more on that later). 
 
 
 
