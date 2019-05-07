@@ -84,9 +84,9 @@
     </ts:action>
   </ts:cards>
   <ts:attribute-types>
-    <ts:attribute-type id="locality" syntax="1.3.6.1.4.1.1466.115.121.1.15" as="utf8">
+    <ts:attribute-type id="locality" syntax="1.3.6.1.4.1.1466.115.121.1.15">
       <ts:origins>
-        <ts:ethereum function="getLocality" contract="EntryToken">
+        <ts:ethereum function="getLocality" contract="EntryToken" as="utf8">
             <ts:inputs>
               <ts:uint256 ref="tokenId"/>
             </ts:inputs>
@@ -105,42 +105,34 @@
     </ts:attribute-type>
     <ts:attribute-type id="expired" syntax="1.3.6.1.4.1.1466.115.121.1.7"> <!-- boolean -->
       <ts:origins>
-        <ts:ethereum function="isExpired" contract="EntryToken">
-          <ts:inputs>
-            <ts:uint256 ref="tokenId"/>
-          </ts:inputs>
-        </ts:ethereum>
-      </ts:origins>
-      <ts:mapping>
-        <ts:option key="0">
-          <ts:value>FALSE</ts:value>
-        </ts:option>
-        <ts:option key="1">
-          <ts:value>TRUE</ts:value>
-        </ts:option>
-      </ts:mapping>
-    </ts:attribute-type>
-    <ts:attribute-type id="street" syntax="1.3.6.1.4.1.1466.115.121.1.15" as="utf8"> <!-- string -->
-      <ts:origins>
-        <ts:ethereum function="getStreet" contract="EntryToken">
+        <ts:ethereum function="isExpired" contract="EntryToken" as="bool">
           <ts:inputs>
             <ts:uint256 ref="tokenId"/>
           </ts:inputs>
         </ts:ethereum>
       </ts:origins>
     </ts:attribute-type>
-    <ts:attribute-type id="building" syntax="1.3.6.1.4.1.1466.115.121.1.15" as="utf8"> <!-- string -->
+    <ts:attribute-type id="street" syntax="1.3.6.1.4.1.1466.115.121.1.15"> <!-- string -->
       <ts:origins>
-        <ts:ethereum function="getBuildingName" contract="EntryToken">
+        <ts:ethereum function="getStreet" contract="EntryToken" as="utf8">
           <ts:inputs>
             <ts:uint256 ref="tokenId"/>
           </ts:inputs>
         </ts:ethereum>
       </ts:origins>
     </ts:attribute-type>
-    <ts:attribute-type id="state" syntax="1.3.6.1.4.1.1466.115.121.1.15" as="utf8"> <!-- string -->
+    <ts:attribute-type id="building" syntax="1.3.6.1.4.1.1466.115.121.1.15"> <!-- string -->
       <ts:origins>
-        <ts:ethereum function="getState" contract="EntryToken">
+        <ts:ethereum function="getBuildingName" contract="EntryToken" as="utf8">
+          <ts:inputs>
+            <ts:uint256 ref="tokenId"/>
+          </ts:inputs>
+        </ts:ethereum>
+      </ts:origins>
+    </ts:attribute-type>
+    <ts:attribute-type id="state" syntax="1.3.6.1.4.1.1466.115.121.1.15"> <!-- string -->
+      <ts:origins>
+        <ts:ethereum function="getState" contract="EntryToken" as="utf8">
           <ts:inputs>
             <ts:uint256 ref="tokenId"/>
           </ts:inputs>

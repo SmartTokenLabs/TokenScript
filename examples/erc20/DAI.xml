@@ -79,7 +79,7 @@
                 <ts:string xml:lang="zh">餘額</ts:string>
             </ts:name>
             <ts:origins>
-                <ts:ethereum function="balanceOf" contract="dai">
+                <ts:ethereum function="balanceOf" contract="dai" as="uint">
                     <ts:inputs>
                         <ts:uint256 ref="ownerAddress"/>
                     </ts:inputs>
