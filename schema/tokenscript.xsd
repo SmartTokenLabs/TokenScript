@@ -214,9 +214,7 @@
         <!-- name is not needed if the attribute is only used for selection -->
         <xs:element minOccurs="0" ref="name"/>
         <xs:element ref="origins"/>
-        <xs:element minOccurs="0" ref="mapping"/>
       </xs:sequence>
-      <xs:attribute name="as" type="xs:NCName"/>
       <xs:attribute name="id" use="required" type="xs:NCName"/>
       <xs:attribute name="oid" type="xs:NMTOKEN"/>
       <xs:attribute name="syntax" use="required" type="xs:NMTOKEN"/>
@@ -238,14 +236,29 @@
       </xs:all>
     </xs:complexType>
   </xs:element>
+  <xs:simpleType name="as">
+  <xs:restriction base="xs:NCName">
+    <xs:enumeration value="uint" />
+    <xs:enumeration value="int" />
+    <xs:enumeration value="utf8" />
+    <xs:enumeration value="e18" />
+    <xs:enumeration value="bool"/>
+  </xs:restriction>
+</xs:simpleType>
   <xs:element name="user-entry">
     <xs:complexType>
-      <xs:attribute name="as" type="xs:NCName"/>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="mapping"/>
+      </xs:sequence>
+      <xs:attribute name="as" type="as" use="required"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="token-id">
     <xs:complexType>
-      <xs:attribute name="as" type="xs:NCName"/>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="mapping"/>
+      </xs:sequence>
+      <xs:attribute name="as" type="as" use="required"/>
       <xs:attribute name="bitmask"/>
     </xs:complexType>
   </xs:element>
@@ -753,10 +766,11 @@
             </xs:choice>
           </xs:complexType>
         </xs:element>
+        <xs:element minOccurs="0" ref="mapping"/>
       </xs:sequence>
       <xs:attribute name="contract" type="xs:IDREF"/>
       <xs:attribute name="function" type="xs:NCName"/>
-      <xs:attribute name="as" type="xs:NCName"/>
+      <xs:attribute name="as" type="as"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="mapping">
