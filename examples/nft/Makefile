@@ -1,16 +1,17 @@
 XMLSECTOOL=xmlsectool
-SSL_KEY=ssl/shong.wang.key
-SSL_CERTS=ssl/shong.wang.certs
+KEYSTORE=
+KEY=1
+KEYPASSWORD=
 SIGNATURE_ALGORITHM=rsa-sha256
 
 help:
-	# Needs a target, example: $$ make AdmissionTicket.canonicalized.xml
+	# Needs a target, example: $$ make EntryToken.canonicalized.xml
 	#  
-	# Let's say you have a TokenScript "AdmissionTicket.xml"
+	# Let's say you have a TokenScript "EntryToken.xml"
 	#- to validate and canonicalize, add 'canonicalized' in the filename
-	@echo $$ make AdmissionTicket.canonicalized.xml
+	@echo $$ make EntryToken.canonicalized.xml
 	# - to sign, use tsml as file extension:
-	@echo $$ make AdmissionTicket.tsml
+	@echo $$ make EntryToken.tsml
 
 %.canonicalized.xml : %.xml
     # xmlsectool canonicalises automatically when needed, but leaving an xml:base attribute which creates trouble later.
@@ -25,6 +26,13 @@ help:
 	-xmlstarlet val --xsd ../../schema/tokenscript.xsd $@ || (xmllint --noout --schema ../../schema/tokenscript.xsd $@; rm $@)
 
 %.tsml: %.canonicalized.xml
-	$(XMLSECTOOL) --sign --keyInfoKeyName 'Shong Wang' --digest SHA-256 --signatureAlgorithm http://www.w3.org/2001/04/xmldsig-more#$(SIGNATURE_ALGORITHM) --inFile $^ --outFile $@ --key $(SSL_KEY) --certificate $(SSL_CERTS)
+ifeq (,$(KEYSTORE))
+	@echo ---------------- Keystore missing. Try this ---------------- 
+	@echo $$ make KEYSTORE=shong.wang.p12 KEYPASSWORD=shong.wang $@
+	@echo replace it with your .p12 file and your password
+	rm $^
+else
+	$(XMLSECTOOL) --sign --keyInfoKeyName 'Shong Wang' --digest SHA-256 --signatureAlgorithm http://www.w3.org/2001/04/xmldsig-more#$(SIGNATURE_ALGORITHM) --inFile $^ --outFile $@ --keystore $(KEYSTORE) --keystoreType PKCS12 --key $(KEY) --keyPassword $(KEYPASSWORD) --signaturePosition LAST
 	# removing the canonicalized created for validation
 	rm $^
+endif
