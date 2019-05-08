@@ -89,7 +89,7 @@
             <ts:origins>
                 <ts:ethereum function="balanceOf" contract="dai" as="uint">
                     <ts:inputs>
-                        <ts:uint256 ref="ownerAddress"/>
+                        <ts:address ref="ownerAddress"/>
                     </ts:inputs>
                 </ts:ethereum>
             </ts:origins>
