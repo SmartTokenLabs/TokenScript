@@ -28,31 +28,31 @@ Now we have all the tools ready.
 
 ### Validate the test TokenScript
 
-Do a `make`. It will validate AdmissionTicket.xml. It should pass if you haven't changed it.
+Do a `make`. It will validate EntryToken.xml. It should pass if you haven't changed it.
 
     $ make
     # XML Canonicalization
-    xmlstarlet c14n AdmissionTicket.xml  > AdmissionTicket.canonicalized.xml
+    xmlstarlet c14n EntryToken.xml  > EntryToken.canonicalized.xml
     # XML Validation
-    xmlstarlet val --xsd ../../schema/tokenscript.xsd AdmissionTicket.canonicalized.xml || (xmllint --noout --schema ../../schema/tokenscript.xsd AdmissionTicket.canonicalized.xml; rm AdmissionTicket.canonicalized.xml)
-    AdmissionTicket.canonicalized.xml - valid
+    xmlstarlet val --xsd ../../schema/tokenscript.xsd EntryToken.canonicalized.xml || (xmllint --noout --schema ../../schema/tokenscript.xsd EntryToken.canonicalized.xml; rm EntryToken.canonicalized.xml)
+    EntryToken.canonicalized.xml - valid
 
 ### Sign the test TokenScript
 
 We prepared the signing key and SSL certificates in ssl directory. If you use yours, remember to replace their references in the Makefile
 
-Run `make` with `AdmissionTicket.tsml`
+Run `make` with `EntryToken.tsml`
 
-    $ make AdmissionTicket.tsml
-    /opt/xmlsectool-2.0.0/xmlsectool.sh --sign --keyInfoKeyName 'Shong Wang' --digest SHA-256 --signatureAlgorithm http://www.w3.org/2001/04/xmldsig-more#rsa-sha256 --inFile AdmissionTicket.canonicalized.xml --outFile AdmissionTicket.tsml --key ssl/shong.wang.key --certificate ssl/shong.wang.certs
-    INFO  XMLSecTool - Reading XML document from file 'AdmissionTicket.canonicalized.xml'
+    $ make EntryToken.tsml
+    /opt/xmlsectool-2.0.0/xmlsectool.sh --sign --keyInfoKeyName 'Shong Wang' --digest SHA-256 --signatureAlgorithm http://www.w3.org/2001/04/xmldsig-more#rsa-sha256 --inFile EntryToken.canonicalized.xml --outFile EntryToken.tsml --key ssl/shong.wang.key --certificate ssl/shong.wang.certs
+    INFO  XMLSecTool - Reading XML document from file 'EntryToken.canonicalized.xml'
     INFO  XMLSecTool - XML document parsed and is well-formed.
     INFO  XMLSecTool - XML document successfully signed
-    INFO  XMLSecTool - XML document written to file /home/weiwu/IdeaProjects/TokenScript/examples/ticket/AdmissionTicket.tsml
+    INFO  XMLSecTool - XML document written to file /home/weiwu/IdeaProjects/TokenScript/examples/ticket/EntryToken.tsml
     # removing the canonicalized created for validation
-    rm AdmissionTicket.canonicalized.xml
+    rm EntryToken.canonicalized.xml
 
-And now you get a signed TokenScript AdmissionTicket.tsml which is ready to be published.
+And now you get a signed TokenScript EntryToken.tsml which is ready to be published.
 
 ### Publishing your TokenScript
 

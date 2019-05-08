@@ -138,7 +138,6 @@ Like the deliveries, the payment requires wallets to understand context and busi
 
 To enable wallets to exploit the potential of programmable payment token, tokenscript must process similar information categories as on the delivery side.
 
-
 ### Advantages to achieve 
 
 There are several areas in which Tokenscript can achieve significant advantages: Interoperability, Scalability, Security, Privacy, User-Interface, Availability.
@@ -166,6 +165,8 @@ The more complex transaction and token logic gets, the harder it is for wallets 
 #### Availability
 
 In most cases, complex token logics - for example, Crypto Kitties - are accessed by a hosted DApp. This reintroduces the dependencies blockchain was meant to eliminate. It also introduces the integration through servers in the middle, when the token logic allows to integrate several parties, like using a car ownership token as an insurance token and a membership token for the road service. In this model the user is dependent on the availability of a certain server. With Tokenscript this can be bypassed, so that the use of a token does not rely on a single source of failure.
+
+### Advantages to achieve (?)
 
 ### Requirements to integrate the web
 
