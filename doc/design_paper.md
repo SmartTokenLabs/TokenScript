@@ -751,41 +751,39 @@ The authors of this paper advocate a method to draw the line between a smart con
 
 2. A smart contract and business process are integrated through the tokens.
 
-Going further along the online iPhone purchase example, at the time of purchase, a shipment token is created, representing the user's right to receive the delivery. It does not imply that in the very few seconds the purchase is recorded on the blockchain, an inventory management database selected a warehouse, deducted the iPhone from its inventory count, labelled it with a shipment tracker and returned the tracker to the token. It would be absurd to use blockchain like a cloud platform and outright impossible thanks to the atomic nature of blockchain transactions.
+This differentiation is fundamental for the design of Tokenscript. So we will illuminate with an example: The iPhone purchase.
 
-Preferably instead, the online retailer obtained a point of integration - the shipment token, which will allow the warehouse to find the product, label it at its own pace, inform the user that the product is ready to be shipped (the token carries the definition of what communication is allowed to the holder), and send it on its way.
+At the time of the purchase, a shipment token is created, representing the user's right to receive the delivery. It does not mean that the blockchain acts like a cloud platform for the inventory management system. Instead, the shipment token serves as a point of integration. It will allow the warehouse to find the product, label it at its own pace, inform the user that the product is ready to be shipped (the token carries the definition of what communication is allowed to the holder), and send it on its way.
 
-As the business matures and markets become less frictional, two changes happen.
+As the business matures and markets become less frictional, two changes might happen.
 
-### Change in the business process
+1. Change in the business process
 
 The first change is that the online retailer found a better shipment company. In this case, the new shipment company will integrate the same shipment token, sending shipping progress information in place of the old one. The customers can still prove ownership of the shipping with his token, e.g. by using an NFC mobile phone to touch the deliverer's hand-held device.
 
 There is no need to change the smart contract transaction rules. The online retailer can even change the shipping company when the product is first under-delivered without the user changing his token.
 
-This change illustrated that the business process should decouple from the token, instead, integrated through the token.
+This change illustrated that **the business process should decouple from the token, instead, integrated through the token**.
 
-### Change in the market
+2. Change in the market
 
-Business went on for a while; then, there is an innovation from the blockchain market. Some users bulk-purchased a year's shipping from a delivery company, to enjoy the AmazonPrime-like free shipping privileges without using Amazon[^last-mile-market]. Seeing an opportunity, a credit card company even went so far as to provide such a privilege to the subscribers of their card, which is also represented by a toke.
+It might happen that some users bulk-purchase a year's shipping from a delivery company, to enjoy the AmazonPrime-like free shipping privileges without using Amazon[^last-mile-market]. A credit card company might even start to provide such a privilege to the subscribers of their card, which is also represented by a token.
 
 [^last-mile-market]: The market condition for such an innovation might exist because only the buyer is most familiar with the last-mile delivery experience. Usually, an online retailer negotiates a higher bulk delivery discount than their buyers could, but they are just a proxy of the buyers' experience. Their interest is not perfectly aligned with the buyers. A buyer driving 30 minutes to pick up a parcel knows that the discount is no match for her time. The delivery company can also optimise the process better than the online retailer, for example, by requesting access to the buyer's calendar, which the online retailer couldn't do safely. Ultimately, more value can be created with the collaboration between the buyer and the delivery company.
 
-The online retailer decided to join the game to stay competitive. This time, he would need to modify his smart contract, changing the transaction rule that a shipping token can be accepted at the time of purchase. In such a case, the output of the transaction will not have a shipping token, since one is already provided.[^fungible-shipping-token]
+Now the online retailer decides to join the game to stay competitive. This time, he would need to modify his smart contract, changing the transaction rule so that a shipping token can be accepted at the time of purchase. In such a case, the output of the transaction will not have a shipping token, since one is already provided.[^fungible-shipping-token]
 
 [^fungible-shipping-token]: In practical implementations, bulk-purchased shipping labels, if tokenised, may or may not be used as shipment tokens. Shipping labels can be designed as a semi-fungible token, while the shipment token must be non-fungible, each mapped to a specific parcel. The authors of this paper decided to leave out such implementation detail for clarity.
 
 The online retailer will necessarily modify his business process to expect pick-ups from any delivery company the user purchased shipping tokens from.
 
-This change illustrated that a new transaction rule would result in a change of smart contract.
+This change illustrated **that a new transaction rule would result in a change of smart contract.**
 
-### Business processes may not change smart contracts. The market condition may.
+### Implications for the Design of Tokenscript: Messaging
 
 To recap, business process changes should not lead to a smart contract change. An improvement in a free market, in the form of a transaction rule change, should naturally lead to a smart contract change. Blockchain serves to provide a frictionless market, not to optimise business processes.
 
-This vision is made possible through Tokenscript. Without which the clear separation of integration needs and business process needs would be difficult and the result would be not interoperable.
-
-In the first case, Tokenscript described a shipping token to be able to receive messages. In the simplest form, the message is entrusted and rendered to the user interface
+This vision is made possible through Tokenscript. For the first case Tokenscript describes a shipping token to be able to receive messages. In the simplest form, the message is entrusted and rendered to the user interface
 
 We demonstrate the portion of Tokenscript related to messaging.
 
@@ -821,19 +819,17 @@ We demonstrate the portion of Tokenscript related to messaging.
 
 The section between `<states>...</states>` gives a list of states which is the basis of defining messages the token holder is allowed to receive.
 
-The first `<trust>...</trust>` structure causes the user agent to accept and display any signed messages from the token issuer, in this case, the online retailer, as notification and an entry in message history, when the token's state is initialised.
+The first `<trust>...</trust>` structure causes the user agent to accept and display any signed messages from the token issuer, in this case the online retailer, as notification and an entry in message history, when the token's state is initialised.
 
 The second `<trust>...</trust>` structure causes the user agent to accept and display any signed messages, whose signing verification key is certified by the issuer of the token, as notification and as an entry in message history, when the token's state is "dispatched". This effectively allows any entity the token issuer explicitly trust to issue a message at "dispatched" state.
 
-When the online retailer changes his delivery company, the retailer could issue a certificate on the public key of the new delivery company, thereby authorising them to send messages to the token holders (buyers) to update them the delivery status, yet restricting the messages to only certain stages of the business process.
+When the online retailer changes his delivery company, the retailer could issue a certificate on the public key of the new delivery company, thereby authorising them to send messages to the token holders (buyers) to update the delivery status, yet restricting the messages to only certain stages of the business process.
 
-This code snippet shows that by giving such flexibility Tokenscript connected to a new business process without requiring a change in the smart contract or affecting user experience. It also allowed communication to the token holder without sending messages through smart contracts.
+This code snippet shows that by giving such flexibility Tokenscript connects to a new business process without requiring a change in the smart contract or affecting user experience. It also allows communication to the token holder without sending messages through smart contracts.
 
 The method of actual communication is left open to be implemented by other layers of blockchain technology like a message queue or even a distributed message queue.
 
-It's worth noting that messaging is not the only part connected to the business process. We will explain a broader scope of integration in the "Web integration" chapter.
-
-It's also possible to write Tokenscript in such a way that only messages from the online retailer is trusted and displayed, therefore, any new delivery company must send their delivery status message to the online retailer's systems to be forwarded to the buyer. There are availability and privacy reasons why this may not be a good idea. For example, a delivery company should be able to operate when the online retailer is offline; the user might send the door entrance passcode to the delivery company which the online retailer should not learn.
+It's also possible to write Tokenscript in such a way that only messages from the online retailer are trusted and displayed, therefore, any new delivery company must send their delivery status message to the online retailer's systems to be forwarded to the buyer. There are availability and privacy reasons why this may not be a good idea. For example, a delivery company should be able to operate when the online retailer is offline; the user might send the door entrance passcode to the delivery company which the online retailer should not learn.
 
 ##  Types of tokens
 
