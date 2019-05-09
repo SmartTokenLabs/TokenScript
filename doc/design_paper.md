@@ -733,7 +733,7 @@ We worked out some major advantages of Tokenscript, including Security, Interope
 
 The design of Tokenscript is work in progress. So we can't give a complete design guide. But we can explain some of the most important design guidelines.
 
-## Relate tokens to smart contract and tokens to web services
+## Changes in the business process and in the market
 
 
 
@@ -833,15 +833,13 @@ It's also possible to write Tokenscript in such a way that only messages from th
 
 ##  Types of tokens
 
-Since 2018, Ethereum community has roughly categorised tokens as fungible tokens and non-fungible tokens.
+Tokenscript needs to deine types of Tokens. Since 2018, Ethereum community has roughly categorised tokens as fungible tokens and non-fungible tokens.
 
-Fungible tokens refer to the currency-like token with a balance, typically implemented in ERC20, although in practice currency functions like pre-authorisation and setting up of state channel requires richer functions than typical ERC20.
+Fungible tokens refer to the currency-like token with a balance, typically implemented in ERC20, although in practice currency functions like pre-authorisation and setting up of state channel requires richer functions than typical ERC20. Non-fungible tokens refer to crypto-kittens and typically have one unit per token.
 
-Non-fungible tokens refer to crypto-kittens and typically have one unit per token.
+The categorisation isn't capturing the full spectrum of the tokens we could and may overlap in some cases. Taking the 1% per cent property token we demonstrated earlier as an example, each of such token is fungible with another issued by the same issuer for the same property. At the same time, someone could create a property token with 0.88% to attract Chinese investors, because 8 is a lucky number in China. These token would not be fungible with the 1% token. Onviously, a percentage of ownership of property A and a percentage of ownership of property B are not fungible with each other. A mix-token with 1% or A and B would be fungible, but at the same time, you could build individualized, non-fungible tokens which represent an investor's own pick of a property mix. The design of Tokenscript has to reflect that the line between fungible and non-fungible tokens is not perfect and that there might be mixed forms.
 
-The categorisation isn't capturing the full spectrum of the tokens we could and may overlap in some cases. Taking the 1% per cent property token we demonstrated earlier as an example, each of such token is fungible with another issued by the same issuer for the same property. Maybe with the exception of the Chinese community which usually overvalue the token with a sequence number of 88, but if we allow any percentage number to be tokenised, say, allowing one to purchase 0.88%, then the sequence number will be refactored out of the way too, making each partial ownership token of the same property strictly fungible. However, apparently, a percentage of ownership of property A  and a percentage of ownership of property B are not fungible with each other.
-
-This paper re-introduces the concept of attestations - it has been there for decades but wasn't fully utilized. From there, this paper categorises tokens as "blockchain token" and "attestation". The former type includes both fungible and non-fungible tokens. The latter type "attestation" will be explained here.
+Further, this paper re-introduces the concept of attestations - it has been there for decades but wasn't fully utilized. From there, this paper categorises tokens as "blockchain token" and "attestation". The former type includes both fungible and non-fungible tokens. The latter type "attestation" will be explained here.
 
 ## Attestations
 
