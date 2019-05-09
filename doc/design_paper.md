@@ -725,7 +725,17 @@ Observing the desirable integration, we can see Tokenscript has to satisfy the f
 
 # The design of Tokenscript
 
+## Overview
+
+Tokenscript is an XML markup which serves as a hinge between the token or smart contact and the wallets, websites and third party platforms. Each Tokenscript is signed by the issuer of a token and can be updated by him. This allows Tokenscript to have the same security properties as a smart contract without having the disadvantages of storing everything in a smart contract.
+
+We worked out some major advantages of Tokenscript, including Security, Interoperability, Privacy, Scalability, Availability and the User-Interface. The design of Tokenscript must enables these advantages while allowing a rich scope of business cases and token and transaction compositions.
+
+The design of Tokenscript is work in progress. So we can't give a complete design guide. But we can explain some of the most important design guidelines.
+
 ## Relate tokens to smart contract and tokens to web services
+
+
 
 <!--- Early public blockchain projects attempted to implement both token logic and business process into smart contracts. Using an online retail project as an example, such a smart contract would not only process an order but also manages the inventory. The token transaction logic, like under what condition the transaction is valid, is tied with business process, like checking inventory. This method is, naturally, inherited from the way people build websites.
 
