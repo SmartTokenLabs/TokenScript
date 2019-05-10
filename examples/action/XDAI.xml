@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ts:action xmlns:ts="http://tokenscript.org/2019/05/tokenscript"
+           xmlns="http://www.w3.org/1999/xhtml"
+           xmlns:xml="http://www.w3.org/XML/1998/namespace"
+>
+    <ts:name>Transfer xDAI to DAI</ts:name>
+    <!-- because this action has xdai as input, it should be listed as
+         an action under XDAI's token view. -->
+    <ts:input>
+        <ts:token name="xdai">
+            <ts:currency network="100"/>
+        </ts:token>
+    </ts:input>
+    <!-- because this action has DAI as output, when a user decides to
+         create a new token, this action qallows DAI token to be chosen as
+         the new token to create -->
+    <ts:output>
+        <ts:token name="dai">
+            <ts:contract>
+                <ts:address network="1">0xdecafbad</ts:address>
+            </ts:contract>
+        </ts:token>
+    </ts:output>
+
+    <!-- if the user tries to use this action when having little xdai
+         balance, either by clicking this action under the XDAI's
+         token view, or by clicking "create" token and choosing DAI,
+         the following message shows. -->
+    <ts:exclude>
+        <ts:selection filter="balance<=1000000000"/>
+        <ts:message>
+            <ts:string xml:lang="en">Not enough balance.</ts:string>
+        </ts:message>
+    </exclude>
+
+    <ts:transaction>
+        <ts:ethereum>
+            <ts:to>0xdecafbad</ts:to>
+        </ts:ethereum>
+    </ts:transaction>
+
+    <ts:view/>
+</ts:action>
