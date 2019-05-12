@@ -220,6 +220,16 @@
       <xs:attribute name="syntax" use="required" type="xs:NMTOKEN"/>
     </xs:complexType>
   </xs:element>
+  <xs:simpleType name="syntax">
+    <xs:restriction base="xs:NMTOKEN">
+      <xs:enumeration value="1.3.6.1.4.1.1466.115.121.1.7"/><!-- Boolean -->
+      <xs:enumeration value="1.3.6.1.4.1.1466.115.121.1.15"/><!-- DirectoryString -->
+      <xs:enumeration value="1.3.6.1.4.1.1466.115.121.1.24"/><!-- GeneralizedTime -->
+      <xs:enumeration value="1.3.6.1.4.1.1466.115.121.1.26"/><!-- IA5String -->
+      <xs:enumeration value="1.3.6.1.4.1.1466.115.121.1.27"/><!-- Integer -->
+      <xs:enumeration value="1.3.6.1.4.1.1466.115.121.1.36"/><!-- NumericString -->
+    </xs:restriction>
+  </xs:simpleType>
   <xs:element name="transaction">
     <xs:complexType>
       <xs:choice minOccurs="1" maxOccurs="1">
