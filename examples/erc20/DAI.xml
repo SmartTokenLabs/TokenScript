@@ -44,11 +44,11 @@
             </ts:attribute-type>
             <ts:transaction>
                 <ts:ethereum function="transfer" contract="dai">
-                    <ts:inputs>
+                    <ts:data>
                         <!-- to convert erc20 DAI to native xDAI, transfer to this address -->
                         <ts:address>0x7301CFA0e1756B71869E93d4e4Dca5c7d0eb0AA6</ts:address>
                         <ts:uint256 ref="amount"/>
-                    </ts:inputs>
+                    </ts:data>
                 </ts:ethereum>
             </ts:transaction>
             <ts:view>&dai-bridge.en;</ts:view>
@@ -70,11 +70,11 @@
             </ts:attribute-type>
             <ts:transaction>
                 <ts:ethereum function="transfer" contract="dai">
-                    <ts:inputs>
+                    <ts:data>
                         <!-- to convert erc20 DAI to native xDAI, transfer to this address -->
                         <ts:address>0x4aa42145Aa6Ebf72e164C9bBC74fbD3788045016</ts:address>
                         <ts:uint256 ref="amount"/>
-                    </ts:inputs>
+                    </ts:data>
                 </ts:ethereum>
             </ts:transaction>
             <ts:view>&dai-bridge.en;</ts:view>
@@ -88,9 +88,9 @@
             </ts:name>
             <ts:origins>
                 <ts:ethereum function="balanceOf" contract="dai" as="uint">
-                    <ts:inputs>
+                    <ts:data>
                         <ts:address ref="ownerAddress"/>
-                    </ts:inputs>
+                    </ts:data>
                 </ts:ethereum>
             </ts:origins>
         </ts:attribute-type>
