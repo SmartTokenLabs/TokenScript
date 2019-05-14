@@ -274,8 +274,14 @@
   </xs:element>
   <xs:element name="ethereum">
     <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="inputs">
+      <xs:choice maxOccurs="2">
+        <xs:element minOccurs="0" name="value">
+          <xs:complexType mixed="true">
+            <xs:attribute name="ref" type="xs:NCName"/>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="to" type="address"/>
+        <xs:element name="data">
           <xs:complexType>
             <xs:choice maxOccurs="unbounded">
               <xs:element name="uint8">
@@ -598,27 +604,26 @@
                   <xs:attribute name="ref" type="xs:NCName"/>
                 </xs:complexType>
               </xs:element>
-              <xs:element name="address">
-                <xs:complexType mixed="true">
-                  <xs:attribute name="ref" type="xs:NCName"/>
-                </xs:complexType>
-              </xs:element>
               <xs:element name="string">
                 <xs:complexType mixed="true">
                   <xs:attribute name="ref" type="xs:NCName"/>
                 </xs:complexType>
               </xs:element>
+              <xs:element name="address" type="address"/>
             </xs:choice>
           </xs:complexType>
         </xs:element>
         <xs:element minOccurs="0" ref="mapping"/>
-      </xs:sequence>
+      </xs:choice>
       <xs:attribute name="contract" type="xs:IDREF"/>
       <xs:attribute name="function" type="xs:NCName"/>
       <xs:attribute name="as" type="as"/>
     </xs:complexType>
   </xs:element>
-  <xs:element name="mapping">
+    <xs:complexType name="address" mixed="true">
+      <xs:attribute name="ref" type="xs:NCName"/>
+    </xs:complexType>
+    <xs:element name="mapping">
     <xs:complexType>
       <xs:sequence>
         <xs:element maxOccurs="unbounded" name="option">
