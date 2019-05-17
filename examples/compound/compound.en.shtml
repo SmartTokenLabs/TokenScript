@@ -1,0 +1,30 @@
+<script type="text/javascript"><![CDATA[
+class Token {
+    constructor(tokenInstance) {
+        this.props = tokenInstance;
+    }
+
+    render() {
+        return 
+        `<div class="container">
+            <h2> DAI Compound Card </h2>
+            <div class="dai-investment-info">
+                <p>DAI balance ${this.props.daiBalance}</p>
+                <p>Supply balance ${this.props.supplyMapping}</p>
+                <p>Borrow balance ${this.props.borrowMapping}</p>
+                <p>Interest rate on supply ${this.props.supplyInterestRate}</p>
+                <p>Interest rate on borrowing ${this.props.borrowInterestRate}</p>
+                <p>Interest earned ${this.props.supplyBalance - this.props.supplyMapping} </p>
+                <p>Interest payable ${this.props.borrowBalance - this.props.borrowMapping} </p>
+            </div>
+        </div>`;
+    }
+}
+
+web3.tokens.dataChanged = (oldTokens, updatedTokens) => {
+    const currentTokenInstance = web3.tokens.data.currentInstance;
+    const domHtml = new Token(currentTokenInstance).render();
+    document.getElementById('root').innerHTML = domHtml;
+};
+
+]]></script>
