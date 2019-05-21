@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE token  [
     <!ENTITY style SYSTEM "shared.css">
-        <!ENTITY dai-bridge.en SYSTEM "dai-bridge.en.shtml">
+    <!ENTITY dai-bridge.en SYSTEM "dai-bridge.en.shtml">
     ]>
 <ts:token xmlns:ts="http://tokenscript.org/2019/05/tokenscript"
           xmlns="http://www.w3.org/1999/xhtml"
