@@ -33,3 +33,35 @@ input {
     margin-top: 5px;
     font-size: 1em;
 }
+hr {
+border: 0.5px solid black;
+}
+button {
+background-color: #3F4654;
+border-radius: 6px;
+color: white;
+padding: 15px 32px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 16px;
+}
+.financial-info-left {
+font-size: 14px;
+width: 50%;
+float: left;
+border-right: 0.5px solid black;
+}
+.financial-info-right {
+float: right;
+font-size: 14px;
+}
+
+.container {
+width: 100%;
+display: inline-block;
+border-width: 0 0 1px;
+}
+.inline-img {
+display: inline-block;
+}
