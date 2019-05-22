@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE token  [
     <!ENTITY style SYSTEM "shared.css">
-        <!ENTITY dai-bridge.en SYSTEM "dai-bridge.en.shtml">
+    <!ENTITY dai-bridge.en SYSTEM "dai-bridge.en.shtml">
     ]>
 <ts:token xmlns:ts="http://tokenscript.org/2019/05/tokenscript"
           xmlns="http://www.w3.org/1999/xhtml"
@@ -12,7 +12,6 @@
 >
     <ts:name>
         <ts:string xml:lang="en">DAI</ts:string>
-        <ts:string xml:lang="zh">代幣</ts:string>
     </ts:name>
     <ts:contract name="dai" interface="erc20">
         <ts:address network="1">0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359</ts:address>
@@ -83,8 +82,7 @@
     <ts:attribute-types>
         <ts:attribute-type id="balance" syntax="1.3.6.1.4.1.1466.115.121.1.36">
             <ts:name>
-                <ts:string xml:lang="en">Balance</ts:string>
-                <ts:string xml:lang="zh">餘額</ts:string>
+                <ts:string xml:lang="en">DAI-Balance</ts:string>
             </ts:name>
             <ts:origins>
                 <ts:ethereum function="balanceOf" contract="dai" as="uint">
