@@ -135,10 +135,10 @@ class Token {
 }
 
 web3.tokens.dataChanged = (oldTokens, updatedTokens) => {
-    const currentTokenInstance = web3.tokens.data.currentInstance
-    const domHtml = new Token(currentTokenInstance).render()
-    document.getElementById('root').innerHTML = domHtml
-}
+    const currentTokenInstance = web3.tokens.data.currentInstance;
+    const domHtml = new Token(currentTokenInstance).render();
+    document.getElementById('root').innerHTML = domHtml;
+};
 
 ]]></script>
 <div id="root"></div>

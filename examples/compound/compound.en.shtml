@@ -7,9 +7,9 @@ class Token {
     render() {
         return 
         `<div class="container">
-            <h2> DAI Compound Card </h2>
-            <div class="dai-investment-info">
-                <p>DAI balance ${this.props.daiBalance}</p>
+            <h2> ${this.props.name} Compound Card </h2>
+            <div class="investment-info">
+                <p>${this.props.name} balance ${this.props.tokenBalance}</p>
                 <p>Supply balance ${this.props.supplyMapping}</p>
                 <p>Borrow balance ${this.props.borrowMapping}</p>
                 <p>Interest rate on supply ${this.props.supplyInterestRate}</p>
