@@ -8,7 +8,7 @@
          an action under XDAI's token view. -->
     <ts:input>
         <ts:token name="xdai">
-            <ts:currency network="100"/>
+            <ts:ethereum network="100"/>
         </ts:token>
     </ts:input>
     <!-- because this action has DAI as output, when a user decides to
@@ -26,12 +26,16 @@
          balance, either by clicking this action under the XDAI's
          token view, or by clicking "create" token and choosing DAI,
          the following message shows. -->
+    <!-- The exclusion rule here is excluded out to reduce the scope of schema-2019-05
     <ts:exclude>
-        <ts:selection filter="balance<=1000000000"/>
+        <ts:selection>
+            <ts:token filter="balance<=1000000000"/>
+        </ts:selection>
         <ts:message>
             <ts:string xml:lang="en">Not enough balance.</ts:string>
         </ts:message>
     </exclude>
+    -->
 
     <ts:transaction>
         <ts:ethereum>
