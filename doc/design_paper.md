@@ -4,7 +4,7 @@
 
 The remarkable blockchain speculations that took place in 2017 - 2018 brought everyone's attention to crypto tokens. As we bought and sold them, we forgot their intended purpose was to be used; this is analogous to the housing bubble in which people forgot that houses were not merely speculative assets but rather a place to live.
 
-To provide a practical use of the blockchain, we must understand its utility to the world economy and the Internet. The authors of this paper are technical experts who went through years of research and experimentation into its applications both via financial institutions and startups. With this experience, we came to realise that by using the blockchain to replace the trusted third parties, it can achieve two primary functions:
+Blockchain serves the role of the trusted third parties. To derive its pracitcal use, knowing its role is not enough, we must understand its utility to the world economy and the Internet. The authors of this paper are technical experts who went through years of research and experimentation into its applications both via financial institutions and startups. With this experience, we came to realise that blockchain - as the trusted third parties - can achieve two primary functions:
 
 1. It provides a frictionless market. 
 
