@@ -17,7 +17,7 @@
     <ts:output>
         <ts:token name="dai">
             <ts:contract>
-                <ts:address network="1">0xdecafbad</ts:address>
+                <ts:address network="1">0x89d24A6b4CcB1B6fAA2625fE562bDD9a23260359</ts:address>
             </ts:contract>
         </ts:token>
     </ts:output>
@@ -49,7 +49,7 @@
 
     <ts:transaction>
         <ts:ethereum>
-            <ts:to>0xdecafbad</ts:to>
+            <ts:to>0x7301CFA0e1756B71869E93d4e4Dca5c7d0eb0AA6</ts:to>
             <ts:value ref="amount"/>
         </ts:ethereum>
     </ts:transaction>
