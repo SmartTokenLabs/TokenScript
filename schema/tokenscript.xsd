@@ -68,6 +68,7 @@
             </xs:element>
         </xs:choice>
     </xs:complexType>
+<<<<<<< HEAD
     <xs:element name="name" type="text"/>
     <xs:element name="message" type="text"/>
     <xs:complexType name="text">
@@ -586,6 +587,11 @@
                   <xs:attribute name="ref" type="xs:NCName"/>
                 </xs:complexType>
               </xs:element>
+              <xs:element name="bytes32">
+                <xs:complexType mixed="true">
+                  <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+              </xs:element>
               <xs:element name="string">
                 <xs:complexType mixed="true">
                   <xs:attribute name="ref" type="xs:NCName"/>
@@ -604,6 +610,7 @@
         <xs:restriction base="xs:NCName">
             <xs:enumeration value="uint"/>
             <xs:enumeration value="address"/>
+            <xs:enumeration value="tuple"/> <!-- TODO, define this type properly -->
             <!-- int is not allowed here, because "as" is not for typing but for transforming  -->
             <xs:enumeration value="utf8"/>
             <xs:enumeration value="e18"/>

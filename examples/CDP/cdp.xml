@@ -30,6 +30,9 @@
     <ts:contract name="Medianizer">
         <ts:address network="1">0x729D19f657BD0614b4985Cf1D82531c67569197B</ts:address>
     </ts:contract>
+    <ts:contract name="SaiTub">
+        <ts:address network="1">0x448a5065aeBB8E423F0896E6c5D525C040f59af3</ts:address>
+    </ts:contract>
     <ts:origins>
         <!-- Define the contract which holds the token that the user will use -->
         <ts:ethereum contract="DAIToken">
@@ -64,7 +67,7 @@
                 <ts:string xml:lang="en">EthPriceUSD</ts:string>
             </ts:name>
             <ts:origins>
-                <ts:ethereum function="read" contract="Medianizer">
+                <ts:ethereum function="read" contract="Medianizer" as="uint">
                 </ts:ethereum>
             </ts:origins>
         </ts:attribute-type>
@@ -72,12 +75,33 @@
         <!-- TODO Get the amount deposited, amount generated,
          amount withdraw-able (in eth and DAI) & amount to pay back -->
 
+        <!-- tuple below returns
+            struct Cup {
+                address  lad;      // CDP owner
+                uint256  ink;      // Locked collateral (in SKR)
+                uint256  art;      // Outstanding normalised debt (tax only)
+                uint256  ire;      // Outstanding normalised debt
+            }
+        -->
+        <ts:attribute-type id="cups" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+            <ts:name>
+                <ts:string xml:lang="en">CDP Debt and Collateral</ts:string>
+            </ts:name>
+            <ts:origins>
+                <ts:ethereum function="cups" contract="SaiTub" as="tuple">
+                    <ts:data>
+                        <ts:bytes32 ref="cupData"/>
+                    </ts:data>
+                </ts:ethereum>
+            </ts:origins>
+        </ts:attribute-type>
+
         <ts:attribute-type id="stabilityFee" syntax="1.3.6.1.4.1.1466.115.121.1.36">
             <ts:name>
                 <ts:string xml:lang="en">Stability Fee</ts:string>
             </ts:name>
             <ts:origins>
-                <ts:ethereum function="fee" contract="DAIToken">
+                <ts:ethereum function="fee" contract="DAIToken" as="uint">
                 </ts:ethereum>
             </ts:origins>
         </ts:attribute-type>
@@ -88,24 +112,26 @@
                 <ts:string xml:lang="zh">餘額</ts:string>
             </ts:name>
             <ts:origins>
-                <ts:ethereum function="balanceOf" contract="DAIToken">
-                    <ts:inputs>
+                <ts:ethereum function="balanceOf" contract="DAIToken" as="uint">
+                    <ts:data>
                         <ts:uint256 ref="ownerAddress"/>
-                    </ts:inputs>
+                    </ts:data>
                 </ts:ethereum>
             </ts:origins>
         </ts:attribute-type>
 
+        <!-- TODO all these functions like move, close, deposit, generate,
+        payback might need to go through the proxy -->
         <ts:attribute-type id="deposit" syntax="1.3.6.1.4.1.1466.115.121.1.36">
             <ts:name>
                 <ts:string xml:lang="en">Deposit</ts:string>
             </ts:name>
             <ts:origins>
                 <ts:ethereum function="lock" contract="DSProxy">
-                    <ts:inputs>
+                    <ts:data>
                         <ts:address ref="address"/>
                         <ts:bytes32 ref="data"/>
-                    </ts:inputs>
+                    </ts:data>
                 </ts:ethereum>
             </ts:origins>
         </ts:attribute-type>
@@ -116,69 +142,82 @@
             </ts:name>
             <ts:origins>
                 <ts:ethereum function="free" contract="DSProxy">
-                    <ts:inputs>
+                    <ts:data>
                         <ts:address ref="address"/>
                         <ts:bytes32 ref="data"/>
                         <ts:uint256 ref="amount"/>
-                    </ts:inputs>
+                    </ts:data>
                 </ts:ethereum>
             </ts:origins>
         </ts:attribute-type>
+
         <ts:attribute-type id="payback" syntax="1.3.6.1.4.1.1466.115.121.1.36">
             <ts:name>
                 <ts:string xml:lang="en">Payback</ts:string>
             </ts:name>
             <ts:origins>
-                <ts:ethereum function="wipe" contract="DSProxy">
-                    <ts:inputs>
-                        <ts:address ref="address"/>
-                        <ts:bytes32 ref="data"/>
-                        <ts:uint256 ref="amt"/>
-                    </ts:inputs>
+                <ts:ethereum function="burn" contract="SaiTub">
+                    <ts:data>
+                        <ts:uint256 ref="wad"/>
+                    </ts:data>
                 </ts:ethereum>
             </ts:origins>
         </ts:attribute-type>
+
         <ts:attribute-type id="generate" syntax="1.3.6.1.4.1.1466.115.121.1.36">
             <ts:name>
                 <ts:string xml:lang="en">Generate</ts:string>
             </ts:name>
             <ts:origins>
-                <ts:ethereum function="draw" contract="DSProxy">
-                    <ts:inputs>
-                        <ts:address ref="address"/>
-                        <ts:bytes32 ref="data"/>
-                        <ts:uint256 ref="amount"/>
-                    </ts:inputs>
+                <ts:ethereum function="mint" contract="SaiTub">
+                    <ts:data>
+                        <ts:address ref="guy"/>
+                        <ts:uint256 ref="wad"/>
+                    </ts:data>
                 </ts:ethereum>
             </ts:origins>
         </ts:attribute-type>
+
         <ts:attribute-type id="move" syntax="1.3.6.1.4.1.1466.115.121.1.36">
             <ts:name>
                 <ts:string xml:lang="en">Move</ts:string>
             </ts:name>
             <ts:origins>
-                <ts:ethereum function="give" contract="DSProxy">
-                    <ts:inputs>
-                        <ts:address ref="from"/>
-                        <ts:bytes32 ref="data"/>
+                <ts:ethereum function="give" contract="SaiTub">
+                    <ts:data>
+                        <ts:bytes32 ref="cup"/>
                         <ts:address ref="to"/>
-                    </ts:inputs>
+                    </ts:data>
                 </ts:ethereum>
             </ts:origins>
         </ts:attribute-type>
+
         <ts:attribute-type id="close" syntax="1.3.6.1.4.1.1466.115.121.1.36">
             <ts:name>
                 <ts:string xml:lang="en">Close</ts:string>
             </ts:name>
             <ts:origins>
-                <ts:ethereum function="shut" contract="DSProxy">
-                    <ts:inputs>
-                        <ts:address ref="address"/>
-                        <ts:bytes32 ref="data"/>
-                    </ts:inputs>
+                <ts:ethereum function="shut" contract="SaiTub">
+                    <ts:data>
+                        <ts:bytes32 ref="cup"/>
+                    </ts:data>
                 </ts:ethereum>
             </ts:origins>
         </ts:attribute-type>
+
+        <ts:attribute-type id="safe" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+            <ts:name>
+                <ts:string xml:lang="en">Is CDP safe?</ts:string>
+            </ts:name>
+            <ts:origins>
+                <ts:ethereum function="safe" contract="SaiTub" as="bool">
+                    <ts:data>
+                        <ts:bytes32 ref="cup"/>
+                    </ts:data>
+                </ts:ethereum>
+            </ts:origins>
+        </ts:attribute-type>
+
     </ts:attribute-types>
 </ts:token>
 

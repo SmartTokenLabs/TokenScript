@@ -6,7 +6,7 @@ class Token {
     }
 
     render() {
-        return`
+        return `
         <div>
             <div id="mainHeader">
               <h2>CDP Portal</h2>
@@ -30,7 +30,7 @@ class Token {
                 <h3>Collateralization Ratio</h3>
                 <b><h5>${this.props.liquidationPrice}</h5></b>
                 <h3>Minimum Ratio</h3>
-                <b><h5>${this.props.currentPriceInfo}</h5></b>
+                <b><h5>150%</h5></b>
                 <h3>Stability Fee</h3>
                 <b><h5>${this.props.stabilityFee}</h5></b>
               </div>
@@ -62,7 +62,7 @@ class Token {
               <div class="dai-panel-left">
                 <center><h3>${this.props.generated}</h3>
                 <h4>Generated</h4>
-                <h6>${this.props.generatedValueUSD} USD</h6>
+                <h6>${this.props.cups[3]} USD</h6>
               </div>
               <br>
               <div class="dai-panel-right">
@@ -71,15 +71,14 @@ class Token {
                 <h6>${this.props.maxToGenerateValue} USD</h6>
               </div>
             </div>
-        </div>
-        `
+        </div>`;
     }
-
-    web3.tokens.dataChanged = (oldTokens, updatedTokens) => {
-        const currentTokenInstance = web3.tokens.data.currentInstance;
-        const domHtml = new Token(currentTokenInstance).render();
-        document.getElementById('root').innerHTML = domHtml;
-    };
-
 }
+
+web3.tokens.dataChanged = (oldTokens, updatedTokens) => {
+    const currentTokenInstance = web3.tokens.data.currentInstance;
+    const domHtml = new Token(currentTokenInstance).render();
+    document.getElementById('root').innerHTML = domHtml;
+};
+
 ]]></script>
