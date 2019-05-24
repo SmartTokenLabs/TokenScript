@@ -21,7 +21,17 @@
             </ts:contract>
         </ts:token>
     </ts:output>
-
+    <ts:attribute-type id="amount" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+        <ts:name>
+            <ts:string xml:lang="en">Amount</ts:string>
+            <ts:string xml:lang="zh">代幣金額</ts:string>
+        </ts:name>
+        <ts:origins>
+            <!-- e18 is a hard coded multiplier.
+            rationale for hardcoding: avoiding over-design  -->
+            <ts:user-entry as="e18"/>
+        </ts:origins>
+    </ts:attribute-type>
     <!-- if the user tries to use this action when having little xdai
          balance, either by clicking this action under the XDAI's
          token view, or by clicking "create" token and choosing DAI,
@@ -40,6 +50,7 @@
     <ts:transaction>
         <ts:ethereum>
             <ts:to>0xdecafbad</ts:to>
+            <ts:value ref="amount"/>
         </ts:ethereum>
     </ts:transaction>
 
