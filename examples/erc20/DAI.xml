@@ -41,15 +41,6 @@
                     <ts:user-entry as="e18"/>
                 </ts:origins>
             </ts:attribute-type>
-            <ts:transaction>
-                <ts:ethereum function="transfer" contract="dai">
-                    <ts:data>
-                        <!-- to convert erc20 DAI to native xDAI, transfer to this address -->
-                        <ts:address>0x7301CFA0e1756B71869E93d4e4Dca5c7d0eb0AA6</ts:address>
-                        <ts:uint256 ref="amount"/>
-                    </ts:data>
-                </ts:ethereum>
-            </ts:transaction>
             <ts:view>&dai-bridge.en;</ts:view>
         </ts:action>
         <ts:action>

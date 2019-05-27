@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ts:action xmlns:ts="http://tokenscript.org/2019/05/tokenscript"
+           xmlns="http://www.w3.org/1999/xhtml"
+           xmlns:xml="http://www.w3.org/XML/1998/namespace"
+>
+    <ts:name>Transfer xDAI to DAI</ts:name>
+    <!-- because this action has xdai as input, it should be listed as
+         an action under XDAI's token view. -->
+    <ts:input>
+        <ts:token name="xdai">
+            <ts:ethereum network="100"/>
+        </ts:token>
+    </ts:input>
+    <!-- because this action has DAI as output, when a user decides to
+         create a new token, this action qallows DAI token to be chosen as
+         the new token to create -->
+    <ts:output>
+        <ts:token name="dai">
+            <ts:contract>
+                <ts:address network="1">0x89d24A6b4CcB1B6fAA2625fE562bDD9a23260359</ts:address>
+            </ts:contract>
+        </ts:token>
+    </ts:output>
+    <ts:attribute-type id="amount" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+        <ts:name>
+            <ts:string xml:lang="en">Amount</ts:string>
+            <ts:string xml:lang="zh">代幣金額</ts:string>
+        </ts:name>
+        <ts:origins>
+            <!-- e18 is a hard coded multiplier.
+            rationale for hardcoding: avoiding over-design  -->
+            <ts:user-entry as="e18"/>
+        </ts:origins>
+    </ts:attribute-type>
+    <!-- if the user tries to use this action when having little xdai
+         balance, either by clicking this action under the XDAI's
+         token view, or by clicking "create" token and choosing DAI,
+         the following message shows. -->
+    <!-- The exclusion rule here is excluded out to reduce the scope of schema-2019-05
+    <ts:exclude>
+        <ts:selection>
+            <ts:token filter="balance<=1000000000"/>
+        </ts:selection>
+        <ts:message>
+            <ts:string xml:lang="en">Not enough balance.</ts:string>
+        </ts:message>
+    </exclude>
+    -->
+
+    <ts:transaction>
+        <ts:ethereum>
+            <ts:to>0x7301CFA0e1756B71869E93d4e4Dca5c7d0eb0AA6</ts:to>
+            <ts:value ref="amount"/>
+        </ts:ethereum>
+    </ts:transaction>
+
+    <ts:view/>
+</ts:action>
