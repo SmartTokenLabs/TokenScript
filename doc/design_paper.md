@@ -725,7 +725,17 @@ Observing the desirable integration, we can see Tokenscript has to satisfy the f
 
 # The design of Tokenscript
 
-## Relate tokens to smart contract and tokens to web services
+## Overview
+
+Tokenscript is an XML markup which serves as a hinge between the token or smart contact and the wallets, websites and third party platforms. Each Tokenscript is signed by the issuer of a token and can be updated by him. This allows Tokenscript to have the same security properties as a smart contract without having the disadvantages of storing everything in a smart contract.
+
+We worked out some major advantages of Tokenscript, including Security, Interoperability, Privacy, Scalability, Availability and the User-Interface. The design of Tokenscript must enables these advantages while allowing a rich scope of business cases and token and transaction compositions.
+
+The design of Tokenscript is work in progress. So we can't give a complete design guide. But we can explain some of the most important design guidelines.
+
+## Changes in the business process and in the market
+
+
 
 <!--- Early public blockchain projects attempted to implement both token logic and business process into smart contracts. Using an online retail project as an example, such a smart contract would not only process an order but also manages the inventory. The token transaction logic, like under what condition the transaction is valid, is tied with business process, like checking inventory. This method is, naturally, inherited from the way people build websites.
 
@@ -741,41 +751,39 @@ The authors of this paper advocate a method to draw the line between a smart con
 
 2. A smart contract and business process are integrated through the tokens.
 
-Going further along the online iPhone purchase example, at the time of purchase, a shipment token is created, representing the user's right to receive the delivery. It does not imply that in the very few seconds the purchase is recorded on the blockchain, an inventory management database selected a warehouse, deducted the iPhone from its inventory count, labelled it with a shipment tracker and returned the tracker to the token. It would be absurd to use blockchain like a cloud platform and outright impossible thanks to the atomic nature of blockchain transactions.
+This differentiation is fundamental for the design of Tokenscript. So we will illuminate with an example: The iPhone purchase.
 
-Preferably instead, the online retailer obtained a point of integration - the shipment token, which will allow the warehouse to find the product, label it at its own pace, inform the user that the product is ready to be shipped (the token carries the definition of what communication is allowed to the holder), and send it on its way.
+At the time of the purchase, a shipment token is created, representing the user's right to receive the delivery. It does not mean that the blockchain acts like a cloud platform for the inventory management system. Instead, the shipment token serves as a point of integration. It will allow the warehouse to find the product, label it at its own pace, inform the user that the product is ready to be shipped (the token carries the definition of what communication is allowed to the holder), and send it on its way.
 
-As the business matures and markets become less frictional, two changes happen.
+As the business matures and markets become less frictional, two changes might happen.
 
-### Change in the business process
+1. Change in the business process
 
 The first change is that the online retailer found a better shipment company. In this case, the new shipment company will integrate the same shipment token, sending shipping progress information in place of the old one. The customers can still prove ownership of the shipping with his token, e.g. by using an NFC mobile phone to touch the deliverer's hand-held device.
 
 There is no need to change the smart contract transaction rules. The online retailer can even change the shipping company when the product is first under-delivered without the user changing his token.
 
-This change illustrated that the business process should decouple from the token, instead, integrated through the token.
+This change illustrated that **the business process should decouple from the token, instead, integrated through the token**.
 
-### Change in the market
+2. Change in the market
 
-Business went on for a while; then, there is an innovation from the blockchain market. Some users bulk-purchased a year's shipping from a delivery company, to enjoy the AmazonPrime-like free shipping privileges without using Amazon[^last-mile-market]. Seeing an opportunity, a credit card company even went so far as to provide such a privilege to the subscribers of their card, which is also represented by a toke.
+It might happen that some users bulk-purchase a year's shipping from a delivery company, to enjoy the AmazonPrime-like free shipping privileges without using Amazon[^last-mile-market]. A credit card company might even start to provide such a privilege to the subscribers of their card, which is also represented by a token.
 
 [^last-mile-market]: The market condition for such an innovation might exist because only the buyer is most familiar with the last-mile delivery experience. Usually, an online retailer negotiates a higher bulk delivery discount than their buyers could, but they are just a proxy of the buyers' experience. Their interest is not perfectly aligned with the buyers. A buyer driving 30 minutes to pick up a parcel knows that the discount is no match for her time. The delivery company can also optimise the process better than the online retailer, for example, by requesting access to the buyer's calendar, which the online retailer couldn't do safely. Ultimately, more value can be created with the collaboration between the buyer and the delivery company.
 
-The online retailer decided to join the game to stay competitive. This time, he would need to modify his smart contract, changing the transaction rule that a shipping token can be accepted at the time of purchase. In such a case, the output of the transaction will not have a shipping token, since one is already provided.[^fungible-shipping-token]
+Now the online retailer decides to join the game to stay competitive. This time, he would need to modify his smart contract, changing the transaction rule so that a shipping token can be accepted at the time of purchase. In such a case, the output of the transaction will not have a shipping token, since one is already provided.[^fungible-shipping-token]
 
 [^fungible-shipping-token]: In practical implementations, bulk-purchased shipping labels, if tokenised, may or may not be used as shipment tokens. Shipping labels can be designed as a semi-fungible token, while the shipment token must be non-fungible, each mapped to a specific parcel. The authors of this paper decided to leave out such implementation detail for clarity.
 
 The online retailer will necessarily modify his business process to expect pick-ups from any delivery company the user purchased shipping tokens from.
 
-This change illustrated that a new transaction rule would result in a change of smart contract.
+This change illustrated **that a new transaction rule would result in a change of smart contract.**
 
-### Business processes may not change smart contracts. The market condition may.
+### Implications for the Design of Tokenscript: Messaging
 
 To recap, business process changes should not lead to a smart contract change. An improvement in a free market, in the form of a transaction rule change, should naturally lead to a smart contract change. Blockchain serves to provide a frictionless market, not to optimise business processes.
 
-This vision is made possible through Tokenscript. Without which the clear separation of integration needs and business process needs would be difficult and the result would be not interoperable.
-
-In the first case, Tokenscript described a shipping token to be able to receive messages. In the simplest form, the message is entrusted and rendered to the user interface
+This vision is made possible through Tokenscript. For the first case Tokenscript describes a shipping token to be able to receive messages. In the simplest form, the message is entrusted and rendered to the user interface
 
 We demonstrate the portion of Tokenscript related to messaging.
 
@@ -811,55 +819,47 @@ We demonstrate the portion of Tokenscript related to messaging.
 
 The section between `<states>...</states>` gives a list of states which is the basis of defining messages the token holder is allowed to receive.
 
-The first `<trust>...</trust>` structure causes the user agent to accept and display any signed messages from the token issuer, in this case, the online retailer, as notification and an entry in message history, when the token's state is initialised.
+The first `<trust>...</trust>` structure causes the user agent to accept and display any signed messages from the token issuer, in this case the online retailer, as notification and an entry in message history, when the token's state is initialised.
 
 The second `<trust>...</trust>` structure causes the user agent to accept and display any signed messages, whose signing verification key is certified by the issuer of the token, as notification and as an entry in message history, when the token's state is "dispatched". This effectively allows any entity the token issuer explicitly trust to issue a message at "dispatched" state.
 
-When the online retailer changes his delivery company, the retailer could issue a certificate on the public key of the new delivery company, thereby authorising them to send messages to the token holders (buyers) to update them the delivery status, yet restricting the messages to only certain stages of the business process.
+When the online retailer changes his delivery company, the retailer could issue a certificate on the public key of the new delivery company, thereby authorising them to send messages to the token holders (buyers) to update the delivery status, yet restricting the messages to only certain stages of the business process.
 
-This code snippet shows that by giving such flexibility Tokenscript connected to a new business process without requiring a change in the smart contract or affecting user experience. It also allowed communication to the token holder without sending messages through smart contracts.
+This code snippet shows that by giving such flexibility Tokenscript connects to a new business process without requiring a change in the smart contract or affecting user experience. It also allows communication to the token holder without sending messages through smart contracts.
 
 The method of actual communication is left open to be implemented by other layers of blockchain technology like a message queue or even a distributed message queue.
 
-It's worth noting that messaging is not the only part connected to the business process. We will explain a broader scope of integration in the "Web integration" chapter.
-
-It's also possible to write Tokenscript in such a way that only messages from the online retailer is trusted and displayed, therefore, any new delivery company must send their delivery status message to the online retailer's systems to be forwarded to the buyer. There are availability and privacy reasons why this may not be a good idea. For example, a delivery company should be able to operate when the online retailer is offline; the user might send the door entrance passcode to the delivery company which the online retailer should not learn.
+It's also possible to write Tokenscript in such a way that only messages from the online retailer are trusted and displayed, therefore, any new delivery company must send their delivery status message to the online retailer's systems to be forwarded to the buyer. There are availability and privacy reasons why this may not be a good idea. For example, a delivery company should be able to operate when the online retailer is offline; the user might send the door entrance passcode to the delivery company which the online retailer should not learn.
 
 ##  Types of tokens
 
-Since 2018, Ethereum community has roughly categorised tokens as fungible tokens and non-fungible tokens.
+Tokenscript needs to deine types of Tokens. Since 2018, Ethereum community has roughly categorised tokens as fungible tokens and non-fungible tokens.
 
-Fungible tokens refer to the currency-like token with a balance, typically implemented in ERC20, although in practice currency functions like pre-authorisation and setting up of state channel requires richer functions than typical ERC20.
+Fungible tokens refer to the currency-like token with a balance, typically implemented in ERC20, although in practice currency functions like pre-authorisation and setting up of state channel requires richer functions than typical ERC20. Non-fungible tokens refer to crypto-kittens and typically have one unit per token.
 
-Non-fungible tokens refer to crypto-kittens and typically have one unit per token.
+The categorisation isn't capturing the full spectrum of the tokens we could and may overlap in some cases. Taking the 1% per cent property token we demonstrated earlier as an example, each of such token is fungible with another issued by the same issuer for the same property. At the same time, someone could create a property token with 0.88% to attract Chinese investors, because 8 is a lucky number in China. This token would not be fungible with the 1% token. Obviously, a percentage of ownership of property A and a percentage of ownership of property B are not fungible with each other. A mix-token with 1% or A and B would be fungible, but at the same time, you could build individualized, non-fungible tokens which represent an investor's own pick of a property mix. The design of Tokenscript has to reflect that the line between fungible and non-fungible tokens is not perfect and that there might be mixed forms.
 
-The categorisation isn't capturing the full spectrum of the tokens we could and may overlap in some cases. Taking the 1% per cent property token we demonstrated earlier as an example, each of such token is fungible with another issued by the same issuer for the same property. Maybe with the exception of the Chinese community which usually overvalue the token with a sequence number of 88, but if we allow any percentage number to be tokenised, say, allowing one to purchase 0.88%, then the sequence number will be refactored out of the way too, making each partial ownership token of the same property strictly fungible. However, apparently, a percentage of ownership of property A  and a percentage of ownership of property B are not fungible with each other.
-
-This paper re-introduces the concept of attestations - it has been there for decades but wasn't fully utilized. From there, this paper categorises tokens as "blockchain token" and "attestation". The former type includes both fungible and non-fungible tokens. The latter type "attestation" will be explained here.
+Further, this paper re-introduces the concept of attestations - it has been there for decades but wasn't fully utilized. From there, this paper categorises tokens as "blockchain tokens" and "attestations". The former type includes both fungible and non-fungible tokens. The latter type "attestation" will be explained here.
 
 ## Attestations
 
-Attestation is a cryptographically signed message testifying something on a subject - a person, a token, or another attestation. Since it is specific to that subject being attested, it is not transferable on its own on the blockchain.
+An attestation is a cryptographically signed message testifying something about an object - a person, a token, or another attestation. In case the attestation is a determinant factor of the object, neither the object nor the attestion can be transfered without it on the blockchain. 
 
-In our previous car ownership token example, the car ownership token would be a blockchain token, where the typical buy, sell and transfer rules can apply. The insurance token on it, however, is not a blockchain token. If the insurance is compulsory, it is an attestation on that car, therefore cannot be transferred on its own. If the insurance is comprehensive, it is an attestation on the car and the driver, and cannot be seamlessly transferred even if the car is transferred.
+Take the car ownership example: The car ownership token would be a blockchain token, where the typical buy, sell and transfer rules can apply. The insurance token on the car, however, should not behave like a blockchain token. If insurance is compulsory, it is an attestation on the car and therefore cannot be transferred on its own. If the insurance is comprehensive, it is an attestation on the car and the driver, and cannot be seamlessly transferred even if the car is transferred. In both cases the insurance token should not be transferable.
 
-If an attestation is not transferable, then why does it have to be on the blockchain? The answer is it doesn't.
+The same holds for all kind of attestations: They are not transferable, as they are bound to a specific object. If an attestation is not transferable, then why does it have to be on the blockchain? The answer is it doesn't.
 
-Take a person identity attestation for example. Unless it is used for a blockchain transaction or revoked for some reason, there is no reason that it should have any trace on blockchains like public Ethereum. They are, still, an item in the user's wallet, since they might need to be prolonged, re-attested due to change of a person's identity or used to login to services the same way Estonian e-residency attestation can be used to login to web services.
+Take a person identity attestation for example. Unless it is used for a blockchain transaction or revoked for some reason, there is no reason that it should have any trace on blockchains like public Ethereum. It is, however, still an item in the user's wallet, since it might need to be prolonged, re-attested due to change of a person's identity or used to login to services the same way Estonian e-residency attestation can be used to login to web services.
 
-An attestation can affect transactions. For example, a VIP member can enjoy a 10% discount on services - such business rule would require a VIP member attestation to be used for the cryptocurrency transaction for purchasing the service. An attestation of Holden Capped Car services, which is valid for 5 years, allow the car to be serviced with the bill capped to a certain amount before its expiry.
+Further, an attestation can affect transactions. For example, a VIP member can enjoy a 10% discount on services by providing a VIP member attestation with a cryptocurrency transaction. An attestation of Holden Capped Car services, which is valid for 5 years, allow the car to be serviced with the bill capped to a certain amount before its expiry. You can also imagine adult services demanding an "over 18" attestation for their transactions and so on. Linking attestation to transactions opens up a lot of very interesting business cases.
 
-Sometimes, an attestation dictates what transactions can happen.
+As attestations touches identity, privacy is a primary matter of concern here. To combat linkability (the subject of an attestation being identified by the public use of such an attestation), the attestation used in transactions must be of a different form than the one that lies in a user's wallet. The authors of this paper addressed this issue in another paper [cite].
 
-As a subscriber of *The Economist*, I commit to paying for each issue as they are published. This is done by me sending a pre-authorisation to withdraw a subscription fee bi-weekly from my Ethereum account. Such a pre-authorisation would be an attestation in the wallet of The Economist, which provides a "charge" action that The Economist could use bi-weekly.
+In all of the previous examples, attestations only leave traces when a transaction needs it. However, there are cases when attestations leave traces on the blockchain when they are created, or revoked.
 
-For privacy reasons, or to combat linkability (the subject of an attestation being identified by the public use of such an attestation), the attestation used in transactions is of a different form than the one that lies in a user's wallet. The authors of this paper addressed this issue in another paper [cite].
+To explain the use case where the *issuing* of attestation has to happen on the blockchain or with blockchain trace, take the example of an aeroplane engine. It is represented by a token and carries a lot of attestation information, like the repair facts, which significantly affests its valuation (and security and insurance properties). Such attestations are in the seller's wallet, but an aeroplane service provider must add a hash of such an attestation each time the engine undergoes maintenance. The buyers would not purchase it if they are not presented with these attestations that match the blockchain records.
 
-In all of the previous examples, attestations only leave traces when a transaction needs it. There are cases when attestations leave traces on the blockchain when they are created, or revoked.
-
-To explain the use case where the *issuing* of attestation has to happen on the blockchain or with blockchain trace, take the aeroplane engine for example, with a substantial resale value, the repair facts of this engine, in the form of attestations, affects valuation significantly. Such attestations are in the seller's wallet, but an aeroplane service provider must add a hash of such an attestation each time the engine undergoes maintenance. The buyers would not purchase if they are not presented with these attestations that match the blockchain records.
-
-To explain the use case when the *revocation* of an attestation has to happen on the blockchain, let's consider an attestation called FIFA ticket.  Issued by the event's organiser, it attests the owner's right to enter the venue, usually after the user has paid or was gifted the ticket. Let's assume 90% of the tickets are purchased with non-crypto currency, therefore these tickets would not have a trace on the blockchain. However, if a ticket's owner decides to sell his tickets on the blockchain following the corresponding smart contract rules, the ticket has to be used as the input of such a transaction and considered consumed, while a blockchain token representing the same entitlement would be created and traded. The writes of this paper organised a FIFA ticket experiment in mid-2018 to test the concepts, and internally we call such an attestation "a spawnable" as its use spawns a blockchain token. The detail of that experiment can be found in another paper [cite].
+To explain the use case when the *revocation* of an attestation has to happen on the blockchain, let's consider an attestation called FIFA ticket. Issued by the event's organiser, it attests the owner's right to enter the venue, usually after the user has paid or was gifted the ticket. Let's assume 90% of the tickets are purchased with non-crypto currency, therefore these tickets would not have a trace on the blockchain. However, if a ticket's owner decides to sell his tickets on the blockchain following the corresponding smart contract rules, the ticket has to be used as the input of such a transaction and considered consumed, while a blockchain token representing the same entitlement would be created and traded. The writers of this paper organised a FIFA ticket experiment in mid-2018 to test the concepts, and internally we call such an attestation "a spawnable" as its use spawns a blockchain token. The detail of that experiment can be found in another paper [cite].
 
 # The components of Tokenscript
 
