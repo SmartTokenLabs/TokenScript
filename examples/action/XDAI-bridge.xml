@@ -3,7 +3,10 @@
            xmlns="http://www.w3.org/1999/xhtml"
            xmlns:xml="http://www.w3.org/XML/1998/namespace"
 >
-    <ts:name>Transfer xDAI to DAI</ts:name>
+    <ts:name>
+        <ts:string xml:lang="en">Transfer xDAI to DAI</ts:string>
+        <ts:string xml:lang="zh">將xDAI轉爲DAI</ts:string>
+    </ts:name>
     <!-- because this action has xdai as input, it should be listed as
          an action under XDAI's token view. -->
     <ts:input>
