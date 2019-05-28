@@ -67,20 +67,19 @@
     </xs:complexType>
     <xs:element name="name" type="text"/>
     <xs:element name="message" type="text"/>
-    <xs:complexType name="text" mixed="true">
+    <xs:complexType name="text">
         <xs:sequence>
-            <xs:element minOccurs="0" maxOccurs="unbounded" ref="plurals"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded"  name="plurals">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" ref="string"/>
+                    </xs:sequence>
+                    <xs:attribute use="required" ref="xml:lang"/>
+                </xs:complexType>
+            </xs:element>
             <xs:element minOccurs="0" maxOccurs="unbounded" ref="string"/>
         </xs:sequence>
     </xs:complexType>
-    <xs:element name="plurals">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element maxOccurs="unbounded" ref="string"/>
-            </xs:sequence>
-            <xs:attribute use="required" ref="xml:lang"/>
-        </xs:complexType>
-    </xs:element>
     <xs:element name="string">
         <xs:complexType>
             <xs:simpleContent>
