@@ -41,6 +41,7 @@
                     <ts:user-entry as="e18"/>
                 </ts:origins>
             </ts:attribute-type>
+            <style type="text/css">&style;</style>
             <ts:view>&dai-bridge.en;</ts:view>
         </ts:action>
         <ts:action>
@@ -67,6 +68,7 @@
                     </ts:data>
                 </ts:ethereum>
             </ts:transaction>
+            <style type="text/css">&style;</style>
             <ts:view>&dai-bridge.en;</ts:view>
         </ts:action>
     </ts:cards>
