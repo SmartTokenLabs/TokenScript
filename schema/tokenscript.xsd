@@ -2,6 +2,7 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
            targetNamespace="http://tokenscript.org/2019/05/tokenscript"
            xmlns:xhtml="http://www.w3.org/1999/xhtml"
+           xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
            xmlns="http://tokenscript.org/2019/05/tokenscript">
 
 
@@ -30,6 +31,7 @@
                 <xs:element minOccurs="0" ref="grouping"/>
                 <xs:element minOccurs="0" ref="ordering"/>
                 <xs:element ref="attribute-types"/>
+                <xs:element minOccurs="0" ref="ds:Signature"/>
             </xs:sequence>
             <xs:attribute name="custodian" type="xs:boolean"/>
         </xs:complexType>
@@ -45,6 +47,7 @@
                 <xs:element minOccurs="0" ref="transaction"/>
                 <xs:element ref="xhtml:style"/><!-- should have minOccure=0 but people forget this -->
                 <xs:element ref="view"/><!-- default constructed view -->
+                <xs:element minOccurs="0" ref="ds:Signature"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
