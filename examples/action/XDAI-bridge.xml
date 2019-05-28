@@ -9,6 +9,7 @@
 >
     <ts:name>
         <ts:string xml:lang="en">Transfer xDAI to DAI</ts:string>
+        <ts:string xml:lang="zh">將xDAI轉爲DAI</ts:string>
     </ts:name>
     <!-- because this action has xdai as input, it should be listed as
          an action under XDAI's token view. -->
