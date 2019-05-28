@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE action  [
+        <!ENTITY style SYSTEM "shared.css">
+        <!ENTITY xdai-bridge.en SYSTEM "xdai-bridge.en.shtml">
+]>
 <ts:action xmlns:ts="http://tokenscript.org/2019/05/tokenscript"
            xmlns="http://www.w3.org/1999/xhtml"
            xmlns:xml="http://www.w3.org/XML/1998/namespace"
 >
-    <ts:name>Transfer xDAI to DAI</ts:name>
+    <ts:name>
+        <ts:string xml:lang="en">Transfer xDAI to DAI</ts:string>
+    </ts:name>
     <!-- because this action has xdai as input, it should be listed as
          an action under XDAI's token view. -->
     <ts:input>
@@ -46,13 +52,16 @@
         </ts:message>
     </exclude>
     -->
-
     <ts:transaction>
         <ts:ethereum>
             <ts:to>0x7301CFA0e1756B71869E93d4e4Dca5c7d0eb0AA6</ts:to>
             <ts:value ref="amount"/>
         </ts:ethereum>
     </ts:transaction>
-
-    <ts:view/>
+    <style type="text/css">
+        &style;
+    </style>
+    <ts:view>
+        &xdai-bridge.en;
+    </ts:view>
 </ts:action>
