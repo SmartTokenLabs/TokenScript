@@ -3,7 +3,7 @@ body {
 }
 table {
     margin: 25px;
-    width: 25%;
+    width: 90%;
     table-layout: auto;
 }
 .fixed {
@@ -28,8 +28,8 @@ input {
     border: #D8D8D8 solid 1px;
     border-radius: 6px;
     padding: 0.5em;
-    width: 25%;
-    height: 30px;
+    width: 70%;
+    height: 50px;
     margin-top: 5px;
     font-size: 1em;
 }
