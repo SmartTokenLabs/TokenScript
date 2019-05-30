@@ -28,24 +28,6 @@
         </ts:token-card>
         <ts:action>
             <ts:name>
-                <ts:string xml:lang="en">Convert xDAI to DAI</ts:string>
-            </ts:name>
-            <ts:attribute-type id="amount" syntax="1.3.6.1.4.1.1466.115.121.1.36">
-                <ts:name>
-                    <ts:string xml:lang="en">Amount in xDAI</ts:string>
-                    <ts:string xml:lang="zh">代幣金額</ts:string>
-                </ts:name>
-                <ts:origins>
-                    <!-- e18 is a hard coded multiplier.
-                    rationale for hardcoding: avoiding over-design  -->
-                    <ts:user-entry as="e18"/>
-                </ts:origins>
-            </ts:attribute-type>
-            <style type="text/css">&style;</style>
-            <ts:view>&dai-bridge.en;</ts:view>
-        </ts:action>
-        <ts:action>
-            <ts:name>
                 <ts:string xml:lang="en">Convert DAI to xDAI</ts:string>
             </ts:name>
             <ts:attribute-type id="amount" syntax="1.3.6.1.4.1.1466.115.121.1.36">
