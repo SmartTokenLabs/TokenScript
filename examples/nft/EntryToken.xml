@@ -25,13 +25,13 @@
       <ts:string quantity="other">入場券</ts:string>
     </ts:plurals>
   </ts:name>
-  <!-- TODO: will make separate Tokenscript for ERC875 -->
-  <ts:contract name="EntryToken" interface="erc875">
-    <ts:address network="1">0x6a3b2a506f53d737bb5897f9d894075f8f7c931f</ts:address>
-    <ts:address network="3">0x1E8bceEd258ca5C7Ed9f55639aBbd01d3F7d9992</ts:address>
-    <ts:address network="4">0x52C4E0CC1f8719Db88A3385756150dAE1814E7e0</ts:address>
-    <ts:address network="5">0x17734f3709486B1D7015f941C069Cebf8017a833</ts:address>
-    <ts:address network="42">0x0C18E83E7D07E2188496467c4102D6D79Dcf1BD1</ts:address>
+  <!-- TODO: will make separate TokenScript for ERC875 -->
+  <ts:contract interface="erc875" name="EntryToken">
+    <ts:address network="1">0xFd838c7A0c32D68533ec713Ed631B6B7C8720cED</ts:address>
+    <ts:address network="3">0x3c22BeB7427A57Ab7d532a974F4bBaD7969CAaD3</ts:address>
+    <ts:address network="4">0x4A60c0bf93b2b3a3D20720a773E5Da8C80C427ac</ts:address>
+    <ts:address network="5">0x0C18E83E7D07E2188496467c4102D6D79Dcf1BD1</ts:address>
+    <ts:address network="42">0x5bD04312e79392F042eC730961d107482D3EF19f</ts:address>
   </ts:contract>
   <ts:origins>
     <!-- Define the contract which holds the token that the user will use -->

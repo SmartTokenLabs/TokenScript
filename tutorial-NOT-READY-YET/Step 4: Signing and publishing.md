@@ -14,7 +14,7 @@ First, check that you have the right tool installed. Say, in OS X with brew inst
 
 If your package manager doesn't provide xmlsectool, you can download from its [home page](https://wiki.shibboleth.net/confluence/display/XSTJ2/xmlsectool+V2+Home) and install it manually.
 
-From here I'll assume your system supports make. If not, it's easier to wait for the tutorial on how to sign with GUI, which we will produce based on [Oxygen's document](https://www.oxygenxml.com/doc/versions/21.0/ug-editor/topics/signing-files.html#signing-files) by the end of April 2019.
+From here I'll assume your system supports make. If not, it's easier to wait for the tutorial on how to sign with GUI, which we will produce based on [Oxygen's document](https://www.oxygenxml.com/doc/versions/21.0/ug-editor/topics/signing-files.html#signing-files) by mid 2019.
 
 If you installed xmlsectool manually, for example to `/opt/xmlsectool-2.0.0/`, you will need to change the first line of the MakeFile to this:
 
@@ -52,8 +52,8 @@ Run `make` with `EntryToken.tsml`
     # removing the canonicalized created for validation
     rm EntryToken.canonicalized.xml
 
-And now you get a signed TokenScript EntryToken.tsml which is ready to be published.
+And now you get a signed TokenScript EntryToken.tsml which is ready to be published. This file can also be dropped to the iOS or Android app as described in the previous step. 
 
 ### Publishing your TokenScript
 
-A signed TokenScript is published by including its reference in the DAPP website that uses the token, similiar to how CSS files are refered. The detail steps for doing so will be provided in the coming weeks in April 2019.
+A signed TokenScript is published by including its reference in the DAPP website that uses the token, similar to how CSS files are referred. The detail steps for doing so will be provided in mid 2019.

@@ -5,13 +5,13 @@ KEYPASSWORD=
 SIGNATURE_ALGORITHM=rsa-sha256
 
 help:
-	# Needs a target, example: $$ make EntryToken.canonicalized.xml
+	# Needs a target, example: $$ make AdmissionTicket.canonicalized.xml
 	#  
-	# Let's say you have a TokenScript "EntryToken.xml"
+	# Let's say you have a TokenScript "AdmissionTicket.xml"
 	#- to validate and canonicalize, add 'canonicalized' in the filename
-	@echo $$ make EntryToken.canonicalized.xml
+	@echo $$ make AdmissionTicket.canonicalized.xml
 	# - to sign, use tsml as file extension:
-	@echo $$ make EntryToken.tsml
+	@echo $$ make AdmissionTicket.tsml
 
 %.canonicalized.xml : %.xml
     # xmlsectool canonicalises automatically when needed, but leaving an xml:base attribute which creates trouble later.
@@ -21,9 +21,9 @@ help:
     # xmlsectool validates too, albeit adding xml:base with breaks schema. Example:
     # JVMOPTS=-Djavax.xml.accessExternalDTD=all /opt/xmlsectool-2.0.0/xmlsectool.sh --validateSchema --xsd --schemaDirectory ../../schema --inFile $^
 	# XML Validation
-    # if INVALID, run validation again with xmllint to get meaningful error
+    # if failed, run validation again with xmllint to get meaningful error
     # then delete the canonicalized file
-	-xmlstarlet val --xsd ../../schema/tokenscript.xsd $@ || (mv $@ $@.INVALID; xmllint --noout --schema ../../schema/tokenscript.xsd $@.INVALID)
+	-xmlstarlet val --xsd ../../schema/tokenscript.xsd $@ || (xmllint --noout --schema ../../schema/tokenscript.xsd $@; rm $@)
 
 %.tsml: %.canonicalized.xml
 ifeq (,$(KEYSTORE))

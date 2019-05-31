@@ -1,6 +1,5 @@
 ## Debugging and testing on iOS and Android
-
-So you now have your completed .xml and .shtml files, excellent! You are now ready to drag and drop it into AlphaWallet for testing with your actual token. If you are using the FIFA WC example, it would be best that you copy the source code [here](https://github.com/AlphaWallet/contracts/blob/master/blockchain-tickets/schema1/TicketingContract.sol) so that you can have a balance of tokens to test with.   
+So you now have your completed .xml and .shtml files, excellent! You can now merge the files together and drop them for testing in AlphaWallet iOS and Android. To merge the files together run 'make EntryToken.canonicalized.xml' which will validate the files and put them all together. Since we have hardcoded the balances for this contract, you will be able to see them immediately in your wallet after you add them by clicking the + button on the homescreen and entering the contract address '0x6a3b2a506f53d737bb5897f9d894075f8f7c931f' or your choice of testnet (see EntryToken.xml for all the addresses available). 
 
 ### Get AlphaWallet iOS or Android
 [<img src=https://github.com/AlphaWallet/alpha-wallet-ios/blob/master/resources/app-store-badge.png height="88">](https://itunes.apple.com/us/app/alphawallet/id1358230430?ls=1&mt=8) [<img src=https://github.com/AlphaWallet/alpha-wallet-android/blob/master/dmz/src/main/resources/static/images/googleplay.png height="88">](https://play.google.com/store/apps/details?id=io.stormbird.wallet&hl=en_US)
@@ -11,8 +10,8 @@ Go to either [iOS](https://github.com/AlphaWallet/alpha-wallet-ios) or [Android]
 ### Debugging on iOS 
 After cloning the source code you can run it with either the emulator or your own phone via xcode or AppCode. If you are using the emulator, simply copy the path it prints when loading up in xcode and cd into it. Once there you shoud see a directory called 'assetDefinitions', simply drop the file into this directory.
 
-If you are using your real device, simply airdrop the .tsml or .shtml, .css and .xml files. 
+If you are using your real device, simply airdrop the canonicalized.xml file or drop the xml file with its three layout files (shared.css, enter.en.shtml & token.en.shtml). 
 
 ### Debugging on Android
-As with iOS you can either use your own device or the emulator. Run on Android Studio/Intellij and use your device or the emulator. In the AlphaWallet settings choose 'enable dev override', allow the app access to file structure then drag and drop the file into the AlphaWallet directory at root or upload to sdcard/AlphaWallet using the Device File Explorer. If the 'enable dev override' is not chosen the app will not be able to pick up files in this directory.
+As with iOS you can either use your own device or the emulator. Run on Android Studio/Intellij and use your device or the emulator. In the AlphaWallet settings choose 'enable dev override', allow the app access to file structure then drag and drop the file into the AlphaWallet directory at root or upload to sdcard/AlphaWallet using the Device File Explorer. If the 'enable dev override' is not chosen inside the app will not be able to pick up files in this directory.
 
