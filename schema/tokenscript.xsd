@@ -19,7 +19,7 @@
     <!-- Importing XHTML namespace. use xhtml1-strict.xsd to get xhtml:Block -->
     <xs:import namespace="http://www.w3.org/1999/xhtml"
                schemaLocation="xhtml1-strict.xsd"/>
-    
+
     <xs:element name="token">
         <xs:complexType>
             <xs:sequence>
@@ -272,8 +272,8 @@
     <xs:simpleType name="as">
         <xs:restriction base="xs:NCName">
             <xs:enumeration value="uint"/>
-            <xs:enumeration value="address"/>
             <xs:enumeration value="tuple"/>
+            <xs:enumeration value="address"/>
             <!-- int is not allowed here, because "as" is not for typing but for transforming  -->
             <xs:enumeration value="utf8"/>
             <xs:enumeration value="e18"/>

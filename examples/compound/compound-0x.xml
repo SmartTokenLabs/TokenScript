@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE token  [
-    <!ENTITY style SYSTEM "../erc20/shared.css">
+    <!ENTITY style SYSTEM "shared.css">
     <!ENTITY compound.en SYSTEM "compound.en.shtml">
     ]>
 <ts:token xmlns:ts="http://tokenscript.org/2019/05/tokenscript"
@@ -53,7 +53,12 @@
                     </ts:data>
                 </ts:ethereum>
             </ts:transaction>
-            <ts:view>&compound.en;</ts:view>
+            <style type="text/css">
+                &style;
+            </style>
+            <ts:view>
+                &compound.en;
+            </ts:view>
         </ts:action>
 
         <ts:action>
@@ -80,9 +85,13 @@
                     </ts:data>
                 </ts:ethereum>
             </ts:transaction>
-            <ts:view>&compound.en;</ts:view>
+            <style type="text/css">
+                &style;
+            </style>
+            <ts:view>
+                &compound.en;
+            </ts:view>
         </ts:action>
-
     </ts:cards>
     <ts:attribute-types>
         <!-- gets a tuple of market info, can get amount of borrows (uint totalBorrows)
