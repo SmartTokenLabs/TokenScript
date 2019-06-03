@@ -97,7 +97,7 @@ tokenDefinition = {
         attributeId: attribute,
         category: {
             name: "Cat",
-	    syntax: "IA5String",
+	    syntax: "Integer",
 	    single: "true",
         },
         startTime: {

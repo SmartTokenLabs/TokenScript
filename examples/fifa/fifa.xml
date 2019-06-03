@@ -106,7 +106,6 @@
     instead of bit-fields.
     1.3.6.1.4.1.1466.115.121.1.15 is DirectoryString
     1.3.6.1.4.1.1466.115.121.1.24 is GeneralisedTime
-    1.3.6.1.4.1.1466.115.121.1.26 is IA5String
     1.3.6.1.4.1.1466.115.121.1.27 is Integer
   -->
         <ts:attribute-type id="locality" oid="2.5.4.7" syntax="1.3.6.1.4.1.1466.115.121.1.15">
