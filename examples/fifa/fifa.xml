@@ -415,7 +415,7 @@
                 <ts:string>№</ts:string>
             </ts:name>
             <ts:origins>
-                <ts:token-id bitmask="000000000000000000000000000000000000000000000000000000000000FFFF" as="utf8"/>
+                <ts:token-id bitmask="000000000000000000000000000000000000000000000000000000000000FFFF" as="uint"/>
             </ts:origins>
         </ts:attribute-type>
 
