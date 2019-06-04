@@ -7,18 +7,17 @@ class Token {
 
     render() {
         return`
-  <div>
+  <div id="border-container">
     <h2 class="ui header block">
-    <center>${this.props.name} Compound Card</center>
+    <bold>${this.props.name} Overview</bold>
     </h2>
     <class="ui container">
-      <div class="ui teal segment">
         <div class="ui grid">
           <div class="left floated six wide column">
-            <h4>${this.props.name} Balance</h4>
+            <h4>${this.props.name.replace("cToken ", "")} Balance</h4>
           </div>
           <div class="right floated three wide column">
-            <h4>${this.props.tokenBalance}</h4>
+            <h4>${this.props.cTokenBalance}</h4>
           </div>
         </div>
         <div class="ui grid">

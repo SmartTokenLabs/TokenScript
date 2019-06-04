@@ -17,24 +17,31 @@
 <ts:name>
     <ts:string xml:lang="en">cToken DAI</ts:string>
 </ts:name>
-<ts:contract name="cTokenDAI">
+<ts:contract name="cTokenDAI" interface="erc20">
     <ts:address network="1">0xF5DCe57282A584D2746FaF1593d3121Fcac444dC</ts:address>
 </ts:contract>
 <ts:contract name="dai" interface="erc20">
     <ts:address network="1">0x89d24A6b4CcB1B6fAA2625fE562bDD9a23260359</ts:address>
 </ts:contract>
 <ts:origins>
-    <ts:ethereum contract="cTokenDAI">
-    </ts:ethereum>
+    <ts:ethereum contract="cTokenDAI"/>
 </ts:origins>
 
 <ts:cards>
     <ts:token-card>
-        <style type="text/css">&style;</style>
-        <ts:view-iconified>
-            &compound.en;
-        </ts:view-iconified>
+        <ts:view-iconified/>
+        <ts:view>
+        </ts:view>
     </ts:token-card>
+
+    <ts:action>
+        <ts:name>
+            <ts:string xml:lang="en">Overview</ts:string>
+        </ts:name>
+        <style type="text/css">&style;</style>
+        <ts:view xml:lang="en">&compound.en;</ts:view>
+    </ts:action>
+
     <ts:action>
         <ts:name>
             <ts:string xml:lang="en">Borrow</ts:string>
@@ -169,7 +176,7 @@
         </ts:origins>
     </ts:attribute-type>
 
-    <!-- TODO make sure interest accurued is actually included here -->
+    <!-- TODO make sure interest accrued is actually included here -->
     <!-- your balance in cDAI, this is essentially the amount supplied with interest -->
     <ts:attribute-type id="cTokenBalanceWithInterest" syntax="1.3.6.1.4.1.1466.115.121.1.36">
         <ts:name>
@@ -234,7 +241,6 @@
             </ts:ethereum>
         </ts:origins>
     </ts:attribute-type>
-
 
 </ts:attribute-types>
 </ts:token>

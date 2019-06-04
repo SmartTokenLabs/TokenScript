@@ -5,6 +5,10 @@
   box-sizing: inherit;
 }
 
+#border-container {
+  margin: 5%;
+}
+
 html {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
