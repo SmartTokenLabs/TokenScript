@@ -7,116 +7,88 @@ class Token {
 
     render() {
         return`
-<div>
-  <Header as='h2' block>
-    ${this.props.name} Compound Card
-  </Header>
-  <Container>
-  <Segment color='teal'>
-      <Grid>
-        <Grid.Column floated='left' width={6}>
-            ${this.props.name} Balance (Supply)
-        </Grid.Column>
-        <Grid.Column floated='right' id="cTokenBalance" width={3}>
-          <h4>${this.props.cTokenBalance}</h4>
-        </Grid.Column>
-      </Grid>
-      <Grid>
-        <Grid.Column floated='left' width={7}>
-          <h4>
+  <div>
+    <h2 class="ui header block">
+    <center>${this.props.name} Compound Card</center>
+    </h2>
+    <class="ui container">
+      <div class="ui teal segment">
+        <div class="ui grid">
+          <div class="left floated six wide column">
+            <h4>${this.props.name} Balance</h4>
+          </div>
+          <div class="right floated three wide column">
+            <h4>${this.props.tokenBalance}</h4>
+          </div>
+        </div>
+        <div class="ui grid">
+          <div class="floated left six wide column">
+            <h4>
+            Supply Balance
+            </h4>
+          </div>
+          <div class="right floated three wide column">
+            <h4>${this.props.cTokenBalance}
+            </h4>
+          </div>
+        </div>
+        <div class="ui grid">
+          <div class="left floated seven wide column">
+            <h4>
             Borrow Balance
-          </h4>
-        </Grid.Column>
-        <Grid.Column floated='right' width={3}>
-          <h4>${this.props.borrowBalanceWithoutInterest}
-          </h4>
-        </Grid.Column>
-        </Grid>
-   </Segment>
-    <Segment inverted color='teal'>
-      <Grid>
-        <Grid.Column floated='left' width={9}>
-          <h4>
-            Interest Rate per block (Supply)
-          </h4>
-        </Grid.Column>
-        <Grid.Column floated='right' width={3}>
-          <h4>${this.props.supplyInterestRate}</h4>
-        </Grid.Column>
-      </Grid>
-
-      <Grid>
-        <Grid.Column floated='left' width={9}>
-          <h4>
+            </h4>
+          </div>
+          <div class="right floated three wide column">
+            <h4>${this.props.borrowBalance}
+            </h4>
+          </div>
+        </div>
+      </div>
+      <div class="ui teal inverted segment">
+        <div class="ui grid">
+          <div class="left floated nine wide column">
+            <h4>
+            Interest Rate on Supply
+            </h4>
+          </div>
+          <div class="right floated three wide column">
+            <h4>${this.props.supplyInterestRate}</h4>
+          </div>
+        </div>
+        <div class="ui grid">
+          <div class="left floated nine wide column">
+            <h4>
             Interest Rate on Borrow
-          </h4>
-        </Grid.Column>
-        <Grid.Column floated='right' width={3}>
-          <h4>${this.props.borrowInterestRate}
-          </h4>
-        </Grid.Column>
-      </Grid>
-
-      <Grid>
-        <Grid.Column floated='left' width={9}>
-          <h4>
+            </h4>
+          </div>
+          <div class="right floated three wide column">
+            <h4>${this.props.borrowInterestRate}
+            </h4>
+          </div>
+        </div>
+        <div class="ui grid">
+          <div class="left floated nine wide column">
+            <h4>
             Interest Earned
-          </h4>
-        </Grid.Column>
-        <Grid.Column floated='right' width={3}>
-          <h4>${(this.props.cTokenBalanceWithInterest - this.props.cTokenBalance) }
-          </h4>
-        </Grid.Column>
-    </Grid>
-
-    <Grid>
-        <Grid.Column floated='left' width={9}>
-          <h4>
+            </h4>
+          </div>
+          <div class="right floated three wide column">
+            <h4>${this.props.cTokenBalance - this.props.cTokenBalanceWithInterest}</h4>
+          </div>
+        </div>
+        <div class="ui grid">
+          <div class="left floated nine wide column">
+            <h4>
             Interest Payable
-          </h4>
-        </Grid.Column>
-        <Grid.Column floated='right' width={3}>
-          <h4>${(this.props.borrowBalanceWithInterest - this.props.borrowBalanceWithoutInterest) }
-          </h4>
-        </Grid.Column>
-    </Grid>
-
-    <Grid>
-        <Grid.Column floated='left' width={9}>
-          <h4>
-            Borrow
-          </h4>
-        </Grid.Column>
-        <Grid.Column floated='right' width={3}>
-          <input type="number" id="borrowAmount"/>
-        </Grid.Column>
-    </Grid>
-
-    <Grid>
-        <Grid.Column floated='left' width={9}>
-          <h4>
-            Repay
-          </h4>
-        </Grid.Column>
-        <Grid.Column floated='right' width={3}>
-          <input type="number" id="repayAmount"/>
-        </Grid.Column>
-    </Grid>
-
-    <Grid>
-        <Grid.Column floated='left' width={9}>
-          <h4>
-            Mint
-          </h4>
-        </Grid.Column>
-        <Grid.Column floated='right' width={3}>
-          <input type="number" id="mintAmount"/>
-        </Grid.Column>
-    </Grid>
-
-    </Segment>
-    </Container>
-</div>
+            </h4>
+          </div>
+          <div class="right floated three wide column">
+            <h4>${this.props.borrowBalanceWithoutInterest - this.props.borrowBalanceWithInterest}
+            </h4>
+          </div>
+        </div>
+      </div>
+  </div>
 `;
     }
 }
