@@ -1,0 +1,88 @@
+<script type="text/javascript"><![CDATA[
+class Token {
+
+    constructor(tokenInstance) {
+        this.props = tokenInstance;
+    }
+
+    render() {
+        return`
+<div>
+  <Header as='h2' block>
+    ${this.props.name} Redeem Card
+  </Header>
+  <Container>
+  <Segment color='teal'>
+      <Grid>
+        <Grid.Column floated='left' width={6}>
+            ${this.props.name} Balance (Supply)
+        </Grid.Column>
+        <Grid.Column floated='right' id="cTokenBalance" width={3}>
+          <h4>${this.props.cTokenBalance}</h4>
+        </Grid.Column>
+      </Grid>
+      <Grid>
+        <Grid.Column floated='left' width={7}>
+          <h4>
+            Borrow Balance
+          </h4>
+        </Grid.Column>
+        <Grid.Column floated='right' width={3}>
+          <h4>${this.props.borrowBalanceWithoutInterest}
+          </h4>
+        </Grid.Column>
+        </Grid>
+   </Segment>
+    <Segment inverted color='teal'>
+      <Grid>
+        <Grid.Column floated='left' width={9}>
+          <h4>
+            Interest Rate on Borrow
+          </h4>
+        </Grid.Column>
+        <Grid.Column floated='right' width={3}>
+          <h4>${this.props.borrowInterestRate}
+          </h4>
+        </Grid.Column>
+      </Grid>
+
+    <Grid>
+        <Grid.Column floated='left' width={9}>
+          <h4>
+            Interest Payable
+          </h4>
+        </Grid.Column>
+        <Grid.Column floated='right' width={3}>
+          <h4>${(this.props.borrowBalanceWithInterest - this.props.borrowBalanceWithoutInterest) }
+          </h4>
+        </Grid.Column>
+    </Grid>
+
+    <Grid>
+        <Grid.Column floated='left' width={9}>
+          <h4>
+            Redeem
+          </h4>
+        </Grid.Column>
+        <Grid.Column floated='right' width={3}>
+          <input type="number" id="redeemAmount"/>
+        </Grid.Column>
+    </Grid>
+    </Segment>
+    </Container>
+</div>
+`;
+    }
+}
+
+web3.tokens.dataChanged = (oldTokens, updatedTokens) => {
+    const currentTokenInstance = web3.tokens.data.currentInstance;
+    const domHtml = new Token(currentTokenInstance).render();
+    document.getElementById('root').innerHTML = domHtml;
+    if (currentTokenInstance.balance != null) {
+        document.getElementById('cTokenBalance').innerHTML = currentTokenInstance.balance / 1e+18;
+    }
+};
+
+]]></script>
+<div id="root"></div>

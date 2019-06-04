@@ -2,6 +2,10 @@
 <!DOCTYPE token  [
         <!ENTITY style SYSTEM "shared.css">
         <!ENTITY compound.en SYSTEM "compound.en.shtml">
+        <!ENTITY borrow.en SYSTEM "borrow.en.shtml">
+        <!ENTITY mint.en SYSTEM "mint.en.shtml">
+        <!ENTITY redeem.en SYSTEM "redeem.en.shtml">
+        <!ENTITY repay.en SYSTEM "repay.en.shtml">
         ]>
 <ts:token xmlns:ts="http://tokenscript.org/2019/05/tokenscript"
           xmlns="http://www.w3.org/1999/xhtml"
@@ -23,121 +27,117 @@
     <ts:ethereum contract="cTokenDAI">
     </ts:ethereum>
 </ts:origins>
+
 <ts:cards>
     <ts:token-card>
-        <ts:view>
+        <style type="text/css">&style;</style>
+        <ts:view-iconified>
             &compound.en;
-        </ts:view>
+        </ts:view-iconified>
     </ts:token-card>
     <ts:action>
         <ts:name>
-            <ts:string xml:lang="en">Compound</ts:string>
+            <ts:string xml:lang="en">Borrow</ts:string>
         </ts:name>
-        <style type="text/css">&style;</style>
-        <ts:view xml:lang="en">
-            &compound.en;
-        </ts:view>
-    </ts:action>
-</ts:cards>
-<ts:attribute-types>
-
-    <ts:attribute-type id="borrowAmount" syntax="1.3.6.1.4.1.1466.115.121.1.36">
-        <ts:name>
-            <ts:string xml:lang="en">Amount to borrow</ts:string>
-        </ts:name>
-        <ts:origins>
-            <!-- e18 is a hard coded multiplier.
-            rationale for hardcoding: avoiding over-design  -->
-            <ts:user-entry as="e18"/>
-        </ts:origins>
-    </ts:attribute-type>
-
-    <ts:attribute-type id="borrow" syntax="1.3.6.1.4.1.1466.115.121.1.36">
-        <ts:name>
-            <ts:string xml:lang="en">Borrow from Compound</ts:string>
-        </ts:name>
-        <ts:origins>
+        <ts:attribute-type id="borrowAmount" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+            <ts:name>
+                <ts:string xml:lang="en">Amount to borrow</ts:string>
+            </ts:name>
+            <ts:origins>
+                <!-- e18 is a hard coded multiplier.
+                rationale for hardcoding: avoiding over-design  -->
+                <ts:user-entry as="e18"/>
+            </ts:origins>
+        </ts:attribute-type>
+        <ts:transaction>
             <ts:ethereum function="borrow" contract="cTokenDAI" as="uint">
                 <ts:data>
                     <ts:uint256 ref="borrowAmount"/>
                 </ts:data>
             </ts:ethereum>
-        </ts:origins>
-    </ts:attribute-type>
+        </ts:transaction>
+        <style type="text/css">&style;</style>
+        <ts:view xml:lang="en">&borrow.en;</ts:view>
+    </ts:action>
 
-    <ts:attribute-type id="repayAmount" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+    <ts:action>
         <ts:name>
-            <ts:string xml:lang="en">Amount to borrow</ts:string>
+            <ts:string xml:lang="en">Repay</ts:string>
         </ts:name>
-        <ts:origins>
-            <!-- e18 is a hard coded multiplier.
-            rationale for hardcoding: avoiding over-design  -->
-            <ts:user-entry as="e18"/>
-        </ts:origins>
-    </ts:attribute-type>
-
-    <ts:attribute-type id="repayBorrow" syntax="1.3.6.1.4.1.1466.115.121.1.36">
-        <ts:name>
-            <ts:string xml:lang="en">Repay loan</ts:string>
-        </ts:name>
-        <ts:origins>
+        <ts:attribute-type id="repayAmount" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+            <ts:name>
+                <ts:string xml:lang="en">Amount to borrow</ts:string>
+            </ts:name>
+            <ts:origins>
+                <!-- e18 is a hard coded multiplier.
+                rationale for hardcoding: avoiding over-design  -->
+                <ts:user-entry as="e18"/>
+            </ts:origins>
+        </ts:attribute-type>
+        <ts:transaction>
             <ts:ethereum function="repayBorrow" contract="cTokenDAI" as="uint">
                 <ts:data>
                     <ts:uint256 ref="repayAmount"/>
                 </ts:data>
             </ts:ethereum>
-        </ts:origins>
-    </ts:attribute-type>
+        </ts:transaction>
+        <style type="text/css">&style;</style>
+        <ts:view xml:lang="en">&repay.en;</ts:view>
+    </ts:action>
 
-    <ts:attribute-type id="mintAmount" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+    <ts:action>
         <ts:name>
-            <ts:string xml:lang="en">Amount to mint</ts:string>
+            <ts:string xml:lang="en">Mint</ts:string>
         </ts:name>
-        <ts:origins>
-            <!-- e18 is a hard coded multiplier.
-            rationale for hardcoding: avoiding over-design  -->
-            <ts:user-entry as="e18"/>
-        </ts:origins>
-    </ts:attribute-type>
-
-    <!-- Minting supplies tokens, withdrawing would be a transfer transaction-->
-    <ts:attribute-type id="mint" syntax="1.3.6.1.4.1.1466.115.121.1.36">
-        <ts:name>
-            <ts:string xml:lang="en">Supply tokens</ts:string>
-        </ts:name>
-        <ts:origins>
+        <ts:attribute-type id="mintAmount" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+            <ts:name>
+                <ts:string xml:lang="en">Amount to mint</ts:string>
+            </ts:name>
+            <ts:origins>
+                <!-- e18 is a hard coded multiplier.
+                rationale for hardcoding: avoiding over-design  -->
+                <ts:user-entry as="e18"/>
+            </ts:origins>
+        </ts:attribute-type>
+        <ts:transaction>
             <ts:ethereum function="mint" contract="cTokenDAI" as="uint">
                 <ts:data>
                     <ts:uint256 ref="mintAmount"/>
                 </ts:data>
             </ts:ethereum>
-        </ts:origins>
-    </ts:attribute-type>
+        </ts:transaction>
+        <style type="text/css">&style;</style>
+        <ts:view xml:lang="en">&mint.en;</ts:view>
+    </ts:action>
 
-    <ts:attribute-type id="redeemTokens" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+    <ts:action>
         <ts:name>
-            <ts:string xml:lang="en">Amount to redeem</ts:string>
+            <ts:string xml:lang="en">Redeem</ts:string>
         </ts:name>
-        <ts:origins>
-            <!-- e18 is a hard coded multiplier.
-            rationale for hardcoding: avoiding over-design  -->
-            <ts:user-entry as="e18"/>
-        </ts:origins>
-    </ts:attribute-type>
-
-    <!-- convert cDAI back into DAI-->
-    <ts:attribute-type id="redeem" syntax="1.3.6.1.4.1.1466.115.121.1.36">
-        <ts:name>
-            <ts:string xml:lang="en">Redeem tokens</ts:string>
-        </ts:name>
-        <ts:origins>
+        <ts:attribute-type id="redeemAmount" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+            <ts:name>
+                <ts:string xml:lang="en">Amount to redeem</ts:string>
+            </ts:name>
+            <ts:origins>
+                <!-- e18 is a hard coded multiplier.
+                rationale for hardcoding: avoiding over-design  -->
+                <ts:user-entry as="e18"/>
+            </ts:origins>
+        </ts:attribute-type>
+        <ts:transaction>
             <ts:ethereum function="redeem" contract="cTokenDAI" as="uint">
                 <ts:data>
                     <ts:uint256 ref="redeemTokens"/>
                 </ts:data>
             </ts:ethereum>
-        </ts:origins>
-    </ts:attribute-type>
+        </ts:transaction>
+        <style type="text/css">&style;</style>
+        <ts:view xml:lang="en">&redeem.en;</ts:view>
+    </ts:action>
+
+</ts:cards>
+
+<ts:attribute-types>
 
     <!-- your balance in DAI (not compound dai) -->
     <ts:attribute-type id="tokenBalance" syntax="1.3.6.1.4.1.1466.115.121.1.36">
