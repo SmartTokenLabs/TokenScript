@@ -33,7 +33,7 @@
         <ts:view>
         </ts:view>
     </ts:token-card>
-
+    <!-- TODO disable 'confirm' button as there is no action on this card just information -->
     <ts:action>
         <ts:name>
             <ts:string xml:lang="en">Overview</ts:string>

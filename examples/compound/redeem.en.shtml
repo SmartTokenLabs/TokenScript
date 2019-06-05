@@ -6,6 +6,10 @@ class Token {
     }
 
     render() {
+        const decimals8 = 100000000; //cToken decimals
+        let borrowBalance = (this.props.borrowBalanceWithInterest / decimals8).toFixed(2);
+        let interestPayable = ((this.props.borrowBalanceWithInterest - this.props.borrowBalanceWithoutInterest) / decimals8).toFixed(2);
+        let cTokenBalance = (this.props.cTokenBalance / decimals8).toFixed(2);
         return`
     <div id="border-container">
         <h2 class="ui header block">
@@ -18,7 +22,7 @@ class Token {
                 <h4>${this.props.name} Balance</h4>
               </div>
               <div class="right floated three wide column">
-                <h4>${this.props.cTokenBalance}</h4>
+                <h4>${cTokenBalance}</h4>
               </div>
             </div>
 
@@ -29,7 +33,7 @@ class Token {
                 </h4>
               </div>
               <div class="right floated three wide column">
-                <h4>${this.props.borrowAmount}
+                <h4>${borrowBalance}
                 </h4>
               </div>
             </div>
@@ -41,7 +45,7 @@ class Token {
                 </h4>
               </div>
               <div class="right floated three wide column">
-                <h4>${this.props.borrowBalanceWithInterest - this.props.borrowBalanceWithoutInterest}
+                <h4>${interestPayable}
                 </h4>
               </div>
             </div>
