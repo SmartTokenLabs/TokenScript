@@ -1,4 +1,5 @@
-# Security of TokenScript files
+## Security of TokenScript files
+(This is not the security of TokenScript - which is a separate topic)
 
 A TokenScript file can be signed. A TokenScript can also be trusted. Ideally, all TokenScript's are signed and trusted.
 
@@ -34,7 +35,9 @@ The express-of-trust special address is calculated in this way:
 
 Assume that TokenScript project's donation address' public key is known, which is Y. In multiplicative group notation, its value is gˣ where 𝑥 is the private key held by TokenScript administration.
 
-First, we do a Keccak hash of the TokenScript file and get *s*. Then compute *h=H("TRUST"|s)* where *H* denotes Keccak, | is used to denote concatenation and the text *TRUST* is simply an ASCII encoding of the literal word TRUST.
+First, we obtain a SHA256 digest 𝑑 from the exclusive canonicalization of the TokenScript. If this TokenScript happens to be signed as well, and the `<DigestMethod>`  used for its root is SHA256 (it usually is), you can find the value encoded in base64 in the `<DigestValue>`. (Of course, you need to decode the base64 value before use.)
+
+Then compute *h=H("TRUST"|𝑑)* where *H* denotes Keccak. `|` is used to denote concatenation. The text *TRUST* is simply an ASCII encoding of the literal word TRUST.
 
 Then, we generate the secp256k1 elliptic curve point Yʰ, and hash it to get an address. This is the special address for express-of-trust of this specific TokenScript.
 
