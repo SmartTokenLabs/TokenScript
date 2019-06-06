@@ -1,0 +1,34 @@
+<script type="text/javascript"><![CDATA[
+class Token {
+
+    constructor(tokenInstance) {
+        this.props = tokenInstance
+    }
+
+    render() {
+        return `
+        <div>
+            <div id="mainHeader">
+              <h2>Withdraw from CDP</h2>
+              <p>#${this.props.CDP_number}</p>
+              <br>
+            </div>
+            <div class="eth-panel-bottom">
+              <b>Max to Withdraw</b>
+              <h6>${this.props.amountWithdrawableEth} ETH
+              | ${this.props.amountWithdrawableEth * this.props.ethPriceUSD} USD </h6>
+              <input type="number"/>
+            </div>
+            <br>
+            <hr><br>
+        </div>`;
+    }
+}
+
+web3.tokens.dataChanged = (oldTokens, updatedTokens) => {
+    const currentTokenInstance = web3.tokens.data.currentInstance;
+    document.getElementById('root').innerHTML = new Token(currentTokenInstance).render();
+};
+
+]]></script>
+<div id="root"></div>

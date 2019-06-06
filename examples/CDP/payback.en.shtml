@@ -1,0 +1,38 @@
+<script type="text/javascript"><![CDATA[
+class Token {
+
+    constructor(tokenInstance) {
+        this.props = tokenInstance
+    }
+
+    render() {
+        const decimals18 = 1000000000000000000;
+        return `
+        <div>
+            <div id="mainHeader">
+              <h2>Payback DAI</h2>
+              <p>#${this.props.CDP_number}</p>
+              <br>
+            </div>
+            <div class="eth-panel-left">
+              <b>Deposited</b>
+              <h6>${this.props.ink / decimals18} ETH |
+                ${(this.props.ink / decimals18) * this.props.ethPriceUSD} USD </h6>
+            </div>
+            <br>
+            <div class="eth-panel-right">
+              <b>Amount to Payback (DAI)</b>
+              <input type="number">
+            </div>
+            <br>
+        </div>`;
+    }
+}
+
+web3.tokens.dataChanged = (oldTokens, updatedTokens) => {
+    const currentTokenInstance = web3.tokens.data.currentInstance;
+    document.getElementById('root').innerHTML = new Token(currentTokenInstance).render();
+};
+
+]]></script>
+<div id="root"></div>

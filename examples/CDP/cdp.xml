@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE token  [
-        <!ENTITY style SYSTEM "../shared.css">
-        <!ENTITY dai-bridge.en SYSTEM "cdp.en.shtml">
-        ]>
+        <!ENTITY style SYSTEM "shared.css">
+        <!ENTITY MoveAndClose.en SYSTEM "MoveAndClose.en.shtml">
+        <!ENTITY payback.en SYSTEM "payback.en.shtml">
+        <!ENTITY generate.en SYSTEM "generate.en.shtml">
+        <!ENTITY withdraw.en SYSTEM "withdraw.en.shtml">
+]>
 <ts:token xmlns:ts="http://tokenscript.org/2019/05/tokenscript"
           xmlns="http://www.w3.org/1999/xhtml"
           xmlns:xml="http://www.w3.org/XML/1998/namespace"
@@ -10,22 +13,18 @@
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           custodian="false"
 >
+
+    <!-- TODO - we have to use the individual proxy to make calls to the CDP contract
+        https://www.reddit.com/r/MakerDAO/comments/bxoex5/does_the_cdp_depend_on_the_proxy_to_execute_all/?
+     -->
+    <!-- TODO get cdp number from event logs -->
     <ts:name>
-        <ts:plurals xml:lang="en">
-            <ts:string quantity="one">Token</ts:string>
-            <ts:string quantity="other">Tokens</ts:string>
-        </ts:plurals>
-        <ts:plurals xml:lang="es">
-            <ts:string quantity="one">simbólico</ts:string>
-            <ts:string quantity="other">Tokens</ts:string>
-        </ts:plurals>
+        <ts:string xml:lang="en">DAI</ts:string>
+        <ts:string xml:lang="es">DAI</ts:string>
         <ts:string xml:lang="zh">代币</ts:string>
     </ts:name>
     <ts:contract name="DAIToken" interface="erc20">
         <ts:address network="1">0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359</ts:address>
-    </ts:contract>
-    <ts:contract name="DSProxy">
-        <ts:address network="1">0x12d20B3eF56a92F675b3A49D1Ed6aBE708CA3758</ts:address>
     </ts:contract>
     <ts:contract name="Medianizer">
         <ts:address network="1">0x729D19f657BD0614b4985Cf1D82531c67569197B</ts:address>
@@ -38,27 +37,149 @@
         <ts:ethereum contract="DAIToken">
         </ts:ethereum>
     </ts:origins>
-    <ts:selections>
-        <ts:selection id="expired">
-            <ts:name>
-                <ts:plurals xml:lang="en">
-                    <ts:string quantity="one">Expired Token</ts:string>
-                    <ts:string quantity="other">Expired Tokens</ts:string>
-                </ts:plurals>
-                <ts:string xml:lang="zh">过期的代币</ts:string>
-            </ts:name>
-            <ts:filter>expired</ts:filter>
-        </ts:selection>
-    </ts:selections>
     <ts:cards>
         <ts:token-card>
-            <style type="text/css">&style;</style>
-            <ts:view-iconified xml:lang="en">
+            <ts:view-iconified>
             </ts:view-iconified>
-            <ts:view xml:lang="en">
-                &dai-bridge.en;
+            <ts:view>
             </ts:view>
         </ts:token-card>
+
+        <ts:action>
+            <ts:name>
+                <ts:string xml:lang="en">Withdraw</ts:string>
+            </ts:name>
+            <ts:attribute-type id="amount" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+                <ts:name>
+                    <ts:string xml:lang="en">Amount to withdraw</ts:string>
+                </ts:name>
+                <ts:origins>
+                    <ts:user-entry as="e18"/>
+                </ts:origins>
+            </ts:attribute-type>
+            <ts:attribute-type id="data" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+                <ts:name>
+                    <ts:string xml:lang="en">Withdraw Data</ts:string>
+                </ts:name>
+                <ts:origins>
+                    <ts:user-entry as="bytes32"/>
+                </ts:origins>
+            </ts:attribute-type>
+            <ts:transaction>
+                <ts:ethereum function="free" contract="SaiTub">
+                    <ts:data>
+                        <ts:address ref="ownerAddress"/>
+                        <ts:bytes32 ref="data"/>
+                        <ts:uint256 ref="amount"/>
+                    </ts:data>
+                </ts:ethereum>
+            </ts:transaction>
+            <style type="text/css">&style;</style>
+            <ts:view>&withdraw.en;</ts:view>
+        </ts:action>
+
+        <ts:action>
+            <ts:name>
+                <ts:string xml:lang="en">Payback</ts:string>
+            </ts:name>
+            <ts:attribute-type id="amount" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+                <ts:name>
+                    <ts:string xml:lang="en">Amount to payback</ts:string>
+                </ts:name>
+                <ts:origins>
+                    <ts:user-entry as="e18"/>
+                </ts:origins>
+            </ts:attribute-type>
+            <ts:transaction>
+                <ts:ethereum function="burn" contract="SaiTub">
+                    <ts:data>
+                        <ts:uint256 ref="amount"/>
+                    </ts:data>
+                </ts:ethereum>
+            </ts:transaction>
+            <style type="text/css">&style;</style>
+            <ts:view>&payback.en;</ts:view>
+        </ts:action>
+
+        <ts:action>
+            <ts:name>
+                <ts:string xml:lang="en">Generate</ts:string>
+            </ts:name>
+            <ts:attribute-type id="amount" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+                <ts:name>
+                    <ts:string xml:lang="en">Amount to generate</ts:string>
+                </ts:name>
+                <ts:origins>
+                    <ts:user-entry as="e18"/>
+                </ts:origins>
+            </ts:attribute-type>
+            <ts:transaction>
+                <ts:ethereum function="mint" contract="SaiTub">
+                    <ts:data>
+                        <ts:address ref="ownerAddress"/>
+                        <ts:uint256 ref="amount"/>
+                    </ts:data>
+                </ts:ethereum>
+            </ts:transaction>
+            <style type="text/css">&style;</style>
+            <ts:view>&generate.en;</ts:view>
+        </ts:action>
+
+        <ts:action>
+            <ts:name>
+                <ts:string xml:lang="en">Move</ts:string>
+            </ts:name>
+            <ts:attribute-type id="cup" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+                <ts:name>
+                    <ts:string xml:lang="en">CDP data</ts:string>
+                </ts:name>
+                <ts:origins>
+                    <ts:user-entry as="bytes32"/>
+                </ts:origins>
+            </ts:attribute-type>
+            <ts:attribute-type id="to" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+                <ts:name>
+                    <ts:string xml:lang="en">send CDP to</ts:string>
+                </ts:name>
+                <ts:origins>
+                    <ts:user-entry as="address"/>
+                </ts:origins>
+            </ts:attribute-type>
+            <ts:transaction>
+                <ts:ethereum function="give" contract="SaiTub">
+                    <ts:data>
+                        <ts:bytes32 ref="cup"/>
+                        <ts:address ref="to"/>
+                    </ts:data>
+                </ts:ethereum>
+            </ts:transaction>
+            <style type="text/css">&style;</style>
+            <ts:view>&MoveAndClose.en;</ts:view>
+        </ts:action>
+
+        <ts:action>
+            <ts:name>
+                <ts:string xml:lang="en">Close</ts:string>
+            </ts:name>
+            <ts:attribute-type id="cup" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+                <ts:name>
+                    <ts:string xml:lang="en">Close CDP</ts:string>
+                </ts:name>
+                <ts:origins>
+                    <ts:user-entry as="bytes32"/>
+                </ts:origins>
+            </ts:attribute-type>
+            <ts:transaction>
+                <ts:ethereum function="shut" contract="SaiTub">
+                    <ts:data>
+                        <ts:bytes32 ref="cup"/>
+                    </ts:data>
+                </ts:ethereum>
+            </ts:transaction>
+            <style type="text/css">&style;</style>
+            <ts:view>&MoveAndClose.en;</ts:view>
+        </ts:action>
+
     </ts:cards>
     <ts:attribute-types>
         <!-- Get the USD price of Ether from the Maker Oracle -->
@@ -72,26 +193,82 @@
             </ts:origins>
         </ts:attribute-type>
 
-        <!-- TODO Get the amount deposited, amount generated,
-         amount withdraw-able (in eth and DAI) & amount to pay back -->
+        <!-- TODO Get the amount generated, amount withdraw-able (in eth and DAI) & amount to pay back -->
+        <!--
+        cup is the bytes32 representation of the CDP, it is returned on creation of a cdp
 
-        <!-- tuple below returns
+        tuple below returns
             struct Cup {
                 address  lad;      // CDP owner
                 uint256  ink;      // Locked collateral (in SKR)
                 uint256  art;      // Outstanding normalised debt (tax only)
                 uint256  ire;      // Outstanding normalised debt
             }
+
+            function lad(bytes32 cup) public view returns (address) {
+                return cups[cup].lad;
+            }
+            function ink(bytes32 cup) public view returns (uint) {
+                return cups[cup].ink;
+            }
+            function tab(bytes32 cup) public returns (uint) {
+                return rmul(cups[cup].art, chi());
+            }
+            function rap(bytes32 cup) public returns (uint) {
+                return sub(rmul(cups[cup].ire, rhi()), tab(cup));
+            }
+
         -->
-        <ts:attribute-type id="cups" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+
+        <ts:attribute-type id="lad" syntax="1.3.6.1.4.1.1466.115.121.1.36">
             <ts:name>
-                <ts:string xml:lang="en">CDP Debt and Collateral</ts:string>
+                <ts:string xml:lang="en">CDP owner</ts:string>
             </ts:name>
             <ts:origins>
-                <ts:ethereum function="cups" contract="SaiTub" as="tuple">
+                <ts:ethereum function="lad" contract="SaiTub" as="address">
                     <ts:data>
-                        <ts:bytes32 ref="cupData"/>
+                        <!-- TODO remove, for testing only -->
+                        <ts:bytes32 ref="cup">0x000000000000000000000000000000000000000000000000000000000000044be</ts:bytes32>                    </ts:data>
+                </ts:ethereum>
+            </ts:origins>
+        </ts:attribute-type>
+
+        <ts:attribute-type id="ink" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+            <ts:name>
+                <ts:string xml:lang="en">Locked collateral (SKR)</ts:string>
+            </ts:name>
+            <ts:origins>
+                <ts:ethereum function="ink" contract="SaiTub" as="address">
+                    <ts:data>
+                        <!-- TODO remove, for testing only -->
+                        <ts:bytes32 ref="cup">0x000000000000000000000000000000000000000000000000000000000000044be</ts:bytes32>
                     </ts:data>
+                </ts:ethereum>
+            </ts:origins>
+        </ts:attribute-type>
+
+        <ts:attribute-type id="tab" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+            <ts:name>
+                <ts:string xml:lang="en">Outstanding normalised debt (Tax Only)</ts:string>
+            </ts:name>
+            <ts:origins>
+                <ts:ethereum function="tab" contract="SaiTub" as="uint">
+                    <ts:data>
+                        <!-- TODO remove, for testing only -->
+                        <ts:bytes32 ref="cup">0x000000000000000000000000000000000000000000000000000000000000044be</ts:bytes32>                    </ts:data>
+                </ts:ethereum>
+            </ts:origins>
+        </ts:attribute-type>
+
+        <ts:attribute-type id="rap" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+            <ts:name>
+                <ts:string xml:lang="en">Outstanding normalised debt</ts:string>
+            </ts:name>
+            <ts:origins>
+                <ts:ethereum function="rap" contract="SaiTub" as="uint">
+                    <ts:data>
+                        <!-- TODO remove, for testing only -->
+                        <ts:bytes32 ref="cup">0x000000000000000000000000000000000000000000000000000000000000044be</ts:bytes32>                    </ts:data>
                 </ts:ethereum>
             </ts:origins>
         </ts:attribute-type>
@@ -101,10 +278,31 @@
                 <ts:string xml:lang="en">Stability Fee</ts:string>
             </ts:name>
             <ts:origins>
-                <ts:ethereum function="fee" contract="DAIToken" as="uint">
+                <ts:ethereum function="tax" contract="SaiTub" as="uint">
                 </ts:ethereum>
             </ts:origins>
         </ts:attribute-type>
+
+        <ts:attribute-type id="liquidationRatio" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+            <ts:name>
+                <ts:string xml:lang="en">Liquidation Ratio</ts:string>
+            </ts:name>
+            <ts:origins>
+                <ts:ethereum function="mat" contract="SaiTub" as="uint">
+                </ts:ethereum>
+            </ts:origins>
+        </ts:attribute-type>
+
+        <ts:attribute-type id="liquidationPenalty" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+            <ts:name>
+                <ts:string xml:lang="en">Liquidation Penalty</ts:string>
+            </ts:name>
+            <ts:origins>
+                <ts:ethereum function="axe" contract="SaiTub" as="uint">
+                </ts:ethereum>
+            </ts:origins>
+        </ts:attribute-type>
+
 
         <ts:attribute-type id="balance" syntax="1.3.6.1.4.1.1466.115.121.1.36">
             <ts:name>
@@ -115,91 +313,6 @@
                 <ts:ethereum function="balanceOf" contract="DAIToken" as="uint">
                     <ts:data>
                         <ts:uint256 ref="ownerAddress"/>
-                    </ts:data>
-                </ts:ethereum>
-            </ts:origins>
-        </ts:attribute-type>
-
-        <!-- TODO all these functions like move, close, deposit, generate,
-        payback might need to go through the proxy -->
-        <ts:attribute-type id="deposit" syntax="1.3.6.1.4.1.1466.115.121.1.36">
-            <ts:name>
-                <ts:string xml:lang="en">Deposit</ts:string>
-            </ts:name>
-            <ts:origins>
-                <ts:ethereum function="lock" contract="DSProxy">
-                    <ts:data>
-                        <ts:address ref="address"/>
-                        <ts:bytes32 ref="data"/>
-                    </ts:data>
-                </ts:ethereum>
-            </ts:origins>
-        </ts:attribute-type>
-
-        <ts:attribute-type id="withdraw" syntax="1.3.6.1.4.1.1466.115.121.1.36">
-            <ts:name>
-                <ts:string xml:lang="en">Withdraw</ts:string>
-            </ts:name>
-            <ts:origins>
-                <ts:ethereum function="free" contract="DSProxy">
-                    <ts:data>
-                        <ts:address ref="address"/>
-                        <ts:bytes32 ref="data"/>
-                        <ts:uint256 ref="amount"/>
-                    </ts:data>
-                </ts:ethereum>
-            </ts:origins>
-        </ts:attribute-type>
-
-        <ts:attribute-type id="payback" syntax="1.3.6.1.4.1.1466.115.121.1.36">
-            <ts:name>
-                <ts:string xml:lang="en">Payback</ts:string>
-            </ts:name>
-            <ts:origins>
-                <ts:ethereum function="burn" contract="SaiTub">
-                    <ts:data>
-                        <ts:uint256 ref="wad"/>
-                    </ts:data>
-                </ts:ethereum>
-            </ts:origins>
-        </ts:attribute-type>
-
-        <ts:attribute-type id="generate" syntax="1.3.6.1.4.1.1466.115.121.1.36">
-            <ts:name>
-                <ts:string xml:lang="en">Generate</ts:string>
-            </ts:name>
-            <ts:origins>
-                <ts:ethereum function="mint" contract="SaiTub">
-                    <ts:data>
-                        <ts:address ref="guy"/>
-                        <ts:uint256 ref="wad"/>
-                    </ts:data>
-                </ts:ethereum>
-            </ts:origins>
-        </ts:attribute-type>
-
-        <ts:attribute-type id="move" syntax="1.3.6.1.4.1.1466.115.121.1.36">
-            <ts:name>
-                <ts:string xml:lang="en">Move</ts:string>
-            </ts:name>
-            <ts:origins>
-                <ts:ethereum function="give" contract="SaiTub">
-                    <ts:data>
-                        <ts:bytes32 ref="cup"/>
-                        <ts:address ref="to"/>
-                    </ts:data>
-                </ts:ethereum>
-            </ts:origins>
-        </ts:attribute-type>
-
-        <ts:attribute-type id="close" syntax="1.3.6.1.4.1.1466.115.121.1.36">
-            <ts:name>
-                <ts:string xml:lang="en">Close</ts:string>
-            </ts:name>
-            <ts:origins>
-                <ts:ethereum function="shut" contract="SaiTub">
-                    <ts:data>
-                        <ts:bytes32 ref="cup"/>
                     </ts:data>
                 </ts:ethereum>
             </ts:origins>

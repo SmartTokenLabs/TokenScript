@@ -1,0 +1,48 @@
+<script type="text/javascript"><![CDATA[
+class Token {
+
+    constructor(tokenInstance) {
+        this.props = tokenInstance
+    }
+
+    render() {
+        const decimals18 = 1000000000000000000;
+        const decimals25 = 10000000000000000000000000;
+        return `
+        <div>
+            <div id="mainHeader">
+              <h2>Your CDP</h2>
+              <p>#${this.props.CDP_number}</p>
+              <br>
+            </div>
+            <br><hr>
+                <div class="container">
+                    <div class="financial-info-left">
+                        <h3>Liquidation Price</h3>
+                        <b><h5>${((this.props.ethPriceUSD * 0.63) / decimals18).toFixed(2)}</h5></b>
+                        <h3>Current Price Info</h3>
+                        <b><h5>${(this.props.ethPriceUSD / decimals18).toFixed(2)} </h5></b>
+                        <h3>Liquidation Penalty </h3>
+                        <b><h5>${(this.props.liquidationPenalty).toFixed(2)}</h5></b>
+                    </div>
+                    <div class="financial-info-right">
+                        <h3>Collateralization Ratio</h3>
+                        <b><h5>${(this.props.liquidationPrice / decimals18).toFixed(2)}</h5></b>
+                        <h3>Minimum Ratio</h3>
+                        <b><h5>${(this.props.liquidationRatio / decimals25).toFixed(2)}%</h5></b>
+                        <h3>Stability Fee</h3>
+                        <b><h5>${(this.props.stabilityFee).toFixed(2)}%</h5></b>
+                    </div>
+                </div>
+            <hr><br>
+        </div>`;
+    }
+}
+
+web3.tokens.dataChanged = (oldTokens, updatedTokens) => {
+    const currentTokenInstance = web3.tokens.data.currentInstance;
+    document.getElementById('root').innerHTML = new Token(currentTokenInstance).render();
+};
+
+]]></script>
+<div id="root"></div>

@@ -1,0 +1,39 @@
+<script type="text/javascript"><![CDATA[
+class Token {
+
+    constructor(tokenInstance) {
+        this.props = tokenInstance
+    }
+
+    render() {
+        const decimals18 = 1000000000000000000;
+        return `
+        <div>
+            <div id="mainHeader">
+              <h2>Generate DAI</h2>
+              <p>#${this.props.CDP_number}</p>
+            </div>
+            <br><hr>
+            <div class="container">
+              <div class="dai-panel-left">
+                <h4>Generated</h4>
+                <h6>TODO DAI</h6>
+              </div>
+              <br>
+              <div class="dai-panel-right">
+                <h4> Max to Generate</h4>
+                <h6>TODO USD</h6>
+                <input type="number"/>
+              </div>
+            </div>
+        </div>`;
+    }
+}
+
+web3.tokens.dataChanged = (oldTokens, updatedTokens) => {
+    const currentTokenInstance = web3.tokens.data.currentInstance;
+    document.getElementById('root').innerHTML = new Token(currentTokenInstance).render();
+};
+
+]]></script>
+<div id="root"></div>
