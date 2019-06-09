@@ -27,11 +27,10 @@
   </ts:name>
   <!-- TODO: will make separate TokenScript for ERC875 -->
   <ts:contract interface="erc875" name="EntryToken">
-    <ts:address network="1">0xFd838c7A0c32D68533ec713Ed631B6B7C8720cED</ts:address>
-    <ts:address network="3">0x3c22BeB7427A57Ab7d532a974F4bBaD7969CAaD3</ts:address>
-    <ts:address network="4">0x4A60c0bf93b2b3a3D20720a773E5Da8C80C427ac</ts:address>
-    <ts:address network="5">0x0C18E83E7D07E2188496467c4102D6D79Dcf1BD1</ts:address>
-    <ts:address network="42">0x5bD04312e79392F042eC730961d107482D3EF19f</ts:address>
+    <ts:address network="1">0x63cCEF733a093E5Bd773b41C96D3eCE361464942</ts:address>
+    <ts:address network="3">0xFB82A5a2922A249f32222316b9D1F5cbD3838678</ts:address>
+    <ts:address network="4">0x7c81DF31BB2f54f03A56Ab25c952bF3Fa39bDF46</ts:address>
+    <ts:address network="42">0x2B58A9403396463404c2e397DBF37c5EcCAb43e5</ts:address>
   </ts:contract>
   <ts:origins>
     <!-- Define the contract which holds the token that the user will use -->
