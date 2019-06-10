@@ -4,9 +4,11 @@ To publish your Tokenscript, it has to be signed.
 
 Currently, a TokenScript is signed by an SSL key. For example, a TokenScript signed by the SSL key for the domain name shong.wang is displayed as "reputation relies on shong.wang" when rendered. To make your first signing easy, we provided both the signing key and needed SSL certificates.
 
+** Dapps like DAI will have a signature from MakerDAO.com's SSL certificate; this gives the user peace of mind that the TokenScript is actually intended by the issuer. The file includes all the relevant code and therefore cannot be tampered with, as that would break the signature verification. ** 
+
 ### Install the tools
 
-All XML signing tool should work, while we demonstrate here a specific tool xmlsectool.
+All XML signing tools should work, but we will we demonstrate here with xmlsectool.
 
 First, check that you have the right tool installed. Say, in OS X with brew installed:
 
@@ -14,7 +16,7 @@ First, check that you have the right tool installed. Say, in OS X with brew inst
 
 If your package manager doesn't provide xmlsectool, you can download from its [home page](https://wiki.shibboleth.net/confluence/display/XSTJ2/xmlsectool+V2+Home) and install it manually.
 
-From here I'll assume your system supports make. If not, it's easier to wait for the tutorial on how to sign with GUI, which we will produce based on [Oxygen's document](https://www.oxygenxml.com/doc/versions/21.0/ug-editor/topics/signing-files.html#signing-files) by mid 2019.
+From here I'll assume your system supports make. If not, it's easier to wait for the tutorial on how to sign with GUI, which we will produce based on [Oxygen's document](https://www.oxygenxml.com/doc/versions/21.0/ug-editor/topics/signing-files.html#signing-files) by late 2019.
 
 If you installed xmlsectool manually, for example to `/opt/xmlsectool-2.0.0/`, you will need to change the first line of the MakeFile to this:
 
@@ -30,12 +32,13 @@ Now we have all the tools ready.
 
 Do a `make`. It will validate EntryToken.xml. It should pass if you haven't changed it.
 
-    $ make
+    $ make EntryToken.canonicalized.xml
     # XML Canonicalization
     xmlstarlet c14n EntryToken.xml  > EntryToken.canonicalized.xml
     # XML Validation
-    xmlstarlet val --xsd ../../schema/tokenscript.xsd EntryToken.canonicalized.xml || (xmllint --noout --schema ../../schema/tokenscript.xsd EntryToken.canonicalized.xml; rm EntryToken.canonicalized.xml)
-    EntryToken.canonicalized.xml - valid
+	-xmlstarlet val --xsd ../../schema/tokenscript.xsd $@ || (mv $@ $@.INVALID; xmllint --noout --schema ../../schema/tokenscript.xsd $@.INVALID)
+
+** If the file has errors, it will produce a file named EntryToken.canonicalized.xml.FAILED which you can use for debugging ** 
 
 ### Sign the test TokenScript
 
@@ -56,4 +59,4 @@ And now you get a signed TokenScript EntryToken.tsml which is ready to be publis
 
 ### Publishing your TokenScript
 
-A signed TokenScript is published by including its reference in the DAPP website that uses the token, similar to how CSS files are referred. The detail steps for doing so will be provided in mid 2019.
+A signed TokenScript is published by including its reference in the DAPP website that uses the token, similar to how CSS files are referred. The detail steps for doing so will be provided in late 2019.
