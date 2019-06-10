@@ -4,7 +4,9 @@ A TokenScript file can be signed. A TokenScript can also be trusted. Ideally, al
 
 ## Signed
 
-A signed TokenScript file is a TokenScript file signed through the use of an XML Signature. At this moment, user agents should only accept such XML Signatures if certified by a certificate authority (CA). For convenience, a website certificate will do at this moment. In the years to come, implementations might require certificates from issuers who can validate an organisation or various forms of decentralised certificate issuers.
+A signed TokenScript file is a TokenScript file signed through the use of an XML Signature. Any signature signing algorithm supported by XML Signature (including ECDSA supported through XML Signature 1.1) is accepted.
+
+At this moment, user agents should only accept such XML Signatures if certified by a certificate authority (CA). For convenience, a website certificate will do at this moment. In the years to come, implementations might require certificates from issuers who can validate an organisation or various forms of decentralised certificate issuers.
 
 When a signed TokenScript is used, the user agent displays the domain name or organisation name of the certificate. It's up to the user if they allow the use of such a TokenScript. We expect users to assert judgement based on whether or not they recognise the CommonName of the certificate.
 
@@ -16,7 +18,9 @@ Any data reference - icons, images and language packs - used by the TokenScript 
 
 ## Trusted (Ethereum)
 
-A trusted TokenScript file is one explicitly trusted by the author of a token's originating contract on Ethereum. Such trust is expressed by an Ethereum transaction. Such trust is also revoked by a transaction.
+A trusted TokenScript file is one explicitly trusted by the author of a token's originating contract on Ethereum. Such trust is expressed by an Ethereum transaction. Only one signing algorithm, ECDSA (secp256k1), is used in express-of-trust because trust is expressed by an Ethereum transaction.
+
+Such trust is also revoked by a transaction.
 
 The transaction consists of a simple To address, with no data attached.
 
