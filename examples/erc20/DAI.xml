@@ -28,7 +28,7 @@
         </ts:token-card>
         <ts:action>
             <ts:name>
-                <ts:string xml:lang="en">Convert DAI to xDAI</ts:string>
+                <ts:string xml:lang="en">Convert to xDAI</ts:string>
             </ts:name>
             <ts:attribute-type id="amount" syntax="1.3.6.1.4.1.1466.115.121.1.36">
                 <ts:name>

@@ -8,7 +8,7 @@
            xmlns:xml="http://www.w3.org/XML/1998/namespace"
 >
     <ts:name>
-        <ts:string xml:lang="en">Transfer to DAI</ts:string>
+        <ts:string xml:lang="en">Convert to DAI</ts:string>
         <ts:string xml:lang="zh">將xDAI轉爲DAI</ts:string>
     </ts:name>
     <!-- because this action has xdai as input, it should be listed as
