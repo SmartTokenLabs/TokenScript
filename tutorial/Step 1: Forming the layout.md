@@ -1,12 +1,12 @@
 ## Forming the layout in TokenScript
 
 ### Resources
-All the files to complete this tutorial are contained in the example nft directory [here](https://github.com/AlphaWallet/TokenScript/examples/nft). 
+All the files to complete this tutorial are contained in the example nft directory [here](https://github.com/AlphaWallet/TokenScript/tree/master/examples/nft).
 
 ### Adding your layout
 Since TokenScript is essentially an XML dialect, it is possible to plug in your existing layout files in HTML, CSS and JS. To begin, simply clone this repo and take a look at the token.en.shtml and enter.en.shtml files inside the example NFT directory. 
 
-    $ git clone https://github.com/AlphaWallet/TokenScript && cd examples/nft 
+    $ git clone https://github.com/AlphaWallet/TokenScript && cd TokenScript/examples/nft
 
 This demo will go through an example token which allows you to enter fake Satoshi's house with an NFT token and a challenge response off chain.  
 
