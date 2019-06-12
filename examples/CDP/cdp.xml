@@ -32,6 +32,13 @@
     <ts:contract name="SaiTub">
         <ts:address network="1">0x448a5065aeBB8E423F0896E6c5D525C040f59af3</ts:address>
     </ts:contract>
+    <ts:contract name="DSProxyFactory">
+        <ts:address network="1">0xA26e15C895EFc0616177B7c1e7270A4C7D51C997</ts:address>
+    </ts:contract>
+    <ts:contract name="DSProxy">
+        <!-- TODO get from lad call -->
+        <ts:address network="1"/>
+    </ts:contract>
     <ts:origins>
         <!-- Define the contract which holds the token that the user will use -->
         <ts:ethereum contract="DAIToken">
@@ -193,9 +200,34 @@
             </ts:origins>
         </ts:attribute-type>
 
+        <ts:attribute-type id="DSProxy" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+            <ts:name>
+                <ts:string xml:lang="en">Proxy Address</ts:string>
+            </ts:name>
+            <ts:origins>
+                <ts:ethereum event="Created" contract="DSProxyFactory" as="address">
+                </ts:ethereum>
+            </ts:origins>
+        </ts:attribute-type>
+
+        <ts:attribute-type id="cup" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+            <ts:name>
+                <ts:string xml:lang="en">CDP number</ts:string>
+            </ts:name>
+            <ts:origins>
+                <ts:ethereum event="LogNewCup" contract="SaiTub" as="bytes32">
+                    <ts:data>
+                        <ts:address ref="DSProxy"/>
+                    </ts:data>
+                </ts:ethereum>
+            </ts:origins>
+        </ts:attribute-type>
+
         <!-- TODO Get the amount generated, amount withdraw-able (in eth and DAI) & amount to pay back -->
         <!--
         cup is the bytes32 representation of the CDP, it is returned on creation of a cdp
+
+        Note: CDP is owned by proxy and proxy is controlled by the initial sender
 
         tuple below returns
             struct Cup {
@@ -217,7 +249,7 @@
             function rap(bytes32 cup) public returns (uint) {
                 return sub(rmul(cups[cup].ire, rhi()), tab(cup));
             }
-
+            0x000000000000000000000000000000000000000000000000000000000000044be
         -->
 
         <ts:attribute-type id="lad" syntax="1.3.6.1.4.1.1466.115.121.1.36">
@@ -227,8 +259,8 @@
             <ts:origins>
                 <ts:ethereum function="lad" contract="SaiTub" as="address">
                     <ts:data>
-                        <!-- TODO remove, for testing only -->
-                        <ts:bytes32 ref="cup">0x000000000000000000000000000000000000000000000000000000000000044be</ts:bytes32>                    </ts:data>
+                        <ts:bytes32 ref="cup"/>
+                    </ts:data>
                 </ts:ethereum>
             </ts:origins>
         </ts:attribute-type>
@@ -240,8 +272,7 @@
             <ts:origins>
                 <ts:ethereum function="ink" contract="SaiTub" as="address">
                     <ts:data>
-                        <!-- TODO remove, for testing only -->
-                        <ts:bytes32 ref="cup">0x000000000000000000000000000000000000000000000000000000000000044be</ts:bytes32>
+                        <ts:bytes32 ref="cup"/>
                     </ts:data>
                 </ts:ethereum>
             </ts:origins>
@@ -254,8 +285,8 @@
             <ts:origins>
                 <ts:ethereum function="tab" contract="SaiTub" as="uint">
                     <ts:data>
-                        <!-- TODO remove, for testing only -->
-                        <ts:bytes32 ref="cup">0x000000000000000000000000000000000000000000000000000000000000044be</ts:bytes32>                    </ts:data>
+                        <ts:bytes32 ref="cup"/>
+                    </ts:data>
                 </ts:ethereum>
             </ts:origins>
         </ts:attribute-type>
@@ -267,8 +298,8 @@
             <ts:origins>
                 <ts:ethereum function="rap" contract="SaiTub" as="uint">
                     <ts:data>
-                        <!-- TODO remove, for testing only -->
-                        <ts:bytes32 ref="cup">0x000000000000000000000000000000000000000000000000000000000000044be</ts:bytes32>                    </ts:data>
+                        <ts:bytes32 ref="cup"/>
+                    </ts:data>
                 </ts:ethereum>
             </ts:origins>
         </ts:attribute-type>

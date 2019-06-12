@@ -651,6 +651,7 @@
             </xs:sequence>
             <xs:attribute name="contract" type="xs:IDREF"/>
             <xs:attribute name="function" type="xs:NCName"/>
+            <xs:attribute name="event" type="xs:NCName"/>
             <xs:attribute name="as" type="as"/>
         </xs:complexType>
     </xs:element>
