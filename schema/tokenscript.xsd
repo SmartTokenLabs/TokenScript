@@ -644,6 +644,7 @@
                                 </xs:complexType>
                             </xs:element>
                             <xs:element name="address" type="address"/>
+                            <xs:element name="bytes" type="address"/>
                         </xs:choice>
                     </xs:complexType>
                 </xs:element>
