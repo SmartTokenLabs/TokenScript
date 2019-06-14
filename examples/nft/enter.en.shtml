@@ -1,48 +1,65 @@
-<script type="text/javascript">
-window.onload = function startup() {
-    // 1. call API to fetch challenge
-    fetch('http://stormbird.duckdns.org:8080/api/getChallenge')
-        .then(function (response) {
-            return response.text()
-        })
-        .then(function (response) {
-            document.getElementById('msg').innerHTML = 'Challenge: ' + response
-            window.challenge = response
-        })
+<script type="text/javascript"><![CDATA[
+class Token {
+    constructor(tokenInstance) {
+        this.props = tokenInstance
+        document.getElementById("contractAddress").value = this.props.EntryToken;
+    }
 }
 
-window.onConfirm = function onConfirm(signature) {
-    if (window.challenge === undefined || window.challenge.length == 0) return
-    const challenge = window.challenge
-    document.getElementById('status').innerHTML = 'Wait for signature...'
-    // 2. sign challenge to generate response
-    web3.personal.sign({ data: challenge }, function (error, value) {
-		if (error != null) {
-		  document.getElementById('status').innerHTML = error
-		  window.onload()
-		  return
-		}
-
-        document.getElementById('status').innerHTML = 'Verifying credentials ...'
-        // 3. open door
-        fetch(`http://stormbird.duckdns.org:8080/api/checkSignature?contract=0x0C8D487DD27D7c4A027D9f92915659139e0b2FF2&amp;challenge=${challenge}&amp;sig=${value}`)
-            .then(function (response) {
-                return response.text()
-            })
-            .then(function (response) {
-                if (response == "pass") {
-                    document.getElementById('status').innerHTML = 'Entrance granted!'
-                    window.close()
-                } else {
-                    document.getElementById('status').innerHTML = 'Failed with: ' + response
-                }
-            })
-    })
-    window.challenge = ''
-	document.getElementById('msg').innerHTML = ''
-}
+web3.tokens.dataChanged = (oldTokens, updatedTokens) => {
+    const currentTokenInstance = web3.tokens.data.currentInstance;
+    document.getElementById('root').innerHTML = new Token(currentTokenInstance).render();
+};
+]]>
 </script>
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function() {
+        window.onload = function startup() {
+            // 1. call API to fetch challenge
+            fetch('http://stormbird.duckdns.org:8080/api/getChallenge')
+                .then(function (response) {
+                    return response.text()
+                })
+                .then(function (response) {
+                    document.getElementById('msg').innerHTML = 'Challenge: ' + response
+                    window.challenge = response
+                })
+        }
 
+        window.onConfirm = function onConfirm(signature) {
+            if (window.challenge === undefined || window.challenge.length == 0) return
+            const challenge = window.challenge
+            document.getElementById('status').innerHTML = 'Wait for signature...'
+            // 2. sign challenge to generate response
+            web3.personal.sign({ data: challenge }, function (error, value) {
+                if (error != null) {
+                    document.getElementById('status').innerHTML = error
+                    window.onload();
+                    return
+                }
+
+                document.getElementById('status').innerHTML = 'Verifying credentials ...'
+                // 3. open door
+                let contractAddress = document.getElementById("contractAddress").textContent;
+                fetch(`http://stormbird.duckdns.org:8080/api/checkSignature?contract=${contractAddress}&amp;challenge=${challenge}&amp;sig=${value}`)
+                    .then(function (response) {
+                        return response.text()
+                    })
+                    .then(function (response) {
+                        if (response == "pass") {
+                            document.getElementById('status').innerHTML = 'Entrance granted!'
+                            window.close()
+                        } else {
+                            document.getElementById('status').innerHTML = 'Failed with: ' + response
+                        }
+                    })
+            });
+            window.challenge = '';
+            document.getElementById('msg').innerHTML = '';
+        }
+    })
+</script>
 <h3>Welcome to Craig Wright's house!</h3>
 <div id="msg">Preparing to unlock the entrance door.</div>
+<div id="contractAddress"></div>
 <div id="status"></div>
