@@ -2,3 +2,4 @@
 .DS_Store
 .idea 
 *.canonicalized.xml
+*.canonicalized.xml.INVALID
