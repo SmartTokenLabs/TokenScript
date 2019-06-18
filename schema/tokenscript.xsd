@@ -239,6 +239,7 @@
                 <xs:element ref="origins"/>
             </xs:sequence>
             <xs:attribute name="id" use="required" type="xs:NCName"/>
+            <xs:attribute name="single-value" use="optional" type="xs:NCName"/>
             <xs:attribute name="oid" type="xs:NMTOKEN"/>
             <xs:attribute name="syntax" use="required" type="xs:NMTOKEN"/>
         </xs:complexType>
