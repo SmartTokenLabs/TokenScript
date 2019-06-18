@@ -23,7 +23,7 @@ help:
 	# XML Validation
     # if failed, run validation again with xmllint to get meaningful error
     # then delete the canonicalized file
-	-xmlstarlet val --xsd ../../schema/tokenscript.xsd $@ || (xmllint --noout --schema ../../schema/tokenscript.xsd $@; rm $@)
+	-xmlstarlet val --xsd http://tokenscript.org/2019/05/tokenscript/tokenscript.xsd $@ || (xmllint --noout --schema http://tokenscript.org/2019/05/tokenscript/tokenscript.xsd $@; rm $@)
 
 %.tsml: %.canonicalized.xml
 ifeq (,$(KEYSTORE))
