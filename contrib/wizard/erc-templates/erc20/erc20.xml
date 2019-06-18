@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE token  [
+    <!ENTITY style SYSTEM "shared.css">
+    <!ENTITY approve.en SYSTEM "approve.en.shtml">
+    <!ENTITY transferFrom.en SYSTEM "transferFrom.en.shtml">
+]>
+<ts:token xmlns:ts="http://tokenscript.org/2019/05/tokenscript"
+          xmlns="http://www.w3.org/1999/xhtml"
+          xmlns:xml="http://www.w3.org/XML/1998/namespace"
+          xsi:schemaLocation="http://tokenscript.org/2019/05/tokenscript ../../schema/tokenscript.xsd"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          custodian="false"
+>
+    <ts:name>
+        <ts:plurals xml:lang="en">
+            <ts:string quantity="one">Token</ts:string>
+            <ts:string quantity="many">Tokens</ts:string>
+        </ts:plurals>
+    </ts:name>
+    <!-- Since it is defined as erc20 here, you will not need to have transfer or receive as an action in AlphaWallet -->
+    <ts:contract name="token" interface="erc20">
+        <ts:address network="1">0x000000000000000000000000000000000000dEaD</ts:address>
+    </ts:contract>
+    <ts:origins>
+        <ts:ethereum contract="token">
+        </ts:ethereum>
+    </ts:origins>
+    <ts:cards>
+        <ts:token-card>
+            <ts:view-iconified/>
+            <ts:view>
+            </ts:view>
+        </ts:token-card>
+        <ts:action>
+            <ts:name>
+                <ts:string xml:lang="en">Transfer from</ts:string>
+            </ts:name>
+            <ts:attribute-type id="amount" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+                <ts:name>
+                    <ts:string xml:lang="en">Amount in token</ts:string>
+                    <ts:string xml:lang="zh">代幣金額</ts:string>
+                </ts:name>
+                <ts:origins>
+                    <!-- e18 is a hard coded multiplier.
+                    rationale for hardcoding: avoiding over-design  -->
+                    <ts:user-entry as="e18"/>
+                </ts:origins>
+            </ts:attribute-type>
+            <ts:attribute-type id="from" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+                <ts:name>
+                    <ts:string xml:lang="en">from</ts:string>
+                </ts:name>
+                <ts:origins>
+                    <!-- e18 is a hard coded multiplier.
+                    rationale for hardcoding: avoiding over-design  -->
+                    <ts:user-entry as="e18"/>
+                </ts:origins>
+            </ts:attribute-type>
+            <ts:attribute-type id="to" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+                <ts:name>
+                    <ts:string xml:lang="en">to</ts:string>
+                </ts:name>
+                <ts:origins>
+                    <!-- e18 is a hard coded multiplier.
+                    rationale for hardcoding: avoiding over-design  -->
+                    <ts:user-entry as="e18"/>
+                </ts:origins>
+            </ts:attribute-type>
+            <ts:transaction>
+                <ts:ethereum function="transferFrom" contract="token">
+                    <ts:data>
+                        <ts:address ref="from"/>
+                        <ts:address ref="to"/>
+                        <ts:uint256 ref="amount"/>
+                    </ts:data>
+                </ts:ethereum>
+            </ts:transaction>
+            <style type="text/css">&style;</style>
+            <ts:view>&transferFrom.en;</ts:view>
+        </ts:action>
+        
+        <ts:action>
+            <ts:name>
+                <ts:string xml:lang="en">Approve</ts:string>
+            </ts:name>
+            <ts:attribute-type id="amount" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+                <ts:name>
+                    <ts:string xml:lang="en">Amount in token</ts:string>
+                    <ts:string xml:lang="zh">代幣金額</ts:string>
+                </ts:name>
+                <ts:origins>
+                    <!-- e18 is a hard coded multiplier.
+                    rationale for hardcoding: avoiding over-design  -->
+                    <ts:user-entry as="e18"/>
+                </ts:origins>
+            </ts:attribute-type>
+            <ts:attribute-type id="spender" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+                <ts:name>
+                    <ts:string xml:lang="en">Amount in token</ts:string>
+                    <ts:string xml:lang="zh">代幣金額</ts:string>
+                </ts:name>
+                <ts:origins>
+                    <!-- e18 is a hard coded multiplier.
+                    rationale for hardcoding: avoiding over-design  -->
+                    <ts:user-entry as="e18"/>
+                </ts:origins>
+            </ts:attribute-type>
+            <ts:transaction>
+                <ts:ethereum function="approve" contract="token">
+                    <ts:data>
+                        <ts:address ref="spender"/>
+                        <ts:uint256 ref="amount"/>
+                    </ts:data>
+                </ts:ethereum>
+            </ts:transaction>
+            <style type="text/css">&style;</style>
+            <ts:view>&approve.en;</ts:view>
+        </ts:action>
+    </ts:cards>
+
+    <ts:attribute-types>
+
+        <ts:attribute-type id="balance" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+            <ts:name>
+                <ts:string xml:lang="en">token-Balance</ts:string>
+            </ts:name>
+            <ts:origins>
+                <ts:ethereum function="balanceOf" contract="token" as="uint">
+                    <ts:data>
+                        <ts:address ref="ownerAddress"/>
+                    </ts:data>
+                </ts:ethereum>
+            </ts:origins>
+        </ts:attribute-type>
+
+        <ts:attribute-type id="totalSupply" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+            <ts:name>
+                <ts:string xml:lang="en">token-Balance</ts:string>
+            </ts:name>
+            <ts:origins>
+                <ts:ethereum function="totalSupply" contract="token" as="uint">
+                </ts:ethereum>
+            </ts:origins>
+        </ts:attribute-type>
+
+        <ts:attribute-type id="allowance" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+            <ts:name>
+                <ts:string xml:lang="en">Allowance</ts:string>
+            </ts:name>
+            <ts:origins>
+                <ts:ethereum function="allowance" contract="token" as="uint">
+                    <ts:data>
+                        <ts:address ref="owner"/>
+                        <ts:address ref="spender"/>
+                    </ts:data>
+                </ts:ethereum>
+            </ts:origins>
+        </ts:attribute-type>
+
+    </ts:attribute-types>
+
+</ts:token>
