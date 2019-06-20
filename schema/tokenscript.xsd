@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
-           targetNamespace="http://tokenscript.org/2019/05/tokenscript"
+           targetNamespace="http://tokenscript.org/2019/07/tokenscript"
            xmlns:xhtml="http://www.w3.org/1999/xhtml"
            xmlns:dsig="http://www.w3.org/2000/09/xmldsig#"
-           xmlns="http://tokenscript.org/2019/05/tokenscript">
+           xmlns="http://tokenscript.org/2019/07/tokenscript">
 
 
     <!-- Importing XML namespace for xml:lang and xml:id -->
@@ -239,6 +239,7 @@
                 <xs:element ref="origins"/>
             </xs:sequence>
             <xs:attribute name="id" use="required" type="xs:NCName"/>
+            <xs:attribute name="single-value" use="optional" type="xs:NCName"/>
             <xs:attribute name="oid" type="xs:NMTOKEN"/>
             <xs:attribute name="syntax" use="required" type="xs:NMTOKEN"/>
         </xs:complexType>
@@ -276,6 +277,7 @@
             <xs:enumeration value="utf8"/>
             <xs:enumeration value="e18"/>
             <xs:enumeration value="bool"/>
+            <xs:enumeration value="bytes"/>
         </xs:restriction>
     </xs:simpleType>
     <xs:element name="user-entry">
@@ -307,6 +309,11 @@
                 <xs:element minOccurs="0" name="data">
                     <xs:complexType>
                         <xs:choice maxOccurs="unbounded">
+                            <xs:element name="bool">
+                                <xs:complexType mixed="true">
+                                    <xs:attribute name="ref" type="xs:NCName"/>
+                                </xs:complexType>
+                            </xs:element>
                             <xs:element name="uint8">
                                 <xs:complexType mixed="true">
                                     <xs:attribute name="ref" type="xs:NCName"/>
@@ -628,6 +635,171 @@
                                 </xs:complexType>
                             </xs:element>
                             <xs:element name="string">
+                                <xs:complexType mixed="true">
+                                    <xs:attribute name="ref" type="xs:NCName"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="bytes">
+                                <xs:complexType mixed="true">
+                                    <xs:attribute name="ref" type="xs:NCName"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="byte">
+                                <xs:complexType mixed="true">
+                                    <xs:attribute name="ref" type="xs:NCName"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="bytes2">
+                                <xs:complexType mixed="true">
+                                    <xs:attribute name="ref" type="xs:NCName"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="bytes3">
+                                <xs:complexType mixed="true">
+                                    <xs:attribute name="ref" type="xs:NCName"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="bytes4">
+                                <xs:complexType mixed="true">
+                                    <xs:attribute name="ref" type="xs:NCName"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="bytes5">
+                                <xs:complexType mixed="true">
+                                    <xs:attribute name="ref" type="xs:NCName"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="bytes6">
+                                <xs:complexType mixed="true">
+                                    <xs:attribute name="ref" type="xs:NCName"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="bytes7">
+                                <xs:complexType mixed="true">
+                                    <xs:attribute name="ref" type="xs:NCName"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="bytes8">
+                                <xs:complexType mixed="true">
+                                    <xs:attribute name="ref" type="xs:NCName"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="bytes9">
+                                <xs:complexType mixed="true">
+                                    <xs:attribute name="ref" type="xs:NCName"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="bytes10">
+                                <xs:complexType mixed="true">
+                                    <xs:attribute name="ref" type="xs:NCName"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="bytes11">
+                                <xs:complexType mixed="true">
+                                    <xs:attribute name="ref" type="xs:NCName"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="bytes12">
+                                <xs:complexType mixed="true">
+                                    <xs:attribute name="ref" type="xs:NCName"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="bytes13">
+                                <xs:complexType mixed="true">
+                                    <xs:attribute name="ref" type="xs:NCName"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="bytes14">
+                                <xs:complexType mixed="true">
+                                    <xs:attribute name="ref" type="xs:NCName"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="bytes15">
+                                <xs:complexType mixed="true">
+                                    <xs:attribute name="ref" type="xs:NCName"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="bytes16">
+                                <xs:complexType mixed="true">
+                                    <xs:attribute name="ref" type="xs:NCName"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="bytes17">
+                                <xs:complexType mixed="true">
+                                    <xs:attribute name="ref" type="xs:NCName"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="bytes18">
+                                <xs:complexType mixed="true">
+                                    <xs:attribute name="ref" type="xs:NCName"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="bytes19">
+                                <xs:complexType mixed="true">
+                                    <xs:attribute name="ref" type="xs:NCName"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="bytes20">
+                                <xs:complexType mixed="true">
+                                    <xs:attribute name="ref" type="xs:NCName"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="bytes21">
+                                <xs:complexType mixed="true">
+                                    <xs:attribute name="ref" type="xs:NCName"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="bytes22">
+                                <xs:complexType mixed="true">
+                                    <xs:attribute name="ref" type="xs:NCName"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="bytes23">
+                                <xs:complexType mixed="true">
+                                    <xs:attribute name="ref" type="xs:NCName"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="bytes24">
+                                <xs:complexType mixed="true">
+                                    <xs:attribute name="ref" type="xs:NCName"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="bytes25">
+                                <xs:complexType mixed="true">
+                                    <xs:attribute name="ref" type="xs:NCName"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="bytes26">
+                                <xs:complexType mixed="true">
+                                    <xs:attribute name="ref" type="xs:NCName"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="bytes27">
+                                <xs:complexType mixed="true">
+                                    <xs:attribute name="ref" type="xs:NCName"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="bytes28">
+                                <xs:complexType mixed="true">
+                                    <xs:attribute name="ref" type="xs:NCName"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="bytes29">
+                                <xs:complexType mixed="true">
+                                    <xs:attribute name="ref" type="xs:NCName"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="bytes30">
+                                <xs:complexType mixed="true">
+                                    <xs:attribute name="ref" type="xs:NCName"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="bytes31">
+                                <xs:complexType mixed="true">
+                                    <xs:attribute name="ref" type="xs:NCName"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="bytes32">
                                 <xs:complexType mixed="true">
                                     <xs:attribute name="ref" type="xs:NCName"/>
                                 </xs:complexType>
