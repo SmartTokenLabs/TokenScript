@@ -45,7 +45,7 @@ By taking the knowledge of tokens including smart contract interfaces out and pu
 
 The TokenScript project is an initiative to design, progress TokenScript and nurture the use of TokenScript.
 
-# Git repo
+## Git repo
 
 This project holds:
 
@@ -58,7 +58,7 @@ lib/browser
 lib/web
 :    library for DApps to render tokens in the case the DApp-browser does not support TokenScript. Some features are not available (e.g. switching nodes or accessing multiple Plasma Chain) as they require underlying DApp browser support.
 
-# Trying out TokenScript
+## Trying out TokenScript
 
 Join our Telegram group <https://t.me/AlphaWalletGroup> and ask for "an example Admission Ticket Token to play with TokenScript". Tell us your Ethereum address so we can send you a token.
 
@@ -70,3 +70,6 @@ For iOS:
 4. Go to our repository at <https://github.com/AlphaWallet/TokenScript/tree/master/examples/nft> and AirDrop the files `AdmissionTicket.xml`, `token.en.shtml`, `shared.css` and `enter.en.shtml` from your Mac to your iPhone. If you have access to the files in mobile Safari, you can also choose to "Open in AlphaWallet" from the iOS share menu
 In the AlphaWallet app, go to Wallet tab and tap on the token "Admission Ticket Token (DAT2)"
 6. In the AlphaWallet app, check the Settings tab > `TokenScript Overrides` for the list of TokenScript files. Swipe to delete or tap to share. You can AirDrop the files to another iPhone which has AlphaWallet TestFlight installed
+
+## Donation Address
+[0xdeadd42a3ab7d14626a98eadebd26ae8c81b07e4](https://etherscan.io/address/0xdeadd42a3ab7d14626a98eadebd26ae8c81b07e4)
