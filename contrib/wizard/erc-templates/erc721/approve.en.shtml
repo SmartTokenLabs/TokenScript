@@ -1,0 +1,30 @@
+<script type="text/javascript"><![CDATA[
+class Token {
+    constructor(tokenInstance) {
+        this.props = tokenInstance
+    }
+
+    render() {
+        return `
+        <div class="ui container">
+              <div class="ui segment">
+                <span>Your Balance: <b>${(this.props.balance / 1e+18).toFixed(2)}</b><br></span>
+              </div>
+              <label>Approve the transfer of your funds</label>
+              <input type="number" id="amount" placeholder="0"/>
+              <input type="text" id="spender" placeholder="spender address"/>
+              <img
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAoCAYAAACfKfiZAAAABGdBTUEAALGPC/xhBQAAAcNJREFUWAntl71KxEAQx03OyuJSiIKtCIIfT+ATiOnEsxMld6X2Fgo2PoBgdXfJNT5BtNM7BLGysvQZvM5CuFzifwJzjHf5uLBbbiDszO7M/H87bGBjLZQ8vu9vxXEcWpb14HnedUl4utzpdB6TJDmQsch/ajabrpwj256ekH6v19sej8cDFFsHxBUK38r1AnszYy1rLh+AxEejUR+FVrkYQC4rQHBa4ZjZAYjsRFE0kOJcRTfEDACJQ6wPoRUWnR51QvwDCIJgt0ycYXRBTABIHAfupWjnLM6jDogUIAzDpariEqLb7XrsVx0XKcF13V987/fY0bIo4MA+EX5q4nv+RNwrz9u2ncD+YL/qmAKgaIzEG5mMw7gBoRkAEm+1WhcyVsWenAGVIiq5BsB0wHTAdMB0wHTAdMB0wHTAdCC9FatcKtvt9jHy92QN3JxnfutoDrF3Mg638XdlABQ5QvFDWTjHpv+Mc7mGvDXlM1Cv108B8SYLz2NTjuM4Z8oAjUbjBxD7VSAolnIoVxmAdlsFQopTrhaAeSGmxbUClEFkiWsHyIPIEy8EqNVq30gcUhA/8BO8X+znjXwmsP5MLx+4rPg/qL3E8KLnDDoAAAAASUVORK5CYII="
+              width="20px">
+              </img>
+        </div>`;
+    }
+}
+
+web3.tokens.dataChanged = (oldTokens, updatedTokens) => {
+    const currentTokenInstance = web3.tokens.data.currentInstance;
+    document.getElementById('root').innerHTML = new Token(currentTokenInstance).render();
+};
+
+]]></script>
+<div id="root"></div>
