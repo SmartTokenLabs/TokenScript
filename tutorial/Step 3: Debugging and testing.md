@@ -10,7 +10,7 @@ So you now have your completed .xml and .shtml files, excellent! You can now mer
 Go to either [iOS](https://github.com/AlphaWallet/alpha-wallet-ios) or [Android](https://github.com/AlphaWallet/alpha-wallet-android) source repo
 
 ### Debugging on iOS 
-After cloning the source code you can run it with either the emulator or your own phone via xcode or AppCode. If you are using the emulator, simply copy the path it prints when loading up in xcode and cd into it. Once there you shoud see a directory called 'assetDefinitions', simply drop the file into this directory.
+After cloning the source code you can run it with either the emulator or your own phone via xcode or AppCode. If you are using the emulator, simply copy the path it prints when loading up in xcode and cd into it. Once there you shoud see a directory called 'assetDefinitionsOverrides', simply drop the file into this directory.
 
 If you are using your real device, simply airdrop the canonicalized.xml file or drop the xml file with its three layout files (shared.css, enter.en.shtml & token.en.shtml). 
 
