@@ -74,7 +74,7 @@ For Android:
 
 1. Install the latest AlphaWallet app from the play store.
 2. In the AlphaWallet app, go to Wallet (first tab) and tap the `+` button and paste the contract address `0x63cCEF733a093E5Bd773b41C96D3eCE361464942` to make the wallet display the token
-3. Go to our repository at <https://github.com/AlphaWallet/TokenScript/tree/master/examples/nft>, run 'make EntryToken.canonicalized.xml' and drag and drop the file into the AlphaWallet folder (on your android device). 
+3. Go to our repository at <https://github.com/AlphaWallet/TokenScript/tree/master/examples/nft>, run 'make EntryToken.canonicalized.xml' and drag and drop the file into the sdcard/home/AlphaWallet folder (on your android device). 
 4. In the AlphaWallet app, go to Wallet tab and tap on the token "TokenScript Test Tokens (TKS)"
 5. In the AlphaWallet app, check the Settings tab > `TokenScript Overrides` for the list of TokenScript files. Swipe to delete or tap to share. 
 
