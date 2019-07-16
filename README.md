@@ -60,16 +60,15 @@ lib/web
 
 ## Trying out TokenScript
 
-Join our Telegram group <https://t.me/AlphaWalletGroup> and ask for "an example Entry Token Token to play with TokenScript". Tell us your Ethereum address so we can send you a token.
+FYI, Join our Telegram group <https://t.me/AlphaWalletGroup> if you need any assistance. 
 
 For iOS:
 
 1. Install the TestFlight build by visiting <https://testflight.apple.com/join/aHUxcsro>
-2. In the AlphaWallet app, go to Settings (last tab) > `Enabled Networks` and tap `Ropsten (test)` to enable it. Tap `Done`
-3. In the AlphaWallet app, go to Wallet (first tab) and tap the `+` button and paste the contract address `0x0C8D487DD27D7c4A027D9f92915659139e0b2FF2` to make the wallet display the token which should have been transferred to you
-4. Go to our repository at <https://github.com/AlphaWallet/TokenScript/tree/master/examples/nft> and AirDrop the files `EntryToken.xml`, `token.en.shtml`, `shared.css` and `enter.en.shtml` from your Mac to your iPhone. If you have access to the files in mobile Safari, you can also choose to "Open in AlphaWallet" from the iOS share menu
+2. In the AlphaWallet app, go to Wallet (first tab) and tap the `+` button and paste the contract address `0x63cCEF733a093E5Bd773b41C96D3eCE361464942` to make the wallet display the token which should have been transferred to you
+3. Go to our repository at <https://github.com/AlphaWallet/TokenScript/tree/master/examples/nft> and AirDrop the files `EntryToken.xml`, `token.en.shtml`, `shared.css` and `enter.en.shtml` from your Mac to your iPhone. If you have access to the files in mobile Safari, you can also choose to "Open in AlphaWallet" from the iOS share menu
 In the AlphaWallet app, go to Wallet tab and tap on the token "TokenScript Test Tokens (TKS)"
-6. In the AlphaWallet app, check the Settings tab > `TokenScript Overrides` for the list of TokenScript files. Swipe to delete or tap to share. You can AirDrop the files to another iPhone which has AlphaWallet TestFlight installed
+4. In the AlphaWallet app, check the Settings tab > `TokenScript Overrides` for the list of TokenScript files. Swipe to delete or tap to share. You can AirDrop the files to another iPhone which has AlphaWallet TestFlight installed
 
 ## Donation Address
 [0xdeadd42a3ab7d14626a98eadebd26ae8c81b07e4](https://etherscan.io/address/0xdeadd42a3ab7d14626a98eadebd26ae8c81b07e4)
