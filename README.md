@@ -65,10 +65,18 @@ FYI, Join our Telegram group <https://t.me/AlphaWalletGroup> if you need any ass
 For iOS:
 
 1. Install the latest AlphaWallet app from the app store. 
-2. In the AlphaWallet app, go to Wallet (first tab) and tap the `+` button and paste the contract address `0x63cCEF733a093E5Bd773b41C96D3eCE361464942` to make the wallet display the token which should have been transferred to you
+2. In the AlphaWallet app, go to Wallet (first tab) and tap the `+` button and paste the contract address `0x63cCEF733a093E5Bd773b41C96D3eCE361464942` to make the wallet display the token 
 3. Go to our repository at <https://github.com/AlphaWallet/TokenScript/tree/master/examples/nft> and AirDrop the files `EntryToken.xml`, `token.en.shtml`, `shared.css` and `enter.en.shtml` from your Mac to your iPhone. If you have access to the files in mobile Safari, you can also choose to "Open in AlphaWallet" from the iOS share menu
-In the AlphaWallet app, go to Wallet tab and tap on the token "TokenScript Test Tokens (TKS)"
-4. In the AlphaWallet app, check the Settings tab > `TokenScript Overrides` for the list of TokenScript files. Swipe to delete or tap to share. You can AirDrop the files to another iPhone which has AlphaWallet TestFlight installed
+4. In the AlphaWallet app, go to Wallet tab and tap on the token "TokenScript Test Tokens (TKS)"
+5. In the AlphaWallet app, check the Settings tab > `TokenScript Overrides` for the list of TokenScript files. Swipe to delete or tap to share. You can AirDrop the files to another iPhone which has AlphaWallet TestFlight installed
+
+For Android:
+
+1. Install the latest AlphaWallet app from the play store.
+2. In the AlphaWallet app, go to Wallet (first tab) and tap the `+` button and paste the contract address `0x63cCEF733a093E5Bd773b41C96D3eCE361464942` to make the wallet display the token
+3. Go to our repository at <https://github.com/AlphaWallet/TokenScript/tree/master/examples/nft> and drag and drop the files `EntryToken.xml`, `token.en.shtml`, `shared.css` and `enter.en.shtml` from your PC into the AlphaWallet folder. 
+4. In the AlphaWallet app, go to Wallet tab and tap on the token "TokenScript Test Tokens (TKS)"
+5. In the AlphaWallet app, check the Settings tab > `TokenScript Overrides` for the list of TokenScript files. Swipe to delete or tap to share. 
 
 ## Donation Address
 [0xdeadd42a3ab7d14626a98eadebd26ae8c81b07e4](https://etherscan.io/address/0xdeadd42a3ab7d14626a98eadebd26ae8c81b07e4)
