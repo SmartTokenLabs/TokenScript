@@ -1,0 +1,991 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="375"
+   height="1026"
+   viewBox="0 0 375 1026"
+   version="1.1"
+   id="svg249"
+   sodipodi:docname="3.svg"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)">
+  <metadata
+     id="metadata253">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="2493"
+     inkscape:window-height="1385"
+     id="namedview251"
+     showgrid="false"
+     inkscape:zoom="1"
+     inkscape:cx="187.5"
+     inkscape:cy="513"
+     inkscape:window-x="67"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg249" />
+  <defs
+     id="defs86">
+    <linearGradient
+       id="linear-gradient"
+       x1="298.80109"
+       y1="292.3455"
+       x2="7.070396"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="scale(1.2198751,0.81975606)"
+       y2="0">
+      <stop
+         offset="0"
+         stop-color="#81c7f5"
+         id="stop2" />
+      <stop
+         offset="1"
+         stop-color="#3867d5"
+         id="stop4" />
+    </linearGradient>
+    <clipPath
+       id="clip-path">
+      <path
+         id="Shape"
+         d="M338.667-26.667h16.667A2.667,2.667,0,0,1,358-24v6h0a2.667,2.667,0,0,1-2.667,2.667H338.667A2.667,2.667,0,0,1,336-18v-6h0A2.667,2.667,0,0,1,338.667-26.667Z"
+         transform="translate(0 44)"
+         fill="none"
+         clip-rule="evenodd" />
+    </clipPath>
+    <clipPath
+       id="clip-path-2">
+      <path
+         id="Shape-2"
+         data-name="Shape"
+         d="M359-23v4a2.17,2.17,0,0,0,1.328-2A2.17,2.17,0,0,0,359-23"
+         transform="translate(0 44)"
+         fill="none" />
+    </clipPath>
+    <clipPath
+       id="clip-path-3">
+      <path
+         id="Shape-3"
+         data-name="Shape"
+         d="M339.333-24.667h15.333A1.333,1.333,0,0,1,356-23.333v4.667h0a1.333,1.333,0,0,1-1.333,1.333H339.333A1.333,1.333,0,0,1,338-18.667v-4.667h0A1.333,1.333,0,0,1,339.333-24.667Z"
+         transform="translate(0 44)"
+         fill="none" />
+    </clipPath>
+    <clipPath
+       id="clip-path-4">
+      <path
+         id="Shape-4"
+         data-name="Shape"
+         d="M323.33-24.392a8.64,8.64,0,0,1,5.953,2.378.308.308,0,0,0,.433,0l1.156-1.167a.322.322,0,0,0,.093-.229.322.322,0,0,0-.1-.227,10.9,10.9,0,0,0-15.08,0,.322.322,0,0,0-.1.227.322.322,0,0,0,.093.229l1.156,1.167a.308.308,0,0,0,.433,0,8.641,8.641,0,0,1,5.954-2.378Zm0,3.8a4.907,4.907,0,0,1,3.294,1.27.31.31,0,0,0,.433-.006l1.155-1.167a.322.322,0,0,0,.094-.23.322.322,0,0,0-.1-.229,7.159,7.159,0,0,0-9.752,0,.322.322,0,0,0-.1.229.322.322,0,0,0,.094.23l1.154,1.167a.31.31,0,0,0,.433.006,4.907,4.907,0,0,1,3.292-1.27Zm2.219,2.784a.314.314,0,0,0,.094-.231.314.314,0,0,0-.1-.226,3.422,3.422,0,0,0-4.419,0,.314.314,0,0,0-.1.226.314.314,0,0,0,.094.231l2,2.016a.311.311,0,0,0,.222.093.312.312,0,0,0,.222-.093Z"
+         transform="translate(0 44)"
+         fill="none" />
+    </clipPath>
+    <clipPath
+       id="clip-path-5">
+      <path
+         id="Shape-5"
+         data-name="Shape"
+         d="M294.667-19.667h1a1,1,0,0,1,1,1v2a1,1,0,0,1-1,1h-1a1,1,0,0,1-1-1v-2a1,1,0,0,1,1-1Zm4.667-2h1a1,1,0,0,1,1,1v4a1,1,0,0,1-1,1h-1a1,1,0,0,1-1-1v-4A1,1,0,0,1,299.333-21.667ZM304-24h1a1,1,0,0,1,1,1v6.333a1,1,0,0,1-1,1h-1a1,1,0,0,1-1-1V-23A1,1,0,0,1,304-24Zm4.667-2.333h1a1,1,0,0,1,1,1v8.667a1,1,0,0,1-1,1h-1a1,1,0,0,1-1-1v-8.667a1,1,0,0,1,1-1Z"
+         transform="translate(0 44)"
+         fill="none" />
+    </clipPath>
+    <filter
+       id="Rectangle_184"
+       x="7"
+       y="259"
+       width="179.526"
+       height="57.493"
+       filterUnits="userSpaceOnUse">
+      <feOffset
+         dy="2"
+         input="SourceAlpha"
+         id="feOffset17" />
+      <feGaussianBlur
+         stdDeviation="3"
+         result="blur"
+         id="feGaussianBlur19" />
+      <feFlood
+         flood-color="#4f85df"
+         flood-opacity="0.29"
+         id="feFlood21" />
+      <feComposite
+         operator="in"
+         in2="blur"
+         id="feComposite23"
+         result="result1" />
+      <feComposite
+         in="SourceGraphic"
+         in2="result1"
+         id="feComposite25" />
+    </filter>
+    <filter
+       id="Rectangle_184-2"
+       x="188.474"
+       y="259"
+       width="179.526"
+       height="57.493"
+       filterUnits="userSpaceOnUse">
+      <feOffset
+         dy="2"
+         input="SourceAlpha"
+         id="feOffset28" />
+      <feGaussianBlur
+         stdDeviation="3"
+         result="blur-2"
+         id="feGaussianBlur30" />
+      <feFlood
+         flood-color="#4f85df"
+         flood-opacity="0.29"
+         id="feFlood32" />
+      <feComposite
+         operator="in"
+         in2="blur-2"
+         id="feComposite34"
+         result="result1" />
+      <feComposite
+         in="SourceGraphic"
+         in2="result1"
+         id="feComposite36" />
+    </filter>
+    <filter
+       id="Rectangle_184-3"
+       x="97.426"
+       y="313.117"
+       width="179.526"
+       height="57.493"
+       filterUnits="userSpaceOnUse">
+      <feOffset
+         dy="2"
+         input="SourceAlpha"
+         id="feOffset39" />
+      <feGaussianBlur
+         stdDeviation="3"
+         result="blur-3"
+         id="feGaussianBlur41" />
+      <feFlood
+         flood-color="#4f85df"
+         flood-opacity="0.29"
+         id="feFlood43" />
+      <feComposite
+         operator="in"
+         in2="blur-3"
+         id="feComposite45"
+         result="result1" />
+      <feComposite
+         in="SourceGraphic"
+         in2="result1"
+         id="feComposite47" />
+    </filter>
+    <filter
+       id="Rectangle_169"
+       x="4.5"
+       y="412.5"
+       width="366"
+       height="250.207"
+       filterUnits="userSpaceOnUse">
+      <feOffset
+         dy="4"
+         input="SourceAlpha"
+         id="feOffset50" />
+      <feGaussianBlur
+         stdDeviation="4.5"
+         result="blur-4"
+         id="feGaussianBlur52" />
+      <feFlood
+         flood-opacity="0.051"
+         id="feFlood54" />
+      <feComposite
+         operator="in"
+         in2="blur-4"
+         id="feComposite56"
+         result="result1" />
+      <feComposite
+         in="SourceGraphic"
+         in2="result1"
+         id="feComposite58" />
+    </filter>
+    <filter
+       id="Rectangle_169-2"
+       x="4.5"
+       y="687.5"
+       width="366"
+       height="169.207"
+       filterUnits="userSpaceOnUse">
+      <feOffset
+         dy="4"
+         input="SourceAlpha"
+         id="feOffset61" />
+      <feGaussianBlur
+         stdDeviation="4.5"
+         result="blur-5"
+         id="feGaussianBlur63" />
+      <feFlood
+         flood-opacity="0.051"
+         id="feFlood65" />
+      <feComposite
+         operator="in"
+         in2="blur-5"
+         id="feComposite67"
+         result="result1" />
+      <feComposite
+         in="SourceGraphic"
+         in2="result1"
+         id="feComposite69" />
+    </filter>
+    <filter
+       id="Rectangle_169-3"
+       x="4.5"
+       y="882.5"
+       width="366"
+       height="145.207"
+       filterUnits="userSpaceOnUse">
+      <feOffset
+         dy="4"
+         input="SourceAlpha"
+         id="feOffset72" />
+      <feGaussianBlur
+         stdDeviation="4.5"
+         result="blur-6"
+         id="feGaussianBlur74" />
+      <feFlood
+         flood-opacity="0.051"
+         id="feFlood76" />
+      <feComposite
+         operator="in"
+         in2="blur-6"
+         id="feComposite78"
+         result="result1" />
+      <feComposite
+         in="SourceGraphic"
+         in2="result1"
+         id="feComposite80" />
+    </filter>
+    <clipPath
+       id="clip-_3">
+      <rect
+         width="375"
+         height="1026"
+         id="rect83" />
+    </clipPath>
+  </defs>
+  <rect
+     style="fill:#ffffff"
+     y="0"
+     x="0"
+     id="rect88"
+     height="1026"
+     width="375" />
+  <rect
+     y="0"
+     x="0"
+     style="fill:url(#linear-gradient)"
+     height="252"
+     width="375"
+     data-name="Rectangle 3"
+     id="Rectangle_3" />
+  <g
+     transform="translate(0,-60)"
+     data-name="Status bar/dark"
+     id="Status_bar_dark">
+    <path
+       style="fill:none"
+       inkscape:connector-curvature="0"
+       transform="translate(0,104)"
+       d="M 0,-44 H 375 V 0 H 0 Z"
+       id="bg" />
+    <g
+       transform="translate(0,60)"
+       data-name="status bar/dark"
+       id="status_bar_dark-2">
+      <path
+         style="fill:none"
+         inkscape:connector-curvature="0"
+         transform="translate(0,44)"
+         d="M 0,-44 H 375 V 0 H 0 Z"
+         id="Background" />
+      <g
+         id="Battery">
+        <g
+           clip-path="url(#clip-path)"
+           id="Border">
+          <path
+             style="fill:none;stroke-width:2"
+             inkscape:connector-curvature="0"
+             stroke="rgba(255,255,255,0.35)"
+             transform="translate(336,17.333)"
+             d="M 2.667,0 H 19.333 A 2.667,2.667 0 0 1 22,2.667 v 6 0 a 2.667,2.667 0 0 1 -2.667,2.667 H 2.667 A 2.667,2.667 0 0 1 0,8.667 v -6 0 A 2.667,2.667 0 0 1 2.667,0 Z"
+             id="Fill" />
+        </g>
+        <g
+           clip-path="url(#clip-path-2)"
+           id="Cap">
+          <path
+             inkscape:connector-curvature="0"
+             fill="rgba(255,255,255,0.4)"
+             transform="translate(0,44)"
+             d="m 354,-28 h 11.328 v 14 H 354 Z"
+             data-name="Fill"
+             id="Fill-2" />
+        </g>
+        <g
+           clip-path="url(#clip-path-3)"
+           id="Capacity">
+          <path
+             style="fill:#ffffff"
+             inkscape:connector-curvature="0"
+             transform="translate(0,44)"
+             d="m 333,-29.667 h 28 v 17.333 h -28 z"
+             data-name="Fill"
+             id="Fill-3" />
+        </g>
+      </g>
+      <g
+         id="Wifi">
+        <g
+           clip-path="url(#clip-path-4)"
+           data-name="Wifi"
+           id="Wifi-2">
+          <path
+             style="fill:#ffffff"
+             inkscape:connector-curvature="0"
+             transform="translate(0,44)"
+             d="m 310.694,-31.669 h 25.272 V -10.7 h -25.272 z"
+             data-name="Fill"
+             id="Fill-4" />
+        </g>
+      </g>
+      <g
+         data-name="Cellular Connection"
+         id="Cellular_Connection">
+        <g
+           clip-path="url(#clip-path-5)"
+           data-name="Cellular Connection"
+           id="Cellular_Connection-2">
+          <path
+             style="fill:#ffffff"
+             inkscape:connector-curvature="0"
+             transform="translate(0,44)"
+             d="m 288.667,-31.333 h 27 v 20.667 h -27 z"
+             data-name="Fill"
+             id="Fill-5" />
+        </g>
+      </g>
+      <g
+         transform="translate(-9)"
+         data-name="Bars/_/Time Black"
+         id="Bars___Time_Black">
+        <path
+           style="fill:none"
+           inkscape:connector-curvature="0"
+           transform="translate(8,50)"
+           d="M 21,-19 H 75 V -35 H 21 Z"
+           data-name="Background"
+           id="Background-2" />
+        <path
+           style="fill:#ffffff"
+           inkscape:connector-curvature="0"
+           transform="translate(29,17)"
+           d="m 16.433,13.239 c 2.509,0 4,-1.962 4,-5.284 A 6.336,6.336 0 0 0 19.733,4.838 3.5,3.5 0 0 0 16.487,2.89 3.43,3.43 0 0 0 12.823,6.356 3.159,3.159 0 0 0 16.07,9.637 2.727,2.727 0 0 0 18.627,8.16 h 0.116 c 0,2.256 -0.854,3.6 -2.3,3.6 A 1.716,1.716 0 0 1 14.714,10.55 H 12.96 a 3.324,3.324 0 0 0 3.473,2.689 z m 0.062,-5 A 1.865,1.865 0 0 1 14.553,6.3 a 1.9500467,1.9500467 0 1 1 3.9,0.027 1.874,1.874 0 0 1 -1.959,1.908 z m 7.038,3.719 a 1.08,1.08 0 1 0 -1.094,-1.08 1.048,1.048 0 0 0 1.093,1.076 z m 0,-5.127 a 1.043,1.043 0 0 0 1.094,-1.073 1.094,1.094 0 0 0 -2.187,0 1.047,1.047 0 0 0 1.092,1.069 z M 31.445,13 h 1.688 v -1.839 h 1.333 V 9.671 H 33.134 V 3.136 h -2.488 c -1.743,2.625 -3.131,4.819 -4.02,6.453 v 1.572 h 4.819 z M 28.26,9.609 c 1.148,-2.023 2.174,-3.644 3.117,-5.038 h 0.1 V 9.712 H 28.26 Z M 38.511,13 h 1.764 V 3.136 H 38.518 L 35.94,4.94 v 1.7 l 2.454,-1.723 h 0.116 z"
+           data-name="↳ Time"
+           id="_Time" />
+      </g>
+    </g>
+  </g>
+  <text
+     style="font-weight:300;font-size:16px;font-family:Montserrat-Light, Montserrat;fill:#ffffff"
+     font-weight="300"
+     font-size="16"
+     id="SOVEREIGN"
+     x="18"
+     y="67">
+    <tspan
+       id="tspan111"
+       y="67"
+       x="18">SOVEREIGN</tspan>
+  </text>
+  <text
+     style="font-weight:500;font-size:21px;font-family:Montserrat-Medium, Montserrat;fill:#ffffff"
+     font-weight="500"
+     font-size="21"
+     data-name="Cryptocurrency of Marshall Island"
+     id="Cryptocurrency_of_Marshall_Island"
+     x="18"
+     y="94">
+    <tspan
+       id="tspan114"
+       y="94"
+       x="18">Cryptocurrency of Marshall</tspan>
+    <tspan
+       id="tspan116"
+       y="119"
+       x="18">Island</tspan>
+  </text>
+  <g
+     style="filter:url(#Rectangle_184)"
+     id="g120">
+    <rect
+       style="fill:#ffffff"
+       y="0"
+       x="0"
+       transform="translate(16,266)"
+       rx="7"
+       height="39.493"
+       width="161.526"
+       data-name="Rectangle 184"
+       id="Rectangle_184-4" />
+  </g>
+  <text
+     style="font-weight:500;font-size:12px;font-family:Montserrat-Medium, Montserrat;opacity:0.57599996"
+     font-weight="500"
+     font-size="12"
+     data-name="Pay Anyone"
+     id="Pay_Anyone"
+     x="96.564003"
+     y="289.56">
+    <tspan
+       id="tspan122"
+       y="289.56"
+       x="61.133999">Pay Anyone</tspan>
+  </text>
+  <g
+     style="filter:url(#Rectangle_184-2)"
+     id="g126">
+    <rect
+       style="fill:#ffffff"
+       y="0"
+       x="0"
+       transform="translate(197.47,266)"
+       rx="7"
+       height="39.493"
+       width="161.526"
+       data-name="Rectangle 184"
+       id="Rectangle_184-5" />
+  </g>
+  <text
+     style="font-weight:500;font-size:12px;font-family:Montserrat-Medium, Montserrat;opacity:0.57599996"
+     font-weight="500"
+     font-size="12"
+     data-name="Request Payment"
+     id="Request_Payment"
+     x="278.04401"
+     y="290.56">
+    <tspan
+       id="tspan128"
+       y="290.56"
+       x="224.302">Request Payment</tspan>
+  </text>
+  <g
+     style="filter:url(#Rectangle_184-3)"
+     id="g132">
+    <rect
+       style="fill:#ffffff"
+       y="0"
+       x="0"
+       transform="translate(106.43,320.12)"
+       rx="7"
+       height="39.493"
+       width="161.526"
+       data-name="Rectangle 184"
+       id="Rectangle_184-6" />
+  </g>
+  <text
+     style="font-weight:500;font-size:12px;font-family:Montserrat-Medium, Montserrat;opacity:0.57599996"
+     font-weight="500"
+     font-size="12"
+     data-name="Convert to USD"
+     id="Convert_to_USD"
+     x="187.99001"
+     y="343.677">
+    <tspan
+       id="tspan134"
+       y="343.677"
+       x="141.84399">Convert to USD</tspan>
+  </text>
+  <text
+     style="font-size:38px;font-family:Montserrat-Regular, Montserrat;fill:#ffffff"
+     font-size="38"
+     data-name="$314.15"
+     id="_314.15"
+     x="113"
+     y="173">
+    <tspan
+       id="tspan137"
+       y="173"
+       x="113">$314.15</tspan>
+  </text>
+  <text
+     style="font-weight:300;font-size:14px;font-family:Montserrat-Light, Montserrat;fill:#ffffff"
+     font-weight="300"
+     font-size="14"
+     data-name="CURRENT BALANCE ($276.15 available)"
+     id="CURRENT_BALANCE_276.15_available_"
+     x="187"
+     y="201">
+    <tspan
+       id="tspan140"
+       y="201"
+       x="116.713">CURRENT BALANCE</tspan>
+    <tspan
+       id="tspan142"
+       y="229"
+       x="123.321">($276.15 available)</tspan>
+  </text>
+  <g
+     data-name="Group 86"
+     id="Group_86">
+    <text
+       style="font-weight:500;font-size:15px;font-family:Montserrat-Medium, Montserrat;opacity:0.33600003"
+       font-weight="500"
+       font-size="15"
+       transform="translate(16,402)"
+       data-name="Recent Transactions"
+       id="Recent_Transactions">
+      <tspan
+         id="tspan145"
+         y="0"
+         x="0">Recent Transactions</tspan>
+    </text>
+    <text
+       style="font-size:15px;font-family:Montserrat-Regular, Montserrat;opacity:0.33600003"
+       font-size="15"
+       transform="translate(357,402)"
+       data-name="3/49"
+       id="_3_49">
+      <tspan
+         id="tspan148"
+         y="0"
+         x="-32.73">3/49</tspan>
+    </text>
+    <g
+       style="filter:url(#Rectangle_169)"
+       id="g152">
+      <rect
+         style="fill:#ffffff"
+         y="0"
+         x="0"
+         transform="translate(18,422)"
+         rx="5"
+         height="223.207"
+         width="339"
+         data-name="Rectangle 169"
+         id="Rectangle_169-4" />
+    </g>
+    <g
+       data-name="Group 83"
+       id="Group_83">
+      <text
+         style="font-weight:500;font-size:14px;font-family:Montserrat-Medium, Montserrat"
+         font-weight="500"
+         font-size="14"
+         transform="translate(30,445)"
+         data-name="29 Jan BEKANT Desk - IKEA"
+         id="_29_Jan_BEKANT_Desk_-_IKEA">
+        <tspan
+           id="tspan154"
+           y="0"
+           x="0">29 Jan BEKANT Desk - IKEA</tspan>
+      </text>
+      <text
+         style="font-weight:500;font-size:14px;font-family:Montserrat-Medium, Montserrat;fill:#e65454"
+         font-weight="500"
+         font-size="14"
+         transform="translate(346,445)"
+         data-name="-499.99"
+         id="_-499.99">
+        <tspan
+           id="tspan157"
+           y="0"
+           x="-51.52">-499.99</tspan>
+      </text>
+      <g
+         transform="translate(-3,-7)"
+         data-name="Group 81"
+         id="Group_81">
+        <text
+           style="font-size:12px;font-family:Montserrat-Regular, Montserrat"
+           font-size="12"
+           transform="translate(45,474)"
+           data-name="Delivery token - FedEx"
+           id="Delivery_token_-_FedEx">
+          <tspan
+             id="tspan160"
+             y="0"
+             x="0">Delivery token - FedEx</tspan>
+        </text>
+        <circle
+           style="fill:#4a7fdd"
+           transform="translate(33,467)"
+           r="2.5"
+           cy="2.5"
+           cx="2.5"
+           data-name="Ellipse 14"
+           id="Ellipse_14" />
+      </g>
+      <g
+         transform="translate(-3,14)"
+         data-name="Group 82"
+         id="Group_82">
+        <text
+           style="font-size:12px;font-family:Montserrat-Regular, Montserrat"
+           font-size="12"
+           transform="translate(45,474)"
+           data-name="Warranty 1 year - IKEA"
+           id="Warranty_1_year_-_IKEA">
+          <tspan
+             id="tspan165"
+             y="0"
+             x="0">Warranty 1 year - IKEA</tspan>
+        </text>
+        <circle
+           style="fill:#4a7fdd"
+           transform="translate(33,467)"
+           r="2.5"
+           cy="2.5"
+           cx="2.5"
+           data-name="Ellipse 14"
+           id="Ellipse_14-2" />
+      </g>
+      <g
+         transform="translate(-3,35)"
+         data-name="Group 94"
+         id="Group_94">
+        <text
+           style="font-size:12px;font-family:Montserrat-Regular, Montserrat"
+           font-size="12"
+           transform="translate(45,474)"
+           data-name="Receipt Token"
+           id="Receipt_Token">
+          <tspan
+             id="tspan170"
+             y="0"
+             x="0">Receipt Token</tspan>
+        </text>
+        <circle
+           style="fill:#4a7fdd"
+           transform="translate(33,467)"
+           r="2.5"
+           cy="2.5"
+           cx="2.5"
+           data-name="Ellipse 14"
+           id="Ellipse_14-3" />
+      </g>
+    </g>
+    <g
+       transform="translate(0,109)"
+       data-name="Group 84"
+       id="Group_84">
+      <text
+         style="font-weight:500;font-size:14px;font-family:Montserrat-Medium, Montserrat"
+         font-weight="500"
+         font-size="14"
+         transform="translate(30,445)"
+         data-name="28 Jan VISA Application"
+         id="_28_Jan_VISA_Application">
+        <tspan
+           id="tspan176"
+           y="0"
+           x="0">28 Jan VISA Application</tspan>
+      </text>
+      <text
+         style="font-weight:500;font-size:14px;font-family:Montserrat-Medium, Montserrat;fill:#e65454"
+         font-weight="500"
+         font-size="14"
+         transform="translate(346,445)"
+         data-name="-80.00"
+         id="_-80.00">
+        <tspan
+           id="tspan179"
+           y="0"
+           x="-42.882">-80.00</tspan>
+      </text>
+      <g
+         transform="translate(-3,-7)"
+         data-name="Group 81"
+         id="Group_81-2">
+        <text
+           style="font-size:12px;font-family:Montserrat-Regular, Montserrat"
+           font-size="12"
+           transform="translate(45,474)"
+           data-name="Receipt Token"
+           id="Receipt_Token-2">
+          <tspan
+             id="tspan182"
+             y="0"
+             x="0">Receipt Token</tspan>
+        </text>
+        <circle
+           style="fill:#4a7fdd"
+           transform="translate(33,467)"
+           r="2.5"
+           cy="2.5"
+           cx="2.5"
+           data-name="Ellipse 14"
+           id="Ellipse_14-4" />
+      </g>
+    </g>
+    <g
+       transform="translate(0,179)"
+       data-name="Group 85"
+       id="Group_85">
+      <text
+         style="font-weight:500;font-size:14px;font-family:Montserrat-Medium, Montserrat"
+         font-weight="500"
+         font-size="14"
+         transform="translate(30,445)"
+         data-name="26 Purchase SOVEREIGN from Ether"
+         id="_26_Purchase_SOVEREIGN_from_Ether">
+        <tspan
+           id="tspan188"
+           y="0"
+           x="0">26 Purchase SOVEREIGN from Ether</tspan>
+      </text>
+      <text
+         style="font-weight:500;font-size:14px;font-family:Montserrat-Medium, Montserrat;fill:#e65454"
+         font-weight="500"
+         font-size="14"
+         transform="translate(346,445)"
+         data-name="-80.00"
+         id="_-80.00-2">
+        <tspan
+           id="tspan191"
+           y="0"
+           x="-42.882">-80.00</tspan>
+      </text>
+    </g>
+    <line
+       style="opacity:0.10700001;fill:none;stroke:#707070;stroke-width:1"
+       y2="0"
+       y1="0"
+       x1="0"
+       transform="translate(25.5,524.5)"
+       x2="325"
+       data-name="Line 1"
+       id="Line_1" />
+    <line
+       style="opacity:0.10700001;fill:none;stroke:#707070;stroke-width:1"
+       y2="0"
+       y1="0"
+       x1="0"
+       transform="translate(25.5,594.5)"
+       x2="325"
+       data-name="Line 2"
+       id="Line_2" />
+  </g>
+  <g
+     transform="translate(0,275)"
+     data-name="Group 87"
+     id="Group_87">
+    <text
+       style="font-weight:500;font-size:15px;font-family:Montserrat-Medium, Montserrat;opacity:0.33600003"
+       font-weight="500"
+       font-size="15"
+       transform="translate(16,402)"
+       data-name="Open Payment Channels"
+       id="Open_Payment_Channels">
+      <tspan
+         id="tspan198"
+         y="0"
+         x="0">Open Payment Channels</tspan>
+    </text>
+    <g
+       style="filter:url(#Rectangle_169-2)"
+       id="g202"
+       transform="translate(0,-275)">
+      <rect
+         style="fill:#ffffff"
+         y="0"
+         x="0"
+         transform="translate(18,697)"
+         rx="5"
+         height="142.207"
+         width="339"
+         data-name="Rectangle 169"
+         id="Rectangle_169-5" />
+    </g>
+    <g
+       data-name="Group 83"
+       id="Group_83-2">
+      <text
+         style="font-weight:500;font-size:14px;font-family:Montserrat-Medium, Montserrat"
+         font-weight="500"
+         font-size="14"
+         transform="translate(30,445)"
+         data-name="Payment Channel"
+         id="Payment_Channel">
+        <tspan
+           id="tspan204"
+           y="0"
+           x="0">Payment Channel</tspan>
+      </text>
+      <text
+         style="font-size:13px;font-family:Montserrat-Regular, Montserrat"
+         font-size="13"
+         transform="translate(30,475)"
+         data-name="Opened: 2019-04-05"
+         id="Opened:_2019-04-05">
+        <tspan
+           id="tspan207"
+           y="0"
+           x="0">Opened: 2019-04-05</tspan>
+      </text>
+      <text
+         style="font-size:13px;font-family:Montserrat-Regular, Montserrat"
+         font-size="13"
+         transform="translate(30,498)"
+         data-name="Expiry: 2019-05-05"
+         id="Expiry:_2019-05-05">
+        <tspan
+           id="tspan210"
+           y="0"
+           x="0">Expiry: 2019-05-05</tspan>
+      </text>
+      <text
+         style="font-size:13px;font-family:Montserrat-Regular, Montserrat;fill:#0bb218"
+         font-size="13"
+         transform="translate(30,527)"
+         data-name="Balance held: $50"
+         id="Balance_held:_50">
+        <tspan
+           style="fill:#000000"
+           id="tspan213"
+           y="0"
+           x="0">Balance held:</tspan>
+        <tspan
+           style="font-weight:500;font-family:Montserrat-Medium, Montserrat;fill:#0bb218"
+           id="tspan215"
+           font-weight="500"
+           y="0">$50</tspan>
+      </text>
+      <text
+         style="font-size:13px;font-family:Montserrat-Regular, Montserrat;fill:#0bb218"
+         font-size="13"
+         transform="translate(30,550)"
+         data-name="Current Balance: $38"
+         id="Current_Balance:_38">
+        <tspan
+           style="fill:#000000"
+           id="tspan218"
+           y="0"
+           x="0">Current Balance:</tspan>
+        <tspan
+           style="font-weight:500;font-family:Montserrat-Medium, Montserrat;fill:#0bb218"
+           id="tspan220"
+           font-weight="500"
+           y="0">$38</tspan>
+      </text>
+    </g>
+  </g>
+  <g
+     transform="translate(0,470)"
+     data-name="Group 88"
+     id="Group_88">
+    <text
+       style="font-weight:500;font-size:15px;font-family:Montserrat-Medium, Montserrat;opacity:0.33600003"
+       font-weight="500"
+       font-size="15"
+       transform="translate(16,402)"
+       data-name="Authorisations"
+       id="Open_Payment_Channels-2">
+      <tspan
+         id="tspan225"
+         y="0"
+         x="0">Authorisations</tspan>
+    </text>
+    <text
+       style="font-size:15px;font-family:Montserrat-Regular, Montserrat;opacity:0.33600003"
+       font-size="15"
+       transform="translate(357,402)"
+       data-name="2/5"
+       id="_2_5">
+      <tspan
+         id="tspan228"
+         y="0"
+         x="-23.475">2/5</tspan>
+    </text>
+    <g
+       style="filter:url(#Rectangle_169-3)"
+       id="g232"
+       transform="translate(0,-470)">
+      <rect
+         style="fill:#ffffff"
+         y="0"
+         x="0"
+         transform="translate(18,892)"
+         rx="5"
+         height="118.207"
+         width="339"
+         data-name="Rectangle 169"
+         id="Rectangle_169-6" />
+    </g>
+    <g
+       data-name="Group 83"
+       id="Group_83-3">
+      <text
+         style="font-weight:500;font-size:14px;font-family:Montserrat-Medium, Montserrat"
+         font-weight="500"
+         font-size="14"
+         transform="translate(30,448)"
+         data-name="The Guardian: biweekly"
+         id="The_Guardian:_biweekly">
+        <tspan
+           id="tspan234"
+           y="0"
+           x="0">The Guardian: biweekly</tspan>
+      </text>
+      <text
+         style="font-weight:500;font-size:14px;font-family:Montserrat-Medium, Montserrat"
+         font-weight="500"
+         font-size="14"
+         transform="translate(30,501)"
+         data-name="Pablo &amp; Rusty: monthly"
+         id="Pablo_Rusty:_monthly">
+        <tspan
+           id="tspan237"
+           y="0"
+           x="0">Pablo &amp; Rusty: monthly</tspan>
+      </text>
+      <text
+         style="font-size:13px;font-family:Montserrat-Regular, Montserrat"
+         font-size="13"
+         transform="translate(30,471)"
+         data-name="$10 - No expiry"
+         id="_10_-_No_expiry">
+        <tspan
+           id="tspan240"
+           y="0"
+           x="0">$10 - No expiry</tspan>
+      </text>
+      <text
+         style="font-size:13px;font-family:Montserrat-Regular, Montserrat"
+         font-size="13"
+         transform="translate(30,524)"
+         data-name="$28 - till 2019"
+         id="_28_-_till_2019">
+        <tspan
+           id="tspan243"
+           y="0"
+           x="0">$28 - till 2019</tspan>
+      </text>
+    </g>
+  </g>
+</svg>
