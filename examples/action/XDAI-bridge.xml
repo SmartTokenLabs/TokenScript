@@ -3,7 +3,7 @@
         <!ENTITY style SYSTEM "shared.css">
         <!ENTITY xdai-bridge.en SYSTEM "xdai-bridge.en.shtml">
 ]>
-<ts:action xmlns:ts="http://tokenscript.org/2019/05/tokenscript"
+<ts:action xmlns:ts="http://tokenscript.org/2019/07/tokenscript"
            xmlns="http://www.w3.org/1999/xhtml"
            xmlns:xml="http://www.w3.org/XML/1998/namespace"
 >

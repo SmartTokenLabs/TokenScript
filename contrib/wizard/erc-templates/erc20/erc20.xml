@@ -4,10 +4,10 @@
     <!ENTITY approve.en SYSTEM "approve.en.shtml">
     <!ENTITY transferFrom.en SYSTEM "transferFrom.en.shtml">
 ]>
-<ts:token xmlns:ts="http://tokenscript.org/2019/05/tokenscript"
+<ts:token xmlns:ts="http://tokenscript.org/2019/07/tokenscript"
           xmlns="http://www.w3.org/1999/xhtml"
           xmlns:xml="http://www.w3.org/XML/1998/namespace"
-          xsi:schemaLocation="http://tokenscript.org/2019/05/tokenscript ../../schema/tokenscript.xsd"
+          xsi:schemaLocation="http://tokenscript.org/2019/07/tokenscript ../../../../schema/tokenscript.xsd"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           custodian="false"
 >

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE token  [
+        <!ENTITY style SYSTEM "shared.css">
+        <!ENTITY mint.en SYSTEM "supply.en.shtml">
+        <!ENTITY redeem.en SYSTEM "withdraw.en.shtml">
+        ]>
+<ts:token xmlns:ts="http://tokenscript.org/2019/07/tokenscript"
+          xmlns="http://www.w3.org/1999/xhtml"
+          xmlns:xml="http://www.w3.org/XML/1998/namespace"
+          xsi:schemaLocation="http://tokenscript.org/2019/07/tokenscript"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          custodian="false"
+>
+<ts:name>
+    <ts:string xml:lang="en">cETH</ts:string>
+</ts:name>
+<ts:contract name="cETH" interface="erc20">
+    <ts:address network="1">0x4ddc2d193948926d02f9b1fe9e1daa0718270ed5</ts:address>
+</ts:contract>
+<ts:origins>
+    <ts:ethereum contract="cETH"/>
+</ts:origins>
+
+<ts:cards>
+    <ts:token-card>
+        <ts:view-iconified/>
+        <ts:view>
+        </ts:view>
+    </ts:token-card>
+
+    <ts:action>
+        <ts:name>
+            <ts:string xml:lang="en">Supply</ts:string>
+        </ts:name>
+        <ts:attribute-type id="mintAmount" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+            <ts:name>
+                <ts:string xml:lang="en">Amount to supply</ts:string>
+            </ts:name>
+            <ts:origins>
+                <!-- e18 is a hard coded multiplier.
+                rationale for hardcoding: avoiding over-design  -->
+                <ts:user-entry as="e18"/>
+            </ts:origins>
+        </ts:attribute-type>
+        <ts:transaction>
+            <ts:ethereum function="mint" contract="cETH" as="uint">
+                <ts:value ref="mintAmount"/>
+            </ts:ethereum>
+        </ts:transaction>
+        <style type="text/css">&style;</style>
+        <ts:view xml:lang="en">&mint.en;</ts:view>
+    </ts:action>
+
+    <ts:action>
+        <ts:name>
+            <ts:string xml:lang="en">Withdraw</ts:string>
+        </ts:name>
+        <ts:attribute-type id="redeemAmount" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+            <ts:name>
+                <ts:string xml:lang="en">Amount to withdraw</ts:string>
+            </ts:name>
+            <ts:origins>
+                <!-- e8 is a hard coded multiplier.
+                rationale for hardcoding: avoiding over-design  -->
+                <ts:user-entry as="e8"/>
+            </ts:origins>
+        </ts:attribute-type>
+        <ts:transaction>
+            <ts:ethereum function="redeem" contract="cETH" as="uint">
+                <ts:data>
+                    <ts:uint256 ref="redeemAmount"/>
+                </ts:data>
+            </ts:ethereum>
+        </ts:transaction>
+        <style type="text/css">&style;</style>
+        <ts:view xml:lang="en">&redeem.en;</ts:view>
+    </ts:action>
+
+</ts:cards>
+
+<ts:attribute-types>
+
+    <!-- eth to cETH exchange rate -->
+    <ts:attribute-type id="exchangeRate" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+        <ts:name>
+            <ts:string xml:lang="en">Exchange Rate</ts:string>
+        </ts:name>
+        <ts:origins>
+            <ts:ethereum function="exchangeRateCurrent" contract="cETH" as="uint">
+            </ts:ethereum>
+        </ts:origins>
+    </ts:attribute-type>
+
+    <ts:attribute-type id="cTokenBalance" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+        <ts:name>
+            <ts:string xml:lang="en">Balance</ts:string>
+            <ts:string xml:lang="zh">餘額</ts:string>
+        </ts:name>
+        <ts:origins>
+            <ts:ethereum function="balanceOf" contract="cETH" as="uint">
+                <ts:data>
+                    <ts:address ref="ownerAddress"/>
+                </ts:data>
+            </ts:ethereum>
+        </ts:origins>
+    </ts:attribute-type>
+
+    <ts:attribute-type id="supplyInterestRate" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+        <ts:name>
+            <ts:string xml:lang="en">Supply Interest Rate</ts:string>
+        </ts:name>
+        <ts:origins>
+            <ts:ethereum function="supplyRatePerBlock" contract="cETH" as="uint">
+            </ts:ethereum>
+        </ts:origins>
+    </ts:attribute-type>
+
+</ts:attribute-types>
+</ts:token>

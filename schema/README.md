@@ -4,4 +4,4 @@
 
 If you have a TokenScript file which includes an older version of the schema, you can refer to it with a link instead of referencing the file directly. 
 
-Example: `http://tokenscript.org/2019/05/tokenscript` for the May version of the schema. 
+Example: `http://tokenscript.org/2019/07/tokenscript` for the May version of the schema. 
