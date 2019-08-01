@@ -40,9 +40,20 @@ Do a `make`. It will validate EntryToken.xml. It should pass if you haven't chan
 
 ** If the file has errors, it will produce a file named EntryToken.canonicalized.xml.FAILED which you can use for debugging ** 
 
+### Using your SSL key
+To sign a TokenScript file you must retrieve the relevant SSL key that corresponds to the Token you are making a TokenScript for. e.g. `cdp.makerdao.com` for DAI related TokenScripts. 
+
+This file must be converted to .p12 for signing and since most services will give you your file in .pem, here are the steps using OpenSSL to convert it from pem to p12. 
+
+    $ openssl pkcs12 -export -out keystore.p12 -inkey pathToYourPrivateKey.pem -in pathToYourCert.pem -certfile pathToYourChain.pem
+
+This command will ask for you to provide a password to encrypt the .p12, you will need to use this password again for the step below. The output of this command will be `keystore.p12`.
+
+If you do not want to use your own key for this tutorial, simply skip this step and go to the next which uses the sample key `shong.wang`. 
+
 ### Sign the test TokenScript
 
-We prepared the signing key and SSL certificates in ssl directory. If you use yours, remember to replace their references in the Makefile
+We prepared the signing key and SSL certificates in ssl directory. If you use yours, remember to replace their references in the Makefile or use the command below with your encrypted .p12. 
 
 Run `make` with `EntryToken.tsml`
 
@@ -55,8 +66,14 @@ Run `make` with `EntryToken.tsml`
     # removing the canonicalized created for validation
     rm EntryToken.canonicalized.xml
 
-And now you get a signed TokenScript EntryToken.tsml which is ready to be published. This file can also be dropped to the iOS or Android app as described in the previous step. 
+And now you get a signed TokenScript EntryToken.tsml which is ready to be published. This file can also be dropped to the iOS or Android app as described in the previous step.
+
+If you are signing with your own key from the step above, run: 
+
+    $ make EntryToken.tsml KEYSTORE=keystore.p12 KEYPASSWORD=YourPassword
 
 ### Publishing your TokenScript
 
-A signed TokenScript is published by including its reference in the DAPP website that uses the token, similar to how CSS files are referred. The detail steps for doing so will be provided in late 2019.
+To test your current .tsml file, you can simply drop in onto your device with the instructions provided by step 3. As of now, we are serving signed tsml files from a server that the device can pull from to load into it's corresponding token card. 
+
+If you would like to publish your own tsml file to run on this server, create a PR in this [repo](https://github.com/AlphaWallet/TokenScript-Repo) and we will review it. 
