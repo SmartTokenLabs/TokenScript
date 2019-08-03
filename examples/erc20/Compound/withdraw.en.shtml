@@ -23,7 +23,7 @@ class Token {
             <span><bold><h3>Interest Rate: ${APR}%</h3></bold></span>
           </div>
           <div id="inputBox">
-              <bold><h3>Withdraw ${this.props.name.replace("c", "")} from Compound</h3></bold>
+              <bold><h3>Withdraw ${this.props.name} for ${this.props.name.replace("c", "")} from Compound</h3></bold>
               <span><input id="redeemAmount" type="number"></span>
           </div>
         </div>

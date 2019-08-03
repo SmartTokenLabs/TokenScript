@@ -44,7 +44,9 @@
         </ts:attribute-type>
         <ts:transaction>
             <ts:ethereum function="mint" contract="cETH" as="uint">
-                <ts:value ref="mintAmount"/>
+                <ts:data>
+                    <ts:uint256 ref="mintAmount"/>
+                </ts:data>
             </ts:ethereum>
         </ts:transaction>
         <style type="text/css">&style;</style>
