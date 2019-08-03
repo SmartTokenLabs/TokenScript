@@ -3,3 +3,6 @@
 .idea 
 *.canonicalized.xml
 *.canonicalized.xml.INVALID
+*.tsml
+*.p12
+!shong.wang.p12
