@@ -11,8 +11,7 @@ class Token {
         let cTokenBalance = (this.props.cTokenBalance / decimals8).toFixed(2);
         let tokenBalance = (this.props.tokenBalance / decimals18).toFixed(2);
         let interestRatePerBlock = this.props.supplyInterestRate;
-        //TODO be very careful with this number as it is subject to change
-        let averageBlocksPerYear = 2132224.72973;
+        const averageBlocksPerYear = 2102400;
         let APR = (((interestRatePerBlock * averageBlocksPerYear) / decimals18) * 100).toFixed(2);
         return`
         <div class="ui container">
