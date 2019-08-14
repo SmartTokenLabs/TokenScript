@@ -26,10 +26,8 @@
       <ts:string quantity="other">入場券</ts:string>
     </ts:plurals>
   </ts:name>
-  <ts:contract interface="erc875" name="EntryToken">
-    <ts:address network="1">0x63cCEF733a093E5Bd773b41C96D3eCE361464942</ts:address>
-    <ts:address network="3">0xFB82A5a2922A249f32222316b9D1F5cbD3838678</ts:address>
-    <ts:address network="42">0x2B58A9403396463404c2e397DBF37c5EcCAb43e5</ts:address>
+  <ts:contract interface="erc721" name="EntryToken">
+    <ts:address network="1">0x2aea4add166ebf38b63d09a75de1a7b94aa24163</ts:address>
   </ts:contract>
   <ts:origins>
     <!-- Define the contract which holds the token that the user will use -->
