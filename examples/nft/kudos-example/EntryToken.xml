@@ -14,24 +14,16 @@
 >
   <ts:name>
     <ts:plurals xml:lang="en">
-      <ts:string quantity="one">Ticket</ts:string>
-      <ts:string quantity="other">Tickets</ts:string>
-    </ts:plurals>
-    <ts:plurals xml:lang="es">
-      <ts:string quantity="one">Boleto de admisión</ts:string>
-      <ts:string quantity="other">Boleto de admisiónes</ts:string>
-    </ts:plurals>
-    <ts:plurals xml:lang="zh">
-      <ts:string quantity="one">入場券</ts:string>
-      <ts:string quantity="other">入場券</ts:string>
+      <ts:string quantity="one">Kudo</ts:string>
+      <ts:string quantity="other">Kudos</ts:string>
     </ts:plurals>
   </ts:name>
-  <ts:contract interface="erc721" name="EntryToken">
+  <ts:contract interface="erc721" name="KUDO">
     <ts:address network="1">0x2aea4add166ebf38b63d09a75de1a7b94aa24163</ts:address>
   </ts:contract>
   <ts:origins>
     <!-- Define the contract which holds the token that the user will use -->
-    <ts:ethereum contract="EntryToken">
+    <ts:ethereum contract="KUDO">
     </ts:ethereum>
   </ts:origins>
   <ts:selections>
@@ -65,8 +57,6 @@
       -->
       <ts:name>
         <ts:string xml:lang="en">Enter</ts:string>
-        <ts:string xml:lang="zh">入場</ts:string>
-        <ts:string xml:lang="es">Entrar</ts:string>
       </ts:name>
       <ts:exclude selection="expired"/>
       <style type="text/css">&style;</style>
@@ -78,7 +68,7 @@
   <ts:attribute-types>
     <ts:attribute-type id="locality" syntax="1.3.6.1.4.1.1466.115.121.1.15">
       <ts:origins>
-        <ts:ethereum function="getLocality" contract="EntryToken" as="utf8">
+        <ts:ethereum function="getLocality" contract="KUDO" as="utf8">
             <ts:data>
               <ts:uint256 ref="tokenId"/>
             </ts:data>
@@ -89,7 +79,6 @@
     <ts:attribute-type id="time" syntax="1.3.6.1.4.1.1466.115.121.1.24">
       <ts:name>
         <ts:string xml:lang="en">Time</ts:string>
-        <ts:string xml:lang="zh">时间</ts:string>
       </ts:name>
       <ts:origins>
         <ts:token-id bitmask="0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000000000000000000000" as="utf8"/>
@@ -97,7 +86,7 @@
     </ts:attribute-type>
     <ts:attribute-type id="expired" syntax="1.3.6.1.4.1.1466.115.121.1.7"> <!-- boolean -->
       <ts:origins>
-        <ts:ethereum function="isExpired" contract="EntryToken" as="bool">
+        <ts:ethereum function="isExpired" contract="KUDO" as="bool">
           <ts:data>
             <ts:uint256 ref="tokenId"/>
           </ts:data>
@@ -106,7 +95,7 @@
     </ts:attribute-type>
     <ts:attribute-type id="street" syntax="1.3.6.1.4.1.1466.115.121.1.15"> <!-- string -->
       <ts:origins>
-        <ts:ethereum function="getStreet" contract="EntryToken" as="utf8">
+        <ts:ethereum function="getStreet" contract="KUDO" as="utf8">
           <ts:data>
             <ts:uint256 ref="tokenId"/>
           </ts:data>
@@ -115,7 +104,7 @@
     </ts:attribute-type>
     <ts:attribute-type id="building" syntax="1.3.6.1.4.1.1466.115.121.1.15"> <!-- string -->
       <ts:origins>
-        <ts:ethereum function="getBuildingName" contract="EntryToken" as="utf8">
+        <ts:ethereum function="getBuildingName" contract="KUDO" as="utf8">
           <ts:data>
             <ts:uint256 ref="tokenId"/>
           </ts:data>
@@ -124,7 +113,7 @@
     </ts:attribute-type>
     <ts:attribute-type id="state" syntax="1.3.6.1.4.1.1466.115.121.1.15"> <!-- string -->
       <ts:origins>
-        <ts:ethereum function="getState" contract="EntryToken" as="utf8">
+        <ts:ethereum function="getState" contract="KUDO" as="utf8">
           <ts:data>
             <ts:uint256 ref="tokenId"/>
           </ts:data>
