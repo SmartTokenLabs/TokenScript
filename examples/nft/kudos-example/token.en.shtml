@@ -112,7 +112,7 @@ class Token {
                 <span class="ts-count">x${this.props._count}</span>  <span class="ts-category">${this.props.name}</span>
             </div>
             <div>
-                <span class="ts-venue">${this.props.building}</span>
+                <span class="ts-venue">${this.props.clones}</span>
             </div>
                 <div style="margin: 0px; padding:0px; clear: both; height: 6px">
                 &nbsp;
