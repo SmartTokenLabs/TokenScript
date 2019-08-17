@@ -1,0 +1,31 @@
+<script type="text/javascript"><![CDATA[
+class Token {
+    constructor(tokenInstance) {
+        this.props = tokenInstance
+        document.getElementById("contractAddress").value = this.props.Kudos;
+    }
+}
+
+web3.tokens.dataChanged = (oldTokens, updatedTokens) => {
+    const currentTokenInstance = web3.tokens.data.currentInstance;
+    document.getElementById('root').innerHTML = new Token(currentTokenInstance).render();
+};
+]]>
+</script>
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function() {
+        window.onload = function startup() {
+            const instance = web3.tokens.data.currentInstance;
+            document.getElementById('msg').innerHTML = `
+                Kudos ID: ${instance.tokenId} <br/>
+                Owned: ${instance._count} <br/>
+                Contract Address: ${instance.contractAddress} <br/>
+                Message Contained: ${instance.description}
+            `;
+        }
+    })
+</script>
+<h3>Kudos by Gitcoin</h3>
+<div id="msg"></div>
+<div id="contractAddress"></div>
+<div id="status"></div>
