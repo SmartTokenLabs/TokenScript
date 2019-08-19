@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE token  [
+        <!ENTITY style SYSTEM "shared.css">
+        <!ENTITY mint.en SYSTEM "supply.en.shtml">
+        <!ENTITY redeem.en SYSTEM "withdraw.en.shtml">
+        <!ENTITY enable.en SYSTEM "enable.en.shtml">
+        ]>
+<ts:token xmlns:ts="http://tokenscript.org/2019/05/tokenscript"
+          xmlns="http://www.w3.org/1999/xhtml"
+          xmlns:xml="http://www.w3.org/XML/1998/namespace"
+          xsi:schemaLocation="http://tokenscript.org/2019/05/tokenscript"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          custodian="false"
+>
+<ts:name>
+    <ts:string xml:lang="en">cBAT</ts:string>
+</ts:name>
+<ts:contract name="cBAT" interface="erc20">
+    <ts:address network="1">0x6C8c6b02E7b2BE14d4fA6022Dfd6d75921D90E4E</ts:address>
+</ts:contract>
+<ts:contract name="BAT" interface="erc20">
+    <ts:address network="1">0x0d8775f648430679a709e98d2b0cb6250d2887ef</ts:address>
+</ts:contract>
+<ts:origins>
+    <ts:ethereum contract="cBAT"/>
+</ts:origins>
+
+<ts:cards>
+    <ts:token-card>
+        <ts:view-iconified/>
+        <ts:view>
+        </ts:view>
+    </ts:token-card>
+
+    <ts:action>
+        <ts:name>
+            <ts:string xml:lang="en">Enable</ts:string>
+        </ts:name>
+        <ts:transaction>
+            <ts:ethereum function="approve" contract="BAT" as="bool">
+                <ts:data>
+                    <ts:address>0x6C8c6b02E7b2BE14d4fA6022Dfd6d75921D90E4E</ts:address>
+                    <ts:uint256>115792089237316195423570985008687907853269984665640564039457584007913129639935</ts:uint256>
+                </ts:data>
+            </ts:ethereum>
+        </ts:transaction>
+        <style type="text/css">&style;</style>
+        <ts:view xml:lang="en">&enable.en;</ts:view>
+    </ts:action>
+
+    <ts:action>
+        <ts:name>
+            <ts:string xml:lang="en">Supply</ts:string>
+        </ts:name>
+        <ts:attribute-type id="mintAmount" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+            <ts:name>
+                <ts:string xml:lang="en">Amount to supply</ts:string>
+            </ts:name>
+            <ts:origins>
+                <!-- e18 is a hard coded multiplier.
+                rationale for hardcoding: avoiding over-design  -->
+                <ts:user-entry as="e18"/>
+            </ts:origins>
+        </ts:attribute-type>
+        <ts:transaction>
+            <ts:ethereum function="mint" contract="cBAT" as="uint">
+                <ts:data>
+                    <ts:uint256 ref="mintAmount"/>
+                </ts:data>
+            </ts:ethereum>
+        </ts:transaction>
+        <style type="text/css">&style;</style>
+        <ts:view xml:lang="en">&mint.en;</ts:view>
+    </ts:action>
+
+    <ts:action>
+        <ts:name>
+            <ts:string xml:lang="en">Withdraw</ts:string>
+        </ts:name>
+        <ts:attribute-type id="redeemAmount" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+            <ts:name>
+                <ts:string xml:lang="en">Amount to withdraw</ts:string>
+            </ts:name>
+            <ts:origins>
+                <ts:user-entry as="uint"/>
+            </ts:origins>
+        </ts:attribute-type>
+        <ts:transaction>
+            <ts:ethereum function="redeem" contract="cBAT" as="uint">
+                <ts:data>
+                    <ts:uint256 ref="redeemAmount"/>
+                </ts:data>
+            </ts:ethereum>
+        </ts:transaction>
+        <style type="text/css">&style;</style>
+        <ts:view xml:lang="en">&redeem.en;</ts:view>
+    </ts:action>
+
+</ts:cards>
+
+<ts:attribute-types>
+
+    <ts:attribute-type id="allowance" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+        <ts:origins>
+            <ts:ethereum function="allowance" contract="BAT" as="uint">
+                <ts:data>
+                    <ts:address ref="ownerAddress"/>
+                    <ts:address>0x6C8c6b02E7b2BE14d4fA6022Dfd6d75921D90E4E</ts:address>
+                </ts:data>
+            </ts:ethereum>
+        </ts:origins>
+    </ts:attribute-type>
+
+    <!-- your balance in BAT (not compound BAT) -->
+    <ts:attribute-type id="tokenBalance" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+        <ts:name>
+            <ts:string xml:lang="en">Balance</ts:string>
+            <ts:string xml:lang="zh">餘額</ts:string>
+        </ts:name>
+        <ts:origins>
+            <ts:ethereum function="balanceOf" contract="BAT" as="uint">
+                <ts:data>
+                    <ts:address ref="ownerAddress"/>
+                </ts:data>
+            </ts:ethereum>
+        </ts:origins>
+    </ts:attribute-type>
+
+    <!-- BAT to cBAT exchange rate -->
+    <ts:attribute-type id="exchangeRate" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+        <ts:name>
+            <ts:string xml:lang="en">Exchange Rate</ts:string>
+        </ts:name>
+        <ts:origins>
+            <ts:ethereum function="exchangeRateCurrent" contract="cBAT" as="uint">
+            </ts:ethereum>
+        </ts:origins>
+    </ts:attribute-type>
+
+    <ts:attribute-type id="cTokenBalance" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+        <ts:name>
+            <ts:string xml:lang="en">Balance</ts:string>
+            <ts:string xml:lang="zh">餘額</ts:string>
+        </ts:name>
+        <ts:origins>
+            <ts:ethereum function="balanceOf" contract="cBAT" as="uint">
+                <ts:data>
+                    <ts:address ref="ownerAddress"/>
+                </ts:data>
+            </ts:ethereum>
+        </ts:origins>
+    </ts:attribute-type>
+
+    <ts:attribute-type id="supplyInterestRate" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+        <ts:name>
+            <ts:string xml:lang="en">Supply Interest Rate</ts:string>
+        </ts:name>
+        <ts:origins>
+            <ts:ethereum function="supplyRatePerBlock" contract="cBAT" as="uint">
+            </ts:ethereum>
+        </ts:origins>
+    </ts:attribute-type>
+
+</ts:attribute-types>
+</ts:token>
