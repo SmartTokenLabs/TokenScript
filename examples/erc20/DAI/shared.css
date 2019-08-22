@@ -1,3 +1,9 @@
+h3 { color: #111; font-family: 'Open Sans', sans-serif; font-size: 20px; font-weight: 300; line-height: 32px; }
+
+#inputBox {
+  text-align: center;
+}
+
 html,
 body {
   height: 100%;
@@ -54,10 +60,11 @@ body {
   background: #FFFFFF;
   -webkit-box-shadow: 0px 1px 2px 0 rgba(34, 36, 38, 0.15);
   box-shadow: 0px 1px 2px 0 rgba(34, 36, 38, 0.15);
-  margin: 1rem 0em;
-  padding: 1em 1em;
+  margin: 0.5rem 0em;
+  padding: 0.5em 0.5em;
   border-radius: 0.28571429rem;
   border: 1px solid rgba(34, 36, 38, 0.15);
+  text-align: center;
 }
 .ui.segment:first-child {
   margin-top: 0em;
