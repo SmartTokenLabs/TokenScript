@@ -21,7 +21,7 @@
     </ts:plurals>
   </ts:name>
   <ts:contract interface="erc875" name="Devcon5">
-    <ts:address network="1">0x4AdBa62A60b07F052a8D73cC93695359FaB3894d</ts:address>
+    <ts:address network="1">0x48401d879E7736Ab80D3D18E24cEbcAc5345170A</ts:address>
   </ts:contract>
   <ts:origins>
     <!-- Define the contract which holds the token that the user will use -->
