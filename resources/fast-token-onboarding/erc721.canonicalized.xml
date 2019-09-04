@@ -1,0 +1,33 @@
+<ts:token xmlns="http://www.w3.org/1999/xhtml" xmlns:ts="http://tokenscript.org/2019/05/tokenscript" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" custodian="false" xsi:schemaLocation="http://tokenscript.org/2019/05/tokenscript">
+  <ts:name>
+    <ts:plurals xml:lang="en"> <!-- other languages "es"=Spanish "zh"=Chinese ... -->
+      <ts:string quantity="one">Token</ts:string>
+      <ts:string quantity="other">Tokens</ts:string>
+    </ts:plurals>
+    <!--ts:plurals xml:lang="fr">
+      <ts:string quantity="one">###</ts:string>
+      <ts:string quantity="other">###</ts:string>
+    </ts:plurals-->
+  </ts:name>
+  <ts:contract interface="erc721" name="YOUR_ERC721_TOKEN_NAME">
+    <ts:address network="1">0xYOUR_CONTRACT_ADDRESS_HERE</ts:address>     <!--mainnet-->
+    <!--ts:address network="3">0x###</ts:address-->     <!--test networks if desired etc-->
+  </ts:contract>
+
+  <ts:origins>
+    <!-- Define the contract which holds the token that the user will use -->
+    <ts:ethereum contract="YOUR_TOKEN_NAME">
+    </ts:ethereum>
+  </ts:origins>
+  <ts:cards>
+  </ts:cards>
+  <ts:attribute-types>
+    <!-- placeholder for future functions -->
+    <ts:attribute-type id="symbol" syntax="1.3.6.1.4.1.1466.115.121.1.26">
+      <ts:origins>
+        <ts:ethereum as="utf8" function="symbol">
+        </ts:ethereum>
+      </ts:origins>
+    </ts:attribute-type>
+  </ts:attribute-types>
+</ts:token>
