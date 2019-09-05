@@ -16,7 +16,7 @@
 
   <ts:origins>
     <!-- Define the contract which holds the token that the user will use -->
-    <ts:ethereum contract="YOUR_TOKEN_NAME">
+    <ts:ethereum contract="YOUR_ERC721_TOKEN_NAME"> <!-- as above ts:contract name -->
     </ts:ethereum>
   </ts:origins>
   <ts:cards>

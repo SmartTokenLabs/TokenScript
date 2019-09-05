@@ -8,10 +8,12 @@ Signing of xml requires xmlsectool:
 
 # TokenScript
 Open the relevant erc20 or erc721 canonicalized.xml file, and modify the parameters accordingly:
-- Name (eg kitten/kittens: `<ts:string quantity="one">Token</ts:string>` and `<ts:string quantity="other">Tokens</ts:string>`
-- Token Name (eg CryptoKitties): `<ts:contract interface="erc721" name="YOUR_TOKEN_NAME">`
+- Name as it will appear to users (eg CryptoKitty / CryptoKitties):
+  - `<ts:string quantity="one">Singular Name</ts:string>`
+  - `<ts:string quantity="other">Plural Name</ts:string>`
+- Token Name (eg CryptoKitties): `<ts:contract interface="erc721" name="YOUR_ERC721_TOKEN_NAME">`
 - Smart Contract address: `<ts:address network="1">0xYOUR_CONTRACT_ADDRESS_HERE</ts:address>`
-- Contract Name (eg CryptoKitties): `<ts:ethereum contract="YOUR_TOKEN_NAME">`
+- Contract Name (eg CryptoKitties): `<ts:ethereum contract="YOUR_ERC721_TOKEN_NAME"> <!-- as above ts:contract name -->`
 
 # Signing
 A script has been provided for convenience (sign.sh), please open and modify parameters accordingly:
@@ -19,6 +21,10 @@ A script has been provided for convenience (sign.sh), please open and modify par
 - `KEYSTORE_FILE=./YOUR_KEY_FILE.p12`
 - `TOKEN_FILE=erc20.canonicalized.xml # or erc721.canonicalized.xml`
 - keyPassword `"YOUR .P12 PASSWORD"`
+
+# Testing your .tsml
+curl -X POST -F file=@"/full/path/YOUR_TSML_FILE.tsml" https://aw.app/api/v1/verifyXMLDSig
+Success: `{"result":"pass", ...}`
 
 # You're in!
 Please send the resulting .tsml file (signed/certified xml), or get in touch if you have any questions/comments.
