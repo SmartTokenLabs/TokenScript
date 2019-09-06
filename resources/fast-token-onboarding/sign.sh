@@ -1,6 +1,6 @@
 #!/bin/bash
 NAME='YOUR COMPANY NAME'
-KEYSTORE_FILE=./YOUR_KEY_FILE.p12
+KEYSTORE_FILE=./YOUR_KEY_FILE.p12 # of your domain
 # set .p12 password in last line of xmlsectool command below
 
 TOKEN_FILE=erc20.canonicalized.xml # or erc721.canonicalized.xml
