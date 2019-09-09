@@ -18,12 +18,12 @@ Open the relevant erc20 or erc721 canonicalized.xml file, and modify the paramet
 # Signing
 A script has been provided for convenience (sign.sh), please open and modify parameters accordingly:
 - `NAME='YOUR COMPANY NAME'`
-- `KEYSTORE_FILE=./YOUR_KEY_FILE.p12`
+- `KEYSTORE_FILE=./YOUR_KEY_FILE.p12 # of your domain`
 - `TOKEN_FILE=erc20.canonicalized.xml # or erc721.canonicalized.xml`
 - keyPassword `"YOUR .P12 PASSWORD"`
 
 # Testing your .tsml
-curl -X POST -F file=@"/full/path/YOUR_TSML_FILE.tsml" https://aw.app/api/v1/verifyXMLDSig
+Command: `curl -X POST -F file=@"/full/path/YOUR_TSML_FILE.tsml" https://aw.app/api/v1/verifyXMLDSig`
 Success: `{"result":"pass", ...}`
 
 # You're in!
