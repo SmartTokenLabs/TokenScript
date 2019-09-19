@@ -9,7 +9,7 @@ class Token {
     }
 
     getBaseURL() {
-        return "http://192.168.26.170:8080/api/"; //"https://paymaster.stormbird.sg/api/";
+        return "https://paymaster.stormbird.sg/api/";
     }
 
     getStatus() {
