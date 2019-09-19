@@ -15,7 +15,7 @@
     </ts:name>
 
     <ts:contract name="ALP">
-        <ts:address network="1">0x5401b9687a08b15CFca344EdEc7c1486bDaf9e32</ts:address>
+        <ts:address network="1">0x8c0edb69ebf038ba0c7a4873e40fc09725064c2e</ts:address>
     </ts:contract>
 
     <ts:origins>
