@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ts:token xmlns:ts="http://tokenscript.org/2019/05/tokenscript"
+          xmlns="http://www.w3.org/1999/xhtml"
+          xmlns:xml="http://www.w3.org/XML/1998/namespace"
+          xsi:schemaLocation="http://tokenscript.org/2019/05/tokenscript"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          custodian="false"
+>
+  <ts:name>
+    <ts:plurals xml:lang="en">
+      <ts:string quantity="one">Devcon5 Ticket</ts:string>
+      <ts:string quantity="other">Devcon5 Tickets</ts:string>
+    </ts:plurals>
+    <ts:plurals xml:lang="es">
+      <ts:string quantity="one">Boleto de admisión</ts:string>
+      <ts:string quantity="other">Boleto de admisiónes</ts:string>
+    </ts:plurals>
+    <ts:plurals xml:lang="zh">
+      <ts:string quantity="one">入場券</ts:string>
+      <ts:string quantity="other">入場券</ts:string>
+    </ts:plurals>
+  </ts:name>
+  <ts:contract interface="erc875" name="Devcon5">
+    <ts:address network="1">0x48401d879E7736Ab80D3D18E24cEbcAc5345170A</ts:address>
+  </ts:contract>
+  <ts:origins>
+    <!-- Define the contract which holds the token that the user will use -->
+    <ts:ethereum contract="Devcon5">
+    </ts:ethereum>
+  </ts:origins>
+  <ts:selections>
+    <ts:selection id="expired">
+      <ts:name>
+        <ts:plurals xml:lang="en">
+          <ts:string quantity="one">Expired Ticket</ts:string>
+          <ts:string quantity="other">Expired Tickets</ts:string>
+        </ts:plurals>
+        <ts:string xml:lang="zh">已经过期的票</ts:string>
+      </ts:name>
+      <ts:filter>expired</ts:filter>
+    </ts:selection>
+  </ts:selections>
+  <ts:cards>
+  </ts:cards>
+
+  <ts:attribute-types>
+    <ts:attribute-type id="category" syntax="1.3.6.1.4.1.1466.115.121.1.15">
+    <ts:name>
+      <ts:string xml:lang="en">Cat</ts:string>
+      <ts:string xml:lang="zh">等级</ts:string>
+      <ts:string xml:lang="es">Cat</ts:string>
+    </ts:name>
+    <ts:origins>
+      <ts:token-id bitmask="000000000000000000000000000000000000000000FF00000000000000000000" as="uint">
+        <ts:mapping>
+          <ts:option key="0">
+            <ts:value>Devcon5 Tickets </ts:value>
+          </ts:option>
+        </ts:mapping>
+      </ts:token-id>
+    </ts:origins>
+    </ts:attribute-type>
+
+    <ts:attribute-type id="section" syntax="1.3.6.1.4.1.1466.115.121.1.15">
+      <ts:origins>
+        <ts:token-id bitmask="0000000000000000000000000000000000000000000000FFFFFFFFFF00000000" as="utf8">
+        </ts:token-id>
+      </ts:origins>
+    </ts:attribute-type>
+
+    <ts:attribute-type id="locality" syntax="1.3.6.1.4.1.1466.115.121.1.15">
+      <ts:origins>
+        <ts:ethereum function="getLocality" contract="Devcon5" as="utf8">
+          <ts:data>
+            <ts:uint256 ref="tokenId"/>
+          </ts:data>
+        </ts:ethereum>
+      </ts:origins>
+    </ts:attribute-type>
+
+    <ts:attribute-type id="time" syntax="1.3.6.1.4.1.1466.115.121.1.24">
+      <ts:name>
+        <ts:string xml:lang="en">Time</ts:string>
+        <ts:string xml:lang="zh">时间</ts:string>
+        <ts:string xml:lang="es">Tiempo</ts:string>
+        <ts:string xml:lang="ru">время</ts:string>
+      </ts:name>
+      <ts:origins>
+        <ts:token-id bitmask="0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000000000000000000000" as="utf8">
+        </ts:token-id>
+      </ts:origins>
+    </ts:attribute-type>
+
+    <ts:attribute-type id="expired" syntax="1.3.6.1.4.1.1466.115.121.1.7"> <!-- boolean -->
+      <ts:origins>
+        <ts:ethereum function="isExpired" contract="Devcon5" as="bool">
+          <ts:data>
+            <ts:uint256 ref="tokenId"/>
+          </ts:data>
+        </ts:ethereum>
+      </ts:origins>
+    </ts:attribute-type>
+
+    <ts:attribute-type id="street" syntax="1.3.6.1.4.1.1466.115.121.1.15"> <!-- string -->
+      <ts:origins>
+        <ts:ethereum function="getStreet" contract="Devcon5" as="utf8">
+          <ts:data>
+            <ts:uint256 ref="tokenId"/>
+          </ts:data>
+        </ts:ethereum>
+      </ts:origins>
+    </ts:attribute-type>
+
+    <ts:attribute-type id="building" syntax="1.3.6.1.4.1.1466.115.121.1.15"> <!-- string -->
+      <ts:origins>
+        <ts:ethereum function="getBuildingName" contract="Devcon5" as="utf8">
+          <ts:data>
+            <ts:uint256 ref="tokenId"/>
+          </ts:data>
+        </ts:ethereum>
+      </ts:origins>
+    </ts:attribute-type>
+
+    <ts:attribute-type id="state" syntax="1.3.6.1.4.1.1466.115.121.1.15"> <!-- string -->
+      <ts:origins>
+        <ts:ethereum function="getState" contract="Devcon5" as="utf8">
+          <ts:data>
+            <ts:uint256 ref="tokenId"/>
+          </ts:data>
+        </ts:ethereum>
+      </ts:origins>
+    </ts:attribute-type>
+
+    <ts:attribute-type id="numero" syntax="1.3.6.1.4.1.1466.115.121.1.27">
+      <ts:origins>
+        <ts:token-id bitmask="000000000000000000000000000000000000000000FFFF000000000000000000" as="uint"/>
+      </ts:origins>
+    </ts:attribute-type>
+
+</ts:attribute-types>
+</ts:token>
