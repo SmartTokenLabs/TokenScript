@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE token  [
+        <!ENTITY style SYSTEM "shared.css">
+        <!ENTITY release.en SYSTEM "release.en.shtml">
+        <!ENTITY subdomain.en SYSTEM "subdomain.en.shtml">
+        <!ENTITY bundle.en SYSTEM "bundle.js">
+        ]>
+<ts:token xmlns:ts="http://tokenscript.org/2019/10/tokenscript"
+          xmlns="http://www.w3.org/1999/xhtml"
+          xmlns:xml="http://www.w3.org/XML/1998/namespace"
+          xsi:schemaLocation="http://tokenscript.org/2019/10/tokenscript http://tokenscript.org/2019/10/tokenscript.xsd"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          custodian="false"
+>
+  <ts:name>
+    <ts:plurals xml:lang="en">
+      <ts:string quantity="one">ENS</ts:string>
+    </ts:plurals>
+  </ts:name>
+  <ts:contract interface="erc721" name="ENS">
+    <ts:address network="1">0xFaC7BEA255a6990f749363002136aF6556b31e04</ts:address>
+  </ts:contract>
+  <ts:contract name="registrar">
+    <ts:address network="1">0xF0AD5cAd05e10572EfcEB849f6Ff0c68f9700455</ts:address>
+  </ts:contract>
+  <ts:origins>
+    <!-- Define the contract which holds the token that the user will use -->
+    <ts:ethereum contract="ENS">
+    </ts:ethereum>
+  </ts:origins>
+
+  <ts:cards>
+    <ts:token-card>
+      <ts:view-iconified/>
+      <ts:view>
+      </ts:view>
+    </ts:token-card>
+
+    <ts:action>
+      <ts:name>
+        <ts:string xml:lang="en">Refund</ts:string>
+      </ts:name>
+      <ts:transaction>
+        <ts:ethereum function="releaseDeed" contract="ENS">
+          <ts:data>
+            <ts:bytes32 ref="tokenId"/>
+          </ts:data>
+        </ts:ethereum>
+      </ts:transaction>
+      <style type="text/css">&style;</style>
+      <ts:view xml:lang="en">&release.en;</ts:view>
+    </ts:action>
+
+    <ts:action>
+      <ts:name>
+        <ts:string xml:lang="en">Create subdomain</ts:string>
+      </ts:name>
+
+      <ts:attribute-type id="subdomainHash" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+        <ts:name>
+          <ts:string xml:lang="en">subdomainHash</ts:string>
+        </ts:name>
+        <ts:origins>
+          <ts:user-entry as="bytes"/>
+        </ts:origins>
+      </ts:attribute-type>
+
+      <ts:attribute-type id="owner" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+        <ts:name>
+          <ts:string xml:lang="en">owner</ts:string>
+        </ts:name>
+        <ts:origins>
+          <ts:user-entry as="address"/>
+        </ts:origins>
+      </ts:attribute-type>
+
+      <ts:transaction>
+        <ts:ethereum function="setSubnodeOwner" contract="ENS">
+          <ts:data>
+            <ts:bytes32 ref="tokenId"/>
+            <ts:bytes32 ref="subdomainHash"/>
+            <ts:address ref="owner"/>
+          </ts:data>
+        </ts:ethereum>
+      </ts:transaction>
+
+      <style type="text/css">&style;</style>
+      <ts:view xml:lang="en">&subdomain.en;</ts:view>
+    </ts:action>
+
+<!--    <ts:action>-->
+<!--      <ts:name>-->
+<!--        <ts:string xml:lang="en">Renew</ts:string>-->
+<!--      </ts:name>-->
+<!--      <ts:transaction>-->
+<!--        <ts:ethereum function="renew" contract="ENS">-->
+<!--          <ts:data>-->
+<!--            <ts:bytes32 ref="tokenId"/>-->
+<!--            <ts:uint256 ref="duration"/>-->
+<!--          </ts:data>-->
+<!--        </ts:ethereum>-->
+<!--      </ts:transaction>-->
+<!--      <style type="text/css">&style;</style>-->
+<!--      <ts:view xml:lang="en">&renew.en;</ts:view>-->
+<!--    </ts:action>-->
+
+  </ts:cards>
+
+  <ts:attribute-types>
+    <ts:attribute-type id="nameExpires" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+      <ts:origins>
+        <ts:ethereum function="nameExpires" contract="ENS" as="uint">
+          <ts:data>
+            <ts:uint256 ref="tokenId"/>
+          </ts:data>
+        </ts:ethereum>
+      </ts:origins>
+    </ts:attribute-type>
+  </ts:attribute-types>
+
+</ts:token>
