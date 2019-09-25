@@ -56,11 +56,12 @@ You can find all the projects currently using TokenScript [here](https://github.
 
 **8.1 Project Governing Board**
 
-- Reprsentitives from implementations
-AlphaWallet - at any time represented by any of
-- Victor Zhang - CEO and co founder
-- James Brown - AlphaWallet Android development lead.
-- Hwee Boon Yar - AlphaWallet iOS development lead.
+Reprsentitives from implementations:
+AlphaWallet - Victor Zhang - CEO and co founder
+
+Rrepresentitives from TokenIssuers:
+[missing]
+
 
 **8.2  Technical Steering Committee**
 
