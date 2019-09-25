@@ -68,7 +68,7 @@ Rrepresentitives from TokenIssuers:
 
 | Nmae | Expertise | Location | Works |
 |---|---|---|---|
-| Weiwu Zhang (chair) | Tokenisation. Former banking system architect | Sydney | αWallet |
+| Weiwu Zhang (chair) | Tokenisation | Sydney | αWallet, formerly CBA (bank) blockchain architect|
 | Dr Tore Kasper Frederiksen | Multi-party computation, zero-knowledge proof | Denmark  | [Papers](https://scholar.google.dk/citations?user=XnMVW7gAAAAJ) |
 | Dr Nigel Sheridan-Smith | distributed systems, network protocols | Sydney | [Papers](https://www.semanticscholar.org/author/Nigel-Sheridan-Smith/2519329) |
 | James Brown | compiler and virtual machiens | Sydney | αWallet, former Sony (PS3) compiler and linker team lead |
