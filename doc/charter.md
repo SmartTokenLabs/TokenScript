@@ -70,7 +70,7 @@ Rrepresentitives from TokenIssuers:
 |---|---|---|---|
 | Weiwu Zhang (chair) | Tokenisation. Former banking system architect | Sydney | αWallet |
 | Dr Tore Kasper Frederiksen | Multi-party computation, zero-knowledge proof | Denmark  | [Papers](https://scholar.google.dk/citations?user=XnMVW7gAAAAJ) |
-| Dr Nigel Sheridan-Smith | distributed systems, integration and web experience | Sydney | [Papers](https://www.semanticscholar.org/author/Nigel-Sheridan-Smith/2519329) |
+| Dr Nigel Sheridan-Smith | distributed systems, network protocols | Sydney | [Papers](https://www.semanticscholar.org/author/Nigel-Sheridan-Smith/2519329) |
 | James Brown | compiler and virtual machiens, former Sony (PS3) compiler and linker team lead | Sydney | αWallet |
 | Hwee Boon Yar | system interoperatbility and data exchange, mobile app (one of his app ranked No. 1 in App Store) | Singapore | |
 
