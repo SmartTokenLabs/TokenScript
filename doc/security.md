@@ -37,9 +37,9 @@ If the smart contract has no key-management on its own, the transaction should b
 
 The express-of-trust special address is calculated in this way:
 
-TokenScript project's donation address is `0xdeadd42a3ab7d14626a98eadebd26ae8c81b07e4`. The public key of it is *Y*, its value is:
+TokenScript project's donation address is: `0x000bd52fb4f46f148b0ff0cc651048e283d2d000`. Its public key is *Y*, its value is:
 
-    f0985bd9dbb6f461adc994a0c12595716a7f4fb2879bfc5155dffec3770096201c13f8314b46db8d8177887f8d95af1f2dd217291ce6ffe9183681186696bbe5
+    0x483d69cc4377d318da81402f2488f588ccae3d22a37be36457a574487d9ca4d9c38cd62d83113e440c7bdc682ced6d05ee739b831c6d5cb01982367f76fc8ce0
 
 In multiplicative group notation, its value is 𝑔ˣ where 𝑥 is the private key held by TokenScript administration.
 
