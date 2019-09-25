@@ -68,11 +68,11 @@ Rrepresentitives from TokenIssuers:
 
 | Nmae | Expertise | Location | Works |
 |---|---|---|---|
-| Weiwu Zhang (chair) | interoperability, former banking system architect | Sydney | αWallet |
+| Weiwu Zhang (chair) | Tokenisation. Former banking system architect | Sydney | αWallet |
 | Dr Tore Kasper Frederiksen | Multi-party computation, zero-knowledge proof | Denmark  | [Papers](https://scholar.google.dk/citations?user=XnMVW7gAAAAJ) |
 | Dr Nigel Sheridan-Smith | distributed systems, integration and web experience | Sydney | [Papers](https://www.semanticscholar.org/author/Nigel-Sheridan-Smith/2519329) |
 | James Brown | compiler and virtual machiens, former Sony (PS3) compiler and linker team lead | Sydney | αWallet |
-| Hwee Boon Yar | | Singapore | |
+| Hwee Boon Yar | system interoperatbility and data exchange, mobile app (one of his app ranked No. 1 in App Store) | Singapore | |
 
 **8.2 Other Contributors (Optional)** 
 
