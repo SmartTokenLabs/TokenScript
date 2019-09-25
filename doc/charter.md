@@ -25,7 +25,8 @@ Token standards like ERC20/ERC721 are appropriately simple in their definition f
  In future, users will expect to be able to seamlessly use services via tokens. They will not need to manually convert their DAI or KNC to make an ETH or dollar payment, this logic will be described in a file representing an underlying token and executed in real time. 
  TokenScript is a framework to define such token logic and have it be cryptographically signed by the original author. This will allow other developers to import such token functionality and extend it, while knowing it came from a credible source. 
  
-**4. Business Benefits**  
+**4. Business Benefits**
+
 A token issuer who writes a TokenScript will immediately have mobile integration. They will not need to create their own wallet to serve their users and will have the ability in future to have their token serve their users in ways they cannot even imagine. Each TokenScript is signed by the issuer, meaning the user knows it comes from a valid source.
 
 As a simple example, let's image you have an NFT contract which accepts donations of eth and gives back an NFT representing your donation. This NFT could entitle you to free drinks at a special bar or give you further information about where your donations are going. Such logic could easily be written in TokenScript and the author could instantly have it work on a holders mobile phone app. 
@@ -39,7 +40,7 @@ As of 2019, the blockchain industry is still small and most dapps can fit on a s
 **5. Relationship to Other Projects**  
 A few token issuers already leverage TokenScript to represent their tokens inside our mobile wallet. 
 
-- the xDAI/MakerDAO team has a bridge running inside our wallet [here](https://github.com/AlphaWallet/TokenScript-Repo/blob/master/aw.app/2019/05/DAI.tsml) and [here](https://github.com/AlphaWallet/alpha-wallet-ios/blob/master/xDaiTokenScript/XDAI-bridge.tsml)
+- the xDAI/MakerDAO team has a bridge running inside AlphaWallet (currently the main implementor of TokenScript) [here](https://github.com/AlphaWallet/TokenScript-Repo/blob/master/aw.app/2019/05/DAI.tsml) and [here](https://github.com/AlphaWallet/alpha-wallet-ios/blob/master/xDaiTokenScript/XDAI-bridge.tsml)
 - Compound has [TokenScript's](https://github.com/AlphaWallet/TokenScript/tree/master/examples/erc20/Compound) which enable users to invest or withdraw their funds from all compound services 
 - Celer has signed a TokenScript for their [ERC20 token](https://github.com/AlphaWallet/TokenScript-Repo/blob/master/celer.network/2019/05/CELER.tsml) which gives peace of mind to their users that the token does in fact originate from them. This list is growing everyday 
  -bZx iDAI is a [TokenScript](https://github.com/AlphaWallet/TokenScript/tree/master/examples/erc20/iDAI) running inside our wallet and allows the user to earn interest. Later there may also be TokenScripts for leveraged investment tokens
