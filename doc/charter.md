@@ -1,6 +1,4 @@
-<img src="../img/open-project-logos/open-projects-logo.PNG.png" width="300">
-
-# Draft Charter Template
+# Project Charter 
 -------------------------------------------
 
 **INSTRUCTIONS FOR USE:** Ask the Open Projects Administrator to set up a page in our Draft Charters repository where you can publicly collaborate with others in the community. Alternatively, you may copy this template and complete your draft in private or in another public space.
@@ -50,21 +48,29 @@ A few token issuers already leverage TokenScript to represent their tokens insid
 - [TokenScript](https://github.com/AlphaWallet/TokenScript) Apache 2.0
 - [AlphaWallet iOS](https://github.com/AlphaWallet/alpha-wallet-ios) & [AlphaWallet Android](https://github.com/AlphaWallet/alpha-wallet-android) GPL (under review, this may change)
 
-|**7. Initial Contributions from Existing Work**  | You can find all the projects currently using TokenScript [here](https://github.com/AlphaWallet/TokenScript/tree/master/examples) |
-|**8. Project Leadership**   |      |
-|**8.1 Project Governing Board**  
-AlphaWallet team members: 
+**7. Initial Contributions from Existing Work**
 
-- Weiwu Zhang - co founder and CTO (weiwu.zhang@alphawallet.com)
-- James Brown - co founder and lead android dev (james.brown@alphawallet.com)
-- Victor Zhang - CEO and co founder (victor.zhang@alphawallet.com)
-- Hwee Boon Yar - Lead iOS developer (hboon@alphawallet.com)
-- James Sangalli - co founder and developer (Developed most of the current TokenScripts) (james.sangalli@alphawallet.com)
-- James Zaki - Project Manager (james.zaki@alphawallet.com)
+You can find all the projects currently using TokenScript [here](https://github.com/AlphaWallet/TokenScript/tree/master/examples) 
 
-|**8.2 Other Contributors (Optional)** 
+**8. Project Leadership**
 
-- Virgil Griffith - Executive cheerleader for TokenScript and creator of the "smart token" name :) (virgil@ethereum.org)
+**8.1 Project Governing Board**
+
+**8.2  Technical Steering Committee**
+
+* Weiwu Zhang (chair), interoperability, banking system architect, Sydney.
+
+* Dr Nigel Sheridan-Smith, distributed systems, integration and web experience, based in Sydney
+https://www.semanticscholar.org/author/Nigel-Sheridan-Smith/2519329
+
+* Dr Tore Kasper Frederiksen, Multi-party computation, zero-knowledge proof, based in Denmark
+https://scholar.google.dk/citations?user=XnMVW7gAAAAJ&hl=en
+
+**8.2 Other Contributors (Optional)** 
+
+- Virgil Griffith - Executive cheerleader for TokenScript and creator of the "smart token" name :) [github](https://github.com/virgil)
+
+---
 
 When you are ready to submit this charter, notify [OASIS](mailto:op-admin@oasis-open.org). The Open Projects Administrator will ensure it is complete and meets all requirements.   
 
