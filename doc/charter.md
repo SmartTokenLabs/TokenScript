@@ -71,7 +71,7 @@ Rrepresentitives from TokenIssuers:
 | Weiwu Zhang (chair) | Tokenisation | Sydney, Australia | αWallet, formerly CBA (bank) blockchain architect|
 | Dr Tore Kasper Frederiksen | Multi-party computation, zero-knowledge proof | Denmark  | [Papers](https://scholar.google.dk/citations?user=XnMVW7gAAAAJ) |
 | Dr Nigel Sheridan-Smith | distributed systems, network protocols | Sydney, Australia | [Papers](https://www.semanticscholar.org/author/Nigel-Sheridan-Smith/2519329) |
-| James Brown | compiler and virtual machiens | Sydney, Australia| αWallet, former Sony (PS3) compiler and linker team lead |
+| James Brown | compiler and virtual machine | Sydney, Australia| αWallet, former Sony (PS3) compiler and linker team lead |
 | Hwee Boon Yar | system interoperatbility and data exchange, mobile app | Singapore | αWallet, SimplyTweet (former App Store champion) |
 
 **8.2 Other Contributors (Optional)** 
