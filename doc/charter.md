@@ -66,17 +66,13 @@ Rrepresentitives from TokenIssuers:
 
 **8.2  Technical Steering Committee**
 
-* Weiwu Zhang (chair), interoperability, αWallet, former banking system architect, Sydney.
-
-* Dr Tore Kasper Frederiksen, Multi-party computation, zero-knowledge proof, based in Denmark
-https://scholar.google.dk/citations?user=XnMVW7gAAAAJ&hl=en
-
-* Dr Nigel Sheridan-Smith, distributed systems, integration and web experience, based in Sydney
-https://www.semanticscholar.org/author/Nigel-Sheridan-Smith/2519329
-
-* James Brown - αWallet, Sony (PS3) compiler and linker team lead
-
-* Hwee Boon Yar -
+| Nmae | Expertise | Location | Works |
+|---|---|---|---|
+| Weiwu Zhang (chair) | interoperability, former banking system architect | Sydney | αWallet |
+| Dr Tore Kasper Frederiksen | Multi-party computation, zero-knowledge proof | Denmark  | [Papers](https://scholar.google.dk/citations?user=XnMVW7gAAAAJ) |
+| Dr Nigel Sheridan-Smith | distributed systems, integration and web experience | Sydney | [Papers](https://www.semanticscholar.org/author/Nigel-Sheridan-Smith/2519329) |
+| James Brown | compiler and virtual machiens, former Sony (PS3) compiler and linker team lead | Sydney | αWallet |
+| Hwee Boon Yar | | Singapore | |
 
 **8.2 Other Contributors (Optional)** 
 
