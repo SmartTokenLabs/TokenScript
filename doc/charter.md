@@ -56,15 +56,25 @@ You can find all the projects currently using TokenScript [here](https://github.
 
 **8.1 Project Governing Board**
 
+- Reprsentitives from implementations
+AlphaWallet - at any time represented by any of
+- Victor Zhang - CEO and co founder
+- James Brown - AlphaWallet Android development lead.
+- Hwee Boon Yar - AlphaWallet iOS development lead.
+
 **8.2  Technical Steering Committee**
 
-* Weiwu Zhang (chair), interoperability, banking system architect, Sydney.
+* Weiwu Zhang (chair), interoperability, αWallet, former banking system architect, Sydney.
+
+* Dr Tore Kasper Frederiksen, Multi-party computation, zero-knowledge proof, based in Denmark
+https://scholar.google.dk/citations?user=XnMVW7gAAAAJ&hl=en
 
 * Dr Nigel Sheridan-Smith, distributed systems, integration and web experience, based in Sydney
 https://www.semanticscholar.org/author/Nigel-Sheridan-Smith/2519329
 
-* Dr Tore Kasper Frederiksen, Multi-party computation, zero-knowledge proof, based in Denmark
-https://scholar.google.dk/citations?user=XnMVW7gAAAAJ&hl=en
+* James Brown - αWallet, Sony (PS3) compiler and linker team lead
+
+* Hwee Boon Yar -
 
 **8.2 Other Contributors (Optional)** 
 
