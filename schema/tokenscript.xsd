@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
-           targetNamespace="http://tokenscript.org/2019/05/tokenscript"
+           targetNamespace="http://tokenscript.org/2019/10/tokenscript"
            xmlns:xhtml="http://www.w3.org/1999/xhtml"
            xmlns:dsig="http://www.w3.org/2000/09/xmldsig#"
-           xmlns="http://tokenscript.org/2019/05/tokenscript">
+           xmlns="http://tokenscript.org/2019/10/tokenscript">
 
 
     <!-- Importing XML namespace for xml:lang and xml:id -->
@@ -19,7 +19,7 @@
     <!-- Importing XHTML namespace. use xhtml1-strict.xsd to get xhtml:Block -->
     <xs:import namespace="http://www.w3.org/1999/xhtml"
                schemaLocation="xhtml1-strict.xsd"/>
-    
+
     <xs:element name="token">
         <xs:complexType>
             <xs:sequence>
@@ -276,6 +276,9 @@
             <!-- int is not allowed here, because "as" is not for typing but for transforming  -->
             <xs:enumeration value="utf8"/>
             <xs:enumeration value="e18"/>
+            <xs:enumeration value="e8"/>
+            <xs:enumeration value="e4"/>
+            <xs:enumeration value="e2"/>
             <xs:enumeration value="bool"/>
             <xs:enumeration value="bytes"/>
         </xs:restriction>
