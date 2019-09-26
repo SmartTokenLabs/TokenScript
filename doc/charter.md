@@ -57,12 +57,11 @@ You can find all the projects currently using TokenScript [here](https://github.
 
 **8.1 Project Governing Board**
 
-Reprsentitives from implementations:
-AlphaWallet - Victor Zhang - CEO and co founder
-
-Rrepresentitives from TokenIssuers:
-[missing]
-
+| Stakeholder group representitive | name | organisation |
+|---|---|---|
+| Ethereum public blockchain | Virgil Griffith | Ethereum Foundation |
+| Client Implementation | Victor Zhang | AlphaWallet |
+| Token Issuer | (missing) | (missing) 
 
 **8.2  Technical Steering Committee**
 
@@ -76,7 +75,7 @@ Rrepresentitives from TokenIssuers:
 
 **8.2 Other Contributors (Optional)** 
 
-- Virgil Griffith - Executive cheerleader for TokenScript and creator of the "smart token" name :) [github](https://github.com/virgil)
+Special thanks to Virgil Griffith - creator of the "smart token" name :) [github](https://github.com/virgil)
 
 ---
 
