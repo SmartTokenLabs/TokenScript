@@ -15,7 +15,7 @@ requirements must be met before it can be considered for formation as an officia
 |  |  |
 |-----------------------------------|-----------------------------------|
 | **1. Project Name**   | TokenScript  |
-| **1.1 Full Name**     | TokenScript - An opensource framework for defining the behavior of your tokens in a cross platform, dynamic, modular and secure way |
+| **1.1 Full Name**     | TokenScript - An open source framework for defining the behavior of your tokens in a cross platform, dynamic, modular and secure way |
 | **1.2 Familiar Name** | TokenScript |
 
 **2. Abstract**   
@@ -59,7 +59,7 @@ You can find all the projects currently using TokenScript [here](https://github.
 
 **8.1 Project Governing Board**
 
-| Stakeholder group representitive | name | organisation |
+| Stakeholder group representative | name | organisation |
 |---|---|---|
 | Ethereum public blockchain | Virgil Griffith | Ethereum Foundation |
 | Client Implementation | Victor Zhang | AlphaWallet |
@@ -67,13 +67,13 @@ You can find all the projects currently using TokenScript [here](https://github.
 
 **8.2  Technical Steering Committee**
 
-| Nmae | Expertise | Location | Works |
+| Name | Expertise | Location | Works |
 |---|---|---|---|
 | Weiwu Zhang (chair) | Tokenisation | Sydney, Australia | αWallet, formerly CBA (bank) blockchain architect|
 | Dr Tore Kasper Frederiksen | Multi-party computation, zero-knowledge proof | Denmark  | [Papers](https://scholar.google.dk/citations?user=XnMVW7gAAAAJ) |
 | Dr Nigel Sheridan-Smith | distributed systems, network protocols | Sydney, Australia | [Papers](https://www.semanticscholar.org/author/Nigel-Sheridan-Smith/2519329) |
 | James Brown | compiler and virtual machine | Sydney, Australia| αWallet, former Sony (PS3) compiler and linker lead |
-| Hwee Boon Yar | system interoperatbility and data exchange, mobile app | Singapore | αWallet, SimplyTweet app (former AppStore champion) |
+| Hwee Boon Yar | system interoperability and data exchange, mobile app | Singapore | αWallet, SimplyTweet app (former AppStore champion) |
 
 **8.2 Other Contributors (Optional)** 
 
