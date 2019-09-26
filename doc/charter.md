@@ -61,7 +61,7 @@ You can find all the projects currently using TokenScript [here](https://github.
 |---|---|---|
 | Ethereum public blockchain | Virgil Griffith | Ethereum Foundation |
 | Client Implementation | Victor Zhang | AlphaWallet |
-| Token Issuer | (missing) | (missing) 
+| Developer community | Hao Yun | LinkTime |
 
 **8.2  Technical Steering Committee**
 
