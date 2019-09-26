@@ -10,12 +10,14 @@ by OASIS. This charter must be finalized by its proposers and submission
 requirements must be met before it can be considered for formation as an official 
 [OASIS Open Project](http://oasis-open-projects.org). Contact the [Open Projects Administrator](mailto:op-admin@oasis-open.org) for details on this.
 
+**1. Project Name** 
 
-| Charter section | Section description. Replace with charter text. |
+|  |  |
 |-----------------------------------|-----------------------------------|
 | **1. Project Name**   | TokenScript  |
 | **1.1 Full Name**     | TokenScript - An opensource framework for defining the behavior of your tokens in a cross platform, dynamic, modular and secure way |
 | **1.2 Familiar Name** | TokenScript |
+
 **2. Abstract**   
 Token standards like ERC20/ERC721 are appropriately simple in their definition for broad use. But with each implementation comes additional functionality unique to an application's features. To better represent this functionality, the TokenScript framework effectively extends a token's logic (from the author) into the app space where it is integrated.
 
