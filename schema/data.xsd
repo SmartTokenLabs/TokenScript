@@ -1,0 +1,503 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:complexType name="data">
+        <xs:choice maxOccurs="unbounded">
+            <xs:element name="bool">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="uint8">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="uint16">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="uint24">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="uint32">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="uint40">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="uint48">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="uint56">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="uint64">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="uint72">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="uint80">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="uint88">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="uint96">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="uint104">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="uint112">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="uint120">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="uint128">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="uint136">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="uint144">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="uint152">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="uint160">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="uint168">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="uint176">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="uint184">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="uint192">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="uint200">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="uint208">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="uint216">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="uint224">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="uint232">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="uint240">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="uint248">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="uint256">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="int8">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="int16">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="int24">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="int32">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="int40">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="int48">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="int56">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="int64">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="int72">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="int80">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="int88">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="int96">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="int104">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="int112">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="int120">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="int128">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="int136">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="int144">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="int152">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="int160">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="int168">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="int176">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="int184">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="int192">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="int200">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="int208">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="int216">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="int224">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="int232">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="int240">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="int248">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="int256">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="string">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="bytes">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="byte">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="bytes2">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="bytes3">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="bytes4">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="bytes5">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="bytes6">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="bytes7">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="bytes8">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="bytes9">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="bytes10">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="bytes11">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="bytes12">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="bytes13">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="bytes14">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="bytes15">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="bytes16">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="bytes17">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="bytes18">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="bytes19">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="bytes20">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="bytes21">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="bytes22">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="bytes23">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="bytes24">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="bytes25">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="bytes26">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="bytes27">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="bytes28">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="bytes29">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="bytes30">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="bytes31">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="bytes32">
+                <xs:complexType mixed="true">
+                    <xs:attribute name="ref" type="xs:NCName"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="address" type="address"/>
+        </xs:choice>
+    </xs:complexType>
+</xs:schema>
