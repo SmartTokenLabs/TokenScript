@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE token  [
-        <!ENTITY style SYSTEM "shared.css">
+        <!ENTITY style SYSTEM "../shared.css">
         <!ENTITY supply.en SYSTEM "supply.en.shtml">
         <!ENTITY withdraw.en SYSTEM "withdraw.en.shtml">
         <!ENTITY enable.en SYSTEM "enable.en.shtml">

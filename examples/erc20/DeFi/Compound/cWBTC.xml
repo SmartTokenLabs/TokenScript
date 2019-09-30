@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE token  [
-        <!ENTITY style SYSTEM "shared.css">
+        <!ENTITY style SYSTEM "../shared.css">
         <!ENTITY mint.en SYSTEM "supply.en.shtml">
         <!ENTITY redeem.en SYSTEM "withdraw.en.shtml">
         <!ENTITY enable.en SYSTEM "enable.en.shtml">
@@ -13,16 +13,16 @@
           custodian="false"
 >
 <ts:name>
-    <ts:string xml:lang="en">cUSDC</ts:string>
+    <ts:string xml:lang="en">cWBTC</ts:string>
 </ts:name>
-<ts:contract name="cUSDC" interface="erc20">
-    <ts:address network="1">0x39AA39c021dfbaE8faC545936693aC917d5E7563</ts:address>
+<ts:contract name="cWBTC" interface="erc20">
+    <ts:address network="1">0xC11b1268C1A384e55C48c2391d8d480264A3A7F4</ts:address>
 </ts:contract>
-<ts:contract name="USDC" interface="erc20">
-    <ts:address network="1">0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48</ts:address>
+<ts:contract name="WBTC" interface="erc20">
+    <ts:address network="1">0x2260fac5e5542a773aa44fbcfedf7c193bc2c599</ts:address>
 </ts:contract>
 <ts:origins>
-    <ts:ethereum contract="cUSDC"/>
+    <ts:ethereum contract="cWBTC"/>
 </ts:origins>
 
 <ts:cards>
@@ -37,9 +37,9 @@
             <ts:string xml:lang="en">Enable</ts:string>
         </ts:name>
         <ts:transaction>
-            <ts:ethereum function="approve" contract="USDC" as="bool">
+            <ts:ethereum function="approve" contract="WBTC" as="bool">
                 <ts:data>
-                    <ts:address>0x39AA39c021dfbaE8faC545936693aC917d5E7563</ts:address>
+                    <ts:address>0xC11b1268C1A384e55C48c2391d8d480264A3A7F4</ts:address>
                     <ts:uint256>115792089237316195423570985008687907853269984665640564039457584007913129639935</ts:uint256>
                 </ts:data>
             </ts:ethereum>
@@ -63,7 +63,7 @@
             </ts:origins>
         </ts:attribute-type>
         <ts:transaction>
-            <ts:ethereum function="mint" contract="cETH" as="uint">
+            <ts:ethereum function="mint" contract="cWBTC" as="uint">
                 <ts:data>
                     <ts:uint256 ref="mintAmount"/>
                 </ts:data>
@@ -86,7 +86,7 @@
             </ts:origins>
         </ts:attribute-type>
         <ts:transaction>
-            <ts:ethereum function="redeem" contract="cETH" as="uint">
+            <ts:ethereum function="redeem" contract="cWBTC" as="uint">
                 <ts:data>
                     <ts:uint256 ref="redeemAmount"/>
                 </ts:data>
@@ -102,23 +102,23 @@
 
     <ts:attribute-type id="allowance" syntax="1.3.6.1.4.1.1466.115.121.1.36">
         <ts:origins>
-            <ts:ethereum function="allowance" contract="USDC" as="uint">
+            <ts:ethereum function="allowance" contract="WBTC" as="uint">
                 <ts:data>
                     <ts:address ref="ownerAddress"/>
-                    <ts:address>0x39AA39c021dfbaE8faC545936693aC917d5E7563</ts:address>
+                    <ts:address>0xC11b1268C1A384e55C48c2391d8d480264A3A7F4</ts:address>
                 </ts:data>
             </ts:ethereum>
         </ts:origins>
     </ts:attribute-type>
 
-    <!-- your balance in USDC (not compound USDC) -->
+    <!-- your balance in WBTC (not compound WBTC) -->
     <ts:attribute-type id="tokenBalance" syntax="1.3.6.1.4.1.1466.115.121.1.36">
         <ts:name>
             <ts:string xml:lang="en">Balance</ts:string>
             <ts:string xml:lang="zh">餘額</ts:string>
         </ts:name>
         <ts:origins>
-            <ts:ethereum function="balanceOf" contract="USDC" as="uint">
+            <ts:ethereum function="balanceOf" contract="WBTC" as="uint">
                 <ts:data>
                     <ts:address ref="ownerAddress"/>
                 </ts:data>
@@ -126,13 +126,13 @@
         </ts:origins>
     </ts:attribute-type>
 
-    <!-- USDC to cUSDC exchange rate -->
+    <!-- WBTC to cWBTC exchange rate -->
     <ts:attribute-type id="exchangeRate" syntax="1.3.6.1.4.1.1466.115.121.1.36">
         <ts:name>
             <ts:string xml:lang="en">Exchange Rate</ts:string>
         </ts:name>
         <ts:origins>
-            <ts:ethereum function="exchangeRateCurrent" contract="cUSDC" as="uint">
+            <ts:ethereum function="exchangeRateCurrent" contract="cWBTC" as="uint">
             </ts:ethereum>
         </ts:origins>
     </ts:attribute-type>
@@ -143,7 +143,7 @@
             <ts:string xml:lang="zh">餘額</ts:string>
         </ts:name>
         <ts:origins>
-            <ts:ethereum function="balanceOf" contract="cUSDC" as="uint">
+            <ts:ethereum function="balanceOf" contract="cWBTC" as="uint">
                 <ts:data>
                     <ts:address ref="ownerAddress"/>
                 </ts:data>
@@ -156,7 +156,7 @@
             <ts:string xml:lang="en">Supply Interest Rate</ts:string>
         </ts:name>
         <ts:origins>
-            <ts:ethereum function="supplyRatePerBlock" contract="cUSDC" as="uint">
+            <ts:ethereum function="supplyRatePerBlock" contract="cWBTC" as="uint">
             </ts:ethereum>
         </ts:origins>
     </ts:attribute-type>
