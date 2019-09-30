@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE token  [
-        <!ENTITY style SYSTEM "shared.css">
+        <!ENTITY style SYSTEM "../shared.css">
         <!ENTITY mint.en SYSTEM "supply.en.shtml">
         <!ENTITY redeem.en SYSTEM "withdraw.en.shtml">
         ]>
