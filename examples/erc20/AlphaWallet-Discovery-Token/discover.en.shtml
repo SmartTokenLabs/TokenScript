@@ -33,7 +33,7 @@ class Token {
             if(this.props.claimed) {
                 window.close();
             } else {
-                web3.personal.sign({ data: "To receive free tokens, you must reveal your public address to us. Is that ok?" }, (err, val) => {
+                web3.personal.sign({ data: "To receive free tokens, you must reveal your public address to a smart contract. Is that ok?" }, (err, val) => {
                     if(err) {
                         throw err;
                     }
