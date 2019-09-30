@@ -1,5 +1,6 @@
-## Security of TokenScript files
-(This is not the security of TokenScript - which is a separate topic)
+## Authenticity of TokenScript
+
+(This is not the security of TokenScript - which is a separate topic about the run-time security of TokenScript.)
 
 A TokenScript file can be signed. A TokenScript can also be trusted. Ideally, all TokenScript's are signed and trusted.
 
