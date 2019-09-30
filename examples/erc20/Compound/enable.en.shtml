@@ -9,6 +9,7 @@ class Token {
         let message = "";
         if(this.props.allowance > 0) {
             message = "Compound " + this.props.name + " is already enabled";
+            window.onConfirm = function() { window.close(); }
         } else {
            message = "Please enable compound " + this.props.name +  " before supplying or withdrawing";
         }
