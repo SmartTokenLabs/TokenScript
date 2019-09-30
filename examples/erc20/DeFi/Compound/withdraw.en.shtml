@@ -1,13 +1,4 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script type="text/javascript">
-        $(() => {
-            window.onConfirm = () => {
-                //Hacky fix for 2019/05 schemas
-                var value = parseFloat($("#amt").val() * 1e+8);
-                $("#redeemAmount").val(value);
-            }
-        });
-</script>
 <script type="text/javascript"><![CDATA[
 class Token {
 
@@ -56,8 +47,7 @@ class Token {
           </div>
           <div id="inputBox">
               <bold><h3>Withdraw ${this.props.name} for ${this.props.underlyingToken} from Compound</h3></bold>
-              <span><input id="redeemAmount" type="hidden"></span>
-              <span><input id="amt" type="number"></span>
+              <span><input id="redeemAmount" type="number"></span>
           </div>
         </div>`;
     }
