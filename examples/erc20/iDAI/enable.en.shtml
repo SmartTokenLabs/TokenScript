@@ -8,7 +8,8 @@ class Token {
     render() {
         let message = "";
         if(this.props.allowance > 0) {
-            message = "iDAI is already enabled, no need to click confirm";
+            message = "iDAI is already enabled";
+            window.onConfirm = function() { window.close(); }
         } else {
            message = "Please enable iDAI by clicking confirm";
         }
