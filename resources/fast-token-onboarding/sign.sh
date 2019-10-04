@@ -3,7 +3,7 @@ NAME='YOUR COMPANY NAME'
 KEYSTORE_FILE=./YOUR_KEY_FILE.p12 # of your domain
 # set .p12 password in last line of xmlsectool command below
 
-TOKEN_FILE=erc20.canonicalized.xml # or erc721.canonicalized.xml
+TOKEN_FILE=pDAI.xml # or erc721.canonicalized.xml
 SIGNATURE_ALGORITHM=rsa-sha256 # or ecdsa-sha256
 
 echo "Signing xml with $KEYSTORE_FILE..."
