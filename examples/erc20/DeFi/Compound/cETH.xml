@@ -4,10 +4,10 @@
         <!ENTITY mint.en SYSTEM "supply.en.shtml">
         <!ENTITY redeem.en SYSTEM "withdraw.en.shtml">
         ]>
-<ts:token xmlns:ts="http://tokenscript.org/2019/05/tokenscript"
+<ts:token xmlns:ts="http://tokenscript.org/2019/10/tokenscript"
           xmlns="http://www.w3.org/1999/xhtml"
           xmlns:xml="http://www.w3.org/XML/1998/namespace"
-          xsi:schemaLocation="http://tokenscript.org/2019/05/tokenscript"
+          xsi:schemaLocation="http://tokenscript.org/2019/10/tokenscript http://tokenscript.org/2019/10/tokenscript.xsd"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           custodian="false"
 >
@@ -62,7 +62,7 @@
                 <ts:string xml:lang="en">Amount to withdraw</ts:string>
             </ts:name>
             <ts:origins>
-                <ts:user-entry as="uint"/>
+                <ts:user-entry as="e8"/>
             </ts:origins>
         </ts:attribute-type>
         <ts:transaction>
