@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://tokenscript.org/2019/10/tokenscript"
+           xmlns:xhtml="http://www.w3.org/1999/xhtml"
+           xmlns:dsig="http://www.w3.org/2000/09/xmldsig#"
+           xmlns="http://tokenscript.org/2019/10/tokenscript"
+           elementFormDefault="qualified">
+    <xs:complexType mixed="true" name="variable">
+        <xs:attribute name="ref" type="xs:NCName"/>
+    </xs:complexType>
+    <xs:element name="data">
+        <xs:complexType>
+            <xs:choice maxOccurs="unbounded">
+                <xs:element name="bool" type="variable"/>
+                <xs:element name="uint8" type="variable"/>
+                <xs:element name="uint16" type="variable"/>
+                <xs:element name="uint24" type="variable"/>
+                <xs:element name="uint32" type="variable"/>
+                <xs:element name="uint40" type="variable"/>
+                <xs:element name="uint48" type="variable"/>
+                <xs:element name="uint56" type="variable"/>
+                <xs:element name="uint64" type="variable"/>
+                <xs:element name="uint72" type="variable"/>
+                <xs:element name="uint80" type="variable"/>
+                <xs:element name="uint88" type="variable"/>
+                <xs:element name="uint96" type="variable"/>
+                <xs:element name="uint104" type="variable"/>
+                <xs:element name="uint112" type="variable"/>
+                <xs:element name="uint120" type="variable"/>
+                <xs:element name="uint128" type="variable"/>
+                <xs:element name="uint136" type="variable"/>
+                <xs:element name="uint144" type="variable"/>
+                <xs:element name="uint152" type="variable"/>
+                <xs:element name="uint160" type="variable"/>
+                <xs:element name="uint168" type="variable"/>
+                <xs:element name="uint176" type="variable"/>
+                <xs:element name="uint184" type="variable"/>
+                <xs:element name="uint192" type="variable"/>
+                <xs:element name="uint200" type="variable"/>
+                <xs:element name="uint208" type="variable"/>
+                <xs:element name="uint216" type="variable"/>
+                <xs:element name="uint224" type="variable"/>
+                <xs:element name="uint232" type="variable"/>
+                <xs:element name="uint240" type="variable"/>
+                <xs:element name="uint248" type="variable"/>
+                <xs:element name="uint256" type="variable"/>
+                <xs:element name="int8" type="variable"/>
+                <xs:element name="int16" type="variable"/>
+                <xs:element name="int24" type="variable"/>
+                <xs:element name="int32" type="variable"/>
+                <xs:element name="int40" type="variable"/>
+                <xs:element name="int48" type="variable"/>
+                <xs:element name="int56" type="variable"/>
+                <xs:element name="int64" type="variable"/>
+                <xs:element name="int72" type="variable"/>
+                <xs:element name="int80" type="variable"/>
+                <xs:element name="int88" type="variable"/>
+                <xs:element name="int96" type="variable"/>
+                <xs:element name="int104" type="variable"/>
+                <xs:element name="int112" type="variable"/>
+                <xs:element name="int120" type="variable"/>
+                <xs:element name="int128" type="variable"/>
+                <xs:element name="int136" type="variable"/>
+                <xs:element name="int144" type="variable"/>
+                <xs:element name="int152" type="variable"/>
+                <xs:element name="int160" type="variable"/>
+                <xs:element name="int168" type="variable"/>
+                <xs:element name="int176" type="variable"/>
+                <xs:element name="int184" type="variable"/>
+                <xs:element name="int192" type="variable"/>
+                <xs:element name="int200" type="variable"/>
+                <xs:element name="int208" type="variable"/>
+                <xs:element name="int216" type="variable"/>
+                <xs:element name="int224" type="variable"/>
+                <xs:element name="int232" type="variable"/>
+                <xs:element name="int240" type="variable"/>
+                <xs:element name="int248" type="variable"/>
+                <xs:element name="int256" type="variable"/>
+                <xs:element name="string" type="variable"/>
+                <xs:element name="bytes" type="variable"/>
+                <xs:element name="byte" type="variable"/>
+                <xs:element name="bytes1" type="variable"/>
+                <xs:element name="bytes2" type="variable"/>
+                <xs:element name="bytes3" type="variable"/>
+                <xs:element name="bytes4" type="variable"/>
+                <xs:element name="bytes5" type="variable"/>
+                <xs:element name="bytes6" type="variable"/>
+                <xs:element name="bytes7" type="variable"/>
+                <xs:element name="bytes8" type="variable"/>
+                <xs:element name="bytes9" type="variable"/>
+                <xs:element name="bytes10" type="variable"/>
+                <xs:element name="bytes11" type="variable"/>
+                <xs:element name="bytes12" type="variable"/>
+                <xs:element name="bytes13" type="variable"/>
+                <xs:element name="bytes14" type="variable"/>
+                <xs:element name="bytes15" type="variable"/>
+                <xs:element name="bytes16" type="variable"/>
+                <xs:element name="bytes17" type="variable"/>
+                <xs:element name="bytes18" type="variable"/>
+                <xs:element name="bytes19" type="variable"/>
+                <xs:element name="bytes20" type="variable"/>
+                <xs:element name="bytes21" type="variable"/>
+                <xs:element name="bytes22" type="variable"/>
+                <xs:element name="bytes23" type="variable"/>
+                <xs:element name="bytes24" type="variable"/>
+                <xs:element name="bytes25" type="variable"/>
+                <xs:element name="bytes26" type="variable"/>
+                <xs:element name="bytes27" type="variable"/>
+                <xs:element name="bytes28" type="variable"/>
+                <xs:element name="bytes29" type="variable"/>
+                <xs:element name="bytes30" type="variable"/>
+                <xs:element name="bytes31" type="variable"/>
+                <xs:element name="bytes32" type="variable"/>
+                <xs:element name="address" type="address"/>
+            </xs:choice>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

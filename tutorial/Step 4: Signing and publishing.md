@@ -36,7 +36,7 @@ Do a `make`. It will validate EntryToken.xml. It should pass if you haven't chan
     # XML Canonicalization
     xmlstarlet c14n EntryToken.xml  > EntryToken.canonicalized.xml
     # XML Validation
-	-xmlstarlet val --xsd http://tokenscript.org/2019/05/tokenscript/tokenscript.xsd $@ || (mv $@ $@.INVALID; xmllint --noout --schema http://tokenscript.org/2019/05/tokenscript/tokenscript.xsd $@.INVALID)
+	-xmlstarlet val --xsd http://tokenscript.org/2019/10/tokenscript/tokenscript.xsd $@ || (mv $@ $@.INVALID; xmllint --noout --schema http://tokenscript.org/2019/10/tokenscript/tokenscript.xsd $@.INVALID)
 
 ** If the file has errors, it will produce a file named EntryToken.canonicalized.xml.FAILED which you can use for debugging ** 
 
