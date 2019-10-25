@@ -4,7 +4,15 @@ class Token {
     constructor(tokenInstance) {
         this.props = tokenInstance;
         this.props.ensName = this.props.description.replace(", an ENS name.", "").replace(/`/g, "");
-        this.props.duration = 31540000; // 1 year
+    }
+
+    formatTimeStamp(UNIX_timestamp) {
+        let a = new Date(UNIX_timestamp * 1000);
+        let months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        let year = a.getFullYear();
+        let month = months[a.getMonth()];
+        let date = a.getDate();
+        return date + ' ' + month + ' ' + year;
     }
 
     render() {
@@ -15,6 +23,8 @@ class Token {
               <span><bold><h3>Renew <strong>${this.props.ensName}</strong> for one year</h3></bold></span>
               <div id="inputBox">
                  <h3>Price of one year renewal: ${(this.props.renewalPricePerYear / 1e+18).toFixed(3)} ETH</h3>
+                 <h3>Name expires: ${this.formatTimeStamp(this.props.nameExpires)}</h3>
+                 <input id="ensName" type="hidden" value=${this.props.ensName}>
                  <br>
               </div>
           </div>
@@ -24,7 +34,8 @@ class Token {
 
 web3.tokens.dataChanged = (oldTokens, updatedTokens) => {
     const currentTokenInstance = web3.tokens.data.currentInstance;
-    document.getElementById('root').innerHTML = new Token(currentTokenInstance).render();
+    let token = new Token(currentTokenInstance);
+    document.getElementById('root').innerHTML = token.render();
 };
 
 ]]></script>
