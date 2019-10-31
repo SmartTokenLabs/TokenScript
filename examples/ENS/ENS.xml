@@ -23,6 +23,13 @@
   </ts:contract>
   <ts:contract name="registrar">
     <ts:address network="1">0xF0AD5cAd05e10572EfcEB849f6Ff0c68f9700455</ts:address>
+    <ts:data name="EventRegistered">
+      <ts:string name="name" />
+      <ts:bytes32 name="label" />
+      <ts:address name="owner"/>
+      <ts:uint name="cost"/>
+      <ts:uint name="expires"/>
+    </ts:data>
   </ts:contract>
   <ts:origins>
     <!-- Define the contract which holds the token that the user will use -->
@@ -30,6 +37,13 @@
     </ts:ethereum>
   </ts:origins>
 
+  <ts:attribute-types>
+    <ts:attribute-type id="name" syntax="1.3.6.1.4.1.1466.115.121.1.15">
+      <ts:origins>
+        <ts:ethereum event="NameRegistered" filter="owner=$ownerAddress" value="name"/>
+      </ts:origins>
+    </ts:attribute-type>
+  </ts:attribute-types>
   <ts:cards>
 
     <ts:action>
