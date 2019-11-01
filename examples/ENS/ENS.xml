@@ -40,7 +40,7 @@
   <ts:attribute-types>
     <ts:attribute-type id="name" syntax="1.3.6.1.4.1.1466.115.121.1.15">
       <ts:origins>
-        <ts:ethereum event="NameRegistered" filter="owner=${ownerAddress}" value="name"/>
+        <ts:ethereum event="NameRegistered" filter="label=${tokenID}" value="name"/>
       </ts:origins>
     </ts:attribute-type>
   </ts:attribute-types>
