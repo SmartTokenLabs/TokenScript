@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="660.58917mm"
+   height="207.39554mm"
+   viewBox="0 0 660.58917 207.39554"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   sodipodi:docname="artifacts+tokens.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.35"
+     inkscape:cx="820.49999"
+     inkscape:cy="628.21315"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="2490"
+     inkscape:window-height="1376"
+     inkscape:window-x="70"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Capa 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(254.88824,-107.65253)">
+    <ellipse
+       id="path10"
+       cx="211.28888"
+       cy="211.3503"
+       rx="194.11922"
+       ry="103.40495"
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.58562684;stroke-opacity:1" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="113.01488"
+       y="148.60629"
+       id="text14"><tspan
+         sodipodi:role="line"
+         id="tspan12"
+         x="113.01488"
+         y="148.60629"
+         style="stroke-width:0.26458332">Artifact</tspan><tspan
+         sodipodi:role="line"
+         x="113.01488"
+         y="161.83546"
+         style="stroke-width:0.26458332"
+         id="tspan4566">(Can only live in the context of a token)</tspan></text>
+    <ellipse
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.37961599;stroke-opacity:1"
+       id="path4524"
+       cx="77.107132"
+       cy="232.13899"
+       rx="34.338314"
+       ry="19.219271" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="57.074394"
+       y="227.22531"
+       id="text4528"><tspan
+         sodipodi:role="line"
+         id="tspan4526"
+         x="57.074394"
+         y="227.22531"
+         style="stroke-width:0.26458332">Signed</tspan><tspan
+         sodipodi:role="line"
+         x="57.074394"
+         y="240.45448"
+         style="stroke-width:0.26458332"
+         id="tspan4530">Data</tspan></text>
+    <ellipse
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.97655988;stroke-opacity:1"
+       id="path4532"
+       cx="232.45554"
+       cy="231.00508"
+       rx="113.03688"
+       ry="57.852345" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="179.53886"
+       y="203.79079"
+       id="text4536"><tspan
+         sodipodi:role="line"
+         x="179.53886"
+         y="203.79079"
+         style="stroke-width:0.26458332"
+         id="tspan4540">Blockchain Truth</tspan></text>
+    <ellipse
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.297131;stroke-opacity:1"
+       id="path4544"
+       cx="158.75017"
+       cy="243.10028"
+       rx="23.796227"
+       ry="18.126583" />
+    <ellipse
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.57863027;stroke-opacity:1"
+       id="path4546"
+       cx="258.08194"
+       cy="240.07652"
+       rx="71.280472"
+       ry="22.143572" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="145.52101"
+       y="238.56458"
+       id="text4550"><tspan
+         sodipodi:role="line"
+         id="tspan4548"
+         x="145.52101"
+         y="238.56458"
+         style="stroke-width:0.26458332">Event</tspan><tspan
+         sodipodi:role="line"
+         x="145.52101"
+         y="251.79375"
+         style="stroke-width:0.26458332"
+         id="tspan4568">Data</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="210.07933"
+       y="241.21045"
+       id="text4554"><tspan
+         sodipodi:role="line"
+         id="tspan4552"
+         x="210.07933"
+         y="241.21045"
+         style="stroke-width:0.26458332">Return value / struct</tspan><tspan
+         sodipodi:role="line"
+         x="210.07933"
+         y="254.43962"
+         style="stroke-width:0.26458332"
+         id="tspan4556">of pure functions</tspan></text>
+    <ellipse
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.26458332;stroke-opacity:1"
+       id="path4560"
+       cx="-125.11012"
+       cy="208.1756"
+       rx="129.64583"
+       ry="80.508926" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="-139.70871"
+       y="154.88094"
+       id="text4564"><tspan
+         sodipodi:role="line"
+         id="tspan4562"
+         x="-139.70871"
+         y="154.88094"
+         style="stroke-width:0.26458332">Token</tspan></text>
+    <g
+       id="g4603"
+       transform="translate(-50.636002,15.119048)">
+      <ellipse
+         ry="38.863251"
+         rx="84.598366"
+         cy="201.6837"
+         cx="-74.474121"
+         id="path4570"
+         style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.40117291;stroke-opacity:1" />
+      <text
+         id="text4574"
+         y="191.92264"
+         x="-66.523804"
+         style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.26458332"
+           y="191.92264"
+           x="-66.523804"
+           id="tspan4572"
+           sodipodi:role="line">Attestation</tspan></text>
+      <ellipse
+         ry="14.400655"
+         rx="48.796486"
+         cy="216.1131"
+         cx="-74.474121"
+         id="path4576"
+         style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.18946494;stroke-opacity:1" />
+      <text
+         id="text4580"
+         y="186.63097"
+         x="-139.09526"
+         style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.26458332"
+           y="186.63097"
+           x="-139.09526"
+           id="tspan4578"
+           sodipodi:role="line">Blockchain</tspan><tspan
+           id="tspan4582"
+           style="stroke-width:0.26458332"
+           y="199.86014"
+           x="-139.09526"
+           sodipodi:role="line">Token</tspan></text>
+      <path
+         inkscape:connector-curvature="0"
+         id="path4584"
+         d="m -74.474121,162.6197 v 78.128"
+         style="fill:none;stroke:#000000;stroke-width:0.21331434px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <text
+         id="text4588"
+         y="213.84523"
+         x="-91.092247"
+         style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.26458332"
+           y="213.84523"
+           x="-91.092247"
+           id="tspan4586"
+           sodipodi:role="line">Virtual</tspan><tspan
+           id="tspan4590"
+           style="stroke-width:0.26458332"
+           y="227.0744"
+           x="-91.092247"
+           sodipodi:role="line">Token</tspan></text>
+    </g>
+  </g>
+</svg>
