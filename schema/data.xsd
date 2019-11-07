@@ -8,6 +8,9 @@
     <xs:complexType mixed="true" name="variable">
         <xs:attribute name="ref" type="xs:NCName"/>
     </xs:complexType>
+    <xs:complexType name="address" mixed="true">
+        <xs:attribute name="ref" type="xs:NCName"/>
+    </xs:complexType>
     <xs:element name="data">
         <xs:complexType>
             <xs:choice maxOccurs="unbounded">
@@ -113,6 +116,7 @@
                 <xs:element name="bytes32" type="variable"/>
                 <xs:element name="address" type="address"/>
             </xs:choice>
+            <xs:attribute name="objectClass" type="xs:ID"/>
         </xs:complexType>
     </xs:element>
 </xs:schema>

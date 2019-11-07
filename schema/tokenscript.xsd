@@ -114,6 +114,7 @@
                     </xs:complexType>
                 </xs:element>
                 <xs:element minOccurs="0" ref="interface"/>
+                <xs:element minOccurs="0" ref="data"/>
             </xs:sequence>
             <xs:attribute name="name" type="xs:ID"/>
             <xs:attribute name="interface" type="xs:NCName"/>
@@ -321,11 +322,9 @@
             <xs:attribute name="bitmask" type="bitmask"/>
             <xs:attribute name="contract" type="xs:IDREF"/>
             <xs:attribute name="function" type="xs:NCName"/>
+            <xs:attribute name="event" type="xs:NCName"/>
         </xs:complexType>
     </xs:element>
-    <xs:complexType name="address" mixed="true">
-        <xs:attribute name="ref" type="xs:NCName"/>
-    </xs:complexType>
     <xs:element name="mapping">
         <xs:complexType>
             <xs:sequence>

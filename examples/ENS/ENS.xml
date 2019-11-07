@@ -23,7 +23,7 @@
   </ts:contract>
   <ts:contract name="registrar">
     <ts:address network="1">0xF0AD5cAd05e10572EfcEB849f6Ff0c68f9700455</ts:address>
-    <ts:data name="EventRegistered">
+    <ts:data objectClass="ENSName">
       <ts:string name="name" />
       <ts:bytes32 name="label" />
       <ts:address name="owner"/>
