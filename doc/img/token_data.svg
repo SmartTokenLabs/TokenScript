@@ -15,7 +15,7 @@
    version="1.1"
    id="svg8"
    inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
-   sodipodi:docname="artifacts+tokens.svg">
+   sodipodi:docname="token_data.svg">
   <defs
      id="defs2" />
   <sodipodi:namedview
@@ -26,8 +26,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.35"
-     inkscape:cx="820.49999"
-     inkscape:cy="628.21315"
+     inkscape:cx="283.35713"
+     inkscape:cy="616.78458"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -57,29 +57,6 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(254.88824,-107.65253)">
-    <ellipse
-       id="path10"
-       cx="211.28888"
-       cy="211.3503"
-       rx="194.11922"
-       ry="103.40495"
-       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.58562684;stroke-opacity:1" />
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="113.01488"
-       y="148.60629"
-       id="text14"><tspan
-         sodipodi:role="line"
-         id="tspan12"
-         x="113.01488"
-         y="148.60629"
-         style="stroke-width:0.26458332">Artifact</tspan><tspan
-         sodipodi:role="line"
-         x="113.01488"
-         y="161.83546"
-         style="stroke-width:0.26458332"
-         id="tspan4566">(Can only live in the context of a token)</tspan></text>
     <ellipse
        style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.37961599;stroke-opacity:1"
        id="path4524"

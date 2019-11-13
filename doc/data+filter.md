@@ -71,7 +71,7 @@ But not every object derived from a CarToken can be a token. Transfer of ownersh
 Even if the Transfer of ownership event has a 1-to-1 relationship with another token, e.g. *StampDuty* token, and that the event's properties coincide with the attributes of that token, the event is still an artifact and the StampDuty still a token, not the same thing. The event data-object only exists in the scope of the token, while the *StampDuty* token has its own scope. (It also does not *have to* inherit the event's properties). This relationship is similar to how a SalesOffer data-object, which has price information, from the view of blockchain, has a 1-to-1 relationship with the SalesContract token, which is created by the buyer sending a transaction with SalesOffer data-object as payload, and every *SalesOffer* data-object property becomes a *SalesContract* token attribute, they are still two different thing.
 
 Conclusion:
-![Venn Diagram of Artifacts and Tokens](https://github.com/AlphaWallet/TokenScript/raw/master/doc/img/data-object%2Btoken.svg)
+![Venn Diagram of Artifacts and Tokens](img/token_data.svg)
 
 # Filters
 
