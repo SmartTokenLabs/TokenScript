@@ -1,21 +1,33 @@
-# Data-objects and Tokens
+# The way we treat data on the blockchain is wrong; this works
 
-The way we treat data on the blockchain is wrong.
+Here in TokenScript project, we are adapting tried-and-true methods that have worked in cryptography engineering for decades to public blockchains.
 
-I'll start with an example and demonstrate a better way.
+Data on the blockchain is unfortunately not being used as it was designed for. People are blaming Ethereum blockchain congestion at the same time as they write smart contracts that forwards chit-chat messages. But having a blockchain strewn with graffiti isn't even the biggest problem.
+
+The most prominent problem is that the data is not structured for interoperability, extensibility and longevity.
+
+In other words, structures are invented for use only in one project, causing problems in other projects upon its changes, and get abandoned altogether soon after.
+
+I'll start with an example data object, show how it could be treated differently, and finally introduce you to the work-in-progress TokenScript's data-object.
 
 ## Example of data objects
 
 We will start with an example and generalise it later.
 
-Imagine an event ticket as a data object. Its in-memory representation might look like this:
+Imagine an event ticket as a data object, represented in the front-end developer's most favoured format, JSON:
 
     {
-        "numero": 24,  # the 24th ticket issued
-        "class":  2,   # class 2 menas a VIP-class ticket
-        "start": "2020010120" # starts by 20:00 1st Jan 2020
+        "numero": 24,
+        "class":  2,
+        "start": "2020010120"
     }
- 
+
+It means:
+
+ 1. this is the *24th* ticket issued.
+ 2. in class *2*. Let's say cass 2 means a VIP-class ticket.
+ 3. the event starts by *2020-01-01 20:00*
+
 Such a data object may be used in a blockchain transaction. Lets' say we have an Ethereum smart contract that transfers a ticket's ownership:
 
     function transfer_ticket(string ticket, address newOwner)
@@ -134,7 +146,13 @@ We will not have enough time to cover how this is done, but suffice to say, exte
 
 # Where are we going from here?
 
-The token data object described in this article is a piece of work under TokenScript project, which is ... (put some PR stuff here and backlinks)
+The token data object described in this article is a thread of work under TokenScript project. You may find a lot more about it in the:
+
+(Waiting OASIS repository and mailin glist)
+
+And participate through
+
+(Waiting OASIS web pages of our project)
 
 [^1]: The same schema can be written in a equivalent shorthand format called ASN.1:
 
