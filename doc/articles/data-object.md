@@ -16,11 +16,7 @@ We’ll start with an example, which we’ll later generalise.
 
 Imagine an event ticket as a data object, represented in JSON:
 
-    {
-        "numero": 24,
-        "class":  2,
-        "start": "2020010120"
-    }
+![JSON representation of a ticket data object](data-object-ticket.svg)
 
 This object, a ticket, carries the following information:
 
@@ -160,7 +156,7 @@ The token data object described in this article is a thread of work under TokenS
      ````
          SEQUENCE {
            numero  INTEGER,
-           class   ENUMERAGED { normal(0), gifted(1), vip(2) },
+           class   ENUMERATED { normal(0), gifted(1), vip(2) },
            date    UTCTime
          }
      ````
