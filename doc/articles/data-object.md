@@ -14,7 +14,7 @@ I’ll start with an example data object, illustrate how it could be treated dif
 
 We’ll start with an example, which we’ll later generalise.
 
-Imagine an event ticket as a data object, represented in JSON:
+Imagine an event ticket as a data object, encoded in JSON:
 
 ![JSON representation of a ticket data object](data-object-ticket.svg)
 
@@ -32,16 +32,16 @@ Having the data object in JSON format will consume a lot of “gas,” however, 
 
 ## Separation of data and schema
 
-For the *data*, we DER-encode it into this 20 bytes: `0x3012020118020102180A32303230303130313230`. Observe how the 20 bytes contained the 3 pieces of information:
+For the *data*, we encode it into this 20 bytes: 0x3012020118020102180A32303230303130313230. Observe how the 20 bytes contained the 3 pieces of information:
 
     0x30 12 02 01 18 0A 01 02 18 0A 32 30 32 30 30 31 30 31 32 30
                   --       --       +----------------------------
                   ^        ^                     ^
                   24       2         2  0  2  0  1  0  1  0  2  0
 
-Observe the ticket number `24` is encoded as `0x18`; the ticket class "VIP" encoded as `0x02`; the date is encoded in an ASCII string. (You can ignore the bytes between these data elements for now.)
+Observe the ticket number `24` is encoded as `0x18`; the ticket class "VIP" encoded as `0x02`; the date is encoded in an ASCII string. The in-between structural-bytes are the result of using standard DER encoding rules†.
 
-For the *schema*, we write it in ASN.X (an XML schema language)[^1].
+For the *schema*, we write it in ASN.X (an XML schema language).
     
     <sequence>
         <element name="numero" type="asn:Integer"/>
@@ -54,26 +54,26 @@ For the *schema*, we write it in ASN.X (an XML schema language)[^1].
         </element>
         <element name="start" type="asn:UTCTime"/>
     </sequence>
-
-The schema is stored in a TokenScript file. In other words, wallets and dapp browsers can use the schema to understand the 20 bytes of data. The schema can be compiled into a terse piece of solidity bytecode for the smart contract to parse the 20 bytes.
+    
+Schema has to be stored outside of the smart contract. In our TokenScript project the schema is stored in TokenScript so that wallets and dapp browsers compatible with TokenScript can use the schema to understand the 20 bytes of data. You can store it in other formats‡ but you shouldn’t store it directly in a smart contract, instead, the schema can be *compiled* into a terse piece of solidity bytecode for the smart contract to parse the 20 bytes.[^2]
 
 ## Using the schema
 
 Once we have separated the data from its schema, our Ethereum smart contract function becomes:
 
-    function transfer_ticketing(bytes ticket, address newOwner)
+    function transferTicketing(bytes ticket, address newOwner)
     
 Where `string` is replaced by `bytes` to accept the DER-encoded 20 bytes.
 
 Let's take a closer look by showing a few lines before and after the function declaration:
 
     struct Ticket {
-        uint nomero;  // the sequence number of the ticket
+        uint numero;  // the sequence number of the ticket
         uint class;   // 0: normal, 1: gifted, 2: VIP
         string start; // start time of the event
     }
     
-    function transfer_ticketing(bytes ticket, address newOwner)
+    function transferTicketing(bytes ticket, address newOwner)
     {
         Ticket ticketObj = parse_ticket(ticket);
         ...
@@ -81,37 +81,44 @@ Let's take a closer look by showing a few lines before and after the function de
     
 The function `parse_ticket` consists of code compiled from the schema. Trust me, this is considerably more efficient than a JSON parser.
 
-On the other hand, should similar DER-encoded bytes be constructed for use in a transaction (or should the user’s wallet need to display what’s in a transaction containing such bytes), it can rely on the schema.
+On the other hand, should a dapp need to construct such DER-encoded bytes for use in a transaction, or should the user’s wallet need to display an already-constructed transaction in a user-readable way, it can rely on the schema.
 
 ## Why the fuzz?
 
 So what's the advantage of this DER or ASN fuzz over the following straightforward, newbie-friendly method?
 
-    function transfer_ticket(uint numero, uint class, string start, address newOwner)
+    function transferTicket(uint numero, uint class, string start, address newOwner)
     
 Or this more structured version?
 
-    function transfer_ticket(Ticket ticket, address newOnwer)
+    function transferTicket(Ticket ticket, address newOnwer)
 
 Is it just for making the transactions shorter?
 
 The answer to both these questions is “yes,” and there’s more to that “yes” than one may assume. At the outset, this decreases transaction payload by more than 50%, albeit with more advantages:
 
-First, DER-encoded data is useful for signing. Why do you need to sign it, though?
 
 ## Reason 1: Attestation
 
-We call signed data objects “attestation,” since it’s the signer attesting to something.
+A string of DER-encoded bytes is useful for signing. Why do you need to sign it, though?
 
-Let’s examine the ticket example again. At first, you might imagine that a ticket contract holds all tickets and information regarding their ownership. For example, when “Alice” transfers a ticket to “Bob,” Alice initiates a transaction which reassigns the ownership of that ticket to Bob.
+To get an attestation. We call signed data objects "attestation," since it's the signer attesting to something.
 
-An event organiser might issue thousands, if not tens of thousands of tickets for an event, and most of the people who receive the issued tickets will not then transfer them to someone else. If there isn’t a transfer scenario, the ticket need not appear in the blockchain. The event organiser can sign an attestation, where they attest the ticket’s ownership to a certain Ethereum key holder. The keyholder can prove their ownership via a challenge-response protocol.
+Let's examine the ticket example again. At first, you might imagine that a ticket contract holds all tickets and information regarding their ownership. For example, when "Alice" transfers a ticket to "Bob," Alice initiates a transaction which reassigns the ownership of that ticket to Bob.
 
-The first advantage of moving to DER-encoded data is that it’s easy to convert it into attestations. With this type of data, we can cover more complicated scenarios, such as Merkle proof of attestation, or even zero-knowledge proof of attestation. JSON isn’t an ideal format for signed data—there are several ways to serialise a data object to JSON.
+An event organiser might issue thousands, if not tens of thousands of tickets for an event, and most of the people who receive the issued tickets will not then transfer them to someone else. If there isn't a transfer scenario, the ticket need not appear in the blockchain. The event organiser can sign an attestation, where they attest the ticket's ownership to a certain Ethereum key holder. The keyholder can prove their ownership via a challenge-response protocol.
 
-Attestation is generally useful. For example, you can write a smart contract in such a way that a user attested to be a Sophisticated Investor can make purchases in an ICO pre-sale. For instance, a car insurance company can attest to the fact that your car (represented here by an Ethereum token) is insured.
+On the other hand, JSON isn't an ideal format for signed data - there are several ways to serialise a data object to JSON.
 
-Additional information on how to sign a data object (and by extension, converting it into an attestation), will be published shortly as the working group is revising the draft.
+Attestation is generally useful. Here are a few examples.
+
+- You can write a smart contract in such a way that a user attested to be a Sophisticated Investor can make purchases in an ICO pre-sale.
+
+- A car insurance company can attest to the fact that your car (represented here by an Ethereum token) is insured.
+
+- If your car is a smart vehicle and you authorises a friend to drive it, you can write an attestation without sending an Ethereum transaction.
+
+The schema for signing of attestations should be adapted from existing standards, rather than inventing new ones and recreate security issues already solved in existing standards. TokenScript is [working on such an schema adaptation](https://community.tokenscript.org/t/weekly-design-meeting-16-simple-attestation-format/302). There are much further work to be done. For example, we need a format that can do partial attestation by using Merkle Tree, or even zero-knowledge proof of attestation.
 
 ## Reason 2: Data-Interoperability
 
@@ -137,21 +144,29 @@ Extensibility is tightly connected to interoperability. Always bear in mind that
 
 Suppose you are the beneficiary of a will that is in the form of crypto attestation. Once your parents pass away, you are ready to cash it out. You certainly don’t want the will contract, after undergoing a variety of upgrades throughout the years your parents lived, to reject the attestation and ask that it be signed again by your (now deceased) parents within a new data structure!
 
-One data structure that stood the test of time was X.509 certificates. It was invented before SSL, and its underlying data structure survived until now. X.509 certificate is designed as an ASN.1 module, which has built-in support for extensibility.
+One data structure that stood the test of time is X.509 certificates. It was invented before SSL, and its underlying data structure survived until now. X.509 certificate is designed as an ASN.1 module, which has built-in support for extensibility.
 
 Today’s blockchain data objects should also boast this support.
 There isn’t enough time to cover how this is done, but to summarize, extensibility depends on schema. For instance, a nicely defined schema enables one to perform tasks such as extending an array of data into a 2-dimensional matrix as required.
 
 # Where are we going from here?
 
-The token data object described in this article is a thread of work under TokenScript project. You may find more information pertaining to it in the:
+Here in TokenScript project we treat data correctly by adapting existing standards. TokenScript itself is designed to be standardized and is being mentored by OASIS (the same standard group behind Open Document ISO standards). To participate you can join:
 
 - [TokenScript Forum](http://community.tokenscript.org/)
 - Participate [the design meeting on Google Hangout Meet](https://meet.google.com/yix-kjmv-gsj) every Thursday 7pm Sydney time
 - If you live near Melbourne, Australia, participate [the meet-up on 22th Nov](https://meet.google.com/yix-kjmv-gsj)
 - Browse the [TokenScript project website](http://tokenscript.org) and the github repository (linked from that website).
 
-[^1]: The same schema can be written in a equivalent shorthand format called ASN.1:
+[^1]: If you want to inspect DER encodeded data you can use openssl:
+
+    $ echo -n 0x3012020118020102180A32303230303130313230 | xxd -r -p | openssl asn1parse -inform DER -i
+    0:d=0  hl=2 l=  18 cons: SEQUENCE          
+    2:d=1  hl=2 l=   1 prim:  INTEGER           :18
+    5:d=1  hl=2 l=   1 prim:  INTEGER           :02
+    8:d=1  hl=2 l=  10 prim:  GENERALIZEDTIME   :2020010120
+
+[^2]: The same schema can be written in a equivalent shorthand format called ASN.1:
 
      ````
          SEQUENCE {
