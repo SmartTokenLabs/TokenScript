@@ -79,7 +79,7 @@ Let's take a closer look by showing a few lines before and after the function de
         ...
     }
     
-The function `parse_ticket` consists of code compiled from the schema. Trust me, this is considerably more efficient than a JSON parser.
+The function `parse_ticket` consists of code compiled from the schema. This is considerably more efficient than a JSON parser.
 
 On the other hand, should a dapp need to construct such DER-encoded bytes for use in a transaction, or should the user’s wallet need to display an already-constructed transaction in a user-readable way, it can rely on the schema.
 
@@ -108,7 +108,7 @@ Let's examine the ticket example again. At first, you might imagine that a ticke
 
 An event organiser might issue thousands, if not tens of thousands of tickets for an event, and most of the people who receive the issued tickets will not then transfer them to someone else. If there isn't a transfer scenario, the ticket need not appear in the blockchain. The event organiser can sign an attestation, where they attest the ticket's ownership to a certain Ethereum key holder. The keyholder can prove their ownership via a challenge-response protocol.
 
-On the other hand, JSON isn't an ideal format for signed data - there are several ways to serialise a data object to JSON.
+On the other hand, if data is encoded in JSON, it can’t be signed safely since JSON is not a deterministic encoding.
 
 Attestation is generally useful. Here are a few examples.
 
@@ -158,7 +158,7 @@ Here in TokenScript project we treat data correctly by adapting existing standar
 - If you live near Melbourne, Australia, participate [the meet-up on 22th Nov](https://meet.google.com/yix-kjmv-gsj)
 - Browse the [TokenScript project website](http://tokenscript.org) and the github repository (linked from that website).
 
-[^1]: If you want to inspect DER encodeded data you can use openssl:
+[^1]: DER is the default way to encode data in cryptography engineering. For example, Bitcoin signatures and X.509 certificates are encoded this way. If you want to inspect DER encodeded data, you can use openssl like this:
 
     $ echo -n 0x3012020118020102180A32303230303130313230 | xxd -r -p | openssl asn1parse -inform DER -i
     0:d=0  hl=2 l=  18 cons: SEQUENCE          
