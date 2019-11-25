@@ -107,9 +107,11 @@ class Token {
             time = this.formatGeneralizedTimeToTime(this.props.time.generalizedTime)
             date = this.props.time == null ? "": this.formatGeneralizedTimeToDate(this.props.time.generalizedTime)
         }
-        let redeemedMessage = "(Not redeemed)"
-        if(this.props.redeemed) {
+        let redeemedMessage = "";
+        if(this.props.redeemed === 1) {
             redeemedMessage = "(Redeemed)"
+        } else {
+            redeemedMessage = "(Not redeemed)"
         }
         return `<div>
           <div>
@@ -140,8 +142,7 @@ class Token {
 
 web3.tokens.dataChanged = (oldTokens, updatedTokens) => {
     const currentTokenInstance = web3.tokens.data.currentInstance;
-    const domHtml = new Token(currentTokenInstance).render();
-    document.getElementById('root').innerHTML = domHtml
+    document.getElementById('root').innerHTML = new Token(currentTokenInstance).render();
 };
 ]]></script>
 <div id="root"></div>
