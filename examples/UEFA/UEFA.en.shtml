@@ -108,9 +108,10 @@ class Token {
             date = this.props.time == null ? "": this.formatGeneralizedTimeToDate(this.props.time.generalizedTime)
         }
         let redeemedMessage = "";
-        if(this.props.redeemed === 1) {
+        //might not have loaded so only set if actually loaded
+        if(this.props.redeemed === "1") {
             redeemedMessage = "(Redeemed)"
-        } else {
+        } else if(this.props.redeemed === "0") {
             redeemedMessage = "(Not redeemed)"
         }
         return `<div>
