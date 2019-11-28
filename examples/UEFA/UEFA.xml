@@ -18,7 +18,9 @@
     </ts:name>
 
     <ts:contract name="UEFA" interface="erc721">
+        <ts:address network="100">0x0f43923667843bccafd12a5c001a7838fa5fc8ab</ts:address>
         <ts:address network="3">0xc2f901070AdcfA07Bc5c46cc2390063248eb9E81</ts:address>
+        <ts:address network="4">0xC1c14278Cc455d9dFA0b0257aF40862bD8677EFC</ts:address>
     </ts:contract>
 
     <ts:origins>
