@@ -64,9 +64,7 @@ lib/web
 
 FYI, Join our Telegram group <https://t.me/AlphaWalletGroup> if you need any assistance. 
 
-Tokenscript design weekly meetings, Time: 7pm (Sydney Time) Weekly
-
-Add these events to your calendar <a target="_blank" href="https://calendar.google.com/event?action=TEMPLATE&amp;tmeid=NnNxanAycHRoZm9hazUwNzJ0OGt0cjFlbjJfMjAxOTEyMDVUMDgwMDAwWiB2aWN0b3IuemhhbmdAYWxwaGF3YWxsZXQuY29t&amp;tmsrc=victor.zhang%40alphawallet.com&amp;scp=ALL"><img border="0" src="https://www.google.com/calendar/images/ext/gc_button1_en.gif"></a>
+Tokenscript design weekly meetings, Time: 7pm (Sydney Time) Weekly, <a target="_blank" href="https://calendar.google.com/event?action=TEMPLATE&amp;tmeid=NnNxanAycHRoZm9hazUwNzJ0OGt0cjFlbjJfMjAxOTEyMDVUMDgwMDAwWiB2aWN0b3IuemhhbmdAYWxwaGF3YWxsZXQuY29t&amp;tmsrc=victor.zhang%40alphawallet.com&amp;scp=ALL"><img border="0" src="https://www.google.com/calendar/images/ext/gc_button1_en.gif"></a>
 
 For iOS:
 
