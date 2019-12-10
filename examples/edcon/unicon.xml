@@ -60,7 +60,7 @@
                 <ts:token-id bitmask="000000000000000000000000000000000000FF00000000000000000000000000" as="uint">
                     <ts:mapping>
                         <ts:option key="1">
-                            <ts:value xml:lang="en">Vienna</ts:value>
+                            <ts:value xml:lang="en">Welthandelspl. 1, 1020 Wien, Austria</ts:value>
                         </ts:option>
                     </ts:mapping>
                 </ts:token-id>
@@ -75,7 +75,7 @@
                 <ts:token-id bitmask="00000000000000000000000000000000000000FF000000000000000000000000" as="uint">
                     <ts:mapping>
                         <ts:option key="1">
-                            <ts:value xml:lang="en">Blockchain Plaza, Vienna</ts:value>
+                            <ts:value xml:lang="en">Vienna University of Economics and Business</ts:value>
                         </ts:option>
                     </ts:mapping>
                 </ts:token-id>
