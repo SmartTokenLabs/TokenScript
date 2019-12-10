@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE token  [
-        <!ENTITY Airline.en SYSTEM "Summit.en.shtml">
+        <!ENTITY Summit.en SYSTEM "Summit.en.shtml">
         <!ENTITY style SYSTEM "../shared.css">
         ]>
 <ts:token xmlns:ts="http://tokenscript.org/2019/10/tokenscript"
@@ -17,13 +17,13 @@
         </ts:plurals>
     </ts:name>
 
-    <ts:contract name="Airline" interface="erc721">
-        <ts:address network="100">0x6060c2bc6bcd71b528e9669ccac0faf17824e3cd</ts:address>
+    <ts:contract name="Summit" interface="erc721">
+        <ts:address network="100">0x6b2c1f4f903ce8df4e52e153e4d0a103030787c0</ts:address>
     </ts:contract>
 
     <ts:origins>
         <!-- Define the contract which holds the token that the user will use -->
-        <ts:ethereum contract="Airline">
+        <ts:ethereum contract="Summit">
         </ts:ethereum>
     </ts:origins>
 
@@ -31,10 +31,10 @@
         <ts:token-card>
             <style type="text/css">&style;</style>
             <ts:view-iconified xml:lang="en">
-                &Airline.en;
+                &Summit.en;
             </ts:view-iconified>
             <ts:view xml:lang="en">
-                &Airline.en;
+                &Summit.en;
             </ts:view>
         </ts:token-card>
     </ts:cards>
@@ -77,10 +77,10 @@
                 <ts:token-id bitmask="00000000000000000000000000000000000000FF000000000000000000000000" as="uint">
                     <ts:mapping>
                         <ts:option key="1">
-                            <ts:value xml:lang="en">Shanghai Pudong Airport</ts:value>
+                            <ts:value xml:lang="en">MGM Grand</ts:value>
                         </ts:option>
                         <ts:option key="2">
-                            <ts:value xml:lang="en">London Heathrow Airport</ts:value>
+                            <ts:value xml:lang="en">ICC centre</ts:value>
                         </ts:option>
                     </ts:mapping>
                 </ts:token-id>
@@ -119,7 +119,10 @@
                 <ts:token-id bitmask="000000000000000000000000000000000000000000000000000000FF00000000" as="uint">
                     <ts:mapping>
                         <ts:option key="1">
-                            <ts:value xml:lang="en">Business Class</ts:value>
+                            <ts:value xml:lang="en">Speaker pass</ts:value>
+                        </ts:option>
+                        <ts:option key="2">
+                            <ts:value xml:lang="en">Volunteer pass</ts:value>
                         </ts:option>
                     </ts:mapping>
                 </ts:token-id>
@@ -140,7 +143,7 @@
                 <ts:string>Redeemed</ts:string>
             </ts:name>
             <ts:origins>
-                <ts:ethereum function="redeemed" contract="Airline" as="bool">
+                <ts:ethereum function="redeemed" contract="Summit" as="bool">
                     <ts:data>
                         <ts:uint256 ref="tokenId"/>
                     </ts:data>
