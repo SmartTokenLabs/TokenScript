@@ -12,8 +12,8 @@
 >
     <ts:name>
         <ts:plurals xml:lang="en">
-            <ts:string quantity="one">Ticket</ts:string>
-            <ts:string quantity="other">Tickets</ts:string>
+            <ts:string quantity="one">Tour B Package</ts:string>
+            <ts:string quantity="other">Tour B Packages</ts:string>
         </ts:plurals>
     </ts:name>
 

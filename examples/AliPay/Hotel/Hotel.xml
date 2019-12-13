@@ -12,8 +12,8 @@
 >
     <ts:name>
         <ts:plurals xml:lang="en">
-            <ts:string quantity="one">Reservation</ts:string>
-            <ts:string quantity="other">Reservations</ts:string>
+            <ts:string quantity="one">Hotel Reservation</ts:string>
+            <ts:string quantity="other">Hotel Reservations</ts:string>
         </ts:plurals>
     </ts:name>
 
