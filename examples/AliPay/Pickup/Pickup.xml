@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE token  [
-        <!ENTITY Pickup.en SYSTEM "Pickup.en.shtml">
-        <!ENTITY style SYSTEM "../shared.css">
+        <!ENTITY Airline.en SYSTEM "Pickup.en.shtml">
+        <!ENTITY style SYSTEM "shared.css">
         ]>
 <ts:token xmlns:ts="http://tokenscript.org/2019/10/tokenscript"
           xmlns="http://www.w3.org/1999/xhtml"
@@ -12,18 +12,18 @@
 >
     <ts:name>
         <ts:plurals xml:lang="en">
-            <ts:string quantity="one">Airport drop off pass</ts:string>
-            <ts:string quantity="other">Airport drop off passes</ts:string>
+            <ts:string quantity="one">Airport Pickup Pass</ts:string>
+            <ts:string quantity="other">Airport Pickup Passes</ts:string>
         </ts:plurals>
     </ts:name>
 
-    <ts:contract name="Pickup" interface="erc721">
-        <ts:address network="100">0x5e8c614cac6d140fbd5a454f41a1d5dc5da1a218</ts:address>
+    <ts:contract name="Airline" interface="erc721">
+        <ts:address network="100">0x6060c2bc6bcd71b528e9669ccac0faf17824e3cd</ts:address>
     </ts:contract>
 
     <ts:origins>
         <!-- Define the contract which holds the token that the user will use -->
-        <ts:ethereum contract="Pickup">
+        <ts:ethereum contract="Airline">
         </ts:ethereum>
     </ts:origins>
 
@@ -31,10 +31,10 @@
         <ts:token-card>
             <style type="text/css">&style;</style>
             <ts:view-iconified xml:lang="en">
-                &Pickup.en;
+                &Airline.en;
             </ts:view-iconified>
             <ts:view xml:lang="en">
-                &Pickup.en;
+                &Airline.en;
             </ts:view>
         </ts:token-card>
     </ts:cards>
@@ -119,10 +119,7 @@
                 <ts:token-id bitmask="000000000000000000000000000000000000000000000000000000FF00000000" as="uint">
                     <ts:mapping>
                         <ts:option key="1">
-                            <ts:value xml:lang="en">Silver cabs</ts:value>
-                        </ts:option>
-                        <ts:option key="2">
-                            <ts:value xml:lang="en">Presidential limo</ts:value>
+                            <ts:value xml:lang="en">Business Class</ts:value>
                         </ts:option>
                     </ts:mapping>
                 </ts:token-id>
@@ -143,7 +140,7 @@
                 <ts:string>Redeemed</ts:string>
             </ts:name>
             <ts:origins>
-                <ts:ethereum function="redeemed" contract="Pickup" as="bool">
+                <ts:ethereum function="redeemed" contract="Airline" as="bool">
                     <ts:data>
                         <ts:uint256 ref="tokenId"/>
                     </ts:data>

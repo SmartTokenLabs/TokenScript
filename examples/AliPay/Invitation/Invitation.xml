@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE token  [
-        <!ENTITY Airline.en SYSTEM "Airline.en.shtml">
-        <!ENTITY style SYSTEM "../shared.css">
+        <!ENTITY Invitation.en SYSTEM "Invitation.en.shtml">
+        <!ENTITY style SYSTEM "shared.css">
         ]>
 <ts:token xmlns:ts="http://tokenscript.org/2019/10/tokenscript"
           xmlns="http://www.w3.org/1999/xhtml"
@@ -12,18 +12,18 @@
 >
     <ts:name>
         <ts:plurals xml:lang="en">
-            <ts:string quantity="one">Airport pick up pass</ts:string>
-            <ts:string quantity="other">Airport pick up passes</ts:string>
+            <ts:string quantity="one">VIP Invitation</ts:string>
+            <ts:string quantity="other">VIP Invitations</ts:string>
         </ts:plurals>
     </ts:name>
 
-    <ts:contract name="Airline" interface="erc721">
-        <ts:address network="100">0x6060c2bc6bcd71b528e9669ccac0faf17824e3cd</ts:address>
+    <ts:contract name="Invitation" interface="erc721">
+        <ts:address network="100">0x6fEa92f6e6B1CD95d234ec006c33846Bb36423c8</ts:address>
     </ts:contract>
 
     <ts:origins>
         <!-- Define the contract which holds the token that the user will use -->
-        <ts:ethereum contract="Airline">
+        <ts:ethereum contract="Invitation">
         </ts:ethereum>
     </ts:origins>
 
@@ -31,10 +31,10 @@
         <ts:token-card>
             <style type="text/css">&style;</style>
             <ts:view-iconified xml:lang="en">
-                &Airline.en;
+                &Invitation.en;
             </ts:view-iconified>
             <ts:view xml:lang="en">
-                &Airline.en;
+                &Invitation.en;
             </ts:view>
         </ts:token-card>
     </ts:cards>
@@ -77,35 +77,13 @@
                 <ts:token-id bitmask="00000000000000000000000000000000000000FF000000000000000000000000" as="uint">
                     <ts:mapping>
                         <ts:option key="1">
-                            <ts:value xml:lang="en">Shanghai Pudong Airport</ts:value>
+                            <ts:value xml:lang="en">Hilton Resorts</ts:value>
                         </ts:option>
                         <ts:option key="2">
-                            <ts:value xml:lang="en">London Heathrow Airport</ts:value>
+                            <ts:value xml:lang="en">Trump Tower</ts:value>
                         </ts:option>
                     </ts:mapping>
                 </ts:token-id>
-            </ts:origins>
-        </ts:attribute-type>
-
-        <ts:attribute-type id="countryA" syntax="1.3.6.1.4.1.1466.115.121.1.26">
-            <!-- Intentionally avoid using countryName
-         (SYNTAX 1.3.6.1.4.1.1466.115.121.1.11) per RFC 4519
-             CountryName is two-characters long, not 3-characters.
-         -->
-            <ts:name>
-                <ts:string xml:lang="en">From</ts:string>
-            </ts:name>
-            <ts:origins>
-                <ts:token-id bitmask="0000000000000000000000000000000000000000FFFFFF000000000000000000" as="utf8"/>
-            </ts:origins>
-        </ts:attribute-type>
-
-        <ts:attribute-type id="countryB" syntax="1.3.6.1.4.1.1466.115.121.1.26">
-            <ts:name>
-                <ts:string xml:lang="en">To</ts:string>
-            </ts:name>
-            <ts:origins>
-                <ts:token-id bitmask="0000000000000000000000000000000000000000000000FFFFFF000000000000" as="utf8"/>
             </ts:origins>
         </ts:attribute-type>
 
@@ -119,7 +97,10 @@
                 <ts:token-id bitmask="000000000000000000000000000000000000000000000000000000FF00000000" as="uint">
                     <ts:mapping>
                         <ts:option key="1">
-                            <ts:value xml:lang="en">Business Class</ts:value>
+                            <ts:value xml:lang="en">Executive Suite</ts:value>
+                        </ts:option>
+                        <ts:option key="2">
+                            <ts:value xml:lang="en">Deluxe Suite</ts:value>
                         </ts:option>
                     </ts:mapping>
                 </ts:token-id>
@@ -140,7 +121,7 @@
                 <ts:string>Redeemed</ts:string>
             </ts:name>
             <ts:origins>
-                <ts:ethereum function="redeemed" contract="Airline" as="bool">
+                <ts:ethereum function="redeemed" contract="Invitation" as="bool">
                     <ts:data>
                         <ts:uint256 ref="tokenId"/>
                     </ts:data>
