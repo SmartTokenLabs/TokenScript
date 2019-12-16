@@ -12,8 +12,8 @@
 >
     <ts:name>
         <ts:plurals xml:lang="en">
-            <ts:string quantity="one">Limo pass</ts:string>
-            <ts:string quantity="other">Limo passes</ts:string>
+            <ts:string quantity="one">Airport drop off pass</ts:string>
+            <ts:string quantity="other">Airport drop off passes</ts:string>
         </ts:plurals>
     </ts:name>
 
