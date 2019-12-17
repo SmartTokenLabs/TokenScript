@@ -13,12 +13,12 @@
 }
 .ticket {
     background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMzQ0cHgiIGhlaWdodD0iMTg0cHgiIHZpZXdCb3g9IjAgMCAzNDQgMTg0IiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPgogICAgPCEtLSBHZW5lcmF0b3I6IFNrZXRjaCA2MSAoODk1ODEpIC0gaHR0cHM6Ly9za2V0Y2guY29tIC0tPgogICAgPHRpdGxlPkNvbWJpbmVkIFNoYXBlPC90aXRsZT4KICAgIDxkZXNjPkNyZWF0ZWQgd2l0aCBTa2V0Y2guPC9kZXNjPgogICAgPGRlZnM+CiAgICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iR3JhZGllbnQiIGdyYWRpZW50VHJhbnNmb3JtPSJyb3RhdGUoNDUpIj4KCSAgICAgIDxzdG9wIG9mZnNldD0iNSUiICBzdG9wLWNvbG9yPSIjRjNBNDM1IiAvPgoJICAgICAgPHN0b3Agb2Zmc2V0PSI5NSUiIHN0b3AtY29sb3I9IiNGQTQ1MzAiIC8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogIDwvZGVmcz4KICAgIDxnIGlkPSJTeW1ib2xzIiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj4KICAgICAgICA8ZyBpZD0iQ2FyZHMvQ29udGVudC9QaWNrdXAiIGZpbGw9InVybCgjR3JhZGllbnQpIj4KICAgICAgICAgICAgPHBhdGggZD0iTS00LjI2MzI1NjQxZS0xNCwxNiBDLTQuMzcxNDczMDFlLTE0LDcuMTYzNDQ0IDcuMTYzNDQ0LDEuNjIzMjQ5ZS0xNSAxNiwwIEwzMjgsMCBDMzM2LjgzNjU1NiwtMS42MjMyNDllLTE1IDM0NCw3LjE2MzQ0NCAzNDQsMTYgTDM0NCw3NyBDMzM1LjcxNTcyOSw3NyAzMjksODMuNzE1NzI4OCAzMjksOTIgQzMyOSwxMDAuMjg0MjcxIDMzNS43MTU3MjksMTA3IDM0NCwxMDcgTDM0NCwxMDcgTDM0NCwxNjggQzM0NCwxNzYuODM2NTU2IDMzNi44MzY1NTYsMTg0IDMyOCwxODQgTDE2LDE4NCBDNy4xNjM0NDQsMTg0IC00LjE1NTAzOTgxZS0xNCwxNzYuODM2NTU2IC00LjI2MzI1NjQxZS0xNCwxNjggTC00LjI2MzI1NjQxZS0xNCwxMDcgTDAuMzEzODI4MTUzLDEwNi45OTY3ODIgQzguNDUzMjEzNjMsMTA2LjgyOTczIDE1LDEwMC4xNzk0MDcgMTUsOTIgQzE1LDgzLjcxNTcyODggOC4yODQyNzEyNSw3NyAtNC4yNjMyNTY0MWUtMTQsNzcgTC00LjI2MzI1NjQxZS0xNCw3NyBMLTQuMjYzMjU2NDFlLTE0LDE2IFoiIGlkPSJDb21iaW5lZC1TaGFwZSI+PC9wYXRoPgogICAgICAgIDwvZz4KICAgIDwvZz4KPC9zdmc+');
-  border-radius: 15px;
-  display: flex;
-  flex-direction: column;
-  background-size: cover;
-  max-height: 99%;
-  width: 100%;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    background-size: cover;
+    width: 100%;
+    background-repeat: no-repeat;
 }
 .ticketname {
     font-family: "SourceSansPro";
@@ -126,10 +126,11 @@
     background-repeat: repeat-y;
     margin-left: 3%;
     height: 100%;
+    width: 20%;
 }
 
 .redeemed-stamp {
-    height: 55%;
-    margin-top: 100%;
-    margin-left: 34%;
+    height: 60%;
+    margin-top: 58%;
+    margin-left: 28%;
 }
