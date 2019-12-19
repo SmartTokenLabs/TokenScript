@@ -89,7 +89,7 @@
                 <ts:string xml:lang="es">Cat</ts:string>
             </ts:name>
             <ts:origins>
-                <ts:token-id bitmask="000000000000000000000000000000000000000000000000000000FF00000000" as="uint">
+                <ts:token-id bitmask="00000000000000000000000000000000000000000000000000000000FF000000" as="uint">
                     <ts:mapping>
                         <ts:option key="1">
                             <ts:value xml:lang="en">A</ts:value>
