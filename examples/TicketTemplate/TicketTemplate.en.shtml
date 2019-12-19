@@ -1,0 +1,39 @@
+<script type="text/javascript"><![CDATA[
+    class Token {
+        constructor(tokenInstance) {
+            this.props = tokenInstance
+        }
+    
+        render() {
+            return `<div class="ticket">
+                        <div class="content">
+                            <div class="left-content">
+                                <div class="top-section">
+                                    <span class="title">
+                                        ${this.props.title}
+                                    </span>
+                                    <span class="subtitle">
+                                        ${this.props.subtitle}
+                                    </span>
+                                </div>
+                                <div class="bottom-section">
+                                    <span class="footer">
+                                        ${this.props.footer}
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="right-content">
+                                
+                            </div>
+                        </div>
+                </div>`;
+        }
+    }
+    
+    web3.tokens.dataChanged = (oldTokens, updatedTokens) => {
+        const currentTokenInstance = web3.tokens.data.currentInstance;
+        document.getElementById('root').innerHTML = new Token(currentTokenInstance).render();
+    };
+    ]]></script>
+    <div id="root"></div>
+    
