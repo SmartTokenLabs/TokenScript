@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE token  [
         <!ENTITY UEFA.en SYSTEM "UEFA.en.shtml">
+        <!ENTITY UEFA.zh SYSTEM "UEFA.zh.shtml">
         <!ENTITY style SYSTEM "shared.css">
         ]>
 <ts:token xmlns:ts="http://tokenscript.org/2019/10/tokenscript"
@@ -14,6 +15,10 @@
         <ts:plurals xml:lang="en">
             <ts:string quantity="one">Ticket</ts:string>
             <ts:string quantity="other">Tickets</ts:string>
+        </ts:plurals>
+        <ts:plurals xml:lang="zh">
+            <ts:string quantity="one">票</ts:string>
+            <ts:string quantity="other">票</ts:string>
         </ts:plurals>
     </ts:name>
 
@@ -46,6 +51,7 @@
         <ts:attribute-type id="time" syntax="1.3.6.1.4.1.1466.115.121.1.24">
             <ts:name>
                 <ts:string xml:lang="en">Time</ts:string>
+                <ts:string xml:lang="zh">时间</ts:string>
             </ts:name>
             <ts:origins>
                 <ts:token-id bitmask="FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00000000000000000000000000" as="utf8">
@@ -56,44 +62,57 @@
         <ts:attribute-type id="locality" oid="2.5.4.7" syntax="1.3.6.1.4.1.1466.115.121.1.15">
             <ts:name>
                 <ts:string xml:lang="en">City</ts:string>
+                <ts:string xml:lang="zh">城市</ts:string>
             </ts:name>
             <ts:origins>
                 <ts:token-id bitmask="000000000000000000000000000000000000FF00000000000000000000000000" as="uint">
                     <ts:mapping>
                         <ts:option key="1">
+                            <ts:value xml:lang="zh">哥本哈根</ts:value>
                             <ts:value xml:lang="en">Copenhagen</ts:value>
                         </ts:option>
                         <ts:option key="2">
+                            <ts:value xml:lang="zh">圣彼得斯堡</ts:value>
                             <ts:value xml:lang="en">Saint Petersburg</ts:value>
                         </ts:option>
                         <ts:option key="3">
+                            <ts:value xml:lang="zh">阿姆斯特丹</ts:value>
                             <ts:value xml:lang="en">Amsterdam</ts:value>
                         </ts:option>
                         <ts:option key="4">
+                            <ts:value xml:lang="zh">布加勒斯特</ts:value>
                             <ts:value xml:lang="en">Bucharest</ts:value>
                         </ts:option>
                         <ts:option key="5">
+                            <ts:value xml:lang="zh">伦敦</ts:value>
                             <ts:value xml:lang="en">London</ts:value>
                         </ts:option>
                         <ts:option key="6">
+                            <ts:value xml:lang="zh">格拉斯哥</ts:value>
                             <ts:value xml:lang="en">Glasgow</ts:value>
                         </ts:option>
                         <ts:option key="7">
+                            <ts:value xml:lang="zh">毕尔巴鄂</ts:value>
                             <ts:value xml:lang="en">Bilbao</ts:value>
                         </ts:option>
                         <ts:option key="8">
+                            <ts:value xml:lang="zh">都柏林</ts:value>
                             <ts:value xml:lang="en">Dublin</ts:value>
                         </ts:option>
                         <ts:option key="9">
+                            <ts:value xml:lang="zh">布达佩斯</ts:value>
                             <ts:value xml:lang="en">Budapest</ts:value>
                         </ts:option>
                         <ts:option key="10">
+                            <ts:value xml:lang="zh">慕尼黑</ts:value>
                             <ts:value xml:lang="en">Munich</ts:value>
                         </ts:option>
                         <ts:option key="11">
+                            <ts:value xml:lang="zh">巴库</ts:value>
                             <ts:value xml:lang="en">Baku</ts:value>
                         </ts:option>
                         <ts:option key="12">
+                            <ts:value xml:lang="zh">罗马</ts:value>
                             <ts:value xml:lang="en">Rome</ts:value>
                         </ts:option>
                     </ts:mapping>
@@ -109,39 +128,51 @@
                 <ts:token-id bitmask="00000000000000000000000000000000000000FF000000000000000000000000" as="uint">
                     <ts:mapping>
                         <ts:option key="1">
+                            <ts:value xml:lang="zh">罗马奥林匹克体育场</ts:value>
                             <ts:value xml:lang="en">Olimpico in Roma</ts:value>
                         </ts:option>
                         <ts:option key="2">
-                            <ts:value xml:lang="en">Baku Olym[oc Stadium</ts:value>
+                            <ts:value xml:lang="zh">巴库奥林匹克体育场</ts:value>
+                            <ts:value xml:lang="en">Baku Olympic Stadium</ts:value>
                         </ts:option>
                         <ts:option key="3">
+                            <ts:value xml:lang="zh">帕肯体育场</ts:value>
                             <ts:value xml:lang="en">Parken Stadium</ts:value>
                         </ts:option>
                         <ts:option key="4">
+                            <ts:value xml:lang="zh">圣彼得堡体育馆</ts:value>
                             <ts:value xml:lang="en">Saint Petersburg Stadium</ts:value>
                         </ts:option>
                         <ts:option key="5">
+                            <ts:value xml:lang="zh">约翰·克鲁伊夫竞技场</ts:value>
                             <ts:value xml:lang="en">Johan Cruijff Arena</ts:value>
                         </ts:option>
                         <ts:option key="6">
+                            <ts:value xml:lang="zh">布加勒斯特国家体育馆</ts:value>
                             <ts:value xml:lang="en">National Arena Bucharest</ts:value>
                         </ts:option>
                         <ts:option key="7">
+                            <ts:value xml:lang="zh">温布利球场</ts:value>
                             <ts:value xml:lang="en">Wembley Stadium</ts:value>
                         </ts:option>
                         <ts:option key="8">
+                            <ts:value xml:lang="zh">汉普登公园</ts:value>
                             <ts:value xml:lang="en">Hampden Park</ts:value>
                         </ts:option>
                         <ts:option key="9">
+                            <ts:value xml:lang="zh">圣马姆斯体育场</ts:value>
                             <ts:value xml:lang="en">San Mames stadium</ts:value>
                         </ts:option>
                         <ts:option key="10">
+                            <ts:value xml:lang="zh">都柏林竞技场</ts:value>
                             <ts:value xml:lang="en">Dublin Arena</ts:value>
                         </ts:option>
                         <ts:option key="11">
+                            <ts:value xml:lang="zh">普斯卡斯·费伦茨体育场</ts:value>
                             <ts:value xml:lang="en">Puskas Ferenc Stadium</ts:value>
                         </ts:option>
                         <ts:option key="12">
+                            <ts:value xml:lang="zh">安联球场</ts:value>
                             <ts:value xml:lang="en">Allianz Arena</ts:value>
                         </ts:option>
                     </ts:mapping>
@@ -155,6 +186,7 @@
              CountryName is two-characters long, not 3-characters.
          -->
             <ts:name>
+                <ts:string xml:lang="zh">球队 A</ts:string>
                 <ts:string xml:lang="en">Team A</ts:string>
             </ts:name>
             <ts:origins>
@@ -164,6 +196,7 @@
 
         <ts:attribute-type id="countryB" syntax="1.3.6.1.4.1.1466.115.121.1.26">
             <ts:name>
+                <ts:string xml:lang="zh">球队 B</ts:string>
                 <ts:string xml:lang="en">Team B</ts:string>
             </ts:name>
             <ts:origins>
@@ -173,6 +206,7 @@
 
         <ts:attribute-type id="match" syntax="1.3.6.1.4.1.1466.115.121.1.27">
             <ts:name>
+                <ts:string xml:lang="zh">比赛</ts:string>
                 <ts:string xml:lang="en">Match</ts:string>
             </ts:name>
             <ts:origins>
@@ -182,23 +216,26 @@
 
         <ts:attribute-type id="category" syntax="1.3.6.1.4.1.1466.115.121.1.15">
             <ts:name>
-                <ts:string xml:lang="en">Cat</ts:string>
                 <ts:string xml:lang="zh">等级</ts:string>
-                <ts:string xml:lang="es">Cat</ts:string>
+                <ts:string xml:lang="en">Cat</ts:string>
             </ts:name>
             <ts:origins>
                 <ts:token-id bitmask="000000000000000000000000000000000000000000000000000000FF00000000" as="uint">
                     <ts:mapping>
                         <ts:option key="1">
-                            <ts:value xml:lang="en">The Club (Club2020)</ts:value>
+                            <ts:value xml:lang="zh">The Club (Club 2020)</ts:value>
+                            <ts:value xml:lang="en">The Club (Club 2020)</ts:value>
                         </ts:option>
                         <ts:option key="2">
+                            <ts:value xml:lang="zh">The Lounge (Prestige)</ts:value>
                             <ts:value xml:lang="en">The Lounge (Prestige)</ts:value>
                         </ts:option>
                         <ts:option key="3">
+                            <ts:value xml:lang="zh">The Suite (Silver)</ts:value>
                             <ts:value xml:lang="en">The Suite (Silver)</ts:value>
                         </ts:option>
                         <ts:option key="4">
+                            <ts:value xml:lang="zh">The Suite (Gold)</ts:value>
                             <ts:value xml:lang="en">The Suite (Gold)</ts:value>
                         </ts:option>
                     </ts:mapping>
@@ -217,7 +254,8 @@
 
         <ts:attribute-type id="redeemed" syntax="1.3.6.1.4.1.1466.115.121.1.27">
             <ts:name>
-                <ts:string>Redeemed</ts:string>
+                <ts:string xml:lang="zh">已兑换</ts:string>
+                <ts:string xml:lang="en">Redeemed</ts:string>
             </ts:name>
             <ts:origins>
                 <ts:ethereum function="redeemed" contract="UEFA" as="bool">
