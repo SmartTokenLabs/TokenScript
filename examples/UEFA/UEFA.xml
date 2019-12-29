@@ -40,8 +40,14 @@
             <ts:view-iconified xml:lang="en">
                 &UEFA.en;
             </ts:view-iconified>
+            <ts:view-iconified xml:lang="zh">
+                &UEFA.zh;
+            </ts:view-iconified>
             <ts:view xml:lang="en">
                 &UEFA.en;
+            </ts:view>
+            <ts:view xml:lang="zh">
+                &UEFA.zh;
             </ts:view>
         </ts:token-card>
     </ts:cards>
