@@ -48,7 +48,7 @@
                 <xs:element minOccurs="0" ref="exclude"/>
                 <xs:element minOccurs="0" ref="transaction"/>
                 <xs:element ref="xhtml:style"/><!-- should have minOccure=0 but people forget this -->
-                <xs:element ref="view"/><!-- default constructed view -->
+                <xs:element maxOccurs="unbounded" ref="view"/><!-- default constructed view -->
                 <xs:element minOccurs="0" maxOccurs="unbounded" ref="dsig:Signature"/>
             </xs:sequence>
         </xs:complexType>
@@ -132,8 +132,8 @@
         <xs:complexType>
             <xs:sequence>
                 <xs:element minOccurs="0" ref="xhtml:style"/>
-                <xs:element minOccurs="0" ref="view-iconified"/>
-                <xs:element minOccurs="0" ref="view"/>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="view-iconified"/>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="view"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
