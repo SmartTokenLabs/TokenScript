@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE token  [
+        <!ENTITY Pickup.en SYSTEM "Dropoff.en.shtml">
+        <!ENTITY style SYSTEM "shared.css">
+        ]>
+<ts:token xmlns:ts="http://tokenscript.org/2019/10/tokenscript"
+          xmlns="http://www.w3.org/1999/xhtml"
+          xmlns:xml="http://www.w3.org/XML/1998/namespace"
+          xsi:schemaLocation="http://tokenscript.org/2019/10/tokenscript http://tokenscript.org/2019/10/tokenscript.xsd"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          custodian="false"
+>
+    <ts:name>
+        <ts:plurals xml:lang="en">
+            <ts:string quantity="one">Airport drop off pass</ts:string>
+            <ts:string quantity="other">Airport drop off passes</ts:string>
+        </ts:plurals>
+    </ts:name>
+
+    <ts:contract name="Pickup" interface="erc721">
+        <ts:address network="100">0x5e8c614cac6d140fbd5a454f41a1d5dc5da1a218</ts:address>
+    </ts:contract>
+
+    <ts:origins>
+        <!-- Define the contract which holds the token that the user will use -->
+        <ts:ethereum contract="Pickup">
+        </ts:ethereum>
+    </ts:origins>
+
+    <ts:cards>
+        <ts:token-card>
+            <style type="text/css">&style;</style>
+            <ts:view-iconified xml:lang="en">
+                &Pickup.en;
+            </ts:view-iconified>
+            <ts:view xml:lang="en">
+                &Pickup.en;
+            </ts:view>
+        </ts:token-card>
+    </ts:cards>
+
+    <ts:attribute-types>
+
+        <ts:attribute-type id="time" syntax="1.3.6.1.4.1.1466.115.121.1.24">
+            <ts:name>
+                <ts:string xml:lang="en">Time</ts:string>
+            </ts:name>
+            <ts:origins>
+                <ts:token-id bitmask="FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00000000000000000000000000" as="utf8">
+                </ts:token-id>
+            </ts:origins>
+        </ts:attribute-type>
+
+        <ts:attribute-type id="locality" oid="2.5.4.7" syntax="1.3.6.1.4.1.1466.115.121.1.15">
+            <ts:name>
+                <ts:string xml:lang="en">City</ts:string>
+            </ts:name>
+            <ts:origins>
+                <ts:token-id bitmask="000000000000000000000000000000000000FF00000000000000000000000000" as="uint">
+                    <ts:mapping>
+                        <ts:option key="1">
+                            <ts:value xml:lang="en">Shanghai</ts:value>
+                        </ts:option>
+                        <ts:option key="2">
+                            <ts:value xml:lang="en">London</ts:value>
+                        </ts:option>
+                    </ts:mapping>
+                </ts:token-id>
+            </ts:origins>
+        </ts:attribute-type>
+
+        <ts:attribute-type id="venue" syntax="1.3.6.1.4.1.1466.115.121.1.15">
+            <ts:name>
+                <ts:string xml:lang="en">Venue</ts:string>
+            </ts:name>
+            <ts:origins>
+                <ts:token-id bitmask="00000000000000000000000000000000000000FF000000000000000000000000" as="uint">
+                    <ts:mapping>
+                        <ts:option key="1">
+                            <ts:value xml:lang="en">Shanghai Pudong Airport</ts:value>
+                        </ts:option>
+                        <ts:option key="2">
+                            <ts:value xml:lang="en">London Heathrow Airport</ts:value>
+                        </ts:option>
+                    </ts:mapping>
+                </ts:token-id>
+            </ts:origins>
+        </ts:attribute-type>
+
+        <ts:attribute-type id="countryA" syntax="1.3.6.1.4.1.1466.115.121.1.26">
+            <!-- Intentionally avoid using countryName
+         (SYNTAX 1.3.6.1.4.1.1466.115.121.1.11) per RFC 4519
+             CountryName is two-characters long, not 3-characters.
+         -->
+            <ts:name>
+                <ts:string xml:lang="en">From</ts:string>
+            </ts:name>
+            <ts:origins>
+                <ts:token-id bitmask="0000000000000000000000000000000000000000FFFFFF000000000000000000" as="utf8"/>
+            </ts:origins>
+        </ts:attribute-type>
+
+        <ts:attribute-type id="countryB" syntax="1.3.6.1.4.1.1466.115.121.1.26">
+            <ts:name>
+                <ts:string xml:lang="en">To</ts:string>
+            </ts:name>
+            <ts:origins>
+                <ts:token-id bitmask="0000000000000000000000000000000000000000000000FFFFFF000000000000" as="utf8"/>
+            </ts:origins>
+        </ts:attribute-type>
+
+        <ts:attribute-type id="category" syntax="1.3.6.1.4.1.1466.115.121.1.15">
+            <ts:name>
+                <ts:string xml:lang="en">Cat</ts:string>
+                <ts:string xml:lang="zh">等级</ts:string>
+                <ts:string xml:lang="es">Cat</ts:string>
+            </ts:name>
+            <ts:origins>
+                <ts:token-id bitmask="000000000000000000000000000000000000000000000000000000FF00000000" as="uint">
+                    <ts:mapping>
+                        <ts:option key="1">
+                            <ts:value xml:lang="en">Silver cabs</ts:value>
+                        </ts:option>
+                        <ts:option key="2">
+                            <ts:value xml:lang="en">Presidential limo</ts:value>
+                        </ts:option>
+                    </ts:mapping>
+                </ts:token-id>
+            </ts:origins>
+        </ts:attribute-type>
+
+        <ts:attribute-type id="numero" syntax="1.3.6.1.4.1.1466.115.121.1.27">
+            <ts:name>
+                <ts:string>№</ts:string>
+            </ts:name>
+            <ts:origins>
+                <ts:token-id bitmask="00000000000000000000000000000000000000000000000000000000FFFF00" as="uint"/>
+            </ts:origins>
+        </ts:attribute-type>
+
+        <ts:attribute-type id="redeemed" syntax="1.3.6.1.4.1.1466.115.121.1.27">
+            <ts:name>
+                <ts:string>Redeemed</ts:string>
+            </ts:name>
+            <ts:origins>
+                <ts:ethereum function="redeemed" contract="Pickup" as="bool">
+                    <ts:data>
+                        <ts:uint256 ref="tokenId"/>
+                    </ts:data>
+                </ts:ethereum>
+            </ts:origins>
+        </ts:attribute-type>
+
+    </ts:attribute-types>
+</ts:token>

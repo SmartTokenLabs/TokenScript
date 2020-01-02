@@ -64,6 +64,8 @@ lib/web
 
 FYI, Join our Telegram group <https://t.me/AlphaWalletGroup> if you need any assistance. 
 
+Tokenscript design weekly meetings, Time: 7pm, Thursday (Sydney Time) Weekly, <a target="_blank" href="https://calendar.google.com/event?action=TEMPLATE&amp;tmeid=NnNxanAycHRoZm9hazUwNzJ0OGt0cjFlbjJfMjAxOTEyMDVUMDgwMDAwWiB2aWN0b3IuemhhbmdAYWxwaGF3YWxsZXQuY29t&amp;tmsrc=victor.zhang%40alphawallet.com&amp;scp=ALL"><img border="0" src="https://www.google.com/calendar/images/ext/gc_button1_en.gif"></a>
+
 For iOS:
 
 1. Install the latest AlphaWallet app from the app store. 
