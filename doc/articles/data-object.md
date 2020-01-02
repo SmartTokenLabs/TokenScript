@@ -1,4 +1,4 @@
-# The way we treat data on the blockchain is wrong—this is how it’s supposed to work
+# The way we treat data on the blockchain is wrong—this is how it’s supposed to work (pt1)
 
 Here in the TokenScript project, we are adapting tried-and-true methods (that have borne fruit in cryptography engineering for decades) to public blockchains.
 
@@ -176,3 +176,11 @@ Here in TokenScript project we treat data correctly by adapting existing standar
          }
      ````
      We choose to use XML so we can extend it to allow encoding in ABI as well.
+     
+# The way we treat data on the blockchain is wrong—this is how it’s supposed to work (pt2)
+
+In my last article I made the following points;
+
+- Data on the blockchain should be extensible with a schema that can be signed;
+- Data itself should be tight and signed.
+- 
