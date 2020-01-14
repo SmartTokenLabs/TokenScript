@@ -110,15 +110,15 @@ class Token {
         let redeemedMessage = "";
         //might not have loaded so only set if actually loaded
         if(this.props.redeemed === "1") {
-            redeemedMessage = "(已兑换)"
+            redeemedMessage = "(Redeemed)"
         } else if(this.props.redeemed === "0") {
-            redeemedMessage = "(未兑换)"
+            redeemedMessage = "(Not redeemed)"
         }
         return `<div class="ticket">
         <div class="top-section">
                 <div class="left-column">
                     <span class="ticketname">
-                        欧足联2020款待
+                        Sports VIP EVENT TICKET
                     </span>
                     <span class="tbml-city">
                             ${this.props.countryA} - ${this.props.countryB}

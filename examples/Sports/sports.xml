@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE token  [
-        <!ENTITY UEFA.en SYSTEM "UEFA.en.shtml">
-        <!ENTITY UEFA.zh SYSTEM "UEFA.zh.shtml">
+        <!ENTITY UEFA.en SYSTEM "sports.en.shtml">
+        <!ENTITY UEFA.zh SYSTEM "sports.zh.shtml">
         <!ENTITY style SYSTEM "shared.css">
         ]>
 <ts:token xmlns:ts="http://tokenscript.org/2019/10/tokenscript"
@@ -23,6 +23,7 @@
     </ts:name>
 
     <ts:contract name="UEFA" interface="erc721">
+        <ts:address network="1">0x89D142Bef8605646881C68dcD48cDAF17FE597dC</ts:address>
         <ts:address network="100">0x0f43923667843bccafd12a5c001a7838fa5fc8ab</ts:address>
         <ts:address network="3">0xc2f901070AdcfA07Bc5c46cc2390063248eb9E81</ts:address>
         <ts:address network="4">0x9693a618E4FC4912986b2e5342A82BaC47CF4d52</ts:address>
