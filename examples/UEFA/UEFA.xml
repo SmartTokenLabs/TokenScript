@@ -74,52 +74,52 @@
                 <ts:token-id bitmask="000000000000000000000000000000000000FF00000000000000000000000000" as="uint">
                     <ts:mapping>
                         <ts:option key="1">
-                            <ts:value xml:lang="zh">哥本哈根</ts:value>
-                            <ts:value xml:lang="en">Copenhagen</ts:value>
+                            <ts:value xml:lang="zh">坎尼卡</ts:value>
+                            <ts:value xml:lang="en">Cantonica</ts:value>
                         </ts:option>
                         <ts:option key="2">
-                            <ts:value xml:lang="zh">圣彼得斯堡</ts:value>
-                            <ts:value xml:lang="en">Saint Petersburg</ts:value>
+                            <ts:value xml:lang="zh">萨卢卡迈</ts:value>
+                            <ts:value xml:lang="en">Saleucami</ts:value>
                         </ts:option>
                         <ts:option key="3">
-                            <ts:value xml:lang="zh">阿姆斯特丹</ts:value>
-                            <ts:value xml:lang="en">Amsterdam</ts:value>
+                            <ts:value xml:lang="zh">阿巴法</ts:value>
+                            <ts:value xml:lang="en">Abafar</ts:value>
                         </ts:option>
                         <ts:option key="4">
-                            <ts:value xml:lang="zh">布加勒斯特</ts:value>
-                            <ts:value xml:lang="en">Bucharest</ts:value>
+                            <ts:value xml:lang="zh">巴那卜</ts:value>
+                            <ts:value xml:lang="en">Balnab</ts:value>
                         </ts:option>
                         <ts:option key="5">
-                            <ts:value xml:lang="zh">伦敦</ts:value>
-                            <ts:value xml:lang="en">London</ts:value>
+                            <ts:value xml:lang="zh">洛塔</ts:value>
+                            <ts:value xml:lang="en">Lothal</ts:value>
                         </ts:option>
                         <ts:option key="6">
-                            <ts:value xml:lang="zh">格拉斯哥</ts:value>
-                            <ts:value xml:lang="en">Glasgow</ts:value>
+                            <ts:value xml:lang="zh">加勒尔</ts:value>
+                            <ts:value xml:lang="en">Garel</ts:value>
                         </ts:option>
                         <ts:option key="7">
-                            <ts:value xml:lang="zh">毕尔巴鄂</ts:value>
-                            <ts:value xml:lang="en">Bilbao</ts:value>
+                            <ts:value xml:lang="zh">巴多塔</ts:value>
+                            <ts:value xml:lang="en">Bardotta</ts:value>
                         </ts:option>
                         <ts:option key="8">
-                            <ts:value xml:lang="zh">都柏林</ts:value>
-                            <ts:value xml:lang="en">Dublin</ts:value>
+                            <ts:value xml:lang="zh">达戈巴</ts:value>
+                            <ts:value xml:lang="en">Dagobah</ts:value>
                         </ts:option>
                         <ts:option key="9">
-                            <ts:value xml:lang="zh">布达佩斯</ts:value>
-                            <ts:value xml:lang="en">Budapest</ts:value>
+                            <ts:value xml:lang="zh">巴图</ts:value>
+                            <ts:value xml:lang="en">Batuu</ts:value>
                         </ts:option>
                         <ts:option key="10">
-                            <ts:value xml:lang="zh">慕尼黑</ts:value>
-                            <ts:value xml:lang="en">Munich</ts:value>
+                            <ts:value xml:lang="zh">马拉奇</ts:value>
+                            <ts:value xml:lang="en">Malachor</ts:value>
                         </ts:option>
                         <ts:option key="11">
-                            <ts:value xml:lang="zh">巴库</ts:value>
-                            <ts:value xml:lang="en">Baku</ts:value>
+                            <ts:value xml:lang="zh">巴林</ts:value>
+                            <ts:value xml:lang="en">Bahryn</ts:value>
                         </ts:option>
                         <ts:option key="12">
-                            <ts:value xml:lang="zh">罗马</ts:value>
-                            <ts:value xml:lang="en">Rome</ts:value>
+                            <ts:value xml:lang="zh">拉克萨斯</ts:value>
+                            <ts:value xml:lang="en">Raxus</ts:value>
                         </ts:option>
                     </ts:mapping>
                 </ts:token-id>
@@ -134,52 +134,52 @@
                 <ts:token-id bitmask="00000000000000000000000000000000000000FF000000000000000000000000" as="uint">
                     <ts:mapping>
                         <ts:option key="1">
-                            <ts:value xml:lang="zh">罗马奥林匹克体育场</ts:value>
-                            <ts:value xml:lang="en">Olimpico in Roma</ts:value>
+                            <ts:value xml:lang="zh">拉克萨斯奥林匹克体育场</ts:value>
+                            <ts:value xml:lang="en">Olimpico in Raxus</ts:value>
                         </ts:option>
                         <ts:option key="2">
-                            <ts:value xml:lang="zh">巴库奥林匹克体育场</ts:value>
-                            <ts:value xml:lang="en">Baku Olympic Stadium</ts:value>
+                            <ts:value xml:lang="zh">吉奥诺西斯奥林匹克体育场</ts:value>
+                            <ts:value xml:lang="en">Geonosis Olympic Stadium</ts:value>
                         </ts:option>
                         <ts:option key="3">
-                            <ts:value xml:lang="zh">帕肯体育场</ts:value>
-                            <ts:value xml:lang="en">Parken Stadium</ts:value>
+                            <ts:value xml:lang="zh">企业星区管理局体育场</ts:value>
+                            <ts:value xml:lang="en">Corporate Sector Stadimum</ts:value>
                         </ts:option>
                         <ts:option key="4">
-                            <ts:value xml:lang="zh">圣彼得堡体育馆</ts:value>
-                            <ts:value xml:lang="en">Saint Petersburg Stadium</ts:value>
+                            <ts:value xml:lang="zh">银河共和国体育馆</ts:value>
+                            <ts:value xml:lang="en">Galactic Republic Stadimum</ts:value>
                         </ts:option>
                         <ts:option key="5">
-                            <ts:value xml:lang="zh">约翰·克鲁伊夫竞技场</ts:value>
-                            <ts:value xml:lang="en">Johan Cruijff Arena</ts:value>
+                            <ts:value xml:lang="zh">独立星系邦联竞技场</ts:value>
+                            <ts:value xml:lang="en">Confederacy of Independent Systems Arena</ts:value>
                         </ts:option>
                         <ts:option key="6">
-                            <ts:value xml:lang="zh">布加勒斯特国家体育馆</ts:value>
-                            <ts:value xml:lang="en">National Arena Bucharest</ts:value>
+                            <ts:value xml:lang="zh">巴那卜体育馆</ts:value>
+                            <ts:value xml:lang="en">National Arena Balnab</ts:value>
                         </ts:option>
                         <ts:option key="7">
-                            <ts:value xml:lang="zh">温布利球场</ts:value>
-                            <ts:value xml:lang="en">Wembley Stadium</ts:value>
+                            <ts:value xml:lang="zh">塞纳尔球场</ts:value>
+                            <ts:value xml:lang="en">Sienar Stadium</ts:value>
                         </ts:option>
                         <ts:option key="8">
-                            <ts:value xml:lang="zh">汉普登公园</ts:value>
-                            <ts:value xml:lang="en">Hampden Park</ts:value>
+                            <ts:value xml:lang="zh">城市公园</ts:value>
+                            <ts:value xml:lang="en">Urban Park</ts:value>
                         </ts:option>
                         <ts:option key="9">
-                            <ts:value xml:lang="zh">圣马姆斯体育场</ts:value>
-                            <ts:value xml:lang="en">San Mames stadium</ts:value>
+                            <ts:value xml:lang="zh">朱莉娅女王体育场</ts:value>
+                            <ts:value xml:lang="en">Queen Julia Stadium</ts:value>
                         </ts:option>
                         <ts:option key="10">
-                            <ts:value xml:lang="zh">都柏林竞技场</ts:value>
-                            <ts:value xml:lang="en">Dublin Arena</ts:value>
+                            <ts:value xml:lang="zh">尤达竞技场</ts:value>
+                            <ts:value xml:lang="en">Yoda Arena</ts:value>
                         </ts:option>
                         <ts:option key="11">
-                            <ts:value xml:lang="zh">普斯卡斯·费伦茨体育场</ts:value>
-                            <ts:value xml:lang="en">Puskas Ferenc Stadium</ts:value>
+                            <ts:value xml:lang="zh">商人和旅行者体育场</ts:value>
+                            <ts:value xml:lang="en">Traders and Travelers Stadium</ts:value>
                         </ts:option>
                         <ts:option key="12">
-                            <ts:value xml:lang="zh">安联球场</ts:value>
-                            <ts:value xml:lang="en">Allianz Arena</ts:value>
+                            <ts:value xml:lang="zh">西斯竞技场</ts:value>
+                            <ts:value xml:lang="en">Sith Arena</ts:value>
                         </ts:option>
                     </ts:mapping>
                 </ts:token-id>
