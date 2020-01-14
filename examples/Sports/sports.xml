@@ -230,20 +230,20 @@
                 <ts:token-id bitmask="000000000000000000000000000000000000000000000000000000FF00000000" as="uint">
                     <ts:mapping>
                         <ts:option key="1">
-                            <ts:value xml:lang="zh">The Club (Club 2020)</ts:value>
-                            <ts:value xml:lang="en">The Club (Club 2020)</ts:value>
+                            <ts:value xml:lang="zh">X-WING STARFIGHTER</ts:value>
+                            <ts:value xml:lang="en">X-WING STARFIGHTER</ts:value>
                         </ts:option>
                         <ts:option key="2">
-                            <ts:value xml:lang="zh">The Lounge (Prestige)</ts:value>
-                            <ts:value xml:lang="en">The Lounge (Prestige)</ts:value>
+                            <ts:value xml:lang="zh">TIE FIGHTER</ts:value>
+                            <ts:value xml:lang="en">TIE FIGHTER</ts:value>
                         </ts:option>
                         <ts:option key="3">
-                            <ts:value xml:lang="zh">The Suite (Silver)</ts:value>
-                            <ts:value xml:lang="en">The Suite (Silver)</ts:value>
+                            <ts:value xml:lang="zh">STAR DESTROYER</ts:value>
+                            <ts:value xml:lang="en">STAR DESTROYER</ts:value>
                         </ts:option>
                         <ts:option key="4">
-                            <ts:value xml:lang="zh">The Suite (Gold)</ts:value>
-                            <ts:value xml:lang="en">The Suite (Gold)</ts:value>
+                            <ts:value xml:lang="zh">REPUBLIC FRIGATE</ts:value>
+                            <ts:value xml:lang="en">REPUBLIC FRIGATE</ts:value>
                         </ts:option>
                     </ts:mapping>
                 </ts:token-id>
