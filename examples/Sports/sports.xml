@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE token  [
-        <!ENTITY UEFA.en SYSTEM "sports.en.shtml">
-        <!ENTITY UEFA.zh SYSTEM "sports.zh.shtml">
+        <!ENTITY SPORTS.en SYSTEM "sports.en.shtml">
+        <!ENTITY SPORTS.zh SYSTEM "sports.zh.shtml">
         <!ENTITY style SYSTEM "shared.css">
         ]>
 <ts:token xmlns:ts="http://tokenscript.org/2019/10/tokenscript"
@@ -22,7 +22,7 @@
         </ts:plurals>
     </ts:name>
 
-    <ts:contract name="UEFA" interface="erc721">
+    <ts:contract name="SPORTS" interface="erc721">
         <ts:address network="1">0x89D142Bef8605646881C68dcD48cDAF17FE597dC</ts:address>
         <ts:address network="100">0x0f43923667843bccafd12a5c001a7838fa5fc8ab</ts:address>
         <ts:address network="3">0xc2f901070AdcfA07Bc5c46cc2390063248eb9E81</ts:address>
@@ -31,7 +31,7 @@
 
     <ts:origins>
         <!-- Define the contract which holds the token that the user will use -->
-        <ts:ethereum contract="UEFA">
+        <ts:ethereum contract="SPORTS">
         </ts:ethereum>
     </ts:origins>
 
@@ -39,16 +39,16 @@
         <ts:token-card>
             <style type="text/css">&style;</style>
             <ts:view-iconified xml:lang="en">
-                &UEFA.en;
+                &SPORTS.en;
             </ts:view-iconified>
             <ts:view-iconified xml:lang="zh">
-                &UEFA.zh;
+                &SPORTS.zh;
             </ts:view-iconified>
             <ts:view xml:lang="en">
-                &UEFA.en;
+                &SPORTS.en;
             </ts:view>
             <ts:view xml:lang="zh">
-                &UEFA.zh;
+                &SPORTS.zh;
             </ts:view>
         </ts:token-card>
     </ts:cards>
@@ -265,7 +265,7 @@
                 <ts:string xml:lang="en">Redeemed</ts:string>
             </ts:name>
             <ts:origins>
-                <ts:ethereum function="redeemed" contract="UEFA" as="bool">
+                <ts:ethereum function="redeemed" contract="SPORTS" as="bool">
                     <ts:data>
                         <ts:uint256 ref="tokenId"/>
                     </ts:data>
