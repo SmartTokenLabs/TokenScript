@@ -24,9 +24,6 @@
 
     <ts:contract name="SPORTS" interface="erc721">
         <ts:address network="1">0x89D142Bef8605646881C68dcD48cDAF17FE597dC</ts:address>
-        <ts:address network="100">0x0f43923667843bccafd12a5c001a7838fa5fc8ab</ts:address>
-        <ts:address network="3">0xc2f901070AdcfA07Bc5c46cc2390063248eb9E81</ts:address>
-        <ts:address network="4">0x9693a618E4FC4912986b2e5342A82BaC47CF4d52</ts:address>
     </ts:contract>
 
     <ts:origins>
@@ -197,7 +194,58 @@
                 <ts:string xml:lang="en">Team A</ts:string>
             </ts:name>
             <ts:origins>
-                <ts:token-id bitmask="0000000000000000000000000000000000000000FFFFFF000000000000000000" as="utf8"/>
+                <ts:token-id bitmask="00000000000000000000000000000000000000000000FF000000000000000000" as="uint">
+                    <ts:mapping>
+                        <ts:option key="1">
+                            <ts:value xml:lang="zh">CLONE TROOPERS</ts:value>
+                            <ts:value xml:lang="en">CLONE TROOPERS</ts:value>
+                        </ts:option>
+                        <ts:option key="2">
+                            <ts:value xml:lang="zh">WHITE WORMS</ts:value>
+                            <ts:value xml:lang="en">WHITE WORMS</ts:value>
+                        </ts:option>
+                        <ts:option key="3">
+                            <ts:value xml:lang="zh">THE NEW REPUBLIC</ts:value>
+                            <ts:value xml:lang="en">THE NEW REPUBLIC</ts:value>
+                        </ts:option>
+                        <ts:option key="4">
+                            <ts:value xml:lang="zh">THE RESISTANCE</ts:value>
+                            <ts:value xml:lang="en">THE RESISTANCE</ts:value>
+                        </ts:option>
+                        <ts:option key="5">
+                            <ts:value xml:lang="zh">TECHNO UNION</ts:value>
+                            <ts:value xml:lang="en">TECHNO UNION</ts:value>
+                        </ts:option>
+                        <ts:option key="6">
+                            <ts:value xml:lang="zh">TECH STORMTROOPER</ts:value>
+                            <ts:value xml:lang="en">TECH STORMTROOPER</ts:value>
+                        </ts:option>
+                        <ts:option key="7">
+                            <ts:value xml:lang="zh">WEEQUAY PIRATES</ts:value>
+                            <ts:value xml:lang="en">WEEQUAY PIRATES</ts:value>
+                        </ts:option>
+                        <ts:option key="8">
+                            <ts:value xml:lang="zh">SITH</ts:value>
+                            <ts:value xml:lang="en">SITH</ts:value>
+                        </ts:option>
+                        <ts:option key="9">
+                            <ts:value xml:lang="zh">SHORETROOPERS</ts:value>
+                            <ts:value xml:lang="en">SHORETROOPERS</ts:value>
+                        </ts:option>
+                        <ts:option key="10">
+                            <ts:value xml:lang="zh">SNOWTROOPERS</ts:value>
+                            <ts:value xml:lang="en">SNOWTROOPERS</ts:value>
+                        </ts:option>
+                        <ts:option key="11">
+                            <ts:value xml:lang="zh">UNKAR'S THUGS</ts:value>
+                            <ts:value xml:lang="en">UNKAR'S THUGS</ts:value>
+                        </ts:option>
+                        <ts:option key="12">
+                            <ts:value xml:lang="zh">TRADE FEDERATION</ts:value>
+                            <ts:value xml:lang="en">TRADE FEDERATION</ts:value>
+                        </ts:option>
+                    </ts:mapping>
+                </ts:token-id>
             </ts:origins>
         </ts:attribute-type>
 
@@ -207,7 +255,58 @@
                 <ts:string xml:lang="en">Team B</ts:string>
             </ts:name>
             <ts:origins>
-                <ts:token-id bitmask="0000000000000000000000000000000000000000000000FFFFFF000000000000" as="utf8"/>
+                <ts:token-id bitmask="0000000000000000000000000000000000000000000000FF0000000000000000" as="uint">
+                    <ts:mapping>
+                        <ts:option key="1">
+                            <ts:value xml:lang="zh">X-WING STARFIGHTER</ts:value>
+                            <ts:value xml:lang="en">X-WING STARFIGHTER</ts:value>
+                        </ts:option>
+                        <ts:option key="2">
+                            <ts:value xml:lang="zh">GALACTIC EMPIRE</ts:value>
+                            <ts:value xml:lang="en">GALACTIC EMPIRE</ts:value>
+                        </ts:option>
+                        <ts:option key="3">
+                            <ts:value xml:lang="zh">GALACTIC REPUBLIC</ts:value>
+                            <ts:value xml:lang="en">GALACTIC REPUBLIC</ts:value>
+                        </ts:option>
+                        <ts:option key="4">
+                            <ts:value xml:lang="zh">HUTT CLAN</ts:value>
+                            <ts:value xml:lang="en">HUTT CLAN</ts:value>
+                        </ts:option>
+                        <ts:option key="5">
+                            <ts:value xml:lang="zh">JEDI ORDER</ts:value>
+                            <ts:value xml:lang="en">JEDI ORDER</ts:value>
+                        </ts:option>
+                        <ts:option key="6">
+                            <ts:value xml:lang="zh">CLAN SAXON</ts:value>
+                            <ts:value xml:lang="en">CLAN SAXON</ts:value>
+                        </ts:option>
+                        <ts:option key="7">
+                            <ts:value xml:lang="zh">JUMP TROOPERS</ts:value>
+                            <ts:value xml:lang="en">JUMP TROOPERS</ts:value>
+                        </ts:option>
+                        <ts:option key="8">
+                            <ts:value xml:lang="zh">STORM TROOPERS</ts:value>
+                            <ts:value xml:lang="en">STORM TROOPERS</ts:value>
+                        </ts:option>
+                        <ts:option key="9">
+                            <ts:value xml:lang="zh">LIFE DAY</ts:value>
+                            <ts:value xml:lang="en">LIFE DAY</ts:value>
+                        </ts:option>
+                        <ts:option key="10">
+                            <ts:value xml:lang="zh">DEATH STAR GUNNERS</ts:value>
+                            <ts:value xml:lang="en">DEATH STAR GUNNERS</ts:value>
+                        </ts:option>
+                        <ts:option key="11">
+                            <ts:value xml:lang="zh">LUKE SKYWALKER</ts:value>
+                            <ts:value xml:lang="en">LUKE SKYWALKER</ts:value>
+                        </ts:option>
+                        <ts:option key="12">
+                            <ts:value xml:lang="zh">DARTH VADER</ts:value>
+                            <ts:value xml:lang="en">DARTH VADER</ts:value>
+                        </ts:option>
+                    </ts:mapping>
+                </ts:token-id>
             </ts:origins>
         </ts:attribute-type>
 
