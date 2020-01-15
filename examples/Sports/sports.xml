@@ -194,8 +194,7 @@
                 <ts:string xml:lang="en">Team A</ts:string>
             </ts:name>
             <ts:origins>
-                <!-- can use less bytes here but doesn't matter -->
-                <ts:token-id bitmask="0000000000000000000000000000000000000000FFFFFF000000000000000000" as="uint">
+                <ts:token-id bitmask="00000000000000000000000000000000000000FF000000000000000000000000" as="uint">
                     <ts:mapping>
                         <ts:option key="1">
                             <ts:value xml:lang="zh">CLONE TROOPERS</ts:value>
@@ -256,7 +255,7 @@
                 <ts:string xml:lang="en">Team B</ts:string>
             </ts:name>
             <ts:origins>
-                <ts:token-id bitmask="0000000000000000000000000000000000000000000000FFFFFF000000000000" as="uint">
+                <ts:token-id bitmask="0000000000000000000000000000000000000000FF0000000000000000000000" as="uint">
                     <ts:mapping>
                         <ts:option key="1">
                             <ts:value xml:lang="zh">X-WING STARFIGHTER</ts:value>
