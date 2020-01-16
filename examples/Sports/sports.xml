@@ -3,6 +3,8 @@
         <!ENTITY SPORTS.en SYSTEM "sports.en.shtml">
         <!ENTITY SPORTS.zh SYSTEM "sports.zh.shtml">
         <!ENTITY style SYSTEM "shared.css">
+        <!ENTITY story SYSTEM "story.css">
+        <!ENTITY story.en SYSTEM "story.en.shtml">
         ]>
 <ts:token xmlns:ts="http://tokenscript.org/2019/10/tokenscript"
           xmlns="http://www.w3.org/1999/xhtml"
@@ -48,6 +50,13 @@
                 &SPORTS.zh;
             </ts:view>
         </ts:token-card>
+        <ts:action>
+            <ts:name>
+                <ts:string xml:lang="en">Surprise</ts:string>
+            </ts:name>
+            <style type="text/css">&story;</style>
+            <ts:view xml:lang="en">&story.en;</ts:view>
+        </ts:action>
     </ts:cards>
 
     <ts:attribute-types>
@@ -373,4 +382,5 @@
         </ts:attribute-type>
 
     </ts:attribute-types>
+
 </ts:token>
