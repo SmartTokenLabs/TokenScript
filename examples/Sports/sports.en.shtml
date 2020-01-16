@@ -132,11 +132,15 @@ class Token {
             </div>
 
             <div class="venue_container">
-                <span class="tbml-venue">${this.props.venue}, ${this.props.locality}</span>
+                <span class="tbml-venue">${this.props.venue}</span>
             </div>
 
             <div class="quant_container">
-              <span class="tbml-category">${this.props.category}, M${this.props.match}</span>
+              <span class="tbml-category">${this.props.category}</span>
+            </div>
+
+            <div class="quant_container">
+              <span class="tbml-category">${this.props.countryA} VS ${this.props.countryB}</span>
             </div>
 
             <div class="redeemed_container">
