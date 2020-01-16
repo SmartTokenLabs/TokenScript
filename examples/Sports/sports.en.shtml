@@ -119,14 +119,14 @@ class Token {
 
           <div class="top-section">
             <div class="eventname_container">
-              <span class="tbml-eventname">Star Wars Infinite Cool Show Good Job</span>
+              <span class="tbml-eventname">Star Wars Infinite Cool</span>
             </div>
             <div class="logo_container">
               <span class="tbml-logo"></span>
             </div>
           </div>
-        
-          <div class="bottom-section">          
+
+          <div class="bottom-section">
             <div class="datetime_container">
               <span class="tbml-datetime">${date} | ${time}</span>
             </div>
