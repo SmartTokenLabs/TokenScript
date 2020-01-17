@@ -15,8 +15,8 @@
 >
     <ts:name>
         <ts:plurals xml:lang="en">
-            <ts:string quantity="one">Ticket</ts:string>
-            <ts:string quantity="other">Tickets</ts:string>
+            <ts:string quantity="one">Starwars Ticket</ts:string>
+            <ts:string quantity="other">Starwars Tickets</ts:string>
         </ts:plurals>
         <ts:plurals xml:lang="zh">
             <ts:string quantity="one">票</ts:string>

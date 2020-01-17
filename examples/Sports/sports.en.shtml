@@ -110,16 +110,17 @@ class Token {
         let redeemedMessage = "";
         //might not have loaded so only set if actually loaded
         if(this.props.redeemed === "1") {
-            redeemedMessage = "(Redeemed)"
+            redeemedMessage = "REDEEMED";
         } else if(this.props.redeemed === "0") {
-            redeemedMessage = "(Not redeemed)"
+            redeemedMessage = "NOT REDEEMED";
         }
+
         return `      <div class="ticket">
         <div class="ticket_inner">
 
           <div class="top-section">
             <div class="eventname_container">
-              <span class="tbml-eventname">Star Wars Infinite Cool</span>
+              <span class="tbml-eventname">202 ABY Showdown</span>
             </div>
             <div class="logo_container">
               <span class="tbml-logo"></span>
@@ -136,10 +137,6 @@ class Token {
             </div>
 
             <div class="quant_container">
-              <span class="tbml-category">${this.props.category}</span>
-            </div>
-
-            <div class="quant_container">
               <span class="tbml-category">${this.props.countryA} VS ${this.props.countryB}</span>
             </div>
 
@@ -147,7 +144,6 @@ class Token {
               <span class="redeemed">${redeemedMessage}</span>
             </div>
           </div>
-
         </div>
       </div>`;
     }
