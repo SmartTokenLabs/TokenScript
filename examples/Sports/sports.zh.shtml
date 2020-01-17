@@ -110,9 +110,9 @@ class Token {
         let redeemedMessage = "";
         //might not have loaded so only set if actually loaded
         if(this.props.redeemed === "1") {
-            redeemedMessage = "(已兑换)"
+            redeemedMessage = "已兑换"
         } else if(this.props.redeemed === "0") {
-            redeemedMessage = "(未兑换)"
+            redeemedMessage = "未兑换"
         }
         return `      <div class="ticket">
         <div class="ticket_inner">
