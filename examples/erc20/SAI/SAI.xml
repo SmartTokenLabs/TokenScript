@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE token  [
+    <!ENTITY style SYSTEM "shared.css">
+    <!ENTITY sai-to-dai.en SYSTEM "sai-to-dai.en.shtml">
+    <!ENTITY enable.en SYSTEM "enable.en.shtml">
+    <!ENTITY important.en SYSTEM "important.en.shtml">
+]>
+<ts:token xmlns:ts="http://tokenscript.org/2019/10/tokenscript"
+          xmlns="http://www.w3.org/1999/xhtml"
+          xmlns:xml="http://www.w3.org/XML/1998/namespace"
+          xsi:schemaLocation="http://tokenscript.org/2019/10/tokenscript http://tokenscript.org/2019/10/tokenscript.xsd"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          custodian="false"
+>
+    <ts:name>
+        <ts:string xml:lang="en">SAI</ts:string>
+    </ts:name>
+    <ts:contract name="MakerMigration" interface="erc20">
+        <ts:address network="1">0xc73e0383f3aff3215e6f04b0331d58cecf0ab849</ts:address>
+    </ts:contract>
+    <ts:contract name="SAI" interface="erc20">
+        <ts:address network="1">0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359</ts:address>
+    </ts:contract>
+    <ts:origins>
+        <ts:ethereum contract="SAI">
+        </ts:ethereum>
+    </ts:origins>
+    <ts:cards>
+        <ts:token-card>
+            <ts:view-iconified/>
+            <ts:view>
+            </ts:view>
+        </ts:token-card>
+        <ts:action>
+            <ts:name>
+                <ts:string xml:lang="en">Convert to DAI</ts:string>
+            </ts:name>
+            <ts:attribute-type id="amount" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+                <ts:name>
+                    <ts:string xml:lang="en">Amount in SAI</ts:string>
+                    <ts:string xml:lang="zh">代幣金額</ts:string>
+                </ts:name>
+                <ts:origins>
+                    <!-- e18 is a hard coded multiplier.
+                    rationale for hardcoding: avoiding over-design  -->
+                    <ts:user-entry as="e18"/>
+                </ts:origins>
+            </ts:attribute-type>
+            <ts:transaction>
+                <ts:ethereum function="swapSaiToDai" contract="MakerMigration">
+                    <ts:data>
+                        <ts:uint256 ref="amount"/>
+                    </ts:data>
+                </ts:ethereum>
+            </ts:transaction>
+            <style type="text/css">&style;</style>
+            <ts:view>&sai-to-dai.en;</ts:view>
+        </ts:action>
+
+        <ts:action>
+            <ts:name>
+                <ts:string xml:lang="en">Enable Migration</ts:string>
+            </ts:name>
+            <ts:transaction>
+                <ts:ethereum function="approve" contract="SAI" as="bool">
+                    <ts:data>
+                        <ts:address>0xc73e0383F3Aff3215E6f04B0331D58CeCf0Ab849</ts:address>
+                        <ts:uint256>115792089237316195423570985008687907853269984665640564039457584007913129639935</ts:uint256>
+                    </ts:data>
+                </ts:ethereum>
+            </ts:transaction>
+            <style type="text/css">&style;</style>
+            <ts:view xml:lang="en">&enable.en;</ts:view>
+        </ts:action>
+
+        <ts:action>
+            <ts:name>
+                <ts:string xml:lang="en">Important!</ts:string>
+            </ts:name>
+            <style type="text/css">&style;</style>
+            <ts:view xml:lang="en">&important.en;</ts:view>
+        </ts:action>
+
+    </ts:cards>
+    <ts:attribute-types>
+        <ts:attribute-type id="allowance" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+            <ts:origins>
+                <ts:ethereum function="allowance" contract="SAI" as="uint">
+                    <ts:data>
+                        <ts:address ref="ownerAddress"/>
+                        <ts:address>0xc73e0383f3aff3215e6f04b0331d58cecf0ab849</ts:address>
+                    </ts:data>
+                </ts:ethereum>
+            </ts:origins>
+        </ts:attribute-type>
+        <ts:attribute-type id="balance" syntax="1.3.6.1.4.1.1466.115.121.1.36">
+            <ts:name>
+                <ts:string xml:lang="en">SAI-Balance</ts:string>
+            </ts:name>
+            <ts:origins>
+                <ts:ethereum function="balanceOf" contract="SAI" as="uint">
+                    <ts:data>
+                        <ts:address ref="ownerAddress"/>
+                    </ts:data>
+                </ts:ethereum>
+            </ts:origins>
+        </ts:attribute-type>
+    </ts:attribute-types>
+</ts:token>
