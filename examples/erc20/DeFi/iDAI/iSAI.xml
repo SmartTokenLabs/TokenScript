@@ -13,19 +13,19 @@
           custodian="false"
 >
     <ts:name>
-        <ts:string xml:lang="en">bZx iDAI</ts:string>
+        <ts:string xml:lang="en">bZx iSAI</ts:string>
     </ts:name>
-    <ts:contract name="iDAI" interface="erc20">
+    <ts:contract name="iSAI" interface="erc20">
         <ts:address network="1">0x14094949152eddbfcd073717200da82fed8dc960</ts:address>
     </ts:contract>
-    <ts:contract name="DAI" interface="erc20">
+    <ts:contract name="SAI" interface="erc20">
         <ts:address network="1">0x89d24A6b4CcB1B6fAA2625fE562bDD9a23260359</ts:address>
     </ts:contract>
     <ts:contract name="hydro">
         <ts:address network="1">0x241e82C79452F51fbfc89Fac6d912e021dB1a3B7</ts:address>
     </ts:contract>
     <ts:origins>
-        <ts:ethereum contract="iDAI"/>
+        <ts:ethereum contract="iSAI"/>
     </ts:origins>
 
     <ts:cards>
@@ -40,7 +40,7 @@
                 <ts:string xml:lang="en">Enable</ts:string>
             </ts:name>
             <ts:transaction>
-                <ts:ethereum function="approve" contract="DAI" as="bool">
+                <ts:ethereum function="approve" contract="SAI" as="bool">
                     <ts:data>
                         <ts:address>0x14094949152eddbfcd073717200da82fed8dc960</ts:address>
                         <ts:uint256>115792089237316195423570985008687907853269984665640564039457584007913129639935</ts:uint256>
@@ -64,7 +64,7 @@
                 </ts:origins>
             </ts:attribute-type>
             <ts:transaction>
-                <ts:ethereum function="mint" contract="iDAI" as="uint">
+                <ts:ethereum function="mint" contract="iSAI" as="uint">
                     <ts:data>
                         <ts:address ref="ownerAddress"/>
                         <ts:uint256 ref="mintAmount"/>
@@ -88,7 +88,7 @@
                 </ts:origins>
             </ts:attribute-type>
             <ts:transaction>
-                <ts:ethereum function="burn" contract="iDAI" as="uint">
+                <ts:ethereum function="burn" contract="iSAI" as="uint">
                     <ts:data>
                         <ts:address ref="ownerAddress"/>
                         <ts:uint256 ref="redeemAmount"/>
@@ -106,7 +106,7 @@
 
         <ts:attribute-type id="allowance" syntax="1.3.6.1.4.1.1466.115.121.1.36">
             <ts:origins>
-                <ts:ethereum function="allowance" contract="DAI" as="uint">
+                <ts:ethereum function="allowance" contract="SAI" as="uint">
                     <ts:data>
                         <ts:address ref="ownerAddress"/>
                         <ts:address>0x14094949152eddbfcd073717200da82fed8dc960</ts:address>
@@ -115,14 +115,14 @@
             </ts:origins>
         </ts:attribute-type>
 
-        <!-- your balance in DAI (not compound DAI) -->
+        <!-- your balance in SAI (not compound SAI) -->
         <ts:attribute-type id="tokenBalance" syntax="1.3.6.1.4.1.1466.115.121.1.36">
             <ts:name>
                 <ts:string xml:lang="en">Balance</ts:string>
                 <ts:string xml:lang="zh">餘額</ts:string>
             </ts:name>
             <ts:origins>
-                <ts:ethereum function="balanceOf" contract="DAI" as="uint">
+                <ts:ethereum function="balanceOf" contract="SAI" as="uint">
                     <ts:data>
                         <ts:address ref="ownerAddress"/>
                     </ts:data>
@@ -130,13 +130,13 @@
             </ts:origins>
         </ts:attribute-type>
 
-        <!-- DAI to iDAI exchange rate -->
+        <!-- SAI to iSAI exchange rate -->
         <ts:attribute-type id="exchangeRate" syntax="1.3.6.1.4.1.1466.115.121.1.36">
             <ts:name>
                 <ts:string xml:lang="en">Exchange Rate</ts:string>
             </ts:name>
             <ts:origins>
-                <ts:ethereum function="exchangeRateCurrent" contract="iDAI" as="uint">
+                <ts:ethereum function="exchangeRateCurrent" contract="iSAI" as="uint">
                 </ts:ethereum>
             </ts:origins>
         </ts:attribute-type>
@@ -147,7 +147,7 @@
                 <ts:string xml:lang="zh">餘額</ts:string>
             </ts:name>
             <ts:origins>
-                <ts:ethereum function="balanceOf" contract="iDAI" as="uint">
+                <ts:ethereum function="balanceOf" contract="iSAI" as="uint">
                     <ts:data>
                         <ts:address ref="ownerAddress"/>
                     </ts:data>
@@ -160,7 +160,7 @@
                 <ts:string xml:lang="en">Supply Interest Rate</ts:string>
             </ts:name>
             <ts:origins>
-                <ts:ethereum function="supplyInterestRate" contract="iDAI" as="uint">
+                <ts:ethereum function="supplyInterestRate" contract="iSAI" as="uint">
                 </ts:ethereum>
             </ts:origins>
         </ts:attribute-type>
