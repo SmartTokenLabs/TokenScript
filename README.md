@@ -46,6 +46,21 @@ Typically, all knowledge about rendering a token and constructing a transaction 
 
 By taking the knowledge of tokens including smart contract interfaces out and put them into a portable TokenScript we allow tokens to be accessible and useful.
 
+## Why use XML rather than JSON or some other JS format? 
+
+It is helpful to think of the TokenScript file as a project file and the canonicalized version as the final distributable, build target.
+
+XML has certain standards and tools that have been built over time that helps us here:
+
+A. XML canonicalization (c14n) which specifies and provides a portable way to represent an XML file under transmission in an always identical format.
+B. XML digital Signatures which is based on signing canonicalized XMLs.
+C. XML allows developers to list and describe attributes and actions/transactions declaratively. While it's possible to do it with JSON, it would likely involve listing them in dictionary and string literals that are harder to enforce schema, validation and track schema changes.
+D. standardized static types, with XML we can easily enforce ASN.1 variable encodings to ensure the variable is as defined. 
+
+Used together, we can ensure that a given signed, canonicalized TokenScript file has not been tampered with. Without using XML, these crucial properties of XML have to be reinvented and made available. 
+
+Ultimately, if we look at the TokenScript XML file as a project file, we can foresee that in the future, we might build tools to manage them instead of relying on editing the XML file directly, then how the file is itself being editable ceases to be that important and integrity of the file becomes more important.
+
 ## TokenScript Project introduction
 
 The TokenScript project is an initiative to design, progress TokenScript and nurture the use of TokenScript.
