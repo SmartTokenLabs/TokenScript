@@ -1,8 +1,39 @@
-## Authenticity of TokenScript
+## Authenticity and trustworthiness of a TokenScript
 
-(This is not the security of TokenScript - which is a separate topic about the run-time security of TokenScript.)
+(This document is not about the runtime security of TokenScript - which will be documented separately)
 
-A TokenScript file can be signed. A TokenScript can also be trusted. Ideally, all TokenScript's are signed and trusted.
+A TokenScript file can be signed. A TokenScript can also be trusted. Ideally, a TokenScript is trusted through an "Express-of-Trust" transaction from the smart contract deployment key. But when that trust is not available, having the TokenScript signed helps the end-user to ascribe trust by authenticity.
+
+- If a TokenScript is trusted, through an Express-of-Trust transaction, then the Smart Contract owner has either created or read the TokenScript and recommended the end-users to use it.
+
+- If a TokenScript is signed, the end-user can ascribe authenticity (the author and integrity), and if that author is known to the end-user, he is likely to trust it without the Express-of-Trust; otherwise, he makes his own decision.
+
+Or in other words:
+
+- signing a TokenScript establish authenticity of the TokenScript but not how much the token contract trusts it;
+
+- the express-of-trust transaction expresses that the token contract author trusts the TokenScript, but nothing about authenticity (who wrote it).
+
+Or in layman's terms:
+
+- Signing a TokenScript "connects" it to identity (e.g. a website, an organisation), with no guarantee if that identity is of a trustworthy entity.
+- Express-of-trust claims the  TokenScript trustworthy, without connecting it to any identity.
+
+Both have their uses. If you are a token contract author, you can do express-of-trust to a TokenScript; however, there are cases that signed TokenScripts are needed:
+
+Case 1:
+
+A token issuer (custodian) want to reassure a user who trusts it by an external (non-blockchain) identity (e.g. website domain name) that he/she is using the correct contract. For example, a token issuer changed its main contract after discovering some security exploitation. It knows that its user trust it by domain name, so it might issue a token script that is signed by the same domain name with expressed trust from both the old and new contract to help the user to migrate.
+
+Case 2:
+
+A token issuer discarded his deployment key (or lost it), but still wish to let its user trust the TokenScript they provided by the help of providing authenticity (revealing the authorship).
+
+Case 3:
+
+A token issuer did not write a TokenScript, but a 3rd party did it; or that the 3rd party has provided additional features. If the 3rd party gained trust (e.g. through social media or within a community), it can sign and release its own TokenScript, and the users can accept them by the reputation of the 3rd part without the token contract's Express-of-Trust.
+
+(The cases of "mixed configuration", like when a 3rd party writes a TokenScript providing action in addition to the one written by the token issuer, is not covered in this introductory document. Instead, they are covered in the future modularisation documents.)
 
 ## Signed
 
