@@ -137,7 +137,7 @@
     <xs:element name="cards">
         <xs:complexType>
             <xs:sequence>
-                <xs:element minOccurs="0" name="token-card" type="card"/>
+                <xs:element minOccurs="0" name="token" type="card"/>
                 <xs:element minOccurs="0" maxOccurs="unbounded" ref="action" />
                 <xs:element minOccurs="0" maxOccurs="unbounded" name="event" type="card"/>
             </xs:sequence>
