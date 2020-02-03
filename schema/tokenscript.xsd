@@ -38,19 +38,33 @@
             <xs:attribute name="custodian" type="xs:boolean"/>
         </xs:complexType>
     </xs:element>
+    <xs:complexType name="card">
+        <xs:choice maxOccurs="unbounded">
+            <xs:element minOccurs="0" ref="xhtml:style"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="view-iconified"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="view"/>
+        </xs:choice>
+    </xs:complexType>
     <xs:element name="action">
         <xs:complexType>
-            <xs:sequence>
+            <xs:choice maxOccurs="unbounded">
                 <xs:element ref="name"/>
+                <!-- consider putting input and output in transaction
+                     declaration later when/if DvP Security is
+                     implemented.  At this stage, DvP security is not
+                     implemented so whatever input and output here are
+                     for the user interface only. One may argue that
+                     this provides a false sense of security if we move
+                     them to <transaction> too early -->
                 <xs:element minOccurs="0" name="input" type="tokens"/>
                 <xs:element minOccurs="0" name="output" type="tokens"/>
                 <xs:element minOccurs="0" maxOccurs="unbounded" ref="attribute-type"/>
                 <xs:element minOccurs="0" ref="exclude"/>
                 <xs:element minOccurs="0" ref="transaction"/>
-                <xs:element ref="xhtml:style"/><!-- should have minOccure=0 but people forget this -->
-                <xs:element maxOccurs="unbounded" ref="view"/><!-- default constructed view -->
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="dsig:Signature"/>
-            </xs:sequence>
+                <xs:element minOccurs="0" ref="xhtml:style"/>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="view-iconified"/>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="view"/>
+            </xs:choice>
         </xs:complexType>
     </xs:element>
     <xs:complexType name="tokens">
@@ -123,17 +137,9 @@
     <xs:element name="cards">
         <xs:complexType>
             <xs:sequence>
-                <xs:element minOccurs="0" ref="token-card"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="action"/>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
-    <xs:element name="token-card">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" ref="xhtml:style"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="view-iconified"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="view"/>
+                <xs:element minOccurs="0" name="token-card" type="card"/>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="action" />
+                <xs:element minOccurs="0" maxOccurs="unbounded" name="event" type="card"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
