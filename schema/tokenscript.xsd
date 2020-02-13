@@ -4,6 +4,7 @@
            xmlns:xhtml="http://www.w3.org/1999/xhtml"
            xmlns:dsig="http://www.w3.org/2000/09/xmldsig#"
            xmlns="http://tokenscript.org/2019/10/tokenscript"
+           xmlns:asnx="urn:ietf:params:xml:ns:asnx"
            elementFormDefault="qualified">
 
 
@@ -20,6 +21,10 @@
     <!-- Importing XHTML namespace. use xhtml1-strict.xsd to get xhtml:Block -->
     <xs:import namespace="http://www.w3.org/1999/xhtml"
                schemaLocation="xhtml1-strict.xsd"/>
+
+    <xs:import namespace="urn:ietf:params:xml:ns:asnx"
+               schemaLocation="asnx.xsd"/>
+
     <xs:include schemaLocation="data.xsd"/>
     
     <xs:element name="token">
@@ -127,6 +132,7 @@
                         <xs:attribute name="network" use="required" type="xs:integer"/>
                     </xs:complexType>
                 </xs:element>
+                <xs:element ref="asnx:module" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element minOccurs="0" ref="interface"/>
             </xs:sequence>
             <xs:attribute name="name" type="xs:ID"/>
@@ -144,17 +150,15 @@
         </xs:complexType>
     </xs:element>
     <xs:element name="include" type="xs:NCName"/>
-    <xs:element name="view" type="shtml"/>
-    <xs:element name="view-iconified" type="shtml">
+    <xs:element name="view" type="view"/>
+    <xs:element name="view-iconified" type="view">
     </xs:element>
-    <xs:complexType name="shtml">
-        <xs:complexContent>
-            <xs:extension base="xhtml:Block">
-                <xs:attributeGroup ref="xhtml:attrs"/>
-                <xs:attribute name="onload" type="xhtml:Script"/>
-                <xs:attribute name="onunload" type="xhtml:Script"/>
-            </xs:extension>
-        </xs:complexContent>
+    <xs:complexType name="view">
+        <xs:sequence>
+            <xs:element ref="xhtml:style"/>
+            <xs:element ref="xhtml:script"/>
+        </xs:sequence>
+        <xs:attribute ref="xml:lang"/>
     </xs:complexType>
     <xs:element name="redeem">
         <xs:complexType>
@@ -327,6 +331,10 @@
             <xs:attribute name="bitmask" type="bitmask"/>
             <xs:attribute name="contract" type="xs:IDREF"/>
             <xs:attribute name="function" type="xs:NCName"/>
+            <xs:attribute name="event" type="xs:NCName"/>
+            <xs:attribute name="filter" type="xs:string"/>
+            <!-- TODO: this should be whatever ASN.X allows as element name -->
+            <xs:attribute name="select" type="xs:NCName"/>
         </xs:complexType>
     </xs:element>
     <xs:complexType name="address" mixed="true">
