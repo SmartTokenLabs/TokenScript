@@ -52,7 +52,7 @@
     </xs:complexType>
     <xs:element name="action">
         <xs:complexType>
-            <xs:choice maxOccurs="unbounded">
+            <xs:sequence>
                 <xs:element ref="name"/>
                 <!-- consider putting input and output in transaction
                      declaration later when/if DvP Security is
@@ -66,9 +66,8 @@
                 <xs:element minOccurs="0" maxOccurs="unbounded" ref="attribute-type"/>
                 <xs:element minOccurs="0" ref="exclude"/>
                 <xs:element minOccurs="0" ref="transaction"/>
-                <xs:element minOccurs="0" ref="xhtml:style"/>
                 <xs:element minOccurs="0" maxOccurs="unbounded" ref="view"/>
-            </xs:choice>
+            </xs:sequence>
         </xs:complexType>
     </xs:element>
     <xs:complexType name="tokens">
