@@ -155,8 +155,9 @@
     </xs:element>
     <xs:complexType name="view">
         <xs:sequence>
-            <xs:element ref="xhtml:style"/>
-            <xs:element ref="xhtml:script"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="xhtml:style"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="xhtml:script"/>
+            <xs:element minOccurs="0" ref="xhtml:body"/>
         </xs:sequence>
         <xs:attribute ref="xml:lang"/>
     </xs:complexType>
