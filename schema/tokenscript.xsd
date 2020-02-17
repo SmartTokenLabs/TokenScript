@@ -46,7 +46,7 @@
     <xs:complexType name="card">
         <xs:choice maxOccurs="unbounded">
             <xs:element minOccurs="0" ref="xhtml:style"/>
-            <xs:element minOccurs="0" maxOccurs="unbounded" ref="view-iconified"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="item-view"/>
             <xs:element minOccurs="0" maxOccurs="unbounded" ref="view"/>
         </xs:choice>
     </xs:complexType>
@@ -67,7 +67,6 @@
                 <xs:element minOccurs="0" ref="exclude"/>
                 <xs:element minOccurs="0" ref="transaction"/>
                 <xs:element minOccurs="0" ref="xhtml:style"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="view-iconified"/>
                 <xs:element minOccurs="0" maxOccurs="unbounded" ref="view"/>
             </xs:choice>
         </xs:complexType>
@@ -151,7 +150,7 @@
     </xs:element>
     <xs:element name="include" type="xs:NCName"/>
     <xs:element name="view" type="view"/>
-    <xs:element name="view-iconified" type="view">
+    <xs:element name="item-view" type="view">
     </xs:element>
     <xs:complexType name="view">
         <xs:sequence>
