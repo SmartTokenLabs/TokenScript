@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           targetNamespace="http://tokenscript.org/2019/10/tokenscript"
+           targetNamespace="http://tokenscript.org/2020/03/tokenscript"
            xmlns:xhtml="http://www.w3.org/1999/xhtml"
            xmlns:dsig="http://www.w3.org/2000/09/xmldsig#"
-           xmlns="http://tokenscript.org/2019/10/tokenscript"
+           xmlns="http://tokenscript.org/2020/03/tokenscript"
            xmlns:asnx="urn:ietf:params:xml:ns:asnx"
            elementFormDefault="qualified">
 
