@@ -328,7 +328,7 @@ To find out the requirements for TokenScript to create a frictionless market, we
 
 For clarity, we define the three concepts involved. 
 
-*Deliverables*: All sorts of things money can buy: assets, goods and services. In this context deliverables are not a physical good, but an entitlement. A proto-tokenization of deliverables happened long ago, like land or security titles. However, only with blockchain they can be transfered in real-time without needing a third party to prevent double spends. Deliverables can profit immensively from tokenization - if the token design properly reflects their needs.
+*Deliverables*: All sorts of things money can buy: assets, goods and services. In this context deliverables are not a physical good, but an entitlement. A proto-tokenization of deliverables happened long ago, like land or security titles. However, only with blockchain they can be transfered in real-time without needing a third party to prevent double spends. Deliverables can profit immensely from tokenization - if the token design properly reflects their needs.
 
 *Payments*: All value transfers done with anything currency-like. In traditional markets payments are done with Fiat currencies, either as physical banknotes or as electronic transfers through trusted third parties. Blockchain eliminates the middle men from payments and enables the use of programmable currencies like Ether or Dai.
 
