@@ -53,8 +53,11 @@ It is helpful to think of the TokenScript file as a project file and the canonic
 XML has certain standards and tools that have been built over time that helps us here:
 
 A. XML canonicalization (c14n) which specifies and provides a portable way to represent an XML file under transmission in an always identical format.
+
 B. XML digital Signatures which is based on signing canonicalized XMLs.
+
 C. XML allows developers to list and describe attributes and actions/transactions declaratively. While it's possible to do it with JSON, it would likely involve listing them in dictionary and string literals that are harder to enforce schema, validation and track schema changes.
+
 D. standardized static types, with XML we can easily enforce ASN.1 variable encodings to ensure the variable is as defined. 
 
 Used together, we can ensure that a given signed, canonicalized TokenScript file has not been tampered with. Without using XML, these crucial properties of XML have to be reinvented and made available. 
