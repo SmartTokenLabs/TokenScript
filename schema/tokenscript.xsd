@@ -7,7 +7,6 @@
            xmlns:asnx="urn:ietf:params:xml:ns:asnx"
            elementFormDefault="qualified">
 
-
     <!-- Importing XML namespace for xml:lang and xml:id -->
     <xs:import namespace="http://www.w3.org/XML/1998/namespace"
                schemaLocation="xml.xsd"/>
@@ -25,7 +24,7 @@
     <xs:import namespace="urn:ietf:params:xml:ns:asnx"
                schemaLocation="asnx.xsd"/>
 
-    <xs:include schemaLocation="data.xsd"/>
+    <xs:include schemaLocation="data.xsd"/> <!-- soon to be replaced by data objects -->
     
     <xs:element name="token">
         <xs:complexType>
