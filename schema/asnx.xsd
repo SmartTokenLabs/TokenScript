@@ -26,5 +26,6 @@
     <xs:complexType name="element">
         <xs:attribute name="name" type="xs:NCName"/>
         <xs:attribute ref="ethereum:type"/>
+        <xs:attribute ref="ethereum:indexed"/>
     </xs:complexType>
 </xs:schema>
