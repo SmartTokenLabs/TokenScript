@@ -32,7 +32,7 @@
                 <xs:element name="name" type="text"/>
                 <xs:element minOccurs="0" maxOccurs="unbounded" ref="contract"/>
                 <xs:element ref="origins"/>
-                <xs:element minOccurs="0" ref="selections"/>
+                <xs:element maxOccurs="unbounded" ref="selection"/>
                 <xs:element ref="cards"/>
                 <xs:element minOccurs="0" ref="grouping"/>
                 <xs:element minOccurs="0" ref="ordering"/>
@@ -171,13 +171,6 @@
     <xs:element name="feemaster" type="xs:anyURI"/>
     <xs:element name="gateway" type="xs:anyURI"/>
     <xs:element name="prefix" type="xs:anyURI"/>
-    <xs:element name="selections">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element maxOccurs="unbounded" ref="selection"/>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
     <xs:element name="selection">
         <xs:complexType>
             <xs:sequence>
