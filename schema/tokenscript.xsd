@@ -29,7 +29,7 @@
     <xs:element name="token">
         <xs:complexType>
             <xs:sequence>
-                <xs:element ref="name"/>
+                <xs:element name="name" type="text"/>
                 <xs:element minOccurs="0" maxOccurs="unbounded" ref="contract"/>
                 <xs:element ref="origins"/>
                 <xs:element minOccurs="0" ref="selections"/>
@@ -52,7 +52,7 @@
     <xs:element name="action">
         <xs:complexType>
             <xs:sequence>
-                <xs:element ref="name"/>
+                <xs:element name="name" type="text"/>
                 <!-- consider putting input and output in transaction
                      declaration later when/if DvP Security is
                      implemented.  At this stage, DvP security is not
@@ -63,10 +63,12 @@
                 <xs:element minOccurs="0" name="input" type="tokens"/>
                 <xs:element minOccurs="0" name="output" type="tokens"/>
                 <xs:element minOccurs="0" maxOccurs="unbounded" ref="attribute-type"/>
-                <xs:element minOccurs="0" ref="exclude"/>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="selection"/>
                 <xs:element minOccurs="0" ref="transaction"/>
                 <xs:element minOccurs="0" maxOccurs="unbounded" ref="view"/>
             </xs:sequence>
+            <xs:attribute name="exclude" type="xs:IDREFS"/>
+            <xs:attribute name="available-to" type="xs:IDREFS"/>
         </xs:complexType>
     </xs:element>
     <xs:complexType name="tokens">
@@ -86,8 +88,6 @@
             </xs:element>
         </xs:choice>
     </xs:complexType>
-    <xs:element name="name" type="text"/>
-    <xs:element name="message" type="text"/>
     <xs:complexType name="text">
         <xs:sequence>
             <xs:element minOccurs="0" maxOccurs="unbounded"  name="plurals">
@@ -181,13 +181,13 @@
     <xs:element name="selection">
         <xs:complexType>
             <xs:sequence>
-                <xs:element minOccurs="0" ref="name"/>
-                <xs:element ref="filter"/>
+                <xs:element minOccurs="0" name="name" type="text"/>
+                <xs:element minOccurs="0" name="denial" type="text"/>
             </xs:sequence>
             <xs:attribute name="id" type="xs:NCName"/>
+            <xs:attribute name="filter" type="xs:string"></xs:attribute>
         </xs:complexType>
     </xs:element>
-    <xs:element name="filter" type="xs:string"/>
     <xs:element name="grouping">
         <xs:complexType>
             <xs:sequence>
@@ -245,7 +245,7 @@
         <xs:complexType>
             <xs:sequence>
                 <!-- name is not needed if the attribute is only used for selection -->
-                <xs:element minOccurs="0" ref="name"/>
+                <xs:element minOccurs="0" name="name" type="text"/>
                 <xs:element ref="origins"/>
             </xs:sequence>
             <xs:attribute name="id" use="required" type="xs:NCName"/>
