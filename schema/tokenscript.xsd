@@ -32,11 +32,11 @@
                 <xs:element name="name" type="text"/>
                 <xs:element minOccurs="0" maxOccurs="unbounded" ref="contract"/>
                 <xs:element ref="origins"/>
-                <xs:element maxOccurs="unbounded" ref="selection"/>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="selection"/>
                 <xs:element ref="cards"/>
                 <xs:element minOccurs="0" ref="grouping"/>
                 <xs:element minOccurs="0" ref="ordering"/>
-                <xs:element ref="attribute-types"/>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="attribute-type"/>
                 <xs:element minOccurs="0" maxOccurs="unbounded" ref="dsig:Signature"/>
             </xs:sequence>
             <xs:attribute name="custodian" type="xs:boolean"/>
@@ -178,7 +178,7 @@
                 <xs:element minOccurs="0" name="denial" type="text"/>
             </xs:sequence>
             <xs:attribute name="id" type="xs:NCName"/>
-            <xs:attribute name="filter" type="xs:string"></xs:attribute>
+            <xs:attribute name="filter" type="xs:string" use="required"></xs:attribute>
         </xs:complexType>
     </xs:element>
     <xs:element name="grouping">
@@ -225,13 +225,6 @@
     <xs:element name="byValue">
         <xs:complexType>
             <xs:attribute name="field" use="required" type="xs:NCName"/>
-        </xs:complexType>
-    </xs:element>
-    <xs:element name="attribute-types">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element maxOccurs="unbounded" ref="attribute-type"/>
-            </xs:sequence>
         </xs:complexType>
     </xs:element>
     <xs:element name="attribute-type">
