@@ -1,6 +1,6 @@
 # Getting Started
 
-The best way to get started is to run through the [tutorial](https://github.com/AlphaWallet/TokenScript/tree/master/tutorial).
+The best way to get started is to run through the [tutorial](https://github.com/AlphaWallet/TokenScript-Examples/tree/master/tutorial).
 
 ## Implicit Attributes
 
