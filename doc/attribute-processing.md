@@ -98,7 +98,7 @@ Inputs with           Origin output with specific       Attribute
 
 11. In `<ts:transaction>`, I just assume the function is an origin with as="void" (void is only used internally for consistency), so the output (if any) is dropped. In the future if we need to chain function calls (I don't know if we will ever need to), then it's just another pipeline of function origins with non-void as=""
 
-12. Note while we say the input and output types are typed, TokenScript clients can still hold them internally as strings as long as it knows and can enforce the types they represent. That's an implementation detail. But such a case (assuming `getString()` returns a string) should not be permitted:
+12. Note while we say the input and output types are typed, TokenScript clients can still hold them internally as strings as long as it knows and can enforce the types they represent. That's an implementation detail. But such a case (assuming `getStreet()` returns a string) should not be permitted:
 
 ```
     <ts:origins>
@@ -111,7 +111,7 @@ Inputs with           Origin output with specific       Attribute
     </ts:origins>
 ```
 
-        But this is valid:
+But this is valid:
 
 ```
     <ts:origins>
