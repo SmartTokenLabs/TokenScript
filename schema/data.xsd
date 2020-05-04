@@ -7,6 +7,7 @@
            elementFormDefault="qualified">
     <xs:complexType mixed="true" name="variable">
         <xs:attribute name="ref" type="xs:NCName"/>
+        <xs:attribute name="local-ref" type="xs:NCName"/>
     </xs:complexType>
     <xs:element name="data">
         <xs:complexType>
