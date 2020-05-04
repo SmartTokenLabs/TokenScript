@@ -112,7 +112,7 @@
                 <xs:element name="bytes30" type="variable"/>
                 <xs:element name="bytes31" type="variable"/>
                 <xs:element name="bytes32" type="variable"/>
-                <xs:element name="address" type="address"/>
+                <xs:element name="address" type="variable"/>
             </xs:choice>
         </xs:complexType>
     </xs:element>
