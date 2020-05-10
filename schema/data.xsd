@@ -5,10 +5,13 @@
            xmlns:dsig="http://www.w3.org/2000/09/xmldsig#"
            xmlns="http://tokenscript.org/2020/03/tokenscript"
            elementFormDefault="qualified">
+    <xs:import namespace="http://www.w3.org/XML/1998/namespace"
+               schemaLocation="xml.xsd"/>
     <xs:complexType mixed="true" name="variable">
         <xs:attribute name="ref" type="xs:NCName"/>
         <xs:attribute name="local-ref" type="xs:NCName"/>
     </xs:complexType>
+    <!-- Importing XML namespace for xml:lang and xml:id -->
     <xs:element name="data">
         <xs:complexType>
             <xs:choice maxOccurs="unbounded">
@@ -114,6 +117,38 @@
                 <xs:element name="bytes32" type="variable"/>
                 <xs:element name="address" type="variable"/>
             </xs:choice>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="as">
+        <xs:restriction base="xs:NCName">
+            <xs:enumeration value="uint"/>
+            <xs:enumeration value="address"/>
+            <!-- int is not allowed here, because "as" is not for typing but for transforming  -->
+            <xs:enumeration value="utf8"/>
+            <xs:enumeration value="e18"/>
+            <xs:enumeration value="e8"/>
+            <xs:enumeration value="e4"/>
+            <xs:enumeration value="e2"/>
+            <xs:enumeration value="bool"/>
+            <xs:enumeration value="bytes"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="mapping">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" name="option">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" name="value">
+                                <xs:complexType mixed="true">
+                                    <xs:attribute ref="xml:lang"/>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="key" use="required" type="xs:integer"/>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
         </xs:complexType>
     </xs:element>
 </xs:schema>
