@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:ts="http://tokenscript.org/2020/06/tokenscript"
+           elementFormDefault="qualified"
            xmlns="urn:ethereum:constantinople"
            targetNamespace="urn:ethereum:constantinople">
+
+    <xs:import schemaLocation="tokenscript.xsd" namespace="http://tokenscript.org/2020/06/tokenscript"/>
+
     <xs:simpleType name="data-type">
         <xs:restriction base="xs:string">
             <xs:enumeration value="bool"/>
@@ -111,4 +116,47 @@
     </xs:simpleType>
     <xs:attribute name="type" type="data-type"/>
     <xs:attribute name="indexed" type="xs:boolean" default="false"/>
+
+    <xs:complexType name="address" mixed="true">
+        <xs:attribute name="ref" type="xs:NCName"/>
+    </xs:complexType>
+
+    <xs:element name="call">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="ether">
+                    <xs:complexType mixed="true">
+                        <xs:attribute name="ref" type="xs:NCName"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element minOccurs="0" ref="ts:data"/>
+                <xs:element minOccurs="0" ref="ts:mapping"/>
+            </xs:sequence>
+            <xs:attribute name="as" type="ts:as"/>
+            <xs:attribute name="bitmask" type="ts:bitmask"/>
+            <xs:attribute name="contract" type="xs:IDREF"/>
+            <xs:attribute name="function" type="xs:NCName"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="transfer">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="to" type="ts:address"/>
+                <xs:element minOccurs="0" name="ether">
+                    <xs:complexType mixed="true">
+                        <xs:attribute name="ref" type="xs:NCName"/>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="event">
+        <xs:complexType>
+            <!-- TODO: this should be whatever ASN.X allows as element name -->
+            <xs:attribute name="module" type="xs:NCName"/>
+            <xs:attribute name="filter" type="xs:string"/>
+            <xs:attribute name="select" type="xs:NCName"/>
+        </xs:complexType>
+    </xs:element>
 </xs:schema>
