@@ -5,6 +5,7 @@
            xmlns:dsig="http://www.w3.org/2000/09/xmldsig#"
            xmlns="http://tokenscript.org/2020/06/tokenscript"
            xmlns:asnx="urn:ietf:params:xml:ns:asnx"
+           xmlns:ethereum="urn:ethereum:constantinople"
            elementFormDefault="qualified">
 
     <!-- Importing XML namespace for xml:lang and xml:id -->
@@ -24,6 +25,9 @@
     <xs:import namespace="urn:ietf:params:xml:ns:asnx"
                schemaLocation="asnx.xsd"/>
 
+    <xs:import namespace="urn:ethereum:constantinople"
+               schemaLocation="ethereum.xsd"/>
+
     <xs:include schemaLocation="data.xsd"/> <!-- soon to be replaced by data objects -->
     
     <xs:element name="token">
@@ -31,7 +35,13 @@
             <xs:sequence>
                 <xs:element name="name" type="text"/>
                 <xs:element minOccurs="0" maxOccurs="unbounded" ref="contract"/>
-                <xs:element ref="origins"/>
+                <xs:element name="origins">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element ref="ethereum" />
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
                 <xs:element minOccurs="0" maxOccurs="unbounded" ref="selection"/>
                 <xs:element ref="cards"/>
                 <xs:element minOccurs="0" ref="grouping"/>
@@ -252,14 +262,16 @@
     <xs:element name="transaction">
         <xs:complexType>
             <xs:choice>
-                <xs:element ref="ethereum"/>
+                <xs:element ref="ethereum:call"/>
+                <xs:element ref="ethereum:transfer"/>
             </xs:choice>
         </xs:complexType>
     </xs:element>
     <xs:element name="origins">
         <xs:complexType>
             <xs:choice maxOccurs="unbounded">
-                <xs:element ref="ethereum"/>
+                <xs:element ref="ethereum:event"/>
+                <xs:element ref="ethereum:call"/>
                 <xs:element ref="user-entry"/>
                 <xs:element ref="token-id"/>
             </xs:choice>
