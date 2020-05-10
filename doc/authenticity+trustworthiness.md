@@ -1,8 +1,12 @@
 ## Authenticity and trustworthiness of a TokenScript
 
-(This document is not about the runtime security of TokenScript - which will be documented separately)
+(This document is not about the runtime security of Token Enclave - which will be documented separately. This deals with the authenticity and trustworthiness of a TokenScript on a textual level.)
 
-A TokenScript file can be signed. A TokenScript can also be trusted. Ideally, a TokenScript is trusted through an "Express-of-Trust" transaction from the smart contract deployment key. But when that trust is not available, having the TokenScript signed helps the end-user to ascribe trust by authenticity.
+A TokenScript file can be signed. A TokenScript can also be trusted. Ideally, both should be done.
+
+At the moment, TokenScript is trusted through an "Express-of-Trust" transaction from the smart contract deployment key. In the future, a smart contract might be able to return the signing key needed for TokenScript. Both should work towards asserting the relationship between a Smart Contract and a TokenScript, hence establishing trust.
+
+However, trust coming from smart contract alone isn't sufficient to the end user, since the user has otherwise no way to assert if the smart contract is the one he intends to interact with, or a phishing contract. But when that trust is not available, having the TokenScript signed helps the end-user to ascribe trust by authenticity.
 
 - If a TokenScript is trusted, through an Express-of-Trust transaction, then the Smart Contract owner has either created or read the TokenScript and recommended the end-users to use it.
 
