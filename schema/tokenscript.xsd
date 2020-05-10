@@ -265,20 +265,6 @@
             </xs:choice>
         </xs:complexType>
     </xs:element>
-    <xs:simpleType name="as">
-        <xs:restriction base="xs:NCName">
-            <xs:enumeration value="uint"/>
-            <xs:enumeration value="address"/>
-            <!-- int is not allowed here, because "as" is not for typing but for transforming  -->
-            <xs:enumeration value="utf8"/>
-            <xs:enumeration value="e18"/>
-            <xs:enumeration value="e8"/>
-            <xs:enumeration value="e4"/>
-            <xs:enumeration value="e2"/>
-            <xs:enumeration value="bool"/>
-            <xs:enumeration value="bytes"/>
-        </xs:restriction>
-    </xs:simpleType>
     <xs:simpleType name="bitmask">
         <xs:restriction base="xs:hexBinary"/>
     </xs:simpleType>
@@ -324,22 +310,4 @@
     <xs:complexType name="address" mixed="true">
         <xs:attribute name="ref" type="xs:NCName"/>
     </xs:complexType>
-    <xs:element name="mapping">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element maxOccurs="unbounded" name="option">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:element maxOccurs="unbounded" name="value">
-                                <xs:complexType mixed="true">
-                                    <xs:attribute ref="xml:lang"/>
-                                </xs:complexType>
-                            </xs:element>
-                        </xs:sequence>
-                        <xs:attribute name="key" use="required" type="xs:integer"/>
-                    </xs:complexType>
-                </xs:element>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
 </xs:schema>
