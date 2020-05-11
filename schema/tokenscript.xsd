@@ -33,7 +33,7 @@
     <xs:element name="token">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="name" type="text"/>
+                <xs:element name="label" type="text"/>
                 <xs:element minOccurs="0" maxOccurs="unbounded" ref="contract"/>
                 <xs:element name="origins">
                     <xs:complexType>
@@ -62,7 +62,7 @@
     <xs:element name="action">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="name" type="text"/>
+                <xs:element name="label" type="text"/>
                 <!-- consider putting input and output in transaction
                      declaration later when/if DvP Security is
                      implemented.  At this stage, DvP security is not
@@ -184,7 +184,7 @@
     <xs:element name="selection">
         <xs:complexType>
             <xs:sequence>
-                <xs:element minOccurs="0" name="name" type="text"/>
+                <xs:element minOccurs="0" name="label" type="text"/>
                 <xs:element minOccurs="0" name="denial" type="text"/>
             </xs:sequence>
             <xs:attribute name="id" type="xs:NCName"/>
@@ -240,8 +240,8 @@
     <xs:element name="attribute-type">
         <xs:complexType>
             <xs:sequence>
-                <!-- name is not needed if the attribute is only used for selection -->
-                <xs:element minOccurs="0" name="name" type="text"/>
+                <!-- label is not needed if the attribute is only used for selection -->
+                <xs:element minOccurs="0" name="label" type="text"/>
                 <xs:element ref="origins"/>
             </xs:sequence>
             <xs:attribute name="id" use="required" type="xs:NCName"/>
