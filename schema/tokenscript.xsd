@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tokenscript="http://tokenscript.org/2020/06/tokenscript"
            targetNamespace="http://tokenscript.org/2020/06/tokenscript"
            xmlns:xhtml="http://www.w3.org/1999/xhtml"
            xmlns:dsig="http://www.w3.org/2000/09/xmldsig#"
@@ -51,6 +52,10 @@
             </xs:sequence>
             <xs:attribute name="custodian" type="xs:boolean"/>
         </xs:complexType>
+        <xs:key name="token-attributes">
+            <xs:selector xpath="tokenscript:attribute-type"></xs:selector>
+            <xs:field xpath="@name"></xs:field>
+        </xs:key>
     </xs:element>
     <xs:complexType name="card">
         <xs:choice maxOccurs="unbounded">
@@ -244,7 +249,7 @@
                 <xs:element minOccurs="0" name="label" type="text"/>
                 <xs:element ref="origins"/>
             </xs:sequence>
-            <xs:attribute name="id" use="required" type="xs:NCName"/>
+            <xs:attribute name="name" use="required" type="xs:NCName"/>
             <xs:attribute name="single-value" use="optional" type="xs:NCName"/>
             <xs:attribute name="oid" type="xs:NMTOKEN"/>
             <xs:attribute name="syntax" use="required" type="xs:NMTOKEN"/>
