@@ -127,6 +127,7 @@
             <xs:enumeration value="utf8"/>
             <xs:enumeration value="e18"/>
             <xs:enumeration value="e8"/>
+            <xs:enumeration value="e6"/>
             <xs:enumeration value="e4"/>
             <xs:enumeration value="e2"/>
             <xs:enumeration value="bool"/>
