@@ -65,12 +65,10 @@
     </xs:element>
     <xs:element name="card">
         <xs:complexType>
-            <xs:sequence maxOccurs="unbounded">
+            <xs:sequence>
                 <xs:element minOccurs="0" name="label" type="text"/>
                 <xs:element minOccurs="0" maxOccurs="unbounded" ref="attribute-type"/>
                 <xs:element minOccurs="0" maxOccurs="unbounded" ref="selection"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="item-view"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="view"/>
                 <!-- consider putting input and output in transaction
                      declaration later when/if DvP Security is
                      implemented.  At this stage, DvP security is not
@@ -81,6 +79,8 @@
                 <xs:element minOccurs="0" name="input" type="tokens"/>
                 <xs:element minOccurs="0" name="output" type="tokens"/>
                 <xs:element minOccurs="0" ref="transaction"/>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="item-view"/>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="view"/>
             </xs:sequence>
             <xs:attribute name="type">
                 <xs:simpleType>
