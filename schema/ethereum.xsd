@@ -121,14 +121,9 @@
         <xs:attribute name="ref" type="xs:NCName"/>
     </xs:complexType>
 
-    <xs:element name="call">
-        <xs:complexType>
+    <xs:element name="call" type="call"/>
+        <xs:complexType name="call">
             <xs:sequence>
-                <xs:element minOccurs="0" name="ether">
-                    <xs:complexType mixed="true">
-                        <xs:attribute name="ref" type="xs:NCName"/>
-                    </xs:complexType>
-                </xs:element>
                 <xs:element minOccurs="0" ref="ts:data"/>
                 <xs:element minOccurs="0" ref="ts:mapping"/>
             </xs:sequence>
@@ -137,17 +132,21 @@
             <xs:attribute name="contract" type="xs:IDREF"/>
             <xs:attribute name="function" type="xs:NCName"/>
         </xs:complexType>
-    </xs:element>
-    <xs:element name="transfer">
+
+    <xs:element name="transaction">
         <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" name="to" type="ts:address"/>
-                <xs:element minOccurs="0" name="ether">
-                    <xs:complexType mixed="true">
-                        <xs:attribute name="ref" type="xs:NCName"/>
-                    </xs:complexType>
-                </xs:element>
-            </xs:sequence>
+            <xs:complexContent>
+                <xs:extension base="call">
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="to" type="ts:address"/>
+                        <xs:element minOccurs="0" name="value">
+                            <xs:complexType mixed="true">
+                                <xs:attribute name="ref" type="xs:NCName"/>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
         </xs:complexType>
     </xs:element>
 

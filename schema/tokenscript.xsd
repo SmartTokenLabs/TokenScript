@@ -267,8 +267,7 @@
     <xs:element name="transaction">
         <xs:complexType>
             <xs:choice>
-                <xs:element ref="ethereum:call"/>
-                <xs:element ref="ethereum:transfer"/>
+                <xs:element ref="ethereum:transaction"/>
             </xs:choice>
         </xs:complexType>
     </xs:element>
