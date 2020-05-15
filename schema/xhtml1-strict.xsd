@@ -29,8 +29,12 @@
     </xs:documentation>
   </xs:annotation>
 
+  <!-- xml schema location was at http://www.w3.org/2001/xml.xsd"
+       we cluster every schema file here to reduce dependency on the
+       availability of w3c's server -->
+
   <xs:import namespace="http://www.w3.org/XML/1998/namespace"
-      schemaLocation="http://www.w3.org/2001/xml.xsd"/>
+      schemaLocation="xml.xsd"/>
 
   <xs:annotation>
     <xs:documentation>
