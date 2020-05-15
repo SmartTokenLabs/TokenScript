@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:ethereum="urn:ethereum:constantinople"
+           xmlns="urn:ietf:params:xml:ns:asnx"
+           targetNamespace="urn:ietf:params:xml:ns:asnx"
+           elementFormDefault="unqualified">
+
+    <xs:import namespace="urn:ethereum:constantinople"
+               schemaLocation="ethereum.xsd"/>
+
+    <xs:element name="module">
+        <xs:complexType>
+            <xs:choice>
+                <xs:element name="sequence" type="container"/>
+            </xs:choice>
+            <xs:attribute name="name" type="xs:NCName"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="container">
+        <xs:choice maxOccurs="unbounded">
+            <xs:element name="element" type="element"/>
+        </xs:choice>
+    </xs:complexType>
+
+    <xs:complexType name="element">
+        <xs:attribute name="name" type="xs:NCName"/>
+        <xs:attribute ref="ethereum:type"/>
+        <xs:attribute ref="ethereum:indexed"/>
+    </xs:complexType>
+</xs:schema>
