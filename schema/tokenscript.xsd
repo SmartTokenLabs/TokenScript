@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           targetNamespace="http://tokenscript.org/2020/03/tokenscript"
+           xmlns:tokenscript="http://tokenscript.org/2020/06/tokenscript"
+           targetNamespace="http://tokenscript.org/2020/06/tokenscript"
            xmlns:xhtml="http://www.w3.org/1999/xhtml"
            xmlns:dsig="http://www.w3.org/2000/09/xmldsig#"
-           xmlns="http://tokenscript.org/2020/03/tokenscript"
+           xmlns="http://tokenscript.org/2020/06/tokenscript"
            xmlns:asnx="urn:ietf:params:xml:ns:asnx"
+           xmlns:ethereum="urn:ethereum:constantinople"
            elementFormDefault="qualified">
 
     <!-- Importing XML namespace for xml:lang and xml:id -->
@@ -24,16 +26,31 @@
     <xs:import namespace="urn:ietf:params:xml:ns:asnx"
                schemaLocation="asnx.xsd"/>
 
+    <xs:import namespace="urn:ethereum:constantinople"
+               schemaLocation="ethereum.xsd"/>
+
     <xs:include schemaLocation="data.xsd"/> <!-- soon to be replaced by data objects -->
-    
+
     <xs:element name="token">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="name" type="text"/>
+                <xs:element name="label" type="text"/>
                 <xs:element minOccurs="0" maxOccurs="unbounded" ref="contract"/>
-                <xs:element ref="origins"/>
+                <xs:element name="origins">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element ref="ethereum" />
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
                 <xs:element minOccurs="0" maxOccurs="unbounded" ref="selection"/>
-                <xs:element ref="cards"/>
+                <xs:element name="cards">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" ref="card"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
                 <xs:element minOccurs="0" ref="grouping"/>
                 <xs:element minOccurs="0" ref="ordering"/>
                 <xs:element minOccurs="0" maxOccurs="unbounded" ref="attribute-type"/>
@@ -41,18 +58,17 @@
             </xs:sequence>
             <xs:attribute name="custodian" type="xs:boolean"/>
         </xs:complexType>
+        <xs:key name="token-attributes">
+            <xs:selector xpath="tokenscript:attribute-type"></xs:selector>
+            <xs:field xpath="@name"></xs:field>
+        </xs:key>
     </xs:element>
-    <xs:complexType name="card">
-        <xs:choice maxOccurs="unbounded">
-            <xs:element minOccurs="0" ref="xhtml:style"/>
-            <xs:element minOccurs="0" maxOccurs="unbounded" ref="item-view"/>
-            <xs:element minOccurs="0" maxOccurs="unbounded" ref="view"/>
-        </xs:choice>
-    </xs:complexType>
-    <xs:element name="action">
+    <xs:element name="card">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="name" type="text"/>
+                <xs:element minOccurs="0" name="label" type="text"/>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="attribute-type"/>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="selection"/>
                 <!-- consider putting input and output in transaction
                      declaration later when/if DvP Security is
                      implemented.  At this stage, DvP security is not
@@ -62,13 +78,21 @@
                      them to <transaction> too early -->
                 <xs:element minOccurs="0" name="input" type="tokens"/>
                 <xs:element minOccurs="0" name="output" type="tokens"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="attribute-type"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="selection"/>
                 <xs:element minOccurs="0" ref="transaction"/>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="item-view"/>
                 <xs:element minOccurs="0" maxOccurs="unbounded" ref="view"/>
             </xs:sequence>
+            <xs:attribute name="type">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="token"/>
+                        <xs:enumeration value="action"/>
+                        <xs:enumeration value="activity"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
             <xs:attribute name="exclude" type="xs:IDREFS"/>
-            <xs:attribute name="available-to" type="xs:IDREFS"/>
+            <xs:attribute name="name" type="xs:NCName"/>
         </xs:complexType>
     </xs:element>
     <xs:complexType name="tokens">
@@ -137,15 +161,6 @@
         </xs:complexType>
     </xs:element>
     <xs:element name="interface" type="xs:NCName"/>
-    <xs:element name="cards">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" name="token" type="card"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="action"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" name="event" type="card"/>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
     <xs:element name="include" type="xs:NCName"/>
     <xs:element name="view" type="view"/>
     <xs:element name="item-view" type="view">
@@ -174,7 +189,7 @@
     <xs:element name="selection">
         <xs:complexType>
             <xs:sequence>
-                <xs:element minOccurs="0" name="name" type="text"/>
+                <xs:element minOccurs="0" name="label" type="text"/>
                 <xs:element minOccurs="0" name="denial" type="text"/>
             </xs:sequence>
             <xs:attribute name="id" type="xs:NCName"/>
@@ -230,11 +245,11 @@
     <xs:element name="attribute-type">
         <xs:complexType>
             <xs:sequence>
-                <!-- name is not needed if the attribute is only used for selection -->
-                <xs:element minOccurs="0" name="name" type="text"/>
+                <!-- label is not needed if the attribute is only used for selection -->
+                <xs:element minOccurs="0" name="label" type="text"/>
                 <xs:element ref="origins"/>
             </xs:sequence>
-            <xs:attribute name="id" use="required" type="xs:NCName"/>
+            <xs:attribute name="name" use="required" type="xs:NCName"/>
             <xs:attribute name="single-value" use="optional" type="xs:NCName"/>
             <xs:attribute name="oid" type="xs:NMTOKEN"/>
             <xs:attribute name="syntax" use="required" type="xs:NMTOKEN"/>
@@ -252,14 +267,16 @@
     <xs:element name="transaction">
         <xs:complexType>
             <xs:choice>
-                <xs:element ref="ethereum"/>
+                <xs:element ref="ethereum:call"/>
+                <xs:element ref="ethereum:transfer"/>
             </xs:choice>
         </xs:complexType>
     </xs:element>
     <xs:element name="origins">
         <xs:complexType>
             <xs:choice maxOccurs="unbounded">
-                <xs:element ref="ethereum"/>
+                <xs:element ref="ethereum:event"/>
+                <xs:element ref="ethereum:call"/>
                 <xs:element ref="user-entry"/>
                 <xs:element ref="token-id"/>
             </xs:choice>
