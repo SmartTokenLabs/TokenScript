@@ -142,6 +142,7 @@
                         <xs:element minOccurs="0" name="value">
                             <xs:complexType mixed="true">
                                 <xs:attribute name="ref" type="xs:NCName"/>
+                                <xs:attribute name="local-ref" type="xs:NCName"/>
                             </xs:complexType>
                         </xs:element>
                     </xs:sequence>
