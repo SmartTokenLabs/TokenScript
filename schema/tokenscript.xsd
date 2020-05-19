@@ -303,16 +303,6 @@
     </xs:element>
     <xs:element name="ethereum">
         <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" name="to" type="address"/>
-                <xs:element minOccurs="0" name="value">
-                    <xs:complexType mixed="true">
-                        <xs:attribute name="ref" type="xs:NCName"/>
-                    </xs:complexType>
-                </xs:element>
-                <xs:element minOccurs="0" ref="data"/>
-                <xs:element minOccurs="0" ref="mapping"/>
-            </xs:sequence>
             <xs:attribute name="as" type="as"/>
             <xs:attribute name="bitmask" type="bitmask"/>
             <xs:attribute name="contract" type="xs:IDREF"/>
