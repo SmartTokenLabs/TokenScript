@@ -1,74 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           xmlns:tokenscript="http://tokenscript.org/2020/06/tokenscript"
-           targetNamespace="http://tokenscript.org/2020/06/tokenscript"
-           xmlns:xhtml="http://www.w3.org/1999/xhtml"
-           xmlns:dsig="http://www.w3.org/2000/09/xmldsig#"
-           xmlns="http://tokenscript.org/2020/06/tokenscript"
-           xmlns:asnx="urn:ietf:params:xml:ns:asnx"
-           xmlns:ethereum="urn:ethereum:constantinople"
-           elementFormDefault="qualified">
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:ts="http://tokenscript.org/2020/06/tokenscript"
+        targetNamespace="http://tokenscript.org/2020/06/tokenscript"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:dsig="http://www.w3.org/2000/09/xmldsig#"
+        xmlns:asnx="urn:ietf:params:xml:ns:asnx"
+        xmlns:ethereum="urn:ethereum:constantinople"
+        elementFormDefault="qualified">
 
     <!-- Importing XML namespace for xml:lang and xml:id -->
-    <xs:import namespace="http://www.w3.org/XML/1998/namespace"
-               schemaLocation="xml.xsd"/>
+    <import namespace="http://www.w3.org/XML/1998/namespace"
+            schemaLocation="xml.xsd"/>
 
     <!-- Importing XML Signature namespace. Schema is from
         http://www.w3.org/TR/2008/REC-xmldsig-core-20080610/xmldsig-core-schema.xsd
     -->
-    <xs:import namespace="http://www.w3.org/2000/09/xmldsig#"
-               schemaLocation="xmldsig-core-schema.xsd"/>
+    <import namespace="http://www.w3.org/2000/09/xmldsig#"
+            schemaLocation="xmldsig-core-schema.xsd"/>
 
     <!-- Importing XHTML namespace. use xhtml1-strict.xsd to get xhtml:Block -->
-    <xs:import namespace="http://www.w3.org/1999/xhtml"
-               schemaLocation="xhtml1-strict.xsd"/>
+    <import namespace="http://www.w3.org/1999/xhtml"
+            schemaLocation="xhtml1-strict.xsd"/>
 
-    <xs:import namespace="urn:ietf:params:xml:ns:asnx"
-               schemaLocation="asnx.xsd"/>
+    <import namespace="urn:ietf:params:xml:ns:asnx"
+            schemaLocation="asnx.xsd"/>
 
-    <xs:import namespace="urn:ethereum:constantinople"
-               schemaLocation="ethereum.xsd"/>
+    <import namespace="urn:ethereum:constantinople"
+            schemaLocation="ethereum.xsd"/>
 
-    <xs:include schemaLocation="data.xsd"/> <!-- soon to be replaced by data objects -->
+    <include schemaLocation="data.xsd"/> <!-- soon to be replaced by data objects -->
 
-    <xs:element name="token">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element name="label" type="text"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="contract"/>
-                <xs:element name="origins">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:element ref="ethereum" />
-                        </xs:sequence>
-                    </xs:complexType>
-                </xs:element>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="selection"/>
-                <xs:element name="cards">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:element maxOccurs="unbounded" ref="card"/>
-                        </xs:sequence>
-                    </xs:complexType>
-                </xs:element>
-                <xs:element minOccurs="0" ref="grouping"/>
-                <xs:element minOccurs="0" ref="ordering"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="attribute-type"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="dsig:Signature"/>
-            </xs:sequence>
-            <xs:attribute name="custodian" type="xs:boolean"/>
-        </xs:complexType>
-        <xs:key name="token-attributes">
-            <xs:selector xpath="tokenscript:attribute-type"></xs:selector>
-            <xs:field xpath="@name"></xs:field>
-        </xs:key>
-    </xs:element>
-    <xs:element name="card">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" name="label" type="text"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="attribute-type"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="selection"/>
+    <element name="token">
+        <complexType>
+            <sequence>
+                <element name="label" type="ts:text"/>
+                <element minOccurs="0" maxOccurs="unbounded" ref="ts:contract"/>
+                <element name="origins">
+                    <complexType>
+                        <sequence>
+                            <element ref="ts:ethereum"/>
+                        </sequence>
+                    </complexType>
+                </element>
+                <element minOccurs="0" maxOccurs="unbounded" ref="ts:selection"/>
+                <element name="cards">
+                    <complexType>
+                        <sequence>
+                            <element maxOccurs="unbounded" ref="ts:card"/>
+                        </sequence>
+                    </complexType>
+                </element>
+                <element minOccurs="0" ref="ts:grouping"/>
+                <element minOccurs="0" ref="ts:ordering"/>
+                <element minOccurs="0" maxOccurs="unbounded" ref="ts:attribute-type"/>
+                <element minOccurs="0" maxOccurs="unbounded" ref="dsig:Signature"/>
+            </sequence>
+            <attribute name="custodian" type="boolean"/>
+        </complexType>
+        <key name="token-attributes">
+            <selector xpath="ts:attribute-type"></selector>
+            <field xpath="@name"></field>
+        </key>
+    </element>
+    <element name="card">
+        <complexType>
+            <sequence>
+                <element minOccurs="0" name="label" type="ts:text"/>
+                <element minOccurs="0" maxOccurs="unbounded" ref="ts:attribute-type"/>
+                <element minOccurs="0" maxOccurs="unbounded" ref="ts:selection"/>
                 <!-- consider putting input and output in transaction
                      declaration later when/if DvP Security is
                      implemented.  At this stage, DvP security is not
@@ -76,244 +75,244 @@
                      for the user interface only. One may argue that
                      this provides a false sense of security if we move
                      them to <transaction> too early -->
-                <xs:element minOccurs="0" name="input" type="tokens"/>
-                <xs:element minOccurs="0" name="output" type="tokens"/>
-                <xs:element minOccurs="0" ref="transaction"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="item-view"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="view"/>
-            </xs:sequence>
-            <xs:attribute name="type">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:enumeration value="token"/>
-                        <xs:enumeration value="action"/>
-                        <xs:enumeration value="activity"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:attribute>
-            <xs:attribute name="exclude" type="xs:IDREFS"/>
-            <xs:attribute name="name" type="xs:NCName"/>
-        </xs:complexType>
-    </xs:element>
-    <xs:complexType name="tokens">
-        <xs:choice maxOccurs="unbounded" minOccurs="0">
-            <xs:element name="token">
-                <xs:complexType>
-                    <xs:choice>
-                        <xs:element name="ethereum">
-                            <xs:complexType>
-                                <xs:attribute name="network"/>
-                            </xs:complexType>
-                        </xs:element>
-                        <xs:element ref="contract"/>
-                    </xs:choice>
-                    <xs:attribute name="name" type="xs:ID"/>
-                </xs:complexType>
-            </xs:element>
-        </xs:choice>
-    </xs:complexType>
-    <xs:complexType name="text">
-        <xs:sequence>
-            <xs:element minOccurs="0" maxOccurs="unbounded"  name="plurals">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element maxOccurs="unbounded" ref="string"/>
-                    </xs:sequence>
-                    <xs:attribute use="required" ref="xml:lang"/>
-                </xs:complexType>
-            </xs:element>
-            <xs:element minOccurs="0" maxOccurs="unbounded" ref="string"/>
-        </xs:sequence>
-    </xs:complexType>
-    <xs:element name="string">
-        <xs:complexType>
-            <xs:simpleContent>
-                <xs:extension base="xs:string">
-                    <xs:attribute ref="xml:lang"/>
-                    <xs:attribute name="quantity" type="quantity"/>
-                </xs:extension>
-            </xs:simpleContent>
-        </xs:complexType>
-    </xs:element>
-    <xs:simpleType name="quantity">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="zero"/>
-            <xs:enumeration value="one"/>
-            <xs:enumeration value="two"/>
-            <xs:enumeration value="few"/>
-            <xs:enumeration value="many"/>
-            <xs:enumeration value="other"/>
-        </xs:restriction>
-    </xs:simpleType>
-    <xs:element name="contract">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element maxOccurs="unbounded" name="address">
-                    <xs:complexType mixed="true">
-                        <xs:attribute name="network" use="required" type="xs:integer"/>
-                    </xs:complexType>
-                </xs:element>
-                <xs:element ref="asnx:module" minOccurs="0" maxOccurs="unbounded"/>
-                <xs:element minOccurs="0" ref="interface"/>
-            </xs:sequence>
-            <xs:attribute name="name" type="xs:ID"/>
-            <xs:attribute name="interface" type="xs:NCName"/>
-        </xs:complexType>
-    </xs:element>
-    <xs:element name="interface" type="xs:NCName"/>
-    <xs:element name="include" type="xs:NCName"/>
-    <xs:element name="view" type="view"/>
-    <xs:element name="item-view" type="view">
-    </xs:element>
-    <xs:complexType name="view">
-        <xs:sequence>
-            <xs:element minOccurs="0" maxOccurs="unbounded" ref="xhtml:style"/>
-            <xs:element minOccurs="0" maxOccurs="unbounded" ref="xhtml:script"/>
-            <xs:element minOccurs="0" ref="xhtml:body"/>
-        </xs:sequence>
-        <xs:attribute ref="xml:lang"/>
-    </xs:complexType>
-    <xs:element name="redeem">
-        <xs:complexType>
-            <xs:attribute name="format" use="required" type="xs:NCName"/>
-        </xs:complexType>
-    </xs:element>
-    <xs:element name="exclude">
-        <xs:complexType>
-            <xs:attribute name="selection"/>
-        </xs:complexType>
-    </xs:element>
-    <xs:element name="feemaster" type="xs:anyURI"/>
-    <xs:element name="gateway" type="xs:anyURI"/>
-    <xs:element name="prefix" type="xs:anyURI"/>
-    <xs:element name="selection">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" name="label" type="text"/>
-                <xs:element minOccurs="0" name="denial" type="text"/>
-            </xs:sequence>
-            <xs:attribute name="id" type="xs:NCName"/>
-            <xs:attribute name="filter" type="xs:string" use="required"></xs:attribute>
-        </xs:complexType>
-    </xs:element>
-    <xs:element name="grouping">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element ref="group"/>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
-    <xs:element name="group">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element ref="consecutive_groups"/>
-            </xs:sequence>
-            <xs:attribute name="bitmask" use="required"/>
-            <xs:attribute name="name" use="required" type="xs:NCName"/>
-        </xs:complexType>
-    </xs:element>
-    <xs:element name="consecutive_groups">
-        <xs:complexType/>
-    </xs:element>
-    <xs:element name="ordering">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element maxOccurs="unbounded" ref="order"/>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
-    <xs:element name="order">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" ref="byName"/>
-                <xs:element maxOccurs="unbounded" ref="byValue"/>
-            </xs:sequence>
-            <xs:attribute name="bitmask" use="required"/>
-            <xs:attribute name="name" use="required" type="xs:NCName"/>
-        </xs:complexType>
-    </xs:element>
-    <xs:element name="byName">
-        <xs:complexType>
-            <xs:attribute name="field" use="required" type="xs:NCName"/>
-        </xs:complexType>
-    </xs:element>
-    <xs:element name="byValue">
-        <xs:complexType>
-            <xs:attribute name="field" use="required" type="xs:NCName"/>
-        </xs:complexType>
-    </xs:element>
-    <xs:element name="attribute-type">
-        <xs:complexType>
-            <xs:sequence>
+                <element minOccurs="0" name="input" type="ts:tokens"/>
+                <element minOccurs="0" name="output" type="ts:tokens"/>
+                <element minOccurs="0" ref="ts:transaction"/>
+                <element minOccurs="0" maxOccurs="unbounded" ref="ts:item-view"/>
+                <element minOccurs="0" maxOccurs="unbounded" ref="ts:view"/>
+            </sequence>
+            <attribute name="type">
+                <simpleType>
+                    <restriction base="string">
+                        <enumeration value="token"/>
+                        <enumeration value="action"/>
+                        <enumeration value="activity"/>
+                    </restriction>
+                </simpleType>
+            </attribute>
+            <attribute name="exclude" type="IDREFS"/>
+            <attribute name="name" type="NCName"/>
+        </complexType>
+    </element>
+    <complexType name="tokens">
+        <choice maxOccurs="unbounded" minOccurs="0">
+            <element name="token">
+                <complexType>
+                    <choice>
+                        <element name="ethereum">
+                            <complexType>
+                                <attribute name="network"/>
+                            </complexType>
+                        </element>
+                        <element ref="ts:contract"/>
+                    </choice>
+                    <attribute name="name" type="ID"/>
+                </complexType>
+            </element>
+        </choice>
+    </complexType>
+    <complexType name="text">
+        <sequence>
+            <element minOccurs="0" maxOccurs="unbounded" name="plurals">
+                <complexType>
+                    <sequence>
+                        <element maxOccurs="unbounded" ref="ts:string"/>
+                    </sequence>
+                    <attribute use="required" ref="xml:lang"/>
+                </complexType>
+            </element>
+            <element minOccurs="0" maxOccurs="unbounded" ref="ts:string"/>
+        </sequence>
+    </complexType>
+    <element name="string">
+        <complexType>
+            <simpleContent>
+                <extension base="string">
+                    <attribute ref="xml:lang"/>
+                    <attribute name="quantity" type="ts:quantity"/>
+                </extension>
+            </simpleContent>
+        </complexType>
+    </element>
+    <simpleType name="quantity">
+        <restriction base="string">
+            <enumeration value="zero"/>
+            <enumeration value="one"/>
+            <enumeration value="two"/>
+            <enumeration value="few"/>
+            <enumeration value="many"/>
+            <enumeration value="other"/>
+        </restriction>
+    </simpleType>
+    <element name="contract">
+        <complexType>
+            <sequence>
+                <element maxOccurs="unbounded" name="address">
+                    <complexType mixed="true">
+                        <attribute name="network" use="required" type="integer"/>
+                    </complexType>
+                </element>
+                <element ref="asnx:module" minOccurs="0" maxOccurs="unbounded"/>
+                <element minOccurs="0" ref="ts:interface"/>
+            </sequence>
+            <attribute name="name" type="ID"/>
+            <attribute name="interface" type="NCName"/>
+        </complexType>
+    </element>
+    <element name="interface" type="NCName"/>
+    <element name="include" type="NCName"/>
+    <element name="view" type="ts:view"/>
+    <element name="item-view" type="ts:view">
+    </element>
+    <complexType name="view">
+        <sequence>
+            <element minOccurs="0" maxOccurs="unbounded" ref="xhtml:style"/>
+            <element minOccurs="0" maxOccurs="unbounded" ref="xhtml:script"/>
+            <element minOccurs="0" ref="xhtml:body"/>
+        </sequence>
+        <attribute ref="xml:lang"/>
+    </complexType>
+    <element name="redeem">
+        <complexType>
+            <attribute name="format" use="required" type="NCName"/>
+        </complexType>
+    </element>
+    <element name="exclude">
+        <complexType>
+            <attribute name="selection"/>
+        </complexType>
+    </element>
+    <element name="feemaster" type="anyURI"/>
+    <element name="gateway" type="anyURI"/>
+    <element name="prefix" type="anyURI"/>
+    <element name="selection">
+        <complexType>
+            <sequence>
+                <element minOccurs="0" name="label" type="ts:text"/>
+                <element minOccurs="0" name="denial" type="ts:text"/>
+            </sequence>
+            <attribute name="id" type="NCName"/>
+            <attribute name="filter" type="string" use="required"></attribute>
+        </complexType>
+    </element>
+    <element name="grouping">
+        <complexType>
+            <sequence>
+                <element ref="ts:group"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="group">
+        <complexType>
+            <sequence>
+                <element ref="ts:consecutive_groups"/>
+            </sequence>
+            <attribute name="bitmask" use="required"/>
+            <attribute name="name" use="required" type="NCName"/>
+        </complexType>
+    </element>
+    <element name="consecutive_groups">
+        <complexType/>
+    </element>
+    <element name="ordering">
+        <complexType>
+            <sequence>
+                <element maxOccurs="unbounded" ref="ts:order"/>
+            </sequence>
+        </complexType>
+    </element>
+    <element name="order">
+        <complexType>
+            <sequence>
+                <element minOccurs="0" ref="ts:byName"/>
+                <element maxOccurs="unbounded" ref="ts:byValue"/>
+            </sequence>
+            <attribute name="bitmask" use="required"/>
+            <attribute name="name" use="required" type="NCName"/>
+        </complexType>
+    </element>
+    <element name="byName">
+        <complexType>
+            <attribute name="field" use="required" type="NCName"/>
+        </complexType>
+    </element>
+    <element name="byValue">
+        <complexType>
+            <attribute name="field" use="required" type="NCName"/>
+        </complexType>
+    </element>
+    <element name="attribute-type">
+        <complexType>
+            <sequence>
                 <!-- label is not needed if the attribute is only used for selection -->
-                <xs:element minOccurs="0" name="label" type="text"/>
-                <xs:element ref="origins"/>
-            </xs:sequence>
-            <xs:attribute name="name" use="required" type="xs:NCName"/>
-            <xs:attribute name="single-value" use="optional" type="xs:NCName"/>
-            <xs:attribute name="oid" type="xs:NMTOKEN"/>
-            <xs:attribute name="syntax" use="required" type="xs:NMTOKEN"/>
-        </xs:complexType>
-    </xs:element>
-    <xs:simpleType name="syntax">
-        <xs:restriction base="xs:NMTOKEN">
-            <xs:enumeration value="1.3.6.1.4.1.1466.115.121.1.7"/><!-- Boolean -->
-            <xs:enumeration value="1.3.6.1.4.1.1466.115.121.1.15"/><!-- DirectoryString -->
-            <xs:enumeration value="1.3.6.1.4.1.1466.115.121.1.24"/><!-- GeneralizedTime -->
-            <xs:enumeration value="1.3.6.1.4.1.1466.115.121.1.27"/><!-- Integer -->
-            <xs:enumeration value="1.3.6.1.4.1.1466.115.121.1.36"/><!-- NumericString -->
-        </xs:restriction>
-    </xs:simpleType>
-    <xs:element name="transaction">
-        <xs:complexType>
-            <xs:choice>
-                <xs:element ref="ethereum:transaction"/>
-            </xs:choice>
-        </xs:complexType>
-    </xs:element>
-    <xs:element name="origins">
-        <xs:complexType>
-            <xs:choice maxOccurs="unbounded">
-                <xs:element ref="ethereum:event"/>
-                <xs:element ref="ethereum:call"/>
-                <xs:element ref="user-entry"/>
-                <xs:element ref="token-id"/>
-            </xs:choice>
-        </xs:complexType>
-    </xs:element>
-    <xs:simpleType name="bitmask">
-        <xs:restriction base="xs:hexBinary"/>
-    </xs:simpleType>
-    <xs:element name="user-entry">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" ref="mapping"/>
-            </xs:sequence>
-            <xs:attribute name="as" type="as" use="required"/>
-        </xs:complexType>
-    </xs:element>
-    <xs:element name="token-id">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" ref="mapping"/>
-            </xs:sequence>
-            <xs:attribute name="as" type="as" use="required"/>
-            <xs:attribute name="bitmask" type="bitmask"/>
-        </xs:complexType>
-    </xs:element>
-    <xs:element name="ethereum">
-        <xs:complexType>
-            <xs:attribute name="as" type="as"/>
-            <xs:attribute name="bitmask" type="bitmask"/>
-            <xs:attribute name="contract" type="xs:IDREF"/>
-            <xs:attribute name="function" type="xs:NCName"/>
-            <xs:attribute name="event" type="xs:NCName"/>
-            <xs:attribute name="filter" type="xs:string"/>
+                <element minOccurs="0" name="label" type="ts:text"/>
+                <element ref="ts:origins"/>
+            </sequence>
+            <attribute name="name" use="required" type="NCName"/>
+            <attribute name="single-value" use="optional" type="NCName"/>
+            <attribute name="oid" type="NMTOKEN"/>
+            <attribute name="syntax" use="required" type="NMTOKEN"/>
+        </complexType>
+    </element>
+    <simpleType name="syntax">
+        <restriction base="NMTOKEN">
+            <enumeration value="1.3.6.1.4.1.1466.115.121.1.7"/><!-- Boolean -->
+            <enumeration value="1.3.6.1.4.1.1466.115.121.1.15"/><!-- DirectoryString -->
+            <enumeration value="1.3.6.1.4.1.1466.115.121.1.24"/><!-- GeneralizedTime -->
+            <enumeration value="1.3.6.1.4.1.1466.115.121.1.27"/><!-- Integer -->
+            <enumeration value="1.3.6.1.4.1.1466.115.121.1.36"/><!-- NumericString -->
+        </restriction>
+    </simpleType>
+    <element name="transaction">
+        <complexType>
+            <choice>
+                <element ref="ethereum:transaction"/>
+            </choice>
+        </complexType>
+    </element>
+    <element name="origins">
+        <complexType>
+            <choice maxOccurs="unbounded">
+                <element ref="ethereum:event"/>
+                <element ref="ethereum:call"/>
+                <element ref="ts:user-entry"/>
+                <element ref="ts:token-id"/>
+            </choice>
+        </complexType>
+    </element>
+    <simpleType name="bitmask">
+        <restriction base="hexBinary"/>
+    </simpleType>
+    <element name="user-entry">
+        <complexType>
+            <sequence>
+                <element minOccurs="0" ref="ts:mapping"/>
+            </sequence>
+            <attribute name="as" type="ts:as" use="required"/>
+        </complexType>
+    </element>
+    <element name="token-id">
+        <complexType>
+            <sequence>
+                <element minOccurs="0" ref="ts:mapping"/>
+            </sequence>
+            <attribute name="as" type="ts:as" use="required"/>
+            <attribute name="bitmask" type="ts:bitmask"/>
+        </complexType>
+    </element>
+    <element name="ethereum">
+        <complexType>
+            <attribute name="as" type="ts:as"/>
+            <attribute name="bitmask" type="ts:bitmask"/>
+            <attribute name="contract" type="IDREF"/>
+            <attribute name="function" type="NCName"/>
+            <attribute name="event" type="NCName"/>
+            <attribute name="filter" type="string"/>
             <!-- TODO: this should be whatever ASN.X allows as element name -->
-            <xs:attribute name="select" type="xs:NCName"/>
-        </xs:complexType>
-    </xs:element>
-    <xs:complexType name="address" mixed="true">
-        <xs:attribute name="ref" type="xs:NCName"/>
-    </xs:complexType>
-</xs:schema>
+            <attribute name="select" type="NCName"/>
+        </complexType>
+    </element>
+    <complexType name="address" mixed="true">
+        <attribute name="ref" type="NCName"/>
+    </complexType>
+</schema>
