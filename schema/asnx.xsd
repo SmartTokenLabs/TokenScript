@@ -24,6 +24,9 @@
     </complexType>
 
     <complexType name="element">
+        <sequence>
+            <element ref="asnx:type"></element>
+        </sequence>
         <attribute name="name" type="NCName"/>
         <attribute name="type" type="asnx:type"/>
         <attribute ref="ethereum:type"/>
@@ -32,10 +35,40 @@
 
     <simpleType name="type">
         <restriction base="string">
-            <enumeration value="asnx:UTF8String"/>
-            <enumeration value="asnx:INTEGER"/>
+            <!-- built-in simple types -->
             <enumeration value="asnx:BOOLEAN"/>
+            <enumeration value="asnx:INTEGER"/>
+            <enumeration value="asnx:BIT-STRING"/>
             <enumeration value="asnx:OCTET-STRING"/>
+            <enumeration value="asnx:NULL"/>
+            <enumeration value="asnx:OBJECT-IDENTIFIER"/>
+            <enumeration value="asnx:REAL"/>
+            <!-- useful types -->
+            <enumeration value="asnx:UTCTime"/>
+            <enumeration value="asnx:UTF8String"/>
         </restriction>
     </simpleType>
+
+    <element name="type">
+        <complexType>
+            <sequence>
+                <element ref="asnx:enumerated"/>
+            </sequence>
+        </complexType>
+    </element>
+
+    <element name="enumerated">
+        <complexType>
+            <sequence>
+                <element ref="asnx:enumeration"/>
+            </sequence>
+        </complexType>
+    </element>
+
+    <element name="enumeration">
+        <complexType>
+            <attribute name="name" type="NCName"/>
+            <attribute name="number" type="integer"/>
+        </complexType>
+    </element>
 </schema>
