@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<ts:token xmlns:ts="http://tokenscript.org/2020/06/tokenscript"
+          xmlns:ethereum="urn:ethereum:constantinople"
+          xmlns:xhtml="http://www.w3.org/1999/xhtml"
+          xmlns:asnx="urn:ietf:params:xml:ns:asnx"
+          xmlns:xml="http://www.w3.org/XML/1998/namespace"
+          xsi:schemaLocation="http://tokenscript.org/2020/06/tokenscript ../schema/tokenscript.xsd"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          custodian="false">
+    <ts:contract name="ticket-issuer">
+        <ts:address network="1">0xdecafbad</ts:address>
+        <asnx:module name="NameRegistered">
+            <sequence>
+                <element name="numero" type="asnx:INTEGER"/>
+                <element name="owner" type="asnx:OCTET-STRING" ethereum:type="address"/>
+                <element name="class">
+                    <type>
+                        <enumerated>
+                            <enumeration name="normal" number="0"/>
+                            <enumeration name="gift" number="1"/>
+                            <enumeration name="VIP" number="2"/>
+                        </enumerated>
+                    </type>
+                </element>
+                <element name="start" type="asnx:UTCTime"/>
+            </sequence>
+        </asnx:module>
+    </ts:contract>
+    <ts:attribute-type name="numero" syntax="Integer">
+        <ts:label>
+            <ts:string>№</ts:string>
+        </ts:label>
+        <ts:origins>
+            <attestation ref="ticket" signer="0x24f9269ea7f6993ad3133102b923de88b8bcf882bf46f0a7b062eb5b3925af48"/>
+        </ts:origins>
+    </ts:attribute-type>
+    <ts:attribute-type name="redeembed" syntax="Boolean">
+        <ts:label>
+            <ts:string xml:lang="en">Redeemed</ts:string>
+        </ts:label>
+        <ts:origins>
+            <ethereum:call function="redeemed()" contract="ticket-issuer">
+                <sequence>
+                    <element name="numero" ref="numero" type="ethereum:uint"/>
+                </sequence>
+            </ethereum:call>
+        </ts:origins>
+    </ts:attribute-type>
+</ts:token>
