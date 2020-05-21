@@ -1,12 +1,37 @@
-  PrivateKeyInfo ::= SEQUENCE {
-    version                   Version,
-    privateKeyAlgorithm       PrivateKeyAlgorithmIdentifier,
-    privateKey                PrivateKey,
-    attributes           [0]  IMPLICIT Attributes OPTIONAL }
-  Version ::= INTEGER
-  PrivateKeyAlgorithmIdentifier ::= AlgorithmIdentifier
-  PrivateKey ::= OCTET STRING
-  Attributes ::= SET OF Attribute
-    AlgorithmIdentifier  ::=  SEQUENCE  {
-    algorithm               OBJECT IDENTIFIER,
-    parameters              ANY DEFINED BY algorithm OPTIONAL  }
+RFC5280
+DEFINITIONS EXPLICIT TAGS ::=
+BEGIN
+
+      PrivateKeyInfo ::= SEQUENCE {
+        version                   Version,
+        privateKeyAlgorithm       PrivateKeyAlgorithmIdentifier,
+        privateKey                PrivateKey,
+        attributes           [0]  IMPLICIT Attributes OPTIONAL }
+
+      Version ::= INTEGER
+
+      PrivateKeyAlgorithmIdentifier ::= AlgorithmIdentifier
+
+      PrivateKey ::= OCTET STRING
+
+      Attributes ::= SET OF Attribute
+
+      Attribute ::= SEQUENCE {
+        type                    ATTRIBUTE.&id,
+        values                  SET SIZE (0..MAX) OF ATTRIBUTE.&Type }
+
+      ATTRIBUTE ::= CLASS {
+        &Type,
+        &id                     OBJECT IDENTIFIER UNIQUE }
+      WITH SYNTAX { [&Type] IDENTIFIED BY &id }
+
+      AlgorithmIdentifier  ::=  SEQUENCE  {
+        algorithm               ALGORITHM.&id,
+        parameters              ALGORITHM.&Type OPTIONAL  }
+
+      ALGORITHM ::= CLASS {
+        &Type                   OPTIONAL,
+        &id                     OBJECT IDENTIFIER UNIQUE }
+      WITH SYNTAX { [&Type] IDENTIFIED BY &id }
+
+END
