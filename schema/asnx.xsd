@@ -10,30 +10,40 @@
 
     <element name="module">
         <complexType>
-            <choice>
+            <choice maxOccurs="unbounded">
                 <element name="sequence" type="asnx:container"/>
+                <element name="namedType" type="asnx:namedType"/>
             </choice>
             <attribute name="name" type="NCName"/>
         </complexType>
     </element>
 
+    <complexType name="namedType">
+        <choice minOccurs="0">
+            <element name="type" type="asnx:type"/>
+        </choice>
+        <attribute name="name" type="NCName"/>
+        <attribute name="type" type="Name"/><!-- should be type="asnx:type" -->
+    </complexType>
+
     <complexType name="container">
         <choice maxOccurs="unbounded">
             <element name="element" type="asnx:element"/>
+            <element name="optional" type="asnx:container"/>
         </choice>
     </complexType>
 
     <complexType name="element">
-        <sequence>
-            <element ref="asnx:type"></element>
-        </sequence>
+        <choice minOccurs="0">
+            <element name="type" type="asnx:type"></element>
+        </choice>
         <attribute name="name" type="NCName"/>
-        <attribute name="type" type="asnx:type"/>
+        <attribute name="type" type="Name"/><!-- should be type="asnx:type" -->
         <attribute ref="ethereum:type"/>
         <attribute ref="ethereum:indexed"/>
     </complexType>
 
-    <simpleType name="type">
+    <simpleType name="builtin-type">
         <restriction base="string">
             <!-- built-in simple types -->
             <enumeration value="asnx:BOOLEAN"/>
@@ -49,13 +59,20 @@
         </restriction>
     </simpleType>
 
-    <element name="type">
-        <complexType>
-            <sequence>
-                <element ref="asnx:enumerated"/>
-            </sequence>
-        </complexType>
-    </element>
+    <complexType name="type">
+        <choice>
+            <element name="sequence" type="asnx:container"/>
+            <element name="setOf" type="asnx:container"/>
+            <element name="tagged">
+                <complexType>
+                    <attribute name="number" type="integer"/>
+                    <attribute name="type" type="Name"/>
+                    <attribute name="tagging" type="string"/>
+                </complexType>
+            </element>
+            <element ref="asnx:enumerated"/>
+        </choice>
+    </complexType>
 
     <element name="enumerated">
         <complexType>

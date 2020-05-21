@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<attestation xmlns:xi="http://www.w3.org/2001/XInclude"
+             xmlns:asnx="urn:ietf:params:xml:ns:asnx"
+>
+    <!-- PrivateKeyInfo is from RFC5208.  Should you wish to test
+         parsing some data encoded tihs way, use the following
+         secp256k1 key excerpt from the bottom of RFC 7468 page 12.
+      -->
+    <xi:include href="RFC5280.asd"/>
+
+    <asnx:module name="identifier">
+        <sequence>
+            <element name="identifier-type" type="asnx:OBJECT-IDENTIFIER"/>
+            <element name="identifier" type="asnx:UTF8String"/>
+        </sequence>
+    </asnx:module>
+
+    <attested module="identifier"/>
+    <secret module="PrivateKeyInfo"/>
+</attestation>
