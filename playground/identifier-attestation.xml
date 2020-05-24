@@ -6,15 +6,26 @@
          parsing some data encoded tihs way, use the following
          secp256k1 key excerpt from the bottom of RFC 7468 page 12.
       -->
-    <xi:include href="RFC5280.asd"/>
+    <xi:include href="RFC5280.asd" name="PrivateKeyInfo"/>
+
+    <!-- this is the dataObject, what is attested -->
 
     <asnx:module name="identifier">
-        <sequence>
+      <sequence>
+            <!-- it can be mail, or mobile, emailAddress is
+                 1.2.840.113549.1.9.1 and mobile is
+                 0.9.2342.19200300.100.1.41 -->
             <element name="identifier-type" type="asnx:OBJECT-IDENTIFIER"/>
+            <!-- it can be the actual email address or mobile number -->
             <element name="identifier" type="asnx:UTF8String"/>
         </sequence>
     </asnx:module>
 
-    <attested module="identifier"/>
-    <secret module="PrivateKeyInfo"/>
+    <!-- the following defines what are stored  -->
+    <!-- two modules: signed info and attestation are implied
+         (TokneScript authors should only care about the core part
+         which is the information attested, i.e. dataObject.
+    -->
+    <attested dataObject="identifier" attestor="0x8098080"/>
+    <secret module="PrivateKeyInfo" name="s"/>
 </attestation>
