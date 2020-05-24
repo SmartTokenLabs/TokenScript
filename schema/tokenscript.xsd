@@ -52,13 +52,13 @@
                 </element>
                 <element minOccurs="0" ref="ts:grouping"/>
                 <element minOccurs="0" ref="ts:ordering"/>
-                <element minOccurs="0" maxOccurs="unbounded" ref="ts:attribute-type"/>
+                <element minOccurs="0" maxOccurs="unbounded" ref="ts:attribute"/>
                 <element minOccurs="0" maxOccurs="unbounded" ref="dsig:Signature"/>
             </sequence>
             <attribute name="custodian" type="boolean"/>
         </complexType>
         <key name="token-attributes">
-            <selector xpath="ts:attribute-type"></selector>
+            <selector xpath="ts:attribute"></selector>
             <field xpath="@name"></field>
         </key>
     </element>
@@ -66,7 +66,7 @@
         <complexType>
             <sequence>
                 <element minOccurs="0" name="label" type="ts:text"/>
-                <element minOccurs="0" maxOccurs="unbounded" ref="ts:attribute-type"/>
+                <element minOccurs="0" maxOccurs="unbounded" ref="ts:attribute"/>
                 <element minOccurs="0" maxOccurs="unbounded" ref="ts:selection"/>
                 <!-- consider putting input and output in transaction
                      declaration later when/if DvP Security is
@@ -241,17 +241,22 @@
             <attribute name="field" use="required" type="NCName"/>
         </complexType>
     </element>
-    <element name="attribute-type">
+    <element name="attribute">
         <complexType>
             <sequence>
+                <element name="type">
+                    <complexType>
+                        <sequence>
+                            <element name="syntax"/>
+                        </sequence>
+                    </complexType>
+                </element>
                 <!-- label is not needed if the attribute is only used for selection -->
                 <element minOccurs="0" name="label" type="ts:text"/>
                 <element ref="ts:origins"/>
             </sequence>
             <attribute name="name" use="required" type="NCName"/>
-            <attribute name="single-value" use="optional" type="NCName"/>
             <attribute name="oid" type="NMTOKEN"/>
-            <attribute name="syntax" use="required" type="NMTOKEN"/>
         </complexType>
     </element>
     <simpleType name="syntax">
