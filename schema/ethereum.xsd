@@ -128,7 +128,6 @@
                 <xs:element minOccurs="0" ref="ts:mapping"/>
             </xs:sequence>
             <xs:attribute name="as" type="ts:as"/>
-            <xs:attribute name="bitmask" type="ts:bitmask"/>
             <xs:attribute name="contract" type="xs:IDREF"/>
             <xs:attribute name="function" type="xs:NCName"/>
         </xs:complexType>
@@ -154,7 +153,8 @@
     <xs:element name="event">
         <xs:complexType>
             <!-- TODO: this should be whatever ASN.X allows as element name -->
-            <xs:attribute name="module" type="xs:NCName"/>
+            <xs:attribute name="type" type="xs:NCName"/>
+            <xs:attribute name="contract" type="xs:IDREF"/>
             <xs:attribute name="filter" type="xs:string"/>
             <xs:attribute name="select" type="xs:NCName"/>
         </xs:complexType>

@@ -33,6 +33,7 @@
     <element name="token">
         <complexType>
             <sequence>
+                <element ref="asnx:module" minOccurs="0" maxOccurs="unbounded"/>
                 <element name="label" type="ts:text"/>
                 <element minOccurs="0" maxOccurs="unbounded" ref="ts:contract"/>
                 <element name="origins">
@@ -152,7 +153,6 @@
                         <attribute name="network" use="required" type="integer"/>
                     </complexType>
                 </element>
-                <element ref="asnx:module" minOccurs="0" maxOccurs="unbounded"/>
                 <element minOccurs="0" ref="ts:interface"/>
             </sequence>
             <attribute name="name" type="ID"/>
@@ -191,7 +191,7 @@
                 <element minOccurs="0" name="label" type="ts:text"/>
                 <element minOccurs="0" name="denial" type="ts:text"/>
             </sequence>
-            <attribute name="id" type="NCName"/>
+            <attribute name="name" type="NCName"/>
             <attribute name="filter" type="string" use="required"></attribute>
         </complexType>
     </element>
