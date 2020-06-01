@@ -11,12 +11,18 @@
     <element name="module">
         <complexType>
             <choice>
-                <element name="sequence" type="asnx:container"/>
+                <element name="namedType" type="asnx:namedType"/>
             </choice>
             <attribute name="name" type="NCName"/>
         </complexType>
     </element>
 
+    <complexType name="namedType">
+        <choice>
+            <element name="sequence" type="asnx:container"/>
+        </choice>
+        <attribute name="name" type="NCName"/>
+    </complexType>
     <complexType name="container">
         <choice maxOccurs="unbounded">
             <element name="element" type="asnx:element"/>
