@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE token  [
+        <!ENTITY style SYSTEM "layouts/shared.css">
+        <!ENTITY item-view-sent.en SYSTEM "layouts/item-view-sent.en.js">
+        <!ENTITY item-view-received.en SYSTEM "layouts/item-view-sent.en.js">
+        <!ENTITY item-view-approvalObtained.en SYSTEM "layouts/item-view-approvalObtained.en.js">
+        <!ENTITY item-view-ownerApproved.en SYSTEM "layouts/item-view-ownerApproved.en.js">
+        <!ENTITY sent.en SYSTEM "layouts/sent.en.js">
+        <!ENTITY received.en SYSTEM "layouts/received.en.js">
+        <!ENTITY receivedApproval.en SYSTEM "layouts/receivedApproval.en.js">
+        <!ENTITY gaveApproval.en SYSTEM "layouts/gaveApproval.en.js">
+        ]>
+<ts:token xmlns:ts="http://tokenscript.org/2020/06/tokenscript"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:asnx="urn:ietf:params:xml:ns:asnx"
+    xmlns:ethereum="urn:ethereum:constantinople"
+    xsi:schemaLocation="http://tokenscript.org/2020/06/tokenscript http://tokenscript.org/2020/06/tokenscript.xsd"
+    custodian="false"
+>
+    <asnx:module name="ERC20-Events">
+        <namedType name="Approval">
+            <sequence>
+                <element name="owner" ethereum:type="address" ethereum:indexed="true"/>
+                <element name="spender" ethereum:type="address" ethereum:indexed="true"/>
+                <element name="value" ethereum:type="uint256" ethereum:indexed="false"/>
+            </sequence>
+        </namedType>
+        <namedType name="Transfer">
+            <sequence>
+                <element name="from" ethereum:type="address" ethereum:indexed="true"/>
+                <element name="to" ethereum:type="address" ethereum:indexed="true"/>
+                <element name="value" ethereum:type="uint256" ethereum:indexed="false"/>
+            </sequence>
+        </namedType>
+    </asnx:module>
+    <ts:cards>
+        <ts:card type="activity" name="sent">
+            <ts:attribute name="amount">
+                <ts:type>
+                    <ts:syntax>1.3.6.1.4.1.1466.115.121.1.36</ts:syntax>
+                </ts:type>
+                <ts:origins>
+                    <ethereum:event type="Transfer" filter="${from}=${ownerAddress}" select="amount"/>
+                </ts:origins>
+            </ts:attribute>
+            <ts:item-view xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+                <script>&item-view-sent.en;</script>
+                <style>&style;</style>
+            </ts:item-view>
+            <ts:view>
+                <script>&sent.en;</script>
+                <style>&style;</style>
+            </ts:view>
+        </ts:card>
+        <ts:card type="activity" name="received">
+            <ts:attribute name="amount">
+                <ts:type>
+                    <ts:syntax>1.3.6.1.4.1.1466.115.121.1.36</ts:syntax>
+                </ts:type>
+                <ts:origins>
+                    <ethereum:event type="Transfer" filter="${to}=${ownerAddress}" select="amount"/>
+                </ts:origins>
+            </ts:attribute>
+            <ts:item-view xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+                <script>&item-view-received.en;</script>
+                <style>&style;</style>
+            </ts:item-view>
+            <ts:view>
+                <script>&received.en;</script>
+                <style>&style;</style>
+            </ts:view>
+        </ts:card>
+
+        <ts:card type="activity" name="ownerApproved">
+            <ts:attribute name="amount">
+                <ts:type>
+                    <ts:syntax>1.3.6.1.4.1.1466.115.121.1.36</ts:syntax>
+                </ts:type>
+                <ts:origins>
+                    <ethereum:event type="Approval" filter="${from}=${ownerAddress}" select="amount"/>
+                </ts:origins>
+            </ts:attribute>
+            <ts:attribute name="to">
+                <ts:type>
+                    <ts:syntax>1.3.6.1.4.1.1466.115.121.1.36</ts:syntax>
+                </ts:type>
+                <ts:origins>
+                    <ethereum:event type="Approval" filter="${to}=${ownerAddress}" select="to"/>
+                </ts:origins>
+            </ts:attribute>
+            <ts:item-view xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+                <script>&item-view-ownerApproved.en;</script>
+                <style>&style;</style>
+            </ts:item-view>
+            <ts:view>
+                <script>&gaveApproval.en;</script>
+                <style>&style;</style>
+            </ts:view>
+        </ts:card>
+
+        <ts:card type="activity" name="approvalObtained">
+            <ts:attribute name="amount">
+                <ts:type>
+                    <ts:syntax>1.3.6.1.4.1.1466.115.121.1.36</ts:syntax>
+                </ts:type>
+                <ts:origins>
+                    <ethereum:event type="Approval" filter="${to}=${ownerAddress}" select="amount"/>
+                </ts:origins>
+            </ts:attribute>
+            <ts:attribute name="from">
+                <ts:type>
+                    <ts:syntax>1.3.6.1.4.1.1466.115.121.1.36</ts:syntax>
+                </ts:type>
+                <ts:origins>
+                    <ethereum:event type="Approval" filter="${to}=${ownerAddress}" select="from"/>
+                </ts:origins>
+            </ts:attribute>
+            <ts:item-view xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+                <script>&item-view-approvalObtained.en;</script>
+                <style>&style;</style>
+            </ts:item-view>
+            <ts:view>
+                <script>&receivedApproval.en;</script>
+                <style>&style;</style>
+            </ts:view>
+        </ts:card>
+
+    </ts:cards>
+    <ts:attribute name="name">
+        <ts:type>
+            <ts:syntax>1.3.6.1.4.1.1466.115.121.1.26</ts:syntax>
+        </ts:type>
+        <ts:label>
+            <ts:string xml:lang="en">name</ts:string>
+        </ts:label>
+        <ts:origins>
+            <ethereum:call function="name" contract="ERC20" as="utf8"/>
+        </ts:origins>
+    </ts:attribute>
+
+    <ts:attribute name="ownerBalance">
+        <ts:type>
+            <ts:syntax>1.3.6.1.4.1.1466.115.121.1.36</ts:syntax>
+        </ts:type>
+        <ts:label>
+            <ts:string xml:lang="en">balance</ts:string>
+        </ts:label>
+        <ts:origins>
+            <ethereum:call function="balanceOf" contract="ERC20" as="uint">
+                <ts:data>
+                    <ts:address ref="ownerAddress"/>
+                </ts:data>
+            </ethereum:call>
+        </ts:origins>
+    </ts:attribute>
+
+    <ts:attribute name="decimals">
+        <ts:type>
+            <ts:syntax>1.3.6.1.4.1.1466.115.121.1.36</ts:syntax>
+        </ts:type>
+        <ts:label>
+            <ts:string xml:lang="en">decimals</ts:string>
+        </ts:label>
+        <ts:origins>
+            <ethereum:call function="decimals" contract="ERC20" as="uint"/>
+        </ts:origins>
+    </ts:attribute>
+
+    <ts:attribute name="symbol">
+        <ts:type>
+            <ts:syntax>1.3.6.1.4.1.1466.115.121.1.26</ts:syntax>
+        </ts:type>
+        <ts:label>
+            <ts:string xml:lang="en">symbol</ts:string>
+        </ts:label>
+        <ts:origins>
+            <ethereum:call function="symbol" contract="ERC20" as="utf8"/>
+        </ts:origins>
+    </ts:attribute>
+
+</ts:token>
