@@ -44,12 +44,12 @@
                 </ts:origins>
             </ts:attribute>
             <ts:item-view xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-                <script>&item-view-sent.en;</script>
-                <style>&style;</style>
+                <style type="text/css">&style;</style>
+                <script type="text/javascript">&item-view-sent.en;</script>
             </ts:item-view>
-            <ts:view>
-                <script>&sent.en;</script>
-                <style>&style;</style>
+            <ts:view  xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+                <style type="text/css">&style;</style>
+                <script type="text/javascript">&sent.en;</script>
             </ts:view>
         </ts:card>
         <ts:card type="activity" name="received">
@@ -62,12 +62,12 @@
                 </ts:origins>
             </ts:attribute>
             <ts:item-view xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-                <script>&item-view-received.en;</script>
-                <style>&style;</style>
+                <style type="text/css">&style;</style>
+                <script type="text/javascript">&item-view-received.en;</script>
             </ts:item-view>
-            <ts:view>
-                <script>&received.en;</script>
-                <style>&style;</style>
+            <ts:view  xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+                <style type="text/css">&style;</style>
+                <script type="text/javascript">&received.en;</script>
             </ts:view>
         </ts:card>
 
@@ -89,12 +89,12 @@
                 </ts:origins>
             </ts:attribute>
             <ts:item-view xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-                <script>&item-view-ownerApproved.en;</script>
-                <style>&style;</style>
+                <style type="text/css">&style;</style>
+                <script type="text/javascript">&item-view-ownerApproved.en;</script>
             </ts:item-view>
-            <ts:view>
-                <script>&gaveApproval.en;</script>
-                <style>&style;</style>
+            <ts:view  xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+                <style type="text/css">&style;</style>
+                <script type="text/javascript">&gaveApproval.en;</script>
             </ts:view>
         </ts:card>
 
@@ -116,12 +116,12 @@
                 </ts:origins>
             </ts:attribute>
             <ts:item-view xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-                <script>&item-view-approvalObtained.en;</script>
-                <style>&style;</style>
+                <style type="text/css">&style;</style>
+                <script type="text/javascript">&item-view-approvalObtained.en;</script>
             </ts:item-view>
-            <ts:view>
-                <script>&receivedApproval.en;</script>
-                <style>&style;</style>
+            <ts:view  xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+                <style type="text/css">&style;</style>
+                <script type="text/javascript">&receivedApproval.en;</script>
             </ts:view>
         </ts:card>
 
