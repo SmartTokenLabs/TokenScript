@@ -34,9 +34,9 @@
         <complexType>
             <sequence>
                 <element ref="asnx:module" minOccurs="0" maxOccurs="unbounded"/>
-                <element name="label" type="ts:text"/>
+                <element minOccurs="0" name="label" type="ts:text"/>
                 <element minOccurs="0" maxOccurs="unbounded" ref="ts:contract"/>
-                <element name="origins">
+                <element name="origins" minOccurs="0">
                     <complexType>
                         <sequence>
                             <element ref="ts:ethereum"/>
@@ -56,7 +56,7 @@
                 <element minOccurs="0" maxOccurs="unbounded" ref="ts:attribute"/>
                 <element minOccurs="0" maxOccurs="unbounded" ref="dsig:Signature"/>
             </sequence>
-            <attribute name="custodian" type="boolean"/>
+            <attribute name="custodian" type="boolean" default="false"/>
         </complexType>
         <key name="token-attributes">
             <selector xpath="ts:attribute"></selector>
