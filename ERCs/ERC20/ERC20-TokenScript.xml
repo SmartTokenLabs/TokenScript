@@ -85,7 +85,7 @@
                     <ts:syntax>1.3.6.1.4.1.1466.115.121.1.36</ts:syntax>
                 </ts:type>
                 <ts:origins>
-                    <ethereum:event type="Approval" filter="to=${ownerAddress}" select="to"/>
+                    <ethereum:event type="Approval" filter="from=${ownerAddress}" select="to"/>
                 </ts:origins>
             </ts:attribute>
             <ts:item-view xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
