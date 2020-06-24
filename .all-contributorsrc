@@ -1,0 +1,123 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "colourful-land",
+      "name": "Weiwu Zhang",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/548435?v=4",
+      "profile": "https://github.com/colourful-land",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "James-Sangalli",
+      "name": "James Sangalli",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/16630514?v=4",
+      "profile": "https://github.com/James-Sangalli",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "theBergmann",
+      "name": "theBergmann",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/25482130?s=400&v=4",
+      "profile": "https://github.com/theBergmann",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "hboon",
+      "name": "Hwee-Boon Yar",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/56189?v=4",
+      "profile": "https://github.com/hboon",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "zhangzhongnan928",
+      "name": "Victor Zhang",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/33795543?v=4",
+      "profile": "https://github.com/zhangzhongnan928",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "liuxiaohao",
+      "name": "maxliu",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/1217967?s=400&u=d09aff7ab31b53ffffb2af8bd8d41eda7e3b79fe&v=4",
+      "profile": "https://github.com/liuxiaohao",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "JamesSmartCell",
+      "name": "James Brown",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/12689544?v=4",
+      "profile": "https://github.com/JamesSmartCell",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "developerpeachy",
+      "name": "Rosalie",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/13824586?s=400&u=329f22d53d8c50f3877f909a6a7f0321d1e215db&v=4",
+      "profile": "https://github.com/developerpeachy",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "jzaki",
+      "name": "James Zaki",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/939603?v=4",
+      "profile": "https://github.com/jzaki",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "farrahfazirah",
+      "name": "Farrah Fazirah",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/20555752?s=460&u=74320573120d8411594a3ffa48e2c6a1a5be3257&v=4",
+      "profile": "https://github.com/farrahfazirah",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "lanlan3322",
+      "name": "Laurence",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/26592081?s=400&u=e70d78508c13db2b533ac081c3677b9aea85c8cf&v=4",
+      "profile": "https://github.com/lanlan3322",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "hellolucas",
+      "name": "Lucas Toledo",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/17125002?v=4",
+      "profile": "https://github.com/hellolucas",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "tokenscript",
+  "projectOwner": "AlphaWallet",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
