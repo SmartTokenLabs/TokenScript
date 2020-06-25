@@ -134,7 +134,7 @@
             <ts:string xml:lang="en">name</ts:string>
         </ts:label>
         <ts:origins>
-            <ethereum:call function="name" contract="ERC20" as="utf8"/>
+            <ethereum:call function="name" as="utf8"/>
         </ts:origins>
     </ts:attribute>
 
@@ -146,7 +146,7 @@
             <ts:string xml:lang="en">balance</ts:string>
         </ts:label>
         <ts:origins>
-            <ethereum:call function="balanceOf" contract="ERC20" as="uint">
+            <ethereum:call function="balanceOf" as="uint">
                 <ts:data>
                     <ts:address ref="ownerAddress"/>
                 </ts:data>
@@ -162,7 +162,7 @@
             <ts:string xml:lang="en">decimals</ts:string>
         </ts:label>
         <ts:origins>
-            <ethereum:call function="decimals" contract="ERC20" as="uint"/>
+            <ethereum:call function="decimals" as="uint"/>
         </ts:origins>
     </ts:attribute>
 
@@ -174,7 +174,7 @@
             <ts:string xml:lang="en">symbol</ts:string>
         </ts:label>
         <ts:origins>
-            <ethereum:call function="symbol" contract="ERC20" as="utf8"/>
+            <ethereum:call function="symbol" as="utf8"/>
         </ts:origins>
     </ts:attribute>
 
