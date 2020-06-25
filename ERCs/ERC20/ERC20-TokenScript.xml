@@ -19,18 +19,22 @@
 >
     <asnx:module name="ERC20-Events">
         <namedType name="Approval">
-            <sequence>
-                <element name="owner" ethereum:type="address" ethereum:indexed="true"/>
-                <element name="spender" ethereum:type="address" ethereum:indexed="true"/>
-                <element name="value" ethereum:type="uint256" ethereum:indexed="false"/>
-            </sequence>
+            <type>
+                <sequence>
+                    <element name="owner" ethereum:type="address" ethereum:indexed="true"/>
+                    <element name="spender" ethereum:type="address" ethereum:indexed="true"/>
+                    <element name="value" ethereum:type="uint256" ethereum:indexed="false"/>
+                </sequence>
+            </type>
         </namedType>
         <namedType name="Transfer">
-            <sequence>
-                <element name="from" ethereum:type="address" ethereum:indexed="true"/>
-                <element name="to" ethereum:type="address" ethereum:indexed="true"/>
-                <element name="value" ethereum:type="uint256" ethereum:indexed="false"/>
-            </sequence>
+            <type>
+                <sequence>
+                    <element name="from" ethereum:type="address" ethereum:indexed="true"/>
+                    <element name="to" ethereum:type="address" ethereum:indexed="true"/>
+                    <element name="value" ethereum:type="uint256" ethereum:indexed="false"/>
+                </sequence>
+            </type>
         </namedType>
     </asnx:module>
     <ts:cards>
