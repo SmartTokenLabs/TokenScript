@@ -89,7 +89,7 @@
                     <ts:syntax>1.3.6.1.4.1.1466.115.121.1.36</ts:syntax>
                 </ts:type>
                 <ts:origins>
-                    <ethereum:event type="Approval" filter="${to}=${ownerAddress}" select="to"/>
+                    <ethereum:event type="Approval" filter="${to}=${ownerAddress}"/>
                 </ts:origins>
             </ts:attribute>
             <ts:item-view xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
@@ -103,22 +103,12 @@
         </ts:card>
 
         <ts:card type="activity" name="approvalObtained">
-            <ts:attribute name="amount">
-                <ts:type>
-                    <ts:syntax>1.3.6.1.4.1.1466.115.121.1.36</ts:syntax>
-                </ts:type>
-                <ts:origins>
-                    <ethereum:event type="Approval" filter="${to}=${ownerAddress}" select="amount"/>
-                </ts:origins>
-            </ts:attribute>
-            <ts:attribute name="from">
-                <ts:type>
-                    <ts:syntax>1.3.6.1.4.1.1466.115.121.1.36</ts:syntax>
-                </ts:type>
-                <ts:origins>
-                    <ethereum:event type="Approval" filter="${to}=${ownerAddress}" select="from"/>
-                </ts:origins>
-            </ts:attribute>
+          <!-- attributes like amount, from, to shouldn't need to be
+               defined here because they are implied -->
+            <ts:source>
+                <!-- contract="…" is missing, this might be a problem -->
+                <ethereum:event type="Approval" filter="${to}=${ownerAddress}" />
+            </ts:source>
             <ts:item-view xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
                 <style type="text/css">&style;</style>
                 <script  type="text/javascript">&item-view-approvalObtained.en;</script>

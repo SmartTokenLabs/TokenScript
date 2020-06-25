@@ -66,6 +66,7 @@
     <element name="card">
         <complexType>
             <sequence>
+                <element ref="asnx:module" minOccurs="0" maxOccurs="unbounded"/>
                 <element minOccurs="0" name="label" type="ts:text"/>
                 <element minOccurs="0" maxOccurs="unbounded" ref="ts:attribute"/>
                 <element minOccurs="0" maxOccurs="unbounded" ref="ts:selection"/>
@@ -253,7 +254,7 @@
                 </element>
                 <!-- label is not needed if the attribute is only used for selection -->
                 <element minOccurs="0" name="label" type="ts:text"/>
-                <element ref="ts:origins"/>
+                <element minOccurs="0" ref="ts:origins"/>
             </sequence>
             <attribute name="name" use="required" type="NCName"/>
             <attribute name="oid" type="NMTOKEN"/>
