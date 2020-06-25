@@ -135,7 +135,7 @@
             <ts:string xml:lang="en">name</ts:string>
         </ts:label>
         <ts:origins>
-            <ethereum:call function="name" contract="ERC721" as="utf8"/>
+            <ethereum:call function="name" as="utf8"/>
         </ts:origins>
     </ts:attribute>
 
@@ -147,7 +147,7 @@
             <ts:string xml:lang="en">symbol</ts:string>
         </ts:label>
         <ts:origins>
-            <ethereum:call function="symbol" contract="ERC721" as="utf8"/>
+            <ethereum:call function="symbol" as="utf8"/>
         </ts:origins>
     </ts:attribute>
 
