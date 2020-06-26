@@ -32,16 +32,6 @@ Visit our example Repo [here](https://github.com/AlphaWallet/TokenScript-Example
 - [FIFA and UEFA’s blockchain tickets](https://apps.apple.com/au/app/shankai/id1492559481)
 - [Car Ownership portal](https://github.com/AlphaWallet/TokenScript-Examples/tree/master/examples/Karma)
 
-## Don't we already have a front-end for tokens?
-
-Yes, it's called DApp websites. But it's not portable and secure.
-
-If everything the user wanted to do with that token is done on a DApp website, that token isn't very useful on other DApps. People used to cut out token functions, shoe-horn it to ERC20 or ERC721 to make it portable.
-
-TokenScript of a token is like making _the DApp of the token_ portable and usable across multiple DApps. It further secures it with a sandboxed and code signed model.
-
-The [TokenScript design paper](https://github.com/AlphaWallet/TokenScript/releases) outlines why TokenScript has to be portable for Tokenisation. The authors of the design paper holds that there is no tangible benefit of using blockchain without tokenisation.
-
 ## How is TokenScript created and used?
 
 A TokenScript is typically created by the Token's issuer — the team which builds the underlying smart contracts dictating the token's transaction rules.
