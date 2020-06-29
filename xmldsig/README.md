@@ -7,7 +7,7 @@ This repository serves to show how to verify XMLDSig signature in every programm
 In all following examples, assume you have cloned [TokenScript-Repo](https://github.com/AlphaWallet/TokenScript-Repo) - an incomplete TokenScript collection - into your home directory (`~/TokenScript-Repo`) for testing purpose.
 
 
-### JavaScript:
+### JavaScript *(not working for many files due to a bug in a JavaScript library)*
 
 First, install the dependencies:
 
