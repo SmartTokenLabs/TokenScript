@@ -1,4 +1,4 @@
-# XMLDSIG verification in every programming language
+# Demonstrate how to verify XMLDSIG signature in every programming language
 
 This repository serves to show how to verify XMLDSig signature in every programming language by producing a dsigverifier commandline utility in as any programming languages as possible. It's use is not limited to TokenScript, but it may serve a starting point for anyone who wish to implement TokenScript, as the first thing you do with them is, typically, to verify its signature.
 
