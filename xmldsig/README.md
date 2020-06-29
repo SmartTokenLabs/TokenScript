@@ -18,7 +18,7 @@ Then run node.js:
 
     $ node xmldsigverifier.js ~/TokenScript-Repo/aw.app/2020/06/*
 
-**Note that at this stage half of the tokenscripts fails validation due to a bug in a dependent JavaScript libraries (not due to a bug in the code of this repository)**
+**Note that at this stage half of the tokenscripts fails validation due to a bug in a dependent JavaScript libraries** (not due to a bug in the code of this repository)
 
 Sample output:
 
