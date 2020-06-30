@@ -17,7 +17,7 @@ When the namespace change, existing Tokenscripts has to be migrated and re-signe
 
 ### The schema namespace in this repo is above my version; how can I use an older version?
 
-If you have a TokenScript file in an older namespace, they can still be checked for validity, except that they will not run on the latest TokenScript engine implementations unless those explicitly supports outdated TokenScript formats.
+If you have a TokenScript file in an older namespace, they can still be checked for validity, except that they will not run on the latest TokenScript engine implementations unless they explicitly supports outdated TokenScript formats.
 
 If you are the author of such TokenScripts, you should migrate to the current TokenScript namespace. We promise that we make such a change as infrequent as possible.
 
