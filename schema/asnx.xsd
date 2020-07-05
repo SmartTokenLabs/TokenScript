@@ -52,7 +52,7 @@
 
     <complexType name="element">
         <choice>
-            <element name="type" type="asnx:type"/>
+            <element minOccurs="0" name="type" type="asnx:type"/>
         </choice>
         <attribute name="name" type="NCName"/>
         <attribute name="type">
