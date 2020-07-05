@@ -23,7 +23,7 @@
                 <sequence>
                     <element name="owner" ethereum:type="address" ethereum:indexed="true"/>
                     <element name="spender" ethereum:type="address" ethereum:indexed="true"/>
-                    <element name="value" ethereum:type="uint256" ethereum:indexed="false"/>
+                    <element name="amount" ethereum:type="uint256" ethereum:indexed="false"/>
                 </sequence>
             </type>
         </namedType>
@@ -32,7 +32,7 @@
                 <sequence>
                     <element name="from" ethereum:type="address" ethereum:indexed="true"/>
                     <element name="to" ethereum:type="address" ethereum:indexed="true"/>
-                    <element name="value" ethereum:type="uint256" ethereum:indexed="false"/>
+                    <element name="amount" ethereum:type="uint256" ethereum:indexed="false"/>
                 </sequence>
             </type>
         </namedType>
@@ -53,7 +53,7 @@
         </ts:card>
         <ts:card type="activity" name="received">
             <ts:origins>
-                <ethereum:event type="Transfer" filter="to=${ownerAddress}" select="value"/>
+                <ethereum:event type="Transfer" filter="to=${ownerAddress}" />
             </ts:origins>
             <ts:item-view xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
                 <style type="text/css">&style;</style>
@@ -67,7 +67,6 @@
 
         <ts:card type="activity" name="ownerApproved">
             <ts:origins>
-                <!-- this brings in attribute "value" -->
                 <ethereum:event type="Approval" filter="owner=${ownerAddress}"/>
             </ts:origins>
             <ts:attribute name="to">
