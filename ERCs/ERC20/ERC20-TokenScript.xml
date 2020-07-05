@@ -39,14 +39,9 @@
     </asnx:module>
     <ts:cards>
         <ts:card type="activity" name="sent">
-            <ts:attribute name="amount">
-                <ts:type>
-                    <ts:syntax>1.3.6.1.4.1.1466.115.121.1.36</ts:syntax>
-                </ts:type>
-                <ts:origins>
-                    <ethereum:event type="Transfer" filter="from=${ownerAddress}" select="value"/>
-                </ts:origins>
-            </ts:attribute>
+            <ts:origins>
+                <ethereum:event type="Transfer" filter="from=${ownerAddress}"/>
+            </ts:origins>
             <ts:item-view xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
                 <style type="text/css">&style;</style>
                 <script  type="text/javascript">&item-view-sent.en;</script>
@@ -57,14 +52,9 @@
             </ts:view>
         </ts:card>
         <ts:card type="activity" name="received">
-            <ts:attribute name="amount">
-                <ts:type>
-                    <ts:syntax>1.3.6.1.4.1.1466.115.121.1.36</ts:syntax>
-                </ts:type>
-                <ts:origins>
-                    <ethereum:event type="Transfer" filter="to=${ownerAddress}" select="value"/>
-                </ts:origins>
-            </ts:attribute>
+            <ts:origins>
+                <ethereum:event type="Transfer" filter="to=${ownerAddress}" select="value"/>
+            </ts:origins>
             <ts:item-view xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
                 <style type="text/css">&style;</style>
                 <script  type="text/javascript">&item-view-received.en;</script>
@@ -76,14 +66,10 @@
         </ts:card>
 
         <ts:card type="activity" name="ownerApproved">
-            <ts:attribute name="amount">
-                <ts:type>
-                    <ts:syntax>1.3.6.1.4.1.1466.115.121.1.36</ts:syntax>
-                </ts:type>
-                <ts:origins>
-                    <ethereum:event type="Approval" filter="owner=${ownerAddress}" select="value"/>
-                </ts:origins>
-            </ts:attribute>
+            <ts:origins>
+                <!-- this brings in attribute "value" -->
+                <ethereum:event type="Approval" filter="owner=${ownerAddress}"/>
+            </ts:origins>
             <ts:attribute name="to">
                 <ts:type>
                     <ts:syntax>1.3.6.1.4.1.1466.115.121.1.36</ts:syntax>
@@ -103,22 +89,9 @@
         </ts:card>
 
         <ts:card type="activity" name="approvalObtained">
-            <ts:attribute name="amount">
-                <ts:type>
-                    <ts:syntax>1.3.6.1.4.1.1466.115.121.1.36</ts:syntax>
-                </ts:type>
-                <ts:origins>
-                    <ethereum:event type="Approval" filter="spender=${ownerAddress}" select="value"/>
-                </ts:origins>
-            </ts:attribute>
-            <ts:attribute name="from">
-                <ts:type>
-                    <ts:syntax>1.3.6.1.4.1.1466.115.121.1.36</ts:syntax>
-                </ts:type>
-                <ts:origins>
-                    <ethereum:event type="Approval" filter="spender=${ownerAddress}" select="owner"/>
-                </ts:origins>
-            </ts:attribute>
+            <ts:origins>
+                <ethereum:event type="Approval" filter="spender=${ownerAddress}"/>
+            </ts:origins>
             <ts:item-view xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
                 <style type="text/css">&style;</style>
                 <script  type="text/javascript">&item-view-approvalObtained.en;</script>
