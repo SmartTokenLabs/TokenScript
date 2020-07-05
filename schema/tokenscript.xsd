@@ -67,6 +67,7 @@
         <complexType>
             <sequence>
                 <element minOccurs="0" name="label" type="ts:text"/>
+                <element minOccurs="0" ref="ts:origins"/>
                 <element minOccurs="0" maxOccurs="unbounded" ref="ts:attribute"/>
                 <element minOccurs="0" maxOccurs="unbounded" ref="ts:selection"/>
                 <!-- consider putting input and output in transaction
