@@ -190,8 +190,8 @@ TokenScript's JavaScript API is designed to be asynchronous.
 
 There are 3 args supplied to the `web3.tokens.dataChanged` callback:
 
-* oldTokens — this contains the value of the token instance before this change
-* updatedTokens — this contains the value of the token instance after this change
+* old data — this contains the data — token instance and card attribute values — before the change
+* updated data — this contains the data — token instance and card attribute values — after the change
 * tokenCardId — the CSS ID of the wrapper `<div>` to place content in
 
 Developers can use this callback and the arguments to figure out what has changed. We might point them to a good JSON-diff library; but since the purpose here is just to render a static layout, they can just re-render the whole DOM as we do in our examples.
@@ -199,10 +199,9 @@ Developers can use this callback and the arguments to figure out what has change
 A simple way to implement that would be:
 
 ```
-web3.tokens.dataChanged = (oldTokens, updatedTokens, tokenCardId) => {
-    const currentTokenInstance = updatedTokens.currentInstance
-    const domHtml = new Token(currentTokenInstance).render()
-    document.getElementById(tokenCardId).getElementsByClassName("contents")[0].innerHTML = domHtml
+web3.tokens.dataChanged = (old, updated, tokenCardId) => {
+    const data = updated
+    document.getElementById(tokenCardId).getElementsByClassName("contents")[0].innerHTML = new Token(data).render()
 }
 ```
 
@@ -215,6 +214,33 @@ document.getElementById(tokenCardId).innerHTML = replacementDomHtml
 ```
 
 The above-mentioned `Token.render()` function generates a DOM from a dictionary of token attributes.
+
+Within the `Token` class, the token data can be access like this:
+
+```
+const tokenAttributeValue = this.props.token.tokenAttribute1
+```
+
+and the card data like this:
+
+```
+const cardAttributeValue = this.props.card.tokenAttribute1
+```
+
+And if we are sure the token and card attribute names don't clash, we can pretend they are in the same namespace with:
+
+```
+web3.tokens.dataChanged = (old, updated, tokenCardId) => {
+    const data = Object.assign({}, updated.token, updated.card)
+    document.getElementById(tokenCardId).getElementsByClassName("contents")[0].innerHTML = new Token(data).render()
+}
+```
+
+Then this is unchanged:
+
+```
+const attributeValue = this.props.tokenAttribute1 //or this.props.cardAttribute1
+```
 
 Future
 ---
