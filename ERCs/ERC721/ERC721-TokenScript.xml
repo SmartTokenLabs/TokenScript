@@ -19,18 +19,22 @@
 >
     <asnx:module name="ERC721-Events">
         <namedType name="Approval">
-            <sequence>
-                <element name="_owner" ethereum:type="address" ethereum:indexed="true"/>
-                <element name="_approved" ethereum:type="address" ethereum:indexed="true"/>
-                <element name="_tokenId" ethereum:type="uint256" ethereum:indexed="false"/>
-            </sequence>
+            <type>
+                <sequence>
+                    <element name="_owner" ethereum:type="address" ethereum:indexed="true"/>
+                    <element name="_approved" ethereum:type="address" ethereum:indexed="true"/>
+                    <element name="_tokenId" ethereum:type="uint256" ethereum:indexed="false"/>
+                </sequence>
+            </type>
         </namedType>
         <namedType name="Transfer">
-            <sequence>
-                <element name="_from" ethereum:type="address" ethereum:indexed="true"/>
-                <element name="_to" ethereum:type="address" ethereum:indexed="true"/>
-                <element name="_tokenId" ethereum:type="uint256" ethereum:indexed="false"/>
-            </sequence>
+            <type>
+                <sequence>
+                    <element name="_from" ethereum:type="address" ethereum:indexed="true"/>
+                    <element name="_to" ethereum:type="address" ethereum:indexed="true"/>
+                    <element name="_tokenId" ethereum:type="uint256" ethereum:indexed="false"/>
+                </sequence>
+            </type>
         </namedType>
     </asnx:module>
     <ts:cards>

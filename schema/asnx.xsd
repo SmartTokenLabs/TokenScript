@@ -19,10 +19,31 @@
 
     <complexType name="namedType">
         <choice>
-            <element name="sequence" type="asnx:container"/>
+            <element name="element" type="asnx:element"/>
+            <element name="type" type="asnx:type">
+            </element>
         </choice>
         <attribute name="name" type="NCName"/>
     </complexType>
+
+    <complexType name="type">
+        <choice>
+            <element name="sequence" type="asnx:container"/>
+            <element name="enumerated" type="asnx:enumerated"/>
+        </choice>
+    </complexType>
+
+    <complexType name="enumerated">
+        <sequence>
+            <element name="enumeration" maxOccurs="unbounded">
+                <complexType>
+                    <attribute name="name" type="NCName"/>
+                    <attribute name="number" type="integer"/>
+                </complexType>
+            </element>
+        </sequence>
+    </complexType>
+
     <complexType name="container">
         <choice maxOccurs="unbounded">
             <element name="element" type="asnx:element"/>
@@ -30,18 +51,22 @@
     </complexType>
 
     <complexType name="element">
+        <choice>
+            <element name="type" type="asnx:type"/>
+        </choice>
         <attribute name="name" type="NCName"/>
-        <attribute name="type" type="asnx:type"/>
+        <attribute name="type">
+            <simpleType>
+                <restriction base="string">
+                    <enumeration value="asnx:UTF8String"/>
+                    <enumeration value="asnx:INTEGER"/>
+                    <enumeration value="asnx:BOOLEAN"/>
+                    <enumeration value="asnx:OCTET-STRING"/>
+                    <enumeration value="asnx:UTCTime"/>
+                </restriction>
+            </simpleType>
+        </attribute>
         <attribute ref="ethereum:type"/>
         <attribute ref="ethereum:indexed"/>
     </complexType>
-
-    <simpleType name="type">
-        <restriction base="string">
-            <enumeration value="asnx:UTF8String"/>
-            <enumeration value="asnx:INTEGER"/>
-            <enumeration value="asnx:BOOLEAN"/>
-            <enumeration value="asnx:OCTET-STRING"/>
-        </restriction>
-    </simpleType>
 </schema>
