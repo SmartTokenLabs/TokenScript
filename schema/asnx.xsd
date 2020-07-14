@@ -51,9 +51,9 @@
     </complexType>
 
     <complexType name="element">
-        <choice>
-            <element name="type" type="asnx:type"/>
-        </choice>
+        <sequence>
+            <element minOccurs="0" name="type" type="asnx:type"/>
+        </sequence>
         <attribute name="name" type="NCName"/>
         <attribute name="type">
             <simpleType>
