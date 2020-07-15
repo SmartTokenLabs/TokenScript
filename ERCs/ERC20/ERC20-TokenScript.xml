@@ -23,7 +23,7 @@
                 <sequence>
                     <element name="owner" ethereum:type="address" ethereum:indexed="true"/>
                     <element name="spender" ethereum:type="address" ethereum:indexed="true"/>
-                    <element name="amount" ethereum:type="uint256" ethereum:indexed="false"/>
+                    <element name="value" ethereum:type="uint256" ethereum:indexed="false"/>
                 </sequence>
             </type>
         </namedType>

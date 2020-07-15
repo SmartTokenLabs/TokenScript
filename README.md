@@ -32,6 +32,8 @@ Visit our example Repo [here](https://github.com/AlphaWallet/TokenScript-Example
 - [FIFA and UEFA’s blockchain tickets](https://apps.apple.com/au/app/shankai/id1492559481)
 - [Car Ownership portal](https://github.com/AlphaWallet/TokenScript-Examples/tree/master/examples/Karma)
 
+[**A really good starting point to generating your own TokenScript**](https://github.com/AlphaWallet/TokenScript-Examples/tree/master/tutorial#future-obtaining-sample-files-schema-202003)
+
 ## How is TokenScript created and used?
 
 A TokenScript is typically created by the Token's issuer — the team which builds the underlying smart contracts dictating the token's transaction rules.
