@@ -42,7 +42,7 @@
             <ts:origins>
                 <!-- this gives you card attributes from, to, tokenID, which is different than the
                  token's attributes -->
-                <ethereum:event type="Transfer" filter="${_from}=${ownerAddress}"/>
+                <ethereum:event type="Transfer" filter="${from}=${ownerAddress}"/>
             </ts:origins>
             <ts:item-view xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
                 <style type="text/css">&style;</style>
@@ -57,7 +57,7 @@
             <ts:origins>
                 <!-- this gives you card attributes from, to, tokenId, which is different than the
                  token's attributes which also have tokenId -->
-                <ethereum:event type="Transfer" filter="${_to}=${ownerAddress}"/>
+                <ethereum:event type="Transfer" filter="${to}=${ownerAddress}"/>
             </ts:origins>
             <ts:item-view xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
                 <style type="text/css">&style;</style>
@@ -71,16 +71,8 @@
 
         <ts:card type="activity" name="ownerApproved">
             <ts:origins>
-                <ethereum:event type="Approval" filter="${_from}=${ownerAddress}"/>
+                <ethereum:event type="Approval" filter="${from}=${ownerAddress}"/>
             </ts:origins>
-            <ts:attribute name="to">
-                <ts:type>
-                    <ts:syntax>1.3.6.1.4.1.1466.115.121.1.36</ts:syntax>
-                </ts:type>
-                <ts:origins>
-                    <ethereum:event type="Approval" filter="${_to}=${ownerAddress}" select="_to"/>
-                </ts:origins>
-            </ts:attribute>
             <ts:item-view xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
                 <style type="text/css">&style;</style>
                 <script type="text/javascript">&item-view-ownerApproved.en;</script>
@@ -93,7 +85,7 @@
 
         <ts:card type="activity" name="approvalObtained">
             <ts:origins>
-                <ethereum:event type="Approval" filter="${_to}=${ownerAddress}"/>
+                <ethereum:event type="Approval" filter="${to}=${ownerAddress}"/>
             </ts:origins>
             <ts:item-view xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
                 <style type="text/css">&style;</style>

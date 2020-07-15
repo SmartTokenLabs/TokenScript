@@ -69,14 +69,6 @@
             <ts:origins>
                 <ethereum:event type="Approval" filter="owner=${ownerAddress}"/>
             </ts:origins>
-            <ts:attribute name="to">
-                <ts:type>
-                    <ts:syntax>1.3.6.1.4.1.1466.115.121.1.36</ts:syntax>
-                </ts:type>
-                <ts:origins>
-                    <ethereum:event type="Approval" filter="owner=${ownerAddress}" select="spender"/>
-                </ts:origins>
-            </ts:attribute>
             <ts:item-view xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
                 <style type="text/css">&style;</style>
                 <script  type="text/javascript">&item-view-ownerApproved.en;</script>
