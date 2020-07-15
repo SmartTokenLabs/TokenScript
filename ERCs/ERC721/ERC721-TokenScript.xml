@@ -42,7 +42,7 @@
             <ts:origins>
                 <!-- this gives you card attributes from, to, tokenID, which is different than the
                  token's attributes -->
-                <ethereum:event type="Transfer" filter="${from}=${ownerAddress}"/>
+                <ethereum:event type="Transfer" filter="from=${ownerAddress}"/>
             </ts:origins>
             <ts:item-view xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
                 <style type="text/css">&style;</style>
@@ -57,7 +57,7 @@
             <ts:origins>
                 <!-- this gives you card attributes from, to, tokenId, which is different than the
                  token's attributes which also have tokenId -->
-                <ethereum:event type="Transfer" filter="${to}=${ownerAddress}"/>
+                <ethereum:event type="Transfer" filter="to=${ownerAddress}"/>
             </ts:origins>
             <ts:item-view xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
                 <style type="text/css">&style;</style>
