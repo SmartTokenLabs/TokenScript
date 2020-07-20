@@ -153,8 +153,8 @@
     <xs:element name="event">
         <xs:complexType>
             <!-- TODO: this should be whatever ASN.X allows as element name -->
-            <xs:attribute name="type" type="xs:NCName"/>
-            <xs:attribute name="contract" type="xs:IDREF"/>
+            <xs:attribute use="required" name="type" type="xs:NCName"/>
+            <xs:attribute use="required" name="contract" type="xs:IDREF"/>
             <xs:attribute name="filter" type="xs:string"/>
             <xs:attribute name="select" type="xs:NCName"/>
         </xs:complexType>
