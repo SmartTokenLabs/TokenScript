@@ -58,6 +58,14 @@
             </sequence>
             <attribute name="custodian" type="boolean" default="false"/>
         </complexType>
+        <keyref name="eventTypeRef" refer="ts:namedTypeName">
+            <selector xpath="ts:cards/ts:card/ts:origins/ethereum:event"></selector>
+            <field xpath="@type"></field>
+        </keyref>
+        <key name="namedTypeName">
+            <selector xpath="asnx:module/namedType"></selector>
+            <field xpath="@name"></field>
+        </key>
         <key name="token-attributes">
             <selector xpath="ts:attribute"></selector>
             <field xpath="@name"></field>
@@ -67,6 +75,7 @@
         <complexType>
             <sequence>
                 <element minOccurs="0" name="label" type="ts:text"/>
+                <element minOccurs="0" ref="ts:origins"/>
                 <element minOccurs="0" maxOccurs="unbounded" ref="ts:attribute"/>
                 <element minOccurs="0" maxOccurs="unbounded" ref="ts:selection"/>
                 <!-- consider putting input and output in transaction
