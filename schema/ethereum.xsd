@@ -129,7 +129,9 @@
             </xs:sequence>
             <xs:attribute name="as" type="ts:as"/>
             <xs:attribute name="contract" type="xs:IDREF"/>
-            <xs:attribute name="function" type="xs:NCName"/>
+            <xs:attribute name="function" type="xs:NCName" use="required"/>
+            <xs:attribute name="select" type="xs:NCName" />
+            <xs:attribute name="type" type="xs:NCName"/>
         </xs:complexType>
 
     <xs:element name="transaction">
