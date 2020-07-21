@@ -58,7 +58,7 @@
             </sequence>
             <attribute name="custodian" type="boolean" default="false"/>
         </complexType>
-        <keyref name="eventTypeRef" refer="ts:namedTypeName">
+        <keyref name="typeRef" refer="ts:namedTypeName">
             <selector xpath="ts:cards/ts:card/ts:origins/ethereum:event"></selector>
             <field xpath="@type"></field>
         </keyref>
@@ -91,7 +91,7 @@
                 <element minOccurs="0" maxOccurs="unbounded" ref="ts:item-view"/>
                 <element minOccurs="0" maxOccurs="unbounded" ref="ts:view"/>
             </sequence>
-            <attribute name="type">
+            <attribute name="type" use="required">
                 <simpleType>
                     <restriction base="string">
                         <enumeration value="token"/>
@@ -164,7 +164,7 @@
                 </element>
                 <element minOccurs="0" ref="ts:interface"/>
             </sequence>
-            <attribute name="name" type="ID"/>
+            <attribute name="name" use="required" type="ID"/>
             <attribute name="interface" type="NCName"/>
         </complexType>
     </element>
