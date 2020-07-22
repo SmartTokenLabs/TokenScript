@@ -121,18 +121,26 @@
         <xs:attribute name="ref" type="xs:NCName"/>
     </xs:complexType>
 
-    <xs:element name="call" type="call"/>
-        <xs:complexType name="call">
-            <xs:sequence>
-                <xs:element minOccurs="0" ref="ts:data"/>
-                <xs:element minOccurs="0" ref="ts:mapping"/>
-            </xs:sequence>
-            <xs:attribute name="as" type="ts:as"/>
-            <xs:attribute name="contract" type="xs:IDREF"/>
-            <xs:attribute name="function" type="xs:NCName" use="required"/>
-            <xs:attribute name="select" type="xs:NCName" />
-            <xs:attribute name="type" type="xs:NCName"/>
+    <xs:complexType name="call">
+        <xs:sequence>
+            <xs:element minOccurs="0" ref="ts:data"/>
+            <xs:element minOccurs="0" ref="ts:mapping"/>
+        </xs:sequence>
+        <xs:attribute name="as" type="ts:as"/>
+        <xs:attribute name="contract" type="xs:IDREF"/>
+        <xs:attribute name="select" type="xs:NCName" />
+        <xs:attribute name="type" type="xs:NCName"/>
+    </xs:complexType>
+
+    <xs:element name="call">
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="call">
+                    <xs:attribute name="function" type="xs:NCName" use="required"/>
+                </xs:extension>
+            </xs:complexContent>
         </xs:complexType>
+    </xs:element>
 
     <xs:element name="transaction">
         <xs:complexType>
@@ -147,6 +155,7 @@
                             </xs:complexType>
                         </xs:element>
                     </xs:sequence>
+                    <xs:attribute name="function" type="xs:NCName" use="optional"/>
                 </xs:extension>
             </xs:complexContent>
         </xs:complexType>
