@@ -53,7 +53,7 @@
             <attribute name="custodian" type="boolean" default="false"/>
         </complexType>
         <keyref name="typeRef" refer="ts:namedTypeName">
-            <selector xpath="ts:cards/ts:card/ts:origins/ethereum:event"></selector>
+            <selector xpath="//ts:origins/ethereum:event|//ts:origins/ethereum:call"></selector>
             <field xpath="@type"></field>
         </keyref>
         <key name="namedTypeName">
