@@ -44,13 +44,7 @@
                     </complexType>
                 </element>
                 <element minOccurs="0" maxOccurs="unbounded" ref="ts:selection"/>
-                <element name="cards">
-                    <complexType>
-                        <sequence>
-                            <element maxOccurs="unbounded" name="card" type="ts:card"/>
-                        </sequence>
-                    </complexType>
-                </element>
+                <element ref="ts:cards"/>
                 <element minOccurs="0" ref="ts:grouping"/>
                 <element minOccurs="0" ref="ts:ordering"/>
                 <element minOccurs="0" maxOccurs="unbounded" ref="ts:attribute"/>
@@ -70,6 +64,13 @@
             <selector xpath="ts:attribute"></selector>
             <field xpath="@name"></field>
         </key>
+    </element>
+    <element name="cards">
+        <complexType>
+            <sequence>
+                <element maxOccurs="unbounded" name="card" type="ts:card"/>
+            </sequence>
+        </complexType>
     </element>
     <simpleType name="cardType">
         <restriction base="string">
