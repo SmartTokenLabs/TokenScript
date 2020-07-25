@@ -47,7 +47,7 @@
                 <element name="cards">
                     <complexType>
                         <sequence>
-                            <element maxOccurs="unbounded" ref="ts:card"/>
+                            <element maxOccurs="unbounded" name="card" type="ts:card"/>
                         </sequence>
                     </complexType>
                 </element>
@@ -71,39 +71,38 @@
             <field xpath="@name"></field>
         </key>
     </element>
-    <element name="card">
-        <complexType>
-            <sequence>
-                <element minOccurs="0" name="label" type="ts:text"/>
-                <element minOccurs="0" ref="ts:origins"/>
-                <element minOccurs="0" maxOccurs="unbounded" ref="ts:attribute"/>
-                <element minOccurs="0" maxOccurs="unbounded" ref="ts:selection"/>
-                <!-- consider putting input and output in transaction
-                     declaration later when/if DvP Security is
-                     implemented.  At this stage, DvP security is not
-                     implemented so whatever input and output here are
-                     for the user interface only. One may argue that
-                     this provides a false sense of security if we move
-                     them to <transaction> too early -->
-                <element minOccurs="0" name="input" type="ts:tokens"/>
-                <element minOccurs="0" name="output" type="ts:tokens"/>
-                <element minOccurs="0" ref="ts:transaction"/>
-                <element minOccurs="0" maxOccurs="unbounded" ref="ts:item-view"/>
-                <element minOccurs="0" maxOccurs="unbounded" ref="ts:view"/>
-            </sequence>
-            <attribute name="type" use="required">
-                <simpleType>
-                    <restriction base="string">
-                        <enumeration value="token"/>
-                        <enumeration value="action"/>
-                        <enumeration value="activity"/>
-                    </restriction>
-                </simpleType>
-            </attribute>
-            <attribute name="exclude" type="IDREFS"/>
-            <attribute name="name" type="NCName"/>
-        </complexType>
-    </element>
+    <simpleType name="cardType">
+        <restriction base="string">
+            <enumeration value="token"/>
+            <enumeration value="action"/>
+            <enumeration value="activity"/>
+        </restriction>
+    </simpleType>
+    <!-- the following line to be removed after cards is set to to be the new root -->
+    <element name="card" type="ts:card"/>
+    <complexType name="card">
+        <sequence>
+            <element minOccurs="0" name="label" type="ts:text"/>
+            <element minOccurs="0" ref="ts:origins"/>
+            <element minOccurs="0" maxOccurs="unbounded" ref="ts:attribute"/>
+            <element minOccurs="0" maxOccurs="unbounded" ref="ts:selection"/>
+            <!-- consider putting input and output in transaction
+                 declaration later when/if DvP Security is
+                 implemented.  At this stage, DvP security is not
+                 implemented so whatever input and output here are
+                 for the user interface only. One may argue that
+                 this provides a false sense of security if we move
+                 them to <transaction> too early -->
+            <element minOccurs="0" name="input" type="ts:tokens"/>
+            <element minOccurs="0" name="output" type="ts:tokens"/>
+            <element minOccurs="0" ref="ts:transaction"/>
+            <element minOccurs="0" maxOccurs="unbounded" ref="ts:item-view"/>
+            <element minOccurs="0" maxOccurs="unbounded" ref="ts:view"/>
+        </sequence>
+        <attribute name="type" use="required" type="ts:cardType"/>
+        <attribute name="exclude" type="IDREFS"/>
+        <attribute name="name" type="NCName"/>
+    </complexType>
     <complexType name="tokens">
         <choice maxOccurs="unbounded" minOccurs="0">
             <element name="token">
