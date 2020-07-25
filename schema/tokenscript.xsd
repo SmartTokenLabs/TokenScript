@@ -71,6 +71,10 @@
                 <element maxOccurs="unbounded" name="card" type="ts:card"/>
             </sequence>
         </complexType>
+        <key name="cardName">
+            <selector xpath="ts:card"/>
+            <field xpath="@name"/>
+        </key>
     </element>
     <simpleType name="cardType">
         <restriction base="string">
@@ -103,7 +107,7 @@
         </sequence>
         <attribute name="type" use="required" type="ts:cardType"/>
         <attribute name="exclude" type="IDREFS"/>
-        <attribute name="name" type="NCName"/>
+        <attribute name="name" type="NCName" use="required"/>
     </complexType>
     <complexType name="tokens">
         <choice maxOccurs="unbounded" minOccurs="0">
