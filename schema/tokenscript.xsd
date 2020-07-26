@@ -97,6 +97,7 @@
             <element minOccurs="0" name="input" type="ts:tokens"/>
             <element minOccurs="0" name="output" type="ts:tokens"/>
             <element minOccurs="0" ref="ts:transaction"/>
+            <element minOccurs="0" maxOccurs="unbounded" name="guide-view" type="ts:view"/>
             <element minOccurs="0" maxOccurs="unbounded" name="item-view" type="ts:view"/>
             <element minOccurs="0" maxOccurs="unbounded" name="view" type="ts:view"/>
         </sequence>
