@@ -267,6 +267,7 @@
                 <element ref="ts:origins"/>
             </sequence>
             <attribute name="name" use="required" type="NCName"/>
+            <attribute name="distinct" type="boolean" default="false"/>
             <attribute name="oid" type="NMTOKEN"/>
         </complexType>
     </element>
