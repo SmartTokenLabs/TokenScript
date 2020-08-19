@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="tokenscript" href="EntryToken.xml"/>
+    <script type="text/javascript" src="tokenscript-bootstrap.js"/>
+    <title>Showing the cards in a web page</title>
+    <script type="text/javascript">
+        window.onload = () => {
+            // entry-token: name of the token. Consider making that optional if the website only uses 1 token
+            const tokenCard = new TokenView(document.getElementById("token_card"), "entry-tokne");
+            tokenCard.render();
+        }
+        function  launch_action() {
+            // "enter" = name of the action.
+            const promise = new TokenAction("enter");
+        }
+    </script>
+</head>
+<body>
+<h1>Demonstration of showing a card in a web page</h1>
+<h2>Token Card</h2>
+<iframe id="token_card"></iframe>
+<h2>Action Card: </h2>
+<button onclick="launch_action();">Show</button>
+</body>
+</html>
