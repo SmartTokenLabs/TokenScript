@@ -10,10 +10,14 @@
             // entry-token: name of the token. Consider making that optional if the website only uses 1 token
             const tokenCard = new TokenView(document.getElementById("token_card"), "entry-tokne");
             tokenCard.render();
+            // In the future, when context is available, you can pass context, perhaps like this:
+            // new TokenView(document.getElementById("token_card"), "entry-tokne", context);
         }
         function  launch_action() {
             // "enter" = name of the action.
-            const promise = new TokenAction("enter");
+            const promise = new TokenAction("enter", "entry-token");
+            // For actions that has a payload, this:
+            // const promise = new TokenAction("enter", Payload);
         }
     </script>
 </head>
