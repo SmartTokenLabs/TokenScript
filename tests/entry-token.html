@@ -11,7 +11,9 @@
     <title>Showing the cards in a web page</title>
     <script type="text/javascript" src="tokenscript-bootstrap.js"/>
     <script type="text/javascript">
-        async function once_negotiated() {
+        // the following event is triggered every time when a token is negotiated
+        // and that is why an event listener is used in place of a promise;
+        window.addEventListener("ontokennegotiation",  (token) => {
             const tokenCard = new token.TokenCard();
             // might be renderIn, need to find a comfortable method for seasoned React JS user
             await tokenCard.render(document.getElementById("card_container"));
@@ -21,14 +23,15 @@
                     // … code to handle the result of enter action.
                 )
             };
-        }
-        window.addEventListener("ontokennegotiation", once_negotiated);
+        });
 
-        // If you don't like automatic negotiation
-        // Negotiator.negotiate("entry-token", "expiry>=20180404")\
         function renegotiate() {
-            // check negotiator
-            Negotiator.negotiate("entry-token", "l=Syndey").then(once_negotiated);
+            // Negotiator.negotiate() returns a promise, but in this case
+            // the developer doesn't need to save it or call .then()
+            // because a window.ontokennegotiation is triggered.
+            // the developer will want to save it or call .then() if they
+            // have things to do specifically for this round of negotiation
+            Negotiator.negotiate('entry-token', 'l=Syndey');
         }
     </script>
 </head>
@@ -37,6 +40,7 @@
 <h2>Token Card</h2>
 <div id="card_container"></div>
 <p><button id="enter_button">Enter</button></p>
-<p><button id="new_token" onclick="renegotiate();">Try a different token in Sydney</button></p>
+<p><button id="new_token" onclick="renegotiate">
+    Try a different token in Sydney</button></p>
 </body>
 </html>
