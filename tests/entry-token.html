@@ -3,56 +3,40 @@
 <head>
     <meta charset="UTF-8"/>
     <link rel="tokenscript" href="EntryToken.xml"/>
-    <script type="text/javascript" src="tokenscript-bootstrap.js"/>
+    <!-- this is for token negotiation! -->
+    <meta tokens-accepted="entry-token" filter="expiry>=20180404"/>
+    <!-- if without linked TokenScript, consider a synax like this
+    <meta tokens-accepted="ethereum:1/0x63cCEF733a093E5Bd773b41C96D3eCE361464942/"/>
+    -->
     <title>Showing the cards in a web page</title>
+    <script type="text/javascript" src="tokenscript-bootstrap.js"/>
     <script type="text/javascript">
-        window.onload = () => {
-            // entry-token: name of the token. Consider making that optional if the website only uses 1 token
-            const tokenCard = new TokenView(document.getElementById("token_card"), "entry-tokne");
-            tokenCard.render();
-            // In the future, when context is available, you can pass context, perhaps like this:
-            // new TokenView(document.getElementById("token_card"), "entry-tokne", context);
+        async function once_negotiated() {
+            const tokenCard = new token.TokenCard();
+            // might be renderIn, need to find a comfortable method for seasoned React JS user
+            await tokenCard.render(document.getElementById("card_container"));
+            // alternatively, tokenCard.renderAsItem(…)
+            document.getElementById("enter_button").onclick = (event) => {
+                token.enterAction().then(
+                    // … code to handle the result of enter action.
+                )
+            };
         }
-        function  launch_action() {
-            // "enter" = name of the action.
-            const promise = TokenAction("enter", "entry-token");
-            // For actions that has a payload, this:
-            // const promise = new TokenAction("enter", Payload);
+        window.addEventListener("ontokennegotiation", once_negotiated);
+
+        // If you don't like automatic negotiation
+        // Negotiator.negotiate("entry-token", "expiry>=20180404")\
+        function renegotiate() {
+            // check negotiator
+            Negotiator.negotiate("entry-token", "l=Syndey").then(once_negotiated);
         }
-        /*
-// alternatively
-
-// EntryToken is already defined by the act of including
-// the TokenScript file
-
-const promise = new EntryToken.EnterAction(Payload);
-
-// if you type:
-
-const promise = new EntryToken.EnterAction({
-
-                                           // then IntelliJ will ask you
-                                           // for one of 'amount',
-                                           // 'recipient_address'
-                                           // 'currency', as it is stated
-                                           // in the prottype below:
-
-// we can potentially have the function prototype defined
-
-EntryToken.EnterAction = ({amount, recipient_address, currency}) {
-    …
-}
-
-// this can potentially help IntelliJ to automatically remind
-// developers what are expected in the Payload
-        */
     </script>
 </head>
 <body>
 <h1>Demonstration of showing a card in a web page</h1>
 <h2>Token Card</h2>
-<iframe id="token_card"></iframe>
-<h2>Action Card: </h2>
-<button onclick="launch_action();">Show</button>
+<div id="card_container"></div>
+<p><button id="enter_button">Enter</button></p>
+<p><button id="new_token" onclick="renegotiate();">Try a different token in Sydney</button></p>
 </body>
 </html>
