@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<ts:token xmlns:ethereum="urn:ethereum:constantinople" xmlns:ts="http://tokenscript.org/2020/06/tokenscript" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xsi:schemaLocation="http://tokenscript.org/2020/06/tokenscript http://tokenscript.org/2020/06/tokenscript.xsd">
+<ts:token xmlns:ethereum="urn:ethereum:constantinople"
+          xmlns:ts="http://tokenscript.org/2020/06/tokenscript"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          name="entry-token"
+          xsi:schemaLocation="http://tokenscript.org/2020/06/tokenscript http://tokenscript.org/2020/06/tokenscript.xsd"
+>
   <ts:label>
     <ts:plurals xml:lang="en">
       <ts:string quantity="one">Ticket</ts:string>
