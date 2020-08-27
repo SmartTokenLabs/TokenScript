@@ -15,10 +15,37 @@
         }
         function  launch_action() {
             // "enter" = name of the action.
-            const promise = new TokenAction("enter", "entry-token");
+            const promise = TokenAction("enter", "entry-token");
             // For actions that has a payload, this:
             // const promise = new TokenAction("enter", Payload);
         }
+        /*
+// alternatively
+
+// EntryToken is already defined by the act of including
+// the TokenScript file
+
+const promise = new EntryToken.EnterAction(Payload);
+
+// if you type:
+
+const promise = new EntryToken.EnterAction({
+
+                                           // then IntelliJ will ask you
+                                           // for one of 'amount',
+                                           // 'recipient_address'
+                                           // 'currency', as it is stated
+                                           // in the prottype below:
+
+// we can potentially have the function prototype defined
+
+EntryToken.EnterAction = ({amount, recipient_address, currency}) {
+    …
+}
+
+// this can potentially help IntelliJ to automatically remind
+// developers what are expected in the Payload
+        */
     </script>
 </head>
 <body>
