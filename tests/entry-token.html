@@ -4,9 +4,9 @@
     <meta charset="UTF-8"/>
     <link rel="tokenscript" href="EntryToken.xml"/>
     <!-- this is for token negotiation! -->
-    <meta tokens-accepted="entry-token" filter="expiry>=20180404"/>
+    <meta name="token.filter" content="objectClass=entrytoken"/>
     <!-- if without linked TokenScript, consider a synax like this
-    <meta tokens-accepted="ethereum:1/0x63cCEF733a093E5Bd773b41C96D3eCE361464942/"/>
+    <meta name="token.scope" content="ethereum:1/0x63cCEF733a093E5Bd773b41C96D3eCE361464942/"/>
     -->
     <title>Showing the cards in a web page</title>
     <script type="text/javascript" src="tokenscript-bootstrap.js"/>
@@ -31,7 +31,7 @@
             // because a window.ontokennegotiation is triggered.
             // the developer will want to save it or call .then() if they
             // have things to do specifically for this round of negotiation
-            Negotiator.negotiate('entry-token', 'l=Syndey');
+            Negotiator.negotiate('entrytoken', 'l=Syndey');
         }
     </script>
 </head>

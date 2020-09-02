@@ -2,7 +2,7 @@
 <ts:token xmlns:ethereum="urn:ethereum:constantinople"
           xmlns:ts="http://tokenscript.org/2020/06/tokenscript"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          name="entry-token"
+          name="entrytoken"
           xsi:schemaLocation="http://tokenscript.org/2020/06/tokenscript http://tokenscript.org/2020/06/tokenscript.xsd"
 >
   <ts:label>
