@@ -4,24 +4,41 @@
     <meta charset="UTF-8"/>
     <link rel="tokenscript" href="EntryToken.xml"/>
     <!-- this is for token negotiation! -->
+    <!-- OG: meta tag allow only "scheme,name,http-equiv,content,charset". we can use "name,content" to stay document valid-->
+<!--    <meta name="token" content="entry-token"/>-->
     <meta name="token.filter" content="objectClass=entrytoken"/>
+<!--    <meta name="token-expiry" content=">=2018-04-04"/>-->
     <!-- if without linked TokenScript, consider a synax like this
-    <meta name="token.scope" content="ethereum:1/0x63cCEF733a093E5Bd773b41C96D3eCE361464942/"/>
+    <meta tokens-accepted="ethereum:1/0x63cCEF733a093E5Bd773b41C96D3eCE361464942/"/>
     -->
     <title>Showing the cards in a web page</title>
-    <script type="text/javascript" src="tokenscript-bootstrap.js"/>
+    <script type="text/javascript" src="tokenscript-bootstrap.js"></script>
     <script type="text/javascript">
         // the following event is triggered every time when a token is negotiated
         // and that is why an event listener is used in place of a promise;
-        window.addEventListener("ontokennegotiation",  (token) => {
-            const tokenCard = new token.TokenCard();
+
+        // OG: parse XML, load external files etc (but dont parse token-specific data) + code blocked until all files fetched completely
+        const tokenCard = new TokenCard();
+        window.addEventListener("ontokennegotiation", async (e) => {
+            console.log('ontokennegotiation data received: ' + e.detail);
+
             // might be renderIn, need to find a comfortable method for seasoned React JS user
-            await tokenCard.render(document.getElementById("card_container"));
+            // OG: parse token-specific data, render iframe content
+            tokenCard.render(document.getElementById("card_container")).then(()=>{
+                console.log('render done');
+            });
+
             // alternatively, tokenCard.renderAsItem(…)
             document.getElementById("enter_button").onclick = (event) => {
-                token.enterAction().then(
+                console.log('click fired');
+                /*
+                token.enterAction().then(e=>{
+
+                    }
                     // … code to handle the result of enter action.
                 )
+
+                 */
             };
         });
 
@@ -31,8 +48,20 @@
             // because a window.ontokennegotiation is triggered.
             // the developer will want to save it or call .then() if they
             // have things to do specifically for this round of negotiation
-            Negotiator.negotiate('entrytoken', 'l=Syndey');
+
+            // OG: I think we can use TokenCard method to re-render iframe, because some logic makes network requests and parse XML (it takes some time and load network). So TokenCard constructor will parse XML and load external data and negotiate() method will rerender iframe
+            console.log('Btn clicked');
+            tokenCard.negotiate('entrytoken', 'l=Syndey');
+
+            // Negotiator.negotiate('entry-token', 'l=Syndey');
         }
+        (function(){
+            setTimeout(()=>{
+                // console.log('2 sec timeout done');
+                var event = new CustomEvent('ontokennegotiation', { 'detail': 'some data to pass' });
+                window.dispatchEvent(event);
+            },2000)
+        })();
     </script>
 </head>
 <body>
@@ -40,7 +69,7 @@
 <h2>Token Card</h2>
 <div id="card_container"></div>
 <p><button id="enter_button">Enter</button></p>
-<p><button id="new_token" onclick="renegotiate">
+<p><button id="new_token" onclick="renegotiate()">
     Try a different token in Sydney</button></p>
 </body>
 </html>
