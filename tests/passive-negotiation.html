@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <link rel="tokenscript" href="EntryToken.xml"/>
+
     <!-- this is for token negotiation! -->
     <!-- OG: meta tag allow only "scheme,name,http-equiv,content,charset". we can use "name,content" to stay document valid-->
 <!--    <meta name="token" content="entry-token"/>-->
@@ -12,6 +13,7 @@
     <meta tokens-accepted="ethereum:1/0x63cCEF733a093E5Bd773b41C96D3eCE361464942/"/>
     -->
     <title>Showing the cards in a web page</title>
+    <link rel="stylesheet" href="ts.css">
     <script type="text/javascript" src="tokenscript-bootstrap.js"></script>
     <script type="text/javascript">
         // the following event is triggered every time when a token is negotiated
@@ -21,15 +23,14 @@
         // in the TokenBar.
 
         // OG: parse XML, load external files etc (but dont parse token-specific data) + code blocked until all files fetched completely
-        const tokenCard = new TokenCard();
         window.addEventListener("ontokennegotiation", async (e) => {
-            console.log('ontokennegotiation data received: ' + e.detail);
+            console.log('ontokennegotiation fired. token name received: ' + e.detail);
 
             // might be renderIn, need to find a comfortable method for seasoned React JS user
             // OG: parse token-specific data, render iframe content
-            tokenCard.render(document.getElementById("card_container")).then(()=>{
-                console.log('render done');
-            });
+            // tokenCard.render(document.getElementById("card_container")).then(()=>{
+            //     console.log('render done');
+            // });
 
             // alternatively, tokenCard.renderAsItem(…)
             document.getElementById("enter_button").onclick = (event) => {
@@ -49,8 +50,8 @@
 </head>
 <body>
 <h1>Demonstration of showing a card in a web page</h1>
-<h2>Token Card</h2>
-<div id="card_container"></div>
-<p><button id="enter_button">Enter</button></p>
+<h2>Token Card will be in the top right corner of the screen</h2>
+<!--<div id="card_container"></div>-->
+<p><button id="enter_button">Enter (not implemented yet)</button></p>
 </body>
 </html>
