@@ -431,6 +431,18 @@ document.addEventListener("DOMContentLoaded", function() {
       </ts:view>
     </ts:card>
   </ts:cards>
+    <ts:attribute name="tokenId" distinct="true">
+      <ts:type>
+        <ts:syntax>1.3.6.1.4.1.1466.115.121.1.40</ts:syntax>
+      </ts:type>
+      <ts:origins>
+        <ethereum:call function="balanceOf" contract="EntryToken">
+            <ts:data>
+              <ts:uint256 ref="ownerAddress"></ts:uint256>
+            </ts:data>
+        </ethereum:call>
+      </ts:origins>
+    </ts:attribute>
     <ts:attribute name="locality">
         <ts:type><ts:syntax>1.3.6.1.4.1.1466.115.121.1.15</ts:syntax></ts:type>
       <ts:origins>
