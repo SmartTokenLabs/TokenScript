@@ -22,6 +22,7 @@
   <ts:contract interface="erc875" name="EntryToken">
     <ts:address network="1">0x63cCEF733a093E5Bd773b41C96D3eCE361464942</ts:address>
     <ts:address network="3">0xFB82A5a2922A249f32222316b9D1F5cbD3838678</ts:address>
+    <ts:address network="4">0xd915c8AD3241F459a45AdcBBF8af42caA561A154</ts:address>
     <ts:address network="42">0x2B58A9403396463404c2e397DBF37c5EcCAb43e5</ts:address>
   </ts:contract>
   <ts:origins>
