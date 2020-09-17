@@ -51,7 +51,8 @@
                 <element minOccurs="0" maxOccurs="unbounded" ref="dsig:Signature"/>
             </sequence>
             <attribute name="custodian" type="boolean" default="false"/>
-			<!--assert test="if(not(ts:origins)) then (count(ts:attribute[string(@distinct) = 'true']) = 1) else true()"/-->
+			<assert test="count(ts:attribute[string(@distinct) = 'true']) le 1"/>
+			<assert test="if(not(ts:origins)) then count(ts:attribute[string(@distinct) = 'true']) = 1 else true()"/>
         </complexType>
         <keyref name="typeRef" refer="ts:namedTypeName">
             <selector xpath=".//ts:origins/ethereum:event|.//ts:origins/ethereum:call"></selector>
