@@ -259,14 +259,16 @@ window.Negotiator = (function(){
     parse single attribute params
     */
     let getAttributeParams = function(func, root, options){
-        let {userAddress, tokenId, chainID} = options;
-        let attributeNode = getXMLItem('ts:attribute[@name="'+func+'"][1]', root );
+        let {userAddress, tokenId, chainID , attributeNode} = options;
 
-        let xmlNode = getXMLItem('ts:origins/ts:ethereum[1]', root );
-
+        let xmlNode = getXMLItem('ts:origins/ts:ethereum[1]', root);
         let defaultContract = xmlNode ? xmlNode.getAttribute('contract') : '';
 
         var params = [];
+
+        if (!attributeNode) {
+            attributeNode = getXMLItem('ts:attribute[@name="' + func + '"][1]', root);
+        }
 
         if (attributeNode){
             // console.log('attributeNode');
@@ -783,21 +785,21 @@ window.Negotiator = (function(){
             debug && console.log('ethersData');
             debug && console.log(ethersData);
 
-            let distinctAttribute = getXMLItem('ts:attribute[@distinct="true"][1]',tokenNodesList[tokenName]);
+            let distinctAttributeNode = getXMLItem('ts:attribute[@distinct="true"][1]',tokenNodesList[tokenName]);
 
-            if (!distinctAttribute) throw new Error("Cant find distinct attribute");
-            let distinctAttributeName = distinctAttribute.getAttribute('name');
-
-            if (!distinctAttributeName) throw new Error("Cant find distinct attribute name");
+            if (!distinctAttributeNode) {
+                debug && console.log("Cant find distinct attribute, lets use ownerAddress");
+                return ['ownerAddress='+userAddress];
+            }
 
             // methodattributes = {params,ethFunction,ethContract,ethAs,ethType,ethSelect,label};
-            methodattributes = getAttributeParams(distinctAttributeName,tokenNodesList[tokenName],{userAddress,chainID});
+            methodattributes = getAttributeParams(false,tokenNodesList[tokenName],{userAddress,chainID,attributeNode: distinctAttributeNode});
             let params = methodattributes.params;
 
             debug && console.log('methodattributes');
             debug && console.log(methodattributes);
 
-            if (!methodattributes) throw new Error('/ getAttributeParams failed for {Address='+userAddress+', chainID = '+chainID+' , tokenName = '+tokenName+'}. Check logs for details');
+            if (!methodattributes) throw new Error(' getAttributeParams failed for {Address='+userAddress+', chainID = '+chainID+' , tokenName = '+tokenName+'}. Check logs for details');
 
             const abi = await getJSONAbi(methodattributes.ethContract);
 
@@ -811,7 +813,7 @@ window.Negotiator = (function(){
 
             if (output && output.length) {
                 let out = [];
-                output.forEach(a=>{out.push(a._hex)});
+                output.forEach(a=>{out.push('tokenID='+a._hex)});
                 return out;
             } else {
                 throw new Error('Empty token list');
