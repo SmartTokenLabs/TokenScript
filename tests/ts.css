@@ -49,9 +49,14 @@
     font-size: 20px;
     padding: 10px; }
   .ts_token_bar .ts_token_bar_body {
-    padding: 10px; }
+    padding: 10px;
+    min-height: 50px; }
+    .ts_token_bar .ts_token_bar_body .def {
+      position: absolute; }
     .ts_token_bar .ts_token_bar_body .ts_token_wrap {
-      margin-top: 10px;
+      margin-bottom: 10px;
+      background: #fff;
+      position: relative;
       box-sizing: border-box; }
       .ts_token_bar .ts_token_bar_body .ts_token_wrap iframe {
         width: 100%;

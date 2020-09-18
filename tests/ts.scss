@@ -65,14 +65,22 @@
   & &_body
   {
     padding: 10px;
+    min-height: 50px;
+    .def {
+      position: absolute;
+    }
     .ts_token_wrap {
-      margin-top: 10px;
+      //margin-top: 10px;
+      margin-bottom: 10px;
+      background: #fff;
+      position: relative;
       box-sizing: border-box;
       iframe {
         width: 100%;
         box-sizing: border-box;
       }
     }
+
   }
 
 }
