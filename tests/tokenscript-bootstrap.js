@@ -1,8 +1,8 @@
 window.Negotiator = (function(){
     let debug = true;
-    debug = false;
+    // debug = false;
     let catchDebug = true;
-    catchDebug = false;
+    // catchDebug = false;
 
     let negotiatedTokens = {};
 
@@ -306,7 +306,7 @@ window.Negotiator = (function(){
             ethContract = ethContract ? ethContract : defaultContract;
 
             let contractAddressObj = getContractAddress(xmlDoc, ethContract, tokenXmlNode, chainID);
-            let { contractInterface, contractAddress } = contractAddressObj;
+            var { contractInterface, contractAddress } = contractAddressObj;
 
             if (!contractAddress) {
                 debug && console.log('Contract address required. chainID = '+chainID);
