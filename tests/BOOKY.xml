@@ -1,4 +1,4 @@
-<ts:token xmlns:asnx="urn:ietf:params:xml:ns:asnx" xmlns:ethereum="urn:ethereum:constantinople" xmlns:ts="http://tokenscript.org/2020/06/tokenscript" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" custodian="false" xsi:schemaLocation="http://tokenscript.org/2020/06/tokenscript http://tokenscript.org/2020/06/tokenscript.xsd">
+<ts:token xmlns:asnx="urn:ietf:params:xml:ns:asnx" xmlns:ethereum="urn:ethereum:constantinople" xmlns:ts="http://tokenscript.org/2020/06/tokenscript" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" custodian="false" xsi:schemaLocation="http://tokenscript.org/2020/06/tokenscript http://tokenscript.org/2020/06/tokenscript.xsd" name="booky">
     <asnx:module name="ERC20-Events">
         <namedType name="Approval">
             <type>
@@ -21,7 +21,7 @@
     </asnx:module>
 
     <ts:contract interface="erc20" name="booky">
-        <ts:address network="1">0x583cbBb8a8443B38aBcC0c956beCe47340ea1367</ts:address>
+        <ts:address network="3">0x583cbBb8a8443B38aBcC0c956beCe47340ea1367</ts:address>
     </ts:contract>
     <ts:cards>
 

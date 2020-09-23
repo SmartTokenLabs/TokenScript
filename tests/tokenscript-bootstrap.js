@@ -9,7 +9,7 @@ window.Negotiator = (function(){
     let ready = false;
     let tokens = {};
     let tokenNodesList = {};
-    let select, bar, lang, xmlDoc, nsResolver;
+    let select, bar, lang;
     let web3;
     let jsons = {};
     let config = {
@@ -56,7 +56,6 @@ window.Negotiator = (function(){
             lang = lang ? lang : config.lang;
 
             await parseXML();
-            await fillTokenList();
 
             // if (tokens.length)
             bar = bar ? bar : createFloatingBox();
@@ -122,17 +121,21 @@ window.Negotiator = (function(){
      */
     let parseXML = async function(){
         try {
-            const XMLNode = document.querySelector('link[rel="tokenscript"]');
-            if (!XMLNode || !XMLNode.href) throw new Error("Tokenscript link missed");
+            const XMLNodes = document.querySelectorAll('link[rel="tokenscript"]');
+            if (!XMLNodes) throw new Error("Tokenscript link missed");
 
             // if (isTokenExpired()) throw new Error("Token expired");
 
-            const XMLPath = XMLNode.href;
+            // XMLNodes.forEach(XMLNode=>{
+            for (let i=0; i < XMLNodes.length; i++){
+                const XMLPath = XMLNodes[i].href;
+                const response = await fetch(XMLPath);
+                const xmlText = await response.text();
+                let xmlDoc = await (new window.DOMParser()).parseFromString(xmlText, "text/xml");
 
-            const response = await fetch(XMLPath);
-            const xmlText = await response.text();
-            xmlDoc = await (new window.DOMParser()).parseFromString(xmlText, "text/xml");
-            nsResolver = xmlDoc.createNSResolver( xmlDoc.ownerDocument == null ? xmlDoc.documentElement : xmlDoc.ownerDocument.documentElement);
+                fillTokenList(xmlDoc);
+            }
+
 
         } catch (e) {
             let message = ' Fetch XML Error. '+e;
@@ -141,12 +144,17 @@ window.Negotiator = (function(){
         }
     }
 
-    let fillTokenList = function(){
-        var tokenNodes = xmlDoc.evaluate('/ts:token', xmlDoc, nsResolver, XPathResult.ANY_TYPE, null );
+    let fillTokenList = function(xmlDoc){
+        let nsResolver = xmlDoc.createNSResolver( xmlDoc.ownerDocument == null ? xmlDoc.documentElement : xmlDoc.ownerDocument.documentElement);
+
+        let tokenNodes = xmlDoc.evaluate('/ts:token', xmlDoc, nsResolver, XPathResult.ANY_TYPE, null );
         let tokenNode = tokenNodes.iterateNext();
 
         while (tokenNode) {
-            tokenNodesList[tokenNode.getAttribute('name')] = tokenNode;
+            tokenNodesList[tokenNode.getAttribute('name')] = {
+                tokenRootNode: tokenNode,
+                xmlDoc: xmlDoc
+            };
             tokenNode = tokenNodes.iterateNext();
         }
     }
@@ -237,8 +245,8 @@ window.Negotiator = (function(){
     /*
     parse XML and return innerHTML value by selector (XPath)
     */
-    let getXMLItemText = function (selector, context = ''){
-        var item = getXMLItem(selector, context);
+    let getXMLItemText = function (xmlDoc, selector, context = ''){
+        var item = getXMLItem(xmlDoc, selector, context);
         if (item) {
             return item.innerHTML;
         } else {
@@ -250,40 +258,43 @@ window.Negotiator = (function(){
     /*
     parse XML and return innerHTML value by selector (XPath)
     */
-    let getXMLItem = function(selector, context = '' ){
-        var xmlNode = xmlDoc.evaluate(selector, context ? context : xmlDoc, nsResolver, XPathResult.ANY_TYPE, null );
-        return xmlNode.iterateNext();
+    let getXMLItem = function(xmlDoc, selector, context = '' ){
+        context = context ? context : xmlDoc;
+        let nsResolver = xmlDoc.createNSResolver( xmlDoc.ownerDocument == null ? xmlDoc.documentElement : xmlDoc.ownerDocument.documentElement);
+
+        let xmlNode = xmlDoc.evaluate(selector, context, nsResolver, XPathResult.ANY_TYPE, null );
+        return xmlNode ? xmlNode.iterateNext() : false;
     }
 
     /*
     parse single attribute params
     */
-    let getAttributeParams = function(func, root, options){
-        let {userAddress, tokenId, chainID , attributeNode} = options;
+    let getAttributeParams = function(func, tokenXmlNode, options){
+        let {userAddress, tokenId, chainID , attributeNode , xmlDoc} = options;
 
-        let xmlNode = getXMLItem('ts:origins/ts:ethereum[1]', root);
+        let xmlNode = getXMLItem(xmlDoc,'ts:origins/ts:ethereum[1]', tokenXmlNode);
         let defaultContract = xmlNode ? xmlNode.getAttribute('contract') : '';
 
         var params = [];
 
         if (!attributeNode) {
-            attributeNode = getXMLItem('ts:attribute[@name="' + func + '"][1]', root);
+            attributeNode = getXMLItem(xmlDoc, 'ts:attribute[@name="' + func + '"][1]', tokenXmlNode);
         }
 
         if (attributeNode){
             // console.log('attributeNode');
             // console.log(attributeNode);
 
-            xmlNode = getXMLItem('ts:label/ts:string[@xml:lang="'+lang+'"][1]',attributeNode);
+            xmlNode = getXMLItem(xmlDoc,'ts:label/ts:string[@xml:lang="'+lang+'"][1]',attributeNode);
 
             if (xmlNode) {
                 var label = xmlNode.innerHTML;
             } else {
-                xmlNode = getXMLItem('ts:label/ts:string[@xml:lang="'+config.lang+'"][1]',attributeNode);
+                xmlNode = getXMLItem(xmlDoc,'ts:label/ts:string[@xml:lang="'+config.lang+'"][1]',attributeNode);
                 var label = xmlNode ? xmlNode.innerHTML : '';
             }
 
-            xmlNode = getXMLItem('ts:origins/ethereum:call[1]',attributeNode);
+            xmlNode = getXMLItem(xmlDoc,'ts:origins/ethereum:call[1]',attributeNode);
             // console.log(attributeNode);
             // console.log(xmlNode);
             var ethFunction = xmlNode.getAttribute('function');
@@ -294,11 +305,9 @@ window.Negotiator = (function(){
 
             ethContract = ethContract ? ethContract : defaultContract;
 
-            let contractNode = getXMLItem('ts:contract[@name="'+ethContract+'"][1]',root);
-            if (contractNode){
-                var contractInterface = contractNode.getAttribute('interface');
-                var contractAddress = getXMLItemText('ts:address[@network='+chainID+'][1]',contractNode);
-            }
+            let contractAddressObj = getContractAddress(xmlDoc, ethContract, tokenXmlNode, chainID);
+            let { contractInterface, contractAddress } = contractAddressObj;
+
             if (!contractAddress) {
                 debug && console.log('Contract address required. chainID = '+chainID);
                 return false;
@@ -308,6 +317,7 @@ window.Negotiator = (function(){
             var ethType = xmlNode.getAttribute('type');
             var ethSelect = xmlNode.getAttribute('select');
 
+            let nsResolver = xmlDoc.createNSResolver( xmlDoc.ownerDocument == null ? xmlDoc.documentElement : xmlDoc.ownerDocument.documentElement);
             let xmlNodeSet = xmlDoc.evaluate('ts:origins/ethereum:call/ts:data/*', attributeNode, nsResolver, XPathResult.ANY_TYPE, null );
 
             let item = xmlNodeSet.iterateNext();
@@ -352,12 +362,24 @@ window.Negotiator = (function(){
 
     }
 
+    let getContractAddress = function (xmlDoc, ethContract, tokenXmlNode, chainID){
+        let contractNode = getXMLItem(xmlDoc,'ts:contract[@name="'+ethContract+'"][1]',tokenXmlNode);
+        if (contractNode){
+            var contractInterface = contractNode.getAttribute('interface');
+            var contractAddress = getXMLItemText(xmlDoc,'ts:address[@network='+chainID+'][1]',contractNode);
+        }
+
+        return {
+            contractInterface, contractAddress
+        }
+    }
+
     class TokenCard {
         constructor(data) {
             debug && console.log('TokenCard constructor fired');
 
-            this.tokenXMLNode = data.xmlDoc;
-            this.nsResolver = data.nsResolver;
+            this.xmlDoc = data.xmlDoc;
+            this.tokenXMLNode = data.tokenXMLNode;
             this.tokenName = data.tokenName;
             this.tokenID = data.tokenID;
             this.toRender = data.wrapNode;
@@ -366,6 +388,174 @@ window.Negotiator = (function(){
             this.fallbackLang = 'en';
             this.ready = false;
             this.parseTokenData();
+
+            this.nsResolver = this.xmlDoc.createNSResolver( this.xmlDoc.ownerDocument == null ? this.xmlDoc.documentElement : this.xmlDoc.ownerDocument.documentElement);
+
+            let xmlNode = getXMLItem(this.xmlDoc,'ts:origins/ts:ethereum[1]', this.xmlDoc);
+            this.defaultContract = xmlNode ? xmlNode.getAttribute('contract') : '';
+        }
+
+        /*
+        Parse ERC20 events and display to console
+         */
+        getErc20EventParams(erc20EventName){
+            const eventXmlNodes = this.xmlDoc.evaluate('asnx:module[@name="ERC20-Events"]/namedType[@name="'+erc20EventName+'"]', this.tokenXMLNode, this.nsResolver, XPathResult.ANY_TYPE, null );
+
+            let moduleNode = eventXmlNodes.iterateNext();
+
+            let params = {};
+
+            if (moduleNode) {
+
+                let eventElementsXmlNodes = this.xmlDoc.evaluate('type/sequence/element', moduleNode, this.nsResolver, XPathResult.ANY_TYPE, null );
+
+                let eventElementsXmlNode = eventElementsXmlNodes.iterateNext();
+                while (eventElementsXmlNode) {
+
+                    params[eventElementsXmlNode.getAttribute('name')] = null;
+
+                    eventElementsXmlNode = eventElementsXmlNodes.iterateNext();
+                }
+            } else {
+                return false;
+            }
+
+            return params;
+        }
+
+
+
+        /*
+        get module events
+         */
+        async renderEventCards(){
+            try {
+
+                const ethersData = await getEthersData();
+                var {provider,signer,userAddress,chainID} = ethersData;
+
+                let activityCardXmlNodes = this.xmlDoc.evaluate('ts:cards/ts:card[@type="activity"]', this.tokenXMLNode, this.nsResolver, XPathResult.ANY_TYPE, null);
+
+                let activityCardXmlNode = activityCardXmlNodes.iterateNext();
+                while (activityCardXmlNode) {
+
+                    let eventNodes = this.xmlDoc.evaluate('ts:origins/ethereum:event[1]', activityCardXmlNode, this.nsResolver, XPathResult.ANY_TYPE, null);
+                    let eventNode = eventNodes.iterateNext();
+
+                    if (eventNode) {
+                        let eventContractName = eventNode.getAttribute('contract');
+
+                        eventContractName = eventContractName ? eventContractName : this.defaultContract;
+
+
+                        if (!eventContractName) throw new Error('eventContractName missing.');
+
+                        var eventFilter = eventNode.getAttribute('filter');
+                        var eventType = eventNode.getAttribute('type');
+
+
+
+                        let contractAddressObj = getContractAddress(this.xmlDoc, eventContractName, this.tokenXMLNode, chainID);
+                        var {contractInterface, contractAddress} = contractAddressObj;
+
+                        if (!contractAddress) {
+                            let message = 'Contract address required. chainID = ' + chainID
+                            debug && console.log(message);
+                            throw new Error(message);
+                        }
+                    };
+
+                    debug && console.log('event:');
+                    debug && console.log(contractAddress, chainID, eventType, eventFilter, userAddress);
+
+                    let params = this.getErc20EventParams(eventType);
+
+                    if (!params) throw  new Error(eventType+' parameters missing.');
+
+                    const match = eventFilter.match(/(\S+)=(\S+)/);
+
+                    if (match) {
+                        let paramName = match[1];
+                        let paramValue = match[2];
+                        if (paramName in params) {
+                            params[paramName] = paramValue == '${ownerAddress}' ? userAddress : paramValue;
+                        }
+                    }
+
+
+
+                    // we can try to render abi from XML
+                    // let abi = [{
+                    //     "anonymous":false,
+                    //     "inputs":[
+                    //         {"indexed":true,"name":"_from","type":"address"},
+                    //         {"indexed":true,"name":"_to","type":"address"},
+                    //         {"indexed":false,"name":"_value","type":"uint256"}
+                    //     ],
+                    //     "name":"Transfer",
+                    //     "type":"event"
+                    // }];
+                    let abi = [{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_amount","type":"uint256"}],"name":"approve","outputs":[{"name":"success","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"totalSupply","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_from","type":"address"},{"name":"_to","type":"address"},{"name":"_amount","type":"uint256"}],"name":"transferFrom","outputs":[{"name":"success","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint8"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"}],"name":"balanceOf","outputs":[{"name":"balance","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"type":"function"},
+                        {
+                            "constant":false,
+                            "inputs":[{"name":"_to","type":"address"},{"name":"_amount","type":"uint256"}],
+                            "name":"transfer",
+                            "outputs":[{"name":"success","type":"bool"}],
+                            "payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"},{"name":"_spender","type":"address"}],"name":"allowance","outputs":[{"name":"remaining","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"ethers","type":"uint256"}],"name":"withdrawEthers","outputs":[{"name":"ok","type":"bool"}],"payable":false,"type":"function"},{"inputs":[{"name":"_name","type":"string"},{"name":"_symbol","type":"string"},{"name":"_decimals","type":"uint8"}],"payable":false,"type":"constructor"},{"payable":true,"type":"fallback"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_owner","type":"address"},{"indexed":false,"name":"_amount","type":"uint256"}],"name":"TokensCreated","type":"event"},
+                        {
+                            "anonymous":false,
+                            "inputs":[
+                                {"indexed":true,"name":"_from","type":"address"},
+                                {"indexed":true,"name":"_to","type":"address"},
+                                {"indexed":false,"name":"_value","type":"uint256"}
+                            ],
+                            "name":"Transfer",
+                            "type":"event"
+                        },{"anonymous":false,"inputs":[{"indexed":true,"name":"_owner","type":"address"},{"indexed":true,"name":"_spender","type":"address"},{"indexed":false,"name":"_value","type":"uint256"}],"name":"Approval","type":"event"}];
+
+                    let paramsArray = [];
+                    for(let i in params){
+                        paramsArray.push(params[i]);
+                    }
+
+                    debug && console.log('eventType');
+                    debug && console.log(eventType);
+
+                    debug && console.log('params');
+                    debug && console.log(params);
+
+                    let contract = new ethers.Contract(contractAddress, abi, provider);
+                    let filter = contract.filters[eventType].apply(null, paramsArray);
+
+                    debug && console.log('filter');
+                    debug && console.log(filter);
+
+                    contract.queryFilter(filter).then(this.cb(eventType + ' where ' + eventFilter));
+
+                    activityCardXmlNode = activityCardXmlNodes.iterateNext();
+                }
+            } catch (e) {
+                let message = "Parse events error. "+e;
+                catchDebug && console.log(e);
+                catchDebug && console.log(message);
+                throw new Error(message);
+            }
+        }
+
+        cb(type){
+            return function(result,error){
+                if (result.length) {
+                    console.log('results for '+type)
+                    console.log(result)
+                } else {
+                    console.log('No results for '+type)
+                }
+
+                if (error) {
+                    console.log('Error');
+                    console.log(error);
+                }
+            }
         }
 
         /*
@@ -395,7 +585,6 @@ window.Negotiator = (function(){
                         this.iframe.contentWindow.onerror = e=>{console.log('iframe error'); console.log(e);};
                         this.injectIframeContent();
                         this.runParser();
-                        resolve();
                     }
                 })
 
@@ -421,8 +610,9 @@ window.Negotiator = (function(){
             debug && console.log('runParser started');
             // this.account = accounts[0];
 
-            this.cardHtml = getXMLItemText( 'ts:cards/ts:card[@type="token"]/ts:item-view[@xml:lang="' + this.lang + '"][1]', this.tokenXMLNode );
-            this.cardHtml = this.cardHtml ? this.cardHtml : getXMLItemText('ts:cards/ts:card[@type="token"]/ts:item-view[@xml:lang="' + this.fallbackLang + '"][1]', this.tokenXMLNode );
+            this.cardHtml = getXMLItemText( this.xmlDoc,'ts:cards/ts:card[@type="token"]/ts:item-view[@xml:lang="' + this.lang + '"][1]', this.tokenXMLNode );
+            this.cardHtml = this.cardHtml ? this.cardHtml : getXMLItemText(this.xmlDoc,'ts:cards/ts:card[@type="token"]/ts:item-view[@xml:lang="' + this.fallbackLang + '"][1]', this.tokenXMLNode );
+            this.cardHtml = this.cardHtml ? this.cardHtml : '<h2 style="text-transform: uppercase;">' + this.tokenName + '</h2>';
 
             // ethereum.enable().then(a=>{
             //     this.runParser(a);
@@ -626,7 +816,7 @@ window.Negotiator = (function(){
 
             let abi = await getJSONAbi(ethContract);
 
-            let parsed = getAttributeParams(func, this.tokenXMLNode,{userAddress});
+            let parsed = getAttributeParams(func, this.tokenXMLNode,{userAddress,XMLDoc});
             let params = parsed.params;
 
             params.push((error, result) => {
@@ -785,15 +975,23 @@ window.Negotiator = (function(){
             debug && console.log('ethersData');
             debug && console.log(ethersData);
 
-            let distinctAttributeNode = getXMLItem('ts:attribute[@distinct="true"][1]',tokenNodesList[tokenName]);
+            let distinctAttributeNode = getXMLItem(tokenNodesList[tokenName].xmlDoc,'ts:attribute[@distinct="true"][1]',tokenNodesList[tokenName].tokenRootNode);
 
             if (!distinctAttributeNode) {
                 debug && console.log("Cant find distinct attribute, lets use ownerAddress");
                 return ['ownerAddress='+userAddress];
             }
 
-            // methodattributes = {params,ethFunction,ethContract,ethAs,ethType,ethSelect,label};
-            methodattributes = getAttributeParams(false,tokenNodesList[tokenName],{userAddress,chainID,attributeNode: distinctAttributeNode});
+            debug && console.log('distinctAttributeNode');
+            debug && console.log(distinctAttributeNode);
+
+            // methodattributes = {params,ethFunction,contractAddress,ethContract,ethAs,ethType,ethSelect,label};
+            methodattributes = getAttributeParams(false,tokenNodesList[tokenName].tokenRootNode,{
+                userAddress,
+                chainID,
+                attributeNode: distinctAttributeNode,
+                xmlDoc: tokenNodesList[tokenName].xmlDoc
+            });
             let params = methodattributes.params;
 
             debug && console.log('methodattributes');
@@ -850,6 +1048,8 @@ window.Negotiator = (function(){
         negotiatedTokens[tokenName] = options;
         try {
             await init(options);
+            await ethereum.enable();
+
             debug && console.log('negotiate fired for '+tokenName);
 
             const tokenNodes = bar.querySelectorAll('.ts_token_bar_body .ts_token_wrap[data-tokenname="'+tokenName+'"]');
@@ -868,15 +1068,17 @@ window.Negotiator = (function(){
                 barBody.appendChild(wrap);
 
                 // tokenInstances[tokenName] =
-                    new TokenCard({
+                wrap.tokenInstance = new TokenCard({
                     // xmlDoc,
-                    xmlDoc: tokenNodesList[tokenName],
+                    xmlDoc: tokenNodesList[tokenName].xmlDoc,
+                    tokenXMLNode: tokenNodesList[tokenName].tokenRootNode,
                     wrapNode: wrap,
                     lang,
-                    nsResolver,
                     tokenName,
                     tokenID
                 });
+
+                // wrap.tokenInstance = instance;
 
                 var event = new CustomEvent('ontokennegotiation', { 'detail': {tokenName,tokenID} });
                 window.dispatchEvent(event);
@@ -944,13 +1146,18 @@ window.Negotiator = (function(){
     }
 
     let renegotiate = function(){
+        debug && console.log('negotiatedTokens');
+        debug && console.log(negotiatedTokens);
+        // if (negotiatedTokens)
         Object.keys(negotiatedTokens).forEach(key=>{
-            negotiate(key,negotiatedTokens[key]).then(e=>{console.log('renegotiated',e)}).catch(console.log);
+            negotiate(key,negotiatedTokens[key]).then(e=>{console.log('renegotiated')}).catch(console.log);
         })
     }
 
     ethereum.on('accountsChanged', renegotiate);
     ethereum.on('chainChanged', renegotiate);
+    ethereum.on('connect', renegotiate);
+    ethereum.on('disconnect', renegotiate);
 
     return {
         negotiate,
