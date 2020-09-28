@@ -461,7 +461,10 @@ document.addEventListener("DOMContentLoaded", function() {
         <ts:string xml:lang="zh">时间</ts:string>
       </ts:label>
       <ts:origins>
-        <ts:token-id as="utf8" bitmask="0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000000000000000000000"></ts:token-id>
+        <ts:token-id as="utf8" bitmask="
+        0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000000000000000000000
+        474d542b33000000000000000000000001075b2282f05255534b534101050002
+"></ts:token-id>
       </ts:origins>
     </ts:attribute>
     <ts:attribute name="expired"> <!-- boolean -->
