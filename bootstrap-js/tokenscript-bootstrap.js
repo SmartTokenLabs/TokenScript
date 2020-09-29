@@ -58,7 +58,7 @@ window.Negotiator = (function(){
                 await parseXML();
 
                 // if (tokens.length)
-                bar = bar ? bar : createFloatingBox();
+                createFloatingBox();
 
                 ready = true;
             }
@@ -190,9 +190,11 @@ window.Negotiator = (function(){
     }
 
     let createFloatingBox = function(){
-        const bar = document.createElement('div');
+        if (bar) return;
+
+        bar = document.createElement('div');
         bar.classList.add(config.cssPrefix + 'token_bar');
-        bar.innerHTML = '<div class="ts_token_bar_head"><div class="ts_token_bar_icon"></div><div class="ts_token_bar_title">Tokens List</div></div><div class="ts_token_bar_body"><div class="def">No Selected Active Tokens for this Account in this Network</div></div>';
+        bar.innerHTML = '<div class="ts_token_bar_head"><div class="ts_token_bar_icon"></div><div class="ts_token_bar_title">Tokens List</div></div><div class="ts_token_bar_body"><div class="def"></div></div>';
         const body = document.getElementsByTagName('body');
         body[0].appendChild(bar);
         const head = bar.querySelector('.ts_token_bar_head');
@@ -202,7 +204,7 @@ window.Negotiator = (function(){
             // return false;
         });
 
-        return bar;
+        setDefMessageAndBtn();
     }
 
     let createSelectOverlay = function(){
@@ -1213,6 +1215,7 @@ window.Negotiator = (function(){
     }
 
     let negotiate = async function(tokenName, options){
+        setDefMessageAndBtn(tokenName);
         negotiatedTokens[tokenName] = options;
         try {
             await init(options);
@@ -1314,13 +1317,66 @@ window.Negotiator = (function(){
         }
     }
 
-    let renegotiate = function(){
+    async function renegotiate(){
+        if (!bar || !negotiatedTokens) return;
+        console.log('negotiatedTokens');
         debug && console.log('negotiatedTokens');
         debug && console.log(negotiatedTokens);
-        // if (negotiatedTokens)
-        Object.keys(negotiatedTokens).forEach(key=>{
-            negotiate(key,negotiatedTokens[key]).then(e=>{console.log('renegotiated')}).catch(console.log);
-        })
+
+        const nodes = bar.querySelectorAll('.ts_token_bar_body > *:not(.def)');
+        nodes.forEach(item=>{item.remove()});
+
+        const def = bar.querySelector('.ts_token_bar_body .def');
+        // try {
+            if (!ethereum || !ethereum.chainId) {
+                def.innerHTML = "Metamask not connected to the network. Check your internet connection and firewall settings.";
+                return;
+            }
+            let tokenName;
+            if ( ethereum.selectedAddress ){
+
+                Object.keys(negotiatedTokens).forEach(key=>{
+                    tokenName = key;
+                    negotiate(key,negotiatedTokens[key]).then(e=>{console.log('renegotiated')}).catch(console.log);
+                })
+            }
+
+            setDefMessageAndBtn(tokenName);
+
+
+        // } catch (e) {
+        //     let message = 'Something went wrong when try to get Network and Address'
+        //     debug && console.log(message);
+        //     debug && console.log(e);
+        //     def.innerHTML = message;
+        // }
+    }
+
+    async function setDefMessageAndBtn(tokenName){
+        if (!bar ) return;
+
+        const def = bar.querySelector('.ts_token_bar_body .def');
+        const node = bar.querySelector('.ts_token_bar_body');
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        let network = await provider.getNetwork();
+
+        if (ethereum.selectedAddress ){
+            def.innerHTML = "On the " + network.name + ", no token is found under your address " + ethereum.selectedAddress + (tokenName ? " that matches the criteria objectClass="+tokenName : '');
+        } else {
+
+
+            def.innerHTML = "MetaMask is not connected this site. To connect to a web3 site, find the connect button on their site.";
+
+            let div = bar.querySelector('.ts_token_bar_body .ts_connect');
+            if (!div) {
+                div = document.createElement('div');
+                div.innerHTML = "Connect to " + (ethereum.isMetaMask ? "Metamask" : "Wallet");
+                div.addEventListener('click',ethereum.enable);
+                div.classList.add('ts_connect','ts_btn_std');
+                node.appendChild(div);
+            }
+
+        }
     }
 
     ethereum.on('accountsChanged', renegotiate);
