@@ -84,6 +84,18 @@
           display: none; }
         .ts_token_bar .ts_token_bar_body .ts_token_wrap .activity_cards .sidebar_toggle {
           display: none; }
+    .ts_token_bar .ts_token_bar_body .ts_connect {
+      margin-top: 80px; }
+
+.ts_btn_std {
+  padding: 2px 5px;
+  background: #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.5s;
+  text-align: center; }
+  .ts_btn_std:hover {
+    box-shadow: inset 0 -3.25em 0 0 #eee; }
 
 #ts_select_token {
   width: 100%;
