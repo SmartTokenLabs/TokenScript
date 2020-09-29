@@ -1361,7 +1361,30 @@ window.Negotiator = (function(){
         let network = await provider.getNetwork();
 
         if (ethereum.selectedAddress ){
-            def.innerHTML = "On the " + network.name + ", no token is found under your address " + ethereum.selectedAddress + (tokenName ? " that matches the criteria objectClass="+tokenName : '');
+            stats = {"Ethereum Network": network.name,
+                     "Your Address": ethereum.selectedAddress,
+                     "Negotiation Filter": "objectClass=" + tokenName
+                    };
+            var tbody = document.createElement("tbody");
+            for (i in stats) {
+                var th = document.createElement("th");
+                th.innerText = i;
+                th.style.whiteSpace = "nowrap";
+                var td = document.createElement("td");
+                td.innerText = stats[i]
+                td.style.overflowWrap = "anywhere";
+                var tr = document.createElement("tr");
+                tr.appendChild(th);
+                tr.appendChild(td);
+                tbody.appendChild(tr);
+            }
+            var caption = document.createElement("caption")
+            caption.innerText="No Ethereum token found";
+            var table = document.createElement("table")
+            table.appendChild(caption)
+            table.appendChild(tbody);
+            def.innerHTML = '';
+            def.appendChild(table)
         } else {
 
 
