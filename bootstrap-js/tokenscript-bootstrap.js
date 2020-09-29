@@ -619,7 +619,7 @@ window.Negotiator = (function(){
                     debug && console.log(filter);
 
                     // contract.queryFilter(filter).then(this.cb(eventType + ' where ' + eventFilter));
-                    contract.queryFilter(filter).then(callback);
+                    contract.queryFilter(flter).then(callback);
 
                     // let res = output._isBigNumber ? bnStringPrecision(output,18,8) : output;
                     // let res = output._isBigNumber ? output.toString() : output;
@@ -1363,8 +1363,12 @@ window.Negotiator = (function(){
         if (ethereum.selectedAddress ){
             stats = {"Ethereum Network": network.name,
                      "Your Address": ethereum.selectedAddress,
-                     "Negotiation Filter": "objectClass=" + tokenName
                     };
+            /* will break for active negotiation, replace the following 4 lines with what's going on with the current negotiation */
+            var filter = document.querySelector("meta[name='token.filter']");
+            if (filter != null) {
+                stats["Negotiation Filter"] =  filter.content;
+            }
             var tbody = document.createElement("tbody");
             for (i in stats) {
                 var th = document.createElement("th");
