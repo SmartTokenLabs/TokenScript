@@ -8,17 +8,19 @@
     <!-- this is for token negotiation! -->
     <!-- OG: meta tag allow only "scheme,name,http-equiv,content,charset". we can use "name,content" to stay document valid-->
 <!--    <meta name="token" content="entry-token"/>-->
-<!--    <meta name="token.filter" content="objectClass=entrytoken"/>-->
-    <meta name="token.filter" content="objectClass=booky"/>
+    <meta name="token.filter" content="objectClass=entrytoken"/>
+<!--    <meta name="token.filter" content="objectClass=booky"/>-->
 <!--    <meta name="token-expiry" content=">=2018-04-04"/>-->
     <!-- if without linked TokenScript, consider a synax like this
     <meta tokens-accepted="ethereum:1/0x63cCEF733a093E5Bd773b41C96D3eCE361464942/"/>
     -->
     <title>Showing the cards in a web page</title>
     <link rel="stylesheet" href="ts.css">
-    <script type="text/javascript" src="web3.min.js"></script>
-    <script type="text/javascript" src="ethers-5.0.umd.min.js"></script>
-    <script type="text/javascript" src="tokenscript-bootstrap.js"></script>
+    <script type="text/javascript" src="inc/web3.min.js"></script>
+<!--    <script type="text/javascript" src="inc/require.js"></script>-->
+    <script type="text/javascript" src="inc/ethers-5.0.umd.min.js"></script>
+<!--    <script type="module" src="tokenscript-bootstrap.js" ></script>-->
+    <script type="text/javascript" src="tokenscript-bootstrap.js" ></script>
     <script type="text/javascript">
         // the following event is triggered every time when a token is negotiated
         // and that is why an event listener is used in place of a promise;
