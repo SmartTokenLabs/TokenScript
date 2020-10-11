@@ -71,7 +71,7 @@
 
         <ts:card type="activity" name="ownerApproved">
             <ts:origins>
-                <ethereum:event type="Approval" filter="${from}=${ownerAddress}"/>
+                <ethereum:event type="Approval" filter="owner=${ownerAddress}"/>
             </ts:origins>
             <ts:item-view xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
                 <style type="text/css">&style;</style>
@@ -85,7 +85,7 @@
 
         <ts:card type="activity" name="approvalObtained">
             <ts:origins>
-                <ethereum:event type="Approval" filter="${to}=${ownerAddress}"/>
+                <ethereum:event type="Approval" filter="approved=${ownerAddress}"/>
             </ts:origins>
             <ts:item-view xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
                 <style type="text/css">&style;</style>
