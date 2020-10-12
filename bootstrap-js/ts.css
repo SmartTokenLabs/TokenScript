@@ -97,6 +97,7 @@
   .ts_btn_std:hover {
     box-shadow: inset 0 -3.25em 0 0 #eee; }
 
+/*
 #ts_select_token {
   width: 100%;
   display: flex;
@@ -112,19 +113,20 @@
   left: 0;
   opacity: 1;
   transition: opacity 0.3s;
-  z-index: 10; }
-  #ts_select_token.disabled {
+  z-index: 10;
+  &.disabled {
     opacity: 0;
-    pointer-events: none; }
-  #ts_select_token .ts_select_box {
+    pointer-events: none;
+  }
+  .ts_select_box {
     padding: 30px;
     background: #fff;
     border-radius: 4px;
     border: 1px solid #000;
     width: 300px;
     text-align: center;
-    position: relative; }
-    #ts_select_token .ts_select_box .ts_close {
+    position: relative;
+    .ts_close {
       position: absolute;
       top: -10px;
       right: -10px;
@@ -138,8 +140,14 @@
       background-repeat: no-repeat;
       background-size: 13px;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 512' %3E%3Cpath fill='currentColor' d='M207.6 256l107.72-107.72c6.23-6.23 6.23-16.34 0-22.58l-25.03-25.03c-6.23-6.23-16.34-6.23-22.58 0L160 208.4 52.28 100.68c-6.23-6.23-16.34-6.23-22.58 0L4.68 125.7c-6.23 6.23-6.23 16.34 0 22.58L112.4 256 4.68 363.72c-6.23 6.23-6.23 16.34 0 22.58l25.03 25.03c6.23 6.23 16.34 6.23 22.58 0L160 303.6l107.72 107.72c6.23 6.23 16.34 6.23 22.58 0l25.03-25.03c6.23-6.23 6.23-16.34 0-22.58L207.6 256z' class=''%3E%3C/path%3E%3C/svg%3E");
-      cursor: pointer; }
-    #ts_select_token .ts_select_box .ts_token {
+      cursor: pointer;
+    }
+    h2 {
+      //color: #fff;
+
+    }
+    
+    .ts_token {
       border: 1px solid #eee;
       background: #f5f5f5;
       padding: 10px 20px;
@@ -149,10 +157,16 @@
       text-align: center;
       box-sizing: border-box;
       transition: 0.25s;
-      cursor: pointer; }
-      #ts_select_token .ts_select_box .ts_token:hover {
-        box-shadow: inset 0 -3.25em 0 0 #eee; }
-
+      cursor: pointer;
+      &:hover {
+        //box-shadow: 0 0.5em 0.5em -0.4em #eee;
+        //transform: translateY(-0.25em);
+        box-shadow: inset 0 -3.25em 0 0 #eee;
+      }
+    }
+  }
+}
+ */
 .box {
   font-size: 1.25rem;
   /* 20 */
