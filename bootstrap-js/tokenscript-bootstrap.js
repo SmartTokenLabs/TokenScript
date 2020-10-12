@@ -1,246 +1,4 @@
-let ts = (function(){
-    /**
-     *
-     * @param str
-     * @param props
-     * @param debug
-     * @returns {string}
-     */
-    function compareStringToProps(str, props, debug = false){
-        if (!str) {
-            debug && console.log('empty filter');
-            return '1';
-        }
-        let match = str.matchAll(/(\([^)(]+\))/g);
-        let matchAll = Array.from(match);
-        debug && console.log('matchAll');
-        debug && console.log(matchAll);
-        matchAll.forEach(item=>{
-            let single = item[1];
-            // console.log('wrong pattern : ' + item + ', skipped');
-            matchProp = single.match(/\(([^<>=]+)(=|<=|>=)([^<>=]+)\)/);
-            if (!matchProp) {
-                debug && console.log('wrong pattern : ' + item + ', skipped');
-                str.replace(item,1);
-            }
-            debug && console.log('matchProp');
-            debug && console.log(matchProp);
-            let propName = matchProp[1].trim();
-            let propCompare = matchProp[2];
-            let propTest = matchProp[3].trim();
-            let propValue = props[propName];
-
-            if (!propValue) {
-                debug && console.log('property check false(prop not exists or empty) for: '+ propName + ', while serve '+item[0]);
-                str = str.replace(item[0],'0');
-            } else {
-                // let compareRes = propValue.match(//);
-                let result;
-                switch (propCompare) {
-                    case '=':
-                        // quote all regex symbols except of *
-                        var re = new RegExp(propTest.replace(/([.?+^$[\]\\(){}|-])/g, "\\$1"));
-                        result = propValue.match(re);
-                        break;
-                    case "<=":
-                        result = parseFloat(propValue) < parseFloat(propTest);
-                        console.log('propValue = '+ parseFloat(propValue) + " ; propTest = " + parseFloat(propTest) + "; compare = " + propCompare + " ; result = "+result);
-                        break;
-                    case ">=":
-                        result = parseFloat(propValue) > parseFloat(propTest);
-                        break;
-                    default:
-                        debug && console.log('compare string error. wrong part: '+matchProp[0]+' at the moment: '+str);
-                        str = "-1";
-                }
-                str = str.replace(item[0], result ? '1' : '0');
-            }
-            debug && console.log('compare string result after : '+single+' = '+str);
-        })
-
-        let counter = 0;
-        while ((matchAll = Array.from((match = str.matchAll(/(\(([!|&]?)([^)(]+)\))/g)))).length) {
-            debug && console.log('matchAll');
-            debug && console.log(matchAll);
-            matchAll.forEach(item=>{
-                let inner = item[0];
-                let compare = item[2];
-                let bits = item[3];
-                switch (compare) {
-                    case '':
-                        switch(inner) {
-                            case '(1)':str = str.replace(item[0], '1');
-                                break;
-                            case '(0)':str = str.replace(item[0], '0');
-                                break;
-                            default:
-                                console.log('compare string error. wrong part: '+inner+' at the moment: '+str);
-                                str = "-1";
-                        }
-                        break;
-                    case "!":
-                        switch(inner) {
-                            case '(!1)':str = str.replace(item[0], '0');
-                                break;
-                            case '(!0)':str = str.replace(item[0], '1');
-                                break;
-                            default:
-                                debug && console.log('compare string error. wrong part: '+inner+' at the moment: '+str);
-                                str = "-1";
-                        }
-                        break;
-                    case "|":
-                        str = str.replace(item[0], bits.includes('1') ? '1' : '0');
-                        break;
-                    case "&":
-                        str = str.replace(item[0], bits.includes('0') ? '0' : '1');
-                        break;
-                    default:
-                        debug && console.log('compare string error. wrong part: '+inner+' at the moment: '+str);
-                        str = "-1";
-                }
-                debug && console.log('second pass temp res = '+str);
-
-                // let innerMatch
-            })
-            debug && console.log('second pass cycle '+counter+' finish res = '+str);
-            counter ++;
-            if (counter > 5) {
-                debug && console.log('its loop, check string please: '+str);
-                str = "-1";
-                break;
-            }
-        };
-
-        debug && console.log('finish res = '+str);
-
-        return parseInt(str);
-    }
-
-    /**
-     * Return Ethers.JS network data
-     * @returns {Promise<{userAddress: *, provider: *, chainID: *, signer: *}>}
-     */
-    async function getEthersData(){
-        await ethereum.enable();
-
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const signer = provider.getSigner();
-        if (!signer) throw new Error("Active Wallet required");
-
-        const userAddress = await signer.getAddress();
-        const networkInfo = await provider.getNetwork();
-
-        if (networkInfo) {
-            var chainID = networkInfo.chainId;
-        } else {
-            throw new Error("Cant read chainID");
-        }
-        return { provider, signer, userAddress, chainID };
-    }
-
-    /**
-     * Get Token Expire date and compare to today
-     * @returns {boolean}
-     */
-    function isTokenExpired(){
-        // name for <meta name="token-expiry" content=">=2018-04-04"/>
-        const tokenExpireMetaName = 'token-expiry';
-        const TokenExpireMetaNode = document.querySelector('meta[name="'+tokenExpireMetaName+'"]');
-        if (TokenExpireMetaNode) {
-            const expire = TokenExpireMetaNode.getAttribute('content');
-            if (expire) {
-                const found = expire.match(/\s*([<>=]{1,2})\s*([\d\-]+)\s*/);
-                if (found[2] && found[1]){
-                    const expireDate = new Date(found[2]);
-                    const today = new Date();
-                    switch (found[1]) {
-                        case '>':
-                            if (today <= expireDate ) return true;
-                            break;
-                        case '>=':
-                            if (today < expireDate ) return true;
-                            break;
-                        case '<':
-                            if (today >= expireDate ) return true;
-                            break;
-                        case '<=':
-                            if (today > expireDate ) return true;
-                            break;
-                    }
-                }
-            }
-        }
-    }
-
-    /**
-     * Parse
-     * @param xmlDoc
-     * @param ethContract
-     * @param tokenXmlNode
-     * @param chainID
-     * @returns {{contractInterface: *, contractAddress: *}}
-     */
-    function getContractAddress(xmlDoc, ethContract, tokenXmlNode, chainID){
-
-        let contractNode = getXMLItem(xmlDoc,'ts:contract[@name="'+ethContract+'"][1]',tokenXmlNode);
-        if (contractNode){
-            var contractInterface = contractNode.getAttribute('interface');
-            var contractAddress = getXMLItemText(xmlDoc,'ts:address[@network='+chainID+'][1]',contractNode);
-        }
-
-        return {
-            contractInterface, contractAddress
-        }
-    }
-
-    /*
-    parse XML and return innerHTML value by selector (XPath)
-    */
-    function getXMLItemText(xmlDoc, selector, context = '', fallbackSelector = ''){
-        let item;
-        if (item = getXMLItem(xmlDoc, selector, context, fallbackSelector)) {
-            return item.innerHTML;
-        } else {
-            window.tsDebug && console.log(selector);
-            window.tsDebug && console.log('Cant find value');
-        }
-    }
-
-    /*
-    parse XML and return innerHTML value by selector (XPath)
-    */
-    function getXMLItem(xmlDoc, selector, context = '' ,fallbackSelector = ''){
-        context = context ? context : xmlDoc;
-        let nsResolver = xmlDoc.createNSResolver( xmlDoc.ownerDocument == null ? xmlDoc.documentElement : xmlDoc.ownerDocument.documentElement);
-        let xmlNode;
-
-        xmlNode = xmlDoc.evaluate(selector, context, nsResolver, XPathResult.ANY_TYPE, null );
-        xmlNode = (xmlNode && !fallbackSelector) ? xmlNode : xmlDoc.evaluate(fallbackSelector, context, nsResolver, XPathResult.ANY_TYPE, null );
-
-        return xmlNode ? xmlNode.iterateNext() : false;
-    }
-
-    /**
-     * Method for simple handle Promices, like "const [error, result] = await to(someAsyncData());"
-     * @param { Promise } promise
-     * @param { Object } improved - If you need to enhance the error.
-     * @return { Promise }
-     */
-    function to(promise, improved){
-        return promise
-            .then((data) => [null, data])
-            .catch((err) => {
-                if (improved) {
-                    Object.assign(err, improved);
-                }
-
-                return [err]; // which is same as [err, undefined];
-            });
-    };
-
-    return {to, compareStringToProps, getEthersData, isTokenExpired, getContractAddress, getXMLItemText, getXMLItem};
-})();
+import {to, compareStringToProps, getEthersData, isTokenExpired, getContractAddress, getXMLItemText, getXMLItem, getJSONAbi} from './modules/ts_helpers.js';
 
 window.Negotiator = (function(){
     let tsDebug = true;
@@ -251,7 +9,7 @@ window.Negotiator = (function(){
     catchDebug = false;
     window.tsCatchDebug = catchDebug;
 
-    let negotiatedTokens = {};
+    // let negotiatedTokens = {};
 
     let ready = false;
     let tokenNodesList = {};
@@ -315,32 +73,6 @@ window.Negotiator = (function(){
     }
 
     /*
-    Read JSON
-     */
-    let getJSONAbi = async function(ethContract){
-        try {
-            let contractJson = jsons[ethContract];
-            if (!contractJson) {
-                let response = await fetch(config.contractJsonPath + ethContract + '.json');
-                if (response.status !== 200) {
-                    const message = 'Looks like there was a problem. Status Code: ' +
-                        response.status;
-                    tsDebug && console.log(message);
-                    throw new Error(message);
-                }
-                contractJson = await response.json();
-                jsons[ethContract] = contractJson;
-            }
-            return contractJson;
-        } catch (e) {
-            let message = 'token JSON fetch error. '+e;
-            catchDebug && console.log(e);
-            throw new Error(message);
-        }
-
-    }
-
-    /*
     Get document lang
      */
     let parseDocumentLang = function(){
@@ -386,14 +118,22 @@ window.Negotiator = (function(){
 
         let nsResolver = xmlDoc.createNSResolver( xmlDoc.ownerDocument == null ? xmlDoc.documentElement : xmlDoc.ownerDocument.documentElement);
         let tokenNodes = xmlDoc.evaluate('/ts:token', xmlDoc, nsResolver, XPathResult.ANY_TYPE, null );
-        let tokenNode = tokenNodes.iterateNext();
-        while (tokenNode) {
+        let tokenNode; ;
+        if (tokenNode = tokenNodes.iterateNext()) {
             tokenNodesList[tokenNode.getAttribute('name')] = {
                 tokenRootNode: tokenNode,
                 xmlDoc: xmlDoc
             };
-            tokenNode = tokenNodes.iterateNext();
         }
+        return tokenNode.getAttribute('name');
+
+        // while (tokenNode) {
+        //     tokenNodesList[tokenNode.getAttribute('name')] = {
+        //         tokenRootNode: tokenNode,
+        //         xmlDoc: xmlDoc
+        //     };
+        //     tokenNode = tokenNodes.iterateNext();
+        // }
     }
 
     let createFloatingBox = function(){
@@ -416,6 +156,7 @@ window.Negotiator = (function(){
         return bar;
     }
 
+    /*
     let createSelectOverlay = function(filter){
         let body = document.getElementsByTagName('body');
         let select = document.getElementById('ts_select_token');
@@ -457,6 +198,7 @@ window.Negotiator = (function(){
 
         return select;
     }
+    */
 
     /**
      *
@@ -472,14 +214,14 @@ window.Negotiator = (function(){
     function getEthereumCallParams({userAddress, tokenId, chainID , ethereumNode , xmlDoc, attributeName, tokenXmlNode, tokenName}){
 
         // get default contract Name
-        let xmlNode = ts.getXMLItem(xmlDoc,'ts:origins/ts:ethereum[1]', tokenXmlNode);
+        let xmlNode = getXMLItem(xmlDoc,'ts:origins/ts:ethereum[1]', tokenXmlNode);
         let defaultContract = xmlNode ? xmlNode.getAttribute('contract') : '';
         defaultContract = defaultContract ? defaultContract : tokenName;
 
         var params = [];
 
         if (!ethereumNode) {
-            ethereumNode = ts.getXMLItem(xmlDoc, 'ts:attribute[@name="' + attributeName + '"]/ts:origins/ethereum:call[1]', tokenXmlNode);
+            ethereumNode = getXMLItem(xmlDoc, 'ts:attribute[@name="' + attributeName + '"]/ts:origins/ethereum:call[1]', tokenXmlNode);
         }
 
         if (ethereumNode){
@@ -491,7 +233,7 @@ window.Negotiator = (function(){
 
             ethCallAttributtes.contract = ethCallAttributtes.contract ? ethCallAttributtes.contract : defaultContract;
 
-            var contract = ts.getContractAddress(xmlDoc, ethCallAttributtes.contract, tokenXmlNode, chainID);
+            var contract = getContractAddress(xmlDoc, ethCallAttributtes.contract, tokenXmlNode, chainID);
 
             if (!contract.contractAddress) {
                 tsDebug && console.log('Contract address required. chainID = '+chainID);
@@ -575,13 +317,13 @@ window.Negotiator = (function(){
 
             this.nsResolver = this.xmlDoc.createNSResolver( this.xmlDoc.ownerDocument == null ? this.xmlDoc.documentElement : this.xmlDoc.ownerDocument.documentElement);
 
-            let xmlNode = ts.getXMLItem(this.xmlDoc,'ts:origins/ts:ethereum[1]', this.xmlDoc);
+            let xmlNode = getXMLItem(this.xmlDoc,'ts:origins/ts:ethereum[1]', this.xmlDoc);
             this.defaultContract = xmlNode ? xmlNode.getAttribute('contract') : '';
             this.defaultContract = this.defaultContract ? this.defaultContract : this.tokenName;
 
             this.getProps().then((props)=>{
                 this.mainProps = props;
-                let filterResult = ts.compareStringToProps(this.filter, props);
+                let filterResult = compareStringToProps(this.filter, props);
                 if (filterResult < 0) {
                     console.log('incorrect filter');
                     this.toRender.style.display = "none";
@@ -633,7 +375,7 @@ window.Negotiator = (function(){
 
         async getProps(){
             try {
-                ethersData = await ts.getEthersData();
+                ethersData = await getEthersData();
 
                 const attributeXmlNodes = this.xmlDoc.evaluate('ts:attribute', this.tokenXMLNode, this.nsResolver, XPathResult.ANY_TYPE, null );
 
@@ -652,7 +394,7 @@ window.Negotiator = (function(){
                     let distinct = attributeNode.getAttribute('distinct');
                     if (distinct) continue;
 
-                    let originsInnerNode = ts.getXMLItem(this.xmlDoc ,'ts:origins/*[1]',attributeNode);
+                    let originsInnerNode = getXMLItem(this.xmlDoc ,'ts:origins/*[1]',attributeNode);
                     if (!originsInnerNode) continue;
 
                     let dataNodeName = originsInnerNode.nodeName;
@@ -682,11 +424,17 @@ window.Negotiator = (function(){
 
                             if ( (!ethCallAttributtes || !ethCallAttributtes.contract) && (!contract && !contract.contractAddress) ) throw new Error(' ethContract and contractAddress required for {Address='+this.ethersData.userAddress+', chainID = '+this.ethersData.chainID+' , tokenName = '+this.tokenName+'}. Check logs for details');
 
-                            const abi = await getJSONAbi(ethCallAttributtes.contract);
+                            const [abi_error, abi] = await to( getJSONAbi(ethCallAttributtes.contract,jsons,config.contractJsonPath, tsDebug ) );
+
+                            if (abi_error || !abi) {
+                                console.error('Cant get Contract ABI for "'+ ethCallAttributtes.contract +'" , attribute "' + name + '" skipped');
+                                break;
+                            }
+
                             const ethersContract = new ethers.Contract(contract.contractAddress, abi, this.ethersData.provider);
                             tsDebug && console.log('ethFunction = ' + ethCallAttributtes.contract + '; name = '+name + '; params = '  );
                             tsDebug && console.log(params);
-                            let [error,output] = await ts.to(ethersContract[ethCallAttributtes.function].apply(null, params) );
+                            let [error,output] = await to(ethersContract[ethCallAttributtes.function].apply(null, params) );
                             if (error) {
                                 tsDebug && console.log('error while try to get attribute "'+name+'" value');
                             } else {
@@ -742,7 +490,7 @@ window.Negotiator = (function(){
                     var ethContract = ethereumEventNode.getAttribute('contract');
                     ethContract = ethContract? ethContract: this.defaultContract;
 
-                    var { contractInterface, contractAddress } = ts.getContractAddress(this.xmlDoc, ethContract, this.tokenXMLNode, this.ethersData.chainID);
+                    var { contractInterface, contractAddress } = getContractAddress(this.xmlDoc, ethContract, this.tokenXMLNode, this.ethersData.chainID);
 
                     if (!contractAddress) {
                         tsDebug && console.log('Contract address required. chainID = '+this.ethersData.chainID);
@@ -774,7 +522,11 @@ window.Negotiator = (function(){
                     tsDebug && console.log('params');
                     tsDebug && console.log(params);
 
-                    let abi = await getJSONAbi(ethContract);
+                    // let abi = await getJSONAbi(ethContract);
+                    const [error, abi] = await to(getJSONAbi(ethContract, jsons, config.contractJsonPath, tsDebug));
+                    if (error) throw new Error(error);
+                    if (!abi) throw new Error('Empty ABI for '+ethContract);
+                    jsons[ethContract] = abi;
 
                     if (!ethContract && !contractAddress) throw new Error(' ethContract and contractAddress required for {Address='+this.ethersData.userAddress+', chainID = '+this.ethersData.chainID+' , tokenName = '+this.tokenName+'}. Check logs for details');
 
@@ -863,7 +615,7 @@ window.Negotiator = (function(){
             //     this.tokenXMLNode,
             //     'ts:cards/ts:card[@type="activity"]/ts:item-view[@xml:lang="' + this.fallbackLang + '"][1]' );
 
-            let cardHtmlNode = ts.getXMLItem(
+            let cardHtmlNode = getXMLItem(
                 this.xmlDoc,
                 'ts:cards/ts:card[@name="' + name + '"][@type="' + type + '"]/ts:'+itemType+'[@xml:lang="' + this.lang + '"][1]',
                 this.tokenXMLNode,
@@ -933,7 +685,7 @@ window.Negotiator = (function(){
                     innerBody[0].innerHTML = '';
                     innerBody[0].appendChild(div);
 
-                    let cardNode = ts.getXMLItem(this.xmlDoc,'ts:cards/ts:card[@name="' + name + '"][@type="' + type + '"][1]', this.tokenXMLNode);
+                    let cardNode = getXMLItem(this.xmlDoc,'ts:cards/ts:card[@name="' + name + '"][@type="' + type + '"][1]', this.tokenXMLNode);
 
                     this.cardOriginProps(cardNode, (filterResult)=>{
                         if (!filterResult || !filterResult.length) return;
@@ -1058,7 +810,7 @@ window.Negotiator = (function(){
          */
         iframeHelper(){
             const origin = document.defaultView.location.origin;
-            console.log('iframeHelper works');
+            // console.log('iframeHelper works');
             function is_ethereum_exists(){
                 return !!window.ethereum;
             }
@@ -1142,48 +894,6 @@ window.Negotiator = (function(){
                 let valueNode = node.querySelector('[data-eth-type="value"]');
                 let result = this.parseAttribute(func, node);
             }
-        }
-
-        /*
-        parse single attribute - fetch data from XML
-         */
-        async getAttribute(attributeName, node){
-            tsDebug && console.log('try to get '+attributeName);
-
-            let abi = await getJSONAbi(ethContract);
-
-            let parsed = getEthereumCallParams({
-                    userAddress: this.ethersData.userAddress,
-                    XMLDoc: this.xmlDoc,
-                    tokenXMLNode: this.tokenXMLNode,
-                    attributeName,
-                    tokenName: this.tokenName
-                    }
-                );
-            let params = parsed.params;
-
-            params.push((error, result) => {
-                if (!error) {
-                    window.res = result;
-
-                    let domNode = node.querySelector('[data-eth-type="value"]');
-                    let resultStr;
-
-                    resultStr = result.length ? this.extractresultValue(ethFunction, result, ethSelect,jsons[ethContract].abi) : result.toNumber();
-
-                    if (domNode) {
-                        domNode.innerHTML = resultStr;
-                    }
-
-                    tsDebug && console.log(result);
-                } else
-                    console.error(error);
-            });
-
-            this.runContractMethod(ethContract, ethFunction, params);
-
-            let domNode = node.querySelector('[data-eth-type="label"]');
-            if (domNode) domNode.innerHTML = label;
         }
 
 
@@ -1284,18 +994,13 @@ window.Negotiator = (function(){
         return filter[1];
     }
 
-
-
-
-
-
     async function getTokenIDs(tokenName){
         try {
             tsDebug && console.log('tokenName');
             tsDebug && console.log(tokenName);
             tsDebug && console.log(tokenNodesList);
             tsDebug && console.log(tokenNodesList[tokenName]);
-            let distinctAttributeNode = ts.getXMLItem(tokenNodesList[tokenName].xmlDoc,'ts:attribute[@distinct="true"][1]',tokenNodesList[tokenName].tokenRootNode);
+            let distinctAttributeNode = getXMLItem(tokenNodesList[tokenName].xmlDoc,'ts:attribute[@distinct="true"][1]',tokenNodesList[tokenName].tokenRootNode);
 
             if (!distinctAttributeNode) {
                 tsDebug && console.log("Cant find distinct attribute, lets use ownerAddress");
@@ -1305,7 +1010,7 @@ window.Negotiator = (function(){
                 };
             }
 
-            let distinctAttributeEthereumCallNode = ts.getXMLItem(tokenNodesList[tokenName].xmlDoc,'ts:origins/ethereum:call[1]',distinctAttributeNode);
+            let distinctAttributeEthereumCallNode = getXMLItem(tokenNodesList[tokenName].xmlDoc,'ts:origins/ethereum:call[1]',distinctAttributeNode);
 
             const distinctName = distinctAttributeNode.getAttribute('name');
 
@@ -1336,7 +1041,11 @@ window.Negotiator = (function(){
 
             if ( (!ethCallAttributtes || !ethCallAttributtes.contract) && (!contract && !contract.contractAddress) ) throw new Error(' ethContract and contractAddress required for {Address='+ethersData.userAddress+', chainID = '+ethersData.chainID+' , tokenName = '+tokenName+'}. Check logs for details');
 
-            const abi = await getJSONAbi(ethCallAttributtes.contract);
+            const [error, abi] = await to(getJSONAbi(ethCallAttributtes.contract, jsons, config.contractJsonPath, tsDebug));
+            if (error) throw new Error(error);
+            if (!abi) throw new Error('Empty ABI for '+ethCallAttributtes.contract);
+            jsons[ethCallAttributtes.contract] = abi;
+
             const ethersContract = new ethers.Contract(contract.contractAddress, abi, ethersData.provider);
             tsDebug && console.log('ethFunction = ' + ethCallAttributtes.contract + '; name = '+name + '; output = '  );
             tsDebug && console.log(params);
@@ -1366,13 +1075,12 @@ window.Negotiator = (function(){
 
     }
 
-
     let negotiate = async function(tokenName, filter){
         setDefMessageAndBtn(tokenName, filter);
-        negotiatedTokens[tokenName] = filter;
+        // negotiatedTokens[tokenName] = filter;
         try {
             await init();
-            ethersData = await ts.getEthersData();
+            ethersData = await getEthersData();
 
             tsDebug && console.log('negotiate fired for '+tokenName);
 
@@ -1439,6 +1147,7 @@ window.Negotiator = (function(){
     //     }
     //     return tokens[name];
     // };
+    /*
     let selectTokenFromList = function(filter = {}){
         init().then(res=>{
             try {
@@ -1446,11 +1155,9 @@ window.Negotiator = (function(){
                 // console.log(res);
 
                 tsDebug && console.log('init OK');
-                if (Object.keys(tokenNodesList).length){
-                    select = createSelectOverlay(filter);
-                    select.classList.remove('disabled');
-                } else {
-                    console.log('Cant see tokens.');
+                // if (Object.keys(tokenNodesList).length){
+                Object.keys(tokenNodesList).forEach(tokenName){
+                    await negotiate(tokenName,filter).then(console.log);
                 }
 
             } catch (e) {
@@ -1459,6 +1166,8 @@ window.Negotiator = (function(){
             //res={xmlDoc,nsResolver}
         }).catch(e=>console.log);
     }
+
+     */
 
 
 
@@ -1474,14 +1183,34 @@ window.Negotiator = (function(){
     }
 
     async function renegotiateAll(filter = ''){
-        if (!bar || !negotiatedTokens) return;
-        console.log('negotiatedTokens');
-        tsDebug && console.log('negotiatedTokens');
-        tsDebug && console.log(negotiatedTokens);
+        // console.log('renegotiateAll fired');
+        await init();
+
+        // console.log('tokenNodesList');
+        // console.log(tokenNodesList);
+        // console.log(bar);
+        if (!bar || !tokenNodesList) return;
 
         const nodes = bar.querySelectorAll('.ts_token_bar_body > *:not(.def)');
         nodes.forEach(item=>{item.remove()});
 
+        // console.log('negotiatedTokens');
+        // tsDebug && console.log('negotiatedTokens');
+        // tsDebug && console.log(negotiatedTokens);
+
+        // Object.keys(tokenNodesList).forEach(tokenName=>{
+        //     await negotiate(tokenName,filter).then(console.log);
+        // })
+
+        let tokens = Object.keys(tokenNodesList);
+        if (tokens.length) for(var i=0; i<tokens.length; i++){
+            await negotiate(tokens[i],filter);
+            setDefMessageAndBtn(tokens[i],filter);
+        }
+
+
+
+/*
         const def = bar.querySelector('.ts_token_bar_body .def');
         try {
             if (!ethereum || !ethereum.chainId) {
@@ -1506,6 +1235,8 @@ window.Negotiator = (function(){
             tsDebug && console.log(e);
             def.innerHTML = message;
         }
+
+ */
     }
 
     async function setDefMessageAndBtn(tokenName,filter = ''){
@@ -1549,7 +1280,7 @@ window.Negotiator = (function(){
     return {
         negotiate,
         // getToken,
-        selectTokenFromList,
+        // selectTokenFromList,
         parseXMLFromText,
         renegotiateAll
     }

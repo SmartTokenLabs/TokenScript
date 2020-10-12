@@ -11,7 +11,8 @@
     <link rel="stylesheet" href="ts.css">
     <script type="text/javascript" src="inc/web3.min.js"></script>
     <script type="text/javascript" src="inc/ethers-5.0.umd.min.js"></script>
-    <script type="text/javascript" src="tokenscript-bootstrap.js"></script>
+    <script type="module" src="tokenscript-bootstrap.js"></script>
+<!--    <script type="text/javascript" src="tokenscript-bootstrap.js"></script>-->
     <script type="text/javascript">(function(e,t,n){var r=e.querySelectorAll("html")[0];r.className=r.className.replace(/(^|\s)no-js(\s|$)/,"$1js$2")})(document,window,0);</script>
     <script type="text/javascript">
         // the following event is triggered every time when a token is negotiated
@@ -32,6 +33,10 @@
         // a float button. My (Weiwu) thinking is that the token bar should be floating there if there are listeners
         // and not float there if the negotiation is handled with a promise. But we can figure this out later as well.
 
+        function getFilter(){
+            let optionsTextarea = document.getElementById('token_filter');
+            return optionsTextarea ? optionsTextarea.value : '';
+        }
         function negotiate() {
             // Negotiator.negotiate() returns a promise, but in this case
             // the developer doesn't need to save it or call .then()
@@ -40,13 +45,10 @@
             // have things to do specifically for this round of negotiation
 
             // OG: I think we can use TokenCard method to re-render iframe, because some logic makes network requests and parse XML (it takes some time and load network). So TokenCard constructor will parse XML and load external data and negotiate() method will rerender iframe
-            console.log('Btn clicked');
+            console.log('negotiate clicked');
             // Negotiator.negotiate('entrytoken', 'l=Syndey');
 
-            let optionsTextarea = document.getElementById('token_filter');
-            let filter = optionsTextarea ? optionsTextarea.value : '';
-            Negotiator.selectTokenFromList(filter);
-
+            Negotiator.renegotiateAll(getFilter()).then(console.log);
 
             document.getElementById("enter_button").onclick = (event) => {
                 console.log('click fired');
@@ -58,32 +60,19 @@
                 )
                  */
             };
-
-
-
-
         }
         window.addEventListener('load',()=>{
-            document.getElementById("token_filter_submit").onclick = (event) => {
-                // console.log('submit fired');
-                let optionsTextarea = document.getElementById('token_filter');
-                let filter = optionsTextarea ? optionsTextarea.value : '';
-                Negotiator.renegotiateAll(filter);
 
-            };
+            document.getElementById("token_filter_submit").onclick = (event) => Negotiator.renegotiateAll(getFilter());
             document.getElementById("token_url_submit").onclick = async (event) => {
-                // console.log('submit fired');
-                let optionsTextarea = document.getElementById('token_filter');
-                let filter = optionsTextarea ? optionsTextarea.value : '';
-
                 let urlNode = document.getElementById('token_url');
                 let url = urlNode ? urlNode.value : '';
 
                 if (url){
                     let response = await fetch(url);
                     let fileContent = await response.text();
-
-                    await Negotiator.parseXMLFromText(fileContent);
+                    let tokenName = await Negotiator.parseXMLFromText(fileContent);
+                    if (tokenName) Negotiator.negotiate(tokenName, getFilter());
                 }
 
             };
@@ -168,8 +157,9 @@
                             Object.keys(droppedFiles).forEach(async key=>{
                                 let file = droppedFiles[key];
                                 const fileContent = await file.text();
-                                // console.log(fileContent);
-                                await Negotiator.parseXMLFromText(fileContent);
+
+                                let tokenName = await Negotiator.parseXMLFromText(fileContent);
+                                if (tokenName) Negotiator.negotiate(tokenName, getFilter());
                             })
                         });
                     }
@@ -203,7 +193,7 @@
 <div id="card_container"></div>
 <p><button id="enter_button">Enter</button></p>
 <p><button id="new_token" onclick="negotiate()">
-    Click here to start choosing a token</button></p>
+    Click here load tokens</button></p>
 
 <form class="box" id="upload_box" method="post" action="" enctype="multipart/form-data">
     <div class="box__input">

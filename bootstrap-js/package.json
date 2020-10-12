@@ -1,0 +1,21 @@
+{
+  "name": "bootstrap-ts",
+  "version": "1.0.0",
+  "description": "Display TS token Views in the Web browser",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
+    "babel-jest": "^26.5.2",
+    "jest": "^26.5.2"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "collectCoverage": true
+  },
+  "author": "Oleh Hryb",
+  "license": "ISC"
+}
