@@ -1,26 +1,20 @@
-import {to, compareStringToProps, getEthersData, isTokenExpired, getContractAddress, getXMLItemText, getXMLItem, getJSONAbi} from './modules/ts_helpers.js';
+import {to, compareStringToProps, getEthersData, isTokenExpired, getContractAddress, getXMLItemText, getXMLItem, getJSONAbi, filterResultConverter, bnStringPrecision, getEthereumCallParams} from './modules/ts_helpers.js';
 
 window.Negotiator = (function(){
     let tsDebug = true;
     tsDebug = false;
-    window.tsDebug = tsDebug;
 
     let catchDebug = true;
     catchDebug = false;
-    window.tsCatchDebug = catchDebug;
-
-    // let negotiatedTokens = {};
 
     let ready = false;
     let tokenNodesList = {};
-    let select, bar, lang, ethersData;
+    let bar, lang, ethersData;
     let web3;
     let jsons = {};
     let config = {
         // name for <meta name="token" content="xxx"/>
         tokenMeta: 'token.filter',
-        // fallback content for <meta name="token" content="ethereum:1/0x63cCEF733a093E5Bd773b41C96D3eCE361464942/"/>
-        // token: 'ethereum:1/0x63cCEF733a093E5Bd773b41C96D3eCE361464942/',
         // fallback lang
         lang: 'en',
         // not realized yet
@@ -35,35 +29,32 @@ window.Negotiator = (function(){
 
 
     async function init(){
+        if (ready) return;
         try {
-            if (!ready) {
+            if (window.location.protocol == 'file:') throw new Error("Please load this App from HTTP/HTTPS server(local web server should work good), because of browser security reason you can't connect remote server from local file script.");
 
-                if (window.location.protocol == 'file:') throw new Error("Please load this App from HTTP/HTTPS server(local web server should work good), because of browser security reason you can't connect remote server from local file script.");
+            if (!window.ethereum) throw new Error("Ethereum Wallet doesnt work at this page, please enable it and reload page.");
 
-                if (!window.ethereum) throw new Error("Ethereum Wallet doesnt work at this page, please enable it and reload page.");
-
-                // if (!Web3 && !window.ethers) {
-                if (!Web3) {
-                    // throw new Error("Please load Web3 or ethers.js library before this App");
-                    throw new Error("Please load Web3 library before this App");
-                }
-                if (!window.ethers) {
-                    throw new Error("Please load ethers.js library before this App");
-                }
-
-                web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
-
-                lang = parseDocumentLang();
-                lang = lang ? lang : config.lang;
-
-                await parseXML();
-
-                // if (tokens.length)
-                bar = createFloatingBox();
-
-                ready = true;
+            // if (!Web3 && !window.ethers) {
+            if (!Web3) {
+                // throw new Error("Please load Web3 or ethers.js library before this App");
+                throw new Error("Please load Web3 library before this App");
+            }
+            if (!window.ethers) {
+                throw new Error("Please load ethers.js library before this App");
             }
 
+            web3 = new Web3(Web3.givenProvider || "ws://localhost:8545");
+
+            lang = parseDocumentLang();
+            lang = lang ? lang : config.lang;
+
+            await parseXML();
+
+            // if (tokens.length)
+            bar = createFloatingBox();
+
+            ready = true;
         } catch (e) {
             let message = ' ;init error happened -> ' + e;
             catchDebug && console.log(message);
@@ -86,43 +77,46 @@ window.Negotiator = (function(){
         }
         return lang;
     }
-    /*
-    Parse XML file and fill tokenNodesList Array
+
+    /**
+     * Parse HTML for tokenscripts and fire parse files
+     * @param debug
+     * @returns {Promise<void>}
      */
-    async function parseXML(){
-        try {
-            const XMLNodes = document.querySelectorAll('link[rel="tokenscript"]');
-            if (!XMLNodes) throw new Error("Tokenscript link missed");
+    async function parseXML(debug = false){
+        const XMLNodes = document.querySelectorAll('link[rel="tokenscript"]');
 
-            // if (isTokenExpired()) throw new Error("Token expired");
-
-            for (let i=0; i < XMLNodes.length; i++){
-                const XMLPath = XMLNodes[i].href;
+        if (XMLNodes) for (let i=0; i < XMLNodes.length; i++){
+            const XMLPath = XMLNodes[i].href;
+            try {
                 const response = await fetch(XMLPath);
                 const xmlText = await response.text();
                 await parseXMLFromText(xmlText);
-
+            } catch (e) {
+                let message = ' Fetch XML Error. '+e;
+                debug && console.log(message);
+                debug && console.log(e);
+                throw new Error(message);
             }
-
-
-        } catch (e) {
-            let message = ' Fetch XML Error. '+e;
-            window.tsCatchDebug && console.log(message);
-            window.tsCatchDebug && console.log(e);
-            throw new Error(message);
         }
     }
 
+    /**
+     * Parse XML files and fill tokenNodesList
+     * @param xmlText
+     * @returns {Promise<*|string>}
+     */
     async function parseXMLFromText(xmlText){
         let xmlDoc = await (new window.DOMParser()).parseFromString(xmlText, "text/xml");
 
         let nsResolver = xmlDoc.createNSResolver( xmlDoc.ownerDocument == null ? xmlDoc.documentElement : xmlDoc.ownerDocument.documentElement);
         let tokenNodes = xmlDoc.evaluate('/ts:token', xmlDoc, nsResolver, XPathResult.ANY_TYPE, null );
-        let tokenNode; ;
+        let tokenNode;
         if (tokenNode = tokenNodes.iterateNext()) {
             tokenNodesList[tokenNode.getAttribute('name')] = {
                 tokenRootNode: tokenNode,
-                xmlDoc: xmlDoc
+                xmlDoc: xmlDoc,
+                filter: ''
             };
         }
         return tokenNode.getAttribute('name');
@@ -136,13 +130,13 @@ window.Negotiator = (function(){
         // }
     }
 
-    let createFloatingBox = function(){
+    function createFloatingBox(){
         let bar = document.querySelector('.ts_token_bar');
         if (bar) return bar;
 
         bar = document.createElement('div');
         bar.classList.add('ts_token_bar');
-        bar.innerHTML = '<div class="ts_token_bar_head"><div class="ts_token_bar_icon"></div><div class="ts_token_bar_title">Tokens List</div></div><div class="ts_token_bar_body"><div class="def"></div></div>';
+        bar.innerHTML = '<div class="ts_token_bar_head"><div class="ts_token_bar_icon"></div><div class="ts_token_bar_title">Tokens List</div></div><div class="ts_token_bar_body"><div class="notokens"></div></div>';
         const body = document.getElementsByTagName('body');
         body[0].appendChild(bar);
         const head = bar.querySelector('.ts_token_bar_head');
@@ -152,7 +146,6 @@ window.Negotiator = (function(){
             // return false;
         });
 
-        setDefMessageAndBtn();
         return bar;
     }
 
@@ -200,107 +193,9 @@ window.Negotiator = (function(){
     }
     */
 
-    /**
-     *
-     * @param userAddress
-     * @param tokenId
-     * @param chainID
-     * @param ethereumNode
-     * @param xmlDoc
-     * @param attributeName
-     * @param tokenXmlNode
-     * @returns {boolean | {ethSelect: *, ethContract: *, contractInterface: *, ethFunction: *, contractAddress: *, ethType: *, label: *, params: *, ethAs: *}}
-     */
-    function getEthereumCallParams({userAddress, tokenId, chainID , ethereumNode , xmlDoc, attributeName, tokenXmlNode, tokenName}){
-
-        // get default contract Name
-        let xmlNode = getXMLItem(xmlDoc,'ts:origins/ts:ethereum[1]', tokenXmlNode);
-        let defaultContract = xmlNode ? xmlNode.getAttribute('contract') : '';
-        defaultContract = defaultContract ? defaultContract : tokenName;
-
-        var params = [];
-
-        if (!ethereumNode) {
-            ethereumNode = getXMLItem(xmlDoc, 'ts:attribute[@name="' + attributeName + '"]/ts:origins/ethereum:call[1]', tokenXmlNode);
-        }
-
-        if (ethereumNode){
-            var atts = ethereumNode.getAttributeNames();
-            var ethCallAttributtes = {};
-            atts.forEach(attName=>{
-                ethCallAttributtes[attName] = ethereumNode.getAttribute(attName);
-            });
-
-            ethCallAttributtes.contract = ethCallAttributtes.contract ? ethCallAttributtes.contract : defaultContract;
-
-            var contract = getContractAddress(xmlDoc, ethCallAttributtes.contract, tokenXmlNode, chainID);
-
-            if (!contract.contractAddress) {
-                tsDebug && console.log('Contract address required. chainID = '+chainID);
-                return false;
-            }
-
-            let nsResolver = xmlDoc.createNSResolver( xmlDoc.ownerDocument == null ? xmlDoc.documentElement : xmlDoc.ownerDocument.documentElement);
-            let xmlNodeSet = xmlDoc.evaluate('ts:data/*', ethereumNode, nsResolver, XPathResult.ANY_TYPE, null );
-
-            let item;
-
-            while (xmlNodeSet && (item = xmlNodeSet.iterateNext())){
-                let ref = item.getAttribute('ref');
-
-                switch (ref) {
-                    case 'ownerAddress':
-                        tsDebug && console.log('ownerAddress = '+userAddress);
-                        params.push(userAddress);
-                        break;
-                    case 'tokenId':
-                        tsDebug && console.log('this.tokenId = '+tokenId);
-                        let rawTokenID = tokenId.replace(/\w+=/,'');
-                        params.push(rawTokenID);
-                        // params.push(tokenId);
-                        break;
-                    default:
-                        tsDebug && console.log('item.innerHTML');
-                        tsDebug && console.log(item.innerHTML);
-                        if (item.innerHTML) params.push(item.innerHTML);
-                }
-            }
-
-        } else {
-            console.log('cant find attribute');
-            return false;
-        }
-
-        return {
-            params,
-            ethCallAttributtes,
-            contract
-        };
-
-    }
-
-    function bnStringPrecision(bn, decimals, precision){
-        bn = ethers.BigNumber.from(bn);
-        if (precision > 15) precision = 15;
-        // while (precision > 15){
-        //     bn = bn.mul(10**15);
-        //     precision -= 15;
-        // }
-        bn = bn.mul(10**precision);
-
-        while (decimals > 15){
-            bn = bn.div(10**15);
-            decimals -= 15;
-        }
-        bn = bn.div(10**decimals);
-
-        return bn.toNumber() / 10**precision;
-    }
 
     class TokenCard {
         constructor(data) {
-            tsDebug && console.log('TokenCard constructor fired');
-
             this.xmlDoc = data.xmlDoc;
             this.tokenXMLNode = data.tokenXMLNode;
             this.tokenName = data.tokenName;
@@ -312,8 +207,15 @@ window.Negotiator = (function(){
             this.filter = data.filter;
             this.activitiesRenderStarted = false;
 
+            this.cardName = data.cardName ? data.cardName : 'main';
+            this.cardType = data.cardType ? data.cardType : "token";
+            this.viewType = data.viewType ? data.viewType : 'item-view';
+            // this.viewType = data.viewType ? data.viewType : 'view';
+
             this.fallbackLang = 'en';
             this.ready = false;
+
+            this.debug = data.debug;
 
             this.nsResolver = this.xmlDoc.createNSResolver( this.xmlDoc.ownerDocument == null ? this.xmlDoc.documentElement : this.xmlDoc.ownerDocument.documentElement);
 
@@ -321,56 +223,195 @@ window.Negotiator = (function(){
             this.defaultContract = xmlNode ? xmlNode.getAttribute('contract') : '';
             this.defaultContract = this.defaultContract ? this.defaultContract : this.tokenName;
 
-            this.getProps().then((props)=>{
-                this.mainProps = props;
+        }
+
+        async getDistinctItems(){
+            let props = await this.getProps();
+            this.debug && console.log('props received');
+            this.debug && console.log(props);
+
+            let distinctAttributeNode = getXMLItem(this.xmlDoc, 'ts:attribute[@distinct="true"][1]', this.tokenXMLNode);
+
+            if (!distinctAttributeNode) {
+                this.debug && console.log("Cant find distinct attribute, lets use ownerAddress");
+                return {
+                    distinctName: "ownerAddress",
+                    items: [this.ethersData.userAddress]
+                };
+            } else {
+                let distinctAttributeEthereumCallNode = getXMLItem(this.xmlDoc, 'ts:origins/ethereum:call[1]', distinctAttributeNode);
+
+                if (!distinctAttributeEthereumCallNode) {
+                    this.debug && console.log("Cant find distinct attribute Ethereum Call, lets use ownerAddress");
+                    // return ['ownerAddress='+ethersData.userAddress];
+                    return {
+                        distinctName: "ownerAddress",
+                        items: [this.ethersData.userAddress]
+                    };
+                }
+
+                const distinctName = distinctAttributeNode.getAttribute('name');
+                let items = [];
+
+                if (props[distinctName] && props[distinctName].length) {
+                    props[distinctName].forEach(a => {
+                        items.push(a._isBigNumber ? a.toHexString() : a.toString())
+                    });
+                } else {
+                    this.debug && console.log('Empty token list');
+                }
+
+                return {
+                    distinctName,
+                    items
+                };
+            }
+        }
+
+        async getAllProps(props = false, cardName = '', cardType = ''){
+
+            cardName = cardName ? cardName : this.cardName;
+            cardType = cardType ? cardType : this.cardType;
+
+            // console.log('try to get props');
+            props = props ? props : await this.getProps();
+            this.debug && console.log('props received');
+            this.debug && console.log(props);
+
+            // get card-view html
+            let selector = 'ts:cards/ts:card[@name="' + cardName + '"][@type="' + cardType + '"][1]';
+            let cardNode = getXMLItem(this.xmlDoc, selector, this.tokenXMLNode );
+
+            if (!cardNode) {
+                this.debug && console.log('cant see card for >>>'+selector+'<<<');
+                // if (cardName =='main' && cardType =="token" ) this.cardHtml = '<h2 style="text-transform: uppercase;">' + this.tokenName + '</h2>';
+                return [props];
+            }
+
+
+            // let cardHtmlNode = getXMLItem(
+            //     this.xmlDoc,
+            //     'ts:'+this.viewType+'[@xml:lang="' + this.lang + '"][1]',
+            //     cardNode,
+            //     'ts:'+this.viewType+'[@xml:lang="' + this.fallbackLang + '"][1]' );
+            //
+            // this.cardHtml = cardHtmlNode ? cardHtmlNode.innerHTML : '';
+
+            // if (!this.cardHtml && this.cardName!='main' && this.cardType!="token" ) {
+            //     this.debug && console.log('cant see "'+this.viewType+'" node for name ="'+this.cardName+'" and type = "'+this.cardType + '";' );
+            //     return [props];
+            // }
+
+            selector = 'ts:origins/ethereum:event';
+            let originsNodes = this.xmlDoc.evaluate(selector, cardNode, this.nsResolver, XPathResult.ANY_TYPE, null );
+
+            var out = [];
+            let ethereumEventNode;
+            while (originsNodes && (ethereumEventNode = originsNodes.iterateNext() ) ) {
+
+                this.debug && console.log('ethereumEventNode');
+                this.debug && console.log(ethereumEventNode);
+                // ------------------------
+                // ethereum:event
+                var eventFilter = ethereumEventNode.getAttribute('filter');
+                var eventType = ethereumEventNode.getAttribute('type');
+                var ethContract = ethereumEventNode.getAttribute('contract');
+                ethContract = ethContract? ethContract: this.defaultContract;
+
+                var { contractInterface, contractAddress } = getContractAddress(this.xmlDoc, ethContract, this.tokenXMLNode, this.ethersData.chainID);
+
+                if (!contractAddress) {
+                    this.debug && console.log('Contract address required. chainID = '+this.ethersData.chainID);
+                    throw new Error('Contract address required. chainID = '+this.ethersData.chainID);
+                }
+
+                if (!ethContract && !contractAddress) throw new Error(' ethContract and contractAddress required for {Address='+this.ethersData.userAddress+', chainID = '+this.ethersData.chainID+' , tokenName = '+this.tokenName+'}. Check logs for details');
+
+                let params = this.getErc20EventParams(eventType);
+
+                if (!params) throw  new Error(eventType+' parameters missing.');
+
+                const match = eventFilter.match(/(\S+)=(\S+)/);
+
+                if (match) {
+                    let paramName = match[1];
+                    let paramValue = match[2];
+                    if (paramName in params) {
+                        params[paramName] = paramValue == '${ownerAddress}' ? this.ethersData.userAddress : paramValue;
+                    }
+                }
+
+                let paramsArray = [];
+                for(let i in params){
+                    paramsArray.push(params[i]);
+                }
+
+                this.debug && console.log('eventType');
+                this.debug && console.log(eventType);
+
+                this.debug && console.log('params');
+                this.debug && console.log(params);
+
+                // let abi = await getJSONAbi(ethContract);
+                const [error, abi] = await to(getJSONAbi(ethContract, jsons, config.contractJsonPath, tsDebug));
+                if (error) throw new Error(error);
+                if (!abi) throw new Error('Empty ABI for '+ethContract);
+                jsons[ethContract] = abi;
+
+                const contract = new ethers.Contract(contractAddress, abi, this.ethersData.provider);
+
+                let filter = contract.filters[eventType].apply(null, paramsArray);
+
+                this.debug && console.log('filter');
+                this.debug && console.log(filter);
+
+                // contract.queryFilter(filter).then(this.cb(eventType + ' where ' + eventFilter));
+                let [contractError, filterResult] = await to(contract.queryFilter(filter) );
+
+                if (contractError) throw new Error('Error when try to request '+eventType+':  '+contractError);
+
+
+                if (filterResult && filterResult.length){
+
+                        // let id = 'ts' + Math.random().toString(36).substring(7);
+                        // var div = iframeDoc.createElement("div");
+                        // var body = iframeDoc.querySelector('body');
+                        // div.setAttribute('id',id);
+                        // body.appendChild(div);
+
+                        // console.log(props);
+
+                        // iframe.contentWindow.web3.tokens.data.currentInstance = props;
+                        // iframe.contentWindow.web3.tokens.dataChanged(null, null, id )
+
+
+                    if (filterResult.length) {
+                        filterResult.forEach(res=>out.push( filterResultConverter( res, props) ) );
+                    } else {
+                        out.push( filterResultConverter(filterResult,props) );
+                    }
+
+                } else out.push(props);
+
+            }
+
+            if(!out.length) {
                 let filterResult = compareStringToProps(this.filter, props);
                 if (filterResult < 0) {
                     console.log('incorrect filter');
-                    this.toRender.style.display = "none";
+                    // this.toRender.style.display = "none";
                     return;
                 } else if (!filterResult) {
                     console.log('filter not passed');
-                    this.toRender.style.display = "none";
+                    // this.toRender.style.display = "none";
                     return;
                 }
-                this.toRender.style.display = "";
 
-                tsDebug && console.log('global props fetched.');
+                out.push(props);
+            }
 
-                // this.addCardIframe(this.toRender);
+            return out;
 
-                this.renderCardView(this.toRender, "main", "token", 'item-view');
-                // this.renderCardView(this.toRender, "enter", "action", 'view');
-            });
-        }
-        addCardIframe(wrapper, callback){
-            tsDebug && console.log('render fired;');
-
-            wrapper.innerHTML = '<div class="sidebar_toggle"> &lt; Show Activities</div>';
-
-            let iframe = wrapper.ownerDocument.createElement('iframe');
-
-            iframe.src = "blank.html";
-            iframe.onload = () => {
-            // let iframeWindow = iframe || iframe.contentWindow;
-            // iframeWindow.addEventListener('load', () => {
-
-                tsDebug && console.log('iframe.onload fired;');
-                iframe.contentWindow.onerror = e=>{console.log('iframe error'); console.log(e);};
-
-
-                let iframeDoc = iframe.contentDocument? iframe.contentDocument: iframe.contentWindow.document;
-
-                /* Inject helper JS code */
-                let code = this.iframeHelper.toString();
-                code = code.substring(15,code.length -1);
-                this.insertScript(iframeDoc,code);
-
-                callback(iframe);
-
-            };
-
-            wrapper.appendChild(iframe);
         }
 
         async getProps(){
@@ -384,21 +425,14 @@ window.Negotiator = (function(){
 
                 while (attributeXmlNodes && (attributeNode = attributeXmlNodes.iterateNext() ) ) {
                     let name = attributeNode.getAttribute('name');
-                    // tsDebug && console.log('try to get attribute name : "'+name+'"');
-                    // if ('expired' == name) {
-                    //     tsDebug && console.log('its "expired", just use tokenID ');
-                    //     continue;
-                    // }
-
-
-                    let distinct = attributeNode.getAttribute('distinct');
-                    if (distinct) continue;
 
                     let originsInnerNode = getXMLItem(this.xmlDoc ,'ts:origins/*[1]',attributeNode);
                     if (!originsInnerNode) continue;
 
                     let dataNodeName = originsInnerNode.nodeName;
                     let res;
+
+                    // this.debug && console.log(dataNodeName);
 
                     switch (dataNodeName) {
                         case 'ts:token-id':
@@ -408,10 +442,12 @@ window.Negotiator = (function(){
                             tsDebug && console.log('its ts:token-id, just use tokenID ');
                             break;
                         case "ethereum:call":
+                            // this.debug && console.log('its ethereum call start');
                             let {
                                 params,
                                 ethCallAttributtes,
-                                contract
+                                contract,
+                                missedAttribute
                             } = getEthereumCallParams({
                                 userAddress: this.ethersData.userAddress,
                                 chainID: this.ethersData.chainID,
@@ -419,27 +455,37 @@ window.Negotiator = (function(){
                                 xmlDoc: this.xmlDoc,
                                 tokenXmlNode: this.tokenXMLNode,
                                 tokenName: this.tokenName,
-                                tokenId: this.tokenID
+                                tokenId: this.tokenID,
+                                debug: this.debug,
                             });
 
                             if ( (!ethCallAttributtes || !ethCallAttributtes.contract) && (!contract && !contract.contractAddress) ) throw new Error(' ethContract and contractAddress required for {Address='+this.ethersData.userAddress+', chainID = '+this.ethersData.chainID+' , tokenName = '+this.tokenName+'}. Check logs for details');
 
-                            const [abi_error, abi] = await to( getJSONAbi(ethCallAttributtes.contract,jsons,config.contractJsonPath, tsDebug ) );
-
-                            if (abi_error || !abi) {
-                                console.error('Cant get Contract ABI for "'+ ethCallAttributtes.contract +'" , attribute "' + name + '" skipped');
+                            if (missedAttribute) {
+                                this.debug && console.log('missed attribute: "' + missedAttribute + '", ethereum call skipped');
                                 break;
                             }
 
+                            const [abi_error, abi] = await to( getJSONAbi(ethCallAttributtes.contract,jsons,config.contractJsonPath, tsDebug ) );
+
+                            if (!abi) {
+                                console.error('Cant get Contract ABI for "'+ ethCallAttributtes.contract +'" , attribute "' + name + '" skipped');
+                                throw new Error('Empty ABI for '+ethCallAttributtes.contract);
+                            }
+                            if (abi_error) throw new Error(abi_error);
+
+                            jsons[ethCallAttributtes.contract] = abi;
+
+
                             const ethersContract = new ethers.Contract(contract.contractAddress, abi, this.ethersData.provider);
-                            tsDebug && console.log('ethFunction = ' + ethCallAttributtes.contract + '; name = '+name + '; params = '  );
-                            tsDebug && console.log(params);
+                            this.debug && console.log('ethFunction = ' + ethCallAttributtes.contract + '; name = '+name + '; params = '  );
+                            this.debug && console.log(params);
                             let [error,output] = await to(ethersContract[ethCallAttributtes.function].apply(null, params) );
                             if (error) {
-                                tsDebug && console.log('error while try to get attribute "'+name+'" value');
+                                console.error('error while try to get attribute "'+name+'" value');
                             } else {
-                                tsDebug && console.log('correct output for "'+name+'"');
-                                tsDebug && console.log(output);
+                                this.debug && console.log('correct output for "'+name+'"');
+                                this.debug && console.log(output);
                                 // let res = output._isBigNumber ? bnStringPrecision(output,18,8) : output;
                                 res = output._isBigNumber ? output.toString() : output;
                             }
@@ -447,9 +493,9 @@ window.Negotiator = (function(){
                             break;
                         // case "ethereum:call":
                         default:
-                            tsDebug && console.log('skipped, type not described. ');
+                            this.debug && console.log('skipped, type not described. ');
                     }
-                    tsDebug && console.log('property "'+name+'" has value "'+res+'"');
+                    // this.debug && console.log('property "'+name+'" has value "'+res+'"');
                     if (res) props[name] = res;
                 }
 
@@ -461,97 +507,11 @@ window.Negotiator = (function(){
                 console.log(props);
             } catch (e) {
                 let message = "getProps() error. "+e;
-                catchDebug && console.log(e);
-                catchDebug && console.log(message);
+                this.debug && console.log(e);
+                this.debug && console.log(message);
                 throw new Error(message);
             }
             return props;
-        }
-
-        async cardOriginProps(cardNode, callback){
-            try {
-
-                tsDebug && console.log('get card origin props');
-                tsDebug && console.log(cardNode);
-
-                const ethereumNodes = cardNode && this.xmlDoc.evaluate('ts:origins/ethereum:event', cardNode, this.nsResolver, XPathResult.ANY_TYPE, null );
-
-                var props = this.mainProps;
-                let ethereumEventNode;
-
-                while (ethereumNodes && (ethereumEventNode = ethereumNodes.iterateNext() ) ) {
-
-                    tsDebug && console.log('ethereumEventNode');
-                    tsDebug && console.log(ethereumEventNode);
-                    // ------------------------
-                    // ethereum:event
-                    var eventFilter = ethereumEventNode.getAttribute('filter');
-                    var eventType = ethereumEventNode.getAttribute('type');
-                    var ethContract = ethereumEventNode.getAttribute('contract');
-                    ethContract = ethContract? ethContract: this.defaultContract;
-
-                    var { contractInterface, contractAddress } = getContractAddress(this.xmlDoc, ethContract, this.tokenXMLNode, this.ethersData.chainID);
-
-                    if (!contractAddress) {
-                        tsDebug && console.log('Contract address required. chainID = '+this.ethersData.chainID);
-                        throw new Error('Contract address required. chainID = '+this.ethersData.chainID);
-                    }
-
-                    let params = this.getErc20EventParams(eventType);
-
-                    if (!params) throw  new Error(eventType+' parameters missing.');
-
-                    const match = eventFilter.match(/(\S+)=(\S+)/);
-
-                    if (match) {
-                        let paramName = match[1];
-                        let paramValue = match[2];
-                        if (paramName in params) {
-                            params[paramName] = paramValue == '${ownerAddress}' ? this.ethersData.userAddress : paramValue;
-                        }
-                    }
-
-                    let paramsArray = [];
-                    for(let i in params){
-                        paramsArray.push(params[i]);
-                    }
-
-                    tsDebug && console.log('eventType');
-                    tsDebug && console.log(eventType);
-
-                    tsDebug && console.log('params');
-                    tsDebug && console.log(params);
-
-                    // let abi = await getJSONAbi(ethContract);
-                    const [error, abi] = await to(getJSONAbi(ethContract, jsons, config.contractJsonPath, tsDebug));
-                    if (error) throw new Error(error);
-                    if (!abi) throw new Error('Empty ABI for '+ethContract);
-                    jsons[ethContract] = abi;
-
-                    if (!ethContract && !contractAddress) throw new Error(' ethContract and contractAddress required for {Address='+this.ethersData.userAddress+', chainID = '+this.ethersData.chainID+' , tokenName = '+this.tokenName+'}. Check logs for details');
-
-                    const contract = new ethers.Contract(contractAddress, abi, this.ethersData.provider);
-
-                    let filter = contract.filters[eventType].apply(null, paramsArray);
-
-                    tsDebug && console.log('filter');
-                    tsDebug && console.log(filter);
-
-                    // contract.queryFilter(filter).then(this.cb(eventType + ' where ' + eventFilter));
-                    contract.queryFilter(filter).then(callback);
-
-                    // let res = output._isBigNumber ? bnStringPrecision(output,18,8) : output;
-                    // let res = output._isBigNumber ? output.toString() : output;
-                    // console.log('ethFunction = ' + ethFunction + '; name = '+name + '; res = ' + res );
-                    // props[name] = res;
-                }
-
-            } catch (e) {
-                let message = "getProps() error. "+e;
-                catchDebug && console.log(e);
-                catchDebug && console.log(message);
-                throw new Error(message);
-            }
         }
 
         /*
@@ -606,164 +566,206 @@ window.Negotiator = (function(){
             }
         }
 
-        async renderCardView(wrapper, name, type, itemType = "item-view"){
-            tsDebug && console.log('renderCardView started for name=' + name + '; type = ' + type + '; itemType=' + itemType);
-
-            // this.cardHtml = getXMLItemText(
-            //     this.xmlDoc,
-            //     'ts:cards/ts:card[@type="activity"]/ts:item-view[@xml:lang="' + this.lang + '"][1]',
-            //     this.tokenXMLNode,
-            //     'ts:cards/ts:card[@type="activity"]/ts:item-view[@xml:lang="' + this.fallbackLang + '"][1]' );
-
-            let cardHtmlNode = getXMLItem(
-                this.xmlDoc,
-                'ts:cards/ts:card[@name="' + name + '"][@type="' + type + '"]/ts:'+itemType+'[@xml:lang="' + this.lang + '"][1]',
-                this.tokenXMLNode,
-                'ts:cards/ts:card[@name="' + name + '"][@type="' + type + '"]/ts:'+itemType+'[@xml:lang="' + this.fallbackLang + '"][1]' );
 
 
+        async render(wrapper, props, cardName = '', cardType = '', cardView = ''){
+            // console.log('render ' +cardName+ ' ' +cardType+ '' + cardView);
 
-            let cardHtml = cardHtmlNode ? cardHtmlNode.innerHTML : '';
+            cardName = cardName ? cardName : this.cardName;
+            cardType = cardType ? cardType : this.cardType;
+            cardView = cardView ? cardView : this.viewType;
 
-            if (!cardHtml && name!='main' && type!="token" ) return false;
+            // console.log('render ' +cardName+ ' ' +cardType+ '' + cardView);
 
-            cardHtml = cardHtml ? cardHtml : '<h2 style="text-transform: uppercase;">' + this.tokenName + '</h2>';
+            let cardHtml = '';
 
-            this.addCardIframe(wrapper, (iframe)=>{
-                let iframeDoc = iframe.contentDocument? iframe.contentDocument: iframe.contentWindow.document;
+            // get card-view html
+            let selector = 'ts:cards/ts:card[@name="' + cardName + '"][@type="' + cardType + '"][1]';
+            let cardNode = getXMLItem(this.xmlDoc, selector, this.tokenXMLNode );
+            if (!cardNode) {
+                this.debug && console.log('cant see card for >>>'+selector+'<<<');
+                if (cardName =='main' && cardType =="token" ) cardHtml = '<h2 style="text-transform: uppercase;">' + this.tokenName + '</h2>';
+            } else {
+                let cardHtmlNode = getXMLItem(
+                    this.xmlDoc,
+                    'ts:'+cardView+'[@xml:lang="' + this.lang + '"][1]',
+                    cardNode,
+                    'ts:'+cardView+'[@xml:lang="' + this.fallbackLang + '"][1]' );
 
-                if (name=='main' && type=="token") {
-                    wrapper.insertAdjacentHTML('beforeend', '<div class="activity_cards"></div>');
-                    let sidebarToggle = wrapper.querySelector('.sidebar_toggle');
-                    let sidebar = wrapper.querySelector('.activity_cards');
-                    sidebarToggle && sidebarToggle.addEventListener('click', () => {
-                        sidebar.classList.toggle('opened');
-                        if (!this.activitiesRenderStarted) this.activitiesRenderStart(sidebar, itemType);
-                    })
+                cardHtml = cardHtmlNode ? cardHtmlNode.innerHTML : '';
+
+                this.debug && console.log('renderCardView started for name=' + cardName + '; type = ' + cardType + '; itemType=' + cardView);
+
+                // console.log('cardHtml');
+                // console.log(cardHtml);
+            }
+
+
+
+
+            // create wrapper for token instance iframe
+            const iframeWrap = document.createElement('div');
+            iframeWrap.setAttribute('data-tokenid',this.tokenID);
+            iframeWrap.setAttribute('data-distinct-name',this.distinctName);
+            iframeWrap.classList.add('ts_tokenitem_wrap');
+            wrapper.appendChild(iframeWrap);
+
+            let activityNode = getXMLItem(this.xmlDoc,'ts:cards/ts:card[@type="activity"][1]', this.tokenXMLNode);
+
+            if (cardName=='main' && cardType=="token" && activityNode) {
+                const sidebarToggle = document.createElement('div');
+                sidebarToggle.classList.add('sidebar_toggle');
+                sidebarToggle.innerHTML = ' &lt; Show Activities';
+                wrapper.appendChild(sidebarToggle);
+
+                const sidebar = document.createElement('div');
+                sidebar.classList.add('activity_cards');
+                wrapper.appendChild(sidebar);
+
+                const cardNodes = this.xmlDoc.evaluate('ts:cards/ts:card[@type="activity"]', this.tokenXMLNode, this.nsResolver, XPathResult.ANY_TYPE, null );
+
+                // console.log('cardNodes');
+                // console.log(cardNodes);
+
+                let cardNode;
+                while (cardNodes && (cardNode = cardNodes.iterateNext())){
+                    // console.log('cardNode');
+                    // console.log(cardNode);
+
+                    let activityName = cardNode.getAttribute('name');
+                    let activityType = cardNode.getAttribute('type');
+
+
+
+                    var sidebarIframeWrap = document.createElement("div");
+                    sidebarIframeWrap.setAttribute('data-name', activityName);
+                    sidebarIframeWrap.setAttribute('data-type', activityType);
+                    sidebar.appendChild(sidebarIframeWrap);
+
+                    let title = document.createElement("h3");
+                    sidebarIframeWrap.appendChild(title);
+
+                    let allProps = await this.getAllProps(props,activityName,activityType);
+                    console.log('allProps for '+activityName + ' , ' + activityType);
+                    console.log(allProps);
+
+
+
+                    if (allProps && allProps.length) {
+                        title.innerHTML = 'Events "'+activityName + ' + ' + activityType + '":';
+                        allProps.forEach(p=>{
+                            this.render(sidebarIframeWrap, p, activityName, activityType, this.viewType);
+                        })
+                    } else {
+                        title.innerHTML = 'No Events "'+activityName + ' + ' + activityType + '"';
+                    }
+
                 }
 
+                sidebarToggle.addEventListener('click', () => {
+                    sidebar.classList.toggle('opened');
+                })
+            }
+
+            let iframe = iframeWrap.ownerDocument.createElement('iframe');
+            // iframe.classList.add('')
+
+            iframe.src = "blank.html";
+            iframe.onload = () => {
+                // let iframeWindow = iframe || iframe.contentWindow;
+                // iframeWindow.addEventListener('load', () => {
+
+                this.debug && console.log('iframe.onload fired;');
+                iframe.contentWindow.onerror = e=>{console.log('iframe error'); console.log(e);};
+
+                let iframeDoc = iframe.contentDocument? iframe.contentDocument: iframe.contentWindow.document;
+
+                /* Inject helper JS code */
+                let code = this.iframeHelper.toString();
+                code = code.substring(15,code.length -1);
+                this.insertScript(iframeDoc,code);
 
                 const innerBody = iframeDoc.getElementsByTagName('body');
 
-                if (innerBody) {
-                    const origin = document.defaultView.location.origin;
-
-                    let html = this.replace_all(cardHtml,'<body>','');
-                    html = this.replace_all(html,'</body>','');
-
-                    let div = iframeDoc.createElement('div');
-                    div.innerHTML = html;
-
-                    const scripts = div.querySelectorAll('script');
-
-                    const iframeEthereumExists = iframe.contentWindow.is_ethereum_exists();
-                    const iframeWeb3Exists = iframe.contentWindow.is_web3_exists();
-
-                    tsDebug && console.log('iframeEthereumExists = '+iframeEthereumExists);
-                    tsDebug && console.log('iframeWeb3Exists = '+iframeWeb3Exists);
-                    if (!iframeEthereumExists || !iframeWeb3Exists) {
-                        console.error('Ethereum or web3 missed');
-                    } else {
-                        let code = this.web3TokensExtention.toString();
-                        code = code.substring(22,code.length -1);
-                        this.insertScript(iframeDoc,code);
-                    }
-
-                    // this.insertScript(this.iframeDoc,null, 'web3.min.js');
-                    if (scripts.length){
-                        scripts.forEach(item=>{
-                            // let data = {
-                            //     action:'inject_script',
-                            //     content: this.decodeHtml(item.innerText)
-                            // };
-                            // iframe.contentWindow.postMessage(JSON.stringify(data),origin);
-                            // console.log(item.innerText);
-                            this.insertScript(iframeDoc,this.decodeHtml(item.innerText));
-                            item.remove();
-                        })
-                    }
-                    innerBody[0].innerHTML = '';
-                    innerBody[0].appendChild(div);
-
-                    let cardNode = getXMLItem(this.xmlDoc,'ts:cards/ts:card[@name="' + name + '"][@type="' + type + '"][1]', this.tokenXMLNode);
-
-                    this.cardOriginProps(cardNode, (filterResult)=>{
-                        if (!filterResult || !filterResult.length) return;
-
-                        // console.log('filterResult');
-                        // console.log(filterResult);
-
-                        let resultParser = (res)=>{
-                            tsDebug && console.log('filterResult item');
-                            tsDebug && console.log(res);
-                            let props = this.mainProps;
-                            ['owner','spender','from','to'].forEach(arg=>{
-                                if (res.args['_'+arg]) props[arg] = res.args['_'+arg];
-                            });
-                            ['value','amount'].forEach(arg=>{
-                                if (res.args['_'+arg]) props[arg] =
-                                    res.args['_'+arg]._isBigNumber
-                                        ? bnStringPrecision(res.args['_'+arg],props['decimals'],8)
-                                        : res.args['_'+arg];
-                            })
-
-                            let id = 'ts' + Math.random().toString(36).substring(7);
-                            var div = iframeDoc.createElement("div");
-                            var body = iframeDoc.querySelector('body');
-                            div.setAttribute('id',id);
-                            body.appendChild(div);
-
-                            console.log(props);
-
-                            iframe.contentWindow.web3.tokens.data.currentInstance = props;
-                            iframe.contentWindow.web3.tokens.dataChanged(null, null, id )
-
-
-
-                        }
-
-                        if (filterResult.length) {
-                            filterResult.forEach(resultParser);
-                        } else {
-                            resultParser(filterResult);
-                        }
-                    });
-
-                    iframeDoc.dispatchEvent(new Event("DOMContentLoaded", {
-                        bubbles: true,
-                        cancelable: true
-                    }));
-                    // setTimeout(()=>{
-                    //     console.log('iframe.dispatchEvent(new Event("load"');
-                    //     iframe.contentWindow.onload();
-                    //     // iframe.dispatchEvent(new Event("load", {
-                    //     //     bubbles: true,
-                    //     //     cancelable: true
-                    //     // }));
-                    // }, 500);
-
-
-                } else {
-                    console.log('Cant see iframe body');
+                if (!innerBody) {
+                    console.log('Cant see iframe body tag');
+                    return;
                 }
-            });
-        }
 
-        activitiesRenderStart(sidebar, itemType){
-            this.activitiesRenderStarted = true;
+                // const origin = document.defaultView.location.origin;
 
-            const cardNodes = this.xmlDoc.evaluate('ts:cards/ts:card[@type="activity"]', this.tokenXMLNode, this.nsResolver, XPathResult.ANY_TYPE, null );
 
-            let cardNode;
-            while (cardNodes && (cardNode = cardNodes.iterateNext())){
-                let name = cardNode.getAttribute('name');
-                let type = cardNode.getAttribute('type');
+                let html = cardHtml ? this.replace_all(cardHtml,'<body>','') :'';
+                html = this.replace_all(html,'</body>','');
 
-                var iframeWrap = document.createElement("div");
-                sidebar.appendChild(iframeWrap);
+                let div = iframeDoc.createElement('div');
+                div.setAttribute('class','main');
+                div.innerHTML = this.decodeHtml(html);
+                const scripts = div.querySelectorAll('script');
 
-                this.renderCardView(iframeWrap, name, type, itemType)
-            }
+                // test iframe ethereum and web3
+                const iframeEthereumExists = iframe.contentWindow.is_ethereum_exists();
+                const iframeWeb3Exists = iframe.contentWindow.is_web3_exists();
+                this.debug && console.log('iframeEthereumExists = '+iframeEthereumExists);
+                this.debug && console.log('iframeWeb3Exists = '+iframeWeb3Exists);
+                if (!iframeEthereumExists || !iframeWeb3Exists) {
+                    console.error('Ethereum or web3 missed');
+                } else {
+                    // inject helper code to fix web3.tokens.dataChanged and other errors
+                    let code = this.web3TokensExtention.toString();
+                    code = code.substring(22,code.length -1);
+                    this.insertScript(iframeDoc,code);
+                }
+
+                // insert all scripts from card-view
+                if (scripts.length){
+                    scripts.forEach(item=>{
+                        // let data = {
+                        //     action:'inject_script',
+                        //     content: this.decodeHtml(item.innerText)
+                        // };
+                        // iframe.contentWindow.postMessage(JSON.stringify(data),origin);
+                        // console.log(item.innerText);
+                        // this.insertScript(iframeDoc,this.decodeHtml(item.innerText));
+                        this.insertScript(iframeDoc,item.innerText);
+                        item.remove();
+                    })
+                }
+
+                // clean body code and add card-view html(without scripts)
+                innerBody[0].innerHTML = '';
+                innerBody[0].appendChild(div);
+
+                let id = 'ts' + Math.random().toString(36).substring(7);
+                div = iframeDoc.createElement("div");
+                var main = iframeDoc.querySelector('body .main');
+                div.setAttribute('id',id);
+                div.setAttribute('class','');
+                main.appendChild(div);
+
+                console.log(props);
+
+                if (iframe.contentWindow.web3.tokens.dataChanged){
+                    iframe.contentWindow.web3.tokens.data.currentInstance = props;
+                    iframe.contentWindow.web3.tokens.dataChanged(null, {currentInstance: props}, id );
+                }
+
+
+                iframeDoc.dispatchEvent(new Event("DOMContentLoaded", {
+                    bubbles: true,
+                    cancelable: true
+                }));
+                // setTimeout(()=>{
+                //     console.log('iframe.dispatchEvent(new Event("load"');
+                //     iframe.contentWindow.onload();
+                //     // iframe.dispatchEvent(new Event("load", {
+                //     //     bubbles: true,
+                //     //     cancelable: true
+                //     // }));
+                // }, 500);
+
+            };
+            iframeWrap.appendChild(iframe);
 
         }
 
@@ -994,182 +996,114 @@ window.Negotiator = (function(){
         return filter[1];
     }
 
-    async function getTokenIDs(tokenName){
-        try {
-            tsDebug && console.log('tokenName');
-            tsDebug && console.log(tokenName);
-            tsDebug && console.log(tokenNodesList);
-            tsDebug && console.log(tokenNodesList[tokenName]);
-            let distinctAttributeNode = getXMLItem(tokenNodesList[tokenName].xmlDoc,'ts:attribute[@distinct="true"][1]',tokenNodesList[tokenName].tokenRootNode);
+    /**
+     * Add token to the list
+     *
+     * @param tokenName
+     * @param filter
+     * @param debug
+     * @returns {Promise<void>}
+     */
+    async function negotiate(tokenName, filter, debug){
 
-            if (!distinctAttributeNode) {
-                tsDebug && console.log("Cant find distinct attribute, lets use ownerAddress");
-                return {
-                    distinctName: "ownerAddress",
-                    items: ['ethersData.userAddress']
-                };
-            }
-
-            let distinctAttributeEthereumCallNode = getXMLItem(tokenNodesList[tokenName].xmlDoc,'ts:origins/ethereum:call[1]',distinctAttributeNode);
-
-            const distinctName = distinctAttributeNode.getAttribute('name');
-
-            if (!distinctAttributeEthereumCallNode) {
-                tsDebug && console.log("Cant find distinct attribute Ethereum Call, lets use ownerAddress");
-                // return ['ownerAddress='+ethersData.userAddress];
-                return {
-                    distinctName: "ownerAddress",
-                    items: ['ethersData.userAddress']
-                };
-            }
-
-            tsDebug && console.log('distinctAttributeEthereumCallNode');
-            tsDebug && console.log(distinctAttributeEthereumCallNode);
-
-            let {
-                params,
-                ethCallAttributtes,
-                contract
-            } = getEthereumCallParams({
-                userAddress: ethersData.userAddress,
-                chainID: ethersData.chainID,
-                ethereumNode: distinctAttributeEthereumCallNode,
-                xmlDoc: tokenNodesList[tokenName].xmlDoc,
-                tokenXmlNode: tokenNodesList[tokenName].tokenRootNode,
-                tokenName
-            });
-
-            if ( (!ethCallAttributtes || !ethCallAttributtes.contract) && (!contract && !contract.contractAddress) ) throw new Error(' ethContract and contractAddress required for {Address='+ethersData.userAddress+', chainID = '+ethersData.chainID+' , tokenName = '+tokenName+'}. Check logs for details');
-
-            const [error, abi] = await to(getJSONAbi(ethCallAttributtes.contract, jsons, config.contractJsonPath, tsDebug));
-            if (error) throw new Error(error);
-            if (!abi) throw new Error('Empty ABI for '+ethCallAttributtes.contract);
-            jsons[ethCallAttributtes.contract] = abi;
-
-            const ethersContract = new ethers.Contract(contract.contractAddress, abi, ethersData.provider);
-            tsDebug && console.log('ethFunction = ' + ethCallAttributtes.contract + '; name = '+name + '; output = '  );
-            tsDebug && console.log(params);
-            let output = await ethersContract[ethCallAttributtes.function].apply(null, params);
-
-            tsDebug && console.log('contract method output');
-            tsDebug && console.log(output);
-
-            if (output && output.length) {
-                let items = [];
-                output.forEach( a => { items.push( a._isBigNumber ? a.toHexString() : a.toString() ) } );
-                return {
-                    distinctName,
-                    items
-                };
-            } else {
-                throw new Error('Empty token list');
-            }
-
-        } catch (e) {
-            let message = 'Cant get token IDs: ' + e;
-            catchDebug && console.log(message);
-            catchDebug && console.log(e);
-            console.log(e);
-            throw new Error(message);
+        // negotiatedTokens[tokenName] = filter;
+        if (!tokenNodesList[tokenName]) {
+            console.error('unknown token '+tokenName);
+            return;
         }
 
-    }
+        console.log('negotiate token '+tokenName+ ' with filter : '+filter);
 
-    let negotiate = async function(tokenName, filter){
-        setDefMessageAndBtn(tokenName, filter);
-        // negotiatedTokens[tokenName] = filter;
+        tokenNodesList[tokenName].filter = filter;
+
         try {
             await init();
             ethersData = await getEthersData();
 
-            tsDebug && console.log('negotiate fired for '+tokenName);
+            debug && console.log('negotiate fired for '+tokenName);
 
             const tokenNodes = bar.querySelectorAll('.ts_token_bar_body .ts_token_wrap[data-tokenname="'+tokenName+'"]');
             if (tokenNodes.length) tokenNodes.forEach(node=>node.remove());
-            let tokensObj = await getTokenIDs(tokenName);
-            tsDebug && console.log('tokensObj = ',tokensObj);
 
-
-            if (!tokensObj) throw new Error('Address in this network doesnt have token IDs.');
-
-            tokensObj['items'].forEach(tokenID=>{
-                const barBody = bar.querySelector('.ts_token_bar_body');
-                const wrap = document.createElement('div');
-                wrap.setAttribute('data-tokenname',tokenName);
-                wrap.setAttribute('data-tokenid',tokensObj.distinctName + '=' + tokenID);
-                wrap.classList.add('ts_token_wrap');
-                barBody.appendChild(wrap);
-
-                // tokenInstances[tokenName] =
-                wrap.tokenInstance = new TokenCard({
-                    // xmlDoc,
-                    xmlDoc: tokenNodesList[tokenName].xmlDoc,
-                    tokenXMLNode: tokenNodesList[tokenName].tokenRootNode,
-                    wrapNode: wrap,
-                    lang,
-                    tokenName,
-                    tokenID,
-                    distinctName: tokensObj.distinctName,
-                    ethersData,
-                    filter
-                });
-
-                // wrap.tokenInstance = instance;
-
-                var event = new CustomEvent('ontokennegotiation', { 'detail': {tokenName,tokenID} });
-                window.dispatchEvent(event);
+            let initialTokenInstance = new TokenCard({
+                // xmlDoc,
+                xmlDoc: tokenNodesList[tokenName].xmlDoc,
+                tokenXMLNode: tokenNodesList[tokenName].tokenRootNode,
+                lang,
+                fallbackLang: config.lang,
+                tokenName,
+                ethersData,
+                filter,
+                // debug: 1
             });
+            let distinctProps = await initialTokenInstance.getDistinctItems();
+            // console.log('distinctProps');
+            // console.log(distinctProps);
+
+            if (distinctProps && distinctProps.items && distinctProps.items.length) {
+                distinctProps.items.forEach(tokenID => {
+                    let tokenInstance = new TokenCard({
+                        xmlDoc: tokenNodesList[tokenName].xmlDoc,
+                        tokenXMLNode: tokenNodesList[tokenName].tokenRootNode,
+                        lang,
+                        fallbackLang: config.lang,
+                        tokenName,
+                        ethersData,
+                        filter,
+                        tokenID,
+                        distinctName: distinctProps.distinctName,
+                        // debug: 1
+                    });
+                    tokenInstance.getAllProps().then(rootProps => {
+                        // console.log('rootProps');
+                        // console.log(rootProps);
+                        // if (rootProps && rootProps.length) rootProps.forEach()
+
+                        let compareRes = compareStringToProps(filter,rootProps[0]);
+                        // console.log('compareRes');
+                        // console.log(compareRes);
+                        if (!compareRes) {
+                            setDefMessageAndBtn(filter);
+                            return;
+                        }
+
+                        const barBody = bar.querySelector('.ts_token_bar_body');
+                        let wrap = barBody.querySelector('.ts_token_wrap[data-tokenname="' + tokenName + '"]');
+                        if (!wrap) {
+                            wrap = document.createElement('div');
+                            wrap.setAttribute('data-tokenname', tokenName);
+                            wrap.classList.add('ts_token_wrap');
+                            barBody.appendChild(wrap);
+                        }
+                        const def = bar.querySelector('.ts_token_bar_body .notokens');
+                        if (def) def.innerHTML = '';
+
+                        // render token main view
+                        tokenInstance.render(wrap, rootProps[0]).then(() => {
+                            setDefMessageAndBtn(filter);
+                        });
+                        wrap.instance = tokenInstance;
+
+                        var event = new CustomEvent('ontokennegotiation', {'detail': {tokenName, tokenID}});
+                        window.dispatchEvent(event);
+
+                    });
 
 
+                });
+            } else {
+                setDefMessageAndBtn(filter);
+            }
 
             bar.classList.add('opened');
 
-            // return tokenCard;
-
         } catch (e) {
             let message = 'negotiate error = '+e;
-            catchDebug && console.log(message);
-            catchDebug && console.log(e);
+            debug && console.log(message);
+            debug && console.log(e);
             throw new Error(message);
         }
-
-
     }
-    // let getToken = async function(name){
-    //     if (!tokens[name]) {
-    //         try {
-    //             return await negotiate(name);
-    //         } catch (e) {
-    //             let message = 'getToken. negotiate error = '+e;
-    //             catchDebug && console.log(message);
-    //             catchDebug && console.log(e);
-    //         }
-    //     }
-    //     return tokens[name];
-    // };
-    /*
-    let selectTokenFromList = function(filter = {}){
-        init().then(res=>{
-            try {
-                // console.log('init res');
-                // console.log(res);
-
-                tsDebug && console.log('init OK');
-                // if (Object.keys(tokenNodesList).length){
-                Object.keys(tokenNodesList).forEach(tokenName){
-                    await negotiate(tokenName,filter).then(console.log);
-                }
-
-            } catch (e) {
-                console.error(e);
-            }
-            //res={xmlDoc,nsResolver}
-        }).catch(e=>console.log);
-    }
-
-     */
-
-
 
     const metaDefinedTokenName =  getTokenName();
     if (metaDefinedTokenName){
@@ -1177,78 +1111,50 @@ window.Negotiator = (function(){
             negotiate(metaDefinedTokenName).then(e=>{bar.classList.remove('opened');});
         } catch (e) {
             let message = 'negotiate error = '+e;
-            catchDebug && console.error('negotiate error');
+            catchDebug && console.error(message);
             console.error(e);
         }
     }
 
     async function renegotiateAll(filter = ''){
-        // console.log('renegotiateAll fired');
+        console.log('renegotiateAll fired. filter = '+filter);
         await init();
 
-        // console.log('tokenNodesList');
-        // console.log(tokenNodesList);
-        // console.log(bar);
+
         if (!bar || !tokenNodesList) return;
 
-        const nodes = bar.querySelectorAll('.ts_token_bar_body > *:not(.def)');
-        nodes.forEach(item=>{item.remove()});
-
-        // console.log('negotiatedTokens');
-        // tsDebug && console.log('negotiatedTokens');
-        // tsDebug && console.log(negotiatedTokens);
-
-        // Object.keys(tokenNodesList).forEach(tokenName=>{
-        //     await negotiate(tokenName,filter).then(console.log);
-        // })
+        // const nodes = bar.querySelectorAll('.ts_token_bar_body > *:not(.notokens)');
+        // nodes.forEach(item=>{item.remove()});
 
         let tokens = Object.keys(tokenNodesList);
-        if (tokens.length) for(var i=0; i<tokens.length; i++){
-            await negotiate(tokens[i],filter);
-            setDefMessageAndBtn(tokens[i],filter);
-        }
-
-
-
-/*
-        const def = bar.querySelector('.ts_token_bar_body .def');
-        try {
-            if (!ethereum || !ethereum.chainId) {
-                def.innerHTML = "Metamask not connected to the network. Check your internet connection and firewall settings.";
-                return;
-            }
-            let tokenName;
-            if ( ethereum.selectedAddress ){
-
-                Object.keys(negotiatedTokens).forEach(key=>{
-                    tokenName = key;
-                    negotiate(key,filter ? filter : negotiatedTokens[key]).then(e=>{console.log('renegotiated')}).catch(console.log);
-                })
-            }
-
-            setDefMessageAndBtn(tokenName,filter);
-
-
-        } catch (e) {
-            let message = 'Something went wrong when try to get Network and Address'
-            tsDebug && console.log(message);
-            tsDebug && console.log(e);
-            def.innerHTML = message;
-        }
-
- */
+        tokens.forEach(async tokenName=> await negotiate(tokenName,filter))
     }
 
-    async function setDefMessageAndBtn(tokenName,filter = ''){
+    async function passiveRenegotiateAll(){
+        await init();
+
+        if (!bar || !tokenNodesList) return;
+        let tokens = Object.keys(tokenNodesList);
+        tokens.forEach(tokenName=>negotiate(tokenName,tokenNodesList[tokenName].filter))
+    }
+
+    async function setDefMessageAndBtn(filter = ''){
         if (!bar ) return;
 
-        const def = bar.querySelector('.ts_token_bar_body .def');
+        const def = bar.querySelector('.ts_token_bar_body .notokens');
         const node = bar.querySelector('.ts_token_bar_body');
+        if (node) {
+            let added = node.querySelector('.ts_token_wrap');
+            def.innerHTML = '';
+            if (added) return;
+        }
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         let network = await provider.getNetwork();
 
         const signer = provider.getSigner();
         const userAddress = signer ? await signer.getAddress() : false;
+
+        let tokenName = Object.keys(tokenNodesList).join('|');
 
         if (signer && userAddress ){
             def.innerHTML = "On the " + network.name + ", no token is found under your address " + userAddress + (tokenName ? " that matches the criteria objectClass="+tokenName : '') + (filter ? ' and filter="'+filter+'"' : '');
@@ -1270,10 +1176,10 @@ window.Negotiator = (function(){
     };
 
     if (window.ethereum){
-        ethereum.on('accountsChanged', renegotiateAll);
-        ethereum.on('chainChanged', renegotiateAll);
-        ethereum.on('connect', renegotiateAll);
-        ethereum.on('disconnect', renegotiateAll);
+        ethereum.on('accountsChanged', passiveRenegotiateAll);
+        ethereum.on('chainChanged', passiveRenegotiateAll);
+        ethereum.on('connect', passiveRenegotiateAll);
+        ethereum.on('disconnect', passiveRenegotiateAll);
     }
 
 

@@ -44,8 +44,39 @@ test("test getContractAddress", () => {
 
     expect(ts.getContractAddress(xmlDoc, "EntryToken", tokenNode, 3)).toMatchObject({'contractAddress':'0xFB82A5a2922A249f32222316b9D1F5cbD3838678','contractInterface':'erc875'});
     expect(ts.getContractAddress(xmlDoc, "EntryToken", tokenNode, 42)).toMatchObject({contractInterface:'erc875',contractAddress:'0x2B58A9403396463404c2e397DBF37c5EcCAb43e5'});
+});
 
+// test("test getJSONAbi", () => {
+//
+//     global.fetch = jest.fn((url) =>
+//         Promise.resolve({
+//             status: 400
+//         })
+//     );
+//
+//     expect(ts.getJSONAbi('somecontract',{})).toBe(false);
+//
+//
+//
+// });
 
+it('getJSONAbi file not found', () => {
+    expect.assertions(1);
+
+        global.fetch = jest.fn((url) =>
+        Promise.resolve({
+            status: 400
+        })
+    );
+
+    return expect(ts.getJSONAbi('somecontract',{})).resolves.toEqual(false);
+
+});
+
+it('getJSONAbi already added', async () => {
+    expect.assertions(1);
+    const data = await ts.getJSONAbi('somecontract',{somecontract:{val1: 2}});
+    expect(data).toMatchObject({val1: 2});
 });
 
 
