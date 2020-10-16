@@ -198,16 +198,22 @@ export function getContractAddress(xmlDoc, ethContract, tokenXmlNode, chainID){
     }
 }
 
-/*
-parse XML and return innerHTML value by selector (XPath)
-*/
-export function getXMLItemText(xmlDoc, selector, context = '', fallbackSelector = ''){
+/**
+ * parse XML and return innerHTML value by selector (XPath)
+ * @param xmlDoc
+ * @param selector
+ * @param context
+ * @param fallbackSelector
+ * @param debug
+ * @returns {*}
+ */
+export function getXMLItemText(xmlDoc, selector, context = '', fallbackSelector = '', debug = false){
     let item;
     if (item = getXMLItem(xmlDoc, selector, context, fallbackSelector)) {
         return item.innerHTML;
     } else {
-        window.tsDebug && console.log(selector);
-        window.tsDebug && console.log('Cant find value');
+        debug && console.log(selector);
+        debug && console.log('Cant find value');
     }
 }
 
@@ -255,33 +261,161 @@ export function to(promise, improved){
 
 export async function getJSONAbi(ethContract, jsons, path = '', debug = false){
     let contractJson = jsons ? jsons[ethContract] : false;
-    // if (!path) {
-    //     console.log('contract JSON path required for getJSONAbi');
-    //     return false;
-    // }
 
-    if (!contractJson) {
-        try {
-            let response = await fetch(path + ethContract + '.json');
-            if (response.status !== 200) {
-                const message = 'Looks like there was a problem. Status Code: ' +
-                    response.status;
-                debug && console.log(message);
-                throw new Error(message);
-            }
-            contractJson = await response.json();
-            jsons[ethContract] = contractJson;
+    if (contractJson) return contractJson;
 
-
-        } catch (e) {
-            let message = 'token JSON fetch error. ' + e;
-            debug && console.log(e);
+    try {
+        let response = await fetch(path + ethContract + '.json');
+        if (response.status !== 200) {
+            const message = 'Looks like there was a problem. Status Code: ' +
+                response.status;
+            debug && console.log(message);
             throw new Error(message);
         }
+        contractJson = await response.json();
+        jsons[ethContract] = contractJson;
+
+    } catch (e) {
+        let message = 'token JSON fetch error. ' + e;
+        debug && console.log(e);
+        debug && console.log(message);
+        // throw new Error(message);
+        return false;
     }
 
     return contractJson;
 }
+
+/**
+ * Convert Contact filter results to readable values and extends it with  common token props
+ * @param resItem
+ * @param commonProps
+ * @returns {*}
+ */
+export function filterResultConverter(resItem, commonProps) {
+    ['owner', 'spender', 'from', 'to'].forEach(arg => {
+        if (resItem.args['_' + arg]) commonProps[arg] = resItem.args['_' + arg];
+    });
+    ['value', 'amount'].forEach(arg => {
+        if (resItem.args['_' + arg]) commonProps[arg] =
+            resItem.args['_' + arg]._isBigNumber
+                ? bnStringPrecision(resItem.args['_' + arg], commonProps['decimals'], 8)
+                : resItem.args['_' + arg];
+    })
+    return commonProps;
+}
+
+/**
+ * To avoid integer overflow it convert bigint using decimapls value and some precision (precision max 15)
+ * @param bn
+ * @param decimals
+ * @param precision
+ * @returns {number}
+ */
+export function bnStringPrecision(bn, decimals, precision){
+    bn = ethers.BigNumber.from(bn);
+    if (precision > 15) precision = 15;
+    // while (precision > 15){
+    //     bn = bn.mul(10**15);
+    //     precision -= 15;
+    // }
+    bn = bn.mul(10**precision);
+
+    while (decimals > 15){
+        bn = bn.div(10**15);
+        decimals -= 15;
+    }
+    bn = bn.div(10**decimals);
+
+    return bn.toNumber() / 10**precision;
+}
+
+/**
+ *
+ * @param userAddress
+ * @param tokenId
+ * @param chainID
+ * @param ethereumNode
+ * @param xmlDoc
+ * @param attributeName
+ * @param tokenXmlNode
+ * @param tokenName
+ * @param debug
+ * @returns {boolean|{missedAttribute: *, contract: *, ethCallAttributtes: *, params: *}}
+ */
+export function getEthereumCallParams({userAddress, tokenId, chainID , ethereumNode , xmlDoc, attributeName, tokenXmlNode, tokenName, debug}){
+
+    let missedAttribute;
+
+    tokenId = tokenId ? tokenId : '';
+
+    // get default contract Name
+    let xmlNode = getXMLItem(xmlDoc,'ts:origins/ts:ethereum[1]', tokenXmlNode);
+    let defaultContract = xmlNode ? xmlNode.getAttribute('contract') : '';
+    defaultContract = defaultContract ? defaultContract : tokenName;
+
+    var params = [];
+
+    if (!ethereumNode) {
+        ethereumNode = getXMLItem(xmlDoc, 'ts:attribute[@name="' + attributeName + '"]/ts:origins/ethereum:call[1]', tokenXmlNode);
+    }
+
+    if (!ethereumNode) {
+        console.log('cant find attribute');
+        return false;
+    }
+
+    var atts = ethereumNode.getAttributeNames();
+    var ethCallAttributtes = {};
+    atts.forEach(attName=>{
+        ethCallAttributtes[attName] = ethereumNode.getAttribute(attName);
+    });
+
+    ethCallAttributtes.contract = ethCallAttributtes.contract ? ethCallAttributtes.contract : defaultContract;
+
+    var contract = getContractAddress(xmlDoc, ethCallAttributtes.contract, tokenXmlNode, chainID);
+
+    if (!contract.contractAddress) {
+        tsDebug && console.log('Contract address required. chainID = '+chainID);
+        return false;
+    }
+
+    let nsResolver = xmlDoc.createNSResolver( xmlDoc.ownerDocument == null ? xmlDoc.documentElement : xmlDoc.ownerDocument.documentElement);
+    let xmlNodeSet = xmlDoc.evaluate('ts:data/*', ethereumNode, nsResolver, XPathResult.ANY_TYPE, null );
+
+    let item;
+
+    while (xmlNodeSet && (item = xmlNodeSet.iterateNext())){
+        let ref = item.getAttribute('ref');
+
+        switch (ref) {
+            case 'ownerAddress':
+                debug && console.log('ownerAddress = '+userAddress);
+                params.push(userAddress);
+                break;
+            case 'tokenId':
+                if(tokenId) {
+                    params.push(tokenId);
+                } else {
+                    missedAttribute = 'tokenId';
+                }
+                break;
+            default:
+                debug && console.log('item.innerHTML');
+                debug && console.log(item.innerHTML);
+                if (item.innerHTML) params.push(item.innerHTML);
+        }
+    }
+
+    return {
+        params,
+        ethCallAttributtes,
+        contract,
+        missedAttribute
+    };
+
+}
+
 
 
 
