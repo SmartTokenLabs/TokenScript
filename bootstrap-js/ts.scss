@@ -88,17 +88,38 @@
       box-sizing: border-box;
       .sidebar_toggle {
         padding: 2px 5px;
-        background: #ccc;
+        background: #c8dadf;
         margin: 5px;
         //float: left;
         display: inline-block;
         border-radius: 4px;
         cursor: pointer;
         transition: all 0.5s;
+        position: relative;
         &:hover {
           box-shadow: inset 0 -3.25em 0 0 #eee;
         }
+        &:after {
+          content: '';
+          position: absolute;
+          display: block;
+          width: 10px;
+          height: 10px;
+          top: -4px;
+          right: -5px;
+          background: red;
+          border-radius: 100px;
+          border: 1px solid #92b0b3;
+          opacity: 0;
+          transition: opacity 0.5s;
+        }
+        &.has_events {
+          &:after {
+            opacity: 1;
+          }
+        }
       }
+
       iframe {
         width: 100%;
         box-sizing: border-box;

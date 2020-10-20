@@ -65,14 +65,30 @@
       box-sizing: border-box; }
       .ts_token_bar .ts_token_bar_body .ts_token_wrap .sidebar_toggle {
         padding: 2px 5px;
-        background: #ccc;
+        background: #c8dadf;
         margin: 5px;
         display: inline-block;
         border-radius: 4px;
         cursor: pointer;
-        transition: all 0.5s; }
+        transition: all 0.5s;
+        position: relative; }
         .ts_token_bar .ts_token_bar_body .ts_token_wrap .sidebar_toggle:hover {
           box-shadow: inset 0 -3.25em 0 0 #eee; }
+        .ts_token_bar .ts_token_bar_body .ts_token_wrap .sidebar_toggle:after {
+          content: '';
+          position: absolute;
+          display: block;
+          width: 10px;
+          height: 10px;
+          top: -4px;
+          right: -5px;
+          background: red;
+          border-radius: 100px;
+          border: 1px solid #92b0b3;
+          opacity: 0;
+          transition: opacity 0.5s; }
+        .ts_token_bar .ts_token_bar_body .ts_token_wrap .sidebar_toggle.has_events:after {
+          opacity: 1; }
       .ts_token_bar .ts_token_bar_body .ts_token_wrap iframe {
         width: 100%;
         box-sizing: border-box; }

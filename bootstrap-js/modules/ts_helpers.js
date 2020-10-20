@@ -288,21 +288,26 @@ export async function getJSONAbi(ethContract, jsons, path = '', debug = false){
 
 /**
  * Convert Contact filter results to readable values and extends it with  common token props
- * @param resItem
- * @param commonProps
+ * @param resArgs
+ * @param incomeProps
  * @returns {*}
  */
-export function filterResultConverter(resItem, commonProps) {
+export function filterResultConverter(resArgs, incomeProps) {
+    // console.log('filterResultConverter input = ');
+    // console.log(resArgs);
+    let resultProps = Object.assign({}, incomeProps);
     ['owner', 'spender', 'from', 'to'].forEach(arg => {
-        if (resItem.args['_' + arg]) commonProps[arg] = resItem.args['_' + arg];
+        if (resArgs['_' + arg]) resultProps[arg] = resArgs['_' + arg];
     });
     ['value', 'amount'].forEach(arg => {
-        if (resItem.args['_' + arg]) commonProps[arg] =
-            resItem.args['_' + arg]._isBigNumber
-                ? bnStringPrecision(resItem.args['_' + arg], commonProps['decimals'], 8)
-                : resItem.args['_' + arg];
+        if (resArgs['_' + arg]) resultProps[arg] =
+            resArgs['_' + arg]._isBigNumber
+                ? bnStringPrecision(resArgs['_' + arg], resultProps['decimals'], 12)
+                : resArgs['_' + arg];
     })
-    return commonProps;
+    // console.log('resultProps');
+    // console.log(resultProps);
+    return resultProps;
 }
 
 /**
@@ -376,7 +381,7 @@ export function getEthereumCallParams({userAddress, tokenId, chainID , ethereumN
     var contract = getContractAddress(xmlDoc, ethCallAttributtes.contract, tokenXmlNode, chainID);
 
     if (!contract.contractAddress) {
-        tsDebug && console.log('Contract address required. chainID = '+chainID);
+        debug && console.log('Contract address required. chainID = '+chainID);
         return false;
     }
 
@@ -416,6 +421,37 @@ export function getEthereumCallParams({userAddress, tokenId, chainID , ethereumN
 
 }
 
+/**
+ * Parse ERC20 events and display to console
+ * @param erc20EventName
+ * @param xmlDoc
+ * @param tokenXMLNode
+ * @returns {boolean}
+ */
+export function getErc20EventParams(erc20EventName, xmlDoc, tokenXMLNode){
+    let nsResolver = xmlDoc.createNSResolver( xmlDoc.ownerDocument == null ? xmlDoc.documentElement : xmlDoc.ownerDocument.documentElement);
+
+    const eventXmlNodes = xmlDoc.evaluate('asnx:module[@name="ERC20-Events"]/namedType[@name="'+erc20EventName+'"]', tokenXMLNode, nsResolver, XPathResult.ANY_TYPE, null );
+
+
+
+    let params = {};
+
+    let moduleNode;
+    if (moduleNode = eventXmlNodes.iterateNext()) {
+
+        let eventElementsXmlNodes = xmlDoc.evaluate('type/sequence/element', moduleNode, nsResolver, XPathResult.ANY_TYPE, null );
+
+        let eventElementsXmlNode; ;
+        while ( eventElementsXmlNode = eventElementsXmlNodes.iterateNext() ) {
+            params[eventElementsXmlNode.getAttribute('name')] = null;
+        }
+    } else {
+        return false;
+    }
+
+    return params;
+}
 
 
 

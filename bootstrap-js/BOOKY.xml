@@ -24,6 +24,202 @@
         <ts:address network="3">0x583cbBb8a8443B38aBcC0c956beCe47340ea1367</ts:address>
     </ts:contract>
     <ts:cards>
+        <ts:card name="main" type="token">
+            <ts:item-view xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+                <style type="text/css">.ts-count {
+                    font-family: "SourceSansPro";
+                    font-weight: bolder;
+                    font-size: 21px;
+                    color: rgb(117, 185, 67);
+                }
+                .ts-category {
+                    font-family: "SourceSansPro";
+                    font-weight: lighter;
+                    font-size: 21px;
+                    color: rgb(67, 67, 67);
+                }
+                .ts-venue {
+                    font-family: "SourceSansPro";
+                    font-weight: lighter;
+                    font-size: 16px;
+                    color: rgb(67, 67, 67);
+                }
+                .ts-date {
+                    font-family: "SourceSansPro";
+                    font-weight: bold;
+                    font-size: 14px;
+                    color: rgb(112, 112, 112);
+                    margin-left: 7px;
+                    margin-right: 7px;
+                }
+                .ts-time {
+                    font-family: "SourceSansPro";
+                    font-weight: lighter;
+                    font-size: 16px;
+                    color: rgb(112, 112, 112);
+                }
+                html {
+                }
+
+                body {
+                    padding: 0px;
+                    margin: 0px;
+                }
+
+                div {
+                    margin: 0px;
+                    padding: 0px;
+                }
+
+                .data-icon {
+                    height:16px;
+                    vertical-align: middle
+                }
+
+                .tbml-count {   font-family: "SourceSansPro";   font-weight: bolder;   font-size: 21px;   color: rgb(117, 185, 67); } .tbml-category {   font-family: "SourceSansPro";   font-weight: lighter;   font-size: 21px;   color: rgb(67, 67, 67); } .tbml-venue {   font-family: "SourceSansPro";   font-weight: lighter;   font-size: 16px;   color: rgb(67, 67, 67); } .tbml-date {   font-family: "SourceSansPro";   font-weight: bold;   font-size: 14px;   color: rgb(112, 112, 112);   margin-left: 7px;   margin-right: 7px; } .tbml-time {   font-family: "SourceSansPro";   font-weight: lighter;   font-size: 16px;   color: rgb(112, 112, 112); }    html {    }        body {    padding: 0px;    margin: 0px;    }        div {    margin: 0px;    padding: 0px;    }     .data-icon {    height:16px;    vertical-align: middle    } 
+
+
+                </style>
+                <body>
+                    <div id="mainid"></div>
+                    <script type="text/javascript">//
+                    class Token {
+
+                        constructor(tokenInstance) {
+                            this.props = tokenInstance;
+                        }
+
+                        render() {
+                            return`
+            &lt;div&gt;Symbol: ${this.props.symbol}&lt;/div>
+            &lt;div>Name: ${this.props.name}&lt;/div>
+            &lt;div>Balance: ${this.props.ownerBalance}&lt;/div>
+            &lt;div>Decimals ${this.props.decimals}&lt;/div>
+
+`;
+                        }
+                    }
+
+                    web3.tokens.dataChanged = (oldTokens, updatedTokens, tokenIdCard) =&gt; {
+                        document.getElementById('mainid').innerHTML = new Token(web3.tokens.data.currentInstance).render();
+                    };
+                    //
+                    </script>
+                </body>
+            </ts:item-view>
+            <ts:view xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+                <style type="text/css">.ts-count {
+                    font-family: "SourceSansPro";
+                    font-weight: bolder;
+                    font-size: 21px;
+                    color: rgb(117, 185, 67);
+                }
+                .ts-category {
+                    font-family: "SourceSansPro";
+                    font-weight: lighter;
+                    font-size: 21px;
+                    color: rgb(67, 67, 67);
+                }
+                .ts-venue {
+                    font-family: "SourceSansPro";
+                    font-weight: lighter;
+                    font-size: 16px;
+                    color: rgb(67, 67, 67);
+                }
+                .ts-date {
+                    font-family: "SourceSansPro";
+                    font-weight: bold;
+                    font-size: 14px;
+                    color: rgb(112, 112, 112);
+                    margin-left: 7px;
+                    margin-right: 7px;
+                }
+                .ts-time {
+                    font-family: "SourceSansPro";
+                    font-weight: lighter;
+                    font-size: 16px;
+                    color: rgb(112, 112, 112);
+                }
+                html {
+                }
+
+                body {
+                    padding: 0px;
+                    margin: 0px;
+                }
+
+                div {
+                    margin: 0px;
+                    padding: 0px;
+                }
+
+                .data-icon {
+                    height:16px;
+                    vertical-align: middle
+                }
+
+                .tbml-count {   font-family: "SourceSansPro";   font-weight: bolder;   font-size: 21px;   color: rgb(117, 185, 67); } .tbml-category {   font-family: "SourceSansPro";   font-weight: lighter;   font-size: 21px;   color: rgb(67, 67, 67); } .tbml-venue {   font-family: "SourceSansPro";   font-weight: lighter;   font-size: 16px;   color: rgb(67, 67, 67); } .tbml-date {   font-family: "SourceSansPro";   font-weight: bold;   font-size: 14px;   color: rgb(112, 112, 112);   margin-left: 7px;   margin-right: 7px; } .tbml-time {   font-family: "SourceSansPro";   font-weight: lighter;   font-size: 16px;   color: rgb(112, 112, 112); }    html {    }        body {    padding: 0px;    margin: 0px;    }        div {    margin: 0px;    padding: 0px;    }     .data-icon {    height:16px;    vertical-align: middle    } 
+
+
+                </style>
+                <script type="text/javascript">//
+
+
+                class Token {
+                    constructor(tokenInstance) {
+                        this.props = tokenInstance;
+                    }
+
+                    formatGeneralizedTimeToDate(str) {
+                        const d = new GeneralizedTime(str);
+                        return new Date(d.getYear(), d.getMonth(), d.getDay(), d.getHours(), d.getMinutes(), d.getSeconds()).toLocaleDateString();
+                    }
+
+                    formatGeneralizedTimeToTime(str) {
+                        const d = new GeneralizedTime(str);
+                        return new Date(d.getYear(), d.getMonth(), d.getDay(), d.getHours(), d.getMinutes(), d.getSeconds()).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+                    }
+
+                    render() {
+                        let time;
+                        let date;
+                        if (this.props.time == null) {
+                            time = "";
+                            date = "";
+                        } else {
+                            time = this.formatGeneralizedTimeToTime(this.props.time.generalizedTime);
+                            date = this.props.time == null ? "": this.formatGeneralizedTimeToDate(this.props.time.generalizedTime);
+                        }
+                        return `&lt;div&gt;
+            &lt;div&gt;
+                &lt;span class="ts-count"&gt;x${this.props._count}&lt;/span&gt;  &lt;span class="ts-category"&gt;${this.props.label}&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;div&gt;
+                &lt;span class="ts-venue"&gt;${this.props.building}&lt;/span&gt;
+            &lt;/div&gt;
+                &lt;div style="margin: 0px; padding:0px; clear: both; height: 6px"&gt;
+                &amp;nbsp;
+                &lt;/div&gt;
+            &lt;div&gt;
+                &lt;img src="data:image/png;base64,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" class="data-icon"/&gt;
+                &lt;span class="ts-date"&gt;${date}&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;div&gt;
+                &lt;span class="ts-time"&gt;${time}, ${this.props.locality}&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;/div&gt;`;
+                    }
+                }
+
+                web3.tokens.dataChanged = (oldTokens, updatedTokens, tokenCardId) =&gt; {
+                    const currentTokenInstance = updatedTokens.currentInstance;
+                    document.getElementById(tokenCardId).innerHTML = new Token(currentTokenInstance).render();
+                };
+
+                //
+                </script>
+            </ts:view>
+        </ts:card>
 
         <ts:card name="sent" type="activity">
             <ts:origins>
