@@ -47,11 +47,13 @@
                 <element ref="ts:cards"/>
                 <element minOccurs="0" ref="ts:grouping"/>
                 <element minOccurs="0" ref="ts:ordering"/>
-                <element minOccurs="0" maxOccurs="unbounded" ref="ts:attribute"/>
+				<element name="attribute" minOccurs="0" maxOccurs="unbounded" type="ts:attributeWithDistinct"/>
                 <element minOccurs="0" maxOccurs="unbounded" ref="dsig:Signature"/>
             </sequence>
             <attribute name="custodian" type="boolean" default="false"/>
             <attribute name="name" type="NCName"/>
+      		<assert test="count(ts:attribute[string(@distinct) = 'true']) le 1"/>
+			<assert test="if(not(ts:origins)) then count(ts:attribute[string(@distinct) = 'true']) = 1 else true()"/>
         </complexType>
         <keyref name="typeRef" refer="ts:namedTypeName">
             <selector xpath=".//ts:origins/ethereum:event|.//ts:origins/ethereum:call"></selector>
@@ -90,7 +92,7 @@
         <sequence>
             <element minOccurs="0" name="label" type="ts:text"/>
             <element minOccurs="0" ref="ts:origins"/>
-            <element minOccurs="0" maxOccurs="unbounded" ref="ts:attribute"/>
+			<element name="attribute" minOccurs="0" maxOccurs="unbounded" type="ts:attribute"/>
             <element minOccurs="0" maxOccurs="unbounded" ref="ts:selection"/>
             <!-- consider putting input and output in transaction
                  declaration later when/if DvP Security is
@@ -253,25 +255,29 @@
             <attribute name="field" use="required" type="NCName"/>
         </complexType>
     </element>
-    <element name="attribute">
-        <complexType>
-            <sequence>
-                <element name="type">
-                    <complexType>
-                        <sequence>
-                            <element name="syntax"/>
-                        </sequence>
-                    </complexType>
-                </element>
-                <!-- label is not needed if the attribute is only used for selection -->
-                <element minOccurs="0" name="label" type="ts:text"/>
-                <element ref="ts:origins"/>
-            </sequence>
-            <attribute name="name" use="required" type="NCName"/>
-            <attribute name="distinct" type="boolean" default="false"/>
-            <attribute name="oid" type="NMTOKEN"/>
-        </complexType>
-    </element>
+	<complexType name="attribute">
+		<sequence>
+			<element name="type">
+				<complexType>
+					<sequence>
+						<element name="syntax"/>
+					</sequence>
+				</complexType>
+			</element>
+			<!-- label is not needed if the attribute is only used for selection -->
+			<element minOccurs="0" name="label" type="ts:text"/>
+			<element ref="ts:origins"/>
+		</sequence>
+		<attribute name="name" use="required" type="NCName"/>
+		<attribute name="oid" type="NMTOKEN"/>
+	</complexType>
+	<complexType name="attributeWithDistinct">
+		<complexContent>
+			<extension base="ts:attribute">
+				<attribute name="distinct" type="boolean" default="false"/>
+			</extension>
+		</complexContent>
+	</complexType>
     <simpleType name="syntax">
         <restriction base="NMTOKEN">
             <enumeration value="1.3.6.1.4.1.1466.115.121.1.7"/><!-- Boolean -->

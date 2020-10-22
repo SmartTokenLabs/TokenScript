@@ -1,6 +1,7 @@
 *.pdf
 .DS_Store
 .idea 
+*.map
 *.canonicalized.xml
 !resources/fast-token-onboarding/*.canonicalized.xml
 *.canonicalized.xml.INVALID
