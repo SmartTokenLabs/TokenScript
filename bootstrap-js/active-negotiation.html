@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+    <meta charset="UTF-8"/>
+<!--    <link rel="tokenscript" href="EntryToken.xml"/>-->
+    <link rel="tokenscript" href="BOOKY.xml"/>
+    <!-- since we are demonstrating active negotiation here, there is no meta-data declared in this example
+     -->
+
+    <title>Showing the cards in a web page</title>
+    <link rel="stylesheet" href="ts.css">
+<!--    uncomment this style to show activity cards as columns -->
+<!--    <style>-->
+<!--        .ts_token_bar .ts_token_bar_body .ts_token_wrap .activity_cards.opened > div {-->
+<!--            display: table-cell;-->
+<!--        }-->
+<!--        .ts_token_bar .ts_token_bar_body .ts_token_wrap .activity_cards.opened {-->
+<!--            display: table-row;-->
+<!--        }-->
+<!--    </style>-->
+    <script type="text/javascript" src="inc/web3.min.js"></script>
+    <script type="text/javascript" src="inc/ethers-5.0.umd.min.js"></script>
+    <script type="module" src="tokenscript-bootstrap.js"></script>
+<!--    <script type="text/javascript" src="tokenscript-bootstrap.js"></script>-->
+    <script type="text/javascript">(function(e,t,n){var r=e.querySelectorAll("html")[0];r.className=r.className.replace(/(^|\s)no-js(\s|$)/,"$1js$2")})(document,window,0);</script>
+    <script type="text/javascript">
+        // the following event is triggered every time when a token is negotiated
+        // and that is why an event listener is used in place of a promise;
+
+
+        // OG: parse XML, load external files etc (but dont parse token-specific data) + code blocked until all files fetched completely
+        // const tokenCard = new TokenCard();
+        window.addEventListener("ontokennegotiation", async (e) => {
+            console.log('ontokennegotiation data received: ' + e.detail);
+        });
+
+        // note that without the user clicking the button "new_token", the TokenBar won't appear at all.
+        // since the TokenScript engine don't even know if this website can use any token.
+        // but when the user clicks that button, the Negotiator at work will pop up a dialogue for the user to choose
+        // a token (the dialogue is simply a TokenBar opened with the rest of the screen darkened).
+        // (After the user made the choice, we are unsure if the TokenBar should disappear or just hang out there like
+        // a float button. My (Weiwu) thinking is that the token bar should be floating there if there are listeners
+        // and not float there if the negotiation is handled with a promise. But we can figure this out later as well.
+
+        function getFilter(){
+            let optionsTextarea = document.getElementById('token_filter');
+            return optionsTextarea ? optionsTextarea.value : '';
+        }
+        function negotiate() {
+            // Negotiator.negotiate() returns a promise, but in this case
+            // the developer doesn't need to save it or call .then()
+            // because a window.ontokennegotiation is triggered.
+            // the developer will want to save it or call .then() if they
+            // have things to do specifically for this round of negotiation
+
+            // OG: I think we can use TokenCard method to re-render iframe, because some logic makes network requests and parse XML (it takes some time and load network). So TokenCard constructor will parse XML and load external data and negotiate() method will rerender iframe
+            console.log('negotiate clicked');
+            // Negotiator.negotiate('entrytoken', 'l=Syndey');
+
+            Negotiator.renegotiateAll(getFilter()).then(console.log);
+
+            document.getElementById("enter_button").onclick = (event) => {
+                console.log('click fired');
+                /*
+                token.enterAction().then(e=>{
+
+                    }
+                    // … code to handle the result of enter action.
+                )
+                 */
+            };
+        }
+        window.addEventListener('load',()=>{
+
+            document.getElementById("token_filter_submit").onclick = (event) => Negotiator.renegotiateAll(getFilter());
+            document.getElementById("token_url_submit").onclick = async (event) => {
+                let urlNode = document.getElementById('token_url');
+                let url = urlNode ? urlNode.value : '';
+
+                if (url){
+                    let response = await fetch(url);
+                    let fileContent = await response.text();
+                    let tokenName = await Negotiator.parseXMLFromText(fileContent);
+                    if (tokenName) Negotiator.negotiate(tokenName, getFilter());
+                }
+
+            };
+
+            ( function ( document, window, index )
+            {
+                // feature detection for drag&drop upload
+                var isAdvancedUpload = function()
+                {
+                    var div = document.createElement( 'div' );
+                    return ( ( 'draggable' in div ) || ( 'ondragstart' in div && 'ondrop' in div ) ) && 'FormData' in window && 'FileReader' in window;
+                }();
+
+
+                // applying the effect for every form
+                var forms = document.querySelectorAll( '#upload_box' );
+                Array.prototype.forEach.call( forms, function( form )
+                {
+                    var input		 = form.querySelector( 'input[type="file"]' ),
+                        label		 = form.querySelector( 'label' ),
+                        errorMsg	 = form.querySelector( '.box__error span' ),
+                        restart		 = form.querySelectorAll( '.box__restart' ),
+                        droppedFiles = false,
+                        showFiles	 = function( files )
+                        {
+                            label.textContent = files.length > 1 ? ( input.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', files.length ) : files[ 0 ].name;
+                        },
+                        triggerFormSubmit = function()
+                        {
+                            var event = document.createEvent( 'HTMLEvents' );
+                            event.initEvent( 'submit', true, false );
+                            form.dispatchEvent( event );
+                        };
+
+                    // letting the server side to know we are going to make an Ajax request
+                    var ajaxFlag = document.createElement( 'input' );
+                    ajaxFlag.setAttribute( 'type', 'hidden' );
+                    ajaxFlag.setAttribute( 'name', 'ajax' );
+                    ajaxFlag.setAttribute( 'value', 1 );
+                    form.appendChild( ajaxFlag );
+
+                    // automatically submit the form on file select
+                    input.addEventListener( 'change', function( e )
+                    {
+                        showFiles( e.target.files );
+
+
+                    });
+
+                    // drag&drop files if the feature is available
+                    if( isAdvancedUpload )
+                    {
+                        form.classList.add( 'has-advanced-upload' ); // letting the CSS part to know drag&drop is supported by the browser
+
+                        [ 'drag', 'dragstart', 'dragend', 'dragover', 'dragenter', 'dragleave', 'drop' ].forEach( function( event )
+                        {
+                            form.addEventListener( event, function( e )
+                            {
+                                // preventing the unwanted behaviours
+                                e.preventDefault();
+                                e.stopPropagation();
+                            });
+                        });
+                        [ 'dragover', 'dragenter' ].forEach( function( event )
+                        {
+                            form.addEventListener( event, function()
+                            {
+                                form.classList.add( 'is-dragover' );
+                            });
+                        });
+                        [ 'dragleave', 'dragend', 'drop' ].forEach( function( event )
+                        {
+                            form.addEventListener( event, function()
+                            {
+                                form.classList.remove( 'is-dragover' );
+                            });
+                        });
+                        form.addEventListener( 'drop', function( e )
+                        {
+                            droppedFiles = e.dataTransfer.files; // the files that were dropped
+                            showFiles( droppedFiles );
+                            Object.keys(droppedFiles).forEach(async key=>{
+                                let file = droppedFiles[key];
+                                const fileContent = await file.text();
+
+                                let tokenName = await Negotiator.parseXMLFromText(fileContent);
+                                if (tokenName) Negotiator.negotiate(tokenName, getFilter());
+                            })
+                        });
+                    }
+
+
+                    // restart the form if has a state of error/success
+                    Array.prototype.forEach.call( restart, function( entry )
+                    {
+                        entry.addEventListener( 'click', function( e )
+                        {
+                            e.preventDefault();
+                            form.classList.remove( 'is-error', 'is-success' );
+                            input.click();
+                        });
+                    });
+
+                    // Firefox focus bug fix for file input
+                    input.addEventListener( 'focus', function(){ input.classList.add( 'has-focus' ); });
+                    input.addEventListener( 'blur', function(){ input.classList.remove( 'has-focus' ); });
+
+                });
+            }( document, window, 0 ));
+        })
+
+
+    </script>
+</head>
+<body>
+<h1>Demonstration of showing a card in a web page</h1>
+<h2>Token Card</h2>
+<div id="card_container"></div>
+<p><button id="enter_button">Enter</button></p>
+<p><button id="new_token" onclick="negotiate()">
+    Click here load tokens</button></p>
+
+<form class="box" id="upload_box" method="post" action="" enctype="multipart/form-data">
+    <div class="box__input">
+        <svg class="box__icon" xmlns="http://www.w3.org/2000/svg" width="50" height="43" viewBox="0 0 50 43"><path d="M48.4 26.5c-.9 0-1.7.7-1.7 1.7v11.6h-43.3v-11.6c0-.9-.7-1.7-1.7-1.7s-1.7.7-1.7 1.7v13.2c0 .9.7 1.7 1.7 1.7h46.7c.9 0 1.7-.7 1.7-1.7v-13.2c0-1-.7-1.7-1.7-1.7zm-24.5 6.1c.3.3.8.5 1.2.5.4 0 .9-.2 1.2-.5l10-11.6c.7-.7.7-1.7 0-2.4s-1.7-.7-2.4 0l-7.1 8.3v-25.3c0-.9-.7-1.7-1.7-1.7s-1.7.7-1.7 1.7v25.3l-7.1-8.3c-.7-.7-1.7-.7-2.4 0s-.7 1.7 0 2.4l10 11.6z" /></svg>
+        <input type="file" name="files[]" id="file" class="box__file" data-multiple-caption="{count} files selected" multiple />
+        <label for="file"><strong>Choose a file</strong><span class="box__dragndrop"> or drag it here</span>.</label>
+    </div>
+    <div class="box__uploading">Uploading&hellip;</div>
+    <div class="box__success">Done! <a href="" class="box__restart" role="button">Upload more?</a></div>
+    <div class="box__error">Error! <span></span>. <a href="https://css-tricks.com/examples/DragAndDropFileUploading//?submit-on-demand" class="box__restart" role="button">Try again!</a></div>
+</form>
+
+<div class="remote-download-box box">
+    <h4>You can add remote token XML file URL here</h4>
+    <input id="token_url" type="text">
+    <div class="submit_btn" id="token_url_submit">Download remote token</div>
+</div>
+
+<div class="options-box box">
+    <h4>You can add token filter string here</h4>
+    <textarea id="token_filter" placeholder="example: (&(!(price<=4444))(|(locality=Jensen)(locality=Sydney)(locality=Babs J*)((locality=Sy*))))"></textarea>
+    <div class="submit_btn" id="token_filter_submit">Renegotiate All tokens with current filter</div>
+</div>
+
+</body>
+</html>

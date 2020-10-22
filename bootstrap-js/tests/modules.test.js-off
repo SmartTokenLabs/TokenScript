@@ -1,0 +1,14 @@
+let ts = require("../tokenscript-bootstrap");
+
+test("Returns string query compared to object", () => {
+    let str1 = "(&(objectClass=Person)(!(price<=4444))(|(locality=Jensen)(locality=Sydney)(locality=Babs J*)((locality=Sy*))))";
+    let str2 = "(&(!(price<=4444))(|(locality=Jensen)(locality=Sydney)(locality=Babs J*)((locality=Sy*))))";
+// str = "locality=Sydney";
+    let props = {
+        locality: 'Sydney',
+        state: 'NSW',
+        price: 15559
+    }
+    expect(ts.compareStringToProps(str1, props)).toBe("0");
+    expect(ts.compareStringToProps(str2, props)).toBe("1");
+});

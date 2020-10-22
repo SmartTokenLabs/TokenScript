@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="tokenscript" href="EntryToken.xml"/>
+    <link rel="tokenscript" href="BOOKY.xml"/>
+
+    <!-- this is for token negotiation! -->
+    <!-- OG: meta tag allow only "scheme,name,http-equiv,content,charset". we can use "name,content" to stay document valid-->
+<!--    <meta name="token" content="entry-token"/>-->
+<!--    <meta name="token.filter" content="objectClass=entrytoken"/>-->
+    <meta name="token.filter" content="objectClass=booky"/>
+<!--    <meta name="token-expiry" content=">=2018-04-04"/>-->
+    <!-- if without linked TokenScript, consider a synax like this
+    <meta tokens-accepted="ethereum:1/0x63cCEF733a093E5Bd773b41C96D3eCE361464942/"/>
+    -->
+    <title>Showing the cards in a web page</title>
+    <link rel="stylesheet" href="ts.css">
+    <script type="text/javascript" src="inc/web3.min.js"></script>
+    <script type="text/javascript" src="inc/ethers-5.0.umd.min.js"></script>
+    <script type="module" src="tokenscript-bootstrap.js" ></script>
+    <script type="text/javascript">
+        // the following event is triggered every time when a token is negotiated
+        // and that is why an event listener is used in place of a promise;
+
+        // the event will be triggered if the user clicks one of the tokens that fits the negotiation criteria
+        // in the TokenBar.
+
+        // OG: parse XML, load external files etc (but dont parse token-specific data) + code blocked until all files fetched completely
+        window.addEventListener("ontokennegotiation", async (e) => {
+            console.log('ontokennegotiation fired. token name received: ' + e.detail);
+
+            // might be renderIn, need to find a comfortable method for seasoned React JS user
+            // OG: parse token-specific data, render iframe content
+            // tokenCard.render(document.getElementById("card_container")).then(()=>{
+            //     console.log('render done');
+            // });
+
+            // alternatively, tokenCard.renderAsItem(…)
+            document.getElementById("enter_button").onclick = (event) => {
+                console.log('click fired');
+                /*
+                token.enterAction().then(e=>{
+
+                    }
+                    // … code to handle the result of enter action.
+                )
+
+                 */
+            };
+            document.getElementById("render_events").onclick = (event) => {
+                console.log('render_events fired');
+                let tokenNode = document.querySelector('.ts_token_bar .ts_token_wrap');
+                if (!tokenNode) {
+                    console.log('No token in the list');
+                    return;
+                }
+
+                let token = tokenNode.tokenInstance;
+                token.renderEventCards().then(console.log).catch(console.log);
+
+
+            };
+        });
+
+    </script>
+</head>
+<body>
+<h1>Demonstration of showing a card in a web page</h1>
+<h2>Token Card will be in the top right corner of the screen</h2>
+<!--<div id="card_container"></div>-->
+<p><button id="enter_button">Enter (not implemented yet)</button></p>
+<p><button id="render_events">Event values to console</button></p>
+</body>
+</html>
