@@ -170,7 +170,7 @@
                 </element>
                 <element minOccurs="0" ref="ts:interface"/>
             </sequence>
-            <attribute name="name" use="required" type="ID"/>
+            <attribute name="name" use="required" type="NCName"/>
             <attribute name="interface" type="NCName"/>
         </complexType>
     </element>
