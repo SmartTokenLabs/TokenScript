@@ -51,7 +51,7 @@
                 <element minOccurs="0" maxOccurs="unbounded" ref="dsig:Signature"/>
             </sequence>
             <attribute name="custodian" type="boolean" default="false"/>
-            <attribute name="name" type="NCName"/>
+            <attribute name="name" type="NCName" use="required"/>
 	    <!-- commented out thanks to issue 
       		<assert test="count(ts:attribute[string(@distinct) = 'true']) le 1"/>
 			<assert test="if(not(ts:origins)) then count(ts:attribute[string(@distinct) = 'true']) = 1 else true()"/>
