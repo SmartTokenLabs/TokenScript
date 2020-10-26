@@ -11,6 +11,7 @@ window.Negotiator = (function(){
 
     let ready = false;
     let tokenNodesList = {};
+    let tokenInstances = {};
     let bar, lang, ethersData;
     let web3;
     let jsons = {};
@@ -93,7 +94,7 @@ window.Negotiator = (function(){
             try {
                 const response = await fetch(XMLPath);
                 const xmlText = await response.text();
-                await parseXMLFromText(xmlText);
+                parseXMLFromText(xmlText);
             } catch (e) {
                 let message = ' Fetch XML Error. '+e;
                 debug && console.log(message);
@@ -108,8 +109,8 @@ window.Negotiator = (function(){
      * @param xmlText
      * @returns {Promise<*|string>}
      */
-    async function parseXMLFromText(xmlText){
-        let xmlDoc = await (new window.DOMParser()).parseFromString(xmlText, "text/xml");
+    function parseXMLFromText(xmlText){
+        let xmlDoc = (new window.DOMParser()).parseFromString(xmlText, "text/xml");
 
         let nsResolver = xmlDoc.createNSResolver( xmlDoc.ownerDocument == null ? xmlDoc.documentElement : xmlDoc.ownerDocument.documentElement);
         let tokenNodes = xmlDoc.evaluate('/ts:token', xmlDoc, nsResolver, XPathResult.ANY_TYPE, null );
@@ -565,6 +566,7 @@ window.Negotiator = (function(){
                 this.debug && console.log(message);
                 throw new Error(message);
             }
+            this.props = basicProps;
             return basicProps;
         }
 
@@ -780,7 +782,7 @@ window.Negotiator = (function(){
 
                 // console.log(props);
 
-                console.log('seconds from start = ' + ( Date.now() - window.ogStart )/1000 );
+                // console.log('seconds from start = ' + ( Date.now() - window.ogStart )/1000 );
 
                 if (iframe.contentWindow.web3.tokens.dataChanged){
                     iframe.contentWindow.web3.tokens.data.currentInstance = props;
@@ -1059,6 +1061,7 @@ window.Negotiator = (function(){
 
         tokenNodesList[tokenName].filter = filter;
         tokenNodesList[tokenName].working = true;
+        tokenNodesList[tokenName].instances = [];
 
         try {
 
@@ -1081,8 +1084,8 @@ window.Negotiator = (function(){
                 debug
             });
             let distinctProps = await initialTokenInstance.getDistinctItems();
-            // console.log('distinctProps');
-            // console.log(distinctProps);
+            console.log('distinctProps');
+            console.log(distinctProps);
 
             if (distinctProps && distinctProps.items && distinctProps.items.length) {
 
@@ -1115,6 +1118,13 @@ window.Negotiator = (function(){
                     });
 
                     let [propsError, props] = await to(tokenInstance.getProps() );
+                    tokenNodesList[tokenName].props = props;
+
+                    // console.log('tokenInstance.getProps');
+                    // console.log(props);
+                    props[distinctProps.distinctName] = tokenID;
+                    // console.log('updated props');
+                    // console.log(props);
 
                     let compareRes = compareStringToProps(filter,props);
                     if (!compareRes) {
@@ -1130,11 +1140,19 @@ window.Negotiator = (function(){
                     await tokenInstance.render(wrap, props);
                     wrap.instance = tokenInstance;
 
-                    var event = new CustomEvent('ontokennegotiation', {'detail': {tokenName, tokenID}});
-                    window.dispatchEvent(event);
+                    // detail.Tokens[“USDT”]
+                    tokenNodesList[tokenName].instances.push(tokenInstance);
+
 
                 };
             }
+
+            let output = prepareTokensOutput(tokenNodesList);
+
+            var event = new CustomEvent('ontokennegotiation', {'detail': {Tokens: output} });
+            window.dispatchEvent(event);
+
+            // -----------
             setDefMessageAndBtn(filter);
             console.log('working state changed to false');
             tokenNodesList[tokenName].working = false;
@@ -1152,6 +1170,14 @@ window.Negotiator = (function(){
 
             throw new Error(message);
         }
+    }
+
+    function prepareTokensOutput(tokenNodesList){
+        let output = [];
+        Object.keys(tokenNodesList).forEach(tokenName=>{
+            output[tokenName] = tokenNodesList[tokenName].instances;
+        })
+        return output;
     }
 
     const metaDefinedTokenName =  getTokenName();
@@ -1242,10 +1268,13 @@ window.Negotiator = (function(){
         ethereum.on('disconnect', passiveRenegotiateAll);
     }
 
+    function getTokens(){
+        return prepareTokensOutput(tokenNodesList);
+    }
 
     return {
         negotiate,
-        // getToken,
+        getTokens,
         // selectTokenFromList,
         parseXMLFromText,
         renegotiateAll
