@@ -330,7 +330,7 @@
         <complexType>
             <attribute name="as" type="ts:as"/>
             <attribute name="bitmask" type="ts:bitmask"/>
-            <attribute name="contract" type="IDREF"/>
+            <attribute name="contract" type="NCName"/>
             <attribute name="function" type="NCName"/>
             <attribute name="event" type="NCName"/>
             <attribute name="filter" type="string"/>
