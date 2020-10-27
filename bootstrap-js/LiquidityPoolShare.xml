@@ -197,7 +197,7 @@ web3.tokens.dataChanged = (oldTokens, updatedTokens, tokenIdCard) =&gt; {
         </ts:card>
     </ts:cards>
     
-    <ts:attribute name="pair">
+    <ts:attribute distinct="true" name="pair">
         <ts:type>
             <ts:syntax>1.3.6.1.4.1.1466.115.121.1.6</ts:syntax>
         </ts:type>
@@ -209,7 +209,7 @@ web3.tokens.dataChanged = (oldTokens, updatedTokens, tokenIdCard) =&gt; {
         </ts:origins>
     </ts:attribute>
     
-    <ts:attribute distinct="true" name="pairSymbol">
+    <ts:attribute name="pairSymbol">
         <ts:type>
             <ts:syntax>1.3.6.1.4.1.1466.115.121.1.15</ts:syntax>
         </ts:type>

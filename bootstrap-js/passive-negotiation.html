@@ -8,8 +8,8 @@
     <!-- this is for token negotiation! -->
     <!-- OG: meta tag allow only "scheme,name,http-equiv,content,charset". we can use "name,content" to stay document valid-->
 <!--    <meta name="token" content="entry-token"/>-->
-<!--    <meta name="token.filter" content="objectClass=entrytoken"/>-->
-    <meta name="token.filter" content="objectClass=booky"/>
+    <meta name="token.filter" content="objectClass=entrytoken"/>
+<!--    <meta name="token.filter" content="objectClass=booky"/>-->
 <!--    <meta name="token-expiry" content=">=2018-04-04"/>-->
     <!-- if without linked TokenScript, consider a synax like this
     <meta tokens-accepted="ethereum:1/0x63cCEF733a093E5Bd773b41C96D3eCE361464942/"/>
@@ -28,8 +28,16 @@
 
         // OG: parse XML, load external files etc (but dont parse token-specific data) + code blocked until all files fetched completely
         window.addEventListener("ontokennegotiation", async (e) => {
-            console.log('ontokennegotiation fired. token name received: ' + e.detail);
+            console.log('ontokennegotiation fired. tokens received: '+Object.keys(e.detail.Tokens).join(', '));
 
+
+            Object.keys(e.detail.Tokens).forEach(tokenName=>{
+                let instances = e.detail.Tokens[tokenName];
+                if (instances) {
+                    instances.forEach(instance=>console.log(instance.props))
+                }
+            })
+            
             // might be renderIn, need to find a comfortable method for seasoned React JS user
             // OG: parse token-specific data, render iframe content
             // tokenCard.render(document.getElementById("card_container")).then(()=>{
