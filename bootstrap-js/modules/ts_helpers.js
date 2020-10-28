@@ -228,7 +228,12 @@ export function getXMLItem(xmlDoc, selector, context = '' ,fallbackSelector = ''
     xmlNode = xmlDoc.evaluate(selector, context, nsResolver, XPathResult.ANY_TYPE, null );
     xmlNode = (xmlNode && !fallbackSelector) ? xmlNode : xmlDoc.evaluate(fallbackSelector, context, nsResolver, XPathResult.ANY_TYPE, null );
 
-    return xmlNode ? xmlNode.iterateNext() : false;
+    let node = xmlNode ? xmlNode.iterateNext() : false;
+    // console.log('selector');
+    // console.log(selector);
+    // console.log(node);
+
+    return node;
 }
 
 /**
@@ -263,6 +268,10 @@ export async function getJSONAbi(ethContract, jsons, path = '', debug = false){
     let contractJson = jsons ? jsons[ethContract] : false;
 
     if (contractJson) return contractJson;
+
+    if (ethContract === 'pool') return CoFiXPairAbi;
+
+    if (ethContract === 'pair') return erc20abi;
 
     try {
         let response = await fetch(path + ethContract + '.json');
@@ -338,8 +347,7 @@ export function bnStringPrecision(bn, decimals, precision){
 /**
  *
  * @param userAddress
- * @param tokenId
- * @param chainID
+ * @param props
  * @param ethereumNode
  * @param xmlDoc
  * @param attributeName
@@ -348,11 +356,9 @@ export function bnStringPrecision(bn, decimals, precision){
  * @param debug
  * @returns {boolean|{missedAttribute: *, contract: *, ethCallAttributtes: *, params: *}}
  */
-export function getEthereumCallParams({userAddress, tokenId, chainID , ethereumNode , xmlDoc, attributeName, tokenXmlNode, tokenName, debug}){
-
-    let missedAttribute;
-
-    tokenId = tokenId ? tokenId : '';
+export function getEthereumCallParams({userAddress, ethereumNode , xmlDoc,  tokenXmlNode, tokenName, debug, props}){
+    // console.log('getEthereumCallParams input props');
+    // console.log(props);
 
     // get default contract Name
     let xmlNode = getXMLItem(xmlDoc,'ts:origins/ts:ethereum[1]', tokenXmlNode);
@@ -361,29 +367,25 @@ export function getEthereumCallParams({userAddress, tokenId, chainID , ethereumN
 
     var params = [];
 
-    if (!ethereumNode) {
-        ethereumNode = getXMLItem(xmlDoc, 'ts:attribute[@name="' + attributeName + '"]/ts:origins/ethereum:call[1]', tokenXmlNode);
-    }
+    // if (!ethereumNode) {
+    //     ethereumNode = getXMLItem(xmlDoc, 'ts:attribute[@name="' + attributeName + '"]/ts:origins/ethereum:call[1]', tokenXmlNode);
+    // }
 
     if (!ethereumNode) {
-        console.log('cant find attribute');
-        return false;
+        console.log('cant see attribute');
+        return {
+            params: [null],
+            ethCallAttributtes: {},
+        };
     }
 
-    var atts = ethereumNode.getAttributeNames();
-    var ethCallAttributtes = {};
+    const atts = ethereumNode.getAttributeNames();
+    const ethCallAttributtes = {contract: ''};
     atts.forEach(attName=>{
         ethCallAttributtes[attName] = ethereumNode.getAttribute(attName);
     });
 
     ethCallAttributtes.contract = ethCallAttributtes.contract ? ethCallAttributtes.contract : defaultContract;
-
-    var contract = getContractAddress(xmlDoc, ethCallAttributtes.contract, tokenXmlNode, chainID);
-
-    if (!contract.contractAddress) {
-        debug && console.log('Contract address required. chainID = '+chainID);
-        return false;
-    }
 
     let nsResolver = xmlDoc.createNSResolver( xmlDoc.ownerDocument == null ? xmlDoc.documentElement : xmlDoc.ownerDocument.documentElement);
     let xmlNodeSet = xmlDoc.evaluate('ts:data/*', ethereumNode, nsResolver, XPathResult.ANY_TYPE, null );
@@ -392,31 +394,38 @@ export function getEthereumCallParams({userAddress, tokenId, chainID , ethereumN
 
     while (xmlNodeSet && (item = xmlNodeSet.iterateNext())){
         let ref = item.getAttribute('ref');
-
-        switch (ref) {
-            case 'ownerAddress':
-                debug && console.log('ownerAddress = '+userAddress);
-                params.push(userAddress);
-                break;
-            case 'tokenId':
-                if(tokenId) {
-                    params.push(tokenId);
-                } else {
-                    missedAttribute = 'tokenId';
-                }
-                break;
-            default:
-                debug && console.log('item.innerHTML');
-                debug && console.log(item.innerHTML);
-                if (item.innerHTML) params.push(item.innerHTML);
+        // console.log('ref');
+        // console.log(ref);
+        if ( props.hasOwnProperty(ref) ) {
+            params.push(props[ref]);
+        } else if (item.innerHTML) {
+            params.push(item.innerHTML);
         }
+        // switch (ref) {
+        //
+        //     case 'ownerAddress':
+        //         debug && console.log('ownerAddress = '+userAddress);
+        //
+        //         break;
+        //     case 'CoFiXRouter':
+        //         console.log('need to find out CoFiXRouter ref, we are using address 0xb2b7BeDd7d7fc19804C7Dd4a4E8174C4c73C210d as test');
+        //         params.push('0xb2b7BeDd7d7fc19804C7Dd4a4E8174C4c73C210d');
+        //         break;
+        //     case 'tokenId':
+        //         if(props['tokenId']) {
+        //             params.push(props['tokenId']);
+        //         }
+        //         break;
+        //     default:
+        //         debug && console.log('item.innerHTML');
+        //         debug && console.log(item.innerHTML);
+        //         if (item.innerHTML) params.push(item.innerHTML);
+        // }
     }
 
     return {
         params,
-        ethCallAttributtes,
-        contract,
-        missedAttribute
+        ethCallAttributtes
     };
 
 }
@@ -453,6 +462,1814 @@ export function getErc20EventParams(erc20EventName, xmlDoc, tokenXMLNode){
     return params;
 }
 
+export let erc20abi = [
+    {
+        "inputs": [],
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "owner",
+                "type": "address"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "spender",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "value",
+                "type": "uint256"
+            }
+        ],
+        "name": "Approval",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "from",
+                "type": "address"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "to",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "value",
+                "type": "uint256"
+            }
+        ],
+        "name": "Transfer",
+        "type": "event"
+    },
+    {
+        "inputs": [],
+        "name": "DOMAIN_SEPARATOR",
+        "outputs": [
+            {
+                "internalType": "bytes32",
+                "name": "",
+                "type": "bytes32"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "PERMIT_TYPEHASH",
+        "outputs": [
+            {
+                "internalType": "bytes32",
+                "name": "",
+                "type": "bytes32"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "name": "allowance",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "spender",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "value",
+                "type": "uint256"
+            }
+        ],
+        "name": "approve",
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "name": "balanceOf",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "decimals",
+        "outputs": [
+            {
+                "internalType": "uint8",
+                "name": "",
+                "type": "uint8"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "name",
+        "outputs": [
+            {
+                "internalType": "string",
+                "name": "",
+                "type": "string"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "name": "nonces",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "owner",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "spender",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "value",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "deadline",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint8",
+                "name": "v",
+                "type": "uint8"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "r",
+                "type": "bytes32"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "s",
+                "type": "bytes32"
+            }
+        ],
+        "name": "permit",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "symbol",
+        "outputs": [
+            {
+                "internalType": "string",
+                "name": "",
+                "type": "string"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "totalSupply",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "to",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "value",
+                "type": "uint256"
+            }
+        ],
+        "name": "transfer",
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "from",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "to",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "value",
+                "type": "uint256"
+            }
+        ],
+        "name": "transferFrom",
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    }
+]
+
+export let CoFiXPairAbi = [
+    {
+        "inputs": [],
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "owner",
+                "type": "address"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "spender",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "value",
+                "type": "uint256"
+            }
+        ],
+        "name": "Approval",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "sender",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "outToken",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "outAmount",
+                "type": "uint256"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "to",
+                "type": "address"
+            }
+        ],
+        "name": "Burn",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "sender",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "amount0",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "amount1",
+                "type": "uint256"
+            }
+        ],
+        "name": "Mint",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "sender",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "amountIn",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "amountOut",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "outToken",
+                "type": "address"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "to",
+                "type": "address"
+            }
+        ],
+        "name": "Swap",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "uint112",
+                "name": "reserve0",
+                "type": "uint112"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint112",
+                "name": "reserve1",
+                "type": "uint112"
+            }
+        ],
+        "name": "Sync",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "from",
+                "type": "address"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "to",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "value",
+                "type": "uint256"
+            }
+        ],
+        "name": "Transfer",
+        "type": "event"
+    },
+    {
+        "inputs": [],
+        "name": "DOMAIN_SEPARATOR",
+        "outputs": [
+            {
+                "internalType": "bytes32",
+                "name": "",
+                "type": "bytes32"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "K_BASE",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "MINIMUM_LIQUIDITY",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "NAVPS_BASE",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "PERMIT_TYPEHASH",
+        "outputs": [
+            {
+                "internalType": "bytes32",
+                "name": "",
+                "type": "bytes32"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "THETA_BASE",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "name": "allowance",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "spender",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "value",
+                "type": "uint256"
+            }
+        ],
+        "name": "approve",
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "name": "balanceOf",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "decimals",
+        "outputs": [
+            {
+                "internalType": "uint8",
+                "name": "",
+                "type": "uint8"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "factory",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "name",
+        "outputs": [
+            {
+                "internalType": "string",
+                "name": "",
+                "type": "string"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "nameForDomain",
+        "outputs": [
+            {
+                "internalType": "string",
+                "name": "",
+                "type": "string"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "name": "nonces",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "owner",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "spender",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "value",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "deadline",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint8",
+                "name": "v",
+                "type": "uint8"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "r",
+                "type": "bytes32"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "s",
+                "type": "bytes32"
+            }
+        ],
+        "name": "permit",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "symbol",
+        "outputs": [
+            {
+                "internalType": "string",
+                "name": "",
+                "type": "string"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "token0",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "token1",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "totalSupply",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "to",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "value",
+                "type": "uint256"
+            }
+        ],
+        "name": "transfer",
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "from",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "to",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "value",
+                "type": "uint256"
+            }
+        ],
+        "name": "transferFrom",
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "stateMutability": "payable",
+        "type": "receive"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "_token0",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "_token1",
+                "type": "address"
+            },
+            {
+                "internalType": "string",
+                "name": "_name",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "_symbol",
+                "type": "string"
+            }
+        ],
+        "name": "initialize",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "getReserves",
+        "outputs": [
+            {
+                "internalType": "uint112",
+                "name": "_reserve0",
+                "type": "uint112"
+            },
+            {
+                "internalType": "uint112",
+                "name": "_reserve1",
+                "type": "uint112"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "to",
+                "type": "address"
+            }
+        ],
+        "name": "mint",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "liquidity",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "oracleFeeChange",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "payable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "outToken",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "to",
+                "type": "address"
+            }
+        ],
+        "name": "burn",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "amountOut",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "oracleFeeChange",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "payable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "outToken",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "to",
+                "type": "address"
+            }
+        ],
+        "name": "swapWithExact",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "amountIn",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "amountOut",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "oracleFeeChange",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256[4]",
+                "name": "tradeInfo",
+                "type": "uint256[4]"
+            }
+        ],
+        "stateMutability": "payable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "outToken",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "amountOutExact",
+                "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "to",
+                "type": "address"
+            }
+        ],
+        "name": "swapForExact",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "amountIn",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "amountOut",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "oracleFeeChange",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256[4]",
+                "name": "tradeInfo",
+                "type": "uint256[4]"
+            }
+        ],
+        "stateMutability": "payable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "to",
+                "type": "address"
+            }
+        ],
+        "name": "skim",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "sync",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "balance0",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "balance1",
+                "type": "uint256"
+            },
+            {
+                "components": [
+                    {
+                        "internalType": "uint256",
+                        "name": "ethAmount",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "erc20Amount",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "blockNum",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "K",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "theta",
+                        "type": "uint256"
+                    }
+                ],
+                "internalType": "struct ICoFiXPair.OraclePrice",
+                "name": "_op",
+                "type": "tuple"
+            }
+        ],
+        "name": "calcNAVPerShareForMint",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "navps",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "balance0",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "balance1",
+                "type": "uint256"
+            },
+            {
+                "components": [
+                    {
+                        "internalType": "uint256",
+                        "name": "ethAmount",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "erc20Amount",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "blockNum",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "K",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "theta",
+                        "type": "uint256"
+                    }
+                ],
+                "internalType": "struct ICoFiXPair.OraclePrice",
+                "name": "_op",
+                "type": "tuple"
+            }
+        ],
+        "name": "calcNAVPerShareForBurn",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "navps",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "balance0",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "balance1",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "ethAmount",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "erc20Amount",
+                "type": "uint256"
+            }
+        ],
+        "name": "calcNAVPerShare",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "navps",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "amount0",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "amount1",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "navps",
+                "type": "uint256"
+            },
+            {
+                "components": [
+                    {
+                        "internalType": "uint256",
+                        "name": "ethAmount",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "erc20Amount",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "blockNum",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "K",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "theta",
+                        "type": "uint256"
+                    }
+                ],
+                "internalType": "struct ICoFiXPair.OraclePrice",
+                "name": "_op",
+                "type": "tuple"
+            }
+        ],
+        "name": "calcLiquidity",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "liquidity",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "pure",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "components": [
+                    {
+                        "internalType": "uint256",
+                        "name": "ethAmount",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "erc20Amount",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "blockNum",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "K",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "theta",
+                        "type": "uint256"
+                    }
+                ],
+                "internalType": "struct ICoFiXPair.OraclePrice",
+                "name": "_op",
+                "type": "tuple"
+            }
+        ],
+        "name": "getNAVPerShareForMint",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "navps",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "components": [
+                    {
+                        "internalType": "uint256",
+                        "name": "ethAmount",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "erc20Amount",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "blockNum",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "K",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "theta",
+                        "type": "uint256"
+                    }
+                ],
+                "internalType": "struct ICoFiXPair.OraclePrice",
+                "name": "_op",
+                "type": "tuple"
+            }
+        ],
+        "name": "getNAVPerShareForBurn",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "navps",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "ethAmount",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "erc20Amount",
+                "type": "uint256"
+            }
+        ],
+        "name": "getNAVPerShare",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "navps",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "amount0",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "amount1",
+                "type": "uint256"
+            },
+            {
+                "components": [
+                    {
+                        "internalType": "uint256",
+                        "name": "ethAmount",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "erc20Amount",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "blockNum",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "K",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "theta",
+                        "type": "uint256"
+                    }
+                ],
+                "internalType": "struct ICoFiXPair.OraclePrice",
+                "name": "_op",
+                "type": "tuple"
+            }
+        ],
+        "name": "getLiquidity",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "liquidity",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "liquidity",
+                "type": "uint256"
+            },
+            {
+                "components": [
+                    {
+                        "internalType": "uint256",
+                        "name": "ethAmount",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "erc20Amount",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "blockNum",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "K",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "theta",
+                        "type": "uint256"
+                    }
+                ],
+                "internalType": "struct ICoFiXPair.OraclePrice",
+                "name": "_op",
+                "type": "tuple"
+            }
+        ],
+        "name": "calcOutToken0ForBurn",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "amountOut",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "fee",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "liquidity",
+                "type": "uint256"
+            },
+            {
+                "components": [
+                    {
+                        "internalType": "uint256",
+                        "name": "ethAmount",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "erc20Amount",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "blockNum",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "K",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "theta",
+                        "type": "uint256"
+                    }
+                ],
+                "internalType": "struct ICoFiXPair.OraclePrice",
+                "name": "_op",
+                "type": "tuple"
+            }
+        ],
+        "name": "calcOutToken1ForBurn",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "amountOut",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "fee",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "amountIn",
+                "type": "uint256"
+            },
+            {
+                "components": [
+                    {
+                        "internalType": "uint256",
+                        "name": "ethAmount",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "erc20Amount",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "blockNum",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "K",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "theta",
+                        "type": "uint256"
+                    }
+                ],
+                "internalType": "struct ICoFiXPair.OraclePrice",
+                "name": "_op",
+                "type": "tuple"
+            }
+        ],
+        "name": "calcOutToken0",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "amountOut",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "fee",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "pure",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "amountIn",
+                "type": "uint256"
+            },
+            {
+                "components": [
+                    {
+                        "internalType": "uint256",
+                        "name": "ethAmount",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "erc20Amount",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "blockNum",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "K",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "theta",
+                        "type": "uint256"
+                    }
+                ],
+                "internalType": "struct ICoFiXPair.OraclePrice",
+                "name": "_op",
+                "type": "tuple"
+            }
+        ],
+        "name": "calcOutToken1",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "amountOut",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "fee",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "pure",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "amountOut",
+                "type": "uint256"
+            },
+            {
+                "components": [
+                    {
+                        "internalType": "uint256",
+                        "name": "ethAmount",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "erc20Amount",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "blockNum",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "K",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "theta",
+                        "type": "uint256"
+                    }
+                ],
+                "internalType": "struct ICoFiXPair.OraclePrice",
+                "name": "_op",
+                "type": "tuple"
+            }
+        ],
+        "name": "calcInNeededToken0",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "amountInNeeded",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "fee",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "pure",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "amountOut",
+                "type": "uint256"
+            },
+            {
+                "components": [
+                    {
+                        "internalType": "uint256",
+                        "name": "ethAmount",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "erc20Amount",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "blockNum",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "K",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "theta",
+                        "type": "uint256"
+                    }
+                ],
+                "internalType": "struct ICoFiXPair.OraclePrice",
+                "name": "_op",
+                "type": "tuple"
+            }
+        ],
+        "name": "calcInNeededToken1",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "amountInNeeded",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "fee",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "pure",
+        "type": "function"
+    }
+]
+
+export function getXMLViews(xmlDoc){
+    const nsResolver = xmlDoc.createNSResolver( xmlDoc.ownerDocument == null ? xmlDoc.documentElement : xmlDoc.ownerDocument.documentElement);
+    const cardNodes = xmlDoc.evaluate('/ts:token/ts:cards/ts:card', xmlDoc, nsResolver, XPathResult.ANY_TYPE, null );
+    const views = [];
+    let cardNode;
+    while (cardNode = cardNodes.iterateNext()) {
+        const name = cardNode.getAttribute('name');
+        const type = cardNode.getAttribute('type');
+        const viewNodes = xmlDoc.evaluate('ts:item-view|ts:view', cardNode, nsResolver, XPathResult.ANY_TYPE, null );
+        let viewNode;
+        while (viewNode = viewNodes.iterateNext()) {
+            const view = viewNode.nodeName;
+            views.push({name, type, view});
+        }
+    }
+    return views;
+}
+
+
+export async function extendPropsWithContracts(xmlDoc, props = {}){
+    const ethersData = await getEthersData();
+    const nsResolver = xmlDoc.createNSResolver( xmlDoc.ownerDocument == null ? xmlDoc.documentElement : xmlDoc.ownerDocument.documentElement);
+    const contractNodes = xmlDoc.evaluate('/ts:token/ts:contract', xmlDoc, nsResolver, XPathResult.ANY_TYPE, null );
+    const output = Object.assign({},props);
+    let contractNode;
+    while (contractNode = contractNodes.iterateNext()) {
+        const name = contractNode.getAttribute('name');
+
+        const address = getXMLItemText(xmlDoc, 'ts:address[@network="' + ethersData.chainID + '"]',contractNode);
+        if (address) {
+            output[name] = address;
+        }
+    }
+    return output;
+}
 
 
 
