@@ -1,8 +1,9 @@
-import {to, compareStringToProps, getEthersData, getContractAddress, getXMLItem, getJSONAbi, filterResultConverter, bnStringPrecision, getEthereumCallParams, getErc20EventParams,getXMLItemText, getXMLViews, extendPropsWithContracts} from "./modules/ts_helpers.js";
+import {to, compareStringToProps, getEthersData, getContractAddress, getXMLItem, getJSONAbi, filterResultConverter, bnStringPrecision, getEthereumCallParams, getErc20EventParams,getXMLItemText, extendPropsWithContracts, parseXMLFromText} from "./modules/ts_helpers.js";
 // import {to, compareStringToProps, getEthersData, getContractAddress, getXMLItem, getJSONAbi, filterResultConverter, bnStringPrecision, getEthereumCallParams, getErc20EventParams} from '../angular/tsa/src/app/lib.ts';
 
 window.Negotiator = (function(){
     let tsDebug = true;
+    let debug = true;
 
     let catchDebug = true;
 
@@ -90,7 +91,7 @@ window.Negotiator = (function(){
             try {
                 const response = await fetch(XMLPath);
                 const xmlText = await response.text();
-                parseXMLFromText(xmlText);
+                negotiateTokenByContent(xmlText);
             } catch (e) {
                 let message = ' Fetch XML Error. '+e;
                 debug && console.log(message);
@@ -105,25 +106,10 @@ window.Negotiator = (function(){
      * @param xmlText
      * @returns {Promise<*|string>}
      */
-    function parseXMLFromText(xmlText){
-        let xmlDoc = (new window.DOMParser()).parseFromString(xmlText, "text/xml");
 
-        let nsResolver = xmlDoc.createNSResolver( xmlDoc.ownerDocument == null ? xmlDoc.documentElement : xmlDoc.ownerDocument.documentElement);
-        let tokenNodes = xmlDoc.evaluate('/ts:token', xmlDoc, nsResolver, XPathResult.ANY_TYPE, null );
-        let tokenNode;
-        if (tokenNode = tokenNodes.iterateNext()) {
-            tokenNodesList[tokenNode.getAttribute('name')] = {
-                tokenRootNode: tokenNode,
-                xmlDoc: xmlDoc,
-                filter: '',
-                views: getXMLViews(xmlDoc)
-            };
 
-            // console.log('fresh tokenNodesList for "' + tokenNode.getAttribute('name') + '"');
-            // console.log(tokenNodesList[tokenNode.getAttribute('name')]);
-
-        }
-        return tokenNode.getAttribute('name');
+    function negotiateTokenByContent(xmlText){
+        Object.assign(tokenNodesList, parseXMLFromText(xmlText))
     }
 
     function createFloatingBox(){
@@ -149,7 +135,6 @@ window.Negotiator = (function(){
 
         constructor(data) {
             this.xmlDoc = data.xmlDoc;
-            this.tokenXMLNode = data.tokenXMLNode;
             this.tokenName = data.tokenName;
             this.toRender = data.wrapNode;
             this.lang = data.lang;
@@ -169,7 +154,7 @@ window.Negotiator = (function(){
 
             this.nsResolver = this.xmlDoc.createNSResolver( this.xmlDoc.ownerDocument == null ? this.xmlDoc.documentElement : this.xmlDoc.ownerDocument.documentElement);
 
-            let xmlNode = getXMLItem(this.xmlDoc,'ts:origins/ts:ethereum[1]', this.xmlDoc);
+            let xmlNode = getXMLItem(this.xmlDoc,'ts:origins/ts:ethereum[1]');
             this.defaultContract = xmlNode ? xmlNode.getAttribute('contract') : '';
             this.defaultContract = this.defaultContract ? this.defaultContract : this.tokenName;
 
@@ -183,7 +168,7 @@ window.Negotiator = (function(){
             // this.debug && console.log('props received');
             // this.debug && console.log(props);
 
-            const distinctAttributeNode = getXMLItem(this.xmlDoc, 'ts:attribute[@distinct="true"][1]', this.tokenXMLNode);
+            const distinctAttributeNode = getXMLItem(this.xmlDoc, '/ts:token/ts:attribute[@distinct="true"][1]');
             // console.log('distinctAttributeNode');
             // console.log(distinctAttributeNode);
 
@@ -236,8 +221,8 @@ window.Negotiator = (function(){
             this.debug && console.log(props);
 
             // get card-view html
-            let selector = 'ts:cards/ts:card[@name="' + cardName + '"][@type="' + cardType + '"][1]';
-            let cardNode = getXMLItem(this.xmlDoc, selector, this.tokenXMLNode );
+            let selector = '/ts:token/ts:cards/ts:card[@name="' + cardName + '"][@type="' + cardType + '"][1]';
+            let cardNode = getXMLItem(this.xmlDoc, selector);
 
             if (!cardNode) {
                 this.debug && console.log('cant see card for >>>'+selector+'<<<');
@@ -261,7 +246,8 @@ window.Negotiator = (function(){
                 var ethContract = ethereumEventNode.getAttribute('contract');
                 ethContract = ethContract? ethContract: this.defaultContract;
 
-                var { contractInterface, contractAddress } = getContractAddress(this.xmlDoc, ethContract, this.tokenXMLNode, this.ethersData.chainID);
+                var { contractInterface, contractAddress } = getContractAddress(this.xmlDoc, ethContract, this.ethersData.chainID);
+
 
                 if (!contractAddress) {
                     this.debug && console.log('Contract address required. chainID = '+this.ethersData.chainID + ', lets try to use prop[contract] value.');
@@ -274,7 +260,7 @@ window.Negotiator = (function(){
 
                 if (!ethContract || !contractAddress) throw new Error(' ethContract and contractAddress required for {Address='+this.ethersData.userAddress+', chainID = '+this.ethersData.chainID+' , tokenName = '+this.tokenName+'}. Check logs for details');
 
-                let params = getErc20EventParams(eventType, this.xmlDoc, this.tokenXMLNode);
+                let params = getErc20EventParams(eventType, this.xmlDoc);
                 // console.log('params');
                 // console.log(params);
 
@@ -321,7 +307,9 @@ window.Negotiator = (function(){
                 // let activityProps;
                 console.log('filterResult for '+eventType+ ', where name=' + cardName +' and type='+ cardType + ';');
                 console.log(filterResult);
-
+                if (filterResult && filterResult.length){
+                    filterResult[0].getTransaction().then(console.log);
+                }
                 if (filterResult && filterResult.length){
                     filterResult.forEach(res=>{
                         // console.log(res.args);
@@ -435,7 +423,7 @@ window.Negotiator = (function(){
             try {
                 this.ethersData = await getEthersData();
 
-                const attributeXmlNodes = this.xmlDoc.evaluate('ts:attribute', this.tokenXMLNode, this.nsResolver, XPathResult.ANY_TYPE, null );
+                const attributeXmlNodes = this.xmlDoc.evaluate('/ts:token/ts:attribute', this.xmlDoc, this.nsResolver, XPathResult.ANY_TYPE, null );
                 // console.log('start getProps');
 
                 let attributeNode;
@@ -484,7 +472,7 @@ window.Negotiator = (function(){
         async getAttributeValue(name){
             let res;
             if (!name) { return null; }
-            const originsInnerNode = getXMLItem(this.xmlDoc , 'ts:attribute[@name="' + name + '"]/ts:origins/*[1]', this.tokenXMLNode);
+            const originsInnerNode = getXMLItem(this.xmlDoc , '/ts:token/ts:attribute[@name="' + name + '"]/ts:origins/*[1]');
             if (!originsInnerNode) {
                 return null;
             }
@@ -537,21 +525,22 @@ window.Negotiator = (function(){
                         userAddress: this.ethersData.userAddress,
                         ethereumNode: originsInnerNode,
                         xmlDoc: this.xmlDoc,
-                        tokenXmlNode: this.tokenXMLNode,
                         tokenName: this.tokenName,
                         props: this.props,
                         debug: this.debug,
                     });
 
-                    var contract = getContractAddress(this.xmlDoc, ethCallAttributtes.contract, this.tokenXMLNode, this.ethersData.chainID);
+                    var contract = getContractAddress(this.xmlDoc, ethCallAttributtes.contract, this.ethersData.chainID);
 
                     if ( !contract || !contract.contractAddress ) {
                         const contractName = originsInnerNode.getAttribute('contract');
                         if (this.props.hasOwnProperty(contractName)) {
                             contract = {contractAddress: this.props[contractName]};
                         } else {
-                            const [attrError, contractAddressFromAttribute] = await to( this.getAttributeValue() );
-                            if (attrError) console.log('getAttributeValue error');
+                            const [attrError, contractAddressFromAttribute] = await to( this.getAttributeValue(contractName) );
+                            if (attrError) {
+                                console.log('getAttributeValue error');
+                            }
 
                             contract = {contractAddress: contractAddressFromAttribute};
                         }
@@ -624,8 +613,8 @@ window.Negotiator = (function(){
             let cardHtml = '';
 
             // get card-view html
-            let selector = 'ts:cards/ts:card[@name="' + cardName + '"][@type="' + cardType + '"][1]';
-            let cardNode = getXMLItem(this.xmlDoc, selector, this.tokenXMLNode );
+            let selector = '/ts:token/ts:cards/ts:card[@name="' + cardName + '"][@type="' + cardType + '"][1]';
+            let cardNode = getXMLItem(this.xmlDoc, selector );
             if (!cardNode) {
                 this.debug && console.log('cant see card for >>>'+selector+'<<<');
                 if (cardName =='main' && cardType =="token" ) cardHtml = '<h2 style="text-transform: uppercase;">' + this.tokenName + '</h2>';
@@ -660,7 +649,7 @@ window.Negotiator = (function(){
 
             wrapper.appendChild(iframeWrap);
 
-            let activityNode = getXMLItem(this.xmlDoc,'ts:cards/ts:card[@type="activity"][1]', this.tokenXMLNode);
+            let activityNode = getXMLItem(this.xmlDoc,'/ts:token/ts:cards/ts:card[@type="activity"][1]');
 
             if (cardName=='main' && cardType=="token" && activityNode) {
                 const sidebarToggle = document.createElement('div');
@@ -672,7 +661,7 @@ window.Negotiator = (function(){
                 sidebar.classList.add('activity_cards');
                 wrapper.appendChild(sidebar);
 
-                const cardNodes = this.xmlDoc.evaluate('ts:cards/ts:card[@type="activity"]', this.tokenXMLNode, this.nsResolver, XPathResult.ANY_TYPE, null );
+                const cardNodes = this.xmlDoc.evaluate('/ts:token/ts:cards/ts:card[@type="activity"]', this.xmlDoc, this.nsResolver, XPathResult.ANY_TYPE, null );
 
                 // console.log('cardNodes');
                 // console.log(cardNodes);
@@ -1025,7 +1014,6 @@ window.Negotiator = (function(){
             let initialTokenInstance = new TokenCard({
                 // xmlDoc,
                 xmlDoc: tokenNodesList[tokenName].xmlDoc,
-                tokenXMLNode: tokenNodesList[tokenName].tokenRootNode,
                 lang,
                 fallbackLang: config.lang,
                 tokenName,
@@ -1034,7 +1022,8 @@ window.Negotiator = (function(){
                 debug
             });
             const distinctProps = await initialTokenInstance.getDistinctItems();
-            const commonInitProps = await extendPropsWithContracts(tokenNodesList[tokenName].xmlDoc);
+            console.log(ethersData);
+            const commonInitProps = await extendPropsWithContracts(tokenNodesList[tokenName].xmlDoc, {}, ethersData);
             commonInitProps.ownerAddress = ethersData.userAddress;
 
             // console.log('contracts');
@@ -1067,7 +1056,6 @@ window.Negotiator = (function(){
 
                     let tokenInstance = new TokenCard({
                         xmlDoc: tokenNodesList[tokenName].xmlDoc,
-                        tokenXMLNode: tokenNodesList[tokenName].tokenRootNode,
                         lang,
                         fallbackLang: config.lang,
                         tokenName,
@@ -1122,8 +1110,8 @@ window.Negotiator = (function(){
 
         } catch (e) {
             let message = 'negotiate error = '+e;
-            debug && console.log(message);
-            debug && console.log(e);
+            console.log(message);
+            console.log(e);
 
             setDefMessageAndBtn(filter);
             console.log('working state changed to false');

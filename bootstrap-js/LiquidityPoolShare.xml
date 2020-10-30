@@ -267,7 +267,7 @@ web3.tokens.dataChanged = (oldTokens, updatedTokens, tokenIdCard) =&gt; {
             <ts:syntax>1.3.6.1.4.1.1466.115.121.1.27</ts:syntax>
         </ts:type>
         <ts:origins>
-            <ethereum:call function="allowance" contract="pair">
+            <ethereum:call xmlns:ethereum="urn:ethereum:constantinople" function="allowance" contract="pair">
                 <ts:data>
                     <ts:address ref="ownerAddress"></ts:address>
                     <ts:address ref="CoFiXRouter"></ts:address>

@@ -185,9 +185,9 @@ export function isTokenExpired(){
  * @param chainID
  * @returns {{contractInterface: *, contractAddress: *}}
  */
-export function getContractAddress(xmlDoc, ethContract, tokenXmlNode, chainID){
+export function getContractAddress(xmlDoc, ethContract, chainID){
 
-    let contractNode = getXMLItem(xmlDoc,'ts:contract[@name="'+ethContract+'"][1]',tokenXmlNode);
+    let contractNode = getXMLItem(xmlDoc,'/ts:token/ts:contract[@name="'+ethContract+'"][1]');
     if (contractNode){
         var contractInterface = contractNode.getAttribute('interface');
         var contractAddress = getXMLItemText(xmlDoc,'ts:address[@network='+chainID+'][1]',contractNode);
@@ -356,20 +356,16 @@ export function bnStringPrecision(bn, decimals, precision){
  * @param debug
  * @returns {boolean|{missedAttribute: *, contract: *, ethCallAttributtes: *, params: *}}
  */
-export function getEthereumCallParams({userAddress, ethereumNode , xmlDoc,  tokenXmlNode, tokenName, debug, props}){
+export function getEthereumCallParams({userAddress, ethereumNode , xmlDoc,  tokenName, debug, props}){
     // console.log('getEthereumCallParams input props');
     // console.log(props);
 
     // get default contract Name
-    let xmlNode = getXMLItem(xmlDoc,'ts:origins/ts:ethereum[1]', tokenXmlNode);
+    const xmlNode = getXMLItem(xmlDoc, '/ts:token/ts:origins/ts:ethereum[1]');
     let defaultContract = xmlNode ? xmlNode.getAttribute('contract') : '';
     defaultContract = defaultContract ? defaultContract : tokenName;
 
-    var params = [];
-
-    // if (!ethereumNode) {
-    //     ethereumNode = getXMLItem(xmlDoc, 'ts:attribute[@name="' + attributeName + '"]/ts:origins/ethereum:call[1]', tokenXmlNode);
-    // }
+    const params = [];
 
     if (!ethereumNode) {
         console.log('cant see attribute');
@@ -381,19 +377,19 @@ export function getEthereumCallParams({userAddress, ethereumNode , xmlDoc,  toke
 
     const atts = ethereumNode.getAttributeNames();
     const ethCallAttributtes = {contract: ''};
-    atts.forEach(attName=>{
+    atts.forEach(attName => {
         ethCallAttributtes[attName] = ethereumNode.getAttribute(attName);
     });
 
     ethCallAttributtes.contract = ethCallAttributtes.contract ? ethCallAttributtes.contract : defaultContract;
 
-    let nsResolver = xmlDoc.createNSResolver( xmlDoc.ownerDocument == null ? xmlDoc.documentElement : xmlDoc.ownerDocument.documentElement);
-    let xmlNodeSet = xmlDoc.evaluate('ts:data/*', ethereumNode, nsResolver, XPathResult.ANY_TYPE, null );
+    const nsResolver = xmlDoc.createNSResolver( xmlDoc.ownerDocument == null ? xmlDoc.documentElement : xmlDoc.ownerDocument.documentElement);
+    const xmlNodeSet = xmlDoc.evaluate('ts:data/*', ethereumNode, nsResolver, XPathResult.ANY_TYPE, null );
 
     let item;
 
     while (xmlNodeSet && (item = xmlNodeSet.iterateNext())){
-        let ref = item.getAttribute('ref');
+        const ref = item.getAttribute('ref');
         // console.log('ref');
         // console.log(ref);
         if ( props.hasOwnProperty(ref) ) {
@@ -437,10 +433,10 @@ export function getEthereumCallParams({userAddress, ethereumNode , xmlDoc,  toke
  * @param tokenXMLNode
  * @returns {boolean}
  */
-export function getErc20EventParams(erc20EventName, xmlDoc, tokenXMLNode){
+export function getErc20EventParams(erc20EventName, xmlDoc){
     let nsResolver = xmlDoc.createNSResolver( xmlDoc.ownerDocument == null ? xmlDoc.documentElement : xmlDoc.ownerDocument.documentElement);
 
-    const eventXmlNodes = xmlDoc.evaluate('asnx:module[@name="ERC20-Events"]/namedType[@name="'+erc20EventName+'"]', tokenXMLNode, nsResolver, XPathResult.ANY_TYPE, null );
+    const eventXmlNodes = xmlDoc.evaluate('/ts:token/asnx:module[@name="ERC20-Events"]/namedType[@name="'+erc20EventName+'"]', xmlDoc, nsResolver, XPathResult.ANY_TYPE, null );
 
 
 
@@ -2235,6 +2231,22 @@ export let CoFiXPairAbi = [
     }
 ]
 
+export function parseXMLFromText(xmlText){
+    const xmlDoc = (new window.DOMParser()).parseFromString(xmlText, 'text/xml');
+    const tokenNode = getXMLItem(xmlDoc, '/ts:token');
+
+    if (tokenNode) {
+        const tokens = {};
+        tokens[tokenNode.getAttribute('name')] = {
+            xmlDoc,
+            filter: '',
+            views: getXMLViews(xmlDoc)
+        };
+        return tokens;
+    }
+    return {};
+}
+
 export function getXMLViews(xmlDoc){
     const nsResolver = xmlDoc.createNSResolver( xmlDoc.ownerDocument == null ? xmlDoc.documentElement : xmlDoc.ownerDocument.documentElement);
     const cardNodes = xmlDoc.evaluate('/ts:token/ts:cards/ts:card', xmlDoc, nsResolver, XPathResult.ANY_TYPE, null );
@@ -2254,8 +2266,7 @@ export function getXMLViews(xmlDoc){
 }
 
 
-export async function extendPropsWithContracts(xmlDoc, props = {}){
-    const ethersData = await getEthersData();
+export function extendPropsWithContracts(xmlDoc, props = {}, ethersData){
     const nsResolver = xmlDoc.createNSResolver( xmlDoc.ownerDocument == null ? xmlDoc.documentElement : xmlDoc.ownerDocument.documentElement);
     const contractNodes = xmlDoc.evaluate('/ts:token/ts:contract', xmlDoc, nsResolver, XPathResult.ANY_TYPE, null );
     const output = Object.assign({},props);
