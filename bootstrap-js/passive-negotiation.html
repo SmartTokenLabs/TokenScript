@@ -2,14 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>
-    <link rel="tokenscript" href="EntryToken.xml"/>
-    <link rel="tokenscript" href="BOOKY.xml"/>
+<!--    <link rel="tokenscript" href="EntryToken.xml"/>-->
+<!--    <link rel="tokenscript" href="BOOKY.xml"/>-->
+    <link rel="tokenscript" href="LiquidityPoolShare.xml"/>
 
     <!-- this is for token negotiation! -->
     <!-- OG: meta tag allow only "scheme,name,http-equiv,content,charset". we can use "name,content" to stay document valid-->
 <!--    <meta name="token" content="entry-token"/>-->
-    <meta name="token.filter" content="objectClass=entrytoken"/>
+<!--    <meta name="token.filter" content="objectClass=entrytoken"/>-->
 <!--    <meta name="token.filter" content="objectClass=booky"/>-->
+    <meta name="token.filter" content="objectClass=CoFixPoolShare"/>
 <!--    <meta name="token-expiry" content=">=2018-04-04"/>-->
     <!-- if without linked TokenScript, consider a synax like this
     <meta tokens-accepted="ethereum:1/0x63cCEF733a093E5Bd773b41C96D3eCE361464942/"/>
@@ -33,11 +35,11 @@
 
             Object.keys(e.detail.Tokens).forEach(tokenName=>{
                 let instances = e.detail.Tokens[tokenName];
-                if (instances) {
-                    instances.forEach(instance=>console.log(instance.props))
-                }
+                // if (instances) {
+                //     instances.forEach(instance=>console.log(instance.props))
+                // }
             })
-            
+
             // might be renderIn, need to find a comfortable method for seasoned React JS user
             // OG: parse token-specific data, render iframe content
             // tokenCard.render(document.getElementById("card_container")).then(()=>{
