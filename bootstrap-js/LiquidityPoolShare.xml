@@ -1,23 +1,23 @@
-<ts:token xmlns:ts="http://tokenscript.org/2020/06/tokenscript" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="CoFixPoolShare" xsi:schemaLocation="http://tokenscript.org/2020/06/tokenscript http://tokenscript.org/2020/06/tokenscript.xsd">
+<ts:token xmlns:ts="http://tokenscript.org/2020/06/tokenscript" xmlns:asnx="urn:ietf:params:xml:ns:asnx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="LiquidityPoolShare" xsi:schemaLocation="http://tokenscript.org/2020/06/tokenscript http://tokenscript.org/2020/06/tokenscript.xsd">
     <asnx:module xmlns:asnx="urn:ietf:params:xml:ns:asnx" name="ERC20-Events" xml:base="file:/home/a/IdeaProjects/token-api-poc/tokenscripts/data-module.xml">
-<namedType name="Approval">
-    <type>
-	<sequence>
-	    <element xmlns:ethereum="urn:ethereum:constantinople" name="owner" ethereum:indexed="true" ethereum:type="address"></element>
-	    <element xmlns:ethereum="urn:ethereum:constantinople" name="spender" ethereum:indexed="true" ethereum:type="address"></element>
-	    <element xmlns:ethereum="urn:ethereum:constantinople" name="value" ethereum:indexed="false" ethereum:type="uint256"></element>
-	</sequence>
-    </type>
-</namedType>
-<namedType name="Transfer">
-    <type>
-	<sequence>
-	    <element xmlns:ethereum="urn:ethereum:constantinople" name="from" ethereum:indexed="true" ethereum:type="address"></element>
-	    <element xmlns:ethereum="urn:ethereum:constantinople" name="to" ethereum:indexed="true" ethereum:type="address"></element>
-	    <element xmlns:ethereum="urn:ethereum:constantinople" name="amount" ethereum:indexed="false" ethereum:type="uint256"></element>
-	</sequence>
-    </type>
-</namedType>
+    <namedType name="Approval">
+        <type>
+            <sequence>
+                <element xmlns:ethereum="urn:ethereum:constantinople" name="owner" ethereum:indexed="true" ethereum:type="address"></element>
+                <element xmlns:ethereum="urn:ethereum:constantinople" name="spender" ethereum:indexed="true" ethereum:type="address"></element>
+                <element xmlns:ethereum="urn:ethereum:constantinople" name="value" ethereum:indexed="false" ethereum:type="uint256"></element>
+            </sequence>
+        </type>
+    </namedType>
+    <namedType name="Transfer">
+        <type>
+            <sequence>
+                <element xmlns:ethereum="urn:ethereum:constantinople" name="from" ethereum:indexed="true" ethereum:type="address"></element>
+                <element xmlns:ethereum="urn:ethereum:constantinople" name="to" ethereum:indexed="true" ethereum:type="address"></element>
+                <element xmlns:ethereum="urn:ethereum:constantinople" name="amount" ethereum:indexed="false" ethereum:type="uint256"></element>
+            </sequence>
+        </type>
+    </namedType>
 </asnx:module>
 
     <ts:label>
@@ -26,6 +26,9 @@
     
     <ts:contract name="NEST">
 	   <ts:address network="1">0x04abEdA201850aC0124161F037Efd70c74ddC74C</ts:address>
+    </ts:contract>
+    <ts:contract name="CoFiXRouter">
+	   <ts:address network="1">0x26aaD4D82f6c9FA6E34D8c1067429C986A055872</ts:address>
     </ts:contract>
 
     <ts:cards>
