@@ -146,7 +146,7 @@
                                 </xs:complexType>
                             </xs:element>
                         </xs:sequence>
-                        <xs:attribute name="key" use="required" type="xs:integer"/>
+                        <xs:attribute name="key" use="required" type="xs:string"/>
                     </xs:complexType>
                 </xs:element>
             </xs:sequence>

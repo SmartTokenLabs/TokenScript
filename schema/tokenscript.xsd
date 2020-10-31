@@ -303,6 +303,15 @@
                 <element ref="ethereum:call"/>
                 <element ref="ts:user-entry"/>
                 <element ref="ts:token-id"/>
+                <element ref="ts:data"/>
+                <element name="attribute">
+                    <complexType>
+                        <sequence>
+                            <element minOccurs="0" ref="ts:mapping"/>
+                        </sequence>
+                        <attribute name="ref" type="NCName"/>
+                    </complexType>
+                </element>
             </choice>
         </complexType>
     </element>
