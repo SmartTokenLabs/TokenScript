@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE token  [
+        <!ENTITY style SYSTEM "resources/alphawallet.css">
+        <!ENTITY paradigm.en SYSTEM "resources/paradigm.js">
+        <!ENTITY send.js SYSTEM "send.js">
+        <!ENTITY contracts SYSTEM "contracts.lst">
+        <!ENTITY data-module SYSTEM "data-module.xml">
+]>
+<ts:token xmlns:ts="http://tokenscript.org/2020/06/tokenscript"
+          xmlns:asnx="urn:ietf:params:xml:ns:asnx"
+          xmlns:ethereum="urn:ethereum:constantinople"
+          xmlns:xhtml="http://www.w3.org/1999/xhtml"
+          xmlns:xml="http://www.w3.org/XML/1998/namespace"
+          xsi:schemaLocation="http://tokenscript.org/2020/06/tokenscript http://tokenscript.org/2020/06/tokenscript.xsd"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          name="CoFi"
+>
+    &data-module;
+    <ts:label>
+        <ts:string xml:lang="en">CoFi</ts:string>
+    </ts:label>
+    &contracts;
+    <ts:origins>
+        <ts:ethereum contract="CoFiToken"/>
+    </ts:origins>
+    <ts:cards>
+        <ts:card name="sent" type="activity">
+            <ts:origins>
+                <ethereum:event contract="CoFiToken" filter="from=${ownerAddress}" type="Transfer"/>
+            </ts:origins>
+            <ts:item-view xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+                <xhtml:style type="text/css">&style;</xhtml:style>
+                <xhtml:script type="text/javascript">&send.js;</xhtml:script>
+            </ts:item-view>
+        </ts:card>
+    </ts:cards>
+    <ts:attribute name="balance">
+        <ts:type>
+            <ts:syntax></ts:syntax>
+        </ts:type>
+        <ts:origins>
+            <ethereum:call as="e18" function="balanceOf">
+                <ts:data>
+                    <ts:address ref="ownerAddress"></ts:address>
+                </ts:data>
+            </ethereum:call>
+        </ts:origins>
+    </ts:attribute>
+</ts:token>
