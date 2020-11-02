@@ -1,7 +1,6 @@
 import { EthersData, EthereumCallParams, ContractAddress, ERC20Props } from './types';
 import { erc20abi, CoFiXPairAbi } from './abis';
-
-declare let require: any;
+import { ApprovedForLiquidityPool } from './types';
 
 const matchAll = require('string.prototype.matchall');
 
@@ -15,11 +14,13 @@ declare global {
   }
 }
 
-const Web3 = require('web3');
-const ethers = require('ethers');
+// import Web3 from 'web3';
+import {BigNumber, ethers} from 'ethers';
 
 export async function getEthersData(): Promise<EthersData>{
-  await window.ethereum.enable();
+  await window.ethereum.request({ method: 'eth_requestAccounts' });
+    // .then((accounts) => console.log(accounts))
+    // .catch((error) => console.error(error));
 
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   const signer = provider.getSigner();
@@ -227,7 +228,7 @@ export function to(promise, improved = false): [any, any]{
     });
 }
 
-export async function getJSONAbi(ethContract, jsons, path = '', debug = false): Promise<{}>{
+export async function getJSONAbi(ethContract, jsons, path = '', debug = 0): Promise<{}>{
   let contractJson = jsons ? jsons[ethContract] : false;
 
   if (contractJson) { return contractJson; }
@@ -267,15 +268,9 @@ export function filterResultConverter(resArgs, incomeProps): {} {
   // console.log('filterResultConverter input = ');
   // console.log(resArgs);
   const resultProps = Object.assign({}, incomeProps);
-  ['owner', 'spender', 'from', 'to'].forEach(arg => {
-    if (resArgs['_' + arg]) { resultProps[arg] = resArgs['_' + arg]; }
-  });
-  ['value', 'amount'].forEach(arg => {
-    if (resArgs['_' + arg]) { resultProps[arg] =
-      resArgs['_' + arg]._isBigNumber
-        ? bnStringPrecision(resArgs['_' + arg], resultProps.decimals, 12)
-        : resArgs['_' + arg];
-    }
+  // console.log(resultProps);
+  ['owner', 'spender', 'from', 'to', 'value', 'amount'].forEach(arg => {
+    if (resArgs[arg]) { resultProps[arg] = resArgs[arg]; }
   });
   // console.log('resultProps');
   // console.log(resultProps);
@@ -442,11 +437,11 @@ export class TokenCard {
   filter: string;
   activitiesRenderStarted: boolean;
   ready: boolean;
-  cardName: string;
-  cardType: string;
-  viewType: string;
+  // cardName: string;
+  // cardType: string;
+  // viewType: string;
   fallbackLang: string;
-  debug: boolean;
+  debug: number;
   nsResolver: any;
   defaultContract: string;
   jsons: {};
@@ -463,9 +458,9 @@ export class TokenCard {
     this.filter = data.filter;
     this.activitiesRenderStarted = false;
 
-    this.cardName = data.cardName ? data.cardName : 'main';
-    this.cardType = data.cardType ? data.cardType : 'token';
-    this.viewType = data.viewType ? data.viewType : 'item-view';
+    // this.cardName = data.cardName ? data.cardName : 'main';
+    // this.cardType = data.cardType ? data.cardType : 'token';
+    // this.viewType = data.viewType ? data.viewType : 'item-view';
 
     this.fallbackLang = 'en';
     this.ready = false;
@@ -591,9 +586,9 @@ export class TokenCard {
       }
 
       // let res = output._isBigNumber ? bnStringPrecision(output,18,8) : output;
-      if (basicProps.decimals && basicProps.ownerBalance) {
-        basicProps.ownerBalance = bnStringPrecision(basicProps.ownerBalance, basicProps.decimals, 10);
-      }
+      // if (basicProps.decimals && basicProps.ownerBalance) {
+        // basicProps.ownerBalance = bnStringPrecision(basicProps.ownerBalance, basicProps.decimals, 10);
+      // }
       // console.log('basic props:');
       // console.log(basicProps );
       // console.log(JSON.stringify(basicProps) );
@@ -756,26 +751,59 @@ export class TokenCard {
 
     // let iframeDoc;
     const iframe = this.iframes[iframeId];
-    this.returnCardFromIframe(props, listener, iframe);
+    this.returnCardFromIframe(props, listener, iframe, iframeId);
 
   }
 
-  returnCardFromIframe(props, listener, iframe): void{
-    console.log('props, listener, iframe');
-    console.log(props);
+  returnCardFromIframe(props, listener, iframe, iframeId): void{
+    (this.debug > 2) && console.log('props, listener, iframe');
+    (this.debug > 2) && console.log(props);
+    // (this.debug > 2) && console.log(iframeId);
+    const propsForRender = {};
+    for (const [name, value] of Object.entries(props)){
+      if ((name === 'value' || name === 'amount') && props.decimals) {
+        const s = value.toString();
+        const decimal = props.ownerBalance.decimals;
+
+        // console.log('transform bigint');
+        // console.log(s);
+        // console.log(decimal);
+        propsForRender[name] = s.substr(0, s.length - decimal)
+          + '.' + s.substr(s.length - decimal);
+        // console.log(propsForRender[name]);
+
+      } else {
+        propsForRender[name] = value;
+      }
+    }
+
     if (iframe.contentWindow.web3.tokens.dataChanged){
-      iframe.contentWindow.web3.tokens.data.currentInstance = props;
-      iframe.contentWindow.web3.tokens.dataChanged(null, {currentInstance: props}, 'render' );
+      iframe.contentWindow.web3.tokens.data.currentInstance = propsForRender;
+      iframe.contentWindow.web3.tokens.dataChanged(null, {currentInstance: propsForRender}, 'render' );
     }
     const iframeDoc = iframe.contentDocument ? iframe.contentDocument : iframe.contentWindow.document;
     const main = iframeDoc.querySelector('body .main');
-    console.log('main iframe div');
-    console.log(main);
-    main && listener.next(main.innerHTML);
+    (this.debug > 2) && console.log('main iframe div');
+    (this.debug > 2) && console.log(main);
+    if (iframeId === 'received_activity_item-view') {
+      const output: ApprovedForLiquidityPool = {
+        card: main ? main.innerHTML : '',
+        amount: props.value,
+        ownerAddress: props.ownerAddress,
+        transactionNonce: props.nonce,
+        transactionSender: '',
+        blockHeight: 12,
+        timeStamp: null,
+      };
+      listener.next(output);
+    } else {
+      main && listener.next(main.innerHTML);
+    }
   }
 
   // async getCardItems(cardName = '', cardType = '', cardView = '', returnHistory = true, listenNewEvents = true): Promise<any> {
-  async getCardItems({cardName, cardType, cardView, returnHistory = true, listenNewEvents = true, listener, transactionNonce = null}): Promise<any> {
+  async getCardItems({cardName, cardType, cardView, returnHistory = true, listenNewEvents = true, listener$, transactionNonce = null}): Promise<any> {
+    console.log('getCardItems fired');
     let selector = '/ts:token/ts:cards/ts:card';
     if (cardName) {
       selector += '[@name="' + cardName + '"]';
@@ -794,6 +822,7 @@ export class TokenCard {
     selector = 'ts:origins/ethereum:event';
     const originsNodes = this.xmlDoc.evaluate(selector, cardNode, this.nsResolver, XPathResult.ANY_TYPE, null );
     if (originsNodes && cardType === 'activity') {
+      console.log('its activity node');
       const props = Object.assign({}, this.props);
       let ethereumEventNode;
       // tslint:disable-next-line:no-conditional-assignment
@@ -865,16 +894,22 @@ export class TokenCard {
           if (contractError) { throw new Error('Error when try to request ' + eventType + ':  ' + contractError); }
 
           // let activityProps;
-          console.log('filterResult for ' + eventType + ', where name=' + cardName + ' and type=' + cardType + ';');
-          console.log(filterResult);
+          (this.debug  ) && console.log('filterResult for ' + eventType + ', where name=' + cardName + ' and type=' + cardType + ';');
+          (this.debug  ) && console.log(filterResult);
 
           if (filterResult && filterResult.length){
             filterResult.forEach(res => {
-              // console.log(res.args);
-              // console.log(JSON.stringify(res.args) );
+              (this.debug > 2 ) && console.log('res.args');
+              (this.debug > 2 ) && console.log(JSON.stringify(res.args) );
+              (this.debug > 2 ) && console.log(JSON.stringify(props) );
               if (res && res.args){
                 const activityProps = filterResultConverter( res.args, props);
-                this.render({props: activityProps, cardName, cardType, cardView, listener});
+                (this.debug > 2 ) && console.log('activityProps');
+                (this.debug > 2 ) && console.log(activityProps);
+                res.getTransaction().then((transaction) => {
+                  activityProps.nonce = transaction.nonce;
+                  this.render({props: activityProps, cardName, cardType, cardView, listener: listener$});
+                });
               }
 
             } );
@@ -921,7 +956,7 @@ export class TokenCard {
               // console.log(args);
 
               const activityProps = filterResultConverter( args, props);
-              this.render({props: activityProps, cardName, cardType, cardView, listener});
+              this.render({props: activityProps, cardName, cardType, cardView, listener: listener$});
 
               // const togglerNode = tokenWrapNode.querySelector('.sidebar_toggle');
               // const sidebarNode = tokenWrapNode.querySelector('.activity_cards');
@@ -937,7 +972,7 @@ export class TokenCard {
 
       }
     } else {
-      this.render({props: this.props, cardName, cardType, cardView, listener });
+      this.render({props: this.props, cardName, cardType, cardView, listener: listener$ });
     }
   }
 
