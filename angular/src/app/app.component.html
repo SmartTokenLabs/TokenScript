@@ -1,6 +1,10 @@
 <div class="content" >
   <h1>hello world!</h1>
   <h2>see dev-tools console 👇</h2>
+  <h2>{{ cards.length }}</h2>
+  <app-activity-card *ngFor="let card of cards "
+                     [card]="card"
+  ></app-activity-card>
 </div>
 
 

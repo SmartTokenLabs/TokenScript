@@ -1,6 +1,6 @@
 import { EthersData, EthereumCallParams, ContractAddress, ERC20Props } from './types';
 import { erc20abi, CoFiXPairAbi } from './abis';
-import { ApprovedForLiquidityPool } from './types';
+import { ApprovedForLiquidityPool, TokenProps } from './types';
 
 const matchAll = require('string.prototype.matchall');
 
@@ -264,7 +264,7 @@ export async function getJSONAbi(ethContract, jsons, path = '', debug = 0): Prom
   return contractJson;
 }
 
-export function filterResultConverter(resArgs, incomeProps): {} {
+export function filterResultConverter(resArgs, incomeProps): TokenProps {
   // console.log('filterResultConverter input = ');
   // console.log(resArgs);
   const resultProps = Object.assign({}, incomeProps);
@@ -762,15 +762,15 @@ export class TokenCard {
     const propsForRender = {};
     for (const [name, value] of Object.entries(props)){
       if ((name === 'value' || name === 'amount') && props.decimals) {
-        const s = value.toString();
-        const decimal = props.ownerBalance.decimals;
+        const decimals = props.decimals;
+        let s = value.toString().padStart(decimals, '0');
 
-        // console.log('transform bigint');
-        // console.log(s);
-        // console.log(decimal);
-        propsForRender[name] = s.substr(0, s.length - decimal)
-          + '.' + s.substr(s.length - decimal);
-        // console.log(propsForRender[name]);
+        if (s.length <= decimals) {
+          s = s.padStart(decimals + 1, '0');
+        }
+
+        propsForRender[name] = s.substr(0, s.length - decimals)
+          + '.' + s.substr(s.length - decimals);
 
       } else {
         propsForRender[name] = value;

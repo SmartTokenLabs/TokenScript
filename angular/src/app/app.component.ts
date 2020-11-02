@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { BigNumber } from '@ethersproject/bignumber';
 import { tap } from 'rxjs/operators';
 import { HuAndHuService } from './prototype-v1/hu-and-hu.service';
-import { LiquidityPoolShare } from './prototype-v1/types';
+import { LiquidityPoolShare, ApprovedForLiquidityPool } from './prototype-v1/types';
 import { random, uuidv4 } from './utility';
 
 @Component({
@@ -13,6 +13,7 @@ import { random, uuidv4 } from './utility';
 })
 export class AppComponent {
   title = 'token-api-poc';
+  public cards: [ApprovedForLiquidityPool] = [{} as ApprovedForLiquidityPool];
 
   constructor(private huAndHu: HuAndHuService) {
     this.runV1();
@@ -84,8 +85,10 @@ export class AppComponent {
     this.huAndHu
       .activityApproval(dummyToken, BigNumber.from(1)) // build+send transaction
       .subscribe((activity) => {
-        console.log('Card: ApprovedForLiquidityPool');
-        console.log(activity);
+        // console.log('Card: ApprovedForLiquidityPool');
+        // console.log(activity);
+        this.cards.push(activity);
+        console.log(this.cards);
 
         // if this code is running, the approve must be successful
         // TODO capture the 'missing-desired-activity' error

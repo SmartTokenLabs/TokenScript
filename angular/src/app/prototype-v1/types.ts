@@ -5,6 +5,17 @@ export interface EthersData {
   chainID: string;
 }
 
+export interface TokenProps {
+  nonce?: number;
+  owner?: string;
+  spender?: string;
+  from?: string;
+  to?: string;
+  value?: BigNumber;
+  amount?: BigNumber;
+  decimals: number;
+}
+
 export interface EthereumCallParams {
   params: [any];
   ethCallAttributtes: {contract?: string, function?: string};
@@ -117,3 +128,4 @@ export interface DividendPoolShare {
 // this technique improving a typesafity around use-cases like that
 export const PairSymbol = ['ETH/USDT', 'ETC/HBTC'] as const;
 export type PairSymbol = typeof PairSymbol[number];
+

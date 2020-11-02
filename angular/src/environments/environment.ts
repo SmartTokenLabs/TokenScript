@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  debug: 0
+  debug: 2
 };
 
 /*

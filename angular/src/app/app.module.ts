@@ -5,10 +5,12 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ActivityCardComponent } from './activity-card/activity-card.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ActivityCardComponent
   ],
   imports: [
     BrowserModule,

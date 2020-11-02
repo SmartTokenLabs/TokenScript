@@ -1,43 +1,67 @@
-<ts:token xmlns:asnx="urn:ietf:params:xml:ns:asnx" xmlns:ethereum="urn:ethereum:constantinople" xmlns:ts="http://tokenscript.org/2020/06/tokenscript" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  name="CoFixPoolShare" xsi:schemaLocation="http://tokenscript.org/2020/06/tokenscript http://tokenscript.org/2020/06/tokenscript.xsd">
-    <asnx:module xmlns:asnx="urn:ietf:params:xml:ns:asnx" name="ERC20-Events" xml:base="file:/home/a/IdeaProjects/token-api-poc/tokenscripts/data-module.xml">
-<namedType name="Approval">
-    <type>
-	<sequence>
-	    <element xmlns:ethereum="urn:ethereum:constantinople" name="owner" ethereum:indexed="true" ethereum:type="address"></element>
-	    <element xmlns:ethereum="urn:ethereum:constantinople" name="spender" ethereum:indexed="true" ethereum:type="address"></element>
-	    <element xmlns:ethereum="urn:ethereum:constantinople" name="value" ethereum:indexed="false" ethereum:type="uint256"></element>
-	</sequence>
-    </type>
-</namedType>
-<namedType name="Transfer">
-    <type>
-	<sequence>
-	    <element xmlns:ethereum="urn:ethereum:constantinople" name="from" ethereum:indexed="true" ethereum:type="address"></element>
-	    <element xmlns:ethereum="urn:ethereum:constantinople" name="to" ethereum:indexed="true" ethereum:type="address"></element>
-	    <element xmlns:ethereum="urn:ethereum:constantinople" name="amount" ethereum:indexed="false" ethereum:type="uint256"></element>
-	</sequence>
-    </type>
-</namedType>
+<ts:token xmlns:asnx="urn:ietf:params:xml:ns:asnx" xmlns:ethereum="urn:ethereum:constantinople" xmlns:ts="http://tokenscript.org/2020/06/tokenscript" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="LiquidityPoolShare" xsi:schemaLocation="http://tokenscript.org/2020/06/tokenscript http://tokenscript.org/2020/06/tokenscript.xsd">
+    <asnx:module name="Shared-Events">
+    <namedType name="Approval">
+        <type>
+            <sequence>
+                <element name="owner" ethereum:indexed="true" ethereum:type="address"></element>
+                <element name="spender" ethereum:indexed="true" ethereum:type="address"></element>
+                <element name="value" ethereum:indexed="false" ethereum:type="uint256"></element>
+            </sequence>
+        </type>
+    </namedType>
+    <namedType name="Transfer">
+        <type>
+            <sequence>
+                <element name="from" ethereum:indexed="true" ethereum:type="address"></element>
+                <element name="to" ethereum:indexed="true" ethereum:type="address"></element>
+                <element name="amount" ethereum:indexed="false" ethereum:type="uint256"></element>
+            </sequence>
+        </type>
+    </namedType>
+    <namedType name="RewardAdded">
+        <type>
+            <sequence>
+                <element name="sender" ethereum:indexed="false" ethereum:type="address"></element>
+                <element name="reward" ethereum:indexed="false" ethereum:type="uint256"></element>
+            </sequence>
+        </type>
+    </namedType>
+    <namedType name="Staked">
+        <type>
+            <sequence>
+                <element name="user" ethereum:indexed="true" ethereum:type="address"></element>
+                <element name="reward" ethereum:indexed="false" ethereum:type="uint256"></element>
+            </sequence>
+        </type>
+    </namedType>
+    <namedType name="Withdrawn">
+        <type>
+            <sequence>
+                <element name="user" ethereum:indexed="true" ethereum:type="address"></element>
+                <element name="amount" ethereum:indexed="false" ethereum:type="uint256"></element>
+            </sequence>
+        </type>
+    </namedType>
 </asnx:module>
 
     <ts:label>
         <ts:string xml:lang="en">CoFix Liquidity Pool Share</ts:string>
     </ts:label>
-    
+
     <ts:contract name="NEST">
 	   <ts:address network="1">0x04abEdA201850aC0124161F037Efd70c74ddC74C</ts:address>
     </ts:contract>
     <ts:contract name="CoFiXRouter">
-        <ts:address network="1">0x26aaD4D82f6c9FA6E34D8c1067429C986A055872</ts:address>
+	   <ts:address network="1">0x26aaD4D82f6c9FA6E34D8c1067429C986A055872</ts:address>
     </ts:contract>
 
     <ts:cards>
         <ts:card name="sent" type="activity">
             <ts:origins>
-                <ethereum:event xmlns:ethereum="urn:ethereum:constantinople" contract="pool" filter="from=${ownerAddress}" type="Transfer"></ethereum:event>
+                <ethereum:event contract="pool" filter="from=${ownerAddress}" type="Transfer"></ethereum:event>
             </ts:origins>
-            <ts:item-view xml:lang="en">
-                <xhtml:style xmlns:xhtml="http://www.w3.org/1999/xhtml" type="text/css">h3 { color: #111; font-family: 'Open Sans', sans-serif; font-size: 20px; font-weight: 300; line-height: 32px; }
+            <ts:item-view xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+                <xhtml:style type="text/css">h3 { color: #111; font-family: 'Open Sans', sans-serif; font-size: 20px; font-weight: 300; line-height: 32px; }
 
 #inputBox {
     text-align: center;
@@ -165,7 +189,7 @@ label {
     font-weight: 500;
     margin-top: 6px;
 }</xhtml:style>
-                <xhtml:script xmlns:xhtml="http://www.w3.org/1999/xhtml" type="text/javascript">//
+                <xhtml:script type="text/javascript">//
 class Token {
 
     constructor(tokenInstance) {
@@ -199,7 +223,7 @@ web3.tokens.dataChanged = (oldTokens, updatedTokens, tokenIdCard) =&gt; {
             </ts:item-view>
         </ts:card>
     </ts:cards>
-    
+
     <ts:attribute distinct="true" name="pair">
         <ts:type>
             <ts:syntax>1.3.6.1.4.1.1466.115.121.1.6</ts:syntax>
@@ -211,7 +235,7 @@ web3.tokens.dataChanged = (oldTokens, updatedTokens, tokenIdCard) =&gt; {
             </ts:data>
         </ts:origins>
     </ts:attribute>
-    
+
     <ts:attribute name="pairSymbol">
         <ts:type>
             <ts:syntax>1.3.6.1.4.1.1466.115.121.1.15</ts:syntax>
@@ -226,10 +250,10 @@ web3.tokens.dataChanged = (oldTokens, updatedTokens, tokenIdCard) =&gt; {
                         <ts:value xml:lang="en">HBTC</ts:value>
                     </ts:option>
                 </ts:mapping>
-            </ts:attribute> 
+            </ts:attribute>
         </ts:origins>
     </ts:attribute>
-    
+
     <ts:attribute name="pool">
         <ts:type>
             <ts:syntax>1.3.6.1.4.1.1466.115.121.1.6</ts:syntax>
@@ -248,13 +272,13 @@ web3.tokens.dataChanged = (oldTokens, updatedTokens, tokenIdCard) =&gt; {
             </ts:attribute>
         </ts:origins>
     </ts:attribute>
-    
+
     <ts:attribute name="balance">
         <ts:type>
             <ts:syntax></ts:syntax>
         </ts:type>
         <ts:origins>
-            <ethereum:call xmlns:ethereum="urn:ethereum:constantinople" as="e18" contract="pool" function="balanceOf">
+            <ethereum:call as="e18" contract="pool" function="balanceOf">
                 <ts:data>
                     <ts:address ref="ownerAddress"></ts:address>
                 </ts:data>
@@ -267,7 +291,7 @@ web3.tokens.dataChanged = (oldTokens, updatedTokens, tokenIdCard) =&gt; {
             <ts:syntax>1.3.6.1.4.1.1466.115.121.1.27</ts:syntax>
         </ts:type>
         <ts:origins>
-            <ethereum:call xmlns:ethereum="urn:ethereum:constantinople" function="allowance" contract="pair">
+            <ethereum:call contract="pair" function="allowance">
                 <ts:data>
                     <ts:address ref="ownerAddress"></ts:address>
                     <ts:address ref="CoFiXRouter"></ts:address>
@@ -275,15 +299,15 @@ web3.tokens.dataChanged = (oldTokens, updatedTokens, tokenIdCard) =&gt; {
             </ethereum:call>
         </ts:origins>
     </ts:attribute>
-    
+
     <ts:attribute name="totalSupply">
         <ts:type>
             <ts:syntax>1.3.6.1.4.1.1466.115.121.1.27</ts:syntax>
         </ts:type>
         <ts:origins>
-            <ethereum:call xmlns:ethereum="urn:ethereum:constantinople" contract="pool" function="totalSupply">
+            <ethereum:call contract="pool" function="totalSupply">
             </ethereum:call>
         </ts:origins>
     </ts:attribute>
-    
+
 </ts:token>
