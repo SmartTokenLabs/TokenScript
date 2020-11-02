@@ -1,5 +1,5 @@
-<ts:token xmlns:asnx="urn:ietf:params:xml:ns:asnx" xmlns:ethereum="urn:ethereum:constantinople" xmlns:ts="http://tokenscript.org/2020/06/tokenscript" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="LiquidityPoolShare" xsi:schemaLocation="http://tokenscript.org/2020/06/tokenscript http://tokenscript.org/2020/06/tokenscript.xsd">
-    <asnx:module name="Shared-Events">
+<ts:token xmlns:asnx="urn:ietf:params:xml:ns:asnx" xmlns:ethereum="urn:ethereum:constantinople" xmlns:ts="http://tokenscript.org/2020/06/tokenscript" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="CoFi" xsi:schemaLocation="http://tokenscript.org/2020/06/tokenscript http://tokenscript.org/2020/06/tokenscript.xsd">
+    <asnx:module name="Shared-Events" xml:base="file:/home/a/IdeaProjects/token-api-poc/tokenscripts/data-module.xml">
     <namedType name="Approval">
         <type>
             <sequence>
@@ -45,20 +45,60 @@
 </asnx:module>
 
     <ts:label>
-        <ts:string xml:lang="en">CoFix Liquidity Pool Share</ts:string>
+        <ts:string xml:lang="en">Dividend Pool Share</ts:string>
+        <ts:string xml:lang="zh">分红池内CoFi</ts:string>
     </ts:label>
+    <ts:contract name="USDT" xml:base="file:/home/a/IdeaProjects/token-api-poc/tokenscripts/contracts.lst">
+	<ts:address network="1">0xdAC17F958D2ee523a2206206994597C13D831ec7</ts:address></ts:contract>
+<ts:contract name="HBTC" xml:base="file:/home/a/IdeaProjects/token-api-poc/tokenscripts/contracts.lst">
+	<ts:address network="1">0x0316EB71485b0Ab14103307bf65a021042c6d380</ts:address></ts:contract>
+<ts:contract name="NEST" xml:base="file:/home/a/IdeaProjects/token-api-poc/tokenscripts/contracts.lst">
+	<ts:address network="1">0x04abEdA201850aC0124161F037Efd70c74ddC74C</ts:address></ts:contract>
+<ts:contract name="WETH" xml:base="file:/home/a/IdeaProjects/token-api-poc/tokenscripts/contracts.lst">
+	<ts:address network="1">0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2</ts:address></ts:contract>
+<ts:contract name="NestPriceOracle" xml:base="file:/home/a/IdeaProjects/token-api-poc/tokenscripts/contracts.lst">
+	<ts:address network="1">0x94F36FAa6bB4f74009637292b09C355CcD3e80Eb</ts:address></ts:contract>
+<ts:contract name="NEST3VoteFactory" xml:base="file:/home/a/IdeaProjects/token-api-poc/tokenscripts/contracts.lst">
+	<ts:address network="1">0x6Cd5698E8854Fb6879d6B1C694223b389B465dea</ts:address></ts:contract>
+<ts:contract name="CoFiXKTable" xml:base="file:/home/a/IdeaProjects/token-api-poc/tokenscripts/contracts.lst">
+	<ts:address network="1">0x75E360Be6248Bd46030C6818624a09403EF5eC21</ts:address></ts:contract>
+<ts:contract name="CoFiToken" xml:base="file:/home/a/IdeaProjects/token-api-poc/tokenscripts/contracts.lst">
+	<ts:address network="1">0x1a23a6BfBAdB59fa563008c0fB7cf96dfCF34Ea1</ts:address></ts:contract>
+<ts:contract name="CoFiXNode" xml:base="file:/home/a/IdeaProjects/token-api-poc/tokenscripts/contracts.lst">
+	<ts:address network="1">0x558201DC4741efc11031Cdc3BC1bC728C23bF512</ts:address></ts:contract>
+<ts:contract name="CoFiXFactory" xml:base="file:/home/a/IdeaProjects/token-api-poc/tokenscripts/contracts.lst">
+	<ts:address network="1">0x66C64ecC3A6014733325a8f2EBEE46B4CA3ED550</ts:address></ts:contract>
+<ts:contract name="CoFiXRouter" xml:base="file:/home/a/IdeaProjects/token-api-poc/tokenscripts/contracts.lst">
+	<ts:address network="1">0x26aaD4D82f6c9FA6E34D8c1067429C986A055872</ts:address></ts:contract>
+<ts:contract name="CoFiXController" xml:base="file:/home/a/IdeaProjects/token-api-poc/tokenscripts/contracts.lst">
+	<ts:address network="1">0xd694eF4C82E50F3f184877572dCD6A45B8FEae87</ts:address></ts:contract>
+<ts:contract name="CoFiXVaultForLP" xml:base="file:/home/a/IdeaProjects/token-api-poc/tokenscripts/contracts.lst">
+	<ts:address network="1">0x6903b1C17A5A0A9484c7346E5c0956027A713fCF</ts:address></ts:contract>
+<ts:contract name="CoFiXVaultForTrader" xml:base="file:/home/a/IdeaProjects/token-api-poc/tokenscripts/contracts.lst">
+	<ts:address network="1">0xE6183d3094a9e360B123Ec1330afAE76A74d1cbF</ts:address></ts:contract>
+<ts:contract name="CoFiXVaultForCNode" xml:base="file:/home/a/IdeaProjects/token-api-poc/tokenscripts/contracts.lst">
+	<ts:address network="1">0x7eDa8251aC08E7898E986DbeC4Ba97B421d545DD</ts:address></ts:contract>
+<ts:contract name="CoFiStakingRewards" xml:base="file:/home/a/IdeaProjects/token-api-poc/tokenscripts/contracts.lst">
+	<ts:address network="1">0x0061c52768378b84306b2665f098c3e0b2C03308</ts:address></ts:contract>
+<ts:contract name="ETH-USDT_Pair" xml:base="file:/home/a/IdeaProjects/token-api-poc/tokenscripts/contracts.lst">
+	<ts:address network="1">0xb2b7BeDd7d7fc19804C7Dd4a4E8174C4c73C210d</ts:address></ts:contract>
+<ts:contract name="ETH-HBTC_Pair" xml:base="file:/home/a/IdeaProjects/token-api-poc/tokenscripts/contracts.lst">
+	<ts:address network="1">0x7C2d7b53AcA4038f2Eb649164181114B9AEE93CB</ts:address></ts:contract>
+<ts:contract name="CoFiXStakingRewards_ETH-USDT" xml:base="file:/home/a/IdeaProjects/token-api-poc/tokenscripts/contracts.lst">
+	<ts:address network="1">0x3B67fe44216d3e147bA8ccF6E49d2E576441cb10</ts:address></ts:contract>
+<ts:contract name="CoFiXStakingRewards_ETH-HBTC" xml:base="file:/home/a/IdeaProjects/token-api-poc/tokenscripts/contracts.lst">
+	<ts:address network="1">0x5Fd4Eb552965F0Db9F50Ac285C55C8397F19F45B</ts:address></ts:contract>
+<ts:contract name="CNodeStakingRewards_CNode" xml:base="file:/home/a/IdeaProjects/token-api-poc/tokenscripts/contracts.lst">
+	<ts:address network="1">0xb697A2528D57a2BA8E75E2F33eD56B594cf9F308</ts:address></ts:contract>
 
-    <ts:contract name="NEST">
-	   <ts:address network="1">0x04abEdA201850aC0124161F037Efd70c74ddC74C</ts:address>
-    </ts:contract>
-    <ts:contract name="CoFiXRouter">
-	   <ts:address network="1">0x26aaD4D82f6c9FA6E34D8c1067429C986A055872</ts:address>
-    </ts:contract>
-
+    <ts:origins>
+        <ts:ethereum contract="CoFiStakingRewards"></ts:ethereum>
+    </ts:origins>
+    
     <ts:cards>
         <ts:card name="sent" type="activity">
             <ts:origins>
-                <ethereum:event contract="pool" filter="from=${ownerAddress}" type="Transfer"></ethereum:event>
+                <ethereum:event contract="CoFiToken" filter="from=${ownerAddress}" type="Transfer"></ethereum:event>
             </ts:origins>
             <ts:item-view xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
                 <xhtml:style type="text/css">h3 { color: #111; font-family: 'Open Sans', sans-serif; font-size: 20px; font-weight: 300; line-height: 32px; }
@@ -223,75 +263,36 @@ web3.tokens.dataChanged = (oldTokens, updatedTokens, tokenIdCard) =&gt; {
             </ts:item-view>
         </ts:card>
     </ts:cards>
-
-    <ts:attribute distinct="true" name="pair">
-        <ts:type>
-            <ts:syntax>1.3.6.1.4.1.1466.115.121.1.6</ts:syntax>
-        </ts:type>
-        <ts:origins>
-            <ts:data>
-                <ts:address>0xdAC17F958D2ee523a2206206994597C13D831ec7</ts:address>
-                <ts:address>0x0316EB71485b0Ab14103307bf65a021042c6d380</ts:address>
-            </ts:data>
-        </ts:origins>
-    </ts:attribute>
-
-    <ts:attribute name="pairSymbol">
-        <ts:type>
-            <ts:syntax>1.3.6.1.4.1.1466.115.121.1.15</ts:syntax>
-        </ts:type>
-        <ts:origins>
-            <ts:attribute ref="pair">
-                <ts:mapping>
-                    <ts:option key="0xdAC17F958D2ee523a2206206994597C13D831ec7">
-                        <ts:value xml:lang="en">USDT</ts:value>
-                    </ts:option>
-                    <ts:option key="0x0316EB71485b0Ab14103307bf65a021042c6d380">
-                        <ts:value xml:lang="en">HBTC</ts:value>
-                    </ts:option>
-                </ts:mapping>
-            </ts:attribute>
-        </ts:origins>
-    </ts:attribute>
-
-    <ts:attribute name="pool">
-        <ts:type>
-            <ts:syntax>1.3.6.1.4.1.1466.115.121.1.6</ts:syntax>
-        </ts:type>
-        <ts:origins>
-            
-            <ts:attribute ref="pair">
-                <ts:mapping>
-                    <ts:option key="0xdAC17F958D2ee523a2206206994597C13D831ec7">
-                        <ts:value xml:lang="en">0xb2b7BeDd7d7fc19804C7Dd4a4E8174C4c73C210d</ts:value>
-                    </ts:option>
-                    <ts:option key="0x0316EB71485b0Ab14103307bf65a021042c6d380">
-                        <ts:value xml:lang="en">0x7C2d7b53AcA4038f2Eb649164181114B9AEE93CB</ts:value>
-                    </ts:option>
-                </ts:mapping>
-            </ts:attribute>
-        </ts:origins>
-    </ts:attribute>
-
+    
     <ts:attribute name="balance">
         <ts:type>
             <ts:syntax></ts:syntax>
         </ts:type>
         <ts:origins>
-            <ethereum:call as="e18" contract="pool" function="balanceOf">
+            <ethereum:call as="e18" function="balanceOf">
                 <ts:data>
                     <ts:address ref="ownerAddress"></ts:address>
                 </ts:data>
             </ethereum:call>
         </ts:origins>
     </ts:attribute>
-
-    <ts:attribute name="pairedTokenAllowance">
+    
+    <ts:attribute name="poolSize">
         <ts:type>
             <ts:syntax>1.3.6.1.4.1.1466.115.121.1.27</ts:syntax>
         </ts:type>
         <ts:origins>
-            <ethereum:call contract="pair" function="allowance">
+            <ethereum:call as="e18" function="totalSupply">
+            </ethereum:call>
+        </ts:origins>
+    </ts:attribute>
+    
+    <ts:attribute name="CofiAllowance">
+        <ts:type>
+            <ts:syntax>1.3.6.1.4.1.1466.115.121.1.27</ts:syntax>
+        </ts:type>
+        <ts:origins>
+            <ethereum:call as="e18" contract="CoFiToken" function="allowance">
                 <ts:data>
                     <ts:address ref="ownerAddress"></ts:address>
                     <ts:address ref="CoFiXRouter"></ts:address>
@@ -299,15 +300,40 @@ web3.tokens.dataChanged = (oldTokens, updatedTokens, tokenIdCard) =&gt; {
             </ethereum:call>
         </ts:origins>
     </ts:attribute>
-
-    <ts:attribute name="totalSupply">
+    
+    <ts:attribute name="dividendReceivable">
         <ts:type>
             <ts:syntax>1.3.6.1.4.1.1466.115.121.1.27</ts:syntax>
         </ts:type>
         <ts:origins>
-            <ethereum:call contract="pool" function="totalSupply">
+            <ethereum:call as="e18" function="earned">
+                <ts:data>
+                    <ts:address ref="ownerAddress"></ts:address>
+                </ts:data>
             </ethereum:call>
         </ts:origins>
     </ts:attribute>
-
+    
+    <ts:attribute name="poolEthBalance">
+        <ts:type>
+            <ts:syntax>1.3.6.1.4.1.1466.115.121.1.27</ts:syntax>
+        </ts:type>
+        <ts:origins>
+            <ethereum:call as="e18" contract="WETH" function="balanceOf">
+                <ts:data>
+                    <ts:address ref="CoFiStackingRewards"></ts:address>
+                </ts:data>
+            </ethereum:call>
+        </ts:origins>
+    </ts:attribute>
+    
+    <ts:attribute name="dividendPayoutRatio">
+        <ts:type>
+            <ts:syntax>1.3.6.1.4.1.1466.115.121.1.27</ts:syntax>
+        </ts:type>
+        <ts:origins>
+            <ethereum:storage as="e18" variable="dividendShare"></ethereum:storage>
+        </ts:origins>
+    </ts:attribute>
+    
 </ts:token>
