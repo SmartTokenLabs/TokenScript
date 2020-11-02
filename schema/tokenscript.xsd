@@ -301,6 +301,7 @@
             <choice maxOccurs="unbounded">
                 <element ref="ethereum:event"/>
                 <element ref="ethereum:call"/>
+                <element ref="ethereum:storage"/>
                 <element ref="ts:user-entry"/>
                 <element ref="ts:token-id"/>
                 <element ref="ts:data"/>
