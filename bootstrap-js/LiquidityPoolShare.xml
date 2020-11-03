@@ -1,5 +1,13 @@
 <ts:token xmlns:asnx="urn:ietf:params:xml:ns:asnx" xmlns:ethereum="urn:ethereum:constantinople" xmlns:ts="http://tokenscript.org/2020/06/tokenscript" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="LiquidityPoolShare" xsi:schemaLocation="http://tokenscript.org/2020/06/tokenscript http://tokenscript.org/2020/06/tokenscript.xsd">
-    <asnx:module name="Shared-Events">
+    <asnx:module name="Shared-Events" xml:base="file:/home/a/IdeaProjects/token-api-poc/tokenscripts/data-module.xml">
+    <namedType name="reserve">
+        <type>
+            <sequence>
+                <element name="_reserve0" ethereum:type="uint256"></element>
+                <element name="_reserve1" ethereum:type="uint256"></element>
+            </sequence>
+        </type>
+    </namedType>
     <namedType name="Approval">
         <type>
             <sequence>
