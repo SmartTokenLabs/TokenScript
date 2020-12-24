@@ -1,0 +1,55 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><meta name="copyright" content="(C) Copyright 2020"><meta name="DC.rights.owner" content="(C) Copyright 2020"><meta name="DC.type" content="concept"><meta name="description" content="TokenCards determine how a wallet represents a token visually."><meta name="DC.relation" scheme="URI" content="Card.html"><meta name="DC.relation" scheme="URI" content="elements/card.html"><meta name="DC.relation" scheme="URI" content="elements/cards.html"><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="concept_nff_y3l_mmb"><link rel="stylesheet" type="text/css" href="css/commonltr.css"><link rel="stylesheet" type="text/css" href="css/custom.css"><title>Token Card</title>
+<link href="https://fonts.googleapis.com/css?family=Roboto+Slab|Lato">
+<script type="text/javascript" src="https://alphawallet.com/wp-content/themes/alphawallet/discourse/widget.js"></script>
+</head><body id="concept_nff_y3l_mmb"><header role="banner"><nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+  <div class="container">
+    <a class="navbar-brand" href="/">🆃okenScript</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+	      <li class="nav-item"><a class="nav-link" href="/TokenScript.html">Documents</a></li>
+	      <li class="nav-item"><a class="nav-link" href="/guides/Intro.html">Guides</a></li>
+	      <li class="nav-item"><a class="nav-link" href="/specs/Intro.html">Specs</a></li>
+	      <li class="nav-item external"><a class="nav-link" href="">TokenScript community forum</a></li>
+	      <li class="nav-item external"><a class="nav-link" href="/TokenScript.html">AlphaWallet (uses TokenScript)</a></li>
+	      <li class="nav-item external"><a class="nav-link" href="/guides/Intro.html">Github TokenScript</a></li>
+	      <li class="nav-item external"><a class="nav-link" href="/specs/Intro.html">Github TokenScript Examples</a></li>
+      </ul>
+    </div>
+  </div>
+</nav></header><div class="container" id="content"><div class="row"><nav role="toc" class="col-lg-3"><ul><li><a href="Tokenization.html">Tokenization and dApps</a></li><li><a href="index.html">Introduction to TokenScript</a></li><li><a href="QuickStart.html">Quick Start (usuable now)</a></li><li><a href="BasicConcepts.html">Basic Concepts</a><ul><li><a href="TokenScript-Component.html">TokenScript File</a></li><li><a href="Attributes.html">Attributes</a></li><li><a href="Card.html">Card</a><ul><li class="active"><a href="TokenCard.html">Token Card</a></li><li><a href="ActionCard.html">ActionCard</a></li><li><a href="ActivityCard.html">ActivityCard</a></li></ul></li><li><a href="DataObjects.html">Data Objects</a></li><li><a href="Attestation.html">Attestation</a></li><li><a href="TokenScript-Syntax.html">TokenScript Syntax</a></li><li><a href="MagicLink.html">Magic Link</a></li></ul></li><li><a href="Deploy.html">Deploy TokenScript</a></li><li><a href="features/FeatureImplementation.html">Features implemented</a></li><li><a href="specs/Intro.html">TokenScript Specs</a></li><li><a href="guides/Intro.html">TokenScript Guides</a></li></ul></nav><main role="main" class="col-lg-9"><article role="article" aria-labelledby="ariaid-title1"><h1 class="title topictitle1" id="ariaid-title1">Token Card</h1>
+
+<div class="body conbody"><p class="shortdesc">TokenCards determine how a wallet represents a token
+visually.</p><p class="p">Token Cards instruct a wallet, a dapp browser or a website
+how to represent a token. This can include visible instructions,
+like icons, colors, a text description or buttons. These visible
+properties are set with the <code class="ph codeph">&lt;view&gt;</code> declaration <a class="xref fm:" href="View_vs_ItemView.html" title="A card can have a View and an Item-View.">View vs Item-View</a>.
+With it token issuers can design how the token appears in the wallet
+or on websites. You can think of it similar to a library of CSS
+code.</p>
+<p class="p">There are also invisible aspects of the token cards. They can
+define important security parameters like a serial number and other
+technical properties which are useful for wallets to know.</p>
+<p class="p">A token card can have different properties in different circumstances.
+A soccer ticket token can change its appearance after the game started,
+and a car leasing token can show different properties depending on
+your position in the car leasing chain.</p>
+<p class="p">Token Cards are declared in the XML-file, but expressed in JavaScript,
+for example by creating a token class and rendering html code in
+it.</p>
+<section class="section"><h2 class="title sectiontitle">Code</h2>
+<div class="p">Here is an example of how a Token Card is declared in the XML file of
+TokenScript:<pre class="pre codeblock"><code>&lt;ts:cards&gt;
+&lt;ts:card type="token" name="main"&gt;
+&lt;ts:item-view xml:lang="en"&gt;
+&lt;xhtml:style type="text/css"&gt;&amp;item-view-style;&lt;/xhtml:style&gt;
+&lt;xhtml:script type="text/javascript"&gt;&amp;item-view.en;&lt;/xhtml:script&gt;
+&lt;/ts:item-view&gt;
+&lt;/ts:card&gt;</code></pre></div>
+<p class="p">This code fragment instructs the wallet to use a JavaScript file
+(item-view.en.js) and a CSS file (item-view-file.css) to display
+the token. You can lookup these files in the <a class="xref" href="https://github.com/AlphaWallet/TokenScript-Examples/tree/master/examples/ENS" target="_blank" rel="external noopener">ENS example for TokenScript</a>.</p></section></div><nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" href="Card.html" title="Cards are a fundamental part of Tokenscript. They define how the token behaves in the wallet and in web pages. They are the only part of Tokenscript which is visible for the user.">Card</a></div></div><div class="linklist relref"><strong>Related reference</strong><br><ul class="linklist"><li class="linklist"><a class="link" href="elements/card.html" title="card element defines a Card">&lt;card&gt; element</a></li><li class="linklist"><a class="link" href="elements/cards.html" title="cards element is a container of multiple Card. It can be used as a root element of a TokenScript File.">&lt;cards&gt; element</a></li></ul></div></nav></article></main></div></div></body></html>

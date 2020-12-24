@@ -1,0 +1,73 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><meta name="copyright" content="(C) Copyright 2020"><meta name="DC.rights.owner" content="(C) Copyright 2020"><meta name="DC.type" content="reference"><meta name="description" content="The data element embedds data, usually used to interact with the Ethereum blockchain"><meta name="DC.relation" scheme="URI" content="../Attributes.html"><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="concept_mkp_2bn_wmb"><link rel="stylesheet" type="text/css" href="../css/commonltr.css"><link rel="stylesheet" type="text/css" href="../css/custom.css"><title>Data</title>
+<link href="https://fonts.googleapis.com/css?family=Roboto+Slab|Lato">
+<script type="text/javascript" src="https://alphawallet.com/wp-content/themes/alphawallet/discourse/widget.js"></script>
+</head><body id="concept_mkp_2bn_wmb"><header role="banner"><nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+  <div class="container">
+    <a class="navbar-brand" href="/">🆃okenScript</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+	      <li class="nav-item"><a class="nav-link" href="/TokenScript.html">Documents</a></li>
+	      <li class="nav-item"><a class="nav-link" href="/guides/Intro.html">Guides</a></li>
+	      <li class="nav-item"><a class="nav-link" href="/specs/Intro.html">Specs</a></li>
+	      <li class="nav-item external"><a class="nav-link" href="">TokenScript community forum</a></li>
+	      <li class="nav-item external"><a class="nav-link" href="/TokenScript.html">AlphaWallet (uses TokenScript)</a></li>
+	      <li class="nav-item external"><a class="nav-link" href="/guides/Intro.html">Github TokenScript</a></li>
+	      <li class="nav-item external"><a class="nav-link" href="/specs/Intro.html">Github TokenScript Examples</a></li>
+      </ul>
+    </div>
+  </div>
+</nav></header><div class="container" id="content"><div class="row"><nav role="toc" class="col-lg-3"><ul></ul></nav><main role="main" class="col-lg-9"><article role="article" aria-labelledby="ariaid-title1">
+    <h1 class="title topictitle1" id="ariaid-title1">Data</h1>
+    
+    <div class="body refbody"><p class="shortdesc">The <code class="ph codeph">data</code> element embedds data, usually used to interact with the
+        Ethereum blockchain</p>
+        <section class="section refsyn">The <code class="ph codeph">data</code> element is like a carrier: It contains different elements of
+            data. Usually it is used inside an <code class="ph codeph">ethereum</code> element to declare the data
+            used for smart contract calls or transaction creation.</section>
+        <section class="section" id="concept_mkp_2bn_wmb__section_pgb_nbn_wmb"><h2 class="title sectiontitle">Code Examples</h2>
+            
+            <p class="p">Define the needed data for an Ethereum call to fill an attribute</p>
+            <div class="p">
+                <pre class="pre codeblock"><code>&lt;ts:attribute name="locality"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;ts:type&gt;
+            &lt;ts:syntax&gt;1.3.6.1.4.1.1466.115.121.1.15&lt;/ts:syntax&gt;
+      &lt;/ts:type&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;ts:origins&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;ethereum:call function="getLocality" contract="EntryToken" as="utf8"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;ts:data&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;ts:uint256 ref="tokenId"/&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/ts:data&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/ethereum:call&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/ts:origins&gt;
+&lt;/ts:attribute&gt;</code></pre>
+            </div>
+            <p class="p">Define amount used in an Ethereum transaction</p>
+            <pre class="pre codeblock"><code>&lt;ts:transaction&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;ethereum:transaction function="redeem" contract="aDAI" as="uint"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;ts:data&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;ts:uint256 ref="redeemAmount"/&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/ts:data&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/ethereum:transaction&gt;
+&lt;/ts:transaction&gt;</code></pre>
+            <div class="p">Define amount and receiver for a
+                transactions<pre class="pre codeblock"><code>&lt;ts:transaction&gt;
+&nbsp;&nbsp; &nbsp;&lt;ethereum:transaction function="transfer" contract="DAI"&gt;
+&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;ts:data&gt;
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;ts:address&gt;
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;0x4aa42145Aa6Ebf72e164C9bBC74fbD3788045016
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;/ts:address&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;ts:uint256 ref="amount"/&gt;
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&lt;/ts:data&gt;
+&nbsp; &nbsp;&nbsp; &nbsp;&lt;/ethereum:transaction&gt;
+&lt;/ts:transaction&gt;</code></pre></div>
+            <p class="p"></p>
+            <p class="p"></p>
+            <p class="p"></p>
+        </section>
+    </div>
+<nav role="navigation" class="related-links"><div class="linklist relconcepts"><strong>Related concepts</strong><br><ul class="linklist"><li class="linklist"><a class="link" href="../Attributes.html" title="Define attributes so that token data becomes available to Cards and Websites.">Attributes</a></li></ul></div></nav></article></main></div></div></body></html>

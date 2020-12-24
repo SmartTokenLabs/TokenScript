@@ -1,0 +1,80 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><meta name="copyright" content="(C) Copyright 2020"><meta name="DC.rights.owner" content="(C) Copyright 2020"><meta name="DC.type" content="concept"><meta name="description" content="The example of a DeFi app illustrates how TokenScript can improve your token and smart contract."><meta name="DC.relation" scheme="URI" content="index.html"><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="concept_n3v_35q_4mb"><link rel="stylesheet" type="text/css" href="css/commonltr.css"><link rel="stylesheet" type="text/css" href="css/custom.css"><title>DeFi with and without TokenScript</title>
+<link href="https://fonts.googleapis.com/css?family=Roboto+Slab|Lato">
+<script type="text/javascript" src="https://alphawallet.com/wp-content/themes/alphawallet/discourse/widget.js"></script>
+</head><body id="concept_n3v_35q_4mb"><header role="banner"><nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+  <div class="container">
+    <a class="navbar-brand" href="/">🆃okenScript</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+	      <li class="nav-item"><a class="nav-link" href="/TokenScript.html">Documents</a></li>
+	      <li class="nav-item"><a class="nav-link" href="/guides/Intro.html">Guides</a></li>
+	      <li class="nav-item"><a class="nav-link" href="/specs/Intro.html">Specs</a></li>
+	      <li class="nav-item external"><a class="nav-link" href="">TokenScript community forum</a></li>
+	      <li class="nav-item external"><a class="nav-link" href="/TokenScript.html">AlphaWallet (uses TokenScript)</a></li>
+	      <li class="nav-item external"><a class="nav-link" href="/guides/Intro.html">Github TokenScript</a></li>
+	      <li class="nav-item external"><a class="nav-link" href="/specs/Intro.html">Github TokenScript Examples</a></li>
+      </ul>
+    </div>
+  </div>
+</nav></header><div class="container" id="content"><div class="row"><nav role="toc" class="col-lg-3"><ul><li><a href="Tokenization.html">Tokenization and dApps</a></li><li><a href="index.html">Introduction to TokenScript</a><ul><li><a href="TokenScript.html">TokenScript Overview</a></li><li><a href="WhatTokenscriptCanDo.html">What Can TokenScript Do?</a></li><li class="active"><a href="defiwithandwithoutts.html">DeFi with and without TokenScript</a></li><li><a href="LivingExamples.html">TokenScript examples in AlphaWallet</a></li></ul></li><li><a href="QuickStart.html">Quick Start (usuable now)</a></li><li><a href="BasicConcepts.html">Basic Concepts</a></li><li><a href="Deploy.html">Deploy TokenScript</a></li><li><a href="features/FeatureImplementation.html">Features implemented</a></li><li><a href="specs/Intro.html">TokenScript Specs</a></li><li><a href="guides/Intro.html">TokenScript Guides</a></li></ul></nav><main role="main" class="col-lg-9"><article role="article" aria-labelledby="ariaid-title1">
+    <h1 class="title topictitle1" id="ariaid-title1">DeFi with and without TokenScript</h1>
+    
+    <div class="body conbody"><p class="shortdesc">The example of a DeFi app illustrates how TokenScript can improve your token and
+        smart contract.</p>
+        <p class="p">Assume you have a DeFi app which allows user to lend and borrow digital token and
+            distributes its own token via yield farming to its users. This is a common model in
+            DeFi.</p>
+        <section class="section"><h2 class="title sectiontitle">User experience without TokenScript </h2>
+        <p class="p">The user needs to visit a website, usually called a dApp. Despite the app being a smart
+            contract on the Ethereum blockchain, users have to access it by a centralized website.
+            There they connect their wallet to the website, which harms privacy. </p>
+        <p class="p">To lend their token, they first have to make it available for the DeFi smart contract,
+            for example by exchanging it in some special version of the token. To do so, the website
+            forwards an unsigned transaction to the user's wallet to sign. After that the user can
+            lend money with the same procedure: He asks the website, and the website crafts an
+            unsigned transaction.</p>
+        <p class="p">To know about the state of his DeFi stake, the user usually has to use the website again.
+            His wallet doesn't understand the smart contract. It doesn't know that the user
+            converted his token into DeFi token, and it doesn't know that he lent his token.
+            Therefore, it doesn't know how much yield he earned and if his lending farmed new token. </p>
+        <p class="p">For example, if you have Compound's cWBTC token in MetaMask, it just shows this:</p>
+        <p class="p"><img class="image" id="concept_n3v_35q_4mb__image_z1m_tzw_qmb" src="mm-cwbtc.png"></p>
+        <p class="p">Of course the wallet does also not know how to craft the transactions for this DeFi app.
+            So the user needs to visit the website again to terminate the lending, to gather his
+            yield and to get his farmed token. </p>
+        <p class="p">You can improve the capabilities of your wallet. You can import the address of the smart
+            contracts, which might allow your wallet to see the token. The wallet developers can
+            also hardcode some information about the smart contract, so that the wallet knows that
+            the user lended money. But this is very cumbersome, incomplete and doesn't scale at
+            all.</p>
+        </section><section class="section"><h2 class="title sectiontitle">User experience with TokenScript</h2>
+        <p class="p">If the DeFi app introduced TokenScript, things would look drastically different.</p>
+        <p class="p">To start, the user needs to visit the website, too. He also needs the website to provide
+            a transaction to exchange the token he wants to lend to customized DeFi token. But then
+            the user experience drastically changes.</p>
+        <p class="p">When his wallet has the DeFi token, it start to download the TokenScript. After having
+            done so, the wallet suddenly understands the smart contract. It provides information
+            about the token, so that the user can learn what it is. It also provides an overview
+            about how much yield you get when lending it, and displays a button to lend and, when
+            already lended, how to terminate it.</p>
+        <p class="p">AlphaWallet has a rudimentary TokenScript for Compound. This allows to withdraw cWBTC
+            token directly from the wallet, which is able to display the interest rate:</p>
+        <p class="p"><img class="image" id="concept_n3v_35q_4mb__image_cpy_n1x_qmb" src="aw-compound-withdraw.jpg"></p>
+        <p class="p">Since the wallet does understand the smart contract, it can find out how much yield you
+            earned, and if you like, it can use an exchange API to translate your earnings in your
+            local currency. Also, the wallet can know how much DeFi token you farmed, and provide a
+            button to pay out the token.</p>
+        <p class="p">In your wallet's history you see every single DeFi operation. The history knows well what
+            you did - it knows which smart contract you used, which token you lended and for which
+            yield rate.</p>
+        <p class="p">TokenScript enables your wallet to do everything you formerly needed a website for. It
+            also allows other websites to easily integrate your token into their service without the
+          need to integrate it again from scratch.</p>
+            <p class="p">ode</p></section>
+    </div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" href="index.html" title="TokenScript is a framework which improves functionality, security and usability of blockchain token in multiple ways.">Introduction to TokenScript</a></div></div></nav></article></main></div></div></body></html>
