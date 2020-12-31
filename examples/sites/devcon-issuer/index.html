@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>tokenScriptConnector playground</title>
+  <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+  <script src="negotiator-authenticator.js"></script>
+  <style>
+    button {
+      cursor: pointer;
+      padding: 20px;
+    }
+  </style>
+</head>
+
+<body onload="initApp()">
+  <ul id="tokenCards"></ul>
+  <div id="vip-container" style="display: none; border: 1px solid black; padding: 12px; background: #eaeaea;">
+    <p>Select from your VIP Tickets</p>
+    <ul id="vip-tickets-list"></ul>
+  </div>
+  <div style="margin: 20px 0;">
+    <button id="vip-only-section" style="display: none;" onclick="vipClickEvent()">VIP ACCESS</button>
+  </div>
+  <div id="modal"
+    style="cursor: pointer; position: absolute; top: 0; left: 0; display: none; width: 100%; height: 100%; background: rgba(0,0,0,0.7);">
+    <div id="modal-inner-container"
+      style="border-radius: 12px; cursor: default; width: 90%; height: 90%; background: white; margin: 5%;">
+      <div id="modal-inner-content" style="padding: 20px;"></div>
+    </div>
+  </div>
+
+  <script>
+
+    // TODO's:
+    // Don’t encapsulate authenticate address - use web3 challenge
+
+    function initApp() {
+      negotiatorAuthenticator.init().then(function (tokens) {
+        let isVIP = false;
+        tokens.map(ticket => { if (ticket.token.ticketClass == "VIP") isVIP = true });
+        if (isVIP) document.getElementById("vip-only-section").style.display = "block";
+        tokens.map(
+          ticketToken => {
+            const container = document.createElement("li");
+            const tokenId = document.createTextNode(ticketToken.token.ticketId);
+            container.appendChild(tokenId);
+            document.getElementById("tokenCards").appendChild(container);
+          }
+        );
+      }, function (error) {
+        console.log("error", error);
+      });
+    }
+    // to handle the vip click event
+    function vipClickEvent() {
+      // 1. Get most up to date Tokens (Confirm if this should be done)
+      negotiatorAuthenticator.init().then(function (tokens) {
+        // 2. Gather all VIP tickets
+        const vipTickets = tokens.filter(ticket => (ticket.token.ticketClass == "VIP"));
+        // 3. Build a Html template of vip tickets
+        let ticketsToHtml = "";
+        vipTickets.map(function (ticket) {
+          ticketsToHtml += `
+          <li>
+            <button style="margin: 20px" data-id="${ticket.token.ticketId}" onClick="selectVipTicket(${ticket.token.ticketId})">
+              ${ticket.token.ticketId}
+            </button>
+          </li>
+        `;
+        });
+        // 4. Render the tickets inside the vip-tickets-list
+        document.getElementById("vip-tickets-list").innerHTML = ticketsToHtml;
+        // 5. Show Modal
+        document.getElementById("vip-container").style.display = 'block';
+      }, function (error) {
+        console.log("error", error);
+      });
+    }
+    // to handle the vip selection click event from the end user
+    function selectVipTicket(ticketId) {
+      event.stopPropagation();
+      // 1. Get most up to date Tokens (Confirm if this should be done each time)
+      negotiatorAuthenticator.init().then(function (tokens) {
+        // 2. Get the ticket using ID
+        const chosenTicket = tokens.filter(ticket => (ticket.token.ticketId == ticketId))[0];
+        // 3. Authenticator (non-Disney mode) - no owner - open modal to retrieve owner
+        if (chosenTicket.ownerAddress == null) {
+          // lead to email code modal process, created by Authenticator.
+          negotiatorAuthenticator.assetOwnerAddress(chosenTicket);
+        }
+        // 4. If owner address is found, authenticateAddress
+        if (chosenTicket.ownerAddress == currentUser.ownerAddress) {
+          // this will lead to sign-message, even if user typed the code in email.
+
+          // TODO: Don’t encapsulate 'authenticateAddress' - use web3 challenge
+          let web3 = new Web3('HTTP://127.0.0.1:7545');
+          // Gnache / Mock Private Key only
+          const signature = web3.eth.accounts.sign('Some data', '35335e2eac26772c5b1aed0114f7f635b99eb17fe8ef37cd68edd7acf093fa9c');
+          console.log(signature);
+          // Get the Public key of the signed message
+          const signatureValid = web3.eth.accounts.recover(signature);
+          console.log(signatureValid);
+          //
+          // negotiatorAuthenticator.authenticateAddress(currentUser.ownerAddress).then(function (result) {
+          // 5. is the address is valid authenticate the ticket
+          if (signatureValid) {
+            negotiatorAuthenticator.authenticate(chosenTicket).then(function (result) {
+              alert('user can enter the VIP room');
+            }, function (error) {
+              console.log(error);
+            });
+          }
+          // }, function (error) {
+          //   console.log(error);
+          // });
+        }
+      }, function (error) {
+        console.log("error", error);
+      });
+    }
+  </script>
+</body>
+
+</html>
