@@ -1,22 +1,17 @@
 import tokenMock from './tokenMock';
 
-const Authenticator = {
+export const Authenticator = {
+  // Return owner Address
   findOwner: function async() {
-    return new Promise((resolve, reject) => {
-      tokenMock[0].token.ownerAddress = 2;
-      return resolve(tokenMock[0].token.ownerAddress);
-    });
+    tokenMock[0].token.ownerAddress = 2;
+    return tokenMock[0].token.ownerAddress;
   },
+  // Return if the user is already authenticated
   getAuthenticationBlob: function async() {
-    return new Promise((resolve, reject) => {
-      return resolve("Authenticated");
-    });
+    return "Authenticated";
   },
+  // Return if the asset belongs to the user
   assetOwnerAddress: function async() {
     return true;
   }
 }
-
-export {
-  Authenticator
-};

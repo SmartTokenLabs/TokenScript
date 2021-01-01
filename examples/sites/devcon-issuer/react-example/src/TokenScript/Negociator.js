@@ -1,21 +1,16 @@
 import tokenMock from './tokenMock';
 
-class Negociator {
+export class Negociator {
   constructor(filter) {
-    const filter = filter;
+    this.filter = filter;
   }
+  // Modal / Auto Attestation
   async negociate() {
-    // May open the modal. Oleg will manage the modal
-    // 
+    return true;
   }
+  // Get the token instances (with filter)
   async getTokenInstances() {
-    // Negociator.getTokenInstances() - Can be used to check the client tokens against the blockchain tokens (to ensure they are still valid)
-    // return new Promise((resolve, reject) => {
-    return resolve(tokenMock);
-    // });
+    // apply this.filter to actual request
+    return tokenMock;
   }
 }
-
-export {
-  Negociator
-};

@@ -18,7 +18,7 @@ const useStyles = makeStyles({
   },
 });
 
-function MediaCard({ tokenInstance }) {
+function MediaCard({ tokenInstance, selectVIPEventHandler }) {
   const classes = useStyles();
   return (
     <Card className="card">
@@ -42,7 +42,7 @@ function MediaCard({ tokenInstance }) {
       </CardActionArea>
       <CardActions>
         {tokenInstance.token.ticketClass === "VIP" &&
-          <Button size="small" color="primary">
+          <Button size="small" color="primary" onClick={e => selectVIPEventHandler({ ticket: tokenInstance })}>
             ENTER VIP
         </Button>
         }
