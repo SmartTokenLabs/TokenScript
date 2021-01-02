@@ -37,6 +37,11 @@ export class Negociator {
       return JSON.parse(token).ticket;
     });
 
+    // TODO's - inside the filter below
+    // If the URL has the blob; ticket.devcon.org/ticket?base64BlobHere (1 ticket)
+    // - Check if it is different than what is stored locally (local storage)
+    // - Store the ticket in local storage / replace the old with this new, if one previosly existed
+
     // filter out any duplicate tickets
     let idList = [];
     const output = tickets.filter((ticket) => {

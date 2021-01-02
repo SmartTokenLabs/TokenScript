@@ -5,6 +5,16 @@
 https://web3js.readthedocs.io/en/v1.2.0/web3-eth-accounts.html#id15
 https://github.com/ethereumjs/ethereumjs-util
 
+## Deliverable TODO's
+
+1. Localstorage / query string simulation (must review flow with Weiwu)
+2. React & Vanilla JS-Html (modern and traditional approaches etc)
+3. NPM & Dist (modern and traditional approaches etc)
+
+// 2 and 3 are perhaps nice to have for Devcon (however my aim is to provide both)
+// Attestation Github (Git or NPM code in here)
+// Negociator Github (needs to consume the Attestation Git or NPM code)
+
 ## Example ticket data
 
 ````
