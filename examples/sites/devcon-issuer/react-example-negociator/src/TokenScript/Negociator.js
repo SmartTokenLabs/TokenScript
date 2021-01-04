@@ -11,6 +11,8 @@ export class Negociator {
   // Get the token instances (with filter)
   async getTokenInstances() {
 
+    debugger;
+
     // Get ticket from params
     const urlParams = new URLSearchParams(window.location.search);
     const ticketFromQuery = urlParams.get('ticket');
@@ -27,9 +29,10 @@ export class Negociator {
     // Check if ticket is valid (rules)
     const isValidTicket = (
       ticketFromQueryParsed &&
-      ticketFromQueryParsed.ticketId &&
-      ticketFromQueryParsed.ticketClass &&
-      ticketFromQueryParsed.devconId
+      ticketFromQueryParsed.ticket &&
+      ticketFromQueryParsed.ticket.ticketId &&
+      ticketFromQueryParsed.ticket.ticketClass &&
+      ticketFromQueryParsed.ticket.devconId
     );
 
     if (isValidTicket) {
@@ -43,7 +46,7 @@ export class Negociator {
       // Build new list of tickets from current and query ticket
       tokensParsed.map((tokenParsed) => {
         // If the same as a previous ticket - replace with the new ticket
-        if (tokenParsed.ticketId === ticketFromQueryParsed.ticketId) {
+        if (tokenParsed.ticket.ticketId === ticketFromQueryParsed.ticket.ticketId) {
           tickets.push(ticketFromQueryParsed);
           isNewQueryTicket = false;
         } else {
