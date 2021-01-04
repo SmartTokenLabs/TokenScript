@@ -20,24 +20,22 @@ function MediaCard({ tokenInstance }) {
   const classes = useStyles();
   return (
     <Card className="card">
-      <CardActionArea>
-        <CardMedia
-          className={classes.media}
-          image="./mock.png"
-          title="token"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            {tokenInstance.ticketClass}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            Ticket Id: {tokenInstance.ticketId}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            Devcon Id: {tokenInstance.devconId}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
+      <CardMedia
+        className={classes.media}
+        image="./mock.png"
+        title="token"
+      />
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="h2">
+          {tokenInstance.ticketClass}
+        </Typography>
+        <Typography variant="body2" color="textSecondary" component="p">
+          Ticket Id: {tokenInstance.ticketId}
+        </Typography>
+        <Typography variant="body2" color="textSecondary" component="p">
+          Devcon Id: {tokenInstance.devconId}
+        </Typography>
+      </CardContent>
     </Card>
   );
 }
