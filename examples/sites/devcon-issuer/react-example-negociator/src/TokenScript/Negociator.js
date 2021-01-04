@@ -11,8 +11,6 @@ export class Negociator {
   // Get the token instances (with filter)
   async getTokenInstances() {
 
-    debugger;
-
     // Get ticket from params
     const urlParams = new URLSearchParams(window.location.search);
     const ticketFromQuery = urlParams.get('ticket');
