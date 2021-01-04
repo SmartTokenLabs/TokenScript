@@ -23,12 +23,7 @@ function App() {
     ]
   );
   useEffect(() => {
-
-    // 1. onload of page, read from query string
-    // 2. store the data into Local Storage [ticket, ticket, ticket]
-    // 3. webster uses an API method to pull down the tickets, { friendly JSON }
-    // 4. webster loads the data into Front End Stylised web page
-
+    // to confirm the task of negociate() in comparison to getTokenInstances()
     negociator.negociate().then(status => {
       // onload of component, get tokens.
       negociator.getTokenInstances().then((tokens) => {
