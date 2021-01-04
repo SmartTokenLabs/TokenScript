@@ -2,10 +2,12 @@ export class Negociator {
   constructor(filter) {
     this.filter = filter;
   }
+
   // Modal / Auto Attestation
   async negociate() {
     return true;
   }
+
   // Get the token instances (with filter)
   async getTokenInstances() {
 
@@ -13,43 +15,64 @@ export class Negociator {
     const urlParams = new URLSearchParams(window.location.search);
     const ticketFromQuery = urlParams.get('ticket');
 
-    // ticketFromQuery format checking - TODO
-    // ...
-
     // Get the current Storage Tokens
     const storageTokens = localStorage.getItem('dcTokens');
 
     // Parse into JS
     let tokensParsed = storageTokens ? JSON.parse(storageTokens) : [];
 
-    if (ticketFromQuery) {
-      // Add New Ticket to array
-      tokensParsed.push(ticketFromQuery);
+    // Parse ticket for validation
+    const ticketFromQueryParsed = JSON.parse(ticketFromQuery);
+
+    // Check if ticket is valid (rules)
+    const isValidTicket = (
+      ticketFromQueryParsed &&
+      ticketFromQueryParsed.ticketId &&
+      ticketFromQueryParsed.ticketClass &&
+      ticketFromQueryParsed.devconId
+    );
+
+    if (isValidTicket) {
+
+      // Store the filtered tickets
+      const tickets = [];
+
+      // If the ticket from the query is new / or to replace an existing ticket
+      let isNewQueryTicket = true;
+
+      // Build new list of tickets from current and query ticket
+      tokensParsed.map((tokenParsed) => {
+        // If the same as a previous ticket - replace with the new ticket
+        if (tokenParsed.ticketId === ticketFromQueryParsed.ticketId) {
+          tickets.push(ticketFromQueryParsed);
+          isNewQueryTicket = false;
+        } else {
+          tickets.push(tokenParsed);
+        }
+      });
+
+      // Add ticket if new
+      if (isNewQueryTicket) {
+        tickets.push(ticketFromQueryParsed);
+      }
+
       // Set New tokens list
-      localStorage.setItem('dcTokens', JSON.stringify(tokensParsed));
+      localStorage.setItem('dcTokens', JSON.stringify(tickets));
     }
 
-    // Get New tokens list
+    // Get New tokens list (with possible new addition)
     const newStorageTokens = localStorage.getItem('dcTokens');
 
-    // web friendly data (transformed)
-    const tickets = JSON.parse(newStorageTokens).map((token) => {
-      return JSON.parse(token).ticket;
-    });
+    if (newStorageTokens) {
+      // return web friendly data for webster (ticket only)
+      return JSON.parse(newStorageTokens).map((token) => {
+        if (typeof (token) === 'string') return JSON.parse(token).ticket;
+        else return token.ticket;
+      });
+    } else {
+      // No tickets
+      return [];
+    }
 
-    // TODO's - inside the filter below
-    // If the URL has the blob; ticket.devcon.org/ticket?base64BlobHere (1 ticket)
-    // - Check if it is different than what is stored locally (local storage)
-    // - Store the ticket in local storage / replace the old with this new, if one previosly existed
-
-    // filter out any duplicate tickets
-    let idList = [];
-    const output = tickets.filter((ticket) => {
-      if (idList.indexOf(ticket.ticketId) > -1) return false;
-      idList.push(ticket.ticketId);
-      return true;
-    });
-
-    return output;
   }
 }
