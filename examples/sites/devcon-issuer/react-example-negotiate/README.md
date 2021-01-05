@@ -13,7 +13,9 @@ https://github.com/ethereumjs/ethereumjs-util
 
 // 2 and 3 are perhaps nice to have for Devcon (however my aim is to provide both)
 // Attestation Github (Git or NPM code in here)
-// Negociator Github (needs to consume the Attestation Git or NPM code)
+// Negotiator Github (needs to consume the Attestation Git or NPM code)
+
+
 
 ## Demo front end to simulate ticket recieved from email
 

@@ -1,10 +1,10 @@
-export class Negociator {
+export class Negotiator {
   constructor(filter) {
     this.filter = filter;
   }
 
   // Modal / Auto Attestation
-  async negociate() {
+  async negotiate() {
     return true;
   }
 

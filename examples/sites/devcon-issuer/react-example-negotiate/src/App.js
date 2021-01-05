@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Negociator } from './TokenScript';
+import { Negotiator } from './TokenScript';
 import Web3 from 'web3';
 import Card from './Card';
 import Modal from './Modal';
@@ -12,17 +12,17 @@ function App() {
   // local State: tokens[], setTokens: Method to update the state of tokens.
   let [tokens, setTokens] = useState([]);
   // instantiate singleton instance using SQL style filters
-  const negociator = new Negociator(
+  const negotiator = new Negotiator(
     [
       "tickets",
       "expiry > today"
     ]
   );
   useEffect(() => {
-    // to confirm the task of negociate() in comparison to getTokenInstances()
-    negociator.negociate().then(status => {
+    // to confirm the task of negotiate() in comparison to getTokenInstances()
+    negotiator.negotiate().then(status => {
       // onload of component, get tokens.
-      negociator.getTokenInstances().then((tokens) => {
+      negotiator.getTokenInstances().then((tokens) => {
         // react event to update state of tokens, component re-renders to show the latest tokens.
         setTokens(tokens);
       }, (error) => {
