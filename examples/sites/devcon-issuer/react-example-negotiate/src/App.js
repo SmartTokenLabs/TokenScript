@@ -6,7 +6,6 @@ import Modal from './Modal';
 import './App.css';
 
 function App() {
-
   // Connect to Ganache
   let web3 = new Web3('HTTP://127.0.0.1:7545');
   // local State: tokens[], setTokens: Method to update the state of tokens.
@@ -23,6 +22,7 @@ function App() {
     negotiator.negotiate().then(status => {
       // onload of component, get tokens.
       negotiator.getTokenInstances().then((tokens) => {
+        debugger;
         // react event to update state of tokens, component re-renders to show the latest tokens.
         setTokens(tokens);
       }, (error) => {
