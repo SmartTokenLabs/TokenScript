@@ -22,7 +22,6 @@ function App() {
     negotiator.negotiate().then(status => {
       // onload of component, get tokens.
       negotiator.getTokenInstances().then((tokens) => {
-        debugger;
         // react event to update state of tokens, component re-renders to show the latest tokens.
         setTokens(tokens);
       }, (error) => {
