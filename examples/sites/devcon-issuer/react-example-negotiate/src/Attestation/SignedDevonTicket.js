@@ -9,7 +9,7 @@ import {
 import { getParametersValue, clearProps, bufferToHexCodes } from "pvutils";
 import AlgorithmIdentifier from "./AlgorithmIdentifier.js";
 import PublicKeyInfo from "./PublicKeyInfo.js";
-import BigInt from "bigint-polyfill";
+import BigInt from "big-integer";
 
 export class DevconTicket {
   //**********************************************************************************
@@ -89,17 +89,17 @@ export class DevconTicket {
 
     if ("devconId" in asn1.result) {
       const devconId = asn1.result["devconId"].valueBlock._valueHex;
-      this.devconId = new BigInt("0x" + bufferToHexCodes(devconId));
+      this.devconId = BigInt("0x" + bufferToHexCodes(devconId)).value;
     }
 
     if ("ticketId" in asn1.result) {
       const ticketId = asn1.result["ticketId"].valueBlock._valueHex
-      this.ticketId = new BigInt("0x" + bufferToHexCodes(ticketId));
+      this.ticketId = BigInt("0x" + bufferToHexCodes(ticketId)).value;
     }
 
     if ("ticketClass" in asn1.result) {
       const ticketClass = asn1.result["ticketClass"].valueBlock._valueHex;
-      this.ticketClass = new BigInt("0x" + bufferToHexCodes(ticketClass));
+      this.ticketClass = BigInt("0x" + bufferToHexCodes(ticketClass)).value;
     }
 
     //endregion
