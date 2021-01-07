@@ -11,10 +11,10 @@ test('Negotiator provides the correctly given filters', () => {
 // test('Negotiator provides token from local storage', async () => {
 //   localStorage.setItem('dcTokens', '[]');
 //   const negotiator = new Negotiator(["tickets", "expiry > today"]);
-//   var ticketStored = [{ "ticket": "MIGbMA0CAQYCBWE3ap3-AgEABEEEEjVknVv9Kf7F2Ftt6QVO3I02eRadiE1kJ6kvr934-TApOLZxrh5GL3jLoEz9Jv42FspPv-LHFa6M9AaOuLAvIgNHADBEAiBwLK_95NPZo0W01HDBfyZisZ2KaNrzoWuxRV-nhjGLMAIgaOP4eVVINH5xM8Cv9OVDdyOG3BxUqyPVQOuDU9PaC9o=", "secret": "45845870684" }];
+//   var ticketStored = '[{"ticket":"MIGbMA0CAQYCBWE3ap3-AgEABEEEEjVknVv9Kf7F2Ftt6QVO3I02eRadiE1kJ6kvr934-TApOLZxrh5GL3jLoEz9Jv42FspPv-LHFa6M9AaOuLAvIgNHADBEAiBwLK_95NPZo0W01HDBfyZisZ2KaNrzoWuxRV-nhjGLMAIgaOP4eVVINH5xM8Cv9OVDdyOG3BxUqyPVQOuDU9PaC9o=","secret":"45845870684"}]';
 //   localStorage.setItem('dcTokens', ticketStored);
 //   const tickets = await negotiator.getTokenInstances();
-//   expect(tickets).toEqual(); //[{ "devconId": "6n", "ticketId": "48646n", "ticketClass": "0n" }]);
+//   expect(tickets).toEqual([{ "devconId": "6n", "ticketId": "48646n", "ticketClass": "0n" }]);
 // });
 
 // test('Negotiator, ensure Query string ticket can be added', async () => {

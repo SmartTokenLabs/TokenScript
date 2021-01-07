@@ -3008,10 +3008,22 @@ bfj@^7.0.2:
     hoopy "^0.1.4"
     tryer "^1.0.1"
 
+big-integer@^1.6.36:
+  version "1.6.48"
+  resolved "https://registry.yarnpkg.com/big-integer/-/big-integer-1.6.48.tgz#8fd88bd1632cba4a1c8c3e3d7159f08bb95b4b9e"
+  integrity sha512-j51egjPa7/i+RdiRuJbPdJ2FIUYYPhvYLjzoYbcMMm62ooO6F94fETG4MTs46zPAF9Brs04OajboA/qTGuz78w==
+
 big.js@^5.2.2:
   version "5.2.2"
   resolved "https://registry.yarnpkg.com/big.js/-/big.js-5.2.2.tgz"
   integrity sha512-vyL2OymJxmarO8gxMr0mhChsO9QGwhynfuu4+MHTAW6czfq9humCB7rKpUjDd9YUiDPU4mzpyupFSvOClAwbmQ==
+
+bigint-polyfill@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/bigint-polyfill/-/bigint-polyfill-0.1.0.tgz#3b99c5966f122cce2339f75504600a89a53bf432"
+  integrity sha512-Rk66dtfZzdBUcFZC4xjysOr/o1nvxVrxSVWCtXjLBFeGMH9xi+60myTQNhc3IazCTD0LQE+4awxQYawSvtYc6g==
+  dependencies:
+    big-integer "^1.6.36"
 
 bignumber.js@^9.0.0:
   version "9.0.1"

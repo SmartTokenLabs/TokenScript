@@ -51,7 +51,7 @@ export class Negotiator {
           // Decoded string to JS Object
           const storedTicketObject = new SignedDevconTicket(ticketBlob.ticket);
           // If the same as a previous ticket - replace with the new ticket
-          if (storedTicketObject.ticket.ticketId === ticketObject.ticketId) {
+          if (storedTicketObject.ticket.ticketId == ticketObject.ticketId) {
             // If new push the DER of the ticket into localstorage
             tickets.raw.push({ ticket: ticketFromQuery, secret: secretFromQuery });
             // Push a js object
