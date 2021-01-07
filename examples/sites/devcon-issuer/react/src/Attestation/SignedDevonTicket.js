@@ -89,17 +89,17 @@ export class DevconTicket {
 
     if ("devconId" in asn1.result) {
       const devconId = asn1.result["devconId"].valueBlock._valueHex;
-      this.devconId = BigInt("0x" + bufferToHexCodes(devconId)).value;
+      this.devconId = new BigInt("0x" + bufferToHexCodes(devconId)).value;
     }
 
     if ("ticketId" in asn1.result) {
       const ticketId = asn1.result["ticketId"].valueBlock._valueHex
-      this.ticketId = BigInt("0x" + bufferToHexCodes(ticketId)).value;
+      this.ticketId = new BigInt("0x" + bufferToHexCodes(ticketId)).value;
     }
 
     if ("ticketClass" in asn1.result) {
       const ticketClass = asn1.result["ticketClass"].valueBlock._valueHex;
-      this.ticketClass = BigInt("0x" + bufferToHexCodes(ticketClass)).value;
+      this.ticketClass = new BigInt("0x" + bufferToHexCodes(ticketClass)).value;
     }
 
     //endregion

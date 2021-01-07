@@ -1,5 +1,27 @@
 // https://github.com/TokenScript/attestation/blob/main/src/main/javascript/SignedDevonTicket.js
 import { SignedDevconTicket } from './../Attestation/SignedDevonTicket';
+import { generateKey, encrypt, pack, unpack, decrypt } from './Crypto';
+
+// Example Use
+// const app = async () => {
+//   // encrypt message
+//   const first = 'Hello, World!'
+//   const key = await generateKey()
+//   const { cipher, iv } = await encrypt(first, key)
+//   // pack and transmit
+//   await fetch('/secure-api', {
+//     method: 'POST',
+//     body: JSON.stringify({
+//       cipher: pack(cipher),
+//       iv: pack(iv),
+//     }),
+//   })
+//   // retrieve
+//   const response = await fetch('/secure-api').then(res => res.json())
+//   // unpack and decrypt message
+//   const final = await decrypt(unpack(response.cipher), key, unpack(response.iv))
+//   console.log(final) // logs 'Hello, World!'
+// }
 
 export class Negotiator {
   constructor(filter) {
@@ -11,12 +33,32 @@ export class Negotiator {
     return true;
   }
 
+  async negotiate() {
+    return true;
+  }
+
+  // Example of how to decrypt the secret
+  async getTokenSecret(encryptedSecret, key = window.location.origin) {
+    const encryptedSecretObject = JSON.parse(encryptedSecret);
+    const secret = await decrypt(unpack(out.cipher), key, unpack(out.iv))
+    return secret;
+  }
+
   // Get the token instances (with filter)
-  async getTokenInstances() {
+  async getTokenInstances(key = window.location.origin) {
     // Get ticket from params - to add to local storage / read into app
     const urlParams = new URLSearchParams(window.location.search);
     const ticketFromQuery = urlParams.get('ticket');
     const secretFromQuery = urlParams.get('secret');
+
+    // Encrypt the secret
+    // const key = await generateKey(); // 
+    const { cipher, iv } = await encrypt(secretFromQuery, key);
+    const encryptedSecret = JSON.stringify({
+      cipher: pack(cipher),
+      iv: pack(iv),
+    });
+
     // Get the current Storage Tokens (DER format)
     const storageTickets = localStorage.getItem('dcTokens');
     // Decode the current ticket (DER format)
@@ -53,7 +95,7 @@ export class Negotiator {
           // If the same as a previous ticket - replace with the new ticket
           if (storedTicketObject.ticket.ticketId == ticketObject.ticketId) {
             // If new push the DER of the ticket into localstorage
-            tickets.raw.push({ ticket: ticketFromQuery, secret: secretFromQuery });
+            tickets.raw.push({ ticket: ticketFromQuery, secret: encryptedSecret });
             // Push a js object
             tickets.web.push({
               devconId: ticketObject.devconId.toString(),
@@ -74,7 +116,7 @@ export class Negotiator {
       }
       // Add ticket if new
       if (isNewQueryTicket) {
-        tickets.raw.push({ ticket: ticketFromQuery, secret: secretFromQuery }); // new raw object
+        tickets.raw.push({ ticket: ticketFromQuery, secret: encryptedSecret }); // new raw object
         tickets.web.push({
           devconId: ticketObject.devconId.toString(),
           ticketId: ticketObject.ticketId.toString(),
@@ -98,7 +140,6 @@ export class Negotiator {
         });
       }
     }
-
     // Return tickets for web
     return tickets.web;
   }
