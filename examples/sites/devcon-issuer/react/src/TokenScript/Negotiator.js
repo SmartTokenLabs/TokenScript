@@ -100,6 +100,6 @@ export class Negotiator {
     }
 
     // Return tickets for web
-    return tickets.web ? tickets.web : [];
+    return tickets.web;
   }
 }
