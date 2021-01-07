@@ -6,7 +6,6 @@ test('Negotiator provides the correctly given filters', () => {
   expect(negotiator.filter).toEqual(['tickets', 'expiry > today']);
 });
 
-// Issue with this test, will skip for now, on the basis that this is an intermediatory
 // code implementation before using the full signed ticket att method
 // test('Negotiator provides token from local storage', async () => {
 //   localStorage.setItem('dcTokens', '[]');

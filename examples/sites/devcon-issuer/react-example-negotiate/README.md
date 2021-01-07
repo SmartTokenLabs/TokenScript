@@ -1,27 +1,21 @@
 # example 
 
-## dev resources
+## Developer Getting Started
 
-https://web3js.readthedocs.io/en/v1.2.0/web3-eth-accounts.html#id15
-https://github.com/ethereumjs/ethereumjs-util
+1. From this directory, run `yarn` or `npm install`
+2. To start the development server run `yarn start`
+3. To see the development server running go to localhost:3000
+4. To simulate a ticket loading inside the page, open the url below:
 
-## Deliverable TODO's
+````
+http://localhost:3000/?ticket=MIGbMA0CAQYCBWE3ap3-AgEABEEEEjVknVv9Kf7F2Ftt6QVO3I02eRadiE1kJ6kvr934-TApOLZxrh5GL3jLoEz9Jv42FspPv-LHFa6M9AaOuLAvIgNHADBEAiBwLK_95NPZo0W01HDBfyZisZ2KaNrzoWuxRV-nhjGLMAIgaOP4eVVINH5xM8Cv9OVDdyOG3BxUqyPVQOuDU9PaC9o=&secret=45845870684
 
-1. Localstorage / query string simulation (must review flow with Weiwu) (done)
-2. React & Vanilla JS-Html (modern and traditional approaches etc) (react done / vanilla todo once confirmed the react is correct)
-3. NPM & Dist (modern and traditional approaches etc) (todo)
+````
 
-// 2 and 3 are perhaps nice to have for Devcon (however my aim is to provide both)
+5. To build the applicatin run `yarn build`
+6. To test the application run `yarn test`
 
-// Attestation Github (Git or NPM code in here)
-// Negotiator Github (needs to consume the Attestation Git or NPM code)
-// Nick-T to utilise this: username/repo#branch-name
-
-## Demo front end to simulate ticket recieved from email
-
-For testing (copy this into the url bar once the application is being served):
-
-### Latest structure
+### Latest structures
 
 ````
 
@@ -31,7 +25,7 @@ http://localhost:3000/?ticket=MIGbMA0CAQYCBWE3ap3-AgEABEEEEjVknVv9Kf7F2Ftt6QVO3I
 
 ````
 
-### new stucture (decoded)
+### Latest stucture (decoded version)
 
 ````
 
@@ -77,6 +71,25 @@ window.addEventListener('tokenEvent', function (e) { console.log('e') }, false);
 window.dispatchEvent(event);
 
 ````
+
+## dev resources and previous notes
+
+- resources:
+
+https://web3js.readthedocs.io/en/v1.2.0/web3-eth-accounts.html#id15
+https://github.com/ethereumjs/ethereumjs-util
+
+- Todo's:
+
+1. Localstorage / query string simulation (must review flow with Weiwu) (done)
+2. React & Vanilla JS-Html (modern and traditional approaches etc) (react done / vanilla todo once confirmed the react is correct)
+3. NPM & Dist (modern and traditional approaches etc) (todo)
+
+// 2 and 3 are perhaps nice to have for Devcon (however my aim is to provide both)
+
+// Attestation Github (Git or NPM code in here)
+// Negotiator Github (needs to consume the Attestation Git or NPM code)
+// Nick-T to utilise this: username/repo#branch-name
 
 # react specifics below
 
