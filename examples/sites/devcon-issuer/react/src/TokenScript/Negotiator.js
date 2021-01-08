@@ -2,27 +2,6 @@
 import { SignedDevconTicket } from './../Attestation/SignedDevonTicket';
 import { generateKey, encrypt, pack, unpack, decrypt } from './Crypto';
 
-// Example Use
-// const app = async () => {
-//   // encrypt message
-//   const first = 'Hello, World!'
-//   const key = await generateKey()
-//   const { cipher, iv } = await encrypt(first, key)
-//   // pack and transmit
-//   await fetch('/secure-api', {
-//     method: 'POST',
-//     body: JSON.stringify({
-//       cipher: pack(cipher),
-//       iv: pack(iv),
-//     }),
-//   })
-//   // retrieve
-//   const response = await fetch('/secure-api').then(res => res.json())
-//   // unpack and decrypt message
-//   const final = await decrypt(unpack(response.cipher), key, unpack(response.iv))
-//   console.log(final) // logs 'Hello, World!'
-// }
-
 export class Negotiator {
   constructor(filter) {
     this.filter = filter;
@@ -38,9 +17,11 @@ export class Negotiator {
   }
 
   // Example of how to decrypt the secret
-  async getTokenSecret(encryptedSecret, key = window.location.origin) {
+  async getTokenSecret(ticket) {
+    const encryptedSecret = ticket.secret;
+    const ticketKey = ticket.key;
     const encryptedSecretObject = JSON.parse(encryptedSecret);
-    const secret = await decrypt(unpack(out.cipher), key, unpack(out.iv))
+    const secret = await decrypt(unpack(encryptedSecretObject.cipher), ticketKey, unpack(encryptedSecretObject.iv))
     return secret;
   }
 
@@ -52,8 +33,8 @@ export class Negotiator {
     const secretFromQuery = urlParams.get('secret');
 
     // Encrypt the secret
-    // const key = await generateKey(); // 
-    const { cipher, iv } = await encrypt(secretFromQuery, key);
+    const ticketKey = await generateKey();
+    const { cipher, iv } = await encrypt(secretFromQuery, ticketKey);
     const encryptedSecret = JSON.stringify({
       cipher: pack(cipher),
       iv: pack(iv),
@@ -116,7 +97,7 @@ export class Negotiator {
       }
       // Add ticket if new
       if (isNewQueryTicket) {
-        tickets.raw.push({ ticket: ticketFromQuery, secret: encryptedSecret }); // new raw object
+        tickets.raw.push({ ticket: ticketFromQuery, secret: encryptedSecret, key: ticketKey }); // new raw object
         tickets.web.push({
           devconId: ticketObject.devconId.toString(),
           ticketId: ticketObject.ticketId.toString(),
