@@ -16,12 +16,11 @@ export class Negotiator {
     return true;
   }
 
+  // https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/exportKey
   // Example of how to decrypt the secret
-  async getTokenSecret(ticket) {
-    const encryptedSecret = ticket.secret;
-    const ticketKey = ticket.key;
-    const encryptedSecretObject = JSON.parse(encryptedSecret);
-    const secret = await decrypt(unpack(encryptedSecretObject.cipher), ticketKey, unpack(encryptedSecretObject.iv))
+  async getTokenSecret(ticket, ticketKey) {
+    const encryptedSecretObject = JSON.parse(ticket.secret);
+    const secret = await decrypt(unpack(encryptedSecretObject.cipher), ticketKey, unpack(encryptedSecretObject.iv));
     return secret;
   }
 
@@ -97,7 +96,7 @@ export class Negotiator {
       }
       // Add ticket if new
       if (isNewQueryTicket) {
-        tickets.raw.push({ ticket: ticketFromQuery, secret: encryptedSecret, key: ticketKey }); // new raw object
+        tickets.raw.push({ ticket: ticketFromQuery, secret: encryptedSecret }); // new raw object
         tickets.web.push({
           devconId: ticketObject.devconId.toString(),
           ticketId: ticketObject.ticketId.toString(),
@@ -121,6 +120,9 @@ export class Negotiator {
         });
       }
     }
+
+    await this.getTokenSecret(tickets.raw[0], ticketKey);
+
     // Return tickets for web
     return tickets.web;
   }
