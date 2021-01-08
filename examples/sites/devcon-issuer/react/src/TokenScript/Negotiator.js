@@ -26,7 +26,7 @@ export class Negotiator {
   }
 
   // Get the token instances (with filter)
-  async getTokenInstances(key = window.location.origin) {
+  async getTokenInstances() {
     // Get ticket from params - to add to local storage / read into app
     const urlParams = new URLSearchParams(window.location.search);
     const ticketFromQuery = urlParams.get('ticket');
