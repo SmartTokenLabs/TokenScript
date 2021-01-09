@@ -5,9 +5,8 @@ export const Authenticator = {
     tokenMock[0].token.ownerAddress = 2;
     return tokenMock[0].token.ownerAddress;
   },
-  getAuthenticationBlob: async (ticketObject) => {
-    // useTicketProof
-    return ticketObject.ticket;
+  getAuthenticationBlob: async (ticket) => {
+    return ticket;
   },
   assetOwnerAddress: async () => {
     return true;
