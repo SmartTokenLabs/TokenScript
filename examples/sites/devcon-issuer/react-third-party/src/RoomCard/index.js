@@ -19,7 +19,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function MediaCard({ room }) {
+export default function MediaCard({ room, discountApplied }) {
   const classes = useStyles();
   const { type, price, discountPrice, image, frequency } = room;
   return (
@@ -34,9 +34,22 @@ export default function MediaCard({ room }) {
           <Typography gutterBottom variant="h5" component="h2">
             {type}
           </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            ${price} / {frequency}
-          </Typography>
+          {discountApplied === false &&
+            <Typography variant="body2" color="textSecondary" component="p">
+              ${price} / {frequency}
+            </Typography>
+          }
+          {discountApplied === true &&
+            <div>
+              <Typography style={{ textDecoration: "line-through" }} variant="body2" color="textSecondary" component="span">
+                ${price}
+              </Typography>
+              <span> </span>
+              <Typography variant="body2" color="textSecondary" component="span">
+                ${discountPrice} / {frequency}
+              </Typography>
+            </div>
+          }
         </CardContent>
       </CardActionArea>
       <CardActions>
