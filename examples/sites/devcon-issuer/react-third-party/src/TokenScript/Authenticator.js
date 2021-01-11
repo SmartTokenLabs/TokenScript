@@ -1,18 +1,9 @@
-import tokenMock from './tokenMock';
-
 export const Authenticator = {
-  findOwner: async () => {
-    tokenMock[0].token.ownerAddress = 2;
-    return tokenMock[0].token.ownerAddress;
-  },
-  getAuthenticationBlob: async (ticket) => {
-    return ticket;
-  },
-  assetOwnerAddress: async () => {
-    return true;
+  getAuthenticationBlob: async ({ ticket }) => {
+    return btoa(ticket.ticketId);
   },
   fetchChallenge: async () => {
-    fetch('./Authentication/getChallenge.json',
+    return fetch('./Authentication/getChallenge.json',
       {
         method: 'GET',
         headers: {
@@ -21,27 +12,28 @@ export const Authenticator = {
       })
       .then(response => response.json())
       .then(data => {
-        console.log('Success:', data);
+        return data.value;
       })
       .catch((error) => {
         console.error('Error:', error);
       });
   },
-  signChallenge: async (useTicketProof, challenge) => {
-    // signedMsg
+  signChallenge: async ({ useTicketProof, challenge }) => {
     return `{challenge: ${challenge}, proof: ${atob(useTicketProof)}}`;
   },
-  sendChallenge: async () => {
-    fetch('./Authentication/validChallenge.json', {
-      method: 'POST',
-      body: signedMsg
+  sendChallenge: async ({ signedMsg }) => {
+    return fetch('./Authentication/validChallenge.json', {
+      method: 'GET', // POST for actual app (can't use POST in this simple mock example)
+      // body: signedMsg // body used for actual app (can't use POST in this simple mock example)
     })
       .then(response => response.json())
-      .then(result => {
-        console.log('Success:', result);
+      .then(data => {
+        return data.value;
       })
       .catch(error => {
         console.error('Error:', error);
       });
-  }
+  },
+  assetOwnerAddress: async () => { }, // return; to confirm the function of this
+  findOwner: async () => { }, // return ownerAddress
 }

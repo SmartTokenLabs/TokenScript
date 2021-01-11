@@ -56,18 +56,18 @@ export class Negotiator {
             tickets.raw.push({ ticket: ticketFromQuery, secret: secretFromQuery });
             // Push a js object
             tickets.web.push({
-              devconId: ticketObject.devconId.toString(),
-              ticketId: ticketObject.ticketId.toString(),
-              ticketClass: ticketObject.ticketClass.toString()
+              devconId: ticketObject.devconId,
+              ticketId: ticketObject.ticketId,
+              ticketClass: ticketObject.ticketClass
             });
             isNewQueryTicket = false;
           } else {
             // Else push the original DER - Check this is correct.
             tickets.raw.push(ticketBlob); // contains the ticket and secret
             tickets.web.push({
-              devconId: storedTicketObject.ticket.devconId.toString(),
-              ticketId: storedTicketObject.ticket.ticketId.toString(),
-              ticketClass: storedTicketObject.ticket.ticketClass.toString()
+              devconId: storedTicketObject.ticket.devconId,
+              ticketId: storedTicketObject.ticket.ticketId,
+              ticketClass: storedTicketObject.ticket.ticketClass
             });
           }
         });
@@ -76,9 +76,9 @@ export class Negotiator {
       if (isNewQueryTicket) {
         tickets.raw.push({ ticket: ticketFromQuery, secret: secretFromQuery }); // new raw object
         tickets.web.push({
-          devconId: ticketObject.devconId.toString(),
-          ticketId: ticketObject.ticketId.toString(),
-          ticketClass: ticketObject.ticketClass.toString()
+          devconId: ticketObject.devconId,
+          ticketId: ticketObject.ticketId,
+          ticketClass: ticketObject.ticketClass
         });
       }
       // Set New tokens list raw only, websters will be decoded each time
@@ -91,9 +91,9 @@ export class Negotiator {
           // Push the original DER
           tickets.raw.push(ticketBlob);
           tickets.web.push({
-            devconId: storedTicketObject.ticket.devconId.toString(),
-            ticketId: storedTicketObject.ticket.ticketId.toString(),
-            ticketClass: storedTicketObject.ticket.ticketClass.toString()
+            devconId: storedTicketObject.ticket.devconId,
+            ticketId: storedTicketObject.ticket.ticketId,
+            ticketClass: storedTicketObject.ticket.ticketClass
           });
         });
       }
