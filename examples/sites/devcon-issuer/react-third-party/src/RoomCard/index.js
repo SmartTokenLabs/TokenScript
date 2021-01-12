@@ -5,7 +5,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
+import BookingModal from './../BookingModal';
 import Typography from '@material-ui/core/Typography';
 import './Card.css';
 
@@ -36,26 +36,24 @@ export default function MediaCard({ room, discountApplied }) {
           </Typography>
           {discountApplied === false &&
             <Typography variant="body2" color="textSecondary" component="p">
-              ${price} / {frequency}
+              {price} ETH / {frequency}
             </Typography>
           }
           {discountApplied === true &&
             <div>
               <Typography style={{ textDecoration: "line-through" }} variant="body2" color="textSecondary" component="span">
-                ${price}
+                {price} ETH
               </Typography>
               <span> </span>
               <Typography variant="body2" color="textSecondary" component="span">
-                ${discountPrice} / {frequency}
+                ${discountPrice} ETH / {frequency}
               </Typography>
             </div>
           }
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
-          Book
-        </Button>
+        <BookingModal roomType={type} discountApplied={discountApplied} price={discountApplied ? discountPrice : price} />
       </CardActions>
     </Card>
   );

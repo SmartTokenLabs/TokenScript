@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import { Negotiator, Authenticator } from './TokenScript';
 import LogoCard from './LogoCard';
-import Drawer from './Drawer';
 import RoomCard from './RoomCard';
 import Typography from '@material-ui/core/Typography';
 import roomTypesData from './roomTypesDataMock.json';
@@ -23,7 +22,10 @@ function App() {
   }
   // 3. listen for ticket changes and apply to view on change
   window.document.addEventListener('ticketsRecievedEvent', handleEvent, false)
-  function handleEvent(e) { setTokens(e.detail) };
+  function handleEvent(e) {
+    setDiscountApplied(true);
+    setTokens(e.detail)
+  };
   // 4. webster selects to apply discount
   const applyDiscount = async (ticket) => {
     // 5. attestation is triggered
@@ -46,39 +48,26 @@ function App() {
           return <RoomCard key={index} room={room} discountApplied={discountApplied} />
         })}
       </div>
-
-      <div className="discountOptionContainer">
-        {!discountApplied &&
-          <div className="discountContainer">
-            <Typography className="discountCopyContainer" gutterBottom variant="body2" component="p">
-              Do you have a Devcon VI ticket?
-          </Typography>
-            <div className="discountButtonContainer">
-              <Drawer tokens={tokens} applyDiscount={applyDiscount} />
-            </div>
-          </div>
-        }
-        {discountApplied &&
-          <div>
-            <div className="ethScale">
-              <div id="space">
-                <div className="elogo">
-                  <div className="trif u1"></div>
-                  <div className="trif u2"></div>
-                  <div className="trif u3"></div>
-                  <div className="trif u4"></div>
-                  <div className="ct"></div>
-                  <div className="trif l1"></div>
-                  <div className="trif l4"></div>
-                </div>
+      {discountApplied &&
+        <div>
+          {/* <div className="ethScale">
+            <div id="space">
+              <div className="elogo">
+                <div className="trif u1"></div>
+                <div className="trif u2"></div>
+                <div className="trif u3"></div>
+                <div className="trif u4"></div>
+                <div className="ct"></div>
+                <div className="trif l1"></div>
+                <div className="trif l4"></div>
               </div>
             </div>
-            <Typography className="applyDiscountCopyContainer" gutterBottom variant="body2" component="p">
-              Your discount has been applied! Enjoy the event from us.
-            </Typography>
-          </div>
-        }
-      </div>
+          </div> */}
+          <Typography className="applyDiscountCopyContainer" gutterBottom variant="body2" component="p">
+            Devcon discount applied! Enjoy the event.
+          </Typography>
+        </div>
+      }
     </div>
   );
 }

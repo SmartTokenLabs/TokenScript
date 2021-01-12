@@ -2,6 +2,11 @@
   width: 1px; 
   height: 1px;
   opacity: 0;
+  visibility: hidden;
+}
+
+.MuiFormControl-root {
+  width: 100%;
 }
 
 .roomCardsContainer {
