@@ -5,11 +5,11 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
-import './Card.css';
+import './logoCard.css';
 
 function MediaCard({ title }) {
   return (
-    <Card className="card">
+    <Card className="logoCard">
       <CardContent>
         <Typography gutterBottom variant="h1" component="h1">
           {title}

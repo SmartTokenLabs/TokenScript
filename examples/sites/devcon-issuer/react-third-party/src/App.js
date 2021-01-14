@@ -11,7 +11,10 @@ function App() {
   // let web3 = new Web3('HTTP://127.0.0.1:7545');
   let [tokens, setTokens] = useState([]);
   useEffect(() => { }, []);
+  // Show discount inside web view
   let [discountApplied, setDiscountApplied] = useState(false);
+  // Validated discount, this could be sent to the backend etc
+  let [validatedDiscount, setValidatedDiscount] = useState(false);
   // 1. User opens website and the negotiator is triggered
   const negotiator = new Negotiator(["discountTokens"]);
   // 2. iframe gets the tickets
@@ -36,8 +39,8 @@ function App() {
     const signedMsg = await Authenticator.signChallenge({ useTicketProof, challenge });
     // 8. post signed message
     const sentChallenge = await Authenticator.sendChallenge({ signedMsg });
-    // 9. apply discount
-    setDiscountApplied(sentChallenge);
+    // 9. discount can be given to the end user
+    setValidatedDiscount(sentChallenge);
   }
   return (
     <div>
@@ -45,7 +48,7 @@ function App() {
       <div className="iframeAttestation" dangerouslySetInnerHTML={iframe()} />
       <div className="roomCardsContainer">
         {roomTypesData.map((room, index) => {
-          return <RoomCard key={index} room={room} discountApplied={discountApplied} />
+          return <RoomCard key={index} room={room} applyDiscount={applyDiscount} discountApplied={discountApplied} tokens={tokens} />
         })}
       </div>
       {discountApplied &&

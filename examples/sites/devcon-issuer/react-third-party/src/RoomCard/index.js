@@ -7,7 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import BookingModal from './../BookingModal';
 import Typography from '@material-ui/core/Typography';
-import './Card.css';
+import './RoomCard.css';
 
 const useStyles = makeStyles({
   root: {
@@ -19,11 +19,11 @@ const useStyles = makeStyles({
   },
 });
 
-export default function MediaCard({ room, discountApplied }) {
+export default function MediaCard({ room, applyDiscount, discountApplied, tokens }) {
   const classes = useStyles();
   const { type, price, discountPrice, image, frequency } = room;
   return (
-    <Card className="card">
+    <Card className="roomCard">
       <CardActionArea>
         <CardMedia
           className={classes.media}
@@ -53,7 +53,7 @@ export default function MediaCard({ room, discountApplied }) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <BookingModal roomType={type} discountApplied={discountApplied} price={discountApplied ? discountPrice : price} />
+        <BookingModal applyDiscount={applyDiscount} tokens={tokens} roomType={type} discountApplied={discountApplied} price={discountApplied ? discountPrice : price} />
       </CardActions>
     </Card>
   );

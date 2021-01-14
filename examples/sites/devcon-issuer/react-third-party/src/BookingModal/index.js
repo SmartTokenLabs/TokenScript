@@ -7,8 +7,9 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DatePicker from './../DatePicker';
+import Card from './../Card';
 
-export default function FormDialog({ roomType, discountApplied, price }) {
+export default function FormDialog({ roomType, applyDiscount, discountApplied, price, tokens }) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -38,18 +39,18 @@ export default function FormDialog({ roomType, discountApplied, price }) {
           />
           <DatePicker />
           <p>Select a ticket:</p>
-          <div>A</div>
-          <div>B</div>
-          <div>C</div>
-          <div>D</div>
-          <div>E</div>
+          {tokens &&
+            tokens.map((token, index) => {
+              return <Card key={index} applyDiscount={applyDiscount} tokenInstance={token}></Card>
+            })
+          }
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
           <Button onClick={handleClose} color="primary">
-            Complete booking
+            Verify Ticket
           </Button>
         </DialogActions>
       </Dialog>

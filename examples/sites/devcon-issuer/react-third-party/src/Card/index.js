@@ -40,11 +40,6 @@ function MediaCard({ tokenInstance, applyDiscount }) {
           </Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary" onClick={e => applyDiscount(tokenInstance)}>
-          Use ticket
-        </Button>
-      </CardActions>
     </Card>
   );
 }
