@@ -7,14 +7,15 @@ import TokenCard from './TokenCard';
 import Typography from '@material-ui/core/Typography';
 import roomTypesData from './roomTypesDataMock.json';
 import './App.css';
-import { de } from 'date-fns/locale';
 
 function App() {
   // let web3 = new Web3('HTTP://127.0.0.1:7545');
   let [tokens, setTokens] = useState([]);
   useEffect(() => { }, []);
-  // Show discount inside web view
-  let [discountApplied, setDiscountApplied] = useState(false);
+  // Show discount is available (tickets shown on top right)
+  let [discountAvailable, setDiscountAvailable] = useState(false);
+  // Value of discount
+  let [discountValue, setDiscountValue] = useState();
   // Validated discount, this could be sent to the backend etc
   let [validatedDiscount, setValidatedDiscount] = useState(false);
   // 1. User opens website and the negotiator is triggered
@@ -28,14 +29,14 @@ function App() {
   // 3. listen for ticket changes and apply to view on change
   window.document.addEventListener('ticketsRecievedEvent', handleEvent, false)
   function handleEvent(e) {
-    setDiscountApplied(true);
+    setDiscountAvailable(true);
     setTokens(e.detail)
   };
   // 4. webster selects to apply discount
   const applyDiscount = async (ticket) => {
     const response = await fetch(`./roomTypesTicketClassDataMock${ticket.ticketClass}.json`)
-    const discount = await response.json();
-    debugger;
+    const data = await response.json();
+    setDiscountValue(data.discount);
     // // 5. attestation is triggered
     // const useTicketProof = await Authenticator.getAuthenticationBlob({ ticket });
     // // 6. get Challenge
@@ -58,10 +59,10 @@ function App() {
       <div className="iframeAttestation" dangerouslySetInnerHTML={iframe()} />
       <div className="roomCardsContainer">
         {roomTypesData.map((room, index) => {
-          return <RoomCard key={index} room={room} applyDiscount={applyDiscount} discountApplied={discountApplied} tokens={tokens} />
+          return <RoomCard key={index} room={room} applyDiscount={applyDiscount} discountAvailable={discountAvailable} discountValue={discountValue} tokens={tokens} />
         })}
       </div>
-      {validatedDiscount &&
+      {/* {discountAvailable && // move this to a checkout page.
         <div>
           <div className="ethScale">
             <div id="space">
@@ -77,10 +78,10 @@ function App() {
             </div>
           </div>
           <Typography className="applyDiscountCopyContainer" gutterBottom variant="body2" component="p">
-            Devcon discount applied! Enjoy the event.
+            Devcon discount available! Enjoy the event.
           </Typography>
         </div>
-      }
+      } */}
     </div>
   );
 }

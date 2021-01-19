@@ -9,7 +9,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DatePicker from './../DatePicker';
 import Card from './../Card';
 
-export default function FormDialog({ roomType, applyDiscount, discountApplied, price, tokens }) {
+export default function FormDialog({ roomType, applyDiscount, discountValue, price, tokens }) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -20,17 +20,21 @@ export default function FormDialog({ roomType, applyDiscount, discountApplied, p
     setOpen(false);
   };
 
+  const viewPrice = discountValue ? (price / discountValue).toFixed(5) : price;
+
   return (
     <div>
       <Button size="small" color="primary" onClick={handleClickOpen}>
         Book
       </Button>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">
+        <DialogTitle id="form-dialog-title" style={{ fontSize: "1.5rem", marginBottom: "12px", paddingBottom: 0 }} disableTypography="false">
           {roomType}
         </DialogTitle>
+        <DialogTitle id="form-dialog-title" style={{ fontSize: "0.8rem", margin: 0, paddingTop: 0 }} disableTypography="false">
+          {discountValue ? 'Discount' : 'Standard'} price of {viewPrice} ETH per night.
+        </DialogTitle>
         <DialogContent>
-          <DialogContentText>{discountApplied ? 'Special discount' : 'Standard'} price of {price} ETH per night.</DialogContentText>
           <TextField
             autoFocus
             margin="dense"
@@ -49,7 +53,6 @@ export default function FormDialog({ roomType, applyDiscount, discountApplied, p
               return <Card key={index} applyDiscount={applyDiscount} tokenInstance={token}></Card>
             })
           }
-          <div style={{ textAlign: 'center', textDecoration: 'underline' }}>Booking Total: {price} Eth</div>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
