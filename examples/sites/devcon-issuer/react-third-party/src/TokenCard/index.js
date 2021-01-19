@@ -30,7 +30,7 @@ function MediaCard({ tokensNumber }) {
           <Typography gutterBottom variant="h1" component="h1">
             {tokensNumber} Devcon Tickets found
           </Typography>
-          <Typography gutterBottom variant="p" component="p" style={{ fontSize: '0.75rem' }}>
+          <Typography gutterBottom variant="body1" component="p" style={{ fontSize: '0.75rem' }}>
             booking discounts available
           </Typography>
         </CardContent>

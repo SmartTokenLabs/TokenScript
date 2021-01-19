@@ -7,6 +7,7 @@ import TokenCard from './TokenCard';
 import Typography from '@material-ui/core/Typography';
 import roomTypesData from './roomTypesDataMock.json';
 import './App.css';
+import { de } from 'date-fns/locale';
 
 function App() {
   // let web3 = new Web3('HTTP://127.0.0.1:7545');
@@ -32,16 +33,19 @@ function App() {
   };
   // 4. webster selects to apply discount
   const applyDiscount = async (ticket) => {
-    // 5. attestation is triggered
-    const useTicketProof = await Authenticator.getAuthenticationBlob({ ticket });
-    // 6. get Challenge
-    const challenge = await Authenticator.fetchChallenge();
-    // 7. sign Challenge useTicketProof, challenge
-    const signedMsg = await Authenticator.signChallenge({ useTicketProof, challenge });
-    // 8. post signed message
-    const sentChallenge = await Authenticator.sendChallenge({ signedMsg });
-    // 9. discount can be given to the end user
-    setValidatedDiscount(sentChallenge);
+    const response = await fetch(`./roomTypesTicketClassDataMock${ticket.ticketClass}.json`)
+    const discount = await response.json();
+    debugger;
+    // // 5. attestation is triggered
+    // const useTicketProof = await Authenticator.getAuthenticationBlob({ ticket });
+    // // 6. get Challenge
+    // const challenge = await Authenticator.fetchChallenge();
+    // // 7. sign Challenge useTicketProof, challenge
+    // const signedMsg = await Authenticator.signChallenge({ useTicketProof, challenge });
+    // // 8. post signed message
+    // const sentChallenge = await Authenticator.sendChallenge({ signedMsg });
+    // // 9. discount can be given to the end user
+    // setValidatedDiscount(sentChallenge);
   }
   return (
     <div>

@@ -26,7 +26,9 @@ export default function FormDialog({ roomType, applyDiscount, discountApplied, p
         Book
       </Button>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">{roomType}</DialogTitle>
+        <DialogTitle id="form-dialog-title">
+          {roomType}
+        </DialogTitle>
         <DialogContent>
           <DialogContentText>{discountApplied ? 'Special discount' : 'Standard'} price of {price} ETH per night.</DialogContentText>
           <TextField
@@ -39,12 +41,15 @@ export default function FormDialog({ roomType, applyDiscount, discountApplied, p
           />
           <DatePicker label={'from'} />
           <DatePicker label={'to'} />
-          <p>Select a ticket to apply discount:</p>
+          {tokens &&
+            <p>Select a ticket to apply discount:</p>
+          }
           {tokens &&
             tokens.map((token, index) => {
               return <Card key={index} applyDiscount={applyDiscount} tokenInstance={token}></Card>
             })
           }
+          <div style={{ textAlign: 'center', textDecoration: 'underline' }}>Booking Total: {price} Eth</div>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
