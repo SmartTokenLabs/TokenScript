@@ -1,10 +1,10 @@
-.logoCard {
+.tokenCard {
   margin: 12px;
   flex-grow: 1;
   flex-basis: 0;
   max-width: 220px;
 }
 
-.logoCard h1 {
+.tokenCard h1 {
   font-size: 1.1rem;
 }

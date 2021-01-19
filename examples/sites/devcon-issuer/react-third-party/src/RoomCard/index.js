@@ -34,22 +34,9 @@ export default function MediaCard({ room, applyDiscount, discountApplied, tokens
           <Typography gutterBottom variant="h5" component="h2">
             {type}
           </Typography>
-          {discountApplied === false &&
-            <Typography variant="body2" color="textSecondary" component="p">
-              {price} ETH / {frequency}
-            </Typography>
-          }
-          {discountApplied === true &&
-            <div>
-              <Typography style={{ textDecoration: "line-through" }} variant="body2" color="textSecondary" component="span">
-                {price} ETH
-              </Typography>
-              <span> </span>
-              <Typography variant="body2" color="textSecondary" component="span">
-                ${discountPrice} ETH / {frequency}
-              </Typography>
-            </div>
-          }
+          <Typography variant="body2" color="textSecondary" component="p">
+            From {price} ETH / {frequency}
+          </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Negotiator, Authenticator } from './TokenScript';
 import LogoCard from './LogoCard';
 import RoomCard from './RoomCard';
+import TokenCard from './TokenCard';
 import Typography from '@material-ui/core/Typography';
 import roomTypesData from './roomTypesDataMock.json';
 import './App.css';
@@ -45,15 +46,20 @@ function App() {
   return (
     <div>
       <LogoCard title={"Hotel Bogota"} />
+      <div style={{ position: 'absolute', top: '0px', right: '20px' }}>
+        {tokens.length > 0 &&
+          <TokenCard tokensNumber={tokens.length} />
+        }
+      </div>
       <div className="iframeAttestation" dangerouslySetInnerHTML={iframe()} />
       <div className="roomCardsContainer">
         {roomTypesData.map((room, index) => {
           return <RoomCard key={index} room={room} applyDiscount={applyDiscount} discountApplied={discountApplied} tokens={tokens} />
         })}
       </div>
-      {discountApplied &&
+      {validatedDiscount &&
         <div>
-          {/* <div className="ethScale">
+          <div className="ethScale">
             <div id="space">
               <div className="elogo">
                 <div className="trif u1"></div>
@@ -65,7 +71,7 @@ function App() {
                 <div className="trif l4"></div>
               </div>
             </div>
-          </div> */}
+          </div>
           <Typography className="applyDiscountCopyContainer" gutterBottom variant="body2" component="p">
             Devcon discount applied! Enjoy the event.
           </Typography>

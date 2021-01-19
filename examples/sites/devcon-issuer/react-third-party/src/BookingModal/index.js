@@ -33,12 +33,13 @@ export default function FormDialog({ roomType, applyDiscount, discountApplied, p
             autoFocus
             margin="dense"
             id="booking-name"
-            label="Booking Name"
+            label="Your Booking Name"
             type="text"
             fullWidth
           />
-          <DatePicker />
-          <p>Select a ticket:</p>
+          <DatePicker label={'from'} />
+          <DatePicker label={'to'} />
+          <p>Select a ticket to apply discount:</p>
           {tokens &&
             tokens.map((token, index) => {
               return <Card key={index} applyDiscount={applyDiscount} tokenInstance={token}></Card>
@@ -50,7 +51,7 @@ export default function FormDialog({ roomType, applyDiscount, discountApplied, p
             Cancel
           </Button>
           <Button onClick={handleClose} color="primary">
-            Verify Ticket
+            Book Now
           </Button>
         </DialogActions>
       </Dialog>

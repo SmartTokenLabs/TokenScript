@@ -10,7 +10,7 @@ import {
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 
-export default function MaterialUIPickers() {
+export default function MaterialUIPickers({ label }) {
   // The first commit of Material-UI
   const [selectedDate, setSelectedDate] = React.useState(new Date('2021-04-10T21:11:54'));
 
@@ -27,7 +27,7 @@ export default function MaterialUIPickers() {
           format="dd/mm/yyyy"
           margin="normal"
           id="date-picker-inline"
-          label="Date picker inline"
+          label={label}
           value={selectedDate}
           onChange={handleDateChange}
           KeyboardButtonProps={{
