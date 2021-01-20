@@ -19,7 +19,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function MediaCard({ room, applyDiscount, discountValue, tokens }) {
+export default function MediaCard({ room, applyDiscount, discount, tokens, book }) {
   const classes = useStyles();
   const { type, price, discountPrice, image, frequency } = room;
   return (
@@ -40,8 +40,8 @@ export default function MediaCard({ room, applyDiscount, discountValue, tokens }
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <BookingModal applyDiscount={applyDiscount} tokens={tokens} roomType={type} discountValue={discountValue} price={price} />
+        <BookingModal book={book} applyDiscount={applyDiscount} tokens={tokens} roomType={type} discount={discount} price={price} />
       </CardActions>
-    </Card >
+    </Card>
   );
 }

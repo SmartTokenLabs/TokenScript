@@ -15,7 +15,7 @@ function App() {
   // Show discount is available (tickets shown on top right)
   let [discountAvailable, setDiscountAvailable] = useState(false);
   // Value of discount
-  let [discountValue, setDiscountValue] = useState();
+  let [discount, setDiscount] = useState({ value: undefined, tokenInstance: null });
   // Validated discount, this could be sent to the backend etc
   let [validatedDiscount, setValidatedDiscount] = useState(false);
   // 1. User opens website and the negotiator is triggered
@@ -36,7 +36,7 @@ function App() {
   const applyDiscount = async (ticket) => {
     const response = await fetch(`./roomTypesTicketClassDataMock${ticket.ticketClass}.json`)
     const data = await response.json();
-    setDiscountValue(data.discount);
+    setDiscount({ value: data.discount, tokenInstance: ticket });
     // // 5. attestation is triggered
     // const useTicketProof = await Authenticator.getAuthenticationBlob({ ticket });
     // // 6. get Challenge
@@ -47,6 +47,20 @@ function App() {
     // const sentChallenge = await Authenticator.sendChallenge({ signedMsg });
     // // 9. discount can be given to the end user
     // setValidatedDiscount(sentChallenge);
+
+    // Notes from Oleh
+    // const useDevconTicket = await Authenticator.getAuthenticationBlob({ ticket });
+    // webster sign useDevconTicket with metamask and send it to the smartContract
+    // const signedTicket = await Authenticator.signToken(useDevconTicket);
+    // for bogota example: I will add Authenticator method to sign ticket with Metamask and return result object. and you can send that object to the backend for autorization+dicounted checkout.
+    // const checkout = this.backendRequestForCheckoutWithDiscount(product, signedTicket);
+  }
+  const book = async (form) => {
+    console.log('form data:', form);
+    // const response = await fetch(`./roomTypesTicketClassDataMock${ticket.ticketClass}.json`)
+    // const data = await response.json();
+    // setDiscount({ value: data.discount, tokenInstance: ticket });
+    // Book e.g. open paypal, metamask. 
   }
   return (
     <div>
@@ -59,10 +73,10 @@ function App() {
       <div className="iframeAttestation" dangerouslySetInnerHTML={iframe()} />
       <div className="roomCardsContainer">
         {roomTypesData.map((room, index) => {
-          return <RoomCard key={index} room={room} applyDiscount={applyDiscount} discountAvailable={discountAvailable} discountValue={discountValue} tokens={tokens} />
+          return <RoomCard key={index} room={room} applyDiscount={applyDiscount} discountAvailable={discountAvailable} discount={discount} tokens={tokens} book={book} />
         })}
       </div>
-      {/* {discountAvailable && // move this to a checkout page.
+      {discount.value && // move this to a checkout page.
         <div>
           <div className="ethScale">
             <div id="space">
@@ -78,10 +92,10 @@ function App() {
             </div>
           </div>
           <Typography className="applyDiscountCopyContainer" gutterBottom variant="body2" component="p">
-            Devcon discount available! Enjoy the event.
+            Devcon discount of {discount.value}% has been granted towards your booking! Enjoy the event.
           </Typography>
         </div>
-      } */}
+      }
     </div>
   );
 }
