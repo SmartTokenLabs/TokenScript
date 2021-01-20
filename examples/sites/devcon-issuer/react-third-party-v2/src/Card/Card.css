@@ -1,0 +1,12 @@
+.card {
+  margin: 24px 0;
+  flex-grow: 1;
+  flex-basis: 0;
+  min-width: 220px;
+  max-width: 345px;
+}
+
+.card.selected {
+  transition: all .35s;
+  background: #dcdcdc;
+}

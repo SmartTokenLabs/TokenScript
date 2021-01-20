@@ -1,0 +1,20 @@
+[
+  {
+    "type": "Deluxe Room",
+    "price": "1.5",
+    "frequency": "per night",
+    "image": "./hotel_3.jpg"
+  },
+  {
+    "type": "King Suite",
+    "price": "2",
+    "frequency": "per night",
+    "image": "./hotel_2.png"
+  },
+  {
+    "type": "Superior Deluxe Suite",
+    "price": "5.5",
+    "frequency": "per night",
+    "image": "./hotel_1.jpg"
+  }
+]

@@ -1,0 +1,116 @@
+.iframeAttestation {
+  width: 1px; 
+  height: 1px;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.MuiFormControl-root {
+  width: 100%;
+}
+
+.roomCardsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 60px;
+}
+
+.discountOptionContainer, .discountButtonContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.discountCopyContainer {
+  font-size: 0.9rem;
+  color: #3f51b5;
+  text-align: center;
+}
+
+.applyDiscountCopyContainer {
+  font-size: 0.6rem;
+  color: #f50057;
+  text-align: center;
+}
+
+/* Ethereum logo */
+
+.ethScale {
+  height: 20px;
+  width: 100%;
+  transform: scale(0.1);
+  margin-bottom: 52px;
+}
+
+#space{
+  margin: auto;
+  width: 800px; 
+  height: 500px;
+  transform: perspective 100px;
+  transform-origin: 110px 110px; 
+}
+
+.elogo{
+  margin: auto;
+  position: reative;
+  width: 400px;
+  height: 400px;
+  transform-style: preserve-3d;
+  transform-origin: 110px 110px 0;
+  transform: perspective(400px) rotateY(46deg) rotateX(-5deg) rotateZ(-5deg);
+  animation: aniether 6s infinite;
+  transform-style: preserve-3d;
+  transform-origin: 110px 110px 0;
+  transform: perspective(400px) rotateY(46deg) rotateX(-5deg) rotateZ(-5deg);
+}
+
+.trif {
+  position: absolute;
+  width: 0px;
+  height: 0px;
+  border-left: 100px solid transparent; 
+  border-right: 100px solid transparent;
+}
+.elogo .u1 {
+    transform: translateZ(50px) rotateX(23.5deg);  
+    border-bottom: 250px solid rgba(50,50,51,0.8);
+}
+.elogo .u2 { 
+    transform: rotateY(90deg) translateZ(50px) rotateX(23.5deg);
+    border-bottom: 250px solid rgba(50,50,51,0.6);
+}
+.elogo .u3 { 
+    transform: rotateY(180deg) translateZ(50px) rotateX(23.5deg); 
+    border-bottom: 250px solid rgba(50,50,51,0.3);
+}
+.elogo .u4 { 
+    transform: rotateY(-90deg) translateZ(50px) rotateX(23.5deg); 
+    border-bottom: 250px solid rgba(50,50,51,0.3);
+}
+
+.elogo .ct { 
+    width: 200px;
+    height: 200px;
+    border: 0;
+    transform: rotateX(-90deg) translateZ(140px);
+    background-color: rgba(60,60,61,1);
+}
+.elogo .l1 { 
+    transform: translateY(55px) translateZ(50px) rotateX(156.5deg);
+    border-bottom: 250px solid rgba(50,50,51,0.85);
+}
+.elogo .l4 { 
+    transform: translateY(55px) rotateY(-90deg) rotateZ(0deg) translateZ(50px) rotateX(156.5deg); 
+  border-bottom: 250px solid rgba(50,50,51,0.45);
+}
+
+@keyframes aniether {
+    20%      {transform: perspective(400px) rotateY(46deg); }
+    30%      {transform: perspective(400px) rotateY(10deg); }
+    50%      {transform: perspective(400px) rotateY(46deg); }
+    60%      {transform: perspective(400px) rotateY(80deg); }
+    80%      {transform: perspective(400px) rotateY(46deg); }
+   100%      {transform: perspective(400px) rotateY(46deg) rotateX(-5deg) rotateZ(-5deg); }
+}
+
