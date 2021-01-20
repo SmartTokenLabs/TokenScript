@@ -35,7 +35,6 @@ function App() {
     setDiscount({ value: data.discount, tokenInstance: ticket });
 
     // To review steps.
-
     // Initial steps
     // // 5. attestation is triggered
     // const useTicketProof = await Authenticator.getAuthenticationBlob({ ticket });

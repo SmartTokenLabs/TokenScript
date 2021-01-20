@@ -5,8 +5,3 @@
   min-width: 220px;
   max-width: 345px;
 }
-
-.card.selected {
-  transition: all .35s;
-  background: #dcdcdc;
-}

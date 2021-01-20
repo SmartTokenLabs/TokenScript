@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -10,16 +10,18 @@ import Button from '@material-ui/core/Button';
 import './Card.css';
 
 const useStyles = makeStyles({
-  root: {},
+  root: {
+    maxWidth: 345,
+  },
   media: {
-    height: 5,
+    height: 3,
   },
 });
 
-function MediaCard({ tokenInstance, applyDiscount, discount }) {
+function MediaCard({ tokenInstance, applyDiscount }) {
   const classes = useStyles();
   return (
-    <Card className={discount.tokenInstance && discount.tokenInstance.ticketClass === tokenInstance.ticketClass ? 'card selected' : 'card'}>
+    <Card className="card">
       <CardActionArea>
         <CardMedia
           className={classes.media}
@@ -38,7 +40,7 @@ function MediaCard({ tokenInstance, applyDiscount, discount }) {
           </Typography>
         </CardContent>
       </CardActionArea>
-    </Card >
+    </Card>
   );
 }
 
