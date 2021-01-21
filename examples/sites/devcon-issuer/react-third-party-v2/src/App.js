@@ -44,19 +44,7 @@ function App() {
     return roomTypesEndpoint.json();
   }
 
-  //
-  // U
-  //
-
-  useEffect(() => {
-    // Once the event triggers, React will re-render with the tickets.
-    negotiator.negotiate(tokens => {
-      setTokens(tokens);
-    });
-    getRoomTypesData().then((data) => {
-      setRoomTypesData(data);
-    })
-  }, []);
+  // Apply discount, user selected a ticket
   const applyDiscount = async (ticket) => {
     const response = await fetch(`./roomTypesTicketClassDataMock${ticket.ticketClass.toString()}.json`)
     const data = await response.json();
@@ -80,7 +68,8 @@ function App() {
     // for bogota example: I will add Authenticator method to sign ticket with Metamask and return result object. and you can send that object to the backend for autorization+dicounted checkout.
     // const checkout = this.backendRequestForCheckoutWithDiscount(product, signedTicket);
   }
-  // End user has selected to make the booking.
+
+  // User selects to make the booking
   const book = async (form) => {
     console.log('form data:', form);
     // const response = await fetch(`./roomTypesTicketClassDataMock${ticket.ticketClass}.json`)
@@ -88,6 +77,22 @@ function App() {
     // setDiscount({ value: data.discount, tokenInstance: ticket });
     // Book e.g. open paypal, metamask. 
   }
+
+  //
+  // React effects
+  //
+
+  useEffect(() => {
+    // Get tokens with applied filter
+    negotiator.negotiate(tokens => {
+      setTokens(tokens);
+    });
+    // Get mock rooms data
+    getRoomTypesData().then((data) => {
+      setRoomTypesData(data);
+    })
+  }, []);
+
   return (
     <div>
       <LogoCard title={"Hotel Bogota"} />
