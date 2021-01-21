@@ -22,8 +22,9 @@ function App() {
   // this comes from a local mock in this example, see: applyDiscount() below.
   let [discount, setDiscount] = useState({ value: undefined, tokenInstance: null });
   // Mock Iframe to read Tickets, this should be devcon.org etc.
-  // const iframe = () => { return { __html: '<iframe id="test" src="/demo.html" title="Iframe"></iframe>' } };
-  const iframe = () => { return { __html: '<iframe id="test" src="https://devcontickets.herokuapp.com/" title="Iframe"></iframe>' } };
+  const iframe = () => { return { __html: '<iframe id="test" src="/demo.html" title="Iframe"></iframe>' } };
+  // To switch out to use
+  // const iframe = () => { return { __html: '<iframe id="tickets-site" src="https://devcontickets.herokuapp.com/" title="Iframe"></iframe>' } };
   // Listen to Tickets being recieved event.
   // Once the event triggers, React will re-render with the tickets.
   window.document.addEventListener('ticketsRecievedEvent', handleEvent, false)
@@ -33,6 +34,7 @@ function App() {
   };
   // Select Ticket to apply a view change, showing the discount that can be redeemed.
   const getRoomTypesData = async () => {
+    // Local mock can be used if required: roomTypesDataMock.json
     const roomTypesEndpoint = await fetch('http://bogotabackend.herokuapp.com/');
     return roomTypesEndpoint.json();
   }
@@ -41,7 +43,6 @@ function App() {
       setRoomTypesData(data);
     })
   }, []);
-
   const applyDiscount = async (ticket) => {
     const response = await fetch(`./roomTypesTicketClassDataMock${ticket.ticketClass}.json`)
     const data = await response.json();
