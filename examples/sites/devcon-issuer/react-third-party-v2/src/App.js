@@ -1,6 +1,6 @@
 // import Web3 from 'web3';
 import React, { useState, useEffect } from 'react';
-import { Negotiator, Authenticator } from './TokenScript';
+// import { Negotiator, Authenticator } from './TokenScript';
 import LogoCard from './LogoCard';
 import RoomCard from './RoomCard';
 import TokenCard from './TokenCard';
@@ -9,42 +9,56 @@ import Typography from '@material-ui/core/Typography';
 import './App.css';
 
 function App() {
-  // let web3 = new Web3('HTTP://127.0.0.1:7545');
-  // Instantiate an instance of the Negotiator with chosen filters
-  const negotiator = new Negotiator();
-  // Devcon Tickets (local state).
+
+  //
+  // React use state settings
+  //
+
+  // Devcon Tickets
   let [tokens, setTokens] = useState([]);
-  // When tickets are known to exist.
-  let [discountAvailable, setDiscountAvailable] = useState(false);
+
   // Room Types Data
   let [roomTypesData, setRoomTypesData] = useState([]);
+
   // Selected token instance to apply discount, with the discount value.
-  // this comes from a local mock in this example, see: applyDiscount() below.
   let [discount, setDiscount] = useState({ value: undefined, tokenInstance: null });
-  // Mock Iframe to read Tickets, this should be devcon.org etc.
-  const iframe = () => { return { __html: '<iframe id="test" src="/demo.html" title="Iframe"></iframe>' } };
-  // To switch out to use
-  // const iframe = () => { return { __html: '<iframe id="tickets-site" src="https://devcontickets.herokuapp.com/" title="Iframe"></iframe>' } };
-  // Listen to Tickets being recieved event.
-  // Once the event triggers, React will re-render with the tickets.
-  window.document.addEventListener('ticketsRecievedEvent', handleEvent, false)
-  function handleEvent(e) {
-    setDiscountAvailable(true);
-    setTokens(e.detail)
-  };
+
+  //
+  // Negotiator
+  //
+
+  // Instantiate an instance of the Negotiator with chosen filters
+  let negotiator = new Negotiator({}, {
+    debug: 1,
+    tokensOrigin: "https://devcontickets.herokuapp.com/outlet/",
+    hideTokensIframe: true
+  });
+
+  //
+  // Booking and Hotel Specific Events
+  //
+
   // Select Ticket to apply a view change, showing the discount that can be redeemed.
   const getRoomTypesData = async () => {
-    // Local mock can be used if required: roomTypesDataMock.json
     const roomTypesEndpoint = await fetch('http://bogotabackend.herokuapp.com/');
     return roomTypesEndpoint.json();
   }
+
+  //
+  // U
+  //
+
   useEffect(() => {
+    // Once the event triggers, React will re-render with the tickets.
+    negotiator.negotiate(tokens => {
+      setTokens(tokens);
+    });
     getRoomTypesData().then((data) => {
       setRoomTypesData(data);
     })
   }, []);
   const applyDiscount = async (ticket) => {
-    const response = await fetch(`./roomTypesTicketClassDataMock${ticket.ticketClass}.json`)
+    const response = await fetch(`./roomTypesTicketClassDataMock${ticket.ticketClass.toString()}.json`)
     const data = await response.json();
     setDiscount({ value: data.discount, tokenInstance: ticket });
 
@@ -82,10 +96,9 @@ function App() {
           <TokenCard tokensNumber={tokens.length} />
         }
       </div>
-      <div className="iframeAttestation" dangerouslySetInnerHTML={iframe()} />
       <div className="roomCardsContainer">
         {roomTypesData.map((room, index) => {
-          return <RoomCard key={index} room={room} applyDiscount={applyDiscount} discountAvailable={discountAvailable} discount={discount} tokens={tokens} book={book} />
+          return <RoomCard key={index} room={room} applyDiscount={applyDiscount} discount={discount} tokens={tokens} book={book} />
         })}
       </div>
       {discount.value &&
