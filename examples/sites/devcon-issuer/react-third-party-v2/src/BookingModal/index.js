@@ -48,7 +48,8 @@ export default function FormDialog({ roomType, applyDiscount, discount, price, t
     setOpen(false);
   };
 
-  const viewPrice = discount.value ? (price / discount.value).toFixed(5) : price;
+  const discountValue = discount.value ? price * discount.value / 100 : 0;
+  const viewPrice = price - discountValue;
 
   return (
     <div>
