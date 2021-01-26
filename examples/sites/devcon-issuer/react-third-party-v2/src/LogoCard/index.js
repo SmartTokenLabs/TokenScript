@@ -7,7 +7,7 @@ import './logoCard.css';
 // LOGO CARD COMPONENT
 // Simply shows the Hotel title
 
-function MediaCard({ title }) {
+function LogoCard({ title }) {
   return (
     <Card className="logoCard">
       <CardContent>
@@ -19,5 +19,5 @@ function MediaCard({ title }) {
   );
 }
 
-export default MediaCard;
+export default LogoCard;
 

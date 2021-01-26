@@ -22,7 +22,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function MediaCard({ room, applyDiscount, discount, tokens, book }) {
+export default function RoomCard({ room, applyDiscount, discount, tokens, book }) {
   const classes = useStyles();
   const { type, price, image, frequency } = room;
   return (

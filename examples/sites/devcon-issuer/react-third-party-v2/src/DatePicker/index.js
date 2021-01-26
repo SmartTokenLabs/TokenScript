@@ -9,7 +9,7 @@ import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/picker
 // DATE PICKER COMPONENT
 // Simply wraps the Date picker material ui component
 
-export default function MaterialUIPickers({ label, handleInput }) {
+export default function DatePicker({ label, handleInput }) {
 
   const [selectedDate, setSelectedDate] = React.useState();
 

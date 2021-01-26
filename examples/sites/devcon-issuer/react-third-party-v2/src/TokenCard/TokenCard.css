@@ -1,10 +1,12 @@
 .tokenCard {
-  margin: 12px;
+  margin: 24px 0;
   flex-grow: 1;
   flex-basis: 0;
-  max-width: 220px;
+  min-width: 220px;
+  max-width: 345px;
 }
 
-.tokenCard h1 {
-  font-size: 1.1rem;
+.tokenCard.selected {
+  transition: all .35s;
+  background: #dcdcdc;
 }

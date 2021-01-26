@@ -5,45 +5,39 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
-import Zoom from '@material-ui/core/Zoom';
 import './TokenCard.css';
-// import Skeleton from '@material-ui/lab/Skeleton';
-// <Skeleton variant="rect" width={216} height={64} />
-
-// TOKEN CARD COMPONENT
-// To show a discount is available to Devcon ticket holders.
 
 const useStyles = makeStyles({
-  root: {
-    maxWidth: 345,
-  },
+  root: {},
   media: {
-    height: 3,
+    height: 5,
   },
 });
 
-function MediaCard({ tokensNumber }) {
+function TokenCard({ tokenInstance, applyDiscount, discount }) {
   const classes = useStyles();
   return (
-    <Zoom in={true} style={{ transitionDelay: true ? '500ms' : '0ms' }}>
-      <Card className="tokenCard">
-        <CardContent>
-          <Typography gutterBottom variant="h1" component="h1">
-            {tokensNumber} Devcon Tickets found
-          </Typography>
-          <Typography gutterBottom variant="body1" component="p" style={{ fontSize: '0.75rem' }}>
-            booking discounts available
-          </Typography>
-        </CardContent>
+    <Card className={discount.tokenInstance && discount.tokenInstance.ticketClass === tokenInstance.ticketClass ? 'tokenCard selected' : 'tokenCard'}>
+      <CardActionArea>
         <CardMedia
           className={classes.media}
           image="./mock.png"
           title="token"
         />
-      </Card>
-    </Zoom>
+        <CardContent onClick={e => applyDiscount(tokenInstance)}>
+          <Typography gutterBottom variant="h5" component="h2">
+            {tokenInstance.ticketClass.toString()}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            Ticket Id: {tokenInstance.ticketId.toString()}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            Devcon Id: {tokenInstance.devconId.toString()}
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+    </Card >
   );
 }
 
-export default MediaCard;
-
+export default TokenCard;

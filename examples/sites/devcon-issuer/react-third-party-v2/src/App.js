@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 // import { Negotiator, Authenticator } from './TokenScript';
 import LogoCard from './LogoCard';
 import RoomCard from './RoomCard';
-import TokenCard from './TokenCard';
+import TokenNotificationCard from './TokenNotificationCard';
 import Typography from '@material-ui/core/Typography';
 // import roomTypesData from './roomTypesDataMock.json';
 import './App.css';
@@ -16,6 +16,9 @@ function App() {
 
   // Devcon Tickets
   let [tokens, setTokens] = useState([]);
+
+  // Devcon non-discount offers
+  let [freeTaxi, setFreeTaxi] = useState(false);
 
   // Room Types Data
   let [roomTypesData, setRoomTypesData] = useState([]);
@@ -86,6 +89,12 @@ function App() {
     // Get tokens with applied filter
     negotiator.negotiate(tokens => {
       setTokens(tokens);
+      // apply any upfront discounts
+      tokens.map(token => {
+        if (token.ticketClass == 2n) {
+          setFreeTaxi(true);
+        }
+      });
     });
     // Get mock rooms data
     getRoomTypesData().then((data) => {
@@ -98,7 +107,7 @@ function App() {
       <LogoCard title={"Hotel Bogota"} />
       <div style={{ position: 'absolute', top: '0px', right: '20px' }}>
         {tokens.length > 0 &&
-          <TokenCard tokensNumber={tokens.length} />
+          <TokenNotificationCard tokensNumber={tokens.length} />
         }
       </div>
       <div className="roomCardsContainer">
@@ -106,7 +115,8 @@ function App() {
           return <RoomCard key={index} room={room} applyDiscount={applyDiscount} discount={discount} tokens={tokens} book={book} />
         })}
       </div>
-      {discount.value &&
+      {
+        freeTaxi &&
         <div>
           <div className="ethScale">
             <div id="space">
@@ -122,11 +132,11 @@ function App() {
             </div>
           </div>
           <Typography className="applyDiscountCopyContainer" gutterBottom variant="body2" component="p">
-            Devcon discount of {discount.value}% has been granted towards your booking! Enjoy the event.
+            Free Taxi service available as a Devcon Ticket Class 2n holder! Enjoy the event.
           </Typography>
         </div>
       }
-    </div>
+    </div >
   );
 }
 

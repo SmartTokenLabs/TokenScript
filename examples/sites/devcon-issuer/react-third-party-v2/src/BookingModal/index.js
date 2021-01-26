@@ -6,9 +6,13 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DatePicker from './../DatePicker';
-import Card from './../Card';
+import TokenCard from './../TokenCard';
+import './BookingModal.css';
 
-export default function FormDialog({ roomType, applyDiscount, discount, price, tokens, book }) {
+// BOOKING MODAL COMPONENT
+// Booking form
+
+export default function BookingModal({ roomType, applyDiscount, discount, price, tokens, book }) {
 
   // Modal State (open boolean).
   const [open, setOpen] = React.useState(false);
@@ -57,10 +61,10 @@ export default function FormDialog({ roomType, applyDiscount, discount, price, t
         Book
       </Button>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle style={{ fontSize: "0.8rem", marginBottom: "12px", paddingBottom: 0 }} disableTypography={true}>
+        <DialogTitle className="title" disableTypography={true}>
           {roomType}
         </DialogTitle>
-        <DialogTitle style={{ fontSize: "1rem", margin: 0, paddingTop: 0 }} disableTypography={true}>
+        <DialogTitle className="subTitle" disableTypography={true}>
           {viewPrice} ETH per night.
         </DialogTitle>
         <DialogContent>
@@ -86,11 +90,11 @@ export default function FormDialog({ roomType, applyDiscount, discount, price, t
               handleInput={handleInput}
             />
             {tokens.length > 0 &&
-              <p style={{ fontSize: "0.8rem" }}>Select a ticket to apply discount:</p>
+              <p className="smallCopy">Select a ticket to apply discount:</p>
             }
             {tokens &&
               tokens.map((token, index) => {
-                return <Card key={index} applyDiscount={applyDiscount} tokenInstance={token} discount={discount}></Card>
+                return <TokenCard key={index} applyDiscount={applyDiscount} tokenInstance={token} discount={discount}></TokenCard>
               })
             }
           </form>
