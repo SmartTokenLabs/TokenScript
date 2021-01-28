@@ -14,7 +14,7 @@ import './BookingModal.css';
 
 export default function BookingModal({ roomType, applyDiscount, discount, price, tokens, book }) {
 
-  // Modal State (open boolean).
+  // Modal State (open boolean)
   const [open, setOpen] = React.useState(false);
 
   // Form state.
@@ -52,8 +52,12 @@ export default function BookingModal({ roomType, applyDiscount, discount, price,
     setOpen(false);
   };
 
+  // Discount price calculation
   const discountValue = discount.value ? price * discount.value / 100 : 0;
   const viewPrice = price - discountValue;
+
+  // Tickets that can be used to apply a discount
+  const discountTicketClasess = [0n, 1n];
 
   return (
     <div>
@@ -93,17 +97,31 @@ export default function BookingModal({ roomType, applyDiscount, discount, price,
               <p className="smallCopy">Select a ticket to apply discount:</p>
             }
             {tokens &&
-              tokens.map((token, index) => {
-                return <TokenCard key={index} applyDiscount={applyDiscount} tokenInstance={token} discount={discount}></TokenCard>
-              })
+              tokens
+                .filter(_token => discountTicketClasess.indexOf(_token.ticketClass) > -1)
+                .map((token, index) => (
+                  <TokenCard
+                    key={index}
+                    applyDiscount={applyDiscount}
+                    tokenInstance={token}
+                    discount={discount}
+                  />
+                ))
             }
           </form>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button
+            onClick={handleClose}
+            color="primary"
+          >
             Cancel
           </Button>
-          <Button onClick={handleSubmit} color="primary" disabled={formIsValid()}>
+          <Button
+            onClick={handleSubmit}
+            color="primary"
+            disabled={formIsValid()}
+          >
             Book Now
           </Button>
         </DialogActions>
