@@ -34,16 +34,30 @@ export default function RoomCard({ room, applyDiscount, discount, tokens, book }
           title="token"
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
+          <Typography
+            gutterBottom
+            variant="h5"
+            component="h2"
+          >
             {type}
           </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
+          <Typography
+            variant="body2"
+            color="textSecondary"
+            component="p"
+          >
             From {price} ETH / {frequency}
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <BookingModal book={book} applyDiscount={applyDiscount} tokens={tokens} roomType={type} discount={discount} price={price} />
+        <BookingModal
+          book={book}
+          applyDiscount={applyDiscount}
+          tokens={tokens}
+          roomType={type}
+          discount={discount}
+          price={price} />
       </CardActions>
     </Card>
   );

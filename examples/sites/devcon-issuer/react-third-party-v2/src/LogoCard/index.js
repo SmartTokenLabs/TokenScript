@@ -11,7 +11,11 @@ function LogoCard({ title }) {
   return (
     <Card className="logoCard">
       <CardContent>
-        <Typography gutterBottom variant="h1" component="h1">
+        <Typography
+          gutterBottom
+          variant="h1"
+          component="h1"
+        >
           {title}
         </Typography>
       </CardContent>

@@ -61,14 +61,27 @@ export default function BookingModal({ roomType, applyDiscount, discount, price,
 
   return (
     <div>
-      <Button size="small" color="primary" onClick={handleClickOpen}>
+      <Button
+        size="small"
+        color="primary"
+        onClick={handleClickOpen}
+      >
         Book
       </Button>
-      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle className="title" disableTypography={true}>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="form-dialog-title">
+        <DialogTitle
+          className="title"
+          disableTypography={true}
+        >
           {roomType}
         </DialogTitle>
-        <DialogTitle className="subTitle" disableTypography={true}>
+        <DialogTitle
+          className="subTitle"
+          disableTypography={true}
+        >
           {viewPrice} ETH per night.
         </DialogTitle>
         <DialogContent>

@@ -8,3 +8,7 @@
 .tokenNotificationCard h1 {
   font-size: 1.1rem;
 }
+
+p.MuiTypography-body1 {
+  font-size: 0.75rem;
+}
