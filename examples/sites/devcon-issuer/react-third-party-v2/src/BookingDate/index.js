@@ -1,21 +1,22 @@
-import React, { useReducer } from "react";
+import React, { useState } from "react";
 import DatePicker from './../DatePicker';
 
 const BookingDate = () => {
 
-  // Form state.
-  const [formInput, setFormInput] = useReducer((state, newState) => ({ ...state, ...newState }), { reference: "" });
-
-  // Handle date change input
-  const handleInput = evt => {
-    const name = evt.target.name;
-    const newValue = evt.target.value;
-    setFormInput({ [name]: newValue });
-  };
-
   var today = new Date();
   var tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
+
+  // Form state.
+  const [formInput, setFormInput] = useState({
+    from: today,
+    to: tomorrow
+  });
+
+  // Handle date change input
+  const handleInput = (newValue, label) => {
+    setFormInput({ [label]: newValue });
+  };
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -25,7 +26,7 @@ const BookingDate = () => {
             name={'from'}
             label={'from'}
             handleInput={handleInput}
-            date={today}
+            date={formInput.from}
           />
         </div>
         <div style={{ margin: '10px' }}>
@@ -33,7 +34,7 @@ const BookingDate = () => {
             name={'to'}
             label={'to'}
             handleInput={handleInput}
-            date={tomorrow}
+            date={formInput.to}
           />
         </div>
       </div>
