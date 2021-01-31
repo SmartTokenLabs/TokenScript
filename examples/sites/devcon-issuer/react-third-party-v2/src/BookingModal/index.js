@@ -5,7 +5,6 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import DatePicker from './../DatePicker';
 import TokenCard from './../TokenCard';
 import './BookingModal.css';
 
@@ -18,7 +17,7 @@ export default function BookingModal({ roomType, applyDiscount, discount, price,
   const [open, setOpen] = React.useState(false);
 
   // Form state.
-  const [formInput, setFormInput] = useReducer((state, newState) => ({ ...state, ...newState }), { reference: "", from: "", to: "" });
+  const [formInput, setFormInput] = useReducer((state, newState) => ({ ...state, ...newState }), { reference: "" });
 
   // Handle form input.
   const handleInput = evt => {
@@ -30,9 +29,7 @@ export default function BookingModal({ roomType, applyDiscount, discount, price,
   // Simple validation check.
   const formIsValid = () => {
     return !(
-      (formInput.reference.length > 0) &&
-      (formInput.from instanceof Date) &&
-      (formInput.to instanceof Date)
+      (formInput.reference.length > 0)
     );
   }
 
@@ -72,72 +69,64 @@ export default function BookingModal({ roomType, applyDiscount, discount, price,
         open={open}
         onClose={handleClose}
         aria-labelledby="form-dialog-title">
-        <DialogTitle
-          className="title"
-          disableTypography={true}
-        >
-          {roomType}
-        </DialogTitle>
-        <DialogTitle
-          className="subTitle"
-          disableTypography={true}
-        >
-          {viewPrice} ETH per night.
-        </DialogTitle>
-        <DialogContent>
-          <form onSubmit={handleSubmit}>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="booking-name"
-              label="Booking Reference Name"
-              type="text"
-              fullWidth
-              name="reference"
-              onChange={handleInput}
-            />
-            <DatePicker
-              name={'from'}
-              label={'from'}
-              handleInput={handleInput}
-            />
-            <DatePicker
-              name={'to'}
-              label={'to'}
-              handleInput={handleInput}
-            />
-            {tokens.length > 0 &&
-              <p className="smallCopy">Select a ticket to apply discount:</p>
-            }
-            {tokens &&
-              tokens
-                .filter(_token => discountTicketClasess.indexOf(_token.ticketClass) > -1)
-                .map((token, index) => (
-                  <TokenCard
-                    key={index}
-                    applyDiscount={applyDiscount}
-                    tokenInstance={token}
-                    discount={discount}
-                  />
-                ))
-            }
-          </form>
-        </DialogContent>
-        <DialogActions>
-          <Button
-            onClick={handleClose}
-            color="primary"
+        <div className='container'>
+          <DialogTitle
+            className="title"
+            disableTypography={true}
           >
-            Cancel
-          </Button>
-          <Button
-            onClick={handleSubmit}
-            color="primary"
-            disabled={formIsValid()}
+            {roomType}
+          </DialogTitle>
+          <DialogTitle
+            className="subTitle"
+            disableTypography={true}
           >
-            Book Now
+            {viewPrice} ETH per night.
+        </DialogTitle>
+          <DialogContent>
+            <form onSubmit={handleSubmit}>
+              <TextField
+                autoFocus
+                margin="dense"
+                id="booking-name"
+                label="Booking Reference Name"
+                type="text"
+                fullWidth
+                name="reference"
+                onChange={handleInput}
+              />
+              {tokens.length > 0 &&
+                <p className="smallCopy">Select a ticket to apply discount:</p>
+              }
+              {tokens &&
+                tokens
+                  .filter(_token => discountTicketClasess.indexOf(_token.ticketClass) > -1)
+                  .map((token, index) => (
+                    <TokenCard
+                      key={index}
+                      applyDiscount={applyDiscount}
+                      tokenInstance={token}
+                      discount={discount}
+                    />
+                  ))
+              }
+            </form>
+          </DialogContent>
+          <DialogActions>
+            <Button
+              onClick={handleClose}
+              color="primary"
+            >
+              Cancel
           </Button>
-        </DialogActions>
+            <Button
+              onClick={handleSubmit}
+              color="primary"
+              disabled={formIsValid()}
+            >
+              Book Now
+          </Button>
+          </DialogActions>
+        </div>
       </Dialog>
     </div>
   );

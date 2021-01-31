@@ -8,7 +8,7 @@
 
 #space{
   margin: auto;
-  width: 800px; 
+  width: 500px; 
   height: 500px;
   transform: perspective 100px;
   transform-origin: 110px 110px; 

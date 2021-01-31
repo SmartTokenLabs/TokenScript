@@ -12,3 +12,9 @@
 p.MuiTypography-body1 {
   font-size: 0.75rem;
 }
+
+@media (max-width: 480px) {
+  .tokenNotificationCard {
+    display: none;
+  }
+}

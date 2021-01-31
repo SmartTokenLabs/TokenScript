@@ -4,6 +4,7 @@ import RoomCard from './RoomCard';
 import TokenNotificationCard from './TokenNotificationCard';
 import Typography from '@material-ui/core/Typography';
 import EthereumLogo from './EthereumLogo';
+import BookingDate from './BookingDate';
 import './App.css';
 
 function App() {
@@ -92,6 +93,7 @@ function App() {
           <TokenNotificationCard tokensNumber={tokens.length} />
         }
       </div>
+      <BookingDate />
       <div className="roomCardsContainer">
         {roomTypesData.map((room, index) => {
           return <RoomCard
@@ -109,6 +111,7 @@ function App() {
         <div>
           <EthereumLogo />
           <Typography
+            style={{ padding: '20px' }}
             className="applyDiscountCopyContainer"
             gutterBottom
             variant="body2"
@@ -117,7 +120,7 @@ function App() {
           </Typography>
         </div>
       }
-    </div >
+    </div>
   );
 }
 

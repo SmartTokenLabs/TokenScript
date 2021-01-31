@@ -12,6 +12,8 @@ import './RoomCard.css';
 // ROOM CARD COMPONENT
 // Shows hotel room item; image, price and option to book.
 
+// https://css-tricks.com/animate-a-container-on-mouse-over-using-perspective-and-transform/
+
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,

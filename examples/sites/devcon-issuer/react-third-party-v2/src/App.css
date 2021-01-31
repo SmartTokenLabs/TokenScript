@@ -13,7 +13,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin: 60px;
+  margin: 20px 60px;
 }
 
 .discountOptionContainer, .discountButtonContainer {

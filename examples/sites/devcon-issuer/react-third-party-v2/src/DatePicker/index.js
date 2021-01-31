@@ -9,9 +9,7 @@ import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/picker
 // DATE PICKER COMPONENT
 // Simply wraps the Date picker material ui component
 
-export default function DatePicker({ label, handleInput }) {
-
-  const [selectedDate, setSelectedDate] = React.useState();
+export default function DatePicker({ label, handleInput, date }) {
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
@@ -24,11 +22,11 @@ export default function DatePicker({ label, handleInput }) {
         <KeyboardDatePicker
           disableToolbar
           variant="inline"
-          format="dd/mm/yyyy"
+          format="dd/MM/yyyy"
           margin="normal"
           id="date-picker-inline"
           label={label}
-          value={selectedDate}
+          value={date}
           onChange={handleDateChange}
           KeyboardButtonProps={{
             'aria-label': 'change date',
