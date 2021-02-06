@@ -146,7 +146,7 @@ function App() {
             gutterBottom
             variant="body2"
             component="p">
-            Free shuttle service available as a Devcon Ticket Class 2n holder! Enjoy the event.
+            Free shuttle service available as a Devcon Ticket holder! Enjoy the event.
           </Typography>
         </div>
       }
