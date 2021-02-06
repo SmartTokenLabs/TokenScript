@@ -106,9 +106,7 @@ function App() {
       setTokens(data.tokens);
       // apply any upfront discounts
       data.tokens.map(token => {
-        if (token.ticketClass == 2n) {
-          setFreeShuttle(true);
-        }
+        setFreeShuttle(true);
       });
     });
     // Get mock rooms data
