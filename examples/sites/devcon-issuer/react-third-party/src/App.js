@@ -26,20 +26,9 @@ function App() {
   // Negotiator
 
   // Instantiate an instance of the Negotiator with chosen filters
-  // let negotiator = new Negotiator({}, {
-  //   debug: 1,
-  //   tokensOrigin: "https://devcontickets.herokuapp.com/",
-  //   hideTokensIframe: true
-  // });
-
   let tokensURL = "https://devcontickets.herokuapp.com/outlet/";
   let filter = { 'ticketClass': 1 };
-  // let filter = { };
-  let negotiator = new Negotiator(
-    filter
-    // "https://devcontickets.herokuapp.com/outlet/" hardcoded as default value, we can change it if needed
-    // , {tokensOrigin: tokensURL}
-  );
+  let negotiator = new Negotiator(filter, { tokensOrigin: tokensURL });
 
   // Booking and Hotel Specific Events
 

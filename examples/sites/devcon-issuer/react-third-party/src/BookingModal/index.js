@@ -1,3 +1,4 @@
+
 import React, { useReducer } from "react";
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -56,6 +57,15 @@ export default function BookingModal({ roomType, applyDiscount, discount, price,
   // Tickets that can be used to apply a discount
   const discountTicketClasess = [1n];
 
+  // Text to accompany the tickets (only shown when there are tickets)
+  const TicketCopy = (index) => {
+    if (index === 0) {
+      return (
+        <p className="smallCopy">Select a ticket to apply discount:</p>
+      );
+    }
+  }
+
   return (
     <div>
       <Button
@@ -98,13 +108,15 @@ export default function BookingModal({ roomType, applyDiscount, discount, price,
                 tokens
                   .filter(_token => discountTicketClasess.indexOf(_token.ticketClass) > -1)
                   .map((token, index) => (
-                    // <p className="smallCopy">Select a ticket to apply discount:</p>
-                    <TokenCard
-                      key={index}
-                      applyDiscount={applyDiscount}
-                      tokenInstance={token}
-                      discount={discount}
-                    />
+                    <div>
+                      {TicketCopy(index)}
+                      <TokenCard
+                        key={index}
+                        applyDiscount={applyDiscount}
+                        tokenInstance={token}
+                        discount={discount}
+                      />
+                    </div>
                   ))
               }
             </form>
@@ -129,3 +141,6 @@ export default function BookingModal({ roomType, applyDiscount, discount, price,
     </div>
   );
 }
+
+
+
