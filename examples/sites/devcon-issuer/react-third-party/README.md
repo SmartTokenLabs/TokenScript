@@ -1,5 +1,7 @@
 # example 
 
+## Hotel Bogota (react=third-party)
+
 ## Developer Getting Started
 
 1. From this directory, run `yarn` or `npm install`

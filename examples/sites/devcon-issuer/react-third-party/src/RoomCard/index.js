@@ -9,6 +9,11 @@ import BookingModal from './../BookingModal';
 import Typography from '@material-ui/core/Typography';
 import './RoomCard.css';
 
+// ROOM CARD COMPONENT
+// Shows hotel room item; image, price and option to book.
+
+// https://css-tricks.com/animate-a-container-on-mouse-over-using-perspective-and-transform/
+
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
@@ -19,9 +24,9 @@ const useStyles = makeStyles({
   },
 });
 
-export default function MediaCard({ room, applyDiscount, discountApplied, tokens }) {
+export default function RoomCard({ room, applyDiscount, discount, tokens, book }) {
   const classes = useStyles();
-  const { type, price, discountPrice, image, frequency } = room;
+  const { type, price, image, frequency } = room;
   return (
     <Card className="roomCard">
       <CardActionArea>
@@ -31,29 +36,30 @@ export default function MediaCard({ room, applyDiscount, discountApplied, tokens
           title="token"
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
+          <Typography
+            gutterBottom
+            variant="h5"
+            component="h2"
+          >
             {type}
           </Typography>
-          {discountApplied === false &&
-            <Typography variant="body2" color="textSecondary" component="p">
-              {price} ETH / {frequency}
-            </Typography>
-          }
-          {discountApplied === true &&
-            <div>
-              <Typography style={{ textDecoration: "line-through" }} variant="body2" color="textSecondary" component="span">
-                {price} ETH
-              </Typography>
-              <span> </span>
-              <Typography variant="body2" color="textSecondary" component="span">
-                ${discountPrice} ETH / {frequency}
-              </Typography>
-            </div>
-          }
+          <Typography
+            variant="body2"
+            color="textSecondary"
+            component="p"
+          >
+            From {price} ETH / {frequency}
+          </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <BookingModal applyDiscount={applyDiscount} tokens={tokens} roomType={type} discountApplied={discountApplied} price={discountApplied ? discountPrice : price} />
+        <BookingModal
+          book={book}
+          applyDiscount={applyDiscount}
+          tokens={tokens}
+          roomType={type}
+          discount={discount}
+          price={price} />
       </CardActions>
     </Card>
   );

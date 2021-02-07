@@ -1,0 +1,20 @@
+.tokenNotificationCard {
+  margin: 12px;
+  flex-grow: 1;
+  flex-basis: 0;
+  max-width: 220px;
+}
+
+.tokenNotificationCard h1 {
+  font-size: 1.1rem;
+}
+
+p.MuiTypography-body1 {
+  font-size: 0.75rem;
+}
+
+@media (max-width: 480px) {
+  .tokenNotificationCard {
+    display: none;
+  }
+}
