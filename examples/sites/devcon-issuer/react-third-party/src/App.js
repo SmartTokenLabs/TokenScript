@@ -27,7 +27,10 @@ function App() {
 
   // Instantiate an instance of the Negotiator with chosen filters
   let tokensURL = "https://devcontickets.herokuapp.com/outlet/";
-  let filter = { 'ticketClass': 1 };
+
+  // NOTE: This filter must be updated to consume the tokens you require.
+  let filter = { 'devconId': 6 };
+
   let negotiator = new Negotiator(filter, { tokensOrigin: tokensURL });
 
   // Booking and Hotel Specific Events
@@ -87,6 +90,7 @@ function App() {
     // }, (err) => {
     //   console.log('fail', err);
     // });
+
   }
 
   // React effects

@@ -55,7 +55,7 @@ export default function BookingModal({ roomType, applyDiscount, discount, price,
   const viewPrice = price - discountValue;
 
   // Tickets that can be used to apply a discount
-  const discountTicketClasess = [1n];
+  const discountTicketClasess = [0n];
 
   // Text to accompany the tickets (only shown when there are tickets)
   const TicketCopy = (index) => {
