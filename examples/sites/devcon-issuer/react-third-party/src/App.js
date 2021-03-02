@@ -11,16 +11,16 @@ function App() {
 
   // React state hooks
 
-  // Devcon Tickets
+  // Devcon Tickets (local state copy of tokens)
   let [tokens, setTokens] = useState([]);
 
-  // Devcon non-discount offers
+  // Devcon non-discount offer example (available to anyone with a devcon token on this website)
   let [freeShuttle, setFreeShuttle] = useState(false);
 
-  // Room Types Data
+  // Room Types Data (hotel room data from example endpoint)
   let [roomTypesData, setRoomTypesData] = useState([]);
 
-  // Selected token instance to apply discount, with the discount value.
+  // Selected token instance to apply discount, with the discount value on hotel booking.
   let [discount, setDiscount] = useState({ value: undefined, tokenInstance: null });
 
   // Negotiator
@@ -29,8 +29,10 @@ function App() {
   let tokensURL = "https://devcontickets.herokuapp.com/outlet/";
 
   // NOTE: This filter must be updated to consume the tokens you require.
-  let filter = { 'devconId': 6 };
+  // let filter = { 'devconId': 6 }; // example with filter applied.
+  let filter = {};
 
+  // Create new instance of the Negotiator with params
   let negotiator = new Negotiator(filter, { tokensOrigin: tokensURL });
 
   // Booking and Hotel Specific Events
@@ -93,7 +95,8 @@ function App() {
 
   }
 
-  // React effects
+  // React effects, used to store the tokens to the app state, site wide discount and acquire
+  // the hotel room example data (prices, names)
   useEffect(() => {
     // Get tokens with applied filter
     negotiator.negotiate(data => {

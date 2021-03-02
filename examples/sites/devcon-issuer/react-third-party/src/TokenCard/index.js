@@ -23,8 +23,7 @@ function TokenCard({ tokenInstance, applyDiscount, discount }) {
   //  ticketClass: 1n
   //  ticketId: 222n
   // }
-
-  const isSelectedToken = (discount.tokenInstance && discount.tokenInstance.ticketClass === tokenInstance.ticketClass);
+  const isSelectedToken = (discount.tokenInstance && discount.tokenInstance.ticketId === tokenInstance.ticketId);
   return (
     <Card className={isSelectedToken ? 'tokenCard selected' : 'tokenCard'}>
       <CardActionArea>
