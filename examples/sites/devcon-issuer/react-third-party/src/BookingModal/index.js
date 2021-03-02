@@ -108,10 +108,9 @@ export default function BookingModal({ roomType, applyDiscount, discount, price,
                 tokens
                   .filter(_token => discountTicketClasess.indexOf(_token.ticketClass) > -1)
                   .map((token, index) => (
-                    <div>
+                    <div key={index}>
                       {TicketCopy(index)}
                       <TokenCard
-                        key={index}
                         applyDiscount={applyDiscount}
                         tokenInstance={token}
                         discount={discount}

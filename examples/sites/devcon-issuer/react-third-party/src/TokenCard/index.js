@@ -16,7 +16,6 @@ const useStyles = makeStyles({
 
 function TokenCard({ tokenInstance, applyDiscount, discount }) {
   const classes = useStyles();
-  debugger;
   return (
     <Card className={discount.tokenInstance && discount.tokenInstance.ticketClass === tokenInstance.ticketClass ? 'tokenCard selected' : 'tokenCard'}>
       <CardActionArea>

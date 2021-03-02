@@ -29,7 +29,7 @@ export default function RoomCard({ room, applyDiscount, discount, tokens, book }
   const { type, price, image, frequency } = room;
   return (
     <Card className="roomCard">
-      <CardActionArea>
+      <div>
         <CardMedia
           className={classes.media}
           image={image}
@@ -51,7 +51,7 @@ export default function RoomCard({ room, applyDiscount, discount, tokens, book }
             From {price} ETH / {frequency}
           </Typography>
         </CardContent>
-      </CardActionArea>
+      </div>
       <CardActions>
         <BookingModal
           book={book}
