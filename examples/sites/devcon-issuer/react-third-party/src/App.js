@@ -42,14 +42,15 @@ function App() {
     }
   }
 
-  // Apply discount, user selected a ticket
+  // Apply discount, user selected a ticket (user can also unselect their choice)
+  // when no ticket by this function, it will clear the discount / selected ticket/token
   const applyDiscount = async (ticket) => {
-    try {
+    if (!ticket) {
+      setDiscount({ value: undefined, tokenInstance: undefined })
+    } else {
       const response = await fetch(`./roomTypesTicketClassDataMock${ticket.ticketClass.toString()}.json`)
       const data = await response.json();
       setDiscount({ value: data.discount, tokenInstance: ticket });
-    } catch (e) {
-      throw e;
     }
   }
 

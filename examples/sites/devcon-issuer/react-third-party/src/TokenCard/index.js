@@ -14,10 +14,13 @@ const useStyles = makeStyles({
   },
 });
 
+// 
+
 function TokenCard({ tokenInstance, applyDiscount, discount }) {
   const classes = useStyles();
+  const isSelectedToken = (discount.tokenInstance && discount.tokenInstance.ticketClass === tokenInstance.ticketClass);
   return (
-    <Card className={discount.tokenInstance && discount.tokenInstance.ticketClass === tokenInstance.ticketClass ? 'tokenCard selected' : 'tokenCard'}>
+    <Card className={isSelectedToken ? 'tokenCard selected' : 'tokenCard'}>
       <CardActionArea>
         <CardMedia
           className={classes.media}
@@ -25,7 +28,7 @@ function TokenCard({ tokenInstance, applyDiscount, discount }) {
           title="token"
         />
         {tokenInstance && tokenInstance.ticketClass &&
-          <CardContent onClick={e => applyDiscount(tokenInstance)}>
+          <CardContent onClick={e => applyDiscount(isSelectedToken ? null : tokenInstance)}>
             <Typography
               gutterBottom
               variant="h5"
