@@ -1,14 +1,15 @@
 "use strict";
 
-var WebCrypto = require("node-webcrypto-ossl");
-var crypto = new WebCrypto.Crypto();
-
-var args = process.argv.slice(2);
+const crypto = require('crypto').webcrypto;
 
 const XmlDSigJs = require("xmldsigjs");
 const fs = require('fs');
 
 XmlDSigJs.Application.setEngine("WebCrypto", crypto);
+
+if (process.argv.length == 2) {
+	console.log("xmldsigverifier demonstration script. Need parameters - xml files with enveloped signatures")
+}
 
 for (var i=2; i<process.argv.length; i++) {
     verify(process.argv[i]);
@@ -30,7 +31,8 @@ function verify(xml_file) {
             }
         })
         .catch(e => {
-            console.log("[FAILED] " + xml_file);
-            //console.log(e)
+            console.log("[ERROR ] " + xml_file);
+            console.log(e)
         });
 }
+
