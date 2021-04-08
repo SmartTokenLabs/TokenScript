@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "engines": {
     "node": ">=0.15"
   },
