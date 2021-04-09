@@ -6,18 +6,6 @@ This repository serves to show how to verify XMLDSig signature in every programm
 
 In all following examples, assume you have cloned [TokenScript-Repo](https://github.com/AlphaWallet/TokenScript-Repo) - a nop-exhaustive TokenScript collection - into your home directory (`~/TokenScript-Repo`) for testing purpose.
 
-### Go
-
-First, install the dependency. You can use `go get`
-
-    $ go get github.com/russellhaering/goxmldsig
-    $ go run golang/xmldsignverify.go
-
-Or, on Ubuntu, `apt-get`
-
-    $ sudo apt-get install golang-go golang-github-russellhaering-goxmldsig-dev
-    $ GOPATH=/usr/share/gocode/ go run golang/xmldsignverify.go
-
 
 ### JavaScript *(not working for many files due to a bug in a JavaScript library)*
 
