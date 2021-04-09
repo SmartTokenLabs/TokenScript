@@ -38,6 +38,7 @@ func main() {
 
 	println(str)
 
+	// Replace ExampleElement.crt with the X509Certificate in your tsml accordingly.
 	cf, e := ioutil.ReadFile("ExampleElement.crt")
 	if e != nil {
 		fmt.Println("cfload:", e.Error())
@@ -54,14 +55,21 @@ func main() {
 	}
 	fmt.Println(cert.PublicKeyAlgorithm)
 
-	doc2 := etree.NewDocument()
-	errdoc := doc2.ReadFromFile("ExampleElement.xml")
-	if errdoc != nil {
-		panic(errdoc)
+	for i := 1; i < len(os.Args); i++ {
+		doc2 := etree.NewDocument()
+		errdoc := doc2.ReadFromFile(os.Args[i])
+		if errdoc != nil {
+			panic(errdoc)
+		}
+		root := doc2.SelectElements("ts:token")
+		fmt.Println(root[0].Tag)
+		defer func() {
+			if p := recover(); p != nil {
+				fmt.Printf("panic: %s\n", p)
+			}
+		}()
+		validate(cert, root[0])
 	}
-	root := doc2.SelectElements("ExampleElement")
-	fmt.Println(root[0].Tag)
-	validate(cert, root[0])
 }
 
 // Validate an element against a root certificate
@@ -78,6 +86,9 @@ func validate(root *x509.Certificate, el *etree.Element) {
 		panic(err)
 	}
 
+	if validated == nil {
+		return
+	}
 	doc := etree.NewDocument()
 	doc.SetRoot(validated)
 	str, err := doc.WriteToString()
