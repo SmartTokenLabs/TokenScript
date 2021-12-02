@@ -3,7 +3,7 @@
 
 **Bring context, security and cross-platform functionality (iOS, Android and Web) to your favourite tokens with a single file.**
 
-TokenScript makes SmartTokens (Credit to [Virgil Griffith](https://twitter.com/virgilgr) for coming up with the term). These are like traditional ERC20 or ERC721 tokens, but with extendable structure & signed JavaScript to realise rich functions that DApps struggle to implement, and be traded with flexible, customisable trading rules.
+TokenScript makes Smart Token (Credit to [Virgil Griffith](https://twitter.com/virgilgr) for coming up with the term). These are like traditional ERC20 or ERC721 tokens, but with extendable structure & signed JavaScript to realise rich functions and full composability that DApps struggle to implement, and be traded with flexible, customisable trading rules.
 
 A TokenScript file is made of
 - JavaScript to make Token work in the user's wallet or across multiple apps; and
