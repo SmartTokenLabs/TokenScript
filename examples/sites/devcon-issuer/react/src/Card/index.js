@@ -27,13 +27,13 @@ function MediaCard({ tokenInstance }) {
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="h2">
-          {tokenInstance.ticketClass}
+          {tokenInstance.ticketClass.toString()}
         </Typography>
         <Typography variant="body2" color="textSecondary" component="p">
-          Ticket Id: {tokenInstance.ticketId}
+          Ticket Id: {tokenInstance.ticketId.toString()}
         </Typography>
         <Typography variant="body2" color="textSecondary" component="p">
-          Devcon Id: {tokenInstance.devconId}
+          Devcon Id: {tokenInstance.devconId.toString()}
         </Typography>
       </CardContent>
     </Card>
