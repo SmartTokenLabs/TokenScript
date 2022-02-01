@@ -9,7 +9,6 @@
     "@testing-library/user-event": "^12.1.10",
     "asn1js": "^2.0.26",
     "big-integer": "^1.6.48",
-    "bigint-polyfill": "^0.1.0",
     "isevn": "^2.0.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",

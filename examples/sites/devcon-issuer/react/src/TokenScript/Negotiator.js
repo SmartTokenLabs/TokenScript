@@ -1,5 +1,6 @@
 // https://github.com/TokenScript/attestation/blob/main/src/main/javascript/SignedDevonTicket.js
 import { SignedDevconTicket } from './../Attestation/SignedDevonTicket';
+import { generateKey, encrypt, pack, unpack, decrypt } from './Crypto';
 
 export class Negotiator {
   constructor(filter) {
@@ -11,12 +12,33 @@ export class Negotiator {
     return true;
   }
 
+  async negotiate() {
+    return true;
+  }
+
+  // https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/exportKey
+  // Example of how to decrypt the secret
+  async getTokenSecret(ticket, ticketKey) {
+    const encryptedSecretObject = JSON.parse(ticket.secret);
+    const secret = await decrypt(unpack(encryptedSecretObject.cipher), ticketKey, unpack(encryptedSecretObject.iv));
+    return secret;
+  }
+
   // Get the token instances (with filter)
   async getTokenInstances() {
     // Get ticket from params - to add to local storage / read into app
     const urlParams = new URLSearchParams(window.location.search);
     const ticketFromQuery = urlParams.get('ticket');
     const secretFromQuery = urlParams.get('secret');
+
+    // Encrypt the secret
+    const ticketKey = await generateKey();
+    const { cipher, iv } = await encrypt(secretFromQuery, ticketKey);
+    const encryptedSecret = JSON.stringify({
+      cipher: pack(cipher),
+      iv: pack(iv),
+    });
+
     // Get the current Storage Tokens (DER format)
     const storageTickets = localStorage.getItem('dcTokens');
     // Decode the current ticket (DER format)
@@ -53,7 +75,7 @@ export class Negotiator {
           // If the same as a previous ticket - replace with the new ticket
           if (storedTicketObject.ticket.ticketId == ticketObject.ticketId) {
             // If new push the DER of the ticket into localstorage
-            tickets.raw.push({ ticket: ticketFromQuery, secret: secretFromQuery });
+            tickets.raw.push({ ticket: ticketFromQuery, secret: encryptedSecret });
             // Push a js object
             tickets.web.push({
               devconId: ticketObject.devconId.toString(),
@@ -74,7 +96,7 @@ export class Negotiator {
       }
       // Add ticket if new
       if (isNewQueryTicket) {
-        tickets.raw.push({ ticket: ticketFromQuery, secret: secretFromQuery }); // new raw object
+        tickets.raw.push({ ticket: ticketFromQuery, secret: encryptedSecret }); // new raw object
         tickets.web.push({
           devconId: ticketObject.devconId.toString(),
           ticketId: ticketObject.ticketId.toString(),
@@ -98,6 +120,8 @@ export class Negotiator {
         });
       }
     }
+
+    await this.getTokenSecret(tickets.raw[0], ticketKey);
 
     // Return tickets for web
     return tickets.web;
