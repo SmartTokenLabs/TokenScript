@@ -1,0 +1,7 @@
+.roomCard {
+  margin: 12px;
+  flex-grow: 1;
+  flex-basis: 0;
+  min-width: 220px;
+  max-width: 345px;
+}

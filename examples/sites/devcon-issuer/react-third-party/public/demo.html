@@ -1,0 +1,11 @@
+<script>
+  setTimeout(() => {
+    const tickets = [
+      { "devconId": 6n, "ticketId": "48646n", "ticketClass": 0n },
+      { "devconId": 1n, "ticketId": "88646n", "ticketClass": 2n },
+      { "devconId": 2n, "ticketId": "38646n", "ticketClass": 1n },
+    ];
+    var event = new CustomEvent('ticketsRecievedEvent', { detail: tickets })
+    window.parent.document.dispatchEvent(event)
+  }, 5000);
+</script>

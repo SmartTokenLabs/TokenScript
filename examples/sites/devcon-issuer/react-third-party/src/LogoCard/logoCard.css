@@ -1,0 +1,11 @@
+.logoCard {
+  margin: 12px;
+  flex-grow: 1;
+  flex-basis: 0;
+  min-width: 220px;
+  max-width: 220px;
+}
+
+.logoCard h1 {
+  font-size: 1.1rem;
+}
