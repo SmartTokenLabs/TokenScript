@@ -110,11 +110,11 @@ interface IERC5XXX {
 
     /// @notice Get the scriptURI for the contract
     /// @return The scriptURI
-    function getScriptURI() external view returns(ScriptURI memory);
+    function scriptURI() external view returns(ScriptURI memory);
       
     /// @notice Get the scriptURI for the contract
     /// @return The scriptURI
-    function getVerificationKey() external view returns(address memory);
+    function verificationKey() external view returns(address memory);
 
 
     /// @notice Update the scriptURI 
@@ -140,7 +140,7 @@ The interface MUST be implemented under the following constraints:
 
 - The `setScriptURI` function MUST validate that `newSigScriptURI` contains a signature on `newScriptURI`, validated against `verificationKey` stored in its state, *before* executing its logic and updating any state.
 
-- The ```getScriptURI()``` function MAY be implemented as pure or view.
+- The ```scriptURI()``` function MAY be implemented as pure or view.
 
 - Any user of the script learned from scriptURI MUST, validate the script and its signature against `verificationKey` before trusting it.
 
