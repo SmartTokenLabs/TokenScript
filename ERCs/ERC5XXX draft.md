@@ -1,7 +1,7 @@
 ### eip: 5???
-### title: Executable Script extention for Token Contracts
+### title: Executable Script extension for Token Contracts
 ### description: Add a scriptURI to point to point to an executable script associated with the functionality of the token.
-### author: James (@JamesSmartCell), Weiwu (@weiwu-zhang), Tore Frederiksen
+### author: James (@JamesSmartCell), Weiwu (@weiwu-zhang), Tore Frederiksen (@jot2re)
 ### discussions-to:
 ### status: Draft
 ### type: Standards Track
@@ -9,12 +9,12 @@
 ### created: 2022-05-03
 ### requires: 
 ### Abstract
-This standard is an interface that adds a scriptURI for locating executable scripts associated with the token.
+This standard is an interface that adds a `scriptURI()` function for locating executable scripts associated with the token.
 
 ### Motivation
 Often NFT authors want to provide some user functionality to their tokens, e.g. through scripts. This should done in a safe way, without opening the user to potential scams. By packaging a link to official scripts, created by the token minter, within the token itself, users can be sure they are using the correct script.
 
-This ERC proposes adding a scriptURI which is a structure containing an array of URIs to external resources in IPFS, github, a cloud provider, etc.
+This ERC proposes adding a scriptURI which is a structure containing an array of URIs to external resources in IPFS, GitHub, a cloud provider, etc.
 Each scriptURI semantically contains access information to access a *single* signed script, stored in one or more off-chain locations.
 Concretely each element in the array contains a pair of URIs, one to the script itself, and one to a signature of the script. 
 
@@ -111,10 +111,10 @@ interface IERC5XXX {
     /// @notice Get the scriptURI for the contract
     /// @return The scriptURI
     function getScriptURI() external view returns(ScriptURI memory);
-	
+      
     /// @notice Get the scriptURI for the contract
     /// @return The scriptURI
-    function getVerificationKey) external view returns(address memory);
+    function getVerificationKey() external view returns(address memory);
 
 
     /// @notice Update the scriptURI 
@@ -146,7 +146,7 @@ The interface MUST be implemented under the following constraints:
 
 
 ### Rationale
-Using this method avoids the need for building secure and certified centralised hosting and allow scripts to be hosted anywhere: IPFS, github or cloud storage.
+Using this method avoids the need for building secure and certified centralised hosting and allow scripts to be hosted anywhere: IPFS, GitHub or cloud storage.
 
 ### Backwards Compatibility
 This standard is compatible with all Token standards (ERC20, 721, 777, 1155 etc).
