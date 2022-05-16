@@ -1,5 +1,5 @@
 ### eip: 5???
-### title: Executable Script extension for Token Contracts
+### title: Client Script extension for Token Contracts
 ### description: Add a scriptURI to point to point to an executable script associated with the functionality of the token.
 ### author: James (@JamesSmartCell), Weiwu (@weiwu-zhang), Tore Frederiksen (@jot2re)
 ### discussions-to:
@@ -12,20 +12,27 @@
 This standard is an interface that adds a `scriptURI()` function for locating executable scripts associated with the token.
 
 ### Motivation
-Often NFT authors want to provide some user functionality to their tokens, e.g. through scripts. This should done in a safe way, without opening the user to potential scams. By packaging a link to official scripts, created by the token minter, within the token itself, users can be sure they are using the correct script.
+Often NFT authors want to provide some user functionality to their tokens, e.g. through scripts. This should be done safely, without opening the user to potential scams. By packaging a link to official scripts, created by the token minter, within the token itself, users can be sure they are using the correct script.
 
-This ERC proposes adding a scriptURI which is a structure containing an array of URIs to external resources in IPFS, GitHub, a cloud provider, etc.
+This ERC proposes adding a scriptURI which is a structure containing an array of URIs to external resources, such as in IPFS, GitHub, a cloud provider, etc.
+
 Each scriptURI semantically contains access information to access a *single* signed script, stored in one or more off-chain locations.
 Concretely each element in the array contains a pair of URIs, one to the script itself, and one to a signature of the script. 
 
-The script provides a user interface to the hosting token which could for example be either: A 'minidapp', which is a cut down dapp tailored for a single token, or a 'TokenScript' which provides a fuller user experience.
+The script provides a client-side executable to the hosting token. Examples of such script:
+
+- A 'miniDapp', which is a cut-down dapp tailored for a single token
+- a 'TokenScript' which provides [T.I.P.S.](https://tokenscript.org/TIPS.html) from a browser wallet.
 
 To facilitate a future-proof solution, this ERC also proposes a solution which allows for updating such resources *after* the token has been issued.
+
 To achieve this the token minter can use the signing key associated with the token minting and an associated smart contract, to authenticate a script/scriptURI signing key.
-In a similar manner the smart contract singing key can also be used to overwrite the scriptURI signing key, in case it gets compromised or needs to be rolled.
+
+Similarly, the smart contract signing key can also be used to overwrite the scriptURI signing key, in case it gets compromised or needs to be rolled.
 The scriptURI signing key is then used to authenticate the URI towards the smart contract, along with the script itself towards anyone accessing it.
 
 #### Script location
+
 While the simplest solutions to facilitate specific script usage associated with NFTs, is clearly to store such a script on the smart contract. However, this has several disadvantages: 
 1. The smart contract signing key is needed to make updates. This means that this key becomes more exposed as it is used more often. 
 2. Updates require smart contract interaction. Simply posting a new transaction on Ethereum is not cheap! When this transaction also includes smart contract logic, the price can quickly become significant. If frequent updates are needed, then smart contract calls can in itself becomes a hurdle.
