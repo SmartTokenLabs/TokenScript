@@ -94,10 +94,10 @@ The keywords “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL N
 We define a scriptURI element using the following structs:
 
 ```
-struct ScriptURI {
-    ScriptURIElement[] scriptURIElements;
+struct scriptURI {
+    scriptURIElement[] scriptURIElements;
 }
-struct ScriptURIElement {
+struct scriptURIElement {
     string URIOfScript;
     string URIOfSignature;
 }
@@ -108,7 +108,7 @@ Based on these elements we define the smart contract interface below:
 interface IERC5XXX {
     /// @dev This event emits when the scriptURI is updated, 
     /// so wallets implementing this interface can update a cached script
-    event ScriptUpdate(ScriptURI memory newScriptURI);
+    event ScriptUpdate(scriptURI memory newScriptURI);
 
     /// @dev This event emits when the script/scriptURI signing key is updated, 
     /// so wallets implementing this interface can update a cached script
@@ -117,7 +117,7 @@ interface IERC5XXX {
 
     /// @notice Get the scriptURI for the contract
     /// @return The scriptURI
-    function scriptURI() external view returns(ScriptURI memory);
+    function scriptURI() external view returns(scriptURI memory);
       
     /// @notice Get the scriptURI for the contract
     /// @return The scriptURI
@@ -125,8 +125,8 @@ interface IERC5XXX {
 
 
     /// @notice Update the scriptURI 
-    /// emits event ScriptUpdate(ScriptURI memory newScriptURI);
-    function setScriptURI(ScriptURI memory newScriptURI, bytes memory newSigScriptURI) external;
+    /// emits event ScriptUpdate(scriptURI memory newScriptURI);
+    function setScriptURI(scriptURI memory newScriptURI, bytes memory newSigScriptURI) external;
 
     /// @notice Set the script/scriptURI signing key
     /// emits event VerificationKeyUpdate(address memory newVerificationKey);
