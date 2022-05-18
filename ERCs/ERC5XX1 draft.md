@@ -20,7 +20,7 @@
 
 ### Abstract
 
-This ERC describes how to assert the authenticity of signed client-script and adds a `revokeClientCodeSigningKey()` function for revocation.
+This ERC describes how to assert the authenticity of signed client-script.
 
 ### Motivation
 
@@ -49,11 +49,15 @@ The authenticity of the client script may be obtained through `scriptURI()` func
 
 ### Format of the certificate and signature
 
-[expand here] certificate is to be in x.509 format. the signature is to be compatible with XMLDSIG.
+[expand here] certificate is to be in x.509 format. the signature is to be compatible with XMLDSIG. It's worth noting the key purpose to specify in x.509
 
 ### Format to attach signature
 
 This ERC does not specify how a wallet client obtains the signature [examples of ways to obtain]
+
+### Revocation
+
+add a public revocation list. (optional) and adds a `revokeClientCodeSigningKey()` function for revocation.
 
 ### Concerning Proxy Contract
 
