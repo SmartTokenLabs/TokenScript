@@ -22,8 +22,9 @@ Concretely each element in the array contains a pair of URIs, one to the script 
 
 The script provides a client-side executable to the hosting token. Examples of such script:
 
-- A 'miniDapp', which is a cut-down dapp tailored for a single token
+- A 'miniDapp', which is a cut-down dapp tailored for a single token.
 - a 'TokenScript' which provides [T.I.P.S.](https://tokenscript.org/TIPS.html) from a browser wallet.
+- an extension that is downlandable to the hardware wallet with an extension framework, such as Ledger.
 
 It is expected that the return value of scriptURI() is constantly updated to reflect the current latest version, if used. However, there is a way to assert the authenticity of signed client side code without frequently updating the URI. Developers should refer to ERC 5xx1 which detailed a method of asserting code authenticity without relying on an URI. Note that both ERCs can be used together.
 
@@ -40,6 +41,11 @@ While the simplest solutions to facilitate specific script usage associated with
 3. Storage fee. If the script is large, contains special graphics or other large elements, then updates to the script can quickly costs thousands of dollars.
 
 For these reasons it makes sense to store volatile data, such as token enhancing functionality, on an external resource. Such an external resource can be either centralized, such as a cloud provider or private server, or decentralized such as the interplanetary filesystem.
+
+#### Authenticity
+
+If the ScriptURI points to a hash, such as with IPFS, the client (wallet) should assume it authentic, if the hash matches. However, if ScriptURI points to a dynamically downloaded location, the client must verify the signature of the script in the method described ERC xxxx, and warn user against executing the script.
+
 Since using centralized storage for a decentralized functionality goes against the ethos of web3, this ERC handle this this by allowing the token provider to store multiple URIs to the script on-chain. The URIs might point to either multiple centralized storage providers or fully decentralized ones, e.g. the IPFS, another blockchain or even on Ethereum itself. It could also be a mix of centralized and decentralized locations.
 
 While this ERC does not dictate the format of the stored script, it should be noted that the script itself could contain pointers to multiple other scripts and data sources. Hence this allows for advanced and rich expansion of tokens.
