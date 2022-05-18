@@ -1,7 +1,7 @@
 ### eip: 5???
-### title: Client Script extension for Token Contracts
+### title: Client Script URI for Token Contracts
 ### description: Add a scriptURI to point to point to an executable script associated with the functionality of the token.
-### author: James (@JamesSmartCell), Weiwu (@weiwu-zhang), Tore Frederiksen (@jot2re)
+### author: James (@JamesSmartCell), Weiwu (@weiwu-zhang)
 ### discussions-to:
 ### status: Draft
 ### type: Standards Track
@@ -9,14 +9,15 @@
 ### created: 2022-05-03
 ### requires: 
 ### Abstract
-This standard is an interface that adds a `scriptURI()` function for locating executable scripts associated with the token.
+This ERC is a contract interface that adds a `scriptURI()` function for locating executable scripts associated with the token.
 
 ### Motivation
-Often NFT authors want to provide some user functionality to their tokens, e.g. through scripts. This should be done safely, without opening the user to potential scams. By packaging a link to official scripts, created by the token minter, within the token itself, users can be sure they are using the correct script.
+Often Smart Contract authors want to provide some user functionality to their tokens through client scripts. The idea is made popular with function-rich NFTs. This should be done safely, without opening the user to potential scams. By packaging a URI to official scripts, created by the token minter, within the token itself, users can be sure they are using the correct script.
 
 This ERC proposes adding a scriptURI which is a structure containing an array of URIs to external resources, such as in IPFS, GitHub, a cloud provider, etc.
 
 Each scriptURI semantically contains access information to access a *single* signed script, stored in one or more off-chain locations.
+
 Concretely each element in the array contains a pair of URIs, one to the script itself, and one to a signature of the script. 
 
 The script provides a client-side executable to the hosting token. Examples of such script:
@@ -24,7 +25,7 @@ The script provides a client-side executable to the hosting token. Examples of s
 - A 'miniDapp', which is a cut-down dapp tailored for a single token
 - a 'TokenScript' which provides [T.I.P.S.](https://tokenscript.org/TIPS.html) from a browser wallet.
 
-To facilitate a future-proof solution, this ERC also proposes a solution which allows for updating such resources *after* the token has been issued.
+It is expected that the return value of scriptURI() is constantly updated to reflect the current latest version, if used. However, there is a way to assert the authenticity of signed client side code without frequently updating the URI. Developers should refer to ERC 5xx1 which detailed a method of asserting code authenticity without relying on an URI. Note that both ERCs can be used together.
 
 To achieve this the token minter can use the signing key associated with the token minting and an associated smart contract, to authenticate a script/scriptURI signing key.
 
