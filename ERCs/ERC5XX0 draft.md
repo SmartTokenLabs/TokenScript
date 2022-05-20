@@ -12,26 +12,21 @@
 This ERC is a contract interface that adds a `scriptURI()` function for locating executable scripts associated with the token.
 
 ### Motivation
-Often Smart Contract authors want to provide some user functionality to their tokens through client scripts. The idea is made popular with function-rich NFTs. This should be done safely, without opening the user to potential scams. By packaging a URI to official scripts, created by the token minter, within the token itself, users can be sure they are using the correct script.
+Often Smart Contract authors want to provide some user functionality to their tokens through client scripts. The idea is made popular with function-rich NFTs. By packaging a URI to an official script, created by the token minter, within the token itself, users can be sure they are using the correct script.
 
-This ERC proposes adding a scriptURI which is a structure containing an array of URIs to external resources, such as in IPFS, GitHub, a cloud provider, etc.
+This ERC proposes adding a `scriptURI` which is a structure containing an array of URIs to external resources, such as in IPFS, GitHub, a cloud provider, etc., which will store the actual script.
 
-Each scriptURI semantically contains access information to access a *single* signed script, stored in one or more off-chain locations.
+Each `scriptURI` semantically contains access information to access a *single* signed script, stored in one or more off-chain locations.
 
-Concretely each element in the array contains a pair of URIs, one to the script itself, and one to a signature of the script. 
+Concretely each element in the array contains a URI to the script itself.
 
-The script provides a client-side executable to the hosting token. Examples of such script:
+The script provides a client-side executable to the hosting token. Examples of such a script could be:
 
 - A 'miniDapp', which is a cut-down dapp tailored for a single token.
-- a 'TokenScript' which provides [T.I.P.S.](https://tokenscript.org/TIPS.html) from a browser wallet.
-- an extension that is downlandable to the hardware wallet with an extension framework, such as Ledger.
+- A 'TokenScript' which provides [T.I.P.S.](https://tokenscript.org/TIPS.html) from a browser wallet.
+- An extension that is downloadable to the hardware wallet with an extension framework, such as Ledger.
 
-It is expected that the return value of scriptURI() is constantly updated to reflect the current latest version, if used. However, there is a way to assert the authenticity of signed client side code without frequently updating the URI. Developers should refer to ERC 5xx1 which detailed a method of asserting code authenticity without relying on an URI. Note that both ERCs can be used together.
-
-To achieve this the token minter can use the signing key associated with the token minting and an associated smart contract, to authenticate a script/scriptURI signing key.
-
-Similarly, the smart contract signing key can also be used to overwrite the scriptURI signing key, in case it gets compromised or needs to be rolled.
-The scriptURI signing key is then used to authenticate the URI towards the smart contract, along with the script itself towards anyone accessing it.
+It is expected that the return value of `scriptURI` is constantly updated to reflect the current latest version, if used. However, there is a way to assert the authenticity of signed client side code without frequently updating the URI. Developers should refer to ERC 5xx1 which detail a method of asserting code authenticity without relying on an URI. Note that both ERCs can be used together.
 
 #### Script location
 
@@ -42,57 +37,40 @@ While the simplest solutions to facilitate specific script usage associated with
 
 For these reasons it makes sense to store volatile data, such as token enhancing functionality, on an external resource. Such an external resource can be either centralized, such as a cloud provider or private server, or decentralized such as the interplanetary filesystem.
 
-#### Authenticity
-
-If the ScriptURI points to a hash, such as with IPFS, the client (wallet) should assume it authentic, if the hash matches. However, if ScriptURI points to a dynamically downloaded location, the client must verify the signature of the script in the method described ERC xxxx, and warn user against executing the script.
-
 Since using centralized storage for a decentralized functionality goes against the ethos of web3, this ERC handle this this by allowing the token provider to store multiple URIs to the script on-chain. The URIs might point to either multiple centralized storage providers or fully decentralized ones, e.g. the IPFS, another blockchain or even on Ethereum itself. It could also be a mix of centralized and decentralized locations.
 
 While this ERC does not dictate the format of the stored script, it should be noted that the script itself could contain pointers to multiple other scripts and data sources. Hence this allows for advanced and rich expansion of tokens.
 
+
+#### Authenticity
+
+For validation of authenticity we consider two different cases:
+
+1. The `scriptURI` points to decentralized immutable locations *or* the location itself contains information that can validate the authenticity of the script. For example, if the URI points to a location on a blockchain or if the latter part of the URI is a hash digest of the resource it points to, such as with IPFS. In the first situation the client (wallet) should assume it is authentic. In the latter, it case, the client must also validate that the hash describing the location also matches the hash of the script, though. 
+
+2. If the `scriptURI` points to a dynamic location, the client must verify that the script downloaded has actually been issued by the same entity, which issued the token it is enhancing. The client must also warn the user against execution if this is not the case. However, this scenario is not covered by this ERC, but is handled by ERC 5XX1.
+
+
 #### Script updates
 Besides issues of script location, another issue is how the script can be updated in a manner where the caller can be sure it is authentic. 
-In this ERC we solve this issue by allowing the issuer to sign and update, on-chain, a scriptURI signing key which can be used to authenticate the script pointed to by the on-chain URI *without* requiring interaction with the smart contract. 
-This approach has multiple advantages:
-1. It allows for off-chain updates of the script (as long as the URI does not change), in a way that can be verified by anyone off-chain. 
-2. It provides a key management functionality, where the smart contract signing key is not required to make updates to the script or its resources. This in turn, provides a key rolling mechanism and implicitly a revocation mechanism in case the script-signing key ever gets compromised. 
-
-It is worth noting that if IPFS is used as URI, then updating the script will also result in an updated URI. This requires interaction with the smart contract. However, this can be done without requiring usage of the smart contract signing key, using a public interface method that allows anyone to update the URIs, but _only_ if they sign the parameters (i.e. new URIs) using the scriptURI signing key. 
-This ensures that even if IPFS is used and URIs need to be updated every time the script is updates, we can still get the key management advantages of using a script signing key.
+We solve this issue by allowing the issuer to update the `scriptURI` on-chain, when the URI points to an immutable location or the URI itself contains info for script validation. 
+This ensures that the script can be changed, even in cases where the URI points to a location based on the hash digest of the script (which is the case if it is stored on the IPFS).
+If instead the `scriptURI` points to a mutable location, it can be updated without on-chain interaction, as described in ERC 5XX1.
 
 #### Overview
 
-With the discussion above in mind we outline the solution proposed by the ERC. For this purpose we consider the following variables:
+With the discussion above in mind we outline the solution proposed by this ERC. For this purpose we consider the following variables:
 - `SCPrivKey`: The private signing key controlling a smart contract implementing this ERC, which is associated with the tokens issued. 
-- `scriptPrivKey`: A private signing key which is used to sign the script issued by the smart contract owner/token provider along with the scriptURI.
-- `scriptKeyAddr`: The address of the public key associated with `scriptPrivKey`, which is used to verify signatures signed with `scriptPrivKey`. 
 - `script`: The script supplying additional functionality to the tokens.
-- `sigScript`: The signature on `script` after signing it with `scriptPrivKey`.
 
-With these variables in mind we can describe the life cycle of tokens script functionality.
+With these variables in mind we can describe the life cycle of the `scriptURI` functionality:
 - Issuance
-1. The token issuer issues the tokens and a smart contract implementing this ERC, with the controlling key for the smart contract being `SCPrivKey`.
-2. The token issuer samples a `scriptPrivKey` and associated `scriptKeyAddr`. They then sign `script`, to get a signature `sigScript` and stores both at one or more URIs, which are consolidated to a scriptURI.
-3. The token issuer calls `setVerificationKey(scriptKeyAddr)` on the smart contract to set the initial scriptURI signing key.
-4. The token issuer signs the scriptURI with the signing key `scriptPrivKey`. Denote the signature `sigScriptURI`. 
-4. The token issuer calls `setScriptURI` with the scriptURI, along with `sigScriptURI`.
+1. The token issuer issues the tokens and a smart contract implementing this ERC, with the controlling signing key for the smart contract being `SCPrivKey`.
+2. The token issuer calls `setScriptURI` with the `scriptURI`.
 
-- Update script
-1. The token issuer signs a new script `script2` using `scriptPrivKey` to get a signature `sigScript2`. 
-2. The token issuer updates `script` and `sigScript` at all its URI locations with `script2` and `sigScript2`.
-3. Replace `script` with `script2` and `sigScript` with `sigScript2`.
-
-- Update script signing key
-1. The token issuer samples a new script signing key pair denoted `scriptPrivKey2` for the private part and `scriptKeyAddr2` for the public part.
-2. The token issuer signs `script` using `scriptPrivKey2` to get `sigScript2` and then replaces `sigScript` with `sigScript2` at all its URI locations.
-3. The token issuer calls `setVerificationKey(scriptKeyAddr2)`.
-4. Replace `scriptPrivKey` with `scriptPrivKey2`, `scriptKeyAddr` with `scriptKeyAddr2` and `sigScript` with `sigScript2`.
-
-- Update script URI
-1. The token issuer moves `script` and `sigScript` from their current URI locations to all new relevant URI locations, and based on this constructs a new scriptURI structure. 
-2. The token issuer signs the new scriptURI structure with the signing key `scriptPrivKey`. Denote the signature `sigScriptURI2`.
-3. The token issuer calls `setScriptURI` with the new scriptURI structure, along with `signScriptURI2`.
-4. Replace `scriptPrivKey` with `scriptPrivKey2`.
+- Update `scriptURI`
+1. The token issuer store the desired `script` at all the new URI locations, and based on this, constructs a new `scriptURI` structure. 
+2. The token issuer calls `setScriptURI` with the new `scriptURI` structure.
 
 
 ### Specification
@@ -102,61 +80,43 @@ We define a scriptURI element using the following structs:
 
 ```
 struct scriptURI {
-    scriptURIElement[] scriptURIElements;
-}
-struct scriptURIElement {
-    string URIOfScript;
-    string URIOfSignature;
+    string[] URIOfScript;
 }
 ```
 
 Based on these elements we define the smart contract interface below:
 ```
-interface IERC5XXX {
+interface IERC5XX0 {
     /// @dev This event emits when the scriptURI is updated, 
     /// so wallets implementing this interface can update a cached script
     event ScriptUpdate(scriptURI memory newScriptURI);
 
-    /// @dev This event emits when the script/scriptURI signing key is updated, 
-    /// so wallets implementing this interface can update a cached script
-    event VerificationKeyUpdate(address memory newVerificationKey);
-
-
     /// @notice Get the scriptURI for the contract
     /// @return The scriptURI
     function scriptURI() external view returns(scriptURI memory);
-      
-    /// @notice Get the scriptURI for the contract
-    /// @return The scriptURI
-    function verificationKey() external view returns(address memory);
-
 
     /// @notice Update the scriptURI 
     /// emits event ScriptUpdate(scriptURI memory newScriptURI);
     function setScriptURI(scriptURI memory newScriptURI, bytes memory newSigScriptURI) external;
-
-    /// @notice Set the script/scriptURI signing key
-    /// emits event VerificationKeyUpdate(address memory newVerificationKey);
-    function setVerificationKey(address memory newVerificationKey)
 }
 ```
 The interface MUST be implemented under the following constraints:
 
-- The smart contract implementing `IERC5XXX` MUST store variables `address verificationKey` and `address owner` in its state.
+- The smart contract implementing `IERC5XX0` MUST store variables `address owner` in its state.
 
-- The smart contract implementing `IERC5XXX` MUST set `owner=msg.sender` in its constructor.
+- The smart contract implementing `IERC5XX0` MUST set `owner=msg.sender` in its constructor.
 
-- The ```ScriptUpdate``` event MUST be emitted when the ```setScriptURI``` function updates the scriptURI.
+- The `ScriptUpdate(...)` event MUST be emitted when the ```setScriptURI``` function updates the `scriptURI`.
 
-- The ```VerificationKeyUpdate``` event MUST be emitted when the ```setVerificationKey``` function updates the signing key.
+- The `setScriptURI(...)` function MUST validate that `owner == msg.sender` *before* executing its logic and updating any state.
 
-- The ```setVerificationKey``` function MUST update the state `verificationKey` to contain `newVerificationKey` if and only if `owner == msg.sender`.
+- The `setScriptURI(...)` function MUST update its internal state such that `currentScriptURI = newScriptURI`.
 
-- The `setScriptURI` function MUST validate that `newSigScriptURI` contains a signature on `newScriptURI`, validated against `verificationKey` stored in its state, *before* executing its logic and updating any state.
+- The `scriptURI()` function MUST return the `currentScriptURI` state.
 
-- The ```scriptURI()``` function MAY be implemented as pure or view.
+- The `scriptURI()` function MAY be implemented as pure or view.
 
-- Any user of the script learned from scriptURI MUST, validate the script and its signature against `verificationKey` before trusting it.
+- Any user of the script learned from `scriptURI` MUST validate the script is either at an immutable location, its URI contains its hash digest, or that it implements ERC 5XX1.
 
 
 ### Rationale
@@ -168,17 +128,17 @@ This standard is compatible with all Token standards (ERC20, 721, 777, 1155 etc)
 ### Examples
 We here go through a couple of examples of where an authenticated script is relevant for adding additional functionality for tokens. 
 
-1. A Utility NFT is a ticket and the authenticated script is a JavaScript 'minidapp' which asks the user to sign a challenge message that shows ownership of the key controlling the ticket. The dapp would then render the signature as a QR code which can be scanned by a ticketing app, which could then mark the ticket used (offchain perhaps).
+1. A Utility NFT is a ticket and the authenticated script is a JavaScript 'minidapp' which asks the user to sign a challenge message that shows ownership of the key controlling the ticket. The dapp would then render the signature as a QR code which can be scanned by a ticketing app, which could then mark the ticket used (off-chain perhaps).
 
 2. Smart Token Labs uses a framework called TokenScript; one element of which is a user interface description for contract interaction.
 Simple example: definition for a 'mint' function. This is a simple verb description similar to a JSON contract ABI definition; where the script gives the verb "Mint" and defines how the contract is called - in this case the contract function name 'mint' and attached value for mint fee. In use: for example a Punks v(x) owner wants to mint another punk, the owner can open their punks in wallet or on supported websites and there will be a 'Mint' verb on the token which when clicked will mint a new Punk without needing to reference the mintFee or connect a wallet etc.
 
-3. Smartlock controlling NFT script which defines an HTML view and two verbs "lock" and "unlock". Each verb has a JavaScript control script. When the token is selected, the HTML view would be displayed and an attached JavaScript would fetch a challenge string from the lock controller. When each verb is selected by the user in the hosting app or website, the relevant script attached to the verb would execute, prompting the user to sign the challenge then sending the challenge to the lock controller, which would reply with a pass or fail and execute an action accordingly. This is an offchain example that uses onchain assets for functionality.
+3. A Smartlock controlling NFT script which defines an HTML view and two verbs "lock" and "unlock". Each verb has a JavaScript control script. When the token is selected, the HTML view would be displayed and an attached JavaScript would fetch a challenge string from the lock controller. When each verb is selected by the user in the hosting app or website, the relevant script attached to the verb would execute, prompting the user to sign the challenge then sending the challenge to the lock controller, which would reply with a pass or fail and execute an action accordingly. This is an off-chain example that uses on-chain assets for functionality.
 
 ### Test Cases
 Test Contract
 pragma solidity 0.8.10;
-import "./IERC5XXX.sol";
+import "./IERC5XX0.sol";
 
 ... TODO
 
