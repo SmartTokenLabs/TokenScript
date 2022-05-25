@@ -63,7 +63,7 @@ If instead the `scriptURI` points to a mutable location, it can be updated witho
 #### Overview
 
 With the discussion above in mind we outline the solution proposed by this ERC. For this purpose we consider the following variables:
-- `SCPrivKey`: The private signing key to administrate a smart contract implementing this ERC, which is associated with the tokens issued. 
+- `SCPrivKey`: The private signing key to administrate a smart contract implementing this ERC. Note that this doesn't have to be a new key especially added for this ERC. Most smart contracts made today already have an administration key to manage the tokens issued. It can be used to update the `scriptURI`.
 - `script`: The script supplying additional functionality to the tokens.
 
 With these variables in mind we can describe the life cycle of the `scriptURI` functionality:
