@@ -114,6 +114,7 @@ The interface MUST be implemented under the following constraints:
 
 - Any user of the script learned from `scriptURI` MUST validate the script is either at an immutable location, its URI contains its hash digest, or that it implements ERC 5XX1.
 
+We note that while the interface specify batch updates of the `scriptURI`, developers can of course enhance the interface with other methods, adding more flexibility in how the `scriptURI` state is managed on-chain.
 
 ### Rationale
 Using this method avoids the need for building secure and certified centralised hosting and allow scripts to be hosted anywhere: IPFS, GitHub or cloud storage.
