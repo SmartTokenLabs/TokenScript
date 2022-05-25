@@ -79,28 +79,21 @@ With these variables in mind we can describe the life cycle of the `scriptURI` f
 ### Specification
 The keywords “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”, “SHOULD NOT”, “RECOMMENDED”, “MAY” and “OPTIONAL” in this document are to be interpreted as described in RFC 2119.
 
-We define a scriptURI element using the following structs:
-
-```
-struct scriptURI {
-    string[] URIOfScript;
-}
-```
-
-Based on these elements we define the smart contract interface below:
+We define a scriptURI element using the `string[]`.
+Based on this we define the smart contract interface below:
 ```
 interface IERC5XX0 {
     /// @dev This event emits when the scriptURI is updated, 
     /// so wallets implementing this interface can update a cached script
-    event ScriptUpdate(scriptURI memory newScriptURI);
+    event ScriptUpdate(string[] memory newScriptURI);
 
     /// @notice Get the scriptURI for the contract
     /// @return The scriptURI
-    function scriptURI() external view returns(scriptURI memory);
+    function scriptURI() external view returns(string[] memory);
 
     /// @notice Update the scriptURI 
     /// emits event ScriptUpdate(scriptURI memory newScriptURI);
-    function setScriptURI(scriptURI memory newScriptURI, bytes memory newSigScriptURI) external;
+    function setScriptURI(string[] memory newScriptURI, bytes memory newSigScriptURI) external;
 }
 ```
 The interface MUST be implemented under the following constraints:
