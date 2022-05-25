@@ -35,11 +35,11 @@ While the simplest solutions to facilitate specific script usage associated with
 2. Updates require smart contract interaction. Simply posting a new transaction on Ethereum is not cheap! When this transaction also includes smart contract logic, the price can quickly become significant. If frequent updates are needed, then smart contract calls can in itself becomes a hurdle.
 3. Storage fee. If the script is large, contains special graphics or other large elements, then updates to the script can quickly costs thousands of dollars.
 
-For these reasons it makes sense to store volatile data, such as token enhancing functionality, on an external resource. Such an external resource can be either centralized, such as a cloud provider or private server, or decentralized such as the interplanetary filesystem.
+For these reasons it makes sense to store volatile data, such as token enhancing functionality, on an external resource. Such an external resource can be either central hosted, such as a cloud provider or privately hosted with a private server, or decentralized such as the interplanetary filesystem.
 
-Since using centralized storage for a decentralized functionality goes against the ethos of web3, this ERC handle this this by allowing the token provider to store multiple URIs to the script on-chain. The URIs might point to either multiple centralized storage providers or fully decentralized ones, e.g. the IPFS, another blockchain or even on Ethereum itself. It could also be a mix of centralized and decentralized locations.
+While centralized storage for a decentralized functionality goes against the ethos of web3, fully decentralized solutions may come with speed or availability penalties. This ERC handle this this by allowing the token provider to store multiple URIs. It could also be a mix of centralized, individually hosted and decentralized locations.
 
-While this ERC does not dictate the format of the stored script, it should be noted that the script itself could contain pointers to multiple other scripts and data sources. Hence this allows for advanced and rich expansion of tokens.
+While this ERC does not dictate the format of the stored script, it should be noted that the script itself could contain pointers to multiple other scripts and data sources, allowing for advanced ways to expand token scripts, such as lazy loading. The handling of integrity of such secondary data sources is left dependent on the format of the script. For example, HTML format uses [the `integrity` property](https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity), while [signed XML format has `<Menifest/>`](https://www.w3.org/TR/xmldsig-core2/#sec-Manifest).
 
 
 #### Authenticity
@@ -52,20 +52,23 @@ For validation of authenticity we consider two different cases:
 
 
 #### Script updates
-Besides issues of script location, another issue is how the script can be updated in a manner where the caller can be sure it is authentic. 
-We solve this issue by allowing the issuer to update the `scriptURI` on-chain, when the URI points to an immutable location or the URI itself contains info for script validation. 
+Besides issues of script location, another issue is how the script can be updated in a manner where the caller can be sure it is authentic.
+
+We address this issue by allowing the issuer to update the `scriptURI` on-chain, when the URI points to an immutable location or the URI itself contains info for script validation.
+
 This ensures that the script can be changed, even in cases where the URI points to a location based on the hash digest of the script (which is the case if it is stored on the IPFS).
+
 If instead the `scriptURI` points to a mutable location, it can be updated without on-chain interaction, as described in ERC 5XX1.
 
 #### Overview
 
 With the discussion above in mind we outline the solution proposed by this ERC. For this purpose we consider the following variables:
-- `SCPrivKey`: The private signing key controlling a smart contract implementing this ERC, which is associated with the tokens issued. 
+- `SCPrivKey`: The private signing key to administrate a smart contract implementing this ERC, which is associated with the tokens issued. 
 - `script`: The script supplying additional functionality to the tokens.
 
 With these variables in mind we can describe the life cycle of the `scriptURI` functionality:
 - Issuance
-1. The token issuer issues the tokens and a smart contract implementing this ERC, with the controlling signing key for the smart contract being `SCPrivKey`.
+1. The token issuer issues the tokens and a smart contract implementing this ERC, with the admin signing key for the smart contract being `SCPrivKey`.
 2. The token issuer calls `setScriptURI` with the `scriptURI`.
 
 - Update `scriptURI`
