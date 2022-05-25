@@ -26,17 +26,20 @@ This ERC describes how to assert the authenticity of the script related to some 
 
 Often NFT authors want to provide some user functionality to their tokens through client scripts. This should be done safely, without opening the user to potential scams. Refer to ERC xxxx examples of such scripts.
 
-Although ERC xxxx specified a way to obtain a set of client scripts through URI, in many cases, it is:
+Although ERC xxxx specified a way to obtain a set of client scripts through URI, it is inapplicable for token contracts that was issued before the creation of ERC xxxx. Furthermore, it lack the finess to address situations such as
 
-- insufficient: For example, a smart contract might have a script for different environments or use-cases. Take a subway token as an example. It might invoke a minimal script to drive the purchase and use of subway tokens in order to send them through NFC (Internet might be slow or inaccessible underground).
+- a smart contract might have different scripts for different environments or use-cases. Take a subway token as an example. It might invoke a minimal script at the POS to be sent through NFC (Internet might be slow or inaccessible underground), while advanced functions for user retention, such as rewarding user mascot NFT for continued use, or carbon credit for buying carbon-neutral airfare.
+- in a specific use case, a token's script is often localized, and it doesn't make sense to download and load all language translations.
+- a specific use-case might be compatible with only a specific version of the token's script.
 
-- inapplicable: For example for token contracts that was issued before the creation of ERC xxxx.
+ERC xxxx returns an all-purpose, one-version of script for use on the client side ignoring the nuances.
 
 This ERC offers a way to assert authenticity of such client scripts disregarding how it is obtained, and can work with smart contracts *prior* to the publication of this ERC.
 
 ### Overview
 
 Although the *token/smart contract author* and the *client script author* can be the same person/team, we will assume they are different people in this ERC, and the case that they are the same person/team can be implied.
+
 The steps needed to ensure script authenticity can be summarized as follows:
 
 1. The *script author* creates a *script signing key*, which has an associates *verification key address*.
