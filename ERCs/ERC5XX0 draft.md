@@ -16,9 +16,9 @@ Often Smart Contract authors want to provide some user functionality to their to
 
 This ERC proposes adding a `scriptURI` which is a structure containing an array of URIs to external resources, such as in IPFS, GitHub, a cloud provider, etc., which will store the actual script.
 
-Each `scriptURI` semantically contains access information to access a *single* signed script, stored in one or more off-chain locations.
+Each `scriptURI` semantically contains access information to access a *single* script, stored in one or more off-chain locations.
 
-Concretely each element in the array contains a URI to the script itself.
+Concretely each element in the array contains a URI to the same script.
 
 The script provides a client-side executable to the hosting token. Examples of such a script could be:
 
