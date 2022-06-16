@@ -50,16 +50,6 @@ For validation of authenticity we consider two different cases:
 
 2. If the `scriptURI` points to a dynamic location, the client must verify that the script downloaded has actually been issued by the same entity, which issued the token it is enhancing. The client must also warn the user against execution if this is not the case. However, this scenario is not covered by this ERC, but is handled by ERC 5XX1.
 
-
-#### Script updates
-Besides issues of script location, another issue is how the script can be updated in a manner where the caller can be sure it is authentic.
-
-We address this issue by allowing the issuer to update the `scriptURI` on-chain, when the URI points to an immutable location or the URI itself contains info for script validation.
-
-This ensures that the script can be changed, even in cases where the URI points to a location based on the hash digest of the script (which is the case if it is stored on the IPFS).
-
-If instead the `scriptURI` points to a mutable location, it can be updated without on-chain interaction, as described in ERC 5XX1.
-
 #### Overview
 
 With the discussion above in mind we outline the solution proposed by this ERC. For this purpose we consider the following variables:
