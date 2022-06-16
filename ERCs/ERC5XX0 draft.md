@@ -21,7 +21,7 @@ This ERC proposes adding a `scriptURI`, a structure containing URIs to external 
 
 Each token contract has one `scriptURI`  function, which points to a client script stored in one or more URIs.
 
-Concretely each element in the array contains a URI to the script itself.
+Concretely each element in the array contains an URI to the script itself.
 
 The script provides a client-side executable to the hosting token. Examples of such a script could be:
 
@@ -29,23 +29,22 @@ The script provides a client-side executable to the hosting token. Examples of s
 - A 'TokenScript' which provides [T.I.P.S.](https://tokenscript.org/TIPS.html) from a browser wallet.
 - An extension that is downloadable to the hardware wallet with an extension framework, such as Ledger.
 
-The return value of `scriptURI` is expected to be constantly updated to reflect the current latest version, if used. However, there is a way to assert the authenticity of signed client side code without frequently updating the URI. Developers should refer to ERC 5xx1, which details a method of asserting code authenticity without relying on URIs. Note that the two ERCs can be used separately or together.
-
 #### Script location
 
 While the most straightforward solution to facilitate specific script usage associated with NFTs, is clearly to store such a script on the smart contract. However, this has several disadvantages: 
 
-1. The smart contract signing key is needed to make updates, causing the key becomes more exposed as it is used more often. 
+1. The smart contract signing key is needed to make updates, causing the key to become more exposed, as it is used more often. 
 
-2. Updates require smart contract interaction. If frequent updates are needed, smart contract calls can become a hurdle.
+2. Updates require smart contract interaction. If frequent updates are needed, smart contract calls can become an expensive hurdle.
 
 3. Storage fee. If the script is large, updates to the script will be costly. A client script is typically much larger than a smart contract.
 
-For these reasons, storing volatile data, such as token enhancing functionality, on an external resource makes sense. Such an external resource can be either central hosted, such as a cloud provider or privately hosted with a private server, or decentralized, such as the interplanetary filesystem.
+For these reasons, storing volatile data, such as token enhancing functionality, on an external resource makes sense. Such an external resource can be either be  hosted centrally, such as through a cloud provider, or privately hosted through a private server, or decentralized hosted, such as the interplanetary filesystem.
 
-While centralized storage for a decentralized functionality goes against the ethos of web3, fully decentralized solutions may come with speed or availability penalties. This ERC handles this by allowing the function `ScriptURI` to return multiple URIs. It could also be a mix of centralized, individually hosted and decentralized locations.
+While centralized storage for a decentralized functionality goes against the ethos of web3, fully decentralized solutions may come with speed, price or space penalties. This ERC handles this by allowing the function `ScriptURI` to return multiple URIs, which could be a mix of centralized, individually hosted and decentralized locations.
 
-While this ERC does not dictate the format of the stored script, the script itself could contain pointers to multiple other scripts and data sources, allowing for advanced ways to expand token scripts, such as lazy loading. The handling of the integrity of such secondary data sources is left dependent on the format of the script. For example, HTML format uses [the `integrity` property](https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity), while [signed XML format has `<Menifest/>`](https://www.w3.org/TR/xmldsig-core2/#sec-Manifest).
+While this ERC does not dictate the format of the stored script, the script itself could contain pointers to multiple other scripts and data sources, allowing for advanced ways to expand token scripts, such as lazy loading. 
+The handling of the integrity of such secondary data sources is left dependent on the format of the script. For example, HTML format uses [the `integrity` property](https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity), while [signed XML format has `<Manifest/>`](https://www.w3.org/TR/xmldsig-core2/#sec-Manifest).
 
 #### Authenticity
 
@@ -68,7 +67,6 @@ We can describe the life cycle of the `scriptURI` functionality:
 - Issuance
 
 1. The token issuer issues the tokens and a smart contract implementing this ERC, with the admin key for the smart contract being `SCPrivKey`.
-
 2. The token issuer calls `setScriptURI` with the `scriptURI`.
 
 - Update `scriptURI`
@@ -129,10 +127,10 @@ We here go through a couple of examples of where an authenticated script is rele
 
 1. A Utility NFT is an event ticket and the authenticated script is a JavaScript 'minidapp' which asks the user to sign a challenge message that shows ownership of the key controlling the ticket. The dapp would then render the signature as a QR code which can be scanned by a ticketing app, which could then mark the ticket as used.
 
-2. Smart Token Labs uses a framework called TokenScript; one element of which is a user interface description for contract interaction.
-Simple example: definition for a 'mint' function. This is a simple verb description similar to a JSON contract ABI definition; where the script gives the verb "Mint" and defines how the contract is called - in this case the contract function name 'mint' and attached value for mint fee. In use: for example a Punks v(x) owner wants to mint another punk, the owner can open their punks in wallet or on supported websites and there will be a 'Mint' verb on the token which when clicked will mint a new Punk without needing to reference the mintFee or connect a wallet etc.
+2. Smart Token Labs uses a framework called TokenScript; one element of which is a user interface description for contract interaction through tokens.
+Consider a simple 'mint' verb associated with an already existing NFT. The associated script can for example allow the owner to mint a derivative through a contract already holding enough ether for the minting fee, without needing to connect their wallet.
 
-3. A Smartlock controlling NFT script which defines an HTML view and two verbs "lock" and "unlock". Each verb has a JavaScript control script. When the token is selected, the HTML view would be displayed and an attached JavaScript would fetch a challenge string from the lock controller. When each verb is selected by the user in the hosting app or website, the relevant script attached to the verb would execute, prompting the user to sign the challenge then sending the challenge to the lock controller, which would reply with a pass or fail and execute an action accordingly. This is an off-chain example that uses on-chain assets for functionality.
+3. An NFT Script which controls a Smartlock. For example consider the lock  being linked to a digital NFT twin and being controlled with the verbs "lock" and "unlock", each of which has an associated JavaScript. Each of these scripts could be executed after the user signs a challenge in a web-view. This is an off-chain example that uses on-chain assets for functionality.
 
 ### Test Cases
 Test Contract
@@ -142,11 +140,4 @@ import "./IERC5XX0.sol";
 ... TODO
 
 ### Security Considerations
-
-As `scriptURI` returns a list of free-form URIs, some forms of URI will not contain a digest. In such a case, it may be desirable to return the digest in a struct together with the URI. This allows the caller to assert the client script is authentic after downloading it.
-
-However, Digital Signature is a much better way to solve this problem. With Digital Signature, the client script can be updated and resigned, without updating its hash in a smart contract.
-
-Digital Signature is highly desirable because a token's client scripts are updated much more frequently than the token's smart contract.
-
-We separately authored ERC5XX1 to guide the use of digital signatures.
+We separately authored ERC5XX1 to guide on how to use digital signatures to efficiently and concisely to ensure authenticity and integrity of scripts not stored at an URI which is a digest of the script itself. 

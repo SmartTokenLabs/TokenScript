@@ -2,7 +2,7 @@
 
 ### title: asserting authenticity of Client Script for Token Contracts
 
-### description: Provide a method to assert the authenticity of client script for token contracts, and a way for revokation
+### description: Provide a method to assert the authenticity of client script for token contracts, and a way for revocation
 
 ### author: Weiwu (@weiwu-zhang), Tore Frederiksen (@jot2re)
 
