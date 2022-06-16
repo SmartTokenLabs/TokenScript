@@ -16,9 +16,9 @@ Often Smart Contract authors want to provide some user functionality to their to
 
 This ERC proposes adding a `scriptURI` which is a structure containing an array of URIs to external resources, such as in IPFS, GitHub, a cloud provider, etc., which will store the actual script.
 
-Each `scriptURI` semantically contains access information to access a *single* signed script, stored in one or more off-chain locations.
+Each `scriptURI` semantically contains access information to access a *single* script, stored in one or more off-chain locations.
 
-Concretely each element in the array contains a URI to the script itself.
+Concretely each element in the array contains a URI to the same script.
 
 The script provides a client-side executable to the hosting token. Examples of such a script could be:
 
@@ -69,28 +69,21 @@ With these variables in mind we can describe the life cycle of the `scriptURI` f
 ### Specification
 The keywords “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”, “SHOULD NOT”, “RECOMMENDED”, “MAY” and “OPTIONAL” in this document are to be interpreted as described in RFC 2119.
 
-We define a scriptURI element using the following structs:
-
-```
-struct scriptURI {
-    string[] URIOfScript;
-}
-```
-
-Based on these elements we define the smart contract interface below:
+We define a scriptURI element using the `string[]`.
+Based on this we define the smart contract interface below:
 ```
 interface IERC5XX0 {
     /// @dev This event emits when the scriptURI is updated, 
     /// so wallets implementing this interface can update a cached script
-    event ScriptUpdate(scriptURI memory newScriptURI);
+    event ScriptUpdate(string[] memory newScriptURI);
 
     /// @notice Get the scriptURI for the contract
     /// @return The scriptURI
-    function scriptURI() external view returns(scriptURI memory);
+    function scriptURI() external view returns(string[] memory);
 
     /// @notice Update the scriptURI 
     /// emits event ScriptUpdate(scriptURI memory newScriptURI);
-    function setScriptURI(scriptURI memory newScriptURI, bytes memory newSigScriptURI) external;
+    function setScriptURI(string[] memory newScriptURI, bytes memory newSigScriptURI) external;
 }
 ```
 The interface MUST be implemented under the following constraints:
@@ -111,6 +104,7 @@ The interface MUST be implemented under the following constraints:
 
 - Any user of the script learned from `scriptURI` MUST validate the script is either at an immutable location, its URI contains its hash digest, or that it implements ERC 5XX1.
 
+We note that while the interface specify batch updates of the `scriptURI`, developers can of course enhance the interface with other methods, adding more flexibility in how the `scriptURI` state is managed on-chain.
 
 ### Rationale
 Using this method avoids the need for building secure and certified centralised hosting and allow scripts to be hosted anywhere: IPFS, GitHub or cloud storage.

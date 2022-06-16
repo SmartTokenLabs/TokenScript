@@ -52,21 +52,48 @@ This process is a deliberate copy of the TLS certification, based on X.509, whic
 
 The authenticity of the client script may be obtained through the `scriptURI()` function call, as in ERC5XX0, or supplied separately by the use-cases. However, this ERC is applicable to any code or data that is signed, and a client must validate the signature in the way specified in this ERC. In real life use-cases, the client scripts can be either supplied by aforementioned `scriptURI()` or offered to the client (wallet) in anyway the wallet can work with, even through NFC connections or QR code.
 
+### Implementation
+
+Some possible methods of implementation: Note: we cannot deliver a completely off-line solution unless a hosting app can pre-verify the *smart contract deployment key* address. 
+
+1. Simplest (assuming internet connection and written *after* publication of this ERC):
+
+- JWS object outlined below (containing: The script itself, URI to certificate, signature of the script signed by *script signing key*) is linked to via scriptURI() in the contract.
+- 1: determine *smart contract deployment key*. Contract should preferrably implement standard 'Ownable' interface or at least the 'owner()' function.
+- 2: fetch the JWS object by querying the scriptURI() in the contract.
+- 3: fetch the certificate linked to from the JWS in the `x5u` header.
+- 4: validate that certificate is signed by the *smart contract deployment key*.
+- 5: obtain the address of the *script signing key* from the `SubjectPublicKeyInfo` field of the certificate.
+- 6: obtain the script itself; in our example it will be bundled in the JWS object itself, along with the signature attached to the script, in the <ds:SignatureValue> tag.
+- 7: verify that the signature from the <ds:SignatureValue> tag is the correct signature of the keccak'd script by the *script signing key*.
+- 8: current time is within `notBefore` and `notAfter`.
+- 9: if the *script signing key* is still valid according to the certificate *and* the script has been signed correctly by the same key, allow user to interact with the token contract(s) defined in the script via the script interface.
+
+2. Example script applied to contract published before this ERC:
+
+- User scans NFC beacon on their mobile.
+- Obtains payload with an app intent (eg ticketing app) containing a URL to a JWS object.
+- JWS Object is fetched along with the script pointed to from the JWS object.
+- Determine origin contract from script.
+- Obtain the owner of the script query `owner()` or JWS object provides contract creation transaction the hosting app can validate and obtain *smart contract deployment key* address.
+- Continue from `3:` above, skipping `6:` as we already have the script.
+- If the *script signing key* is still valid according to the certificate *and* the script has been signed correctly by the same key, allow user to interact with the token contract(s) defined in the script via the script interface.
+
 ### Specification
 The keywords “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”, “SHOULD NOT”, “RECOMMENDED”, “MAY” and “OPTIONAL” in this document are to be interpreted as described in [RFC 2119](https://datatracker.ietf.org/doc/html/rfc2119).
 
 #### Format of the certificate and signature
 
 The certificate for the *script signing key* MUST be in the X.509 format, in accordance with [RFC 5280](https://datatracker.ietf.org/doc/html/rfc5280).
-Furthermore, the certificate MUST by signed by the *smart contract author* as the issuer, using the *smart contract deployment key*. 
+Furthermore, the certificate MUST by signed by the *smart contract author* as the issuer, using the *smart contract deployment key*.
 
 We furthermore make the following requirements of the content of this certificate:
 
 - The `issuer` field MUST be populated with a Common Name, which MUST be the address of the verification key associated with the *smart contract deployment key*. E.g. `CN=0x12345678901234567890`.
 
-- The `SubjectPublicKeyInfo` field  MUST contain the public part of the *script signing key*.
+- The `SubjectPublicKeyInfo` field MUST contain the public part of the *script signing key*.
 
-- The `extensions` field SHOULD be set to include `KeyUsage` (see RFC 5280 sec. 4.2.1.3) with bit 0 set, to indicate that the *script signing key* is used for signing only. Furthermore the *Extended Key Usage* extensions SHOULD also be included, with only the *id-kp-codeSigning* identifier set (See RFC 52080 sec. 4.2.1.12). 
+- The `extensions` field SHOULD be set to include `KeyUsage` (see RFC 5280 sec. 4.2.1.3) with bit 0 set, to indicate that the *script signing key* is used for signing only. Furthermore the *Extended Key Usage* extensions SHOULD also be included, with only the *id-kp-codeSigning* identifier set (See RFC 52080 sec. 4.2.1.12).
 
 - If [revocation option 1](#Revocation) is used, then `extensions` MUST also include `cRLDistributionPoints` (see RFC 5280 4.2.1.13) which MUST contain at least one `distributionPoint` element, containing a `fullName` element. The `fullName` MUST be a single `IA5String` for a `uniformResourceIdentifier` which is an URI pointing to a Certificate Revocation List.
 
@@ -86,7 +113,7 @@ We require the signature to be done as a JWS according to [RFC 7515](https://dat
 
 This ERC does not specify how a wallet client obtains the signature as this can be realized in multiple ways. The simplest of which is to embed the client script in the `payload` of the JWS, as discussed above. This ensure that only a single URI is needed in order to locate both the client script, its signature and the signing key certificate. 
 
-If the client script is stored in a directory (e.g. on a webserver), i.e. with a file-name instead of with a hash digest identifier, then the JWS can simply be stored using the same URI as the client script, with ".jws" or ".sig" appended. 
+If the client script is stored in a directory (e.g. on a webserver), i.e. with a file-name instead of with a hash digest identifier, then the JWS can simply be stored using the same URI as the client script, with ".jws" or ".sig" appended.
 
 
 #### Revocation
