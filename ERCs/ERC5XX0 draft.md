@@ -19,7 +19,7 @@ It's important that a token's client script is linked with the token's contract,
 
 Users can be sure they are using the correct script through the contract author packaging a URI to an official script, made available with a call to the token contract itself.
 
-This ERC proposes adding a `scriptURI`, a structure containing URIs to download external resources, such as in IPFS, GitHub, a cloud provider, etc.
+This ERC proposes adding a `scriptURI`, a structure containing URIs to download the client script. It can be a link to IPFS, GitHub, a cloud provider, etc.
 
 Each token contract has one `scriptURI`  function to return the download URI to a client script.
 
