@@ -132,12 +132,55 @@ Consider a simple 'mint' verb associated with an already existing NFT. The assoc
 
 3. An NFT Script which controls a Smartlock. For example consider the lock  being linked to a digital NFT twin and being controlled with the verbs "lock" and "unlock", each of which has an associated JavaScript. Each of these scripts could be executed after the user signs a challenge in a web-view. This is an off-chain example that uses on-chain assets for functionality.
 
-### Test Cases
-Test Contract
-pragma solidity 0.8.10;
+### Tests
+#### Test Contract
+```
+import "@openzeppelin/contracts/access/Ownable.sol";
 import "./IERC5XX0.sol";
+contract ERC5XX0 is IERC5XX0, Ownable {
+    string[] private _scriptURI;
+    function scriptURI() external view override returns(string[] memory) {
+        return _scriptURI;
+    }
 
-... TODO
+    function setScriptURI(string[] memory newScriptURI) external onlyOwner override {
+        _scriptURI = newScriptURI;
+
+        emit ScriptUpdate(newScriptURI);
+    }
+}
+```
+
+#### Test case
+```
+const { expect } = require('chai');
+const { BigNumber, Wallet } = require('ethers');
+const { ethers, network, getChainId } = require('hardhat');
+
+describe('ERC5XX0', function () {
+  before(async function () {
+    this.ERC5XX0 = await ethers.getContractFactory('ERC5XX0');
+  });
+
+  beforeEach(async function () {
+    // targetNFT
+    this.erc5XX0 = await this.ERC5XX0.deploy();
+  });
+
+  it('Should set script URI', async function () {
+    const scriptURI = [
+      'uri1', 'uri2', 'uri3'
+    ];
+
+    await expect(this.erc5XX0.setScriptURI(scriptURI))
+      .emit(this.erc5XX0, 'ScriptUpdate')
+      .withArgs(scriptURI);
+    
+    const currentScriptURI = await this.erc5XX0.scriptURI();
+
+    expect(currentScriptURI.toString()).to.be.equal(scriptURI.toString());
+  });
+```
 
 ### Security Considerations
 We separately authored ERC5XX1 to guide on how to use digital signatures to efficiently and concisely to ensure authenticity and integrity of scripts not stored at an URI which is a digest of the script itself. 
