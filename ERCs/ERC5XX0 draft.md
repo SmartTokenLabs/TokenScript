@@ -48,18 +48,6 @@ While centralized storage for a decentralized functionality goes against the eth
 While this ERC does not dictate the format of the stored script, the script itself could contain pointers to multiple other scripts and data sources, allowing for advanced ways to expand token scripts, such as lazy loading. 
 The handling of the integrity of such secondary data sources is left dependent on the format of the script. For example, HTML format uses [the `integrity` property](https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity), while [signed XML format has `<Manifest/>`](https://www.w3.org/TR/xmldsig-core2/#sec-Manifest).
 
-#### Security
-
-**When a server is involved**
-
-When the client script does not purely rely on connection to a blockchain node, but also calls server APIs,  the trustworthiness of the server API is called into question. This ERC doesn't provide the mechanism to assert the authenticity of the API access point. Instead, as long as the client script is trusted, it's assumed that it can call any server API in order to carry out token functions. This means the client script can mistrust a server API access point.
-
-**When the scriptURI doesn't contain integrity (hash) information**
-
-The `scriptURI` points to decentralized immutable locations *or* the location itself contains information that can validate the script's authenticity. For example, the URI may point to a location on a blockchain, or, URI may contain a hash digest of the resource, such as with IPFS. In the first situation, the client (wallet) should assume it is authentic. In the latter case, the client must also validate that hash digest.
-
-If the `scriptURI` is a download link to a server, it may not contain a digest in the URI. In such a case, it may be desirable to return the digest in a struct together with the URI. This allows the caller to assert the client script is authentic after downloading it. However, igital Signature is a much better way to solve this problem. With Digital Signature, the client script update only need to be signed again, without updating its hash in a smart contract. The method to do so is not covered by this ERC, but is handled by ERC 5XX1.
-
 #### Overview
 
 With the discussion above in mind, we outline the solution proposed by this ERC. For this purpose, we consider the following variables:
@@ -189,4 +177,13 @@ describe('ERC5XX0', function () {
 ```
 
 ### Security Considerations
+
+#### Security
+
+**When a server is involved**
+
+When the client script does not purely rely on connection to a blockchain node, but also calls server APIs,  the trustworthiness of the server API is called into question. This ERC doesn't provide the mechanism to assert the authenticity of the API access point. Instead, as long as the client script is trusted, it's assumed that it can call any server API in order to carry out token functions. This means the client script can mistrust a server API access point.
+
+**When the scriptURI doesn't contain integrity (hash) information**
+
 We separately authored ERC5XX1 to guide on how to use digital signatures to efficiently and concisely to ensure authenticity and integrity of scripts not stored at an URI which is a digest of the script itself. 
