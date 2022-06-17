@@ -15,13 +15,15 @@ This ERC is a contract interface that adds a `scriptURI()` function for locating
 
 Often, Smart Contract authors want to provide some user functionality to their tokens through client scripts. The idea is made popular with function-rich NFTs.
 
+It's important that a token's client script is linked with the token's contract, since the client script carry out trusted tasks such as creating transactions for the user.
+
 Users can be sure they are using the correct script through the contract author packaging a URI to an official script, made available with a call to the token contract itself.
 
-This ERC proposes adding a `scriptURI`, a structure containing URIs to external resources, such as in IPFS, GitHub, a cloud provider, etc., to store the client script.
+This ERC proposes adding a `scriptURI`, a structure containing URIs to download external resources, such as in IPFS, GitHub, a cloud provider, etc.
 
-Each token contract has one `scriptURI`  function, which points to a client script stored in one or more URIs.
+Each token contract has one `scriptURI`  function to return the download URI to a client script.
 
-Concretely each element in the array contains an URI to the script itself.
+Concretely each element in the array contains a URI to download the script itself.
 
 The script provides a client-side executable to the hosting token. Examples of such a script could be:
 
@@ -46,13 +48,17 @@ While centralized storage for a decentralized functionality goes against the eth
 While this ERC does not dictate the format of the stored script, the script itself could contain pointers to multiple other scripts and data sources, allowing for advanced ways to expand token scripts, such as lazy loading. 
 The handling of the integrity of such secondary data sources is left dependent on the format of the script. For example, HTML format uses [the `integrity` property](https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity), while [signed XML format has `<Manifest/>`](https://www.w3.org/TR/xmldsig-core2/#sec-Manifest).
 
-#### Authenticity
+#### Security
 
-For validation of authenticity, we consider two different cases:
+*When a server is involved*
 
-1. The `scriptURI` points to decentralized immutable locations *or* the location itself contains information that can validate the script's authenticity. For example, the URI may point to a location on a blockchain, or, URI may contain a hash digest of the resource, such as with IPFS. In the first situation, the client (wallet) should assume it is authentic. In the latter case, the client must also validate that hash digest.
+When the client script does not purely rely on connection to a blockchain node, but also calls server APIs,  the trustworthiness of the server API is called into question. This ERC doesn't provide the mechanism to assert the authenticity of the API access point. Instead, as long as the client script is trusted, it's assumed that it can call any server API in order to carry out token functions. This means the client script can mistrust a server API access point.
 
-2. If the `scriptURI` points to a dynamic location, the client must verify that the client script downloaded has actually been issued by the same entity that issued the token for which the client script is. The client must also warn the user against execution if this is not the case. However, this scenario is not covered by this ERC, but is handled by ERC 5XX1.
+* When the scriptURI doesn't contain integrity (hash) information*
+
+Te `scriptURI` points to decentralized immutable locations *or* the location itself contains information that can validate the script's authenticity. For example, the URI may point to a location on a blockchain, or, URI may contain a hash digest of the resource, such as with IPFS. In the first situation, the client (wallet) should assume it is authentic. In the latter case, the client must also validate that hash digest.
+
+If the `scriptURI` is a download link to a server, it may not contain a digest in the URI. In such a case, it may be desirable to return the digest in a struct together with the URI. This allows the caller to assert the client script is authentic after downloading it. However, igital Signature is a much better way to solve this problem. With Digital Signature, the client script update only need to be signed again, without updating its hash in a smart contract. The method to do so is not covered by this ERC, but is handled by ERC 5XX1.
 
 #### Overview
 
