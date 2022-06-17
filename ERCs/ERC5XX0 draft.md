@@ -178,8 +178,6 @@ describe('ERC5XX0', function () {
 
 ### Security Considerations
 
-#### Security
-
 **When a server is involved**
 
 When the client script does not purely rely on connection to a blockchain node, but also calls server APIs,  the trustworthiness of the server API is called into question. This ERC doesn't provide the mechanism to assert the authenticity of the API access point. Instead, as long as the client script is trusted, it's assumed that it can call any server API in order to carry out token functions. This means the client script can mistrust a server API access point.
