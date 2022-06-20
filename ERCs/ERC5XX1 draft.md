@@ -48,13 +48,13 @@ The steps needed to ensure script authenticity can be summarized as follows:
 
 This process is a deliberate copy of the TLS certification, based on X.509, which has stood the test of time. 
 
-The authenticity of the client script may be obtained through the `scriptURI()` function call, as in ERC 5169, or supplied separately by the use-cases. However, this ERC is applicable to any code or data that is signed, and a client must validate the signature in the way specified in this ERC. In real life use-cases, the client scripts can be either supplied by aforementioned `scriptURI()` or offered to the client (wallet) in anyway the wallet can work with, even through NFC connections or QR code.
+The authenticity of the client script may be obtained through the `scriptURI()` function call, as in ERC 5169, or supplied separately by the use-cases, e.g. through a QR code. However, this ERC is applicable to any code or data that is signed, and a client must validate the signature in the way specified in this ERC. 
 
 ### Implementation
 
 Below we offer some possible methods of implementation. Although we note that we cannot deliver a completely off-line solution unless a hosting app can pre-verify the *smart contract deployment key* address. 
 
-Assuming internet connection and the smart contract is written *with* this ERC in mind, then the simplest approach involves linking to the JWS object outlined below (containing the script itself, URI to certificate, signature of the script signed by *script signing key*) via `scriptURI()` in the contract. This consists of the following steps: 
+Assuming internet connection and the smart contract is written *with* this ERC in mind, then the simplest approach involves linking to a JWS object, [as described below](#Format-of-the-certificate-and-signature), via `scriptURI()` in the contract. This consists of the following steps: 
 1. Determine *smart contract deployment key*. Contract should preferably implement standard `Ownable` interface or at least the `owner()` function.
 2. Fetch the JWS object by querying the `scriptURI()` in the contract.
 3. Fetch the certificate linked to from the JWS in the `x5u` header.
