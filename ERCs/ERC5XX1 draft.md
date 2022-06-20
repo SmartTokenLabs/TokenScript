@@ -14,7 +14,7 @@
 
 ### category: ERC
 
-### created: 2s022-05-03
+### created: 2022-05-03
 
 ### requires: 
 
@@ -24,17 +24,15 @@ This ERC describes how to assert the authenticity of the script related to some 
 
 ### Motivation
 
-Often NFT authors want to provide some user functionality to their tokens through client scripts. This should be done safely, without opening the user to potential scams. Refer to ERC xxxx examples of such scripts.
+Often NFT authors want to provide some user functionality to their tokens through client scripts. This should be done safely, without opening the user to potential scams. Refer to ERC 5169 examples of such scripts.
 
-Although ERC xxxx specified a way to obtain a set of client scripts through URI, it is inapplicable for token contracts that was issued before the creation of ERC xxxx. Furthermore, it lack the finess to address situations such as
+Although ERC 5169 specified a way to obtain a set of client scripts through URI, it is inapplicable for token contracts that was issued before the creation of ERC 5169. 
+However, crucially ERC 5169 only considers *how* a user might retrieve a single script from one or more (possibly centralized) end-points. It does not consider how the user can validate that *what* is retrieved from these end points are actually authentic and has not been modified by the entity storing the content. 
 
-- a smart contract might have different scripts for different environments or use-cases. Take a subway token as an example. It might invoke a minimal script at the POS to be sent through NFC (Internet might be slow or inaccessible underground), while advanced functions for user retention, such as rewarding user mascot NFT for continued use, or carbon credit for buying carbon-neutral airfare.
-- in a specific use case, a token's script is often localized, and it doesn't make sense to download and load all language translations.
-- a specific use-case might be compatible with only a specific version of the token's script.
+ERC 5169 also does not show how handle the situation where the NFT might have multiple *different* scripts associated. This can for example be the case if the NFT supports localization. Thus it does not make sense to download and load all language translations and localized functionalities.
 
-ERC xxxx returns an all-purpose, one-version of script for use on the client side ignoring the nuances.
+This ERC offers a way to assert authenticity of *any* client scripts disregarding how it is obtained, and can work with smart contracts *prior* to the publication of this ERC. It does so using idea of general certificate management and chains of trust, as is done for the ubiquitous [X.509 certificates](https://datatracker.ietf.org/doc/html/rfc5280). 
 
-This ERC offers a way to assert authenticity of such client scripts disregarding how it is obtained, and can work with smart contracts *prior* to the publication of this ERC.
 
 ### Overview
 
@@ -50,34 +48,30 @@ The steps needed to ensure script authenticity can be summarized as follows:
 
 This process is a deliberate copy of the TLS certification, based on X.509, which has stood the test of time. 
 
-The authenticity of the client script may be obtained through the `scriptURI()` function call, as in ERC5XX0, or supplied separately by the use-cases. However, this ERC is applicable to any code or data that is signed, and a client must validate the signature in the way specified in this ERC. In real life use-cases, the client scripts can be either supplied by aforementioned `scriptURI()` or offered to the client (wallet) in anyway the wallet can work with, even through NFC connections or QR code.
+The authenticity of the client script may be obtained through the `scriptURI()` function call, as in ERC 5169, or supplied separately by the use-cases. However, this ERC is applicable to any code or data that is signed, and a client must validate the signature in the way specified in this ERC. In real life use-cases, the client scripts can be either supplied by aforementioned `scriptURI()` or offered to the client (wallet) in anyway the wallet can work with, even through NFC connections or QR code.
 
 ### Implementation
 
-Some possible methods of implementation: Note: we cannot deliver a completely off-line solution unless a hosting app can pre-verify the *smart contract deployment key* address. 
+Below we offer some possible methods of implementation. Although we note that we cannot deliver a completely off-line solution unless a hosting app can pre-verify the *smart contract deployment key* address. 
 
-1. Simplest (assuming internet connection and written *after* publication of this ERC):
+Assuming internet connection and the smart contract is written *with* this ERC in mind, then the simplest approach involves linking to the JWS object outlined below (containing the script itself, URI to certificate, signature of the script signed by *script signing key*) via `scriptURI()` in the contract. This consists of the following steps: 
+1. Determine *smart contract deployment key*. Contract should preferably implement standard `Ownable` interface or at least the `owner()` function.
+2. Fetch the JWS object by querying the `scriptURI()` in the contract.
+3. Fetch the certificate linked to from the JWS in the `x5u` header.
+4. Validate that certificate is signed by the *smart contract deployment key*.
+5. Obtain the address of the *script signing key* from the `SubjectPublicKeyInfo` field of the certificate.
+6. Obtain the script itself; in our example it will be bundled in the JWS object itself, along with the signature attached to the script, in the `<ds:SignatureValue>` tag.
+7. Verify that the signature from the `<ds:SignatureValue>` tag is the correct signature of the Keccak-hashed script by the *script signing key*.
+8. Current time is within `notBefore` and `notAfter`.
+9. If the *script signing key* is still valid according to the certificate *and* the script has been signed correctly by the same key, allow user to interact with the token contract(s) defined in the script via the script interface.
 
-- JWS object outlined below (containing: The script itself, URI to certificate, signature of the script signed by *script signing key*) is linked to via scriptURI() in the contract.
-- 1: determine *smart contract deployment key*. Contract should preferrably implement standard 'Ownable' interface or at least the 'owner()' function.
-- 2: fetch the JWS object by querying the scriptURI() in the contract.
-- 3: fetch the certificate linked to from the JWS in the `x5u` header.
-- 4: validate that certificate is signed by the *smart contract deployment key*.
-- 5: obtain the address of the *script signing key* from the `SubjectPublicKeyInfo` field of the certificate.
-- 6: obtain the script itself; in our example it will be bundled in the JWS object itself, along with the signature attached to the script, in the <ds:SignatureValue> tag.
-- 7: verify that the signature from the <ds:SignatureValue> tag is the correct signature of the keccak'd script by the *script signing key*.
-- 8: current time is within `notBefore` and `notAfter`.
-- 9: if the *script signing key* is still valid according to the certificate *and* the script has been signed correctly by the same key, allow user to interact with the token contract(s) defined in the script via the script interface.
-
-2. Example script applied to contract published before this ERC:
-
-- User scans NFC beacon on their mobile.
-- Obtains payload with an app intent (eg ticketing app) containing a URL to a JWS object.
-- JWS Object is fetched along with the script pointed to from the JWS object.
-- Determine origin contract from script.
-- Obtain the owner of the script query `owner()` or JWS object provides contract creation transaction the hosting app can validate and obtain *smart contract deployment key* address.
-- Continue from `3:` above, skipping `6:` as we already have the script.
-- If the *script signing key* is still valid according to the certificate *and* the script has been signed correctly by the same key, allow user to interact with the token contract(s) defined in the script via the script interface.
+If instead the contract is *without* considering this ERC, then simplest approach is as follows: 
+1. The user obtains an URI for the relevant JWS object (for example by scanning an NFC beacon on their mobile phone). 
+2. The JWS Object is fetched along with the script pointed to from the JWS object.
+3. The origin contract is determined from script.
+4. Obtain the owner of the script by querying `owner()`. Alternatively the JWS object can provide the contract creation transaction, so the user can validate and obtain *smart contract deployment key* address from this.
+5. Continue from step 3 in the description above (the flow of a smart contract written *with* this ERC in mind), but skipping step 6, as we already have the script.
+6. Finally, if the *script signing key* is still valid according to the certificate *and* the script has been signed correctly by the same key, allow user to interact with the token contract(s) defined in the script via the script interface.
 
 ### Specification
 The keywords “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”, “SHOULD NOT”, “RECOMMENDED”, “MAY” and “OPTIONAL” in this document are to be interpreted as described in [RFC 2119](https://datatracker.ietf.org/doc/html/rfc2119).
@@ -101,6 +95,7 @@ We furthermore make the following requirements of the content of this certificat
 
 - The `version` field SHOULD be grater than 2, to indicate that the certificate is **not** a regular X.509 certificate.
 
+- If the signing key is a secp256k1 key, then the `signatureAlgorithm` element **must** use OID `1.2.840.10045.2.1` for its `algorithm` field.
 
 We require the signature to be done as a JWS according to [RFC 7515](https://datatracker.ietf.org/doc/html/rfc7515). Concretely we have the following requirements to the elements contained in the JWS:
 
