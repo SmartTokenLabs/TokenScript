@@ -144,5 +144,5 @@ When it comes to validating the authenticity of client script, the following ste
 
 ### Concerning Proxy Contracts
 
-
+The usage of a *script signing key* can prevent the need of a proxy contract to allow for script updates. However, if a proxy contract is already in use, then this ERC can work by simply requiring the *script signing key* certificate to be signed by the proxied contract. 
 
