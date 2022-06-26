@@ -381,32 +381,33 @@ Product description information is typically part of the smart contract. They ca
 
 This serves to introduce the first functionality of TokenScript: acting as a presentation layer for smart-contracts. In XML it looks like this:
 
-    <attribute-type id="voting-right">
-       <name xml:lang="en">Voting right</name>
-       <name xml:lang="zh">投標權</name>
-       <origin contract="holding-contract" as="mapping">
-          <function name="getVotingRight">
-	     <inputs>
-	        <uint256 ref="TokenId"/>
-	     </inputs>
-	  </function>
-          <mapping>
-	     <option key="0">
-	         <value xml:lang="en">No Voting Right</value>
-		 <value xml:lang="zh">無投標權</value>
-             </option>
-	     <option key="1">
-	         <value xml:lang="en">Voting rights on sale</value>
-		 <value xml:lang="zh">可投標決定售出</value>
-	     </option>
-	     <option key="2">
-	         <value xml:lang="en">Voting rights on expense (e.g. insurance)</value>
-		 <value xml:lang="zh">可投標決定維護項目如添置保險</value>
-	     </option>
-	  </mapping>
-	</origin>
-    </attribute-type>
-
+```xml
+<attribute-type id="voting-right">
+  <name xml:lang="en">Voting right</name>
+  <name xml:lang="zh">投標權</name>
+  <origin contract="holding-contract" as="mapping">
+    <function name="getVotingRight">
+      <inputs>
+        <uint256 ref="TokenId"/>
+      </inputs>
+    </function>
+    <mapping>
+      <option key="0">
+        <value xml:lang="en">No Voting Right</value>
+        <value xml:lang="zh">無投標權</value>
+      </option>
+      <option key="1">
+        <value xml:lang="en">Voting rights on sale</value>
+        <value xml:lang="zh">可投標決定售出</value>
+      </option>
+      <option key="2">
+        <value xml:lang="en">Voting rights on expense (e.g. insurance)</value>
+        <value xml:lang="zh">可投標決定維護項目如添置保險</value>
+      </option>
+    </mapping>
+  </origin>
+</attribute-type>
+```
 
 This simplified `attribute-type` code snippet allows the value for Voting Right to be fetched from `holding-contract`, which is a smart contract defined somewhere else in the TokenScript, and present it in one of a few languages.
 
@@ -787,35 +788,37 @@ This vision is made possible through TokenScript. For the first case TokenScript
 
 We demonstrate the portion of TokenScript related to messaging.
 
-    <token>
-      <name xml:lang="en">Shipment</name>
-      <name xml:lang="zh">貨單</name>
-      <name xml:lang="es">Despacho</name>
-      [...]
-      <states>
-         <state name="initialised"/>
-         <state name="dispathced"/>
-	 <state name="collectable"/>
-	 <state name="used"/>
-	 <state name="expired"/>
-	 <state name="returned"/>
-      </states>
-      <messages-acl>
-         <trust signed="issuer">
-	     <permission>
-	         <display type="history"/>
-		 <display type="notification"/>
-             </permission>
-             <condition state="initialised"/>
-	 </trust>
-	 <trust certified="issuer">
-	     <permission>
-	         <display type="history"/>
-		 <display type="notification"/>
-             </permission>
-             <condition state="dispatched"/>
-	 </trust>
-	 [...]
+```xml
+<token>
+  <name xml:lang="en">Shipment</name>
+  <name xml:lang="zh">貨單</name>
+  <name xml:lang="es">Despacho</name>
+  [...]
+  <states>
+    <state name="initialised"/>
+    <state name="dispathced"/>
+    <state name="collectable"/>
+    <state name="used"/>
+    <state name="expired"/>
+    <state name="returned"/>
+  </states>
+  <messages-acl>
+    <trust signed="issuer">
+      <permission>
+        <display type="history"/>
+        <display type="notification"/>
+      </permission>
+      <condition state="initialised"/>
+    </trust>
+    <trust certified="issuer">
+      <permission>
+        <display type="history"/>
+        <display type="notification"/>
+      </permission>
+      <condition state="dispatched"/>
+    </trust>
+    [...]
+```
 
 The section between `<states>...</states>` gives a list of states which is the basis of defining messages the token holder is allowed to receive.
 
