@@ -151,7 +151,7 @@ The challenge to integrating the web requires a few building blocks that weren't
 
 ### "Account authentication" is not a substitute for web integration.
 
-The web doesn't have a built-in authentication mechanism[^tls]. To route around this gab, many users use add-ons like "Sign in with Facebook". Those merely try to provide authentication through a trusted 3rd party, which does not only cause privacy and availability concerns but also only serves for account authentication and can't be used for integration.
+The web doesn't have a built-in authentication mechanism[^tls]. To route around this gap, many users use add-ons like "Sign in with Facebook". Those merely try to provide authentication through a trusted 3rd party, which does not only cause privacy and availability concerns but also only serves for account authentication and can't be used for integration.
 
 [^tls]: There have been excellent efforts on client/server certificates in Transport Layer Security (TLS). However, these authentication methods are not for processes, but only for sites. They represent a delegation model: Imagine a buyer not checking if a title deed is real, but only checks if the seller's name matches the one on the deed. That would be the delegation model used in TLS. In this model, TLS can't guarantee that anything on the website is genuine -- only that the website itself is. Facebook uses TLS, but people put much fake news on it. The unit of trust here is undoubtedly not granular enough for the web to deliver an integrated experience.
 
