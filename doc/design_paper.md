@@ -929,3 +929,4 @@ Examples of attestations: crypto-kitten vouchers, FIFA ticket redeem coupons, Am
 # Join the game
 
 The work to define TokenScript as a specification is a work in progress. We aim to produce a yellow paper of the key methods and considerations and extend it from there. The work in progress is coordinated with Discourse on http://www.tokenscript.org
+AD55jta1SU7NsX46njAdoZAE15X5VZCjww7cDdeSEpFa
