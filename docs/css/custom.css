@@ -1,0 +1,53 @@
+@import url(https://www.dita-ot.org/css/main.css);
+
+
+body {
+	font-family: Lato;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-familY: "Roboto Slab";
+}
+
+/* Style navigation as sidebar */
+nav[role=toc] {
+  float: left;
+}
+
+/* Highlight current topic in bold */
+nav[role=toc] li.active > a {
+  font-weight: bold;
+}
+
+header nav li.nav-item.external {
+	padding-left: 12pt;
+	background-position: left center;
+	background-size: 12pt 12pt;
+	background-repeat: no-repeat;
+	background-image: url(data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%20-256%201850%201850%22%20version%3D%221.1%22%20width%3D%22100%25%22%20height%3D%22100%25%22%3E%0A%20%20%3Cg%20transform%3D%22matrix%281%2C0%2C0%2C-1%2C30.372881%2C1426.9492%29%22%3E%0A%20%20%20%20%3Cpath%20d%3D%22M%201408%2C608%20V%20288%20Q%201408%2C169%201323.5%2C84.5%201239%2C0%201120%2C0%20H%20288%20Q%20169%2C0%2084.5%2C84.5%200%2C169%200%2C288%20v%20832%20Q%200%2C1239%2084.5%2C1323.5%20169%2C1408%20288%2C1408%20h%20704%20q%2014%2C0%2023%2C-9%209%2C-9%209%2C-23%20v%20-64%20q%200%2C-14%20-9%2C-23%20-9%2C-9%20-23%2C-9%20H%20288%20q%20-66%2C0%20-113%2C-47%20-47%2C-47%20-47%2C-113%20V%20288%20q%200%2C-66%2047%2C-113%2047%2C-47%20113%2C-47%20h%20832%20q%2066%2C0%20113%2C47%2047%2C47%2047%2C113%20v%20320%20q%200%2C14%209%2C23%209%2C9%2023%2C9%20h%2064%20q%2014%2C0%2023%2C-9%209%2C-9%209%2C-23%20z%20m%20384%2C864%20V%20960%20q%200%2C-26%20-19%2C-45%20-19%2C-19%20-45%2C-19%20-26%2C0%20-45%2C19%20L%201507%2C1091%20855%2C439%20q%20-10%2C-10%20-23%2C-10%20-13%2C0%20-23%2C10%20L%20695%2C553%20q%20-10%2C10%20-10%2C23%200%2C13%2010%2C23%20l%20652%2C652%20-176%2C176%20q%20-19%2C19%20-19%2C45%200%2C26%2019%2C45%2019%2C19%2045%2C19%20h%20512%20q%2026%2C0%2045%2C-19%2019%2C-19%2019%2C-45%20z%22%20style%3D%22fill%3A%23b9c8e0%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E);
+}
+
+/* Adjust navigation indentation */
+.bs-docs-sidenav,
+.bs-docs-sidenav li ul {
+  padding-left: 20px;
+}
+
+/* Fix table conflict with bootstrap's row class */
+.table .row {
+  display: table-row;
+}
+
+nav[role="toc"] {
+/*  background-color: #343a40; */
+}
+
+pre.codeblock {
+	background: #eeffcc;
+	border: thin solid #e1e4e5;
+	margin-top: 0.5ex;
+}
+
+a.navbar-brand::first-letter {
+	font-size: larger;
+}

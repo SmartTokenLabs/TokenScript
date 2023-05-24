@@ -1,0 +1,173 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><meta name="copyright" content="(C) Copyright 2020"><meta name="DC.rights.owner" content="(C) Copyright 2020"><meta name="DC.type" content="concept"><meta name="description" content="In this tutorial we guide you through the process of setting up a simple TokenScript and deploy it to AlphaWallet."><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="concept_bq1_gdy_4mb"><link rel="stylesheet" type="text/css" href="css/commonltr.css"><link rel="stylesheet" type="text/css" href="css/custom.css"><title>Quick Start (usuable now)</title>
+<link href="https://fonts.googleapis.com/css?family=Roboto+Slab|Lato">
+<script type="text/javascript" src="https://alphawallet.com/wp-content/themes/alphawallet/discourse/widget.js"></script>
+</head><body id="concept_bq1_gdy_4mb"><header role="banner"><nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+  <div class="container">
+    <a class="navbar-brand" href="/">🆃okenScript</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+	      <li class="nav-item"><a class="nav-link" href="/TokenScript.html">Documents</a></li>
+	      <li class="nav-item"><a class="nav-link" href="/guides/Intro.html">Guides</a></li>
+	      <li class="nav-item"><a class="nav-link" href="/specs/Intro.html">Specs</a></li>
+	      <li class="nav-item external"><a class="nav-link" href="">TokenScript community forum</a></li>
+	      <li class="nav-item external"><a class="nav-link" href="/TokenScript.html">AlphaWallet (uses TokenScript)</a></li>
+	      <li class="nav-item external"><a class="nav-link" href="/guides/Intro.html">Github TokenScript</a></li>
+	      <li class="nav-item external"><a class="nav-link" href="/specs/Intro.html">Github TokenScript Examples</a></li>
+      </ul>
+    </div>
+  </div>
+</nav></header><div class="container" id="content"><div class="row"><nav role="toc" class="col-lg-3"><ul><li><a href="Tokenization.html">Tokenization and dApps</a></li><li><a href="index.html">Introduction to TokenScript</a></li><li class="active"><a href="QuickStart.html">Quick Start (usuable now)</a></li><li><a href="BasicConcepts.html">Basic Concepts</a></li><li><a href="Deploy.html">Deploy TokenScript</a></li><li><a href="features/FeatureImplementation.html">Features implemented</a></li><li><a href="specs/Intro.html">TokenScript Specs</a></li><li><a href="guides/Intro.html">TokenScript Guides</a></li></ul></nav><main role="main" class="col-lg-9"><article role="article" aria-labelledby="ariaid-title1">
+    <h1 class="title topictitle1" id="ariaid-title1">Quick Start (usuable now)</h1>
+    
+    <div class="body conbody"><p class="shortdesc">In this tutorial we guide you through the process of setting up a simple TokenScript
+        and deploy it to AlphaWallet.</p>
+	    <div class="note note note_note"><span class="note__title">Note:</span>  This quick start is being redone to focus on the use of TokenScripts, not the creation of it.</div>
+        <p class="p">TokenScript has a lot of functionalities, but we start with an easy example: Add
+            information to your token. We will guide you through the process of adding
+            token-specific information to a wallet. This can be useful by itself, but it is mostly
+            educative to understand how you create a TokenScript for your token and how a wallet
+            like AlphaWallet uses it.</p>
+        <section class="section"><h2 class="title sectiontitle">Requirements</h2>
+            <p class="p">We assume that you are familiar with Token, Ethereum and Smart Contracts. We also
+                assume that you have launched your own Token - be it on mainnet or on a testnet like
+                Ropsten. If you want to learn how to launch a testnet token, you can use <a class="xref" href="guides/Miniguide-deploy-token-on-ropsten.html" title="This miniguide explains how to deploy your custom token on Ropsten testnet using Ethereum Studio and Remix.">our guide</a>. If you
+                have not, but want to try TokenScript, you can use the "Coin" token on Ropsten
+                address 0xe35FE4A1B17d50A8022078d98162DB25bC860834.</p>
+            <p class="p">TokenScript will be imported into AlphaWallet, a mobile wallet which supports several
+                Ethereum networks. To use TokenScript, you will have to add your own token or
+                "Coin". If you need help adding the token, read this <a class="xref" href="guides/Miniguide-add-token-to-aw.html" title="This guide explains how to add a token on Ropsten testnet to AlphaWallet.">mini guide</a>.</p>
+        </section><section class="section"><h2 class="title sectiontitle">Create the TokenScript files</h2>
+            <p class="p">You have your own Token or imported "Coin" in AlphaWallet. Now you want AlphaWallet
+                to show information about this token. </p>
+            <p class="p">To do so you will need a TokenScript file. You could create it from scratch. To do
+                so, you should understand the <a class="xref" href="BasicConcepts.html" title="Learn about the basic concepts of TokenScript, which are used for creating a TokenScript.">basic concepts</a>
+                and study the <a class="xref" href="https://github.com/AlphaWallet/TokenScript-Examples/" target="_blank" rel="external noopener">source code of examples</a>. </p>
+        <p class="p">For this exercise we will use <a class="xref" href="https://alphawallet.github.io/ABI-to-TokenScript/" target="_blank" rel="external noopener">ABI to TokenScript</a>, a simple tool to get the TokenScript
+                files from the smart contract ABI. You find the ABI either in Studio or get it from
+                Etherscan.io.</p>
+        <p class="p">Now download the files in a folder on your computer and inspect them. </p>
+        <p class="p"><img class="image" id="concept_bq1_gdy_4mb__image_gg4_tty_4mb" src="ts-folder.png"></p>
+        <p class="p">Most important is the token.xml file (here: Coin.xml). It declares the TokenScript
+                structure. Also important are the JavaScript files. They contain the dynamic code
+                for <a class="xref" href="ActionCard.html" title="An action card triggers actions in the wallet. For example, a transaction, an attestation, a component of a transaction or a signature.">Action Cards</a> which is executed in
+                AlphaWallet. The Makefile is needed to finish the TokenScript creation. To give your
+                an understanding of TokenScript, we will inspect these files.</p>
+        </section><section class="section"><h2 class="title sectiontitle">The XML file</h2>
+        <p class="p">To manipulate your TokenScript, you will need a basic understanding of what it contains.
+                Here we will only present some parts of the XML file. To learn more about the
+                syntax, you find an <a class="xref" href="elements/index.html" title="Reference of all elements that can be used in a TokenScript.">overview </a>here.</p>
+        <p class="p"><strong class="ph b">The header</strong></p>
+        <p class="p">The file header will look like this:</p>
+        <div class="p"><pre class="pre codeblock"><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE token [
+&nbsp; &lt;!ENTITY style SYSTEM "shared.css"&gt;
+&nbsp; &lt;!ENTITY about.en SYSTEM "about.en.js"&gt;
+&nbsp; &lt;!ENTITY approve.en SYSTEM "approve.en.js"&gt;
+&nbsp; &lt;!ENTITY foryou.en SYSTEM "foryou.en.js"&gt;
+]&gt;</code></pre>The
+                first line declares the XML version of the document. Inside the !DOCTYPE tag you
+                declare other files to use. In this case it are the JavaScript files for your Action
+                Cards. If you want to create your own Action card mycard, you will need to create a
+                JavaScript file for it and declare this file here.</div>
+        <p class="p"><strong class="ph b">Declare contract, network and name</strong></p>
+        <p class="p">Every TokenScript file needs to contain some basic info about the token: On which network
+            does it run, what is the address of its smart contract, and what is its name? This is
+            declared with this code:</p>
+        <div class="p">
+                <pre class="pre codeblock"><code>&lt;ts:contract interface="erc20" name="Coin"&gt;
+     &lt;ts:address network="3"&gt;0xe35FE4A1B17d50A8022078d98162DB25bC860834&lt;/ts:address&gt;&lt;/ts:contract&gt;
+&lt;ts:origins&gt;
+     &lt;ts:ethereum contract="Coin"/&gt;
+&lt;/ts:origins&gt;</code></pre>
+            </div>
+        <p class="p">As you see, the Coin token is an ERC20 smart contract. The network number 3 means that it
+                is on Ropsten testnet. If you change this address, you can direct the TokenScript to
+                another token.</p>
+        <p class="p"><strong class="ph b">Action Cards</strong></p>
+        <div class="p">Action Cards are where the fun starts. With them you can enrich your token with
+                information and even with applications. In the XML file an Action Card is declared
+                inside the <code class="ph codeph">&lt;ts:cards&gt;</code> tags. In this example an Action Card is
+                added which provides information about the
+                token:<pre class="pre codeblock"><code> &lt;ts:card type="action"&gt;
+     &lt;ts:label&gt;
+          &lt;ts:string xml:lang="en"&gt;About this token&lt;/ts:string&gt;
+     &lt;/ts:label&gt;
+     &lt;ts:view xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"&gt;
+         &lt;style type="text/css"&gt;&amp;style;&lt;/style&gt;
+         &lt;script type="text/javascript"&gt;&amp;about.en;&lt;/script&gt;
+     &lt;/ts:view&gt;
+ &lt;/ts:card&gt;</code></pre></div>
+        </section><section class="section"><h2 class="title sectiontitle">The JavaScript file</h2>
+        <p class="p">Before we start to create your own Action Card, you should have a loot to the JavaScript
+                file about.en.js. It contains instructions for the wallet how to unterstand the
+                about Action Card.</p>
+        <div class="p">The file starts with the declaration of the Token class, and ends with a web3 command.
+                For this guide, the render function inside the Token class is most
+                important:<pre class="pre codeblock"><code> render() {
+     return`
+     &lt;div class="ui container"&gt;
+         &lt;div class="ui segment"&gt;
+             &lt;img src="https://www.bitcoin-buch.org/bitcoin-geschichte-front-1.jpg" /&gt;
+             &lt;span&gt;&lt;bold&gt;&lt;h1&gt;This is the Token of Christoph!&lt;/h1&gt;&lt;/bold&gt;&lt;br /&gt;&lt;br /&gt;It                     is a one of the century chance to invest!&lt;/span&gt;
+         &lt;/div&gt;
+     &lt;/div&gt;
+     `;
+ }</code></pre></div>
+        <p class="p">This function renders the display after the user tapped the "about the token" button.
+            Inside you find some basic HTML: A div of the class "ui container", and in it a div of
+            the class "ui segment". Inside this div there is a picture, a headline and a text. </p>
+        </section><section class="section"><h2 class="title sectiontitle">Add your personal note to your token</h2>
+        <p class="p">Now that you know some basics about the TokenScript architecture, it is easy to add your
+                own Action Card with your personal information: </p>
+            <div class="p">
+                <ol class="ol" id="concept_bq1_gdy_4mb__ol_aqq_ybq_cnb">
+                    <li class="li">Create a file called hello.en.js. </li>
+                    <li class="li">Copy the content of about.en.js in this file. </li>
+                    <li class="li">Change the part inside the rendered div to display your personal message and
+                        save it.</li>
+                    <li class="li">Open the xml file.</li>
+                    <li class="li"> Declare your JavaScript file in the header.</li>
+                    <li class="li">Copy the Action Card for "about" and paste it into the Card section.</li>
+                    <li class="li">Modify the content that it loads the hello.en.js file.</li>
+                </ol>
+            </div>
+      </section><section class="section"><h2 class="title sectiontitle">Canonicalize your TokenScript</h2>
+            <p class="p">If you followed the latest instructions, you basically created your own Action Card.
+                Now we just need to canonicalize the file it so that we can import it in
+                AlphaWallet.</p>
+        <p class="p">Thanks to Makefile the canonicalization is easy: Type "make token.canonicalized.xml" in
+            the console while being in the folder with the TokenScript files, with "token" as the
+            name of your token. If your system has all dependencies, you will get a file named
+            "token.canonicalized.xml.TEST". Rename the file into token.canonicalized.xml.</p>
+        <p class="p">If the make commaned doesn't work, you might lack some software. You can use xmllint,
+            which is available for both Ubuntu and Windows. <a class="xref" href="https://github.com/AlphaWallet/TokenScript-Examples/tree/master/tutorial#xmllint" target="_blank" rel="external noopener">Here you find the commands how to install
+            it</a>.</p>
+        </section><section class="section"><h2 class="title sectiontitle">Put the TokenScript on your Smartphone</h2>
+        <p class="p">Finally you need to connect your smartphone to your computer. Open the filesystem and
+                navigate to the AlphaWallet folder. Then paste the token.canonicalized.xml in the
+                AlphaWallet folder.</p>
+        <p class="p">For iOS you should exchange the file somehow, maybe with twitter, facebook or telegram,
+            and than open it with AlphaWallet.</p>
+        <p class="p">Now start AlphaWallet and select your token. Click the […] button in the right buttom,
+            select "hello" and look at the information you added. This is your first
+            TokenScript.</p>
+        <p class="p">Whenever you want to change the information or add another Action Card, you can simply
+            repeat the former steps.</p>
+        </section><section class="section"><h2 class="title sectiontitle">Beyond information</h2>
+        <p class="p">Adding a bit of information to a token in a wallet might sound trivial. But it's no small
+            deal. Common wallets don't know anything about a token, and if they do, then it is
+            because the wallet developers selected a coin to add information. With AlphaWallet and
+            TokenScript you can add information to any Token.</p>
+        <p class="p">It doesn't require much fantasy to imagine how this simple Action Card can become the
+            base for apps. With JavaScript you are not restricted to show information. You can do
+            everything JavaScript can do, and you can connect to an API to get information. If you
+            know how to sign a message with a key inside TokenScript, you can even design your API
+            so that it only sends information to a wallet holding a required amount of your tokens.
+            You can bind any subscription based app to a token and launch it in AlphaWallet. </p></section>
+    </div>
+</article></main></div></div></body></html>

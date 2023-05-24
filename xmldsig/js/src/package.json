@@ -1,0 +1,10 @@
+{
+  "type": "module",
+  "engines": {
+    "node": ">=0.15"
+  },
+  "engineStric": true,
+  "dependencies": {
+    "xmldsigjs": "^2.1.3"
+  }
+}

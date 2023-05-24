@@ -1,0 +1,253 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><meta name="copyright" content="(C) Copyright 2020"><meta name="DC.rights.owner" content="(C) Copyright 2020"><meta name="DC.type" content="reference"><meta name="description" content="Reference of all elements that can be used in a TokenScript."><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="reference_n4y_1gj_qmb"><link rel="stylesheet" type="text/css" href="../css/commonltr.css"><link rel="stylesheet" type="text/css" href="../css/custom.css"><title>TokenScript XML Markup elements</title>
+<link href="https://fonts.googleapis.com/css?family=Roboto+Slab|Lato">
+<script type="text/javascript" src="https://alphawallet.com/wp-content/themes/alphawallet/discourse/widget.js"></script>
+</head><body id="reference_n4y_1gj_qmb"><header role="banner"><nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+  <div class="container">
+    <a class="navbar-brand" href="/">🆃okenScript</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+	      <li class="nav-item"><a class="nav-link" href="/TokenScript.html">Documents</a></li>
+	      <li class="nav-item"><a class="nav-link" href="/guides/Intro.html">Guides</a></li>
+	      <li class="nav-item"><a class="nav-link" href="/specs/Intro.html">Specs</a></li>
+	      <li class="nav-item external"><a class="nav-link" href="">TokenScript community forum</a></li>
+	      <li class="nav-item external"><a class="nav-link" href="/TokenScript.html">AlphaWallet (uses TokenScript)</a></li>
+	      <li class="nav-item external"><a class="nav-link" href="/guides/Intro.html">Github TokenScript</a></li>
+	      <li class="nav-item external"><a class="nav-link" href="/specs/Intro.html">Github TokenScript Examples</a></li>
+      </ul>
+    </div>
+  </div>
+</nav></header><div class="container" id="content"><div class="row"><nav role="toc" class="col-lg-3"><ul></ul></nav><main role="main" class="col-lg-9"><article role="article" aria-labelledby="ariaid-title1">
+    <h1 class="title topictitle1" id="ariaid-title1">TokenScript XML Markup elements</h1>
+    
+    <div class="body refbody"><p class="shortdesc">Reference of all elements that can be used in a TokenScript. </p>
+        <section class="section"><h2 class="title sectiontitle">Using namespace</h2>
+            
+            <p class="p">TokenScript elements are under <a class="xref" href="namespace.html">TokenScript
+                    namespace</a>. That means TokenScript XML file's root element must use xmlns
+                to declare the namespace. You can observe how this is done in any one of the
+                examples.</p>
+            <p class="p">TokenScript file <em class="ph i">must</em> use a prefix to represent the namesapce.<a name="fnsrc_1" href="#fntarg_1"><sup>1</sup></a> In most examples we use "ts:", like
+                &lt;ts:token&gt; or &lt;ts:card&gt;. </p>
+            <p class="p">However, ther are two exceptions:</p>
+            <ol class="ol" id="reference_n4y_1gj_qmb__ol_avt_1d3_ymb">
+                <li class="li">Elements specific to a blockchhain are defiend in each blockchain's own
+                    namespace. For example: <a class="xref" href="ethereum-call.html" title="The Ethereum:Call element gets information from an Ethereum smart contract.">&lt;ethereum:call&gt; element</a>. See <a class="xref" href="namespace.html#namespace__section_esk_kd3_ymb">Namespace of blockchain-specific elements</a>.</li>
+                <li class="li">We use ASNX for data modeling, and such model is defined in &lt;asxn:module&gt; .
+                    Any element inside &lt;asnx:module&gt; is without perfix, such as
+                        <code class="ph codeph">sequence</code>.</li>
+            </ol>
+        </section>
+        <table class="table" id="reference_n4y_1gj_qmb__table_dl4_w5m_qmb"><caption><span class="table--title-label">Table 1. </span><span class="title">XML elements that can be used in a TokenScript file</span></caption><colgroup><col style="width:33.33333333333333%"><col style="width:33.33333333333333%"><col style="width:33.33333333333333%"></colgroup><thead class="thead">
+                    <tr class="row">
+                        <th class="entry" id="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__1">TokenScript Root Elements</th>
+                        <th class="entry" id="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__2">Use</th>
+                        <th class="entry" id="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__3"></th>
+                    </tr>
+                </thead><tbody class="tbody">
+                    <tr class="row">
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__1"><a class="xref" href="token.html" title="token element defines a Token">&lt;token&gt; element</a></td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__2 reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__3" colspan="2">Starts and ends the token specific
+                            tokenscript. Can be used as the root element of TokenScript. </td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__1"><a class="xref" href="tokens.html" title="tokens element is a container of multiple Tokens">tokens</a></td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__2 reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__3" colspan="2">A <code class="ph codeph">tokens</code> element
+                            contains definitions for a list of Tokens. They must all come from the
+                            same token issuer as they are signed by the same trust key.</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__1"><a class="xref" href="cards.html" title="cards element is a container of multiple ***. It can be used as a root element of a TokenScript File.">&lt;cards&gt; element</a></td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__2 reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__3" colspan="2">A container of multiple Cards. </td>
+                    </tr>
+                </tbody><colgroup><col style="width:33.33333333333333%"><col style="width:33.33333333333333%"><col style="width:33.33333333333333%"></colgroup><thead class="thead">
+                    <tr class="row">
+                        <th class="entry" id="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__10">TokenScript Elements</th>
+                        <th class="entry" id="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__11">Use</th>
+                        <th class="entry" id="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__12">Use in</th>
+                    </tr>
+                </thead><tbody class="tbody">
+                    <tr class="row">
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__10"><a class="xref" href="card.html" title="card element defines a Card">card</a></td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__11">Declares a Card, can be token, action or activity cards. </td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__12">Can only be in <a class="xref" href="cards.html" title="cards element is a container of multiple ***. It can be used as a root element of a TokenScript File.">&lt;cards&gt; element</a></td>
+                    </tr>                   <tr class="row">
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__10"><a class="xref" href="attribute.html" title="<attribute&gt; element defines an attribute for a token or a card">attribute</a></td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__11">Defines properties of a token which can be used by other
+                            elements.</td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__12">Can be in <a class="xref" href="token.html" title="token element defines a Token">&lt;token&gt; element</a> or <a class="xref" href="card.html" title="card element defines a Card">&lt;card&gt; element</a></td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__10"><a class="xref" href="origins.html" title="The origins element can be a root element to define the contract a token uses, but can also be inside attributes to get the source of an attribute, like through an ethereum call.">origins</a></td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__11">Can be a root element to define the contract a token uses, but can
+                            also be inside attributes to get the source of an attribute, like
+                            through an ethereum call.</td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__12">In  <a class="xref" href="token.html" title="token element defines a Token">&lt;token&gt; element</a>, <a class="xref" href="card.html" title="card element defines a Card">&lt;card&gt; element</a>, or <a class="xref" href="attribute.html" title="<attribute&gt; element defines an attribute for a token or a card">&lt;attribute&gt; element</a></td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__10"><a class="xref" href="contract.html" title="The contract elements declares address, network and name of the token's smart contract.">contract</a></td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__11">Defines information about the smart contracts to interact
+                            with.</td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__12">In <a class="xref" href="token.html" title="token element defines a Token">&lt;token&gt; element</a>.</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__10"><a class="xref" href="../DataObjects.html" title="With Data Objects you can add data to a TokenScript. Data objects are in a format that allows efficient signing and onchain storage.">asnx:module</a></td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__11">Creates / Defines data objects for TokenScript. </td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__12"></td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__10"><a class="xref" href="address.html" title="The address element declares an Address, usually that of a smart contract on Ethereum.">address</a></td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__11">Declares the address of the token's smart contract. Is usually based
+                            inside the contract-tags, but can also be inside the
+                                <code class="ph codeph">etherem</code> element.</td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__12">Contract, Card</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__10"><code class="ph codeph"><a class="xref" href="bytes32.html" title="The bytes32 Element is used to define data used in interactions with Ethereum blockchain.">bytes32</a></code></td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__11">Define data when interacting with the Ethereum blockchain</td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__12">Ethereum</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__10"><code class="ph codeph"><a class="xref" href="data.html" title="The data element embedds data, usually used to interact with the Ethereum blockchain">data</a></code></td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__11">Declares data, usually used for Ethereum calls, e. G. to declare a
+                            receiving address.</td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__12">Card, Attribute, Ethereum</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__10"><code class="ph codeph"><a class="xref" href="element.html" title="In a data module elements are put in a ordered sequence.">element</a></code></td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__11">creates an element for a data module. Usually inside &lt;sequence&gt;
+                            tags. </td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__12">Data Module, Sequence</td>
+                    </tr>
+                    
+                    <tr class="row">
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__10"><code class="ph codeph">&lt;grouping&gt;</code></td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__11">How various instances of the same type of token are grouped.</td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__12"></td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__10"><code class="ph codeph">&lt;item-view&gt;</code></td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__11">Defines how the wallet must view the token.</td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__12">Card (Token Card)</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__10"><code class="ph codeph">&lt;label&gt;</code></td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__11">Labels allow to localize the TokenScript by adding language specific
+                            files or names.</td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__12">Attributes / Cards</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__10"><code class="ph codeph">&lt;mapping&gt;</code></td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__11"></td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__12"></td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__10"><code class="ph codeph">&lt;option&gt;</code></td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__11"></td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__12"></td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__10"><code class="ph codeph">&lt;plural&gt;</code></td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__11">Adds the correct designation when there is more than one
+                            token.</td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__12">Attributes / Cards</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__10"><code class="ph codeph">&lt;selection&gt;</code></td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__11">Selection is a way to categorise token instances. It allows you to
+                            select multiple token at once or define an action for them. </td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__12">Attributes / Cards</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__10"><code class="ph codeph">&lt;sequence&gt;</code></td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__11">Orders the sequence of elements in a data module. No "ts:" in the tag
+                            required.</td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__12">Data Module</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__10"><code class="ph codeph">&lt;string&gt;</code></td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__11">Is a simple string.</td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__12">Attributes / Cards</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__10"><code class="ph codeph">&lt;syntax&gt;</code></td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__11"></td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__12"></td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__10"><code class="ph codeph">&lt;token-id&gt;</code></td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__11"></td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__12"></td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__10"><code class="ph codeph">&lt;type&gt;</code></td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__11"></td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__12"></td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__10"><code class="ph codeph">&lt;uint256&gt;</code></td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__11"></td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__12"></td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__10"><code class="ph codeph">&lt;user-entry&gt;</code></td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__11"></td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__12"></td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__10"><code class="ph codeph">&lt;value&gt;</code></td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__11"></td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__12"></td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__10"><code class="ph codeph">&lt;view&gt;</code></td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__11">Marks the part which will be visible in the user interface. Is
+                            usually inside an Action Card and refers to a CSS and JavaScript file to
+                            create the view in HTML.</td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__12">Cards</td>
+                    </tr>
+                </tbody><colgroup><col style="width:33.33333333333333%"><col style="width:33.33333333333333%"><col style="width:33.33333333333333%"></colgroup><thead class="thead">
+                    <tr class="row">
+                        <th class="entry" id="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__88">Ethereum-specific Elements</th>
+                        <th class="entry" id="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__89">Use</th>
+                        <th class="entry" id="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__90"></th>
+                    </tr>
+                </thead><tbody class="tbody">
+                    <tr class="row">
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__88"><code class="ph codeph"><a class="xref" href="ethereum-call.html" title="The Ethereum:Call element gets information from an Ethereum smart contract.">ethereum:call</a></code></td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__89">Calls a smart contract, for example fetching the balance.</td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__90">Attributes, Origin</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__88"><code class="ph codeph"><a class="xref" href="ethereum-transaction.html" title="The ethereum:transaction element is used to create an Ethereum transaction.">ethereum:contract</a></code></td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__89">Defines the Token's contract</td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__90">Contract</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__88"><code class="ph codeph"><a class="xref" href="ethereum-event.html" title="The ethereum:event element allows to render an attribute by checking for a blockchain event.">ethereum:event</a></code></td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__89">Enables the wallet to render an attribute with a blockchain
+                            event</td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__90">Attribute, Origin</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__88"><code class="ph codeph"><a class="xref" href="ethereum-transaction.html" title="The ethereum:transaction element is used to create an Ethereum transaction.">ethereum:transaction</a></code></td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__89">Usually inside the &lt;transaction&gt; tag. Creates an Ethereum
+                            transaction.</td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__90">Card</td>
+                    </tr>
+                    <tr class="row">
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__88"><code class="ph codeph">&lt;ethereum:value&gt;</code></td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__89"></td>
+                        <td class="entry" headers="reference_n4y_1gj_qmb__table_dl4_w5m_qmb__entry__90"></td>
+                    </tr>
+                </tbody></table>
+
+    </div>
+<div class="fn"><a name="fntarg_1" href="#fnsrc_1"><sup>1</sup></a>  Actually,
+                    only if it contains an ASNX module, thanks to one of the quirkness defined in
+                    ASNX RFC4912. Since it's not sure when you will be using such a module, the rule
+                    of thumb is always use a prefix.</div></article></main></div></div></body></html>

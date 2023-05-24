@@ -1,0 +1,49 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><meta name="copyright" content="(C) Copyright 2020"><meta name="DC.rights.owner" content="(C) Copyright 2020"><meta name="DC.type" content="concept"><meta name="description" content="Tokens are identified with attribute-value pairs"><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="TokenIdentifier"><link rel="stylesheet" type="text/css" href="css/commonltr.css"><link rel="stylesheet" type="text/css" href="css/custom.css"><title>Token Identifier</title>
+<link href="https://fonts.googleapis.com/css?family=Roboto+Slab|Lato">
+<script type="text/javascript" src="https://alphawallet.com/wp-content/themes/alphawallet/discourse/widget.js"></script>
+</head><body id="TokenIdentifier"><header role="banner"><nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+  <div class="container">
+    <a class="navbar-brand" href="/">🆃okenScript</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+	      <li class="nav-item"><a class="nav-link" href="/TokenScript.html">Documents</a></li>
+	      <li class="nav-item"><a class="nav-link" href="/guides/Intro.html">Guides</a></li>
+	      <li class="nav-item"><a class="nav-link" href="/specs/Intro.html">Specs</a></li>
+	      <li class="nav-item external"><a class="nav-link" href="">TokenScript community forum</a></li>
+	      <li class="nav-item external"><a class="nav-link" href="/TokenScript.html">AlphaWallet (uses TokenScript)</a></li>
+	      <li class="nav-item external"><a class="nav-link" href="/guides/Intro.html">Github TokenScript</a></li>
+	      <li class="nav-item external"><a class="nav-link" href="/specs/Intro.html">Github TokenScript Examples</a></li>
+      </ul>
+    </div>
+  </div>
+</nav></header><div class="container" id="content"><div class="row"><nav role="toc" class="col-lg-3"><ul></ul></nav><main role="main" class="col-lg-9"><article role="article" aria-labelledby="ariaid-title1">
+    <h1 class="title topictitle1" id="ariaid-title1">Token Identifier</h1>
+    
+    <div class="body conbody"><p class="shortdesc">Tokens are identified with attribute-value pairs</p>
+        <div class="p">In TokenScript, for each token, an instance of that token is identified by a key-value
+            pair or a sequence of key-value pairs.<div class="note note note_note"><span class="note__title">Note:</span>  This is similar to how a database
+                identifies a record by primary keys, and how x.509 certificates and x.500 directory
+                entries (tokens before the blockchain era) are identified by RDN (Relative
+                Distinguished Name).</div></div>
+        <div class="p">For Ethereum's ERC20 Tokens, a token is identified by its owner address since each
+            address can only have one such token. For example:
+            <pre class="pre codeblock"><code>ownerAddress=0xedd6d7ba0ff9f4bc501a12529cb736ca76a4fe7e</code></pre>where
+                <code class="ph codeph">0xedd6…</code> is the Etheruem address of this token's owner. </div>
+        <div class="p">For Ethereum's ERC721 Token, a token is identified by the attribute tokenId. For example,
+            the following is the identifier of a
+            token:<pre class="pre codeblock"><code>tokenId=0x06012c8cf97bead5deae237070f9587f8e7a266d</code></pre> It's the
+            identifier of a CryptoKitty called Tzar Hulashorts (not that matters).</div>
+        <p class="p">The attribute(s) that defines a token is called distinct attribute(s).</p>
+        <p class="p">You do not need to confine to a specific ERC, such as the tokenID defined in ERC721. You
+            can define a new token with suitable distinct attribute(s) that suits the nature of your
+            token.</p>
+        <div class="p">For example, for a car token, the distinct attribute might be vin, short for Vehicle
+            Identification Number. So a car may be identified
+            by:<pre class="pre codeblock"><code>vin=KL3TA48E9EB541191</code></pre></div>
+    </div>
+</article></main></div></div></body></html>

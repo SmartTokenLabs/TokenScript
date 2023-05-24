@@ -1,0 +1,185 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><meta name="copyright" content="(C) Copyright 2020"><meta name="DC.rights.owner" content="(C) Copyright 2020"><meta name="DC.type" content="concept"><meta name="description" content="TokenScript file is an overlay of XML Mark-up and JavaScript."><meta name="DC.relation" scheme="URI" content="BasicConcepts.html"><meta name="DC.relation" scheme="URI" content="elements/contract.html"><meta name="DC.relation" scheme="URI" content="elements/address.html"><meta name="DC.relation" scheme="URI" content="elements/token.html"><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="concept_yph_nkg_nmb"><link rel="stylesheet" type="text/css" href="css/commonltr.css"><link rel="stylesheet" type="text/css" href="css/custom.css"><title>TokenScript File</title>
+<link href="https://fonts.googleapis.com/css?family=Roboto+Slab|Lato">
+<script type="text/javascript" src="https://alphawallet.com/wp-content/themes/alphawallet/discourse/widget.js"></script>
+</head><body id="concept_yph_nkg_nmb"><header role="banner"><nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+  <div class="container">
+    <a class="navbar-brand" href="/">🆃okenScript</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+	      <li class="nav-item"><a class="nav-link" href="/TokenScript.html">Documents</a></li>
+	      <li class="nav-item"><a class="nav-link" href="/guides/Intro.html">Guides</a></li>
+	      <li class="nav-item"><a class="nav-link" href="/specs/Intro.html">Specs</a></li>
+	      <li class="nav-item external"><a class="nav-link" href="">TokenScript community forum</a></li>
+	      <li class="nav-item external"><a class="nav-link" href="/TokenScript.html">AlphaWallet (uses TokenScript)</a></li>
+	      <li class="nav-item external"><a class="nav-link" href="/guides/Intro.html">Github TokenScript</a></li>
+	      <li class="nav-item external"><a class="nav-link" href="/specs/Intro.html">Github TokenScript Examples</a></li>
+      </ul>
+    </div>
+  </div>
+</nav></header><div class="container" id="content"><div class="row"><nav role="toc" class="col-lg-3"><ul><li><a href="Tokenization.html">Tokenization and dApps</a></li><li><a href="index.html">Introduction to TokenScript</a></li><li><a href="QuickStart.html">Quick Start (usuable now)</a></li><li><a href="BasicConcepts.html">Basic Concepts</a><ul><li class="active"><a href="TokenScript-Component.html">TokenScript File</a></li><li><a href="Attributes.html">Attributes</a></li><li><a href="Card.html">Card</a></li><li><a href="DataObjects.html">Data Objects</a></li><li><a href="Attestation.html">Attestation</a></li><li><a href="TokenScript-Syntax.html">TokenScript Syntax</a></li><li><a href="MagicLink.html">Magic Link</a></li></ul></li><li><a href="Deploy.html">Deploy TokenScript</a></li><li><a href="features/FeatureImplementation.html">Features implemented</a></li><li><a href="specs/Intro.html">TokenScript Specs</a></li><li><a href="guides/Intro.html">TokenScript Guides</a></li></ul></nav><main role="main" class="col-lg-9"><article role="article" aria-labelledby="ariaid-title1">
+    <h1 class="title topictitle1" id="ariaid-title1">TokenScript File</h1>
+  
+    <div class="body conbody"><p class="shortdesc">TokenScript file
+            is an overlay of XML Mark-up and JavaScript.</p>
+        <p dir="ltr" class="p" id="concept_yph_nkg_nmb__docs-internal-guid-97ed4cbc-7fff-a39d-5b96-20bec9a103c1">A TokenScript file
+            consists of Token Cards, presently in JavaScript and HTML, overlayed with XML
+            mark-up.</p>
+        <p dir="ltr" class="p">The XML mark-up tells a <a class="xref" href="Engine.html" title="A TokenScript engine runs TokenScript">TokenScript Engine</a> to work out how to identify,
+            index and search a token, provide data for its actions and connect it to the web. The
+            JavaScript is used in TokenCards to render token UX and carry out token actions.</p>
+        <p dir="ltr" class="p">The TokenScript is not part of the smart contract which created the token. But
+            it must contain a reference to it and can interact with it.</p>
+        <p dir="ltr" class="p">The TokenScript files are written and <a class="xref" href="Signing.html" title="TokenScript files are signed by the token issuer, usually.">signed by the
+                issuer of a token or a trusted party</a>. They can be updated with another
+            signature. Users can download the TokenScript files on any website or the TokenScript
+            repository and validate the signature. This makes it impossible to fake a TokenScript. </p>
+        <p dir="ltr" class="p">Wallets which understand TokenScript can import it and render the user
+            experience according to the TokenScript instructions.</p>
+        <section class="section"><h2 class="title sectiontitle">The XML markup</h2>
+        <p dir="ltr" class="p" id="concept_yph_nkg_nmb__docs-internal-guid-f87167c3-7fff-e895-9671-be989e591192">The XML markup is
+            usually expressed in a file and uses standard XML syntax. It is mostly a declarative
+            language, with declarations sometimes being nested.</p>
+        <p dir="ltr" class="p">The XML markup describes properties of the token: The functions it provides,
+            the smart contract it relies upon, the behavior of the token, information of the token
+            and much more. </p>
+        <p dir="ltr" class="p">There is a <a class="xref" href="elements/index.html" title="Reference of all elements that can be used in a TokenScript.">list of XML declarations</a>
+            developed by TokenScript. For most cases you only need a few of them.</p>
+        <p dir="ltr" class="p">TokenScript uses XML according the the c14n canonicalization. This allows to
+            create standardized digital signatures for XML and to enforce standardized static types
+            like ASN.1 data modules.</p>
+        <p class="p">The best way to understand how the XML files are structured, study <a class="xref" href="https://github.com/AlphaWallet/TokenScript-Examples" target="_blank" rel="external noopener">our TokenScript example</a> repo.</p>
+        <div class="p">Here is a fragmented example for a TokenScript XML
+            file:<pre class="pre codeblock"><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE token&nbsp; [
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;!ENTITY style SYSTEM "shared.css"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;!ENTITY about.en SYSTEM "about.en.js"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ]&gt;
+
+&lt;ts:token
+&nbsp;&nbsp;&nbsp; xmlns:ts="http://tokenscript.org/2020/06/tokenscript"
+&nbsp;&nbsp;&nbsp; xmlns:xhtml="http://www.w3.org/1999/xhtml"
+&nbsp;&nbsp;&nbsp; xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+&nbsp;&nbsp;&nbsp; xmlns:asnx="urn:ietf:params:xml:ns:asnx"
+&nbsp;&nbsp;&nbsp; xmlns:ethereum="urn:ethereum:constantinople" xsi:schemaLocation="http://tokenscript.org/2020/06/tokenscript http://tokenscript.org/2020/06/tokenscript.xsd" custodian="false"&gt;
+&nbsp;&nbsp;&nbsp; &lt;asnx:module name="Coin-event-Sent"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;namedType name="Sent"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;sequence&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;element name="from" ethereum:type="address" ethereum:indexed="false"&gt;&lt;/element&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;element name="to" ethereum:type="address" ethereum:indexed="false"&gt;&lt;/element&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;element name="amount" ethereum:type="uint256" ethereum:indexed="false"&gt;&lt;/element&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/sequence&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/namedType&gt;
+&nbsp;&nbsp;&nbsp; &lt;/asnx:module&gt;
+&nbsp;&nbsp;&nbsp; &lt;ts:label&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;ts:string xml:lang="en"&gt;Coin&lt;/ts:string&gt;
+&nbsp;&nbsp;&nbsp; &lt;/ts:label&gt;
+&nbsp;&nbsp;&nbsp; &lt;ts:contract interface="erc20" name="Coin"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;ts:address network="3"&gt;0xe35FE4A1B17d50A8022078d98162DB25bC860834&lt;/ts:address&gt;
+&nbsp;&nbsp;&nbsp; &lt;/ts:contract&gt;
+&nbsp;&nbsp;&nbsp; &lt;ts:origins&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;ts:ethereum contract="Coin"/&gt;
+&nbsp;&nbsp;&nbsp; &lt;/ts:origins&gt;
+&nbsp;&nbsp;&nbsp; &lt;ts:cards&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;ts:card type="action"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;ts:label&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;ts:string xml:lang="en"&gt;Approve&lt;/ts:string&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/ts:label&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;ts:attribute name="approvalAddress"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;ts:type&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;ts:syntax&gt;1.3.6.1.4.1.1466.115.121.1.36&lt;/ts:syntax&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/ts:type&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;ts:label&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;ts:string xml:lang="en"&gt;Approval Address&lt;/ts:string&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/ts:label&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;ts:origins&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;ts:user-entry as="address"/&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/ts:origins&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/ts:attribute&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;ts:transaction&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;ethereum:transaction function="approve" contract="Coin" as="uint"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;ts:data&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;ts:address ref="approvalAddress"/&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;           &lt;ts:uint256&gt;115792089237316195423570985008687907853269984665640564039457584007913129639935&lt;/ts:uint256&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/ts:data&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/ethereum:transaction&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/ts:transaction&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;ts:view
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;style type="text/css"&gt;&amp;style;&lt;/style&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;script type="text/javascript"&gt;&amp;approve.en;&lt;/script&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/ts:view&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/ts:card&gt;
+&nbsp;&nbsp;&nbsp; &lt;/ts:cards&gt;
+&nbsp;&nbsp;&nbsp; &lt;ts:attribute name="name"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;ts:type&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;ts:syntax&gt;1.3.6.1.4.1.1466.115.121.1.26&lt;/ts:syntax&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/ts:type&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;ts:label&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;ts:string xml:lang="en"&gt;name&lt;/ts:string&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/ts:label&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;ts:origins&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;ethereum:call function="name" contract="Coin" as="utf8"&gt;&lt;/ethereum:call&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/ts:origins&gt;
+&nbsp;&nbsp;&nbsp; &lt;/ts:attribute&gt;
+&lt;/ts:token&gt;
+</code></pre></div>
+      </section><section class="section"><h2 class="title sectiontitle">JavaScript / WebAssembly</h2>
+        <p dir="ltr" class="p" id="concept_yph_nkg_nmb__docs-internal-guid-164e561b-7fff-349a-545c-506c6cb992db">The JavaScript
+            part integrates TokenScript in the wallet or dApps. It renders the display of the token
+            and can execute custom offchain functionalities. Broadly, it is the dynamic part of the
+            TokenScript, while XML is the static one.</p>
+        <p dir="ltr" class="p">Everything what happens in the wallet and everything a user can see is
+            described with JavaScript: The rendering of the environment, the display of text and
+            images and so on. In terms of TokenScript, JavaScript is used when a card is
+            triggered.</p>
+        <p dir="ltr" class="p">The creators of TokenScript use JavaScript. But any WeAssembly compatible
+            language like Ruby or C can be used. The wallet importing TokenScript needs to
+            understand these languages.</p>
+        <p class="p">Again, the best way to learn about how to build the JavaScript files is to inspect them in
+            the <a class="xref" href="https://github.com/AlphaWallet/TokenScript-Examples/blob/master/examples/erc20/WETH/WETH.xml" target="_blank" rel="external noopener">TokenScript example repo</a>. Here we present a
+            very simple JavaScript to show an "about" site.</p>
+        <div class="p">
+            <pre class="pre codeblock"><code>//&lt;![CDATA[
+class Token {
+
+&nbsp;&nbsp;&nbsp; constructor(tokenInstance) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.props = tokenInstance;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.setConfirm();
+&nbsp;&nbsp;&nbsp; }
+
+&nbsp;&nbsp;&nbsp; setConfirm() {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; window.onConfirm = function() {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; window.close();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
+&nbsp;&nbsp;&nbsp; }
+
+&nbsp;&nbsp;&nbsp; render() {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; let message = "Sample about page for your token, fill me up!";
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return`
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;div class="ui container"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;div class="ui segment"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;img src="https://www.bitcoin-buch.org/bitcoin-geschichte-front-1.jpg" /&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;span&gt;&lt;bold&gt;&lt;h1&gt;This is the Token of Christoph!&lt;/h1&gt;&lt;/bold&gt;&lt;br /&gt;&lt;br /&gt;It is a one of the century chance to invest!&lt;/span&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/div&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/div&gt;
+`;
+&nbsp;&nbsp;&nbsp; }
+}
+
+web3.tokens.dataChanged = (oldTokens, updatedTokens, tokenIdCard) =&gt; {
+&nbsp;&nbsp;&nbsp; const currentTokenInstance = web3.tokens.data.currentInstance;
+&nbsp;&nbsp;&nbsp; document.getElementById(tokenIdCard).innerHTML = new Token(currentTokenInstance).render();
+};
+//]]&gt;</code></pre>
+        </div>
+      </section><section class="section"><h2 class="title sectiontitle">Merging and signing the files</h2>
+        <p class="p">To deploy TokenScript, the files needs to be merged in a canonicalized XML file. For
+                testing purposes you can load the canonicalized XML file in the AlphaWallet folder
+                on your smart phone. For production you must sign the file and make it available to
+                your users, either by a website or by the <a class="xref" href="https://github.com/AlphaWallet/TokenScript-Repo" target="_blank" rel="external noopener">TokenScript repo</a>.</p></section>
+    </div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" href="BasicConcepts.html" title="Learn about the basic concepts of TokenScript, which are used for creating a TokenScript.">Basic Concepts</a></div></div><div class="linklist relref"><strong>Related reference</strong><br><ul class="linklist"><li class="linklist"><a class="link" href="elements/contract.html" title="The contract elements declares address, network and name of the token's smart contract.">Contract</a></li><li class="linklist"><a class="link" href="elements/address.html" title="The address element declares an Address, usually that of a smart contract on Ethereum.">Address</a></li><li class="linklist"><a class="link" href="elements/token.html" title="token element defines a Token">&lt;token&gt; element</a></li></ul></div></nav></article></main></div></div></body></html>

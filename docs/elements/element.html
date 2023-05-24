@@ -1,0 +1,51 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><meta name="copyright" content="(C) Copyright 2020"><meta name="DC.rights.owner" content="(C) Copyright 2020"><meta name="DC.type" content="reference"><meta name="description" content="In a data module elements are put in a ordered sequence."><meta name="DC.relation" scheme="URI" content="../DataObjects.html"><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="concept_icq_hdn_wmb"><link rel="stylesheet" type="text/css" href="../css/commonltr.css"><link rel="stylesheet" type="text/css" href="../css/custom.css"><title>Element</title>
+<link href="https://fonts.googleapis.com/css?family=Roboto+Slab|Lato">
+<script type="text/javascript" src="https://alphawallet.com/wp-content/themes/alphawallet/discourse/widget.js"></script>
+</head><body id="concept_icq_hdn_wmb"><header role="banner"><nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+  <div class="container">
+    <a class="navbar-brand" href="/">🆃okenScript</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+	      <li class="nav-item"><a class="nav-link" href="/TokenScript.html">Documents</a></li>
+	      <li class="nav-item"><a class="nav-link" href="/guides/Intro.html">Guides</a></li>
+	      <li class="nav-item"><a class="nav-link" href="/specs/Intro.html">Specs</a></li>
+	      <li class="nav-item external"><a class="nav-link" href="">TokenScript community forum</a></li>
+	      <li class="nav-item external"><a class="nav-link" href="/TokenScript.html">AlphaWallet (uses TokenScript)</a></li>
+	      <li class="nav-item external"><a class="nav-link" href="/guides/Intro.html">Github TokenScript</a></li>
+	      <li class="nav-item external"><a class="nav-link" href="/specs/Intro.html">Github TokenScript Examples</a></li>
+      </ul>
+    </div>
+  </div>
+</nav></header><div class="container" id="content"><div class="row"><nav role="toc" class="col-lg-3"><ul></ul></nav><main role="main" class="col-lg-9"><article role="article" aria-labelledby="ariaid-title1">
+    <h1 class="title topictitle1" id="ariaid-title1">Element</h1>
+    
+    <div class="body refbody"><p class="shortdesc">In a data module <code class="ph codeph">elements</code> are put in a ordered sequence.</p>
+        <section class="section refsyn">With <code class="ph codeph">&lt;asnx:module&gt;</code> you can define a data module. Inside the
+                <code class="ph codeph">asxn</code> tags you put data elements in a certain order.</section>
+        <section class="section" id="concept_icq_hdn_wmb__section_xnj_t2n_wmb"><h2 class="title sectiontitle">Code Example</h2>
+            
+            <p class="p">Defining the elements of a data module for an ENS event. All elements are defined as
+                an ethereum type (string, bytes32, address, uint).</p>
+            <div class="p">
+                <pre class="pre codeblock"><code>&lt;asnx:module name="ENS-Events"&gt;
+&nbsp;&nbsp;&nbsp; &lt;namedType name="NameRegistered"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;type&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;sequence&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;element name="name" ethereum:type="string"/&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;element name="label" ethereum:type="bytes32" ethereum:indexed="true"/&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;element name="owner" ethereum:type="address" ethereum:indexed="true"/&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;element name="cost" ethereum:type="uint"/&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;element name="expires" ethereum:type="uint"/&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/sequence&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/type&gt;
+&nbsp;&nbsp;&nbsp; &lt;/namedType&gt;
+&lt;/asnx:module&gt;</code></pre>
+            </div>
+        </section>
+    </div>
+<nav role="navigation" class="related-links"><div class="linklist relconcepts"><strong>Related concepts</strong><br><ul class="linklist"><li class="linklist"><a class="link" href="../DataObjects.html" title="With Data Objects you can add data to a TokenScript. Data objects are in a format that allows efficient signing and onchain storage.">Data Objects</a></li></ul></div></nav></article></main></div></div></body></html>

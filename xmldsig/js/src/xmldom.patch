@@ -1,0 +1,42 @@
+diff -ru node_modules/xmldom.old/lib/dom.js node_modules/xmldom/lib/dom.js
+--- node_modules/xmldom.old/lib/dom.js	1985-10-26 18:15:00.000000000 +1000
++++ node_modules/xmldom/lib/dom.js	2021-04-07 17:52:51.494473360 +1000
+@@ -23,7 +23,7 @@
+ 		pt.constructor = Class
+ 	}
+ }
+-var htmlns = 'http://www.w3.org/1999/xhtml' ;
++var htmlns = 'http://www.w3.org/1999/html' ;
+ // Node Types
+ var NodeType = {}
+ var ELEMENT_NODE                = NodeType.ELEMENT_NODE                = 1;
+diff -ru node_modules/xmldom.old/lib/sax.js node_modules/xmldom/lib/sax.js
+--- node_modules/xmldom.old/lib/sax.js	1985-10-26 18:15:00.000000000 +1000
++++ node_modules/xmldom/lib/sax.js	2021-04-07 17:53:56.875198887 +1000
+@@ -195,7 +195,7 @@
+ 				
+ 				
+ 				
+-				if(el.uri === 'http://www.w3.org/1999/xhtml' && !el.closed){
++				if(el.uri === 'http://www.w3.org/1999/html' && !el.closed){
+ 					end = parseHtmlSpecialContent(source,end,el.tagName,entityReplacer,domBuilder)
+ 				}else{
+ 					end++;
+@@ -333,7 +333,7 @@
+ 					errorHandler.warning('attribute "'+value+'" missed quot(")!');
+ 					addAttribute(attrName, value.replace(/&#?\w+;/g,entityReplacer), start)
+ 				}else{
+-					if(currentNSMap[''] !== 'http://www.w3.org/1999/xhtml' || !value.match(/^(?:disabled|checked|selected)$/i)){
++					if(currentNSMap[''] !== 'http://www.w3.org/1999/html' || !value.match(/^(?:disabled|checked|selected)$/i)){
+ 						errorHandler.warning('attribute "'+value+'" missed value!! "'+value+'" instead!!')
+ 					}
+ 					addAttribute(value, value, start)
+@@ -381,7 +381,7 @@
+ 				//case S_ATTR_NOQUOT_VALUE:void();break;
+ 				case S_ATTR_SPACE:
+ 					var tagName =  el.tagName;
+-					if(currentNSMap[''] !== 'http://www.w3.org/1999/xhtml' || !attrName.match(/^(?:disabled|checked|selected)$/i)){
++					if(currentNSMap[''] !== 'http://www.w3.org/1999/html' || !attrName.match(/^(?:disabled|checked|selected)$/i)){
+ 						errorHandler.warning('attribute "'+attrName+'" missed value!! "'+attrName+'" instead2!!')
+ 					}
+ 					addAttribute(attrName, attrName, start);
