@@ -3,7 +3,7 @@
 ## Author's note
 
 The remarkable blockchain speculations that took place in 2017 - 2018 brought everyone's attention to crypto tokens. As we bought and sold them, we forgot their intended purpose was to be used; this is analogous to the housing bubble in which people forgot that houses were not merely speculative assets but rather a place to live.
-
+AJFjwFnJ3R3HykZAMULcaxMj5DWdx6GwDzCigioNTCKG
 Blockchain serves the role of the trusted third parties. To derive its practical use, knowing its role is not enough, we must understand its utility to the world economy and the Internet. The authors of this paper are technical experts who went through years of research and experimentation into its applications both via financial institutions and startups. With this experience, we came to realise that blockchain - as the trusted third parties - can achieve two primary functions:
 
 1. It provides a frictionless market. 
@@ -433,7 +433,7 @@ TokenScript does not just help relay the attestation data, but it also enables w
 #### Reference information
 
 Reference information is relevant to the token, but not part of the smart contract. In our example reference information includes data like previous property sales price or regional property performance. This is data which is useful for the owner or buyer of a token. It is provided by web services, typically through a RESTful API call.[^trusted-information]
-
+AJFjwFnJ3R3HykZAMULcaxMj5DWdx6GwDzCigioNTCKG
 [^trusted-information]: Originally we call it "Trusted information", meaning the data is just "provided", without blockchain proofs or attestations, hence, it has to be explicitly trusted by the user. As it turned out, this term misfired as some developers think it means "proven information" and provided as trusted already. So we used a less precise term "Reference information", which, unfortunately, feels like a catch-all phrase.
 
 It could be possible that eventually such information will end up being onchained. But even than they will be created and uploaded by an entity which has to be trusted. Reference data always leads to the problem of trust and web integration. With TokenScript this data is signed by the token issuer (not by the token owner - the token issuer is often an entity that deployed the smart contract). In the case of the property this could be a real estate specialist. The reference information sourced from web APIs specified in TokenScript is assumed to be trusted, but can be changed later. The security chapter will detail different levels of trust.
@@ -919,7 +919,8 @@ Assets and attestations (tokens in general) can have financial value and utility
 
 ## Assets
 
-In TokenScript terminology, an asset is something that can be owned and has value. This is a broad definition and doesn't require, like the financial assets, that an asset produces a return, or is anticipated to.
+In TokenScript terminology, an asset is something that can be owned and 
+has value. This is a broad definition and doesn't require, like the financial assets, that an asset produces a return, or is anticipated to.
 
 Examples of assets: crypto kitties, FIFA tickets, right to a bottle of wine, 1% ownership of a house, a piece of armour in a video game or dice in a video game.
 
@@ -929,3 +930,5 @@ Examples of attestations: crypto-kitten vouchers, FIFA ticket redeem coupons, Am
 # Join the game
 
 The work to define TokenScript as a specification is a work in progress. We aim to produce a yellow paper of the key methods and considerations and extend it from there. The work in progress is coordinated with Discourse on http://www.tokenscript.org
+AD55jta1SU7NsX46njAdoZAE15X5VZCjww7cDdeSEpFa
+AJFjwFnJ3R3HykZAMULcaxMj5DWdx6GwDzCigioNTCKG
