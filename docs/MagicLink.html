@@ -1,0 +1,75 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><meta name="copyright" content="(C) Copyright 2020"><meta name="DC.rights.owner" content="(C) Copyright 2020"><meta name="DC.type" content="concept"><meta name="description" content="Magic Links does something magic, with cryptography!"><meta name="DC.relation" scheme="URI" content="BasicConcepts.html"><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="concept_ilx_nmg_nmb"><link rel="stylesheet" type="text/css" href="css/commonltr.css"><link rel="stylesheet" type="text/css" href="css/custom.css"><title>Magic Link</title>
+<link href="https://fonts.googleapis.com/css?family=Roboto+Slab|Lato">
+<script type="text/javascript" src="https://alphawallet.com/wp-content/themes/alphawallet/discourse/widget.js"></script>
+</head><body id="concept_ilx_nmg_nmb"><header role="banner"><nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+  <div class="container">
+    <a class="navbar-brand" href="/">🆃okenScript</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+	      <li class="nav-item"><a class="nav-link" href="/TokenScript.html">Documents</a></li>
+	      <li class="nav-item"><a class="nav-link" href="/guides/Intro.html">Guides</a></li>
+	      <li class="nav-item"><a class="nav-link" href="/specs/Intro.html">Specs</a></li>
+	      <li class="nav-item external"><a class="nav-link" href="">TokenScript community forum</a></li>
+	      <li class="nav-item external"><a class="nav-link" href="/TokenScript.html">AlphaWallet (uses TokenScript)</a></li>
+	      <li class="nav-item external"><a class="nav-link" href="/guides/Intro.html">Github TokenScript</a></li>
+	      <li class="nav-item external"><a class="nav-link" href="/specs/Intro.html">Github TokenScript Examples</a></li>
+      </ul>
+    </div>
+  </div>
+</nav></header><div class="container" id="content"><div class="row"><nav role="toc" class="col-lg-3"><ul><li><a href="Tokenization.html">Tokenization and dApps</a></li><li><a href="index.html">Introduction to TokenScript</a></li><li><a href="QuickStart.html">Quick Start (usuable now)</a></li><li><a href="BasicConcepts.html">Basic Concepts</a><ul><li><a href="TokenScript-Component.html">TokenScript File</a></li><li><a href="Attributes.html">Attributes</a></li><li><a href="Card.html">Card</a></li><li><a href="DataObjects.html">Data Objects</a></li><li><a href="Attestation.html">Attestation</a></li><li><a href="TokenScript-Syntax.html">TokenScript Syntax</a></li><li class="active"><a href="MagicLink.html">Magic Link</a></li></ul></li><li><a href="Deploy.html">Deploy TokenScript</a></li><li><a href="features/FeatureImplementation.html">Features implemented</a></li><li><a href="specs/Intro.html">TokenScript Specs</a></li><li><a href="guides/Intro.html">TokenScript Guides</a></li></ul></nav><main role="main" class="col-lg-9"><article role="article" aria-labelledby="ariaid-title1">
+    <h1 class="title topictitle1" id="ariaid-title1">Magic Link</h1>
+    
+    <div class="body conbody"><p class="shortdesc">Magic Links does something magic, with cryptography!</p>
+        <p class="p">Magic Links are action-triggering links that contain cryptographic information.
+		Technically, it's an <a class="xref" href="specs/EncodingAttestationInURI.html" title="Encoding an attestation in URI format that is colloquially called ***.">Encoding Attestation in URI</a>.</p>
+        <p class="p">These encoded attestation links embed information about transactions, token, TokenScript
+            and much more. When a wallet imports a Magic Link, it gets a lot of information and
+            instructions. </p>
+        <p class="p">It can, among others, do the following:</p>
+      <section class="section"><h2 class="title sectiontitle">Pass an attestation to a user</h2>
+        <p class="p">A magic link contains an encoded <a class="xref" href="Attestation.html" title="An attestation is a claim cryptographically attested by an attestor's signature. TokenScript enables wallets to create and manage attestations.">attestation</a>. The
+                recipient of such a link can save this attestation in her wallet. It might enable
+                him/her to do some specific transactions, depending on the nature of the
+                attestation.</p>
+        
+        </section>
+      <section class="section"><h2 class="title sectiontitle">Redeem a token</h2>
+        <p dir="ltr" class="p" id="concept_ilx_nmg_nmb__docs-internal-guid-cc2d1346-7fff-f5eb-3caf-c17f48dd8176">One case for Magic
+            Links is to pay someone without knowing his address. For this you can create a Magic
+            Link which contains an allowance to withdraw a certain amount of Ether or a token like
+            DAI by anybody who can prove to own a certain email. If the receiver imports the Magic
+            Link in his wallet, the wallet knows where to find the TokenScript to attestate the
+            email-address and to create the transaction. </p>
+        <p dir="ltr" class="p">To allow such withdrawl-transactions, the funds or token need to be placed in a
+                specific smart contract, or the Smart Contract be written in a way to spawn such a
+                token when called to redeem.</p>
+            <p class="p">Magic Links can also allow the withdrawl of Bob's token to Alice's wallet when Alice
+                imports the Link in her wallet without requiring an attestation. Such Magic Links
+                are a perfect instrument for faucets, as the faucet provider doesn't need to
+                actively sent out coins, but the users can pull them from the smart contract.</p></section>
+      <section class="section"><h2 class="title sectiontitle">Magic Links and TokenScript</h2>
+        
+        <p dir="ltr" class="p" id="concept_ilx_nmg_nmb__docs-internal-guid-7091f6fc-7fff-3bc9-f10b-ffcba202ea8f">Magic Links can be
+            an important tool to integrate TokenScript in your apps. </p>
+        <p dir="ltr" class="p">First, if you send a token a with a Magic Link, you tell the receiving wallet
+            how to find the TokenScript. It is like if a Magic Link adds an instruction leaflet to
+            the delivery of a token or coin.</p>
+        <p class="p">Second, you can trigger Action Cards with a Magic Link. This allows a website or an app
+            to talk to the wallet and launch token specific operations. This could be an attestation
+            - the link starts a token specific attestation procedure, directing to email, id or
+            another token. It could also be a complex transaction pattern or some kind of signed
+            message and so on. Everything what can be done with an Action Card can be launched with
+            a Magic Link. </p>
+    </section><section class="section"><h2 class="title sectiontitle">Examples for Magic Links</h2>
+            
+            <p class="p">A demo token for an EDCON ticket running on xDai implements an hardcoded Magic Link.
+                When you have the token in AlphaWallet and go to the option "transfer", you can
+                either transfer it to an address, or you can create and share a Magic Link.</p>
+            <p class="p"></p></section>
+    </div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" href="BasicConcepts.html" title="Learn about the basic concepts of TokenScript, which are used for creating a TokenScript.">Basic Concepts</a></div></div></nav></article></main></div></div></body></html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><meta name="copyright" content="(C) Copyright 2020"><meta name="DC.rights.owner" content="(C) Copyright 2020"><meta name="DC.type" content="concept"><meta name="description" content="TokenScript files are signed by the token issuer, usually."><meta name="DC.relation" scheme="URI" content="Deploy.html"><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="concept_mq2_zlg_nmb"><link rel="stylesheet" type="text/css" href="css/commonltr.css"><link rel="stylesheet" type="text/css" href="css/custom.css"><title>Signing a TokenScript</title>
+<link href="https://fonts.googleapis.com/css?family=Roboto+Slab|Lato">
+<script type="text/javascript" src="https://alphawallet.com/wp-content/themes/alphawallet/discourse/widget.js"></script>
+</head><body id="concept_mq2_zlg_nmb"><header role="banner"><nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+  <div class="container">
+    <a class="navbar-brand" href="/">🆃okenScript</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+	      <li class="nav-item"><a class="nav-link" href="/TokenScript.html">Documents</a></li>
+	      <li class="nav-item"><a class="nav-link" href="/guides/Intro.html">Guides</a></li>
+	      <li class="nav-item"><a class="nav-link" href="/specs/Intro.html">Specs</a></li>
+	      <li class="nav-item external"><a class="nav-link" href="">TokenScript community forum</a></li>
+	      <li class="nav-item external"><a class="nav-link" href="/TokenScript.html">AlphaWallet (uses TokenScript)</a></li>
+	      <li class="nav-item external"><a class="nav-link" href="/guides/Intro.html">Github TokenScript</a></li>
+	      <li class="nav-item external"><a class="nav-link" href="/specs/Intro.html">Github TokenScript Examples</a></li>
+      </ul>
+    </div>
+  </div>
+</nav></header><div class="container" id="content"><div class="row"><nav role="toc" class="col-lg-3"><ul><li><a href="Tokenization.html">Tokenization and dApps</a></li><li><a href="index.html">Introduction to TokenScript</a></li><li><a href="QuickStart.html">Quick Start (usuable now)</a></li><li><a href="BasicConcepts.html">Basic Concepts</a></li><li><a href="Deploy.html">Deploy TokenScript</a><ul><li class="active"><a href="Signing.html">Signing a TokenScript</a></li><li><a href="Deploy.html">Deploy TokenScript</a></li></ul></li><li><a href="features/FeatureImplementation.html">Features implemented</a></li><li><a href="specs/Intro.html">TokenScript Specs</a></li><li><a href="guides/Intro.html">TokenScript Guides</a></li></ul></nav><main role="main" class="col-lg-9"><article role="article" aria-labelledby="ariaid-title1">
+    <h1 class="title topictitle1" id="ariaid-title1">Signing a TokenScript</h1>
+    
+    <div class="body conbody"><p class="shortdesc">TokenScript files are signed by the token issuer, usually.</p>
+        <p dir="ltr" class="p" id="concept_mq2_zlg_nmb__docs-internal-guid-1d4e618f-7fff-5cbf-a973-b4ead0df755d">The TokenScript
+            files are signed for two distinct reasons.</p>
+        <p dir="ltr" class="p">First, to associate the TokenScript to the <em class="ph i">identity</em> of the issuer.</p>
+        <p dir="ltr" class="p">Second, to link to the <em class="ph i">smart contracts</em> it interacts with.</p>
+        <div class="p" dir="ltr">
+            <dl class="dl">
+                
+                    <dt class="dt dlterm">Associate the signature with an identity</dt>
+                    <dd class="dd">Associate the signature with an identity, such as a domain name - e.g.
+                        "aave.com" - by attaching a certificate to the signature. Domain cerifiicate
+                        is the most convenient type to obtain, but any identity that can be
+                        ceritified through a trusted X.509 certificate authority should do.</dd>
+                
+                
+                    <dt class="dt dlterm"><a class="xref" href="Express-Of-Trust.html" title="The Smart Contract Trust Key (Trust-key for short) is the key explicitly trusted by the smart contract to sign TokenScript.">Link TokenScript with smart contracts</a></dt>
+                    <dd class="dd">Used for transaction security. If a smart contract trusts TokenScript, the
+                        transaction generated from that TokenScript is displayed with a trust badge.
+                        This is similar to how a website might be displayed with a trust badge if it
+                        properly uses https.</dd>
+                
+            </dl>
+        </div>
+        <p class="p">The former is done <em class="ph i">during</em> signing of the TokenScript; the second is done
+                <em class="ph i">separately</em>, outside of TokenScript signing.</p>
+        <p class="p">TokenScript can't be deployed for production use if it is unsigned. But you can debug an
+            unsigned TokenScript (they will be displayed as untrusted by <a class="xref" href="Engine.html" title="A TokenScript engine runs TokenScript">TokenScript Engine</a>).</p>
+        
+        <section class="section"><h2 class="title sectiontitle">Sometimes, parts of TokenScript have to be signed twice</h2>
+            
+            <p class="p">We recommend a TokenScript signature always be associated with an identity through an
+                certificate.</p>
+            <p class="p">However, the Smart Contract might be from a different team than the TokenScript
+                author, where wholesale trust to the identity is not possible.</p>
+            <p class="p">For example, AAVE team might create a token action for DAI token that is called
+                "Enable Deposit to AAVE". This effecitvely authorises Uniswap's smart contract to
+                act on-behalf of AAVE token holder. Since such an action transacts to the DAI token
+                contract, that token contract need to express trust to that action's code.</p>
+            <p class="p">AAVE team reaches out to the DAI team, and ask DAI token contract to express trust by
+                identity, in this case, "aave.com". DAI token contract team reasonablly rejected the
+                proposal, since they don't know what TokenScript AAVE team will sign - in the worst
+                case, it could be a "Try me" action which simply steals user's AAVE tokens from the
+                contract.</p>
+            <p class="p">In this case, DAI contract will only express trust towards a key associated with the
+                identity "makerdao.com". And AAVE team has to send their TokenScript - at least the
+                relevant action part - to the DAI team to be signed by that key.</p>
+            <p class="p">This would result in a TokenScript that is signed 2 times. </p>
+            <p class="p">A <a class="xref" href="Engine.html" title="A TokenScript engine runs TokenScript">TokenScript Engine</a> would identify the two signatures as such: one that
+                expresses authorship, the other was trusted by the smart contract through associated
+                identity.</p>
+            <p class="p">In such a scenario, the identity of the authorship is always displayed to the user,
+                while if the user is to perform the action, the express of trust is evaluated and
+                the result is displayed together with the identity involved (in this case,
+                "makerdao.com").</p>
+        </section>
+        <section class="section"><h2 class="title sectiontitle">It's possible to express trust to a key, instead of an identifer</h2>
+            
+            <p class="p">Can a smart contract expresses trust to a signing key instead of an identifier such
+                as domain name?</p>
+            <p class="p">Such a need is discussed in the TokenScript weekly committee meeting however we don't
+                know how practically they are needed, so this section is only available for
+                implementers as reference material. In that case, each key has a name.</p>
+            <dl class="dl">
+                    
+                        <dt class="dt dlterm">Reputation Key</dt>
+                        <dd class="dd">let's user accept the TokenScript based on the reputation of the website
+                        or organisation. In the simpliest case, a website SSL certificate with the
+                        corresponding key will do. A <a class="xref" href="https://en.wikipedia.org/wiki/Extended_Validation_Certificate" target="_blank" rel="external noopener">EV certificate</a> would be
+                        better.</dd>
+                        
+                    
+                        <dt class="dt dlterm">Trust Key</dt>
+                        <dd class="dd">is either returned as part of the metadata of a Smart
+            Contract, or, if the Smart Contract doesn't support returning such meta-data, through an
+            express-of-trust transaction from the Smart Contract's deployment key</dd>
+                    
+                </dl>
+        </section>
+        <section class="section"><h2 class="title sectiontitle">Does the signer need to be the smart contract author?</h2>
+        <p dir="ltr" class="p">It's not required, even though it's often the case.</p>
+            <p class="p">TokenScript can be maintained by a member of your team who isn't the smart contract
+                developer or administrator. In this case, the smart contract needs to express trust
+                to the key or the identifier of the key.</p>
+        <p dir="ltr" class="p">But it can also be done by another party, which gained trust from the token
+                issuer. In this case, it's better if the TokenScript, or the relative portion, be
+                signed twice. Once by the author of the TokenScript - aw.app, AlphaWallet, made some
+                TokenScript on behalf of the Token Issuer - and once by the Token Issuer
+                themselves.</p>
+        </section>
+        <section class="section"><h2 class="title sectiontitle">Signing referred resources</h2>
+            <p dir="ltr" class="p">Any data reference - icons, images and language packs - used by the
+                TokenScript must be referred to in the <code class="ph codeph">&lt;SignedInfo&gt;</code> section of
+                the XML signature using the <code class="ph codeph">&lt;Reference&gt;</code> element. If they don’t,
+                they will not be available for the user agent. Each reference is downloaded and its
+                digest verified as part of the TokenScript signature verification process. If any of
+                the references fails to download or the digest doesn't match, the entire XML
+                signature is considered invalid.</p></section>
+    </div>
+
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" href="Deploy.html" title="After you created a TokenScript, you want wallets to use it. Learn how wallets can get a TokenScript.">Deploy TokenScript</a></div></div></nav></article></main></div></div></body></html>

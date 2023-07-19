@@ -1,0 +1,113 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><meta name="copyright" content="(C) Copyright 2020"><meta name="DC.rights.owner" content="(C) Copyright 2020"><meta name="DC.type" content="concept"><meta name="description" content="An attestation is a claim cryptographically attested by an attestor's signature. TokenScript enables wallets to create and manage attestations."><meta name="DC.relation" scheme="URI" content="BasicConcepts.html"><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="concept_adj_mnz_mmb"><link rel="stylesheet" type="text/css" href="css/commonltr.css"><link rel="stylesheet" type="text/css" href="css/custom.css"><title>Attestation</title>
+<link href="https://fonts.googleapis.com/css?family=Roboto+Slab|Lato">
+<script type="text/javascript" src="https://alphawallet.com/wp-content/themes/alphawallet/discourse/widget.js"></script>
+</head><body id="concept_adj_mnz_mmb"><header role="banner"><nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+  <div class="container">
+    <a class="navbar-brand" href="/">🆃okenScript</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+	      <li class="nav-item"><a class="nav-link" href="/TokenScript.html">Documents</a></li>
+	      <li class="nav-item"><a class="nav-link" href="/guides/Intro.html">Guides</a></li>
+	      <li class="nav-item"><a class="nav-link" href="/specs/Intro.html">Specs</a></li>
+	      <li class="nav-item external"><a class="nav-link" href="">TokenScript community forum</a></li>
+	      <li class="nav-item external"><a class="nav-link" href="/TokenScript.html">AlphaWallet (uses TokenScript)</a></li>
+	      <li class="nav-item external"><a class="nav-link" href="/guides/Intro.html">Github TokenScript</a></li>
+	      <li class="nav-item external"><a class="nav-link" href="/specs/Intro.html">Github TokenScript Examples</a></li>
+      </ul>
+    </div>
+  </div>
+</nav></header><div class="container" id="content"><div class="row"><nav role="toc" class="col-lg-3"><ul><li><a href="Tokenization.html">Tokenization and dApps</a></li><li><a href="index.html">Introduction to TokenScript</a></li><li><a href="QuickStart.html">Quick Start (usuable now)</a></li><li><a href="BasicConcepts.html">Basic Concepts</a><ul><li><a href="TokenScript-Component.html">TokenScript File</a></li><li><a href="Attributes.html">Attributes</a></li><li><a href="Card.html">Card</a></li><li><a href="DataObjects.html">Data Objects</a></li><li class="active"><a href="Attestation.html">Attestation</a></li><li><a href="TokenScript-Syntax.html">TokenScript Syntax</a></li><li><a href="MagicLink.html">Magic Link</a></li></ul></li><li><a href="Deploy.html">Deploy TokenScript</a></li><li><a href="features/FeatureImplementation.html">Features implemented</a></li><li><a href="specs/Intro.html">TokenScript Specs</a></li><li><a href="guides/Intro.html">TokenScript Guides</a></li></ul></nav><main role="main" class="col-lg-9"><article role="article" aria-labelledby="ariaid-title1">
+    <h1 class="title topictitle1" id="ariaid-title1">Attestation</h1>
+    
+    <div class="body conbody"><p class="shortdesc">An attestation is a claim cryptographically attested by an attestor's signature.
+        TokenScript enables wallets to create and manage attestations.</p>
+        <div class="note note note_note"><span class="note__title">Note:</span> Unlike a blockchain token, whose existance only depends on smart contract's state, and
+            has no physical files, an attestation can be encoded as a DER file or encoded in a <a class="xref" href="MagicLink.html" title="Magic Links does something magic, with cryptography!">Magic Link</a>. </div>
+        <section class="section"><h2 class="title sectiontitle">What is an attestation?</h2>
+            
+            <p class="p">Attestation are attested claims on something: On a national identity, on the legal
+                drinking / voting age, an university degree, the ownership of an email address, an
+                insurance and so on, attested by respective attestor (authority).</p>
+            <p class="p">Technically, an attestation is a data object (or file) which attests to something and
+                signed by an attestor.</p>
+            <p class="p">There are typically three ways to use an attestation:</p>
+            <ul class="ul" id="concept_adj_mnz_mmb__ul_hdn_xv4_qmb">
+                <li class="li">As the payload of an attested transactions. The underlying smart contract will
+                    check the validity of such attestations. <a class="xref" href="ChequeProtocol.html" title="Cheque protocol solves a common multi-sig use-cases">Cheque protocol</a>
+                    makes heavy use of attestations in such a way.</li>
+                <li class="li">To prove something to a 3rd party. For example, you can construct a proof of
+                    your email address with an email address attestation.</li>
+                <li class="li">To provide dependency for other attestations. Since <a class="xref" href="AttestationChained.html" title="Attestations that doesn't have a subject public key may depends on other attestations">Attestation can be chained</a>.</li>
+            </ul>
+            <p class="p">TokenScript supports the integration of attestation processes, triggered by an action
+                card directly in the wallet. You can integrate an attestation circuit into the life
+                cycle of a token.</p>
+        </section>
+        <section class="section"><h2 class="title sectiontitle">Attestation use cases</h2>
+            
+            <p class="p">A standardized attestation format has an enormous potential to smoothly integrate
+                identity and other claims into the web and to streamline a wide range of processes,
+                like signing up for an exchange, registering a bank account, verifying as an
+                accredited investor for an Security Token Offer or renting a car.</p>
+            <p class="p">For example, you could create a smart contract for an ICO which requires that
+                participants provide an attestation to be an accredited investor. With TokenScript a
+                QR code to the smart contract can trigger the attestation process directly in the
+                wallet, and the wallet can use the attestation for any ICO in the future.</p>
+            <p class="p">Another example would be a car token. When you have the token in your wallet, you can
+                have the option to start an insurance process which will create an insurance
+                attestation connected to the car token. When the wallet has the attestation,
+                TokenScript can unlock the option to take lend the car on a car sharing
+                platform.</p>
+            <p class="p">There can also be attestations for an activity. For example, a smart contract may
+                allow a blockchain payment to be redeemed on the condition that a specific job is
+                attested as well done. Such a job can be, for example, a car painting job,
+                identified by the job id in the corresponding Smart Contract.</p>
+            <p class="p">An attestation can also be connected to an Ethereum entity like the holder of a key
+                pair. This allows to create cheques - the transfer of coins from a smart contract to
+                someone who can provide an attestation for an identifier like an email address. </p>
+            <p class="p">In short: Any delivery vs payment operation can integrate any kind of attestation
+                which might be required for the process. </p>
+        </section>
+        <section class="section"><h2 class="title sectiontitle">Attestation versus Blockchain Token</h2>
+            
+            <p dir="ltr" class="p" id="concept_adj_mnz_mmb__docs-internal-guid-c17d42c9-7fff-776a-6d10-82e4537e3178">Attestation
+                and blockchain token are related concepts: Both of them require the user to have a
+                private key.</p>
+            <p class="p">In some use cases attestations and token are interchangeable: For example, a FIFA
+                ticket can be either an attestation or a blockchain token. When it is an
+                attestation, it attests the key-holder's right to enter the venue. When it is a
+                blockchain token, it serves the same purpose, and also might be transferable within
+                the Smart Contract rules.</p>
+            <p class="p">That reveals the first difference: an attestation isn't transferable, and a token's
+                transferability depends on the smart contract. </p>
+            <p class="p">The second difference is that attestations are private: They are not stored on the
+                blockchain. Since they often carry private information, they should never hit a
+                blockchain. </p>
+            <p class="p">The proof of an attestation, however, might be written to the blockchain in an <a class="xref" href="AttestedTransaction.html" title="With an attestation, a user can send an attested transaction">Attested Transaction</a>. This method to process attestations has many
+                advantages over the commonly used approach of third party whitelists. </p>
+        </section>
+        <section class="section"><h2 class="title sectiontitle">Attestation Format</h2>
+            
+            <p dir="ltr" class="p" id="concept_adj_mnz_mmb__docs-internal-guid-5d145ec5-7fff-8581-76f9-a734957f6ca7">An attestation
+                is a signed <a class="xref" href="DataObjects.html" title="With Data Objects you can add data to a TokenScript. Data objects are in a format that allows efficient signing and onchain storage.">dataObject</a>. The dataObject can
+                contain any information, including public and private information. It can be signed
+                by an Ethereum entity and attested to a token.</p>
+            <p dir="ltr" class="p">Attestations are non-transferable, but transferability can be achieved by
+                attesting to another attestation.</p>
+            <p dir="ltr" class="p">Attestations can be fully expressed by an URI for easy and cross-compatible
+                usage. This allows to create <a class="xref" href="MagicLink.html" title="Magic Links does something magic, with cryptography!">Magic Links</a> which
+                contain an attestation.</p>
+            <p dir="ltr" class="p">The attestation format takes close inspiration from the X.509 certificate
+                specification, RFC-5280, but makes several fields optional, adds a few new ones and
+                changes some formats.</p>
+            <p dir="ltr" class="p">There is still much work to be done. For example, we need a format that can
+                do partial attestation by using Merkle Tree, or even zero-knowledge proof of
+                attestation.</p>
+        </section>
+    </div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" href="BasicConcepts.html" title="Learn about the basic concepts of TokenScript, which are used for creating a TokenScript.">Basic Concepts</a></div></div></nav></article></main></div></div></body></html>

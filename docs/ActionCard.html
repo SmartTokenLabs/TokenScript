@@ -1,0 +1,211 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><meta name="copyright" content="(C) Copyright 2020"><meta name="DC.rights.owner" content="(C) Copyright 2020"><meta name="DC.type" content="concept"><meta name="description" content="An action card triggers actions in the wallet. For example, a transaction, an attestation, a component of a transaction or a signature."><meta name="DC.relation" scheme="URI" content="Card.html"><meta name="DC.relation" scheme="URI" content="elements/card.html"><meta name="DC.relation" scheme="URI" content="elements/cards.html"><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="concept_gm1_2hl_mmb"><link rel="stylesheet" type="text/css" href="css/commonltr.css"><link rel="stylesheet" type="text/css" href="css/custom.css"><title>ActionCard</title>
+<link href="https://fonts.googleapis.com/css?family=Roboto+Slab|Lato">
+<script type="text/javascript" src="https://alphawallet.com/wp-content/themes/alphawallet/discourse/widget.js"></script>
+</head><body id="concept_gm1_2hl_mmb"><header role="banner"><nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+  <div class="container">
+    <a class="navbar-brand" href="/">🆃okenScript</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+	      <li class="nav-item"><a class="nav-link" href="/TokenScript.html">Documents</a></li>
+	      <li class="nav-item"><a class="nav-link" href="/guides/Intro.html">Guides</a></li>
+	      <li class="nav-item"><a class="nav-link" href="/specs/Intro.html">Specs</a></li>
+	      <li class="nav-item external"><a class="nav-link" href="">TokenScript community forum</a></li>
+	      <li class="nav-item external"><a class="nav-link" href="/TokenScript.html">AlphaWallet (uses TokenScript)</a></li>
+	      <li class="nav-item external"><a class="nav-link" href="/guides/Intro.html">Github TokenScript</a></li>
+	      <li class="nav-item external"><a class="nav-link" href="/specs/Intro.html">Github TokenScript Examples</a></li>
+      </ul>
+    </div>
+  </div>
+</nav></header><div class="container" id="content"><div class="row"><nav role="toc" class="col-lg-3"><ul><li><a href="Tokenization.html">Tokenization and dApps</a></li><li><a href="index.html">Introduction to TokenScript</a></li><li><a href="QuickStart.html">Quick Start (usuable now)</a></li><li><a href="BasicConcepts.html">Basic Concepts</a><ul><li><a href="TokenScript-Component.html">TokenScript File</a></li><li><a href="Attributes.html">Attributes</a></li><li><a href="Card.html">Card</a><ul><li><a href="TokenCard.html">Token Card</a></li><li class="active"><a href="ActionCard.html">ActionCard</a></li><li><a href="ActivityCard.html">ActivityCard</a></li></ul></li><li><a href="DataObjects.html">Data Objects</a></li><li><a href="Attestation.html">Attestation</a></li><li><a href="TokenScript-Syntax.html">TokenScript Syntax</a></li><li><a href="MagicLink.html">Magic Link</a></li></ul></li><li><a href="Deploy.html">Deploy TokenScript</a></li><li><a href="features/FeatureImplementation.html">Features implemented</a></li><li><a href="specs/Intro.html">TokenScript Specs</a></li><li><a href="guides/Intro.html">TokenScript Guides</a></li></ul></nav><main role="main" class="col-lg-9"><article role="article" aria-labelledby="ariaid-title1">
+    <h1 class="title topictitle1" id="ariaid-title1">ActionCard</h1>
+    
+    <div class="body conbody"><p class="shortdesc">An action card triggers actions in the wallet. For example, a transaction, an
+        attestation, a component of a transaction or a signature.</p>
+        <section class="section"><h2 class="title sectiontitle">Concept</h2>
+        <p class="p">Action Cards enable wallets and dapp browsers to launch token specific operations. They
+            can be triggered by an external source like a website, but also by a button in the
+            wallet. </p>
+        <p class="p">Action Cards can be launched by a third party. But they never take place on a website or
+            a server, but exclusively in the wallet. A third party can only start, but not change an
+            action card. </p>
+        <p class="p">Action Cards enable wallets to add offchain operations to a token and create token
+            specific transactions, which are currently delivered by a website (dApp). For example,
+            if you have deposited a token to a DEFI project and want to redeem or withdraw it, this
+            can be done by clicking a button in the wallet, instead of being dependent on a website
+            to create the transaction for you. At the same time, any website can integrate a
+            TokenScript and offer buttons for token specific operations without needing to know the
+            smart contract.</p>
+        <p class="p">Action Cards can launch onchain operations like transactions. But they also allow a token
+            creator to add information to his token or integrate offchain operations: The user can
+            sign a message, start a process to attest his email address, send an authorisation to
+            let someone else use your token (if the underlying token's smart contract accepts such
+            authorisations) or create a deal to share (which requires underlying contract's
+            support). Action Cards can also help to transfer an asset to second layer networks like
+            sidechains or offchain networks. They streamline everything what can be done with a
+            token.</p>
+        <p class="p">Some action cards can only be available in a specific context. For example, if a token
+            represents a soccer game ticket, the action "Show entrance Pass" should only be
+            available at a gate of a stadium.</p>
+        <p class="p">It is possible to use two action cards at the same time or in combination. This is called
+            a deck. One successful Action Card can enable another, or the combination of two action
+            cards can unlock a new operation. </p>
+      </section>
+       <section class="section"><h2 class="title sectiontitle">Code</h2>
+        <p class="p"><strong class="ph b">The XML file</strong></p>
+        <div class="p">In the XML file, the <code class="ph codeph">&lt;ts:action&gt;</code>...<code class="ph codeph">&lt;/ts:action&gt;</code>
+            tag starts and ends an Action Card. As an easy example, this is how you declare a simple
+            Action Card which adds an "About" page to a
+            token:<pre class="pre codeblock"><code> &lt;ts:card type="action"&gt;
+     &lt;ts:label&gt;
+          &lt;ts:string xml:lang="en"&gt;About this token&lt;/ts:string&gt;
+     &lt;/ts:label&gt;
+     &lt;ts:view xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"&gt;
+         &lt;style type="text/css"&gt;&amp;style;&lt;/style&gt;
+         &lt;script type="text/javascript"&gt;&amp;about.en;&lt;/script&gt;
+     &lt;/ts:view&gt;
+ &lt;/ts:card&gt;</code></pre></div>
+        <p class="p">In the XML code you find the reference to a Script, usually written in JavaScript. In
+            this Script you execute the Action Card. As you see, the Script is placed in the "view"
+            tags. </p>
+        <div class="p">Often you will need more advanced Action Cards, which might involve to use onchain data
+            to create a transaction. A more sophisticated example is an Action Card to renew an ENS
+            domain:<pre class="pre codeblock"><code>&lt;ts:card type="action" name="renew"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;ts:label&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   &lt;ts:string xml:lang="en"&gt;Renew&lt;/ts:string&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/ts:label&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;ts:attribute name="renewalPricePerYear"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   &lt;ts:type&gt;&lt;ts:syntax&gt;1.3.6.1.4.1.1466.115.121.1.36&lt;/ts:syntax&gt;&lt;/ts:type&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     &lt;ts:label&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;       &lt;ts:string xml:lang="en"&gt;renewal price per year&lt;/ts:string&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     &lt;/ts:label&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     &lt;ts:origins&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;       &lt;ethereum:call function="rentPrice" contract="ETHRegistrarController" as="uint"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;         &lt;ts:data&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    &nbsp;&nbsp;&nbsp;       &lt;ts:string local-ref="userEnsName"/&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    &nbsp;&nbsp;&nbsp;       &lt;ts:uint256&gt;31556952&lt;/ts:uint256&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;         &lt;/ts:data&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;       &lt;/ethereum:call&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     &lt;/ts:origins&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/ts:attribute&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;ts:transaction&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   &lt;ethereum:transaction function="renew" contract="ETHRegistrarController" as="uint"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     &lt;ts:data&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;       &lt;ts:string local-ref="userEnsName"/&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;       &lt;ts:uint256&gt;31556952&lt;/ts:uint256&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     &lt;/ts:data&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     &lt;ethereum:value local-ref="renewalPricePerYear"/&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   &lt;/ethereum:transaction&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/ts:transaction&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;ts:view xml:lang="en"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     &lt;xhtml:style type="text/css"&gt;&amp;style;&lt;/xhtml:style&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     &lt;xhtml:script type="text/javascript"&gt;&amp;renew.en;&lt;/xhtml:script&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/ts:view&gt;
+&lt;/ts:card&gt;</code></pre></div>
+        <p class="p">In this example a few things happen: In the &lt;ts:attribute&gt; part you declare <a class="xref" href="Attributes.html" title="Define attributes so that token data becomes available to Cards and Websites.">Attributes</a> you will later use in the JavaScript
+                file. With an Ethereum call you learn the renewal price per year - an important
+                information to build a transaction. With the &lt;ts:transaction&gt; tag you create the
+                transaction to renew the ENS do▷The JavaScript file◁main. Finally, inside the view
+                tags, you link to a renew.en.js JavaScript file.</p>
+        <p class="p"><strong class="ph b">The JavaScript file</strong></p>
+        <div class="p">The operations of an Action Card are written in an JavaScript file. All JavaScript files
+            must be declared at the top of the xml file (as well as css files and images you
+            use):<pre class="pre codeblock"><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE token&nbsp; [
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;!ENTITY style SYSTEM "shared.css"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;!ENTITY about.en SYSTEM "about.en.js"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;!ENTITY approve.en SYSTEM "approve.en.js"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ]&gt;</code></pre></div>
+        <div class="p">Here is a simple example for a very simple Action Card displaying an about page in the
+            wallet.<pre class="pre codeblock"><code>class Token {
+&nbsp;&nbsp;&nbsp; constructor(tokenInstance) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.props = tokenInstance;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.setConfirm();
+&nbsp;&nbsp;&nbsp; }
+&nbsp;&nbsp;&nbsp; setConfirm() {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; window.onConfirm = function() {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; window.close();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
+&nbsp;&nbsp;&nbsp; }
+&nbsp;&nbsp;&nbsp; render() {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return`
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;div class="ui container"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;div class="ui segment"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;span&gt;&lt;bold&gt;&lt;h1&gt;This is my token!&lt;/span&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/div&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/div&gt;
+`;
+&nbsp;&nbsp;&nbsp; }
+}
+web3.tokens.dataChanged = (oldTokens, updatedTokens, tokenIdCard) =&gt; {
+&nbsp;&nbsp;&nbsp; const currentTokenInstance = web3.tokens.data.currentInstance;
+&nbsp;&nbsp;&nbsp; document.getElementById(tokenIdCard).innerHTML = new Token(currentTokenInstance).render();
+};</code></pre></div>
+        <p class="p">The file starts with declaring a Token class. Here you can define properties of the token
+            and import attributes. In the "render()" part you can put your individual message in
+            html. In this case it is simply the message "This is my token!". But you can also add
+            images from websites, API calls and much more.</p>
+        <p class="p">For a more complicated example, we turn to the ENS TokenScript again and show how to it
+            renews an ENS domain. It is important to note that the renewal transaction is not
+            created in the JavaScript file, but on the XML layer. The JavaScript file just renders
+            the user interface, so that the user exactly knows what he is doing. It could also be
+            used to import information from a third party, process a QR code (like scanning a
+            ticket) and much more.</p>
+        <div class="p">
+            <pre class="pre codeblock"><code>class Token {
+
+&nbsp;&nbsp;&nbsp; //TODO add slider to determine the duration by year
+&nbsp;&nbsp;&nbsp; constructor(tokenInstance) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.props = tokenInstance;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.props.baseNode = ".eth";
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.props.fullName = this.props.ensName + this.props.baseNode;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if(this.props.fullName === ".eth" || this.props.fullName === "undefined.eth") {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // if ENS name cannot be retrieved by events because it is legacy, use the opensea format
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.props.fullName = this.props.name;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //remove .eth
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this.props.ensName = this.props.name.replace(this.props.baseNode, "");
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; web3.action.setProps({
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; userEnsName: this.props.ensName
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; });
+&nbsp;&nbsp;&nbsp; }
+
+&nbsp;&nbsp;&nbsp; formatTimeStamp(UNIX_timestamp) {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; let a = new Date(UNIX_timestamp * 1000);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; let months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; let year = a.getFullYear();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; let month = months[a.getMonth()];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; let date = a.getDate();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return date + ' ' + month + ' ' + year;
+&nbsp;&nbsp;&nbsp; }
+
+&nbsp;&nbsp;&nbsp; render() {
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return`
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;div class="ui container"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;div class="ui segment"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;img src="data:image/png;base64,i...C"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;span&gt;&lt;bold&gt;&lt;h3&gt;Renew &lt;strong&gt;${this.props.fullName}&lt;/strong&gt; for one year&lt;/h3&gt;&lt;/bold&gt;&lt;/span&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;div id="inputBox"&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;h3&gt;Price of one year renewal: ${(this.props.renewalPricePerYear / 1e+18).toFixed(3)} ETH&lt;/h3&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;h3&gt;Name expires: ${this.formatTimeStamp(this.props.nameExpires)}&lt;/h3&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;br&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/div&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/div&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/div&gt;`;
+&nbsp;&nbsp;&nbsp; }
+}
+
+web3.tokens.dataChanged = (oldTokens, updatedTokens, tokenCardId) =&gt; {
+&nbsp;&nbsp;&nbsp; const currentTokenInstance = updatedTokens.currentInstance;
+&nbsp;&nbsp; &nbsp;let token = new Token(currentTokenInstance);
+&nbsp;&nbsp;&nbsp; document.getElementById(tokenCardId).innerHTML = token.render();
+};</code></pre>
+        </div>
+        <p class="p"></p>
+         <p class="p"></p></section>
+    </div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" href="Card.html" title="Cards are a fundamental part of Tokenscript. They define how the token behaves in the wallet and in web pages. They are the only part of Tokenscript which is visible for the user.">Card</a></div></div><div class="linklist relref"><strong>Related reference</strong><br><ul class="linklist"><li class="linklist"><a class="link" href="elements/card.html" title="card element defines a Card">&lt;card&gt; element</a></li><li class="linklist"><a class="link" href="elements/cards.html" title="cards element is a container of multiple Card. It can be used as a root element of a TokenScript File.">&lt;cards&gt; element</a></li></ul></div></nav></article></main></div></div></body></html>

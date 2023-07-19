@@ -1,0 +1,97 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><meta name="copyright" content="(C) Copyright 2020"><meta name="DC.rights.owner" content="(C) Copyright 2020"><meta name="DC.type" content="concept"><meta name="description" content="Distinct Attributes are used to identify a token."><meta name="DC.relation" scheme="URI" content="../features/FeatureImplementation.html"><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="concept_y3c_tv2_pmb"><link rel="stylesheet" type="text/css" href="../css/commonltr.css"><link rel="stylesheet" type="text/css" href="../css/custom.css"><title>Distinct Attribute</title>
+<link href="https://fonts.googleapis.com/css?family=Roboto+Slab|Lato">
+<script type="text/javascript" src="https://alphawallet.com/wp-content/themes/alphawallet/discourse/widget.js"></script>
+</head><body id="concept_y3c_tv2_pmb"><header role="banner"><nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+  <div class="container">
+    <a class="navbar-brand" href="/">🆃okenScript</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+	      <li class="nav-item"><a class="nav-link" href="/TokenScript.html">Documents</a></li>
+	      <li class="nav-item"><a class="nav-link" href="/guides/Intro.html">Guides</a></li>
+	      <li class="nav-item"><a class="nav-link" href="/specs/Intro.html">Specs</a></li>
+	      <li class="nav-item external"><a class="nav-link" href="">TokenScript community forum</a></li>
+	      <li class="nav-item external"><a class="nav-link" href="/TokenScript.html">AlphaWallet (uses TokenScript)</a></li>
+	      <li class="nav-item external"><a class="nav-link" href="/guides/Intro.html">Github TokenScript</a></li>
+	      <li class="nav-item external"><a class="nav-link" href="/specs/Intro.html">Github TokenScript Examples</a></li>
+      </ul>
+    </div>
+  </div>
+</nav></header><div class="container" id="content"><div class="row"><nav role="toc" class="col-lg-3"><ul><li><a href="../Tokenization.html">Tokenization and dApps</a></li><li><a href="../index.html">Introduction to TokenScript</a></li><li><a href="../QuickStart.html">Quick Start (usuable now)</a></li><li><a href="../BasicConcepts.html">Basic Concepts</a></li><li><a href="../Deploy.html">Deploy TokenScript</a></li><li><a href="../features/FeatureImplementation.html">Features implemented</a><ul><li class="active"><a href="../features/DistinctAttribute.html">Distinct Attribute</a></li></ul></li><li><a href="../specs/Intro.html">TokenScript Specs</a></li><li><a href="../guides/Intro.html">TokenScript Guides</a></li></ul></nav><main role="main" class="col-lg-9"><article role="article" aria-labelledby="ariaid-title1">
+    <h1 class="title topictitle1" id="ariaid-title1">Distinct Attribute</h1>
+    
+    <div class="body conbody"><p class="shortdesc">Distinct Attributes are used to identify a token.</p>
+      <div class="p">A distinct attribute is defined by setting <code class="ph codeph">distinct</code> to
+      true.<pre class="pre codeblock"><code>&lt;attribute name="vin" distinct="true"&gt;
+…
+&lt;/attribute&gt;</code></pre></div>
+        <p class="p">If there is only one distinct attribute in a token, then the number of unique values of
+      this attribute determins how many token instances are there.</p>
+    <div class="note note note_note"><span class="note__title">Note:</span> Each Token is identified by a attribute-value pair where the attribute has to be a distinct
+      attribute. See more in <a class="xref" href="../TokenIdentifier.html" title="Tokens are identified with attribute-value pairs">Token Identifier</a></div>
+        <p class="p">If there is no distinct attribute defined in a Token, TokenScript Engine takes a default
+      value <code class="ph codeph">ownerAddress=${ownerAddress}</code> as its <a class="xref" href="../TokenIdentifier.html" title="Tokens are identified with attribute-value pairs">Token Identifier</a>.</p>
+      
+      <div class="example"><h2 class="title sectiontitle">
+                A Car Ownership Token
+        </h2>
+        
+        <div class="p">
+                In this example, which is part of a TokenScript that defines a
+                Car Ownership Toke. Vehicle Identification Number ("vin") is an
+                attribute that identifies a
+			car:
+		<pre class="pre codeblock"><code>  &lt;ts:attribute name="vin" <strong class="ph b">distinct="true"</strong>&gt;
+    &lt;ts:label&gt;
+      &lt;ts:string xml:lang="en"&gt;Vehicle Identification Number&lt;/ts:string&gt;
+    &lt;/ts:label&gt;
+    &lt;ts:origins&gt;
+      &lt;ethereum:call function="getCars" contract="CarOwnership"/&gt;
+    &lt;/ts:origins&gt;
+  &lt;/ts:attribute&gt;</code></pre>Since
+        VIN is a distinct token, each distinct values of this attribute is used to create a distinct
+        token. So, let's say that the function <code class="ph codeph">getCars()</code> in this example returns an
+        array of two values:<pre class="pre codeblock"><code>"KL3TA48E9EB541191", "KL3TA48E9EB541192"</code></pre></div>
+      <div class="p">Then, the TokenScript engine should interpret that there are 2Car Tokens, identified the
+        following two <a class="xref" href="../TokenIdentifier.html" title="Tokens are identified with attribute-value pairs">Token
+        Identifiers</a>:<pre class="pre codeblock"><code>vin=KL3TA48E9EB541191
+vin=KL3TA48E9EB541192</code></pre></div>
+      <p class="p">Both are instances of the Car Token. If the TokenScript engine is running in a user's
+        wallet, it would render two distinct cars.</p>
+      </div>
+        <div class="example"><h2 class="title sectiontitle">CryptoKitty</h2>
+            
+	    <div class="p">The following code defines a distinct attribute called <var class="keyword varname">tokenId</var>.
+
+            <pre class="pre codeblock"><code>&lt;ts:attribute name="tokenId" <strong class="ph b">distinct="true"&gt;</strong>
+  &lt;ts:type&gt;
+    &lt;ts:syntax&gt;1.3.6.1.4.1.1466.115.121.1.40&lt;/ts:syntax&gt;
+  &lt;/ts:type&gt;
+  &lt;ts:origins&gt;
+    &lt;ethereum:call function="balanceOf" contract="EntryToken"&gt;
+      &lt;ts:data&gt;
+        &lt;ts:uint256 ref="ownerAddress"&gt;&lt;/ts:uint256&gt;
+      &lt;/ts:data&gt;
+    &lt;/ethereum:call&gt;
+  &lt;/ts:origins&gt;
+&lt;/ts:attribute&gt;</code></pre>            
+		    </div><div class="p">If
+                the smart contract returns 2 values for it: <ul class="ul" id="concept_y3c_tv2_pmb__ul_xdd_kcw_zmb">
+                    <li class="li"><code class="ph codeph">0x59a7a9fd49fabd07c0f8566ae4be96fcf20be5e1</code></li>
+                    <li class="li"><code class="ph codeph">0xd915c8AD3241F459a45AdcBBF8af42caA561A154</code></li>
+                </ul> then the TokenScript engine identifies 2 tokens, each identified with:
+                <ul class="ul">
+                <li class="li"><code class="ph codeph">tokenId=0x59a7a9fd49fabd07c0f8566ae4be96fcf20be5e1</code></li>
+                <li class="li"><code class="ph codeph">tokenId=0xd915c8AD3241F459a45AdcBBF8af42caA561A154</code></li>
+                </ul>
+            </div>
+          <p class="p">In fact, this attribute can be found in all ERC721 tokens, as ERC721 requires an
+        attribute tokenID to identify a token. However, such a design may not suit other tokens who
+        doesn't benefit from being shoe-horned into ERC721.</p>
+        </div>
+    </div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" href="../features/FeatureImplementation.html" title="This is a matrix that reports the current progress in implementing various TokenScript directives">Features implemented</a></div></div></nav></article></main></div></div></body></html>

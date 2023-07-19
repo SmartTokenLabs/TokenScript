@@ -1,0 +1,152 @@
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><meta name="copyright" content="(C) Copyright 2020"><meta name="DC.rights.owner" content="(C) Copyright 2020"><meta name="DC.type" content="concept"><meta name="DC.relation" scheme="URI" content="index.html"><meta name="DC.format" content="HTML5"><meta name="DC.identifier" content="topic_nlj_qhg_nmb"><link rel="stylesheet" type="text/css" href="css/commonltr.css"><link rel="stylesheet" type="text/css" href="css/custom.css"><title>TokenScript Overview</title>
+<link href="https://fonts.googleapis.com/css?family=Roboto+Slab|Lato">
+<script type="text/javascript" src="https://alphawallet.com/wp-content/themes/alphawallet/discourse/widget.js"></script>
+</head><body id="topic_nlj_qhg_nmb"><header role="banner"><nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+  <div class="container">
+    <a class="navbar-brand" href="/">🆃okenScript</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+	      <li class="nav-item"><a class="nav-link" href="/TokenScript.html">Documents</a></li>
+	      <li class="nav-item"><a class="nav-link" href="/guides/Intro.html">Guides</a></li>
+	      <li class="nav-item"><a class="nav-link" href="/specs/Intro.html">Specs</a></li>
+	      <li class="nav-item external"><a class="nav-link" href="">TokenScript community forum</a></li>
+	      <li class="nav-item external"><a class="nav-link" href="/TokenScript.html">AlphaWallet (uses TokenScript)</a></li>
+	      <li class="nav-item external"><a class="nav-link" href="/guides/Intro.html">Github TokenScript</a></li>
+	      <li class="nav-item external"><a class="nav-link" href="/specs/Intro.html">Github TokenScript Examples</a></li>
+      </ul>
+    </div>
+  </div>
+</nav></header><div class="container" id="content"><div class="row"><nav role="toc" class="col-lg-3"><ul><li><a href="Tokenization.html">Tokenization and dApps</a></li><li><a href="index.html">Introduction to TokenScript</a><ul><li class="active"><a href="TokenScript.html">TokenScript Overview</a></li><li><a href="WhatTokenscriptCanDo.html">What Can TokenScript Do?</a></li><li><a href="defiwithandwithoutts.html">DeFi with and without TokenScript</a></li><li><a href="LivingExamples.html">TokenScript examples in AlphaWallet</a></li></ul></li><li><a href="QuickStart.html">Quick Start (usuable now)</a></li><li><a href="BasicConcepts.html">Basic Concepts</a></li><li><a href="Deploy.html">Deploy TokenScript</a></li><li><a href="features/FeatureImplementation.html">Features implemented</a></li><li><a href="specs/Intro.html">TokenScript Specs</a></li><li><a href="guides/Intro.html">TokenScript Guides</a></li></ul></nav><main role="main" class="col-lg-9"><article role="article" aria-labelledby="ariaid-title1">
+    <h1 class="title topictitle1" id="ariaid-title1">TokenScript Overview</h1>
+    <div class="body conbody">
+	    <p dir="ltr" class="p" id="topic_nlj_qhg_nmb__docs-internal-guid-e0588b59-7fff-f9c6-08d4-576a2c544c53">TokenScript is a
+            Tokenisation framework. It wraps HTML, JavaScript and XML to express Token
+            functionalities and make them deployable in the wallet and on websites. With
+            TokenScript, any token can unlock its customized mini Dapp. </p>
+        <p class="p">TokenScript creates a <a class="xref" href="TokenLayer.html" title="The Token Layer connects the applications (websites) and blockchain">The Token Layer</a>: A <a class="xref" href="DataDriven.html" title="TokenScript takes a data-driven, event-driven design approach">Data/Event Driven</a>,
+            and <a class="xref" href="ContextBased.html" title="Token's availability, status and use are affected by context">Context-based</a> layer between the blockchain and the user. On this
+            layer, token are the basic unit to structure the interaction between users and
+            blockchains.</p>
+	    <p dir="ltr" class="p">TokenScript consists of two parts:</p>
+        <ul class="ul" id="topic_nlj_qhg_nmb__ul_omt_14t_ymb">
+            <li dir="ltr" class="li">TokenScript Engine, which works in the user's wallet, on the web or in a
+                browser plugin. The TokenScript Engine provides the runtime environment for tokens
+                to be used on 3rd party websites.</li>
+            <li dir="ltr" class="li">The<a class="xref" href="TokenScript-Component.html" title="TokenScript file is an overlay of XML Mark-up and JavaScript.">TokenScript File</a> wraps XML, HTML and
+                JavaScript and is issued and signed by the corresponding Token Issuer. It can be
+                imported by any service or device which implemented TokenScript Engine. The file
+                provides additional token information, structures the token UX in the wallets, and
+                appends rules, data moduls, transaction security measurements and much more. </li>
+        </ul>
+        <p dir="ltr" class="p">TokenScript files are <a class="xref" href="Signing.html" title="TokenScript files are signed by the token issuer, usually.">signed by the creator of the
+                token smart contract or a trusted source</a> with a public key. Wallets and dApps
+            can import and verify the files and make sure users only get authorized TokenScripts
+            from trusted sources.</p>
+        <p dir="ltr" class="p">TokenScript is blockchain agnostic. The main focus of our development is based
+            on Ethereum token. But it can be adopted to other blockchains and even combine token and
+            interactions of different blockchains. TokenScript is not a standard for token, but
+                <a class="xref" href="ts-vs-token-standards.html" title="Is TokenScript a standardisation effort?">a standard for a Token Layer</a>, which
+            enables wallets and apps and websites to work with any non-standardized token as easy as
+            with ERC token.</p>
+        <p dir="ltr" class="p">This guide will educate you about the<a class="xref" href="BasicConcepts.html" title="Learn about the basic concepts of TokenScript, which are used for creating a TokenScript."> basic
+                concepts of TokenScript</a> and the <a class="xref" href="Deploy.html" title="After you created a TokenScript, you want wallets to use it. Learn how wallets can get a TokenScript.">deployment</a> of
+            a TokenScript. </p>
+        <section class="section"><h2 class="title sectiontitle">TokenScript benefits </h2>
+            
+            <table class="table" id="topic_nlj_qhg_nmb__table_uys_s4t_ymb"><caption></caption><colgroup><col style="width:33.33333333333333%"><col style="width:33.33333333333333%"><col style="width:33.33333333333333%"></colgroup><thead class="thead">
+                        <tr class="row">
+                            <th class="entry" id="topic_nlj_qhg_nmb__table_uys_s4t_ymb__entry__1"><strong class="ph b">Wallets</strong></th>
+                            <th class="entry" id="topic_nlj_qhg_nmb__table_uys_s4t_ymb__entry__2"><strong class="ph b">without TokenScript</strong></th>
+                            <th class="entry" id="topic_nlj_qhg_nmb__table_uys_s4t_ymb__entry__3"><strong class="ph b">with TokenScript</strong></th>
+                        </tr>
+                    </thead><tbody class="tbody">
+                        <tr class="row">
+                            <td class="entry" headers="topic_nlj_qhg_nmb__table_uys_s4t_ymb__entry__1">Understand token specific smart contracts</td>
+                            <td class="entry" headers="topic_nlj_qhg_nmb__table_uys_s4t_ymb__entry__2">no</td>
+                            <td class="entry" headers="topic_nlj_qhg_nmb__table_uys_s4t_ymb__entry__3">yes</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry" headers="topic_nlj_qhg_nmb__table_uys_s4t_ymb__entry__1">can create token specific transactions</td>
+                            <td class="entry" headers="topic_nlj_qhg_nmb__table_uys_s4t_ymb__entry__2">no</td>
+                            <td class="entry" headers="topic_nlj_qhg_nmb__table_uys_s4t_ymb__entry__3">yes</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry" headers="topic_nlj_qhg_nmb__table_uys_s4t_ymb__entry__1">know the token specific history with all details</td>
+                            <td class="entry" headers="topic_nlj_qhg_nmb__table_uys_s4t_ymb__entry__2">no</td>
+                            <td class="entry" headers="topic_nlj_qhg_nmb__table_uys_s4t_ymb__entry__3">yes</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry" headers="topic_nlj_qhg_nmb__table_uys_s4t_ymb__entry__1">executes offchain operations of a token</td>
+                            <td class="entry" headers="topic_nlj_qhg_nmb__table_uys_s4t_ymb__entry__2">no</td>
+                            <td class="entry" headers="topic_nlj_qhg_nmb__table_uys_s4t_ymb__entry__3">yes</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry" headers="topic_nlj_qhg_nmb__table_uys_s4t_ymb__entry__1">unlock token specific mini dapps</td>
+                            <td class="entry" headers="topic_nlj_qhg_nmb__table_uys_s4t_ymb__entry__2">no</td>
+                            <td class="entry" headers="topic_nlj_qhg_nmb__table_uys_s4t_ymb__entry__3">yes</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry" headers="topic_nlj_qhg_nmb__table_uys_s4t_ymb__entry__1">implements token specific rules</td>
+                            <td class="entry" headers="topic_nlj_qhg_nmb__table_uys_s4t_ymb__entry__2">no</td>
+                            <td class="entry" headers="topic_nlj_qhg_nmb__table_uys_s4t_ymb__entry__3">yes</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry" headers="topic_nlj_qhg_nmb__table_uys_s4t_ymb__entry__1">can import magic links</td>
+                            <td class="entry" headers="topic_nlj_qhg_nmb__table_uys_s4t_ymb__entry__2">no</td>
+                            <td class="entry" headers="topic_nlj_qhg_nmb__table_uys_s4t_ymb__entry__3">yes</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry" headers="topic_nlj_qhg_nmb__table_uys_s4t_ymb__entry__1">can trigger attestation processes and attestated
+                                transactions</td>
+                            <td class="entry" headers="topic_nlj_qhg_nmb__table_uys_s4t_ymb__entry__2">no</td>
+                            <td class="entry" headers="topic_nlj_qhg_nmb__table_uys_s4t_ymb__entry__3">yes</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry" headers="topic_nlj_qhg_nmb__table_uys_s4t_ymb__entry__1">display validated information about a token</td>
+                            <td class="entry" headers="topic_nlj_qhg_nmb__table_uys_s4t_ymb__entry__2">no</td>
+                            <td class="entry" headers="topic_nlj_qhg_nmb__table_uys_s4t_ymb__entry__3">yes</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry" headers="topic_nlj_qhg_nmb__table_uys_s4t_ymb__entry__1">render token appearance depending on the context</td>
+                            <td class="entry" headers="topic_nlj_qhg_nmb__table_uys_s4t_ymb__entry__2">no</td>
+                            <td class="entry" headers="topic_nlj_qhg_nmb__table_uys_s4t_ymb__entry__3">yes</td>
+                        </tr>
+                        <tr class="row">
+                            <td class="entry" headers="topic_nlj_qhg_nmb__table_uys_s4t_ymb__entry__1">combine several token for customized operations</td>
+                            <td class="entry" headers="topic_nlj_qhg_nmb__table_uys_s4t_ymb__entry__2">no</td>
+                            <td class="entry" headers="topic_nlj_qhg_nmb__table_uys_s4t_ymb__entry__3">yes</td>
+                        </tr>
+                    </tbody></table>
+            <p class="p"><strong class="ph b">For Token Issuers</strong></p>
+            <p dir="ltr" class="p">TokenScript enables token issuers to leave the restrictions of smart
+                contracts behind. It allows to add a lot of information, even image files or API
+                lookups to a token, and design a set of business rules and interaction logics for
+                it, including <a class="xref" href="Attestation.html" title="An attestation is a claim cryptographically attested by an attestor's signature. TokenScript enables wallets to create and manage attestations.">attestations</a> and structured
+                interactions with other tokens. </p>
+            <p dir="ltr" class="p">Moreover, with TokenScript token issuers can easily and securely update the
+                token rules.</p>
+            <p class="p"><strong class="ph b">For Wallets</strong></p>
+        </section><section class="section">
+            <p dir="ltr" class="p">For<strong class="ph b"> wallets, </strong>TokenScript levels up their capability as the user
+                agent for blockchain interactions. Currently most dApps require a third party
+                website to interprete the state of the blockchain and to craft smart contract
+                transactions. When a wallet imports TokenScript, it learns to fully understand the
+                smart contract and craft the required transactions.</p>
+            <p class="p">Furthermore, TokenScript allows Token issuers to design the token GUI in the wallet,
+                create all kind of complex transactions and append offchain functions. <strong class="ph b">With
+                    TokenScript, any token can unlock custom mini apps in the wallet</strong>.</p>
+            <p class="p"><strong class="ph b">For Web and app developer</strong></p>
+        </section><section class="section">
+        <p dir="ltr" class="p">Web and app developers can deploy TokenScript into their app. It allows them to
+            securely integrate the full scope of token functionality and to trigger specific token
+            related actions in the user wallet. Without TokenScript they would need to deeply
+            understand blockchain and smart contracts and invest a lot of work to integrate every
+            single token. With TokenScript only a very basic knowledge is required.</p>
+         </section>
+    </div>
+<nav role="navigation" class="related-links"><div class="familylinks"><div class="parentlink"><strong>Parent topic:</strong> <a class="link" href="index.html" title="TokenScript is a framework which improves functionality, security and usability of blockchain token in multiple ways.">Introduction to TokenScript</a></div></div></nav></article></main></div></div></body></html>
