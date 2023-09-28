@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:ethereum="urn:ethereum:constantinople"
+        xmlns:asnx="urn:ietf:params:xml:ns:asnx"
+        targetNamespace="urn:ietf:params:xml:ns:asnx"
+        elementFormDefault="unqualified">
+
+    <import namespace="urn:ethereum:constantinople"
+            schemaLocation="ethereum.xsd"/>
+
+    <element name="module">
+        <complexType>
+            <sequence>
+                <element name="namedType" maxOccurs="unbounded" type="asnx:namedType"/>
+            </sequence>
+            <attribute name="name" type="NCName"/>
+        </complexType>
+    </element>
+
+    <complexType name="namedType">
+        <choice>
+            <element name="element" type="asnx:element"/>
+            <element name="type" type="asnx:type">
+            </element>
+        </choice>
+        <attribute name="name" type="NCName"/>
+    </complexType>
+
+    <complexType name="type">
+        <choice>
+            <element name="sequence" type="asnx:container"/>
+            <element name="enumerated" type="asnx:enumerated"/>
+        </choice>
+    </complexType>
+
+    <complexType name="enumerated">
+        <sequence>
+            <element name="enumeration" maxOccurs="unbounded">
+                <complexType>
+                    <attribute name="name" type="NCName"/>
+                    <attribute name="number" type="integer"/>
+                </complexType>
+            </element>
+        </sequence>
+    </complexType>
+
+    <complexType name="container">
+        <choice maxOccurs="unbounded">
+            <element name="element" type="asnx:element"/>
+        </choice>
+    </complexType>
+
+    <complexType name="element">
+        <sequence>
+            <element minOccurs="0" name="type" type="asnx:type"/>
+        </sequence>
+        <attribute name="name" type="NCName"/>
+        <attribute name="type">
+            <simpleType>
+                <restriction base="string">
+                    <enumeration value="asnx:UTF8String"/>
+                    <enumeration value="asnx:INTEGER"/>
+                    <enumeration value="asnx:BOOLEAN"/>
+                    <enumeration value="asnx:OCTET-STRING"/>
+                    <enumeration value="asnx:UTCTime"/>
+                </restriction>
+            </simpleType>
+        </attribute>
+        <attribute ref="ethereum:type"/>
+        <attribute ref="ethereum:indexed"/>
+    </complexType>
+</schema>

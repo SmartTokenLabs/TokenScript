@@ -18,7 +18,7 @@
     For further information, see: http://www.w3.org/TR/xhtml1
 
     Copyright (c) 1998-2002 W3C (MIT, INRIA, Keio),
-    All Rights Reserved. 
+    All Rights Reserved.
 
     The DTD version is identified by the PUBLIC and SYSTEM identifiers:
 
@@ -41,7 +41,7 @@
     ================ Character mnemonic entities =========================
 
     XHTML entity sets are identified by the PUBLIC and SYSTEM identifiers:
-  
+
     PUBLIC "-//W3C//ENTITIES Latin 1 for XHTML//EN"
     SYSTEM "http://www.w3.org/TR/xhtml1/DTD/xhtml-lat1.ent"
 
@@ -131,7 +131,7 @@
       <xs:documentation>
       tabindex attribute specifies the position of the current element
       in the tabbing order for the current document. This value must be
-      a number between 0 and 32767. User agents should ignore leading zeros. 
+      a number between 0 and 32767. User agents should ignore leading zeros.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base="Number">
@@ -816,7 +816,7 @@
   <xs:element name="div">
     <xs:annotation>
       <xs:documentation>
-      generic language/style container      
+      generic language/style container
       </xs:documentation>
     </xs:annotation>
     <xs:complexType mixed="true">
@@ -1902,6 +1902,7 @@
         <xs:extension base="button.content">
           <xs:attributeGroup ref="attrs"/>
           <xs:attributeGroup ref="focus"/>
+		  <xs:attributeGroup ref="events"/>
           <xs:attribute name="name"/>
           <xs:attribute name="value"/>
           <xs:attribute name="type" default="submit">

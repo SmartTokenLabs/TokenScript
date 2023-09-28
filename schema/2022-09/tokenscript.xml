@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ts:token xmlns:ts="http://tokenscript.org/2022/09/tokenscript"
+		  xmlns:xml="http://www.w3.org/XML/1998/namespace"
+		  xsi:schemaLocation="http://tokenscript.org/2022/09/tokenscript http://tokenscript.org/2022/09/tokenscript.xsd"
+		  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		  xmlns:ethereum="urn:ethereum:constantinople"
+		  name="Test2">
+	<ts:label>
+		<ts:plurals xml:lang="en">
+			<ts:string quantity="one">Test2 Token</ts:string>
+			<ts:string quantity="other">Test2 Tokens</ts:string>
+		</ts:plurals>
+	</ts:label>
+	<ts:contract interface="erc721" name="Token">
+		<ts:address network="4">0x431</ts:address>
+	</ts:contract>
+	<ts:origins>
+		<!-- Define the contract which holds the token that the user will use -->
+		<ts:ethereum contract="Token"/>
+	</ts:origins>
+	<ts:cards>
+
+		<ts:card type="action" name="Mint">
+			<!-- this action is of the model confirm-back.
+			window.onConfirm is called if user hit "confirm";
+			window.close() causes the back button to be pressed.
+			-->
+			<ts:label>
+				<ts:string xml:lang="en">Mint</ts:string>
+			</ts:label>
+			<ts:transaction>
+				<ethereum:transaction contract="Token" function="safeMint">
+					<ts:data>
+					</ts:data>
+				</ethereum:transaction>
+			</ts:transaction>
+			<ts:view xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+				<ts:include type="html" src="./dist/index.html"/>
+			</ts:view>
+		</ts:card>
+
+	</ts:cards>
+
+</ts:token>
