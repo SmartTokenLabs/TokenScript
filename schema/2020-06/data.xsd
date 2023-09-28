@@ -6,7 +6,7 @@
            xmlns="http://tokenscript.org/2020/06/tokenscript"
            elementFormDefault="qualified">
     <xs:import namespace="http://www.w3.org/XML/1998/namespace"
-               schemaLocation="xml.xsd"/>
+               schemaLocation="../common/xml.xsd"/>
     <xs:complexType mixed="true" name="variable">
         <xs:attribute name="ref" type="xs:NCName"/>
         <xs:attribute name="local-ref" type="xs:NCName"/>
@@ -14,7 +14,7 @@
     <!-- Importing XML namespace for xml:lang and xml:id -->
     <xs:element name="data">
         <xs:complexType>
-            <xs:choice maxOccurs="unbounded">
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
                 <xs:element name="bool" type="variable"/>
                 <xs:element name="uint8" type="variable"/>
                 <xs:element name="uint16" type="variable"/>

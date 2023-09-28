@@ -4,7 +4,7 @@ TokenScript schema serves to check if your TokenScript is with the correct synta
 
 This namespace identifies the current schema:
 
-    http://tokenscript.org/2020/06/tokenscript
+    http://tokenscript.org/2022/09/tokenscript
 
 When there is a minor change with the addition of new features and elements, we update the schema without invalidating the old TokenScripts that are already signed and put to use. The namespace identifier remains. This process is slow and normally taking months or years.
 

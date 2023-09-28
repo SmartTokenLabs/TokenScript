@@ -1,0 +1,2381 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Daxe schema for XHTML5.
+  NOTE: this schema is not complete !
+  Element documentation often comes from the Mozilla Developer Network.
+  MDN wiki documents are created by Mozilla Contributors and licensed under CC-BY-SA 2.5.
+  Links:
+      https://developer.mozilla.org/en-US/docs/Web/HTML/Element
+      https://developer.mozilla.org/en-US/docs/MDN/About$history
+      http://creativecommons.org/licenses/by-sa/2.5/
+--><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.w3.org/1999/xhtml" targetNamespace="http://www.w3.org/1999/xhtml" xml:lang="en">
+	<xs:annotation>
+		<xs:documentation>
+			XML schema for XHTML5 documents.
+		</xs:documentation>
+	</xs:annotation>
+
+	<xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd">
+		<xs:annotation>
+			<xs:documentation>
+				This import is needed to use xml:space="preserve".
+			</xs:documentation>
+		</xs:annotation>
+	</xs:import>
+
+	<xs:simpleType name="MediaDesc">
+		<xs:annotation>
+			<xs:documentation>
+				Single or comma-separated list of media descriptors
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[^,]+(,\s*[^,]+)*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="html-align">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="left"/>
+			<xs:enumeration value="center"/>
+			<xs:enumeration value="right"/>
+			<xs:enumeration value="justify"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="htmlLength">
+		<xs:annotation>
+			<xs:documentation>
+				nn for pixels or nn% for percentage length
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[\-+]?(\d+|\d+(\.\d+)?%)"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:attributeGroup name="coreattrs">
+		<xs:annotation>
+			<xs:documentation>
+				core attributes common to most HTML elements
+			</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="id" type="xs:ID">
+			<xs:annotation>
+				<xs:documentation>
+					This attribute defines a unique identifier (ID) which must be unique in the whole document. Its purpose is to identify the element when linking (using a fragment identifier), scripting, or styling (with CSS).
+
+					Usage note:
+					- This attribute's value is an opaque string: this means that web author must not use it to convey any information. Particular meaning, for example semantic meaning, must not be derived from the string.
+					- This attribute's value must not contain white spaces. Browsers treat non-conforming IDs that contains white spaces as if the white space is part of the ID. In contrast to the class attribute, which allows space-separated values, elements can only have one single ID defined through the id attribute. Note that an element may have several IDs, but the others should be set by another means, such as via a script interfacing with the DOM interface of the element.
+					- Using characters except ASCII letters and digits, '_', '-' and '.' may cause compatibility problems, as they weren't allowed in HTML 4. Though this restriction has been lifted in HTML 5, an ID should start with a letter for compatibility.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="class" type="xs:NMTOKENS">
+			<xs:annotation>
+				<xs:documentation>
+					This attribute is a space-separated list of the classes of the element. Classes allows CSS and Javascript to select and access specific elements via the class selectors or functions like the DOM method document.getElementsByClassName.
+
+					Usage note: Though the specification doesn't put requirements on the name of classes, web developers are encouraged to use names that describe the semantic purpose of the element, rather to the presentation of the element (e.g., attribute to describe an attribute rather than italics, although an element of this class may be presented by italics). Semantic names remain logical even if the presentation of the page changes.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="style" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>
+					This attribute contains CSS styling declarations to be applied to the element. Note that it is recommended for styles to be defined in a separate file or files. This attribute and the &lt;style&gt; element have mainly the purpose of allowing for quick styling, for example for testing purposes.
+
+					Usage note: This attribute must not be used to convey semantic information. Even if all styling is removed, a page should remain semantically correct. Typically it shouldn't be used to hide irrelevant information; this should be done using the hidden attribute.
+				</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="onclick"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="i18n">
+		<xs:annotation>
+			<xs:documentation>
+				internationalization attributes
+				lang language code (backwards compatible)
+				xml:lang language code (as per XML 1.0 spec)
+				dir direction for weak/neutral text
+			</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="lang" type="xs:language"/>
+		<xs:attribute ref="xml:lang"/>
+		<xs:attribute name="dir">
+			<xs:simpleType>
+				<xs:restriction base="xs:token">
+					<xs:enumeration value="ltr"/>
+					<xs:enumeration value="rtl"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:attributeGroup>
+
+	<xs:group name="flowContent">
+		<xs:choice>
+			<xs:element ref="section"/>
+			<xs:element ref="header"/>
+			<xs:element ref="footer"/>
+			<xs:element ref="article"/>
+			<xs:element ref="aside"/>
+			<xs:element ref="nav"/>
+			<xs:group ref="heading"/>
+			<xs:group ref="restrictedFlowContent"/>
+		</xs:choice>
+	</xs:group>
+	<xs:group name="restrictedFlowContent">
+		<xs:choice>
+			<xs:element ref="script"/>
+			<xs:element ref="style"/>
+			<xs:element ref="noscript"/>
+			<xs:element ref="pre"/>
+			<xs:element ref="hr"/>
+			<xs:element ref="address"/>
+			<xs:element ref="blockquote"/>
+			<xs:element ref="figure"/>
+			<xs:element ref="object"/>
+			<xs:element ref="applet"/>
+			<xs:element ref="embed"/>
+			<xs:element ref="video"/>
+			<xs:element ref="audio"/>
+			<xs:element ref="map"/>
+			<xs:element ref="canvas"/>
+			<xs:element ref="form"/>
+			<xs:element ref="fieldset"/>
+			<xs:element ref="iframe"/>
+			<xs:element ref="div"/>
+			<xs:element ref="p"/>
+			<xs:element ref="ul"/>
+			<xs:element ref="ol"/>
+			<xs:element ref="dl"/>
+			<xs:element ref="table"/>
+			<xs:group ref="phrasingContent"/>
+		</xs:choice>
+	</xs:group>
+	<xs:group name="heading">
+		<xs:choice>
+			<xs:element ref="h1"/>
+			<xs:element ref="h2"/>
+			<xs:element ref="h3"/>
+			<xs:element ref="h4"/>
+			<xs:element ref="h5"/>
+			<xs:element ref="h6"/>
+		</xs:choice>
+	</xs:group>
+	<xs:group name="phrasingContent">
+		<xs:choice>
+			<xs:element ref="span"/>
+			<xs:element ref="a"/>
+			<xs:element ref="strong"/>
+			<xs:element ref="em"/>
+			<xs:element ref="b"/>
+			<xs:element ref="i"/>
+			<xs:element ref="sup"/>
+			<xs:element ref="sub"/>
+			<xs:element ref="code"/>
+			<xs:element ref="kbd"/>
+			<xs:element ref="samp"/>
+			<xs:element ref="cite"/>
+			<xs:element ref="q"/>
+			<xs:element ref="tt"/>
+			<xs:element ref="ins"/>
+			<xs:element ref="del"/>
+			<xs:element ref="var"/>
+			<xs:element ref="small"/>
+			<xs:element ref="big"/>
+			<xs:element ref="br"/>
+			<xs:element ref="img"/>
+			<xs:element ref="input"/>
+			<xs:element ref="select"/>
+			<xs:element ref="textarea"/>
+			<xs:element ref="label"/>
+			<xs:element ref="button"/>
+			<xs:element ref="bdo"/>
+			<xs:element ref="ruby"/>
+		</xs:choice>
+	</xs:group>
+
+	<xs:complexType name="flowType" mixed="true">
+		<xs:choice maxOccurs="unbounded" minOccurs="0">
+			<xs:group ref="flowContent"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="restrictedFlowType" mixed="true">
+		<xs:choice maxOccurs="unbounded" minOccurs="0">
+			<xs:group ref="restrictedFlowContent"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="phrasingType" mixed="true">
+		<xs:choice maxOccurs="unbounded" minOccurs="0">
+			<xs:group ref="phrasingContent"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType mixed="true" name="headerContent">
+		<xs:choice maxOccurs="unbounded" minOccurs="0">
+			<xs:group ref="flowContent"/>
+		</xs:choice>
+		<xs:attributeGroup ref="coreattrs"/>
+	</xs:complexType>
+
+
+	<xs:element name="html">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML root element (&lt;html&gt;) represents the root of an HTML document.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:choice minOccurs="0" maxOccurs="unbounded">
+					<xs:element ref="head"/>
+					<xs:element ref="body"/>
+				</xs:choice>
+				<xs:any maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attributeGroup ref="i18n"/>
+			<xs:attribute name="id" type="xs:ID"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:group name="head.misc">
+		<xs:sequence>
+			<xs:choice maxOccurs="unbounded" minOccurs="0">
+				<xs:element ref="script"/>
+				<xs:element ref="style"/>
+				<xs:element ref="meta"/>
+				<xs:element ref="link"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:group>
+	<xs:element name="head">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML Head Element (&lt;head&gt;) provides general information (metadata) about the document, including its title and links to or definitions of scripts and style sheets.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:group ref="head.misc"/>
+				<xs:choice>
+					<xs:sequence>
+						<xs:element ref="title"/>
+						<xs:group ref="head.misc"/>
+						<xs:sequence minOccurs="0">
+							<xs:element ref="base"/>
+							<xs:group ref="head.misc"/>
+						</xs:sequence>
+					</xs:sequence>
+					<xs:sequence>
+						<xs:element ref="base"/>
+						<xs:group ref="head.misc"/>
+						<xs:element ref="title"/>
+						<xs:group ref="head.misc"/>
+					</xs:sequence>
+				</xs:choice>
+			</xs:sequence>
+			<xs:attributeGroup ref="i18n"/>
+			<xs:attribute name="id" type="xs:ID"/>
+			<xs:attribute name="profile" type="xs:anyURI">
+				<xs:annotation>
+					<xs:documentation>
+						The URIs of one or more metadata profiles, separated by white space.
+
+						This attribute is obsolete in HTML5.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="title">
+		<xs:annotation>
+			<xs:documentation>
+				The title element is not considered part of the flow of text.
+				It should be displayed, for example as the page header or
+				window title. Exactly one title is required per document.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="true">
+			<xs:attributeGroup ref="i18n"/>
+			<xs:attribute name="id" type="xs:ID"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="base">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML Base Element (&lt;base&gt;) specifies the base URL to use for all relative URLs contained within a document. There can be only one &lt;base&gt; element in a document.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="href" type="xs:anyURI" use="required"/>
+			<xs:attribute name="id" type="xs:ID"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="meta">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML Meta Element (&lt;meta&gt;) represents any metadata information that cannot be represented by one of the other HTML meta-related elements (&lt;base&gt;, &lt;link&gt;, &lt;script&gt;, &lt;style&gt; or &lt;title&gt;).
+
+				Depending on the attributes set, the kind of metadata can be one of the following:
+				- If name is set, it is document-level metadata, applying to the whole page.
+				- If http-equiv is set, it is a pragma directive, i.e. information normally given by the web server about how the - web page should be served.
+				- If charset is set, it is a charset declaration, i.e. the charset used for the serialized form of the webpage. HTML5
+				- if the itemprop is set, a user-defined metadata, transparent for the user-agent as the semantics of the metadata is user-specific.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attributeGroup ref="i18n"/>
+			<xs:attribute name="id" type="xs:ID"/>
+			<xs:attribute name="http-equiv">
+				<xs:annotation>
+					<xs:documentation>
+						This enumerated attribute defines the pragma that can alter servers and user-agents behavior. The value of the pragma is defined using the content and can be one of the following:
+						- content-language (obsolete)
+						- content-type (obsolete)
+						- default-style
+						- refresh
+						- set-cookie (obsolete)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="name">
+				<xs:annotation>
+					<xs:documentation>
+						This attribute defines the name of a document-level metadata. It should not be set if one of the attributes itemprop, http-equiv or charset is also set.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="content" use="required">
+				<xs:annotation>
+					<xs:documentation>
+						This attribute gives the value associated with the http-equiv or name attribute, depending of the context.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="scheme">
+				<xs:annotation>
+					<xs:documentation>
+						This attribute defines the scheme in which the metadata is described. A scheme is a context leading to the correct interpretations of the content value, like a format.
+
+						Notes: Do not use this attribute as it is obsolete. There is no replacement for it as there was no real usage for it. Omit it altogether.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="link">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML Link Element (&lt;link&gt;) specifies relationships between the current document and external resource. Possible uses for this element include defining a relational framework for navigation. This Element is most used to link to style sheets.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="charset" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>
+						This attribute defines the character encoding of the linked resource. The value is a space- and/or comma-delimited list of character sets as defined in RFC 2045. The default value is ISO-8859-1.
+
+						Usage note: This attribute is obsolete in HTML5 and must not be used by authors. To achieve its effect, use the Content-Type: HTTP header on the linked resource.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="href" type="xs:anyURI">
+				<xs:annotation>
+					<xs:documentation>
+						This attribute specifies the URL of the linked resource. A URL might be absolute or relative.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="hreflang" type="xs:language">
+				<xs:annotation>
+					<xs:documentation>
+						This attribute indicates the language of the linked resource. It is purely advisory. Allowed values are determined by BCP47 for HTML5 and by RFC1766 for HTML 4. Use this attribute only if the href attribute is present.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="type" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>
+						This attribute is used to define the type of the content linked to. The value of the attribute should be a MIME type such as text/html, text/css, and so on. The common use of this attribute is to define the type of style sheet linked and the most common current value is text/css, which indicates a Cascading Style Sheet format.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="rel" type="xs:NMTOKENS">
+				<xs:annotation>
+					<xs:documentation>
+						This attribute names a relationship of the linked document to the current document. The attribute must be a space-separated list of the link types values. The most common use of this attribute is to specify a link to an external style sheet: the rel attribute is set to stylesheet, and the href attribute is set to the URL of an external style sheet to format the page. WebTV also supports the use of the value next for rel to preload the next page in a document series.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="rev" type="xs:NMTOKENS">
+				<xs:annotation>
+					<xs:documentation>
+						The value of this attribute shows the relationship of the current document to the linked document, as defined by the href attribute. The attribute thus defines the reverse relationship compared to the value of the rel attribute. Link types values for the attribute are similar to the possible values for rel.
+
+						Usage note: This attribute is obsolete in HTML5. Do not use it. To achieve its effect, use the rel attribute with the opposite link types values, e.g. made should be replaced by author. Also this attribute doesn't mean revision and must not be used with a version number, which is unfortunately the case on numerous sites.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="media" type="MediaDesc">
+				<xs:annotation>
+					<xs:documentation>
+						This attribute specifies the media which the linked resource applies to. Its value must be a media query. This attribute is mainly useful when linking to external stylesheets by allowing the user agent to pick the best adapted one for the device it runs on.
+
+						Usage note:
+
+						- In HTML 4, this can only be a simple white-space-separated list of media description literals, i.e., media types and groups, where defined and allowed as values for this attribute, such as print, screen, aural, braille. HTML5 extended this to any kind of media queries, which are a superset of the allowed values of HTML 4.
+
+						- Browsers not supporting the CSS3 Media Queries won't necessarily recognize the adequate link; do not forget to set fallback links, the restricted set of media queries defined in HTML 4.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="style">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML &lt;style&gt; element contains style information for a document, or a part of document. The specific style information is contained inside of this element, usually in the CSS.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="true">
+			<xs:attributeGroup ref="i18n"/>
+			<xs:attribute name="id" type="xs:ID"/>
+			<xs:attribute default="text/css" name="type" type="xs:string"/>
+			<xs:attribute name="media" type="MediaDesc"/>
+			<xs:attribute name="title" type="xs:string"/>
+			<xs:attribute fixed="preserve" ref="xml:space"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="script">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML &lt;script&gt; element is used to embed or reference an executable script within an HTML or XHTML document.
+
+				Scripts without async or defer attributes, as well as inline scripts, are fetched and executed immediately, before the browser continues to parse the page.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="true">
+			<xs:attribute name="id" type="xs:ID"/>
+			<xs:attribute name="charset" type="xs:string"/>
+			<xs:attribute name="src" type="xs:anyURI">
+				<xs:annotation>
+					<xs:documentation>
+						This attribute specifies the URI of an external script; this can be used as an alternative to embedding a script directly within a document. script elements with an src attribute specified should not have a script embedded within its tags.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute default="text/javascript" name="type" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>
+						This attribute identifies the scripting language of code embedded within a script element or referenced via the element’s src attribute. This is specified as a MIME type; examples of supported MIME types include text/javascript, text/ecmascript, application/javascript, and application/ecmascript.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="crossorigin" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>
+						The crossorigin attribute, provides support for CORS, defining how the element handles cross-origin requests, thereby enabling the configuration of the CORS requests for the element's fetched data. Depending on the element, the attribute can be a CORS settings attribute.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="language" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>
+						Like the type attribute, this attribute identifies the scripting language in use. Unlike the type attribute, however, this attribute’s possible values were never standardized. The type attribute should be used instead.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="defer">
+				<xs:annotation>
+					<xs:documentation>
+						This Boolean attribute is set to indicate to a browser that the script is meant to be executed after the document has been parsed. Since this feature hasn't yet been implemented by all other major browsers, authors should not assume that the script’s execution will actually be deferred. The defer attribute shouldn't be used on scripts that don't have the src attribute. Since Gecko 1.9.2, the defer attribute is ignored on scripts that don't have the src attribute. However, in Gecko 1.9.1 even inline scripts are deferred if the defer attribute is set.
+					</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:token">
+						<xs:enumeration value="defer"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="async">
+				<xs:annotation>
+					<xs:documentation>
+						HTML5 only.
+						Set this Boolean attribute to indicate that the browser should, if possible, execute the script asynchronously. It has no effect on inline scripts (i.e., scripts that don't have the src attribute).
+					</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:token">
+						<xs:enumeration value="async"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute fixed="preserve" ref="xml:space"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="noscript">
+		<xs:annotation>
+			<xs:documentation>
+				Alternate content container for non script-based rendering.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="true">
+			<xs:choice maxOccurs="unbounded" minOccurs="0">
+				<xs:group ref="flowContent"/>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="body">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML Body Element (&lt;body&gt;) represents the content of an HTML document. There can be only one &lt;body&gt; element in a document.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="true">
+			<xs:choice maxOccurs="unbounded" minOccurs="0">
+				<xs:group ref="flowContent"/>
+			</xs:choice>
+			<xs:attributeGroup ref="coreattrs"/>
+			<xs:attributeGroup ref="i18n"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="section">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML Section Element (&lt;section&gt;) represents a generic section of a document, i.e., a thematic grouping of content, typically with a heading. Each &lt;section&gt; should be identified, typically by including a heading (h1-h6 element) as a child of the &lt;section&gt; element.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="true">
+			<xs:choice maxOccurs="unbounded" minOccurs="0">
+				<xs:group ref="flowContent"/>
+			</xs:choice>
+			<xs:attributeGroup ref="coreattrs"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="header">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML &lt;header&gt; Element represents a group of introductory or navigational aids. It may contain some heading elements but also other elements like a logo, wrapped section's header, a search form, and so on.
+
+				This element should have no &lt;footer&gt; or &lt;header&gt; descendants.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="true">
+			<xs:choice maxOccurs="unbounded" minOccurs="0">
+				<xs:group ref="flowContent"/>
+			</xs:choice>
+			<xs:attributeGroup ref="coreattrs"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="footer">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML &lt;footer&gt; Element represents a footer for its nearest sectioning content or sectioning root element (i.e, its nearest parent &lt;article&gt;, &lt;aside&gt;, &lt;nav&gt;, &lt;section&gt;, &lt;blockquote&gt;, &lt;body&gt;, &lt;details&gt;, &lt;fieldset&gt;, &lt;figure&gt;, &lt;td&gt;). A footer typically contains information about the author of the section, copyright data or links to related documents.
+
+				This element should have no &lt;footer&gt; or &lt;header&gt; descendants.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="true">
+			<xs:choice maxOccurs="unbounded" minOccurs="0">
+				<xs:group ref="flowContent"/>
+			</xs:choice>
+			<xs:attributeGroup ref="coreattrs"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="article">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML Article Element (&lt;article&gt;) represents a self-contained composition in a document, page, application, or site, which is intended to be independently distributable or reusable (e.g., in syndication). This could be a forum post, a magazine or newspaper article, a blog entry, or any other independent item of content. Each &lt;article&gt; should be identified, typically by including a heading (h1-h6 element) as a child of the &lt;article&gt; element.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="true">
+			<xs:choice maxOccurs="unbounded" minOccurs="0">
+				<xs:group ref="flowContent"/>
+			</xs:choice>
+			<xs:attributeGroup ref="coreattrs"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="aside">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML &lt;aside&gt; element represents a section of the page with content connected tangentially to the rest, which could be considered separate from that content. These sections are often represented as sidebars or inserts. They often contain the definitions on the sidebars, such as definitions from the glossary; there may also be other types of information, such as related advertisements; the biography of the author; web applications; profile information or related links on the blog.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="true">
+			<xs:choice maxOccurs="unbounded" minOccurs="0">
+				<xs:group ref="flowContent"/>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="nav">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML Navigation Element (&lt;nav&gt;) represents a section of a page that links to other pages or to parts within the page: a section with navigation links.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="true">
+			<xs:choice maxOccurs="unbounded" minOccurs="0">
+				<xs:group ref="flowContent"/>
+			</xs:choice>
+			<xs:attributeGroup ref="coreattrs"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="h1" type="headerContent">
+		<xs:annotation>
+			<xs:documentation>
+				Level 1 title (most important).
+
+				A heading element briefly describes the topic of the section it introduces. Heading information may be used by user agents, for example, to construct a table of contents for a document automatically.
+
+				Inside HTML5 sections, all the heading elements can be h1 (they don't need to be h1, h2, ...). Web browsers determine the level of the heading based on the depth in the section tree.
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="h2" type="headerContent">
+		<xs:annotation>
+			<xs:documentation>
+				Level 2 title
+
+				A heading element briefly describes the topic of the section it introduces. Heading information may be used by user agents, for example, to construct a table of contents for a document automatically.
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="h3" type="headerContent">
+		<xs:annotation>
+			<xs:documentation>
+				Level 3 title
+
+				A heading element briefly describes the topic of the section it introduces. Heading information may be used by user agents, for example, to construct a table of contents for a document automatically.
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="h4" type="headerContent">
+		<xs:annotation>
+			<xs:documentation>
+				Level 4 title
+
+				A heading element briefly describes the topic of the section it introduces. Heading information may be used by user agents, for example, to construct a table of contents for a document automatically.
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="h5" type="headerContent">
+		<xs:annotation>
+			<xs:documentation>
+				Level 5 title
+
+				A heading element briefly describes the topic of the section it introduces. Heading information may be used by user agents, for example, to construct a table of contents for a document automatically.
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="h6" type="headerContent">
+		<xs:annotation>
+			<xs:documentation>
+				Level 6 title
+
+				A heading element briefly describes the topic of the section it introduces. Heading information may be used by user agents, for example, to construct a table of contents for a document automatically.
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="div">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML &lt;div&gt; element (or HTML Document Division Element) is the generic container for flow content, which does not inherently represent anything. It can be used to group elements for styling purposes (using the class or id attributes), or because they share attribute values, such as lang. It should be used only when no other semantic element (such as &lt;article&gt; or &lt;nav&gt;) is appropriate.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="true">
+			<xs:choice maxOccurs="unbounded" minOccurs="0">
+				<xs:group ref="flowContent"/>
+			</xs:choice>
+			<xs:attributeGroup ref="coreattrs"/>
+			<xs:attribute name="align">
+				<xs:annotation>
+					<xs:documentation>
+						In HTML5, the align attribute on &lt;div&gt; is obsolete.
+					</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="center"/>
+						<xs:enumeration value="left"/>
+						<xs:enumeration value="right"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="p">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML &lt;p&gt; element (or HTML Paragraph Element) represents a paragraph of text. Paragraphs are block-level elements.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="true">
+			<xs:choice maxOccurs="unbounded" minOccurs="0">
+				<xs:group ref="phrasingContent"/>
+			</xs:choice>
+			<xs:attributeGroup ref="coreattrs"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ul">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML unordered list element (&lt;ul&gt;) represents an unordered list of items, namely a collection of items that do not have a numerical ordering, and their order in the list is meaningless. Typically, unordered-list items are displayed with a bullet, which can be of several forms, like a dot, a circle or a squared. The bullet style is not defined in the HTML description of the page, but in its associated CSS, using the list-style-type property.
+
+				There is no limitation to the depth and imbrication of lists defined with the &lt;ol&gt; and &lt;ul&gt; elements.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence maxOccurs="unbounded">
+				<xs:element ref="li"/>
+			</xs:sequence>
+			<xs:attributeGroup ref="coreattrs"/>
+			<xs:attribute name="type" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>
+						Used to set the bullet style for the list. The values defined under HTML3.2 and the transitional version of HTML 4.0/4.01 are:
+						- circle,
+						- disc,
+						- and square.
+
+						A fourth bullet type has been defined in the WebTV interface, but not all browsers support it: triangle.
+
+						If not present and if no CSS list-style-type property does apply to the element, the user agent decide to use a kind of bullets depending on the nesting level of the list.
+						Usage note: Do not use this attribute, as it has been deprecated; use the CSS list-style-type property instead.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ol">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML &lt;ol&gt; Element (or HTML Ordered List Element) represents an ordered list of items. Typically, ordered-list items are displayed with a preceding numbering, which can be of any form, like numerals, letters or Romans numerals or even simple bullets. This numbered style is not defined in the HTML description of the page, but in its associated CSS, using the list-style-type property.
+
+				There is no limitation to the depth and overlap of lists defined with the &lt;ol&gt; and &lt;ul&gt; elements.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence maxOccurs="unbounded">
+				<xs:element ref="li"/>
+			</xs:sequence>
+			<xs:attributeGroup ref="coreattrs"/>
+			<xs:attribute name="type" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>
+						Indicates the numbering type:
+						- 'a' indicates lowercase letters,
+						- 'A' indicates uppercase letters,
+						- 'i' indicates lowercase Roman numerals,
+						- 'I' indicates uppercase Roman numerals,
+						- and '1' indicates numbers (default).
+
+						The type set is used for the entire list unless a different type attribute is used within an enclosed &lt;li&gt; element.
+
+						Note: This attribute was deprecated in HTML4, but reintroduced in HTML5. Unless the value of the list number matters (e.g. in legal or technical documents where items are to be referenced by their number/letter), the CSS list-style-type property should be used instead.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="li">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML List Item Element (&lt;li&gt;) is used to represent an item in a list. It must be contained in a parent element: an ordered list (&lt;ol&gt;), an unordered list (&lt;ul&gt;), or a menu (&lt;menu&gt;). In menus and unordered lists, list items are usually displayed using bullet points. In ordered lists, they are usually displayed with an ascending counter on the left, such as a number or letter.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="true">
+			<xs:choice maxOccurs="unbounded" minOccurs="0">
+				<xs:group ref="flowContent"/>
+			</xs:choice>
+			<xs:attributeGroup ref="coreattrs"/>
+			<xs:attribute name="type" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>
+						This character attributes indicates the numbering type:
+
+						a: lowercase letters
+						A: uppercase letters
+						i: lowercase Roman numerals
+						I: uppercase Roman numerals
+						1: numbers
+
+						This type overrides the one used by its parent &lt;ol&gt; element, if any.
+
+						Usage note: This attribute has been deprecated: use the CSS list-style-type property instead.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="value" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>
+						This integer attributes indicates the current ordinal value of the item in the list as defined by the &lt;ol&gt; element. The only allowed value for this attribute is a number, even if the list is displayed with Roman numerals or letters. List items that follow this one continue numbering from the value set. The value attribute has no meaning for unordered lists (&lt;ul&gt;) or for menus (&lt;menu&gt;).
+
+						Note: This attribute was deprecated in HTML4, but reintroduced in HTML5.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dl">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML &lt;dl&gt; Element (or HTML Description List Element) encloses a list of pairs of terms and descriptions. Common uses for this element are to implement a glossary or to display metadata (a list of key-value pairs).
+
+				Prior to HTML5, &lt;dl&gt; was known as a Definition List.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element ref="dt"/>
+				<xs:element ref="dd"/>
+			</xs:choice>
+			<xs:attributeGroup ref="coreattrs"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dt" type="restrictedFlowType">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML &lt;dt&gt; element (or HTML Definition Term Element) identifies a term in a definition list. This element can occur only as a child element of a &lt;dl&gt;. It is usually followed by a &lt;dd&gt; element; however, multiple &lt;dt&gt; elements in a row indicate several terms that are all defined by the immediate next &lt;dd&gt; element.
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="dd">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML &lt;dd&gt; Element (or HTML Description Element) indicates the description of a term in a description list (&lt;dl&gt;) element. This element can occur only as a child element of a definition list and it must follow a &lt;dt&gt; element.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="true">
+			<xs:choice maxOccurs="unbounded" minOccurs="0">
+				<xs:group ref="flowContent"/>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="table">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML Table Element (&lt;table&gt;) represents data in two dimensions or more.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="0" ref="caption"/>
+				<xs:element minOccurs="0" ref="thead"/>
+				<xs:element minOccurs="0" ref="tfoot"/>
+				<xs:choice>
+					<xs:element maxOccurs="unbounded" ref="tbody"/>
+					<xs:element maxOccurs="unbounded" ref="tr"/>
+				</xs:choice>
+			</xs:sequence>
+			<xs:attributeGroup ref="coreattrs"/>
+			<xs:attribute name="border" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>
+						This integer attribute defines, in pixels, the size of the frame surrounding the table. If set to 0, it implies that the frame attribute is set to void.
+						Usage note: Do not use this attribute, as it has been deprecated: the &lt;table&gt; element should be styled using CSS. To give a similar effect than the border attribute, the CSS properties border, border-color, border-width and border-style should be used.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="cellpadding" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>
+						This attribute defines the space between the content of a cell and the border, displayed or not, of it. If it is a pixel length, this pixel-sized space will be applied on all four sides; if it is a percentage length, the content will be centered and the total vertical space (top and bottom) will represent this percentage. The same is true for the total horizontal space (left and right).
+						Usage note: Do not use this attribute, as it has been deprecated: the &lt;table&gt; element should be styled using CSS. To give a similar effect than the border attribute, use the CSS property border-collapse with the value collapse on the &lt;table&gt; element itself, and the property padding on the &lt;td&gt;.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="cellspacing" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>
+						This attribute defines the size, in percentage or in pixels, of the space between two cells (both horizontally and vertically), between the top of the table and the cells of the first row, the left of the table and the first column, the right of the table and the last column and the bottom of the table and the last row.
+						Usage note: Do not use this attribute, as it has been deprecated: the &lt;table&gt; element should be styled using CSS. To give a similar effect than the border attribute, use the CSS property border-collapse with the value collapse on the &lt;table&gt; element itself, and the property margin on the &lt;td&gt; element.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="align" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>
+						Deprecated attribute.
+
+						This enumerated attribute indicates how the table must be aligned in regard of the containing document. It may have the following values:
+
+						- left, meaning that the table is to be displayed to the left of the document;
+						- center, meaning that the table is to be displayed centered in the document;
+						- right, meaning that the table is to be displayed to the right of the document.
+
+						Note:
+						Do not use this attribute, as it has been deprecated: the &lt;table&gt; element should be styled using CSS. To give a similar effect than the align attribute, the CSS properties "text-align" and "vertical-align" should be used.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="rules" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>
+						Deprecated attribute.
+
+						This enumerated attribute defines where rules, i.e. lines, should appear in a table. It can have the following values:
+
+						- none, which indicates the no rules will be displayed; it is the default value;
+						- groups, which will make the rules to be displayed between row groups (defined by the &lt;thead&gt;, &lt;tbody&gt; and &lt;tfoot&gt; elements) and between column groups (defined by the &lt;col&gt; and &lt;colgroup&gt; elements) only;
+						- rows, which will make the rules to be displayed between rows;
+						- columns, which will make the rules to be displayed between columns;
+						- all, which wil make the rules to be displayed between rows and columns.
+
+						Note:
+						The styling of the rules is browser-dependant and cannot be modified.
+						Do not use this attribute, as it has been deprecated: the rules should be defined and styled using CSS. use the CSS property border on the adequate &lt;thead&gt;, &lt;tbody&gt;, &lt;tfoot&gt;, &lt;col&gt; or &lt;colgroup&gt; elements.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="caption">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML &lt;caption&gt; Element (or HTML Table Caption Element) represents the title of a table. Though it is always the first descendant of a &lt;table&gt;, its styling, using CSS, may place it elsewhere, relative to the table.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="true">
+			<xs:choice maxOccurs="unbounded" minOccurs="0">
+				<xs:group ref="flowContent"/>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="thead">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML Table Head Element (&lt;thead&gt;) defines a set of rows defining the head of the columns of the table.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" ref="tr"/>
+			</xs:sequence>
+			<xs:attribute name="align" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>
+						Deprecated attribute.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="tfoot">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML Table Foot Element (&lt;tfoot&gt;) defines a set of rows summarizing the columns of the table.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" ref="tr"/>
+			</xs:sequence>
+			<xs:attribute name="align" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>
+						Deprecated attribute.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="tbody">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:choice>
+					<xs:element maxOccurs="unbounded" ref="tr"/>
+				</xs:choice>
+			</xs:sequence>
+			<xs:attribute name="align" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>
+						Deprecated attribute.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="tr">
+		<xs:annotation>
+			<xs:documentation>
+				Table row
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded" minOccurs="0">
+				<xs:element ref="th"/>
+				<xs:element ref="td"/>
+			</xs:choice>
+			<xs:attributeGroup ref="coreattrs"/>
+			<xs:attribute name="align" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>
+						Deprecated attribute.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="td">
+		<xs:annotation>
+			<xs:documentation>
+				Table cell
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="true">
+			<xs:choice maxOccurs="unbounded" minOccurs="0">
+				<xs:group ref="flowContent"/>
+			</xs:choice>
+			<xs:attributeGroup ref="coreattrs"/>
+			<xs:attribute name="colspan" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>
+						This attribute contains a non-negative integer value that indicates on how many columns does the cell extend. Its default value is 1.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="rowspan" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>
+						This attribute contains a non-negative integer value that indicates on how many rows does the cell extend. Its default value is 1.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="align" type="html-align"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="th">
+		<xs:annotation>
+			<xs:documentation>
+				Table header cell
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="true">
+			<xs:choice maxOccurs="unbounded" minOccurs="0">
+				<xs:group ref="restrictedFlowContent"/>
+			</xs:choice>
+			<xs:attributeGroup ref="coreattrs"/>
+			<xs:attribute name="colspan" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>
+						This attribute contains a non-negative integer value that indicates on how many columns does the cell extend. Its default value is 1.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="rowspan" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>
+						This attribute contains a non-negative integer value that indicates on how many rows does the cell extend. Its default value is 1.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="align" type="html-align"/>
+			<xs:attribute name="scope">
+				<xs:annotation>
+					<xs:documentation>
+						defines the cells that the header defined in this &lt;th&gt; element relates to
+					</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:token">
+						<xs:enumeration value="row"/>
+						<xs:enumeration value="col"/>
+						<xs:enumeration value="rowgroup"/>
+						<xs:enumeration value="colgroup"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="span">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML &lt;span&gt; element is a generic inline container for phrasing content, which does not inherently represent anything. It can be used to group elements for styling purposes (using the class or id attributes), or because they share attribute values, such as lang. It should be used only when no other semantic element is appropriate. &lt;span&gt; is very much like a &lt;div&gt; element, but &lt;div&gt; is a block-level element whereas a &lt;span&gt; is an inline element.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="true">
+			<xs:choice maxOccurs="unbounded" minOccurs="0">
+				<xs:group ref="phrasingContent"/>
+			</xs:choice>
+			<xs:attributeGroup ref="coreattrs"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="a">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML &lt;a&gt; Element (or the HTML Anchor Element) defines a hyperlink, the named target destination for a hyperlink, or both.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="true">
+			<xs:choice maxOccurs="unbounded" minOccurs="0">
+				<xs:group ref="phrasingContent"/>
+			</xs:choice>
+			<xs:attributeGroup ref="coreattrs"/>
+			<xs:attribute name="name" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>
+						HTML 4 only, Obsolete since HTML5.
+
+						This attribute is required in an anchor defining a target location within a page. A value for name is similar to a value for the id core attribute and should be an alphanumeric identifier unique to the document. Under the HTML 4.01 specification, id and name both can be used with the &lt;a&gt; element as long as they have identical values.
+
+						Usage note: This attribute is obsolete in HTML5, use global attribute id instead.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="href" type="xs:anyURI">
+				<xs:annotation>
+					<xs:documentation>
+						This was the single required attribute for anchors defining a hypertext source link, but is no longer required in HTML5. Omitting this attribute creates a placeholder link. The href attribute indicates the link target, either a URL or a URL fragment. A URL fragment is a name preceded by a hash mark (#), which specifies an internal target location (an ID) within the current document. URLs are not restricted to Web (HTTP)-based documents. URLs might use any protocol supported by the browser. For example, file, ftp, and mailto work in most user agents.
+
+						Note: You can use the special fragment "top" to create a link back to the top of the page; for example &lt;a href="#top"&gt;Return to top&lt;/a&gt;. This behavior is specified by HTML5.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="target" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>
+						This attribute specifies where to display the linked resource. In HTML4, this is the name of, or a keyword for, a frame. In HTML5, it is a name of, or keyword for, a browsing context (for example, tab, window, or inline frame). The following keywords have special meanings:
+
+						* _self: Load the response into the same HTML4 frame (or HTML5 browsing context) as the current one. This value is the default if the attribute is not specified.
+						* _blank: Load the response into a new unnamed HTML4 window or HTML5 browsing context.
+						* _parent: Load the response into the HTML4 frameset parent of the current frame or HTML5 parent browsing context of the current one. If there is no parent, this option behaves the same way as _self.
+						* _top: In HTML4: Load the response into the full, original window, canceling all other frames. In HTML5: Load the response into the top-level browsing context (that is, the browsing context that is an ancestor of the current one, and has no parent). If there is no parent, this option behaves the same way as _self.
+
+						Use this attribute only if the href attribute is present.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="title" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>
+						Contains a text representing advisory information related to the element it belongs to. Such information can typically, but not necessarily, be presented to the user as a tooltip.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="rel" type="xs:NMTOKENS">
+				<xs:annotation>
+					<xs:documentation>
+						For anchors containing the href attribute, this attribute specifies the relationship of the target object to the link object. The value is a comma-separated list of link types values. The values and their semantics will be registered by some authority that might have meaning to the document author. The default relationship, if no other is given, is void. Use this attribute only if the href attribute is present.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="accesskey">
+				<xs:annotation>
+					<xs:documentation>
+						Provides a hint for generating a keyboard shortcut for the current element. This attribute consists of a space-separated list of characters. The browser should use the first one that exists on the computer keyboard layout.
+					</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:length fixed="true" value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="em" type="phrasingType">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML Emphasis Element (&lt;em&gt;) marks text that has stress emphasis. The &lt;em&gt; element can be nested, with each level of nesting indicating a greater degree of emphasis.
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="strong" type="phrasingType">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML Strong Element (&lt;strong&gt;) gives text strong importance, and is typically displayed in bold.
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="b" type="phrasingType">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML &lt;b&gt; Element represents a span of text stylistically different from normal text, without conveying any special importance or relevance. It is typically used for keywords in a summary, product names in a review, or other spans of text whose typical presentation would be boldfaced. Another example of its use is to mark the lead sentence of each paragraph of an article.
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="i" type="phrasingType">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML &lt;i&gt; Element represents a range of text that is set off from the normal text for some reason, for example, technical terms, foreign language phrases, or fictional character thoughts. It is typically displayed in italic type.
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="sup" type="phrasingType">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML Superscript Element (&lt;sup&gt;) defines a span of text that should be displayed, for typographic reasons, higher, and often smaller, than the main span of text.
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="sub" type="phrasingType">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML Subscript Element (&lt;sub&gt;) defines a span of text that should be displayed, for typographic reasons, lower, and often smaller, than the main span of text.
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="pre">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML &lt;pre&gt; Element (or HTML Preformatted Text) represents preformatted text. Text within this element is typically displayed in a non-proportional font exactly as it is laid out in the file. Whitespaces inside this element are displayed as typed.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="true">
+			<xs:choice maxOccurs="unbounded" minOccurs="0">
+				<xs:group ref="phrasingContent"/>
+			</xs:choice>
+			<xs:attribute fixed="preserve" ref="xml:space"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="code" type="phrasingType">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML &lt;code&gt; Element represents a fragment of computer code. By default, it is displayed in the browser's default monospace font.
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="kbd" type="phrasingType">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML &lt;kbd&gt; Element (or HTML Keyboard Input Element) represents user input and produces an inline element displayed in the browser's default monotype font.
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="samp" type="phrasingType">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML &lt;samp&gt; element is an element intended to identify sample output from a computer program. It is usually displayed in the browser's default monotype font.
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="cite" type="phrasingType">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML &lt;cite&gt; Element (or HTML Citation Element) represents a reference to a creative work. It must include the title of a work, the name of the author, or a URL reference, which may be in an abbreviated form according to the conventions used for the addition of citation metadata.
+
+				Usage Notes:
+
+				A creative work may include a book, a paper, an essay, a poem, a score, a song, a script, a film, a TV show, a game, a sculpture, a painting, a theater production, a play, an opera, a musical, an exhibition, a legal case report, a computer program, , a web site, a web page, a blog post or comment, a forum post or comment, a tweet, a written or oral statement, etc.
+				Use the cite attribute on a &lt;blockquote&gt; or &lt;q&gt; element to reference an online resource for a source.
+
+
+				Style note:
+
+				To avoid the default italic style from being used for the &lt;cite&gt; element use the CSS font-style property.
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="q">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML &lt;q&gt; Element (or HTML Quote Element) indicates that the enclosed text is a short inline quotation. This element is intended for short quotations that don't require paragraph breaks; for long quotations use &lt;blockquote&gt; element.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="true">
+			<xs:choice maxOccurs="unbounded" minOccurs="0">
+				<xs:group ref="phrasingContent"/>
+			</xs:choice>
+			<xs:attribute name="cite" type="xs:anyURI">
+				<xs:annotation>
+					<xs:documentation>
+						The value of this attribute is a URL that designates a source document or message for the information quoted. This attribute is intended to point to information explaining the context or the reference for the quote.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="tt" type="phrasingType">
+		<xs:annotation>
+			<xs:documentation>
+				This feature is obsolete. Although it may still work in some browsers, its use is discouraged since it could be removed at any time. Try to avoid using it.
+
+				The HTML Teletype Text Element (&lt;tt&gt;) produces an inline element displayed in the browser's default monotype font. This element was intended to style text as it would display on a fixed width display, such as a teletype. It probably is more common to display fixed width type using the &lt;code&gt; element.
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="ins">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML &lt;ins&gt; Element (or HTML Inserted Text) HTML represents a range of text that has been added to a document.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="true">
+			<xs:complexContent>
+				<xs:extension base="phrasingType">
+					<xs:attribute name="cite" type="xs:anyURI"/>
+					<xs:attribute name="datetime" type="xs:dateTime"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="del">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML &lt;del&gt; element (or HTML Deleted Text Element) represents a range of text that has been deleted from a document. This element is often (but need not be) rendered with strike-through text.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="true">
+			<xs:complexContent>
+				<xs:extension base="phrasingType">
+					<xs:attribute name="cite" type="xs:anyURI"/>
+					<xs:attribute name="datetime" type="xs:dateTime"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="var" type="phrasingType">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML Variable Element (&lt;var&gt;) represents a variable in a mathematical expression or a programming context.
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="small" type="phrasingType">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML Small Element (&lt;small&gt;) makes the text font size one size smaller (for example, from large to medium, or from small to x-small) down to the browser's minimum font size. In HTML5, this element is repurposed to represent side-comments and small print, including copyright and legal text, independent of its styled presentation.
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="big" type="phrasingType">
+		<xs:annotation>
+			<xs:documentation>
+				This feature is obsolete. Although it may still work in some browsers, its use is discouraged since it could be removed at any time. Try to avoid using it.
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="br">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML &lt;br&gt; Element (or HTML Line Break Element) produces a line break in text (carriage-return). It is useful for writing a poem or an address, where the division of lines is significant.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType/>
+	</xs:element>
+	<xs:element name="hr">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML &lt;hr&gt; element represents a thematic break between paragraph-level elements (for example, a change of scene in a story, or a shift of topic with a section). In previous versions of HTML, it represented a horizontal rule. It may still be displayed as a horizontal rule in visual browsers, but is now defined in semantic terms, rather than presentational terms.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attributeGroup ref="coreattrs"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="address" type="restrictedFlowType">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML &lt;address&gt; Element may be used by authors to supply contact information for its nearest &lt;article&gt; or &lt;body&gt; ancestor; in the latter case, it applies to the whole document.
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="blockquote">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML &lt;blockquote&gt; Element (or HTML Block Quotation Element) indicates that the enclosed text is an extended quotation. Usually, this is rendered visually by indentation (to change &lt;blockquote&gt; indent, use CSS margin property). A URL for the source of the quotation may be given using the cite attribute, while a text representation of the source can be given using the &lt;cite&gt; element.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="true">
+			<xs:choice maxOccurs="unbounded" minOccurs="0">
+				<xs:group ref="flowContent"/>
+			</xs:choice>
+			<xs:attributeGroup ref="coreattrs"/>
+			<xs:attribute name="cite" type="xs:anyURI"/>
+			<xs:attribute name="align">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="center"/>
+						<xs:enumeration value="left"/>
+						<xs:enumeration value="right"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="bdo">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML &lt;bdo&gt; Element (or HTML bidirectional override element) is used to override the current directionality of text. It causes the directionality of the characters to be ignored in favor of the specified directionality.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="true">
+			<xs:choice maxOccurs="unbounded" minOccurs="0">
+				<xs:group ref="phrasingContent"/>
+			</xs:choice>
+			<xs:attributeGroup ref="coreattrs"/>
+			<xs:attribute name="dir">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="ltr"/>
+						<xs:enumeration value="rtl"/>
+						<xs:enumeration value="auto"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ruby">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML &lt;ruby&gt; Element represents a ruby annotation. Ruby annotations are for showing pronunciation of East Asian characters.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="true">
+			<xs:choice maxOccurs="unbounded" minOccurs="0">
+				<xs:element ref="rb"/>
+				<xs:element ref="rp"/>
+				<xs:element ref="rt"/>
+				<xs:element ref="rtc"/>
+				<xs:group ref="phrasingContent"/>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="rb" type="phrasingType">
+		<xs:annotation>
+			<xs:documentation>
+				The &lt;rb&gt; element marks the base text component of a ruby annotation.
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="rp" type="phrasingType">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML &lt;rp&gt; element is used to provide fall-back parenthesis for browsers non-supporting ruby annotations. Ruby annotations are for showing pronounciation of East Asian characters, like using Japanese furigana or Taiwainese bopomofo characters. The &lt;rp&gt; element is used in the case of lack of &lt;ruby&gt; element support its content has what should be displayed in order to indicate the presence of a ruby annotation, usually parentheses.
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="rt" type="phrasingType">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML &lt;rt&gt; Element embraces pronunciation of characters presented in a ruby annotations, which are used to describe the pronunciation of East Asian characters. This element is always used inside a &lt;ruby&gt; element.
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="rtc">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML &lt;rtc&gt; Element embraces semantic annotations of characters presented in a ruby of &lt;rb&gt; elements used inside of &lt;ruby&gt; element. &lt;rb&gt; elements can have both pronunciation (&lt;rt&gt; and semantic (&lt;rtc&gt;) annotations.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="true">
+			<xs:choice maxOccurs="unbounded" minOccurs="0">
+				<xs:element ref="rt"/>
+				<xs:group ref="phrasingContent"/>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="img">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML &lt;img&gt; Element (or HTML Image Element) represents an image of the document.
+
+				Usage note:
+				Browsers do not always display the image referenced by the element. This is the case for non-graphical browsers (including those used by people with vision impairments), or if the user chooses not to display images, or if the browser is unable to display the image because it is invalid or an unsupported type. In these cases, the browser may replace the image with the text defined in this element's alt attribute.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attributeGroup ref="coreattrs"/>
+			<xs:attribute name="src" type="xs:anyURI" use="required">
+				<xs:annotation>
+					<xs:documentation>
+						Image URL.
+						On browsers supporting srcset, src is ignored if this one is provided.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="alt" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>
+						This attribute defines the alternative text describing the image. Users will see this displayed if the image URL is wrong, the image is not in one of the supported formats, or until the image is downloaded.
+
+						Usage note: Omitting this attribute indicates that the image is a key part of the content, but no textual equivalent is available. Setting this attribute to the empty string indicates that this image is not a key part of the content; non-visual browsers may omit it from rendering.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="width" type="htmlLength">
+				<xs:annotation>
+					<xs:documentation>
+						The width of the image in pixels or percent.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="height" type="htmlLength">
+				<xs:annotation>
+					<xs:documentation>
+						The height of the image in pixels or percent.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="align">
+				<xs:annotation>
+					<xs:documentation>
+						This attribute is deprecated since HTML 4.01 and obsolete since HTML5. Use the vertical-align CSS property instead.
+
+						Specifies the alignment of the image relative to the enclosing text paragraph:
+						- bottom: The image will be aligned so that its bottom will be at the baseline of the surrounding text.
+						- middle: The image will be aligned so that its center-line will be at the baseline of the surrounding text.
+						- top: The image will be aligned so that its top will be at the baseline of the surrounding text.
+						- left: The image will be placed so that it is at the left of the surrounding text. The surrounding text will fill in the region to the right of the image.
+						- right: The image will be placed so that it is at the right of the surrounding text. The surrounding text will fill in the region to the left of the image.
+					</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="bottom"/>
+						<xs:enumeration value="middle"/>
+						<xs:enumeration value="top"/>
+						<xs:enumeration value="left"/>
+						<xs:enumeration value="right"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="figure">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML &lt;figure&gt; Element represents self-contained content, frequently with a caption (&lt;figcaption&gt;), and is typically referenced as a single unit. While it is related to the main flow, its position is independent of the main flow. Usually this is an image, an illustration, a diagram, a code snippet, or a schema that is referenced in the main text, but that can be moved to another page or to an appendix without affecting the main flow.
+
+				Usage note: A caption can be associated with the &lt;figure&gt; element by inserting a &lt;figcaption&gt; inside it (as the first or the last child).
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="true">
+			<xs:choice minOccurs="0">
+				<xs:sequence>
+					<xs:element ref="figcaption"/>
+					<xs:choice maxOccurs="unbounded" minOccurs="0">
+						<xs:group ref="flowContent"/>
+					</xs:choice>
+				</xs:sequence>
+				<xs:sequence>
+					<xs:choice maxOccurs="unbounded">
+						<xs:group ref="flowContent"/>
+					</xs:choice>
+					<xs:element minOccurs="0" ref="figcaption"/>
+				</xs:sequence>
+			</xs:choice>
+			<xs:attributeGroup ref="coreattrs"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="figcaption">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML &lt;figcaption&gt; Element represents a caption or a legend associated with a figure or an illustration described by the rest of the data of the &lt;figure&gt; element which is its immediate ancestor which means &lt;figcaption&gt; can be the first or last element inside a &lt;figure&gt; block. Also, the HTML Figcaption Element is optional; if not provided, then the parent figure element will have no caption.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="true">
+			<xs:choice maxOccurs="unbounded" minOccurs="0">
+				<xs:group ref="flowContent"/>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="object">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML &lt;object&gt; Element (or HTML Embedded Object Element) represents an external resource, which can be treated as an image, a nested browsing context, or a resource to be handled by a plugin.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="true">
+			<xs:choice maxOccurs="unbounded" minOccurs="0">
+				<xs:element ref="param"/>
+				<xs:group ref="flowContent"/>
+			</xs:choice>
+			<xs:attributeGroup ref="coreattrs"/>
+			<xs:attribute name="classid" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>
+						The URI of the object's implementation. It can be used together with, or in place of, the data attribute.
+						Obsolete since HTML5.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="codebase" type="xs:anyURI">
+				<xs:annotation>
+					<xs:documentation>
+						The base path used to resolve relative URIs specified by classid, data, or archive. If not specified, the default is the base URI of the current document.
+						Obsolete since HTML5.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="data" type="xs:anyURI">
+				<xs:annotation>
+					<xs:documentation>
+						The address of the resource as a valid URL. At least one of data and type must be defined.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="type" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>
+						The content type of the resource specified by data. At least one of data and type must be defined.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="codetype" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>
+						The content type of the data specified by classid.
+						Obsolete since HTML5.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="archive">
+				<xs:annotation>
+					<xs:documentation>
+						A space-separated list of URIs for archives of resources for the object.
+						Obsolete since HTML5.
+					</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:list itemType="xs:anyURI"/>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="standby" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>
+						A message that the browser can show while loading the object's implementation and data.
+						Obsolete since HTML5.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="width" type="htmlLength">
+				<xs:annotation>
+					<xs:documentation>
+						The width of the display resource, in CSS pixels.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="height" type="htmlLength">
+				<xs:annotation>
+					<xs:documentation>
+						The height of the displayed resource, in CSS pixels.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="usemap" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>
+						A hash-name reference to a &lt;map&gt; element; that is a '#' followed by the value of a name of a map element.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="name" type="xs:NMTOKEN">
+				<xs:annotation>
+					<xs:documentation>
+						The name of valid browsing context (HTML5), or the name of the control (HTML 4).
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="param">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML &lt;param&gt; element is used to supply a named property value.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="id" type="xs:ID"/>
+			<xs:attribute name="name">
+				<xs:annotation>
+					<xs:documentation>
+						Name of the parameter.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="value">
+				<xs:annotation>
+					<xs:documentation>
+						Specifies the value of the parameter.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute default="data" name="valuetype">
+				<xs:annotation>
+					<xs:documentation>
+						Obsolete in HTML5.
+
+						Specifies the type of the value attribute.
+					</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:token">
+						<xs:enumeration value="data"/>
+						<xs:enumeration value="ref"/>
+						<xs:enumeration value="object"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="type" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>
+						Obsolete in HTML5.
+
+						Only used if the valuetype is set to "ref". Specifies the MIME type of values found at the URI specified by value.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="embed">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML &lt;embed&gt; Element represents an integration point for an external application or interactive content (in other words, a plug-in).
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="id" type="xs:ID"/>
+			<xs:attribute name="src" type="xs:anyURI">
+				<xs:annotation>
+					<xs:documentation>
+						The URL of the resource being embedded.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="type" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>
+						The MIME type to use to select the plug-in to instantiate.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="width" type="xs:nonNegativeInteger">
+				<xs:annotation>
+					<xs:documentation>
+						The displayed width of the resource, in CSS pixels.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="height" type="xs:nonNegativeInteger">
+				<xs:annotation>
+					<xs:documentation>
+						The displayed height of the resource, in CSS pixels.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="applet">
+		<xs:annotation>
+			<xs:documentation>
+				This feature is obsolete. Although it may still work in some browsers, its use is discouraged since it could be removed at any time. Try to avoid using it.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="true">
+			<xs:choice maxOccurs="unbounded" minOccurs="0">
+				<xs:element ref="param"/>
+				<xs:group ref="flowContent"/>
+			</xs:choice>
+			<xs:attribute name="id" type="xs:ID"/>
+			<xs:attribute name="codebase" type="xs:anyURI"/>
+			<xs:attribute name="archive" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>
+						Comma-separated list of URIs for archives containing classes and other resources that will be "preloaded".
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="code"/>
+			<xs:attribute name="object"/>
+			<xs:attribute name="alt" type="xs:string"/>
+			<xs:attribute name="name" type="xs:NMTOKEN"/>
+			<xs:attribute name="width" type="xs:nonNegativeInteger" use="required"/>
+			<xs:attribute name="height" type="xs:nonNegativeInteger" use="required"/>
+			<xs:attribute name="align">
+				<xs:simpleType>
+					<xs:restriction base="xs:token">
+						<xs:enumeration value="top"/>
+						<xs:enumeration value="middle"/>
+						<xs:enumeration value="bottom"/>
+						<xs:enumeration value="left"/>
+						<xs:enumeration value="right"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="hspace" type="xs:nonNegativeInteger"/>
+			<xs:attribute name="vspace" type="xs:nonNegativeInteger"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="video">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML &lt;video&gt; element is used to embed video content. It may contain several video sources, represented using the src attribute or the &lt;source&gt; element; the browser will choose the most suitable one.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="true">
+			<xs:choice maxOccurs="unbounded" minOccurs="0">
+				<xs:element ref="source"/>
+			</xs:choice>
+			<xs:attributeGroup ref="coreattrs"/>
+			<xs:attribute name="src" type="xs:anyURI"/>
+			<xs:attribute name="width" type="xs:nonNegativeInteger"/>
+			<xs:attribute name="height" type="xs:nonNegativeInteger"/>
+			<xs:attribute name="autoplay">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="autoplay"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="controls">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="controls"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="loop">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="loop"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="source">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML &lt;source&gt; element is used to specify multiple media resources for &lt;picture&gt;, &lt;audio&gt; and &lt;video&gt; elements. It is an empty element. It is commonly used to serve the same media in multiple formats supported by different browsers.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="src" type="xs:anyURI" use="required"/>
+			<xs:attribute name="type" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="audio">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML &lt;audio&gt; element is used to embed sound content in documents. It may contain several audio sources, represented using the src attribute or the &lt;source&gt; element; the browser will choose the most suitable one.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="true">
+			<xs:choice maxOccurs="unbounded" minOccurs="0">
+				<xs:element ref="source"/>
+			</xs:choice>
+			<xs:attributeGroup ref="coreattrs"/>
+			<xs:attribute name="src" type="xs:anyURI"/>
+			<xs:attribute name="autoplay">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="autoplay"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="controls">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="controls"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="loop">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="loop"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="map">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML &lt;map&gt; element is used with &lt;area&gt; elements to define an image map (a clickable link area).
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:choice>
+				<xs:choice maxOccurs="unbounded">
+					<xs:group ref="flowContent"/>
+				</xs:choice>
+				<xs:element maxOccurs="unbounded" ref="area"/>
+			</xs:choice>
+			<xs:attribute name="id" type="xs:ID" use="required"/>
+			<xs:attribute name="class" type="xs:NMTOKENS"/>
+			<xs:attribute name="style" type="xs:string"/>
+			<xs:attribute name="title" type="xs:string"/>
+			<xs:attribute name="name" type="xs:NMTOKEN"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="area">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML &lt;area&gt; element defines a hot-spot region on an image, and optionally associates it with a hypertext link. This element is used only within a &lt;map&gt; element.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute default="rect" name="shape">
+				<xs:annotation>
+					<xs:documentation>
+						The shape of the associated hot spot. The specifications for HTML 5 and HTML 4 define the values rect, which defines a rectangular region; circle, which defines a circular region; poly, which defines a polygon; and default, which indicates the entire region beyond any defined shapes.
+						Many browsers, notably Internet Explorer 4 and higher, support circ, polygon, and rectangle as valid values for shape; these values are *not standard*.
+					</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:token">
+						<xs:enumeration value="rect"/>
+						<xs:enumeration value="circle"/>
+						<xs:enumeration value="poly"/>
+						<xs:enumeration value="default"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="coords">
+				<xs:annotation>
+					<xs:documentation>
+						A set of values specifying the coordinates of the hot-spot region. The number and meaning of the values depend upon the value specified for the shape attribute. For a rect or rectangle shape, the coords value is two x,y pairs: left, top, right, and bottom. For a circle shape, the value is x,y,r where x,y is a pair specifying the center of the circle and r is a value for the radius. For a poly or polygon&lt; shape, the value is a set of x,y pairs for each point in the polygon: x1,y1,x2,y2,x3,y3, and so on. In HTML4, the values are numbers of pixels or percentages, if a percent sign (%) is appended; in HTML5, the values are numbers of CSS pixels.
+					</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:pattern value="[\-+]?(\d+|\d+(\.\d+)?%)(,\s*[\-+]?(\d+|\d+(\.\d+)?%))*"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="href" type="xs:anyURI">
+				<xs:annotation>
+					<xs:documentation>
+						The hyperlink target for the area. Its value is a valid URL. In HTML4, either this attribute or the nohref attribute must be present in the element. In HTML5, this attribute may be omitted; if so, the area element does not represent a hyperlink.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="nohref">
+				<xs:annotation>
+					<xs:documentation>
+						Indicates that no hyperlink exists for the associated area. Either this attribute or the href attribute must be present in the element.
+
+						Usage note: This attribute is obsolete in HTML5, instead omitting the href attribute is sufficient.
+					</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:token">
+						<xs:enumeration value="nohref"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="alt" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>
+						A text string alternative to display on browsers that do not display images. The text should be phrased so that it presents the user with the same kind of choice as the image would offer when displayed without the alternative text. In HTML4, this attribute is required, but may be the empty string (""). In HTML5, this attribute is required only if the href attribute is used.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="canvas">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML &lt;canvas&gt; Element can be used to draw graphics via scripting (usually JavaScript). For example, it can be used to draw graphs, make photo compositions or even perform animations. You may (and should) provide alternate content inside the &lt;canvas&gt; block. That content will be rendered both on older browsers that don't support canvas and in browsers with JavaScript disabled.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="true">
+			<xs:choice maxOccurs="unbounded" minOccurs="0">
+				<xs:group ref="flowContent"/>
+			</xs:choice>
+			<xs:attributeGroup ref="coreattrs"/>
+			<xs:attribute default="300" name="width" type="htmlLength">
+				<xs:annotation>
+					<xs:documentation>
+						The width of the coordinate space in CSS pixels.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute default="150" name="height" type="htmlLength">
+				<xs:annotation>
+					<xs:documentation>
+						The height of the coordinate space in CSS pixels.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="form">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML &lt;form&gt; element represents a document section that contains interactive controls to submit information to a web server.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded" minOccurs="0">
+				<xs:group ref="flowContent"/>
+			</xs:choice>
+			<xs:attributeGroup ref="coreattrs"/>
+			<xs:attribute name="action" type="xs:anyURI">
+				<xs:annotation>
+					<xs:documentation>
+						The URI of a program that processes the form information.
+
+						In HTML5, the action attribute is no longer required.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute default="get" name="method">
+				<xs:annotation>
+					<xs:documentation>
+						The HTTP method that the browser uses to submit the form. Possible values are:
+
+						- post: Corresponds to the HTTP POST method ; form data are included in the body of the form and sent to the server.
+
+						- get: Corresponds to the HTTP GET method; form data are appended to the action attribute URI with a '?' as separator, and the resulting URI is sent to the server. Use this method when the form has no side-effects and contains only ASCII characters.
+					</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:token">
+						<xs:enumeration value="get"/>
+						<xs:enumeration value="post"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute default="application/x-www-form-urlencoded" name="enctype" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>
+						When the value of the method attribute is post, enctype is the MIME type of content that is used to submit the form to the server. Possible values are:
+
+						- application/x-www-form-urlencoded: The default value if the attribute is not specified.
+						- multipart/form-data: The value used for an &lt;input&gt; element with the type attribute set to "file".
+						- text/plain (HTML5)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="accept-charset" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>
+						A space- or comma-delimited list of character encodings that the server accepts. The browser uses them in the order in which they are listed. The default value, the reserved string "UNKNOWN", indicates the same encoding as that of the document containing the form element.
+
+						In previous versions of HTML, the different character encodings could be delimited by spaces or commas. In HTML5, only spaces are allowed as delimiters.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="name" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>
+						The name of the form. In HTML 4, its use is deprecated (id should be used instead). It must be unique among the forms in a document and not just an empty string in HTML 5.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="accept" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>
+						A comma-separated list of content types that the server accepts.
+
+						Usage note: This attribute has been removed in HTML5 and should no longer be used. Instead, use the accept attribute of the specific &lt;input&gt; element.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="label">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML &lt;label&gt; Element represents a caption for an item in a user interface. It can be associated with a control either by placing the control element inside the label element, or by using the for attribute. Such a control is called the labeled control of the label element.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="true">
+			<xs:complexContent>
+				<xs:extension base="phrasingType">
+					<xs:attribute name="for" type="xs:IDREF">
+						<xs:annotation>
+							<xs:documentation>
+								The ID of a labelable form-related element in the same document as the label element. The first such element in the document with an ID matching the value of the for attribute is the labeled control for this label element.
+							</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+					<xs:attribute name="accesskey">
+						<xs:annotation>
+							<xs:documentation>
+								A shortcut key to access this element from the keyboard.
+							</xs:documentation>
+						</xs:annotation>
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:length fixed="true" value="1"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+					<xs:attribute name="form" type="xs:IDREF">
+						<xs:annotation>
+							<xs:documentation>
+								The form element that the label element is associated with (its form owner). If specified, the value of the attribute must be the ID of a &lt;form&gt; element in the same document. This attribute enables you to place label elements anywhere within a document, not just as descendants of their form elements.
+							</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:simpleType name="InputType">
+		<xs:restriction base="xs:token">
+			<xs:enumeration value="text"/>
+			<xs:enumeration value="password"/>
+			<xs:enumeration value="checkbox"/>
+			<xs:enumeration value="radio"/>
+			<xs:enumeration value="submit"/>
+			<xs:enumeration value="reset"/>
+			<xs:enumeration value="file"/>
+			<xs:enumeration value="hidden"/>
+			<xs:enumeration value="image"/>
+			<xs:enumeration value="button"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="input">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML &lt;input&gt; element is used to create interactive controls for web-based forms in order to accept data from user.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attributeGroup ref="coreattrs"/>
+			<xs:attribute default="text" name="type" type="InputType"/>
+			<xs:attribute name="name">
+				<xs:annotation>
+					<xs:documentation>
+						the name attribute is required for all but submit &amp; reset
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="value"/>
+			<xs:attribute name="checked">
+				<xs:simpleType>
+					<xs:restriction base="xs:token">
+						<xs:enumeration value="checked"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="disabled">
+				<xs:simpleType>
+					<xs:restriction base="xs:token">
+						<xs:enumeration value="disabled"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="readonly">
+				<xs:simpleType>
+					<xs:restriction base="xs:token">
+						<xs:enumeration value="readonly"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="size"/>
+			<xs:attribute name="maxlength" type="xs:nonNegativeInteger"/>
+			<xs:attribute name="src" type="xs:anyURI"/>
+			<xs:attribute name="alt"/>
+			<xs:attribute name="usemap" type="xs:anyURI"/>
+			<xs:attribute name="accept" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="select">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML select (&lt;select&gt;) element represents a control that presents a menu of options. The options within the menu are represented by &lt;option&gt; elements, which can be grouped by &lt;optgroup&gt; elements. Options can be pre-selected for the user.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element ref="optgroup"/>
+				<xs:element ref="option"/>
+			</xs:choice>
+			<xs:attribute name="name"/>
+			<xs:attribute name="size" type="xs:nonNegativeInteger"/>
+			<xs:attribute name="multiple">
+				<xs:simpleType>
+					<xs:restriction base="xs:token">
+						<xs:enumeration value="multiple"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="disabled">
+				<xs:simpleType>
+					<xs:restriction base="xs:token">
+						<xs:enumeration value="disabled"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="tabindex" type="xs:nonNegativeInteger"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="optgroup">
+		<xs:annotation>
+			<xs:documentation>
+				In a Web form, the HTML &lt;optgroup&gt; element creates a grouping of options within a &lt;select&gt; element.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" ref="option"/>
+			</xs:sequence>
+			<xs:attribute name="disabled">
+				<xs:simpleType>
+					<xs:restriction base="xs:token">
+						<xs:enumeration value="disabled"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="label" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="option">
+		<xs:annotation>
+			<xs:documentation>
+				In a Web form, the HTML &lt;option&gt; element is used to create a control representing an item within a &lt;select&gt;, an &lt;optgroup&gt; or a &lt;datalist&gt; HTML5 element.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="true">
+			<xs:attribute name="selected">
+				<xs:simpleType>
+					<xs:restriction base="xs:token">
+						<xs:enumeration value="selected"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="disabled">
+				<xs:simpleType>
+					<xs:restriction base="xs:token">
+						<xs:enumeration value="disabled"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="label" type="xs:string"/>
+			<xs:attribute name="value"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="textarea">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML &lt;textarea&gt; element represents a multi-line plain-text editing control.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="true">
+			<xs:attribute name="name"/>
+			<xs:attribute name="rows" type="xs:nonNegativeInteger" use="required"/>
+			<xs:attribute name="cols" type="xs:nonNegativeInteger" use="required"/>
+			<xs:attribute name="disabled">
+				<xs:simpleType>
+					<xs:restriction base="xs:token">
+						<xs:enumeration value="disabled"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="readonly">
+				<xs:simpleType>
+					<xs:restriction base="xs:token">
+						<xs:enumeration value="readonly"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="fieldset">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML &lt;fieldset&gt; element is used to group several controls as well as labels (&lt;label&gt;) within a web form.
+
+				Only one legend element should occur in the content, and if present should only be preceded by whitespace.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="true">
+			<xs:sequence>
+				<xs:element ref="legend"/>
+				<xs:choice maxOccurs="unbounded" minOccurs="0">
+					<xs:group ref="flowContent"/>
+				</xs:choice>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="legend">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML &lt;legend&gt; Element (or HTML Legend Field Element) represents a caption for the content of its parent &lt;fieldset&gt;.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="true">
+			<xs:complexContent>
+				<xs:extension base="phrasingType">
+					<xs:attribute name="accesskey">
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:length fixed="true" value="1"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="button">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML &lt;button&gt; Element represents a clickable button.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="true">
+			<xs:choice maxOccurs="unbounded" minOccurs="0">
+				<xs:group ref="flowContent"/>
+			</xs:choice>
+			<xs:attribute name="onclick"/>
+			<xs:attribute name="name"/>
+			<xs:attribute name="value"/>
+			<xs:attribute default="submit" name="type">
+				<xs:simpleType>
+					<xs:restriction base="xs:token">
+						<xs:enumeration value="button"/>
+						<xs:enumeration value="submit"/>
+						<xs:enumeration value="reset"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="disabled">
+				<xs:simpleType>
+					<xs:restriction base="xs:token">
+						<xs:enumeration value="disabled"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="iframe">
+		<xs:annotation>
+			<xs:documentation>
+				The HTML &lt;iframe&gt; Element (or HTML inline frame element) represents a nested browsing context, effectively embedding another HTML page into the current page.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType mixed="true">
+			<xs:choice maxOccurs="unbounded" minOccurs="0">
+				<xs:group ref="flowContent"/>
+			</xs:choice>
+			<xs:attributeGroup ref="coreattrs"/>
+			<xs:attribute name="name" type="xs:NMTOKEN"/>
+			<xs:attribute name="src" type="xs:anyURI"/>
+			<xs:attribute default="1" name="frameborder">
+				<xs:annotation>
+					<xs:documentation>
+						Warning: HTML 4 only
+
+						The value 1 (the default) tells the browser to draw a border between this frame and every other frame.
+						The value 0 tells the browser not to draw a border between this frame and other frames.
+					</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:token">
+						<xs:enumeration value="1"/>
+						<xs:enumeration value="0"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="height" type="htmlLength"/>
+			<xs:attribute name="width" type="htmlLength"/>
+			<xs:attribute name="allowfullscreen">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="allowfullscreen"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
+</xs:schema>

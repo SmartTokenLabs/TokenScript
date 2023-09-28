@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+		   xmlns:ts="http://tokenscript.org/2022/09/tokenscript"
+		   elementFormDefault="qualified"
+		   xmlns="urn:ethereum:constantinople"
+		   targetNamespace="urn:ethereum:constantinople">
+
+	<xs:import schemaLocation="tokenscript.xsd" namespace="http://tokenscript.org/2022/09/tokenscript"/>
+
+	<xs:simpleType name="data-type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="bool"/>
+			<xs:enumeration value="uint"/>
+			<xs:enumeration value="uint8"/>
+			<xs:enumeration value="uint16"/>
+			<xs:enumeration value="uint24"/>
+			<xs:enumeration value="uint32"/>
+			<xs:enumeration value="uint40"/>
+			<xs:enumeration value="uint48"/>
+			<xs:enumeration value="uint56"/>
+			<xs:enumeration value="uint64"/>
+			<xs:enumeration value="uint72"/>
+			<xs:enumeration value="uint80"/>
+			<xs:enumeration value="uint88"/>
+			<xs:enumeration value="uint96"/>
+			<xs:enumeration value="uint104"/>
+			<xs:enumeration value="uint112"/>
+			<xs:enumeration value="uint120"/>
+			<xs:enumeration value="uint128"/>
+			<xs:enumeration value="uint136"/>
+			<xs:enumeration value="uint144"/>
+			<xs:enumeration value="uint152"/>
+			<xs:enumeration value="uint160"/>
+			<xs:enumeration value="uint168"/>
+			<xs:enumeration value="uint176"/>
+			<xs:enumeration value="uint184"/>
+			<xs:enumeration value="uint192"/>
+			<xs:enumeration value="uint200"/>
+			<xs:enumeration value="uint208"/>
+			<xs:enumeration value="uint216"/>
+			<xs:enumeration value="uint224"/>
+			<xs:enumeration value="uint232"/>
+			<xs:enumeration value="uint240"/>
+			<xs:enumeration value="uint248"/>
+			<xs:enumeration value="uint256"/>
+			<xs:enumeration value="int"/>
+			<xs:enumeration value="int8"/>
+			<xs:enumeration value="int16"/>
+			<xs:enumeration value="int24"/>
+			<xs:enumeration value="int32"/>
+			<xs:enumeration value="int40"/>
+			<xs:enumeration value="int48"/>
+			<xs:enumeration value="int56"/>
+			<xs:enumeration value="int64"/>
+			<xs:enumeration value="int72"/>
+			<xs:enumeration value="int80"/>
+			<xs:enumeration value="int88"/>
+			<xs:enumeration value="int96"/>
+			<xs:enumeration value="int104"/>
+			<xs:enumeration value="int112"/>
+			<xs:enumeration value="int120"/>
+			<xs:enumeration value="int128"/>
+			<xs:enumeration value="int136"/>
+			<xs:enumeration value="int144"/>
+			<xs:enumeration value="int152"/>
+			<xs:enumeration value="int160"/>
+			<xs:enumeration value="int168"/>
+			<xs:enumeration value="int176"/>
+			<xs:enumeration value="int184"/>
+			<xs:enumeration value="int192"/>
+			<xs:enumeration value="int200"/>
+			<xs:enumeration value="int208"/>
+			<xs:enumeration value="int216"/>
+			<xs:enumeration value="int224"/>
+			<xs:enumeration value="int232"/>
+			<xs:enumeration value="int240"/>
+			<xs:enumeration value="int248"/>
+			<xs:enumeration value="int256"/>
+			<xs:enumeration value="string"/>
+			<xs:enumeration value="bytes"/>
+			<xs:enumeration value="byte"/>
+			<xs:enumeration value="bytes1"/>
+			<xs:enumeration value="bytes2"/>
+			<xs:enumeration value="bytes3"/>
+			<xs:enumeration value="bytes4"/>
+			<xs:enumeration value="bytes5"/>
+			<xs:enumeration value="bytes6"/>
+			<xs:enumeration value="bytes7"/>
+			<xs:enumeration value="bytes8"/>
+			<xs:enumeration value="bytes9"/>
+			<xs:enumeration value="bytes10"/>
+			<xs:enumeration value="bytes11"/>
+			<xs:enumeration value="bytes12"/>
+			<xs:enumeration value="bytes13"/>
+			<xs:enumeration value="bytes14"/>
+			<xs:enumeration value="bytes15"/>
+			<xs:enumeration value="bytes16"/>
+			<xs:enumeration value="bytes17"/>
+			<xs:enumeration value="bytes18"/>
+			<xs:enumeration value="bytes19"/>
+			<xs:enumeration value="bytes20"/>
+			<xs:enumeration value="bytes21"/>
+			<xs:enumeration value="bytes22"/>
+			<xs:enumeration value="bytes23"/>
+			<xs:enumeration value="bytes24"/>
+			<xs:enumeration value="bytes25"/>
+			<xs:enumeration value="bytes26"/>
+			<xs:enumeration value="bytes27"/>
+			<xs:enumeration value="bytes28"/>
+			<xs:enumeration value="bytes29"/>
+			<xs:enumeration value="bytes30"/>
+			<xs:enumeration value="bytes31"/>
+			<xs:enumeration value="bytes32"/>
+			<xs:enumeration value="address"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:attribute name="type" type="data-type"/>
+	<xs:attribute name="indexed" type="xs:boolean" default="false"/>
+
+	<xs:complexType name="address" mixed="true">
+		<xs:attribute name="ref" type="xs:NCName"/>
+	</xs:complexType>
+
+	<xs:complexType name="call">
+		<xs:sequence>
+			<xs:element minOccurs="0" ref="ts:data"/>
+			<xs:element minOccurs="0" ref="ts:mapping"/>
+		</xs:sequence>
+		<xs:attribute name="as" type="ts:as"/>
+		<xs:attribute name="contract" type="xs:NCName"/>
+		<xs:attribute name="select" type="xs:NCName"/>
+		<xs:attribute name="type" type="xs:NCName"/>
+	</xs:complexType>
+
+	<xs:element name="call">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="call">
+					<xs:attribute name="function" type="xs:NCName" use="required"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="storage">
+		<xs:complexType>
+			<xs:attribute name="variable" type="xs:NCName" use="required"/>
+			<xs:attribute name="index" type="xs:integer" use="required"/>
+			<xs:attribute name="as" type="ts:as"/>
+			<xs:attribute name="contract" type="xs:NCName"/>
+			<xs:attribute name="select" type="xs:NCName"/>
+			<xs:attribute name="type" type="xs:NCName"/>
+		</xs:complexType>
+	</xs:element>
+
+
+	<xs:element name="transaction">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="call">
+					<xs:sequence>
+						<xs:element minOccurs="0" name="to" type="ts:address"/>
+						<xs:element minOccurs="0" name="value">
+							<xs:complexType mixed="true">
+								<xs:attribute name="ref" type="xs:NCName"/>
+								<xs:attribute name="local-ref" type="xs:NCName"/>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+					<xs:attribute name="function" type="xs:NCName" use="optional"/>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="event">
+		<xs:complexType>
+			<!-- TODO: this should be whatever ASN.X allows as element name -->
+			<xs:attribute use="required" name="type" type="xs:NCName"/>
+			<xs:attribute use="required" name="contract" type="xs:NCName"/>
+			<xs:attribute name="filter" type="xs:string"/>
+			<xs:attribute name="select" type="xs:NCName"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
