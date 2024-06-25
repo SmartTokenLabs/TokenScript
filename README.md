@@ -1,6 +1,22 @@
 
 # TokenScript: Add Rich Functionality To Your Tokens
 
+| Web Era           | Digital Primitives                                                             |
+|-------------------|--------------------------------------------------------------------------------|
+| Web 1.0 (Read)    | Website (Read)                                                                 |
+|-------------------|--------------------------------------------------------------------------------|
+| Web 2.0           | Website (Read)                                                                 |
+| (Read & Write)    | Web Application (Read & Write)                                                 |
+|                   | Mobile App (Read & Write)                                                      |
+|-------------------|--------------------------------------------------------------------------------|
+| Web 3.0           | Website (Read)                                                                 |
+| (Read, Write      | Web Application (Read & Write)                                                 |
+| & Own)            | Mobile App (Read & Write)                                                      |
+|                   | Dapp (Decentralized Website, Web Application, Mobile App) (Read & Write)       |
+|                   | Token (Own)                                                                    |
+|                   | Advanced Token (example, token with TokenScript) (Read, Write & Own)           |
+
+
 **Bring context, security and cross-platform functionality (iOS, Android and Web) to your favourite tokens with a single file.**
 
 TokenScript makes Smart Token (Credit to [Virgil Griffith](https://twitter.com/virgilgr) for coming up with the term). These are like traditional ERC20 or ERC721 tokens, but with extendable structure & signed JavaScript to realise rich functions and full composability that DApps struggle to implement, and be traded with flexible, customisable trading rules.
