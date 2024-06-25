@@ -2,10 +2,13 @@
 # TokenScript: Add Rich Functionality To Your Tokens
 | Web Era | New Digital Primitives |
 |---------|-------------------|
-| Web 1.0 (Read) | • Website |
-| Web 2.0 (Read & Write) | • Web Application: Interactive website<br>• Mobile App |
-| Web 3.0 (Read, Write & Own) | • DApp (Read & Write)<br>• Token (Own)<br>• Interactive Token (Read, Write & Own)<br>  (example, token with ERC-5169 + TokenScript) |
+| Web 1.0 [R] | • Website |
+| Web 2.0 [R,W] | • Web App<br>• Mobile App |
+| Web 3.0 [R,W,O] | • DApp [R,W]<br>• Token [O]<br>• Interactive Token [R,W,O]*<br>  |
 
+[R] = Read  [W] = Write  [O] = Own
+
+*Interactive Token example: Smart Token (ERC5169 + TokenScript)
 
 **Bring context, security and cross-platform functionality (iOS, Android and Web) to your favourite tokens with a single file.**
 
