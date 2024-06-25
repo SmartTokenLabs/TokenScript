@@ -2,9 +2,9 @@
 # TokenScript: Add Rich Functionality To Your Tokens
 | Web Era | New Digital Primitives |
 |---------|-------------------|
-| Web 1.0 [R] | • Website |
-| Web 2.0 [R,W] | • Web App<br>• Mobile App |
-| Web 3.0 [R,W,O] | • DApp [R,W]<br>• Token [O]<br>• Interactive Token [R,W,O]*<br>  |
+| Web1 [R] | • Website |
+| Web2 [R,W] | • Web App<br>• Mobile App |
+| Web3 [R,W,O] | • DApp [R,W]<br>• Token [O]<br>• Interactive Token [R,W,O]*<br>  |
 
 [R] = Read  [W] = Write  [O] = Own
 
